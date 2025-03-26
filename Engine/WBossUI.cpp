@@ -11,31 +11,31 @@ namespace W
 		m_vDragStartPos(Vector2::Zero),
 		m_vecMonsterUI{}
 	{
-		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"BossBack", L"..\\Resources\\Texture\\UI\\MonsterUI\\background_.png");
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pMater->SetTexture(pTex);
-		Resources::Insert(L"BossBackMater", pMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pMater);
-
+		//std::shared_ptr<Texture> pTex =
+		//	Resources::Load<Texture>(L"BossBack", L"..\\Resources\\Texture\\UI\\MonsterUI\\background_.png");
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pMater->SetTexture(pTex);
+		//Resources::Insert(L"BossBackMater", pMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pMater);
+		//
 		GetComponent<Transform>()->SetPosition(0.f,0.f,-3.f);
 		GetComponent<Transform>()->SetScale(7.f * 0.961f, 7.f , 0.f);
-
-		Resources::Load<Texture>(L"BossUI00", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete0_0.png");
-		Resources::Load<Texture>(L"BossUI10", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete1_0.png");
-		Resources::Load<Texture>(L"BossUI20", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete2_0.png");
-		Resources::Load<Texture>(L"BossUI30", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete3_0.png");
-
-		//on
-		Resources::Load<Texture>(L"BossUI01", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete0_1.png");
-		Resources::Load<Texture>(L"BossUI11", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete1_1.png");
-		Resources::Load<Texture>(L"BossUI21", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete2_1.png");
-		Resources::Load<Texture>(L"BossUI31", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete3_1.png");
+		//
+		//Resources::Load<Texture>(L"BossUI00", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete0_0.png");
+		//Resources::Load<Texture>(L"BossUI10", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete1_0.png");
+		//Resources::Load<Texture>(L"BossUI20", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete2_0.png");
+		//Resources::Load<Texture>(L"BossUI30", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete3_0.png");
+		//
+		////on
+		//Resources::Load<Texture>(L"BossUI01", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete0_1.png");
+		//Resources::Load<Texture>(L"BossUI11", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete1_1.png");
+		//Resources::Load<Texture>(L"BossUI21", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete2_1.png");
+		//Resources::Load<Texture>(L"BossUI31", L"..\\Resources\\Texture\\UI\\MonsterUI\\selete3_1.png");
 	}
 	BossUI::~BossUI()
 	{
@@ -89,12 +89,12 @@ namespace W
 			return;
 		UI::LateUpdate();
 	}
-	void BossUI::Render()
-	{
-		if (!m_bRenderOn)
-			return;
-		UI::Render();
-	}
+	//void BossUI::Render()
+	//{
+	//	if (!m_bRenderOn)
+	//		return;
+	//	UI::Render();
+	//}
 	void BossUI::MouseOn()
 	{
 		if (m_bTargetOn && m_bRenderOn)

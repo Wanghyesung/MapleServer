@@ -56,30 +56,30 @@ namespace W
 	{
 
 	}
-	void Animator::Create(const std::wstring& _strName, std::shared_ptr<graphics::Texture> _pAtlas, Vector2 _vLeftTop, 
+	void Animator::Create(const std::wstring& _strName, Vector2 _vLeftTop, 
 		Vector2 _vSize, UINT _iColumnLength, Vector2 _vDivisionSize, Vector2 _vOffset, float _fDuration)
 	{
 		Animation* pAnimation = FindAnimation(_strName);
-
+	
 		if (pAnimation != nullptr)
 			return;
-
+	
 		pAnimation = new Animation();
 		pAnimation->SetKey(_strName);
-
+	
 		pAnimation->Create(_strName,
-			_pAtlas, _vLeftTop, _vSize, _iColumnLength,  _vDivisionSize, _vOffset, _fDuration);
-
+			 _vLeftTop, _vSize, _iColumnLength,  _vDivisionSize, _vOffset, _fDuration);
+	
 		m_mapAnimation.insert(std::make_pair(_strName, pAnimation));
-
+	
 		Events* tEvents = FindEvents(_strName);
 		if (tEvents != nullptr)
 			return;
-
+	
 		//이벤트당 하나의 events가지기
 		tEvents = new Events();
 		m_mapEvent.insert(std::make_pair(_strName, tEvents));
-
+	
 		pAnimation->SetAnimator(this);
 	}
 	Animation* Animator::FindAnimation(const std::wstring& _strName)
@@ -127,13 +127,13 @@ namespace W
 		m_bLoop = _bLoop;
 		m_pActiveAnimation->Reset();
 	}
-	void Animator::Binds()
-	{
-		if (m_pActiveAnimation == nullptr)
-			return;
-		
-		m_pActiveAnimation->Binds();
-	}
+	//void Animator::Binds()
+	//{
+	//	if (m_pActiveAnimation == nullptr)
+	//		return;
+	//	
+	//	//m_pActiveAnimation->Binds();
+	//}
 	std::function<void()>& Animator::StartEvent(const std::wstring _strKey)
 	{
 		Events* pEvents = FindEvents(_strKey);

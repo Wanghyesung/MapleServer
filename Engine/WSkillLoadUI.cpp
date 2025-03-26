@@ -7,21 +7,21 @@ namespace W
 		SetPlayerSkill(Player::ePlayerSkill::load);
 
 		//cool
-		std::shared_ptr<Texture> pSKillUI =
-			Resources::Load<Texture>(L"SKillLoadUI2", L"..\\Resources\\Texture\\UI\\SkillUI\\5\\darkload\\2.png");
-		//down
-		pSKillUI = Resources::Load<Texture>(L"SKillLoadUI1", L"..\\Resources\\Texture\\UI\\SkillUI\\5\\darkload\\1.png");
-		//default
-		pSKillUI = Resources::Load<Texture>(L"SKillLoadUI0", L"..\\Resources\\Texture\\UI\\SkillUI\\5\\darkload\\0.png");
-
-		std::shared_ptr<Material> pSKillMater = std::make_shared<Material>();
-		pSKillMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pSKillMater->SetTexture(pSKillUI);
-		Resources::Insert(L"SKillLoadMater", pSKillMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pSKillMater);
+		//std::shared_ptr<Texture> pSKillUI =
+		//	Resources::Load<Texture>(L"SKillLoadUI2", L"..\\Resources\\Texture\\UI\\SkillUI\\5\\darkload\\2.png");
+		////down
+		//pSKillUI = Resources::Load<Texture>(L"SKillLoadUI1", L"..\\Resources\\Texture\\UI\\SkillUI\\5\\darkload\\1.png");
+		////default
+		//pSKillUI = Resources::Load<Texture>(L"SKillLoadUI0", L"..\\Resources\\Texture\\UI\\SkillUI\\5\\darkload\\0.png");
+		//
+		//std::shared_ptr<Material> pSKillMater = std::make_shared<Material>();
+		//pSKillMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pSKillMater->SetTexture(pSKillUI);
+		//Resources::Insert(L"SKillLoadMater", pSKillMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pSKillMater);
 	}
 
 	SkillLoadUI::~SkillLoadUI()
@@ -40,10 +40,10 @@ namespace W
 	{
 		SKill::LateUpdate();
 	}
-	void SkillLoadUI::Render()
-	{
-		SKill::Render();
-	}
+	//void SkillLoadUI::Render()
+	//{
+	//	SKill::Render();
+	//}
 	void SkillLoadUI::MouseOn()
 	{
 		SKill::MouseOn();
@@ -56,8 +56,8 @@ namespace W
 
 		SKill::MouseLbtnDown();
 
-		std::shared_ptr<Material> pShMater = Resources::Find<Material>(L"SKillLoadMater");
-		pShMater->SetTexture(Resources::Find<Texture>(L"SKillLoadUI1"));
+		//std::shared_ptr<Material> pShMater = Resources::Find<Material>(L"SKillLoadMater");
+		//pShMater->SetTexture(Resources::Find<Texture>(L"SKillLoadUI1"));
 	}
 	void SkillLoadUI::MouseLbtnUp()
 	{
@@ -67,8 +67,8 @@ namespace W
 
 		SKill::MouseLbtnUp();
 
-		std::shared_ptr<Material> pShMater = Resources::Find<Material>(L"SKillLoadMater");
-		pShMater->SetTexture(Resources::Find<Texture>(L"SKillLoadUI0"));
+		//std::shared_ptr<Material> pShMater = Resources::Find<Material>(L"SKillLoadMater");
+		//pShMater->SetTexture(Resources::Find<Texture>(L"SKillLoadUI0"));
 	}
 
 	void SkillLoadUI::MouseLbtnClicked()

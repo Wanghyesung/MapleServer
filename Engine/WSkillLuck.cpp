@@ -29,20 +29,20 @@ namespace W
 		tTime.fCurTime = 0.f;
 		SetCoolTime(tTime);
 
-		m_pEffectAtlas = Resources::Load<Texture>(L"luckeffect", L"..\\Resources\\Texture\\Player\\skill\\effect.png");
-		m_pHitEffectAtlas = Resources::Load<Texture>(L"luckhit", L"..\\Resources\\Texture\\Player\\skill\\hit.png");
+		//m_pEffectAtlas = Resources::Load<Texture>(L"luckeffect", L"..\\Resources\\Texture\\Player\\skill\\effect.png");
+		//m_pHitEffectAtlas = Resources::Load<Texture>(L"luckhit", L"..\\Resources\\Texture\\Player\\skill\\hit.png");
 
 		for (int i = 0; i < 8; ++i)
 		{
-			CreateEffet(m_pHitEffectAtlas, L"luck", Vector2(0.f, 0.f), Vector2(74.f, 74.f), 4, 1,
+			CreateEffet(L"luck", Vector2(0.f, 0.f), Vector2(74.f, 74.f), 4, 1,
 				Vector2(90.f, 90.f), Vector2::Zero, 0.1f);
 		}
 
-		CreateEffet(m_pEffectAtlas, L"luckeffect", Vector2(0.f, 0.f), Vector2(112.f, 52.f), 5, 1,
+		CreateEffet(L"luckeffect", Vector2(0.f, 0.f), Vector2(112.f, 52.f), 5, 1,
 			Vector2(110.f, 110.f), Vector2(0.4f, 0.f), 0.1f);
 
 
-		SetSound(Resources::Load<AudioClip>(L"lucksound", L"..\\Resources\\sound\\skill\\luck.mp3"),false);
+		//SetSound(Resources::Load<AudioClip>(L"lucksound", L"..\\Resources\\sound\\skill\\luck.mp3"),false);
 	}
 	SkillLuck::~SkillLuck()
 	{

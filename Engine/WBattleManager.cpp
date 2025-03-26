@@ -42,24 +42,24 @@ namespace W
 
 	void BattleManager::Initialize()
 	{
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
-		pMater->SetRenderinMode(eRenderingMode::Transparent);
-		Resources::Insert(L"DamageMater", pMater);
-
-		for (int i = 0; i < 10; ++i)
-		{
-			std::wstring strNum = std::to_wstring(i);
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
+		//pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//Resources::Insert(L"DamageMater", pMater);
+		//
+		//for (int i = 0; i < 10; ++i)
+		//{
+		//	std::wstring strNum = std::to_wstring(i);
+		//
+		//	std::shared_ptr<Texture> spTex =
+		//		Resources::Load<Texture>(L"Number_" + strNum, L"..\\Resources\\Texture\\Damage\\" + strNum + L".png");
+		//}
 		
-			std::shared_ptr<Texture> spTex =
-				Resources::Load<Texture>(L"Number_" + strNum, L"..\\Resources\\Texture\\Damage\\" + strNum + L".png");
-		}
-		
-		for (int i = 0; i < 300; ++i)
-		{
-			DamageFont* pDamageFont = new DamageFont();
-			m_queueFonts.push(pDamageFont);
-		}
+		//for (int i = 0; i < 300; ++i)
+		//{
+		//	DamageFont* pDamageFont = new DamageFont();
+		//	m_queueFonts.push(pDamageFont);
+		//}
 
 	}
 
@@ -168,17 +168,17 @@ namespace W
 			DamageFont* pDamage = _queueFonts.front();
 			_queueFonts.pop();
 
-			Transform* pTr = pDamage->GetComponent<Transform>();
-			Vector3 vPos = pTr->GetPosition();
-			vPos.x += X;
-			vPos.z = -6.f;
-			vPos.y += (0.3f * tDamage.iCurCount);
-			pTr->SetPosition(vPos);
+			//Transform* pTr = pDamage->GetComponent<Transform>();
+			//Vector3 vPos = pTr->GetPosition();
+			//vPos.x += X;
+			//vPos.z = -6.f;
+			//vPos.y += (0.3f * tDamage.iCurCount);
+			//pTr->SetPosition(vPos);
 
-			pDamage->m_bActive = true;
+			//pDamage->m_bActive = true;
 			SceneManger::AddGameObject(eLayerType::Effect, pDamage);
 
-			X -= fOffsetX;
+			//X -= fOffsetX;
 		}
 
 		if (tDamage.iCurCount == tDamage.iEndCount)

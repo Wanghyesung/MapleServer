@@ -29,13 +29,13 @@ namespace W
 			layer.LateUpdate();
 		}
 	}
-	void Scene::Render()
-	{
-		for (Layer& layer : m_vecLayer)
-		{
-			layer.Render();
-		}
-	}
+	//void Scene::Render()
+	//{
+	//	for (Layer& layer : m_vecLayer)
+	//	{
+	//		layer.Render();
+	//	}
+	//}
 
 	void Scene::Destroy()
 	{
@@ -50,17 +50,17 @@ namespace W
 
 	void Scene::OnEnter()
 	{
-		for (int i = 0; i < m_vecResource.size(); ++i)
-		{
-			ThreadPool::LoadingResource<Texture>(m_vecResource[i].first, m_vecResource[i].second);
-		}
+		//for (int i = 0; i < m_vecResource.size(); ++i)
+		//{
+		//	ThreadPool::LoadingResource<Texture>(m_vecResource[i].first, m_vecResource[i].second);
+		//}
 	}
 	void Scene::OnExit()
 	{
-		for (int i = 0; i < m_vecResource.size(); ++i)
-		{
-			ThreadPool::DeleteResource<Texture>(m_vecResource[i].first);
-		}
+		//for (int i = 0; i < m_vecResource.size(); ++i)
+		//{
+		//	ThreadPool::DeleteResource<Texture>(m_vecResource[i].first);
+		//}
 	}
 	void Scene::AddGameObject(eLayerType _eType, GameObject* _pGameObj)
 	{

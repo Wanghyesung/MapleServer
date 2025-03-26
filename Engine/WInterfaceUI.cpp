@@ -35,18 +35,18 @@ namespace W
 		m_vUIEndPosition(Vector2::One),
 		m_vUIDiffPosition(Vector2::One)
 	{
-		std::shared_ptr<Texture> pInterfaceTex =
-			Resources::Load<Texture>(L"InterfaceTex", L"..\\Resources\\Texture\\UI\\Interface\\back_00.png");
-
-		std::shared_ptr<Material> pInterfaceMater = std::make_shared<Material>();
-		pInterfaceMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pInterfaceMater->SetTexture(pInterfaceTex);
-		Resources::Insert(L"InterfaceMater", pInterfaceMater);
-		//pInterfaceMater->SetRenderinMode(eRenderingMode::Transparent);
-
-		MeshRenderer* pUIMeshRenderer = AddComponent<MeshRenderer>();
-		pUIMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pUIMeshRenderer->SetMaterial(pInterfaceMater);
+		//std::shared_ptr<Texture> pInterfaceTex =
+		//	Resources::Load<Texture>(L"InterfaceTex", L"..\\Resources\\Texture\\UI\\Interface\\back_00.png");
+		//
+		//std::shared_ptr<Material> pInterfaceMater = std::make_shared<Material>();
+		//pInterfaceMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pInterfaceMater->SetTexture(pInterfaceTex);
+		//Resources::Insert(L"InterfaceMater", pInterfaceMater);
+		////pInterfaceMater->SetRenderinMode(eRenderingMode::Transparent);
+		//
+		//MeshRenderer* pUIMeshRenderer = AddComponent<MeshRenderer>();
+		//pUIMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pUIMeshRenderer->SetMaterial(pInterfaceMater);
 
 #pragma region keyNumber
 		//내 인터페이스 키 순서
@@ -67,18 +67,18 @@ namespace W
 				x = 0.f;
 			}
 			Number* pNumber = new Number();
-			MeshRenderer* pMeshRenderer = pNumber->AddComponent<MeshRenderer>();
-			std::wstring strNum = strKey[i];
-			std::shared_ptr<Texture> pTex =
-				Resources::Load<Texture>(strNum + L"Tex", L"..\\Resources\\Texture\\UI\\InputUI\\" + strNum + L".png");
-
-			std::shared_ptr<Material> Mater = std::make_shared<Material>();
-			Mater->SetShader(Resources::Find<Shader>(L"UIShader"));
-			Mater->SetTexture(pTex);
-
-			Resources::Insert(strNum + L"Mater", Mater);
-			pMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRenderer->SetMaterial(Mater);
+			//MeshRenderer* pMeshRenderer = pNumber->AddComponent<MeshRenderer>();
+			//std::wstring strNum = strKey[i];
+			//std::shared_ptr<Texture> pTex =
+			//	Resources::Load<Texture>(strNum + L"Tex", L"..\\Resources\\Texture\\UI\\InputUI\\" + strNum + L".png");
+			//
+			//std::shared_ptr<Material> Mater = std::make_shared<Material>();
+			//Mater->SetShader(Resources::Find<Shader>(L"UIShader"));
+			//Mater->SetTexture(pTex);
+			//
+			//Resources::Insert(strNum + L"Mater", Mater);
+			//pMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			//pMeshRenderer->SetMaterial(Mater);
 
 			pNumber->GetComponent<Transform>()->SetPosition(2.22f + x, -3.1f + y, -8.f);
 			pNumber->GetComponent<Transform>()->SetScale(1.8f * 0.1f, 0.9f * 0.1f, 0.f);
@@ -95,18 +95,18 @@ namespace W
 				x = 0.f;
 			}
 			Number* pNumber = new Number();
-			MeshRenderer* pMeshRenderer = pNumber->AddComponent<MeshRenderer>();
-			std::wstring strNumber = strNum[i];
-			std::shared_ptr<Texture> pTex =
-				Resources::Load<Texture>(strNumber + L"Tex", L"..\\Resources\\Texture\\UI\\InputUI\\" + strNumber + L".png");
-
-			std::shared_ptr<Material> Mater = std::make_shared<Material>();
-			Mater->SetShader(Resources::Find<Shader>(L"UIShader"));
-			Mater->SetTexture(pTex);
-
-			Resources::Insert(strNumber + L"Mater", Mater);
-			pMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-			pMeshRenderer->SetMaterial(Mater);
+			//MeshRenderer* pMeshRenderer = pNumber->AddComponent<MeshRenderer>();
+			//std::wstring strNumber = strNum[i];
+			//std::shared_ptr<Texture> pTex =
+			//	Resources::Load<Texture>(strNumber + L"Tex", L"..\\Resources\\Texture\\UI\\InputUI\\" + strNumber + L".png");
+			//
+			//std::shared_ptr<Material> Mater = std::make_shared<Material>();
+			//Mater->SetShader(Resources::Find<Shader>(L"UIShader"));
+			//Mater->SetTexture(pTex);
+			//
+			//Resources::Insert(strNumber + L"Mater", Mater);
+			//pMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+			//pMeshRenderer->SetMaterial(Mater);
 
 			pNumber->GetComponent<Transform>()->SetPosition(3.65f + x, -3.1f + y, -8.f);
 			pNumber->GetComponent<Transform>()->SetScale(1.f * 0.1f, 1.f * 0.1f, 0.f);
@@ -244,10 +244,10 @@ namespace W
 	{
 		UI::LateUpdate();
 	}
-	void InterfaceUI::Render()
-	{
-		UI::Render();
-	}
+	//void InterfaceUI::Render()
+	//{
+	//	UI::Render();
+	//}
 	void InterfaceUI::MouseOn()
 	{
 

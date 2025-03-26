@@ -1,0 +1,26 @@
+syntax = "proto3";
+package Protocol;
+
+//repeated uint64 victims = 3;
+
+//클라가 서버로
+//서버가 클라에게 현재 채팅방에 누가 있는지 전송
+message C_ENTER
+{
+	string name = 1;
+}
+
+//ㅅ버가 클라로
+message S_ENTER
+{
+	bool success = 1;
+	repeated string users = 2;
+}
+
+//기존에 있던 새로운 인원
+message S_NEW_ENTER //새로운 인원 추가되었다는 걸 다른 클라에게 전송
+{
+	string user = 1;
+}
+
+

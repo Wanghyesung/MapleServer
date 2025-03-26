@@ -64,12 +64,12 @@ namespace W
 
 		ChildLateupdate();
 	}
-	void UI::Render()
-	{
-		GameObject::Render();
-
-		ChildRender();
-	}
+	//void UI::Render()
+	//{
+	//	GameObject::Render();
+	//
+	//	ChildRender();
+	//}
 	void UI::MouseOn()
 	{
 
@@ -131,13 +131,13 @@ namespace W
 			pUI->Update();
 		}
 	}
-	void UI::ChildRender()
-	{
-		for (UI* pUI : m_vecChildUI)
-		{
-			pUI->Render();
-		}
-	}
+	//void UI::ChildRender()
+	//{
+	//	for (UI* pUI : m_vecChildUI)
+	//	{
+	//		pUI->Render();
+	//	}
+	//}
 	void UI::ChildLateupdate()
 	{
 		for (UI* pUI : m_vecChildUI)

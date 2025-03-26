@@ -7,18 +7,18 @@ namespace W
 {
 	EyeItem::EyeItem()
 	{
-		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"eyeItemTex", L"..\\Resources\\Texture\\UI\\ItemUI\\iconRaw0.png");
+		//std::shared_ptr<Texture> pTex =
+		//	Resources::Load<Texture>(L"eyeItemTex", L"..\\Resources\\Texture\\UI\\ItemUI\\iconRaw0.png");
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		////pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pMater->SetTexture(pTex);
+		//Resources::Insert(L"eyeitemMater", pMater);
 
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pMater->SetTexture(pTex);
-		Resources::Insert(L"eyeitemMater", pMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pMater);
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pMater);
 
 		GetComponent<Transform>()->SetScale(0.1f * 3.5f, 0.1f * 2.9f, 0.f);
 		SetIconType(eIconType::Cash);
@@ -38,10 +38,10 @@ namespace W
 	{
 		ItemUI::LateUpdate();
 	}
-	void EyeItem::Render()
-	{
-		ItemUI::Render();
-	}
+	//void EyeItem::Render()
+	//{
+	//	ItemUI::Render();
+	//}
 	void EyeItem::MouseOn()
 	{
 		ItemUI::MouseOn();

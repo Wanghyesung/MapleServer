@@ -18,26 +18,26 @@ namespace W
 		tTime.fCurTime = 0.f;
 		SetCoolTime(tTime);
 
-		m_pEffectAtlas = Resources::Load<Texture>(L"loadeffect", L"..\\Resources\\Texture\\Player\\skill\\load\\start.png");
-		Effect* pEffect = CreateEffet(m_pEffectAtlas, L"loadeffect", Vector2(0.f, 0.5f), Vector2(1700.f, 1200.f), 5, 3,
+		//m_pEffectAtlas = Resources::Load<Texture>(L"loadeffect", L"..\\Resources\\Texture\\Player\\skill\\load\\start.png");
+		Effect* pEffect = CreateEffet(L"loadeffect", Vector2(0.f, 0.5f), Vector2(1700.f, 1200.f), 5, 3,
 			Vector2(1700.f, 1200.f), Vector2(0.5f, 3.f), 0.06f);
 		pEffect->GetComponent<Transform>()->SetScale(10.f, 10.f, 0.f);
 
-		m_pHitEffectAtlas = Resources::Load<Texture>(L"load", L"..\\Resources\\Texture\\Player\\skill\\load\\hit.png");
+		//m_pHitEffectAtlas = Resources::Load<Texture>(L"load", L"..\\Resources\\Texture\\Player\\skill\\load\\hit.png");
 		for (int i = 0; i < 30; ++i)
 		{
-			pEffect = CreateEffet(m_pHitEffectAtlas, L"load", Vector2(0.f, 0.f), Vector2(315.f, 204.f), 14, 1,
+			pEffect = CreateEffet(L"load", Vector2(0.f, 0.f), Vector2(315.f, 204.f), 14, 1,
 				Vector2(300.f, 300.f), Vector2(0.f, 0.f), 0.07f);
 			pEffect->GetComponent<Transform>()->SetScale(3.f, 3.f, 0.f);
 		}
 
-		std::shared_ptr<Texture> pAtlas
-			= Resources::Load<Texture>(L"loadTex", L"..\\Resources\\Texture\\Player\\skill\\load\\load.png");
+		//std::shared_ptr<Texture> pAtlas
+		//	= Resources::Load<Texture>(L"loadTex", L"..\\Resources\\Texture\\Player\\skill\\load\\load.png");
 
-		SetSound(Resources::Load<AudioClip>(L"loadsound", L"..\\Resources\\sound\\skill\\load.mp3"), false);
-		Resources::Load<AudioClip>(L"load_loop", L"..\\Resources\\sound\\skill\\load_loop.mp3");
-		Resources::Load<AudioClip>(L"load_dead", L"..\\Resources\\sound\\skill\\load_dead.mp3");
-		Resources::Load<AudioClip>(L"load_hit", L"..\\Resources\\sound\\skill\\load_hit2.mp3");
+		//SetSound(Resources::Load<AudioClip>(L"loadsound", L"..\\Resources\\sound\\skill\\load.mp3"), false);
+		//Resources::Load<AudioClip>(L"load_loop", L"..\\Resources\\sound\\skill\\load_loop.mp3");
+		//Resources::Load<AudioClip>(L"load_dead", L"..\\Resources\\sound\\skill\\load_dead.mp3");
+		//Resources::Load<AudioClip>(L"load_hit", L"..\\Resources\\sound\\skill\\load_hit2.mp3");
 	}							
 
 	SkillLoad::~SkillLoad()

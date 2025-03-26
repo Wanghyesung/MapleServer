@@ -35,29 +35,29 @@ namespace W
 	template<typename T>
 	inline void ThreadPool::LoadingResource(const std::wstring& _strResourceName, const std::wstring& _strPath)
 	{
-		{
-			std::lock_guard<std::mutex> lock(m_mutex);
-			m_queueTasks.push([=]()
-				{
-					//template에서 template함수 호출시 template 명시
-					Resources::template Load<T>(_strResourceName, _strPath);
-				});
-		}
-		m_iWorkCount.fetch_add(1);
-		m_CV.notify_all();	
+		//{
+		//	std::lock_guard<std::mutex> lock(m_mutex);
+		//	m_queueTasks.push([=]()
+		//		{
+		//			//template에서 template함수 호출시 template 명시
+		//			Resources::template Load<T>(_strResourceName, _strPath);
+		//		});
+		//}
+		//m_iWorkCount.fetch_add(1);
+		//m_CV.notify_all();	
 	}
 	template<typename T>
 	inline void ThreadPool::DeleteResource(const std::wstring& _strResourceName)
 	{
-		{
-			std::lock_guard<std::mutex> lock(m_mutex);
-			m_queueTasks.push([=]()
-				{
-					//template에서 template함수 호출시 template 명시
-					Resources::template Release<T>(_strResourceName);
-				});
-		}
-		m_iWorkCount.fetch_add(1);
-		m_CV.notify_all();
+		//{
+		//	std::lock_guard<std::mutex> lock(m_mutex);
+		//	m_queueTasks.push([=]()
+		//		{
+		//			//template에서 template함수 호출시 template 명시
+		//			Resources::template Release<T>(_strResourceName);
+		//		});
+		//}
+		//m_iWorkCount.fetch_add(1);
+		//m_CV.notify_all();
 	}
 }

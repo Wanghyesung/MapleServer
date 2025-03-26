@@ -27,8 +27,8 @@ namespace W
 	{
 		GameObject::LateUpdate();
 	}
-	void Ground::Render()
-	{
-		GameObject::Render();
-	}
+	//void Ground::Render()
+	//{
+	//	GameObject::Render();
+	//}
 }

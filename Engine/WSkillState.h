@@ -39,15 +39,12 @@ namespace W
 		void EndSound();
 
 	protected:
-		Effect* CreateEffet(std::shared_ptr<Texture> _pAtlas, std::wstring _strName, Vector2 _vLeftTop, Vector2 _vSize, 
+		Effect* CreateEffet(std::wstring _strName, Vector2 _vLeftTop, Vector2 _vSize, 
 			UINT _iColumnLength, UINT _iRowLength, Vector2 _vDivisionSize, Vector2 _vOffset, float _fDuration);
 		void StartEffect(Effect* _pEffect);
 
 		void AddDamage(PlayerAttackObject* _pAttackObject);
 
-	protected:
-		std::shared_ptr<Texture> m_pEffectAtlas;
-		std::shared_ptr<Texture> m_pHitEffectAtlas;
 
 	private:
 		std::wstring m_strStateName;

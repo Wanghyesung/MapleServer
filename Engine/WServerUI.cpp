@@ -6,20 +6,20 @@ namespace W
 	ServerUI::ServerUI():
 		m_pChannel(nullptr)
 	{
-		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"sky_1Tex", L"..\\Resources\\Texture\\UI\\StartUI\\sky_1.png");
-
-		pTex =
-			Resources::Load<Texture>(L"sky_0Tex", L"..\\Resources\\Texture\\UI\\StartUI\\sky_0.png");
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pMater->SetTexture(pTex);
-		Resources::Insert(L"skyMater", pMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pMater);
+		//std::shared_ptr<Texture> pTex =
+		//	Resources::Load<Texture>(L"sky_1Tex", L"..\\Resources\\Texture\\UI\\StartUI\\sky_1.png");
+		//
+		//pTex =
+		//	Resources::Load<Texture>(L"sky_0Tex", L"..\\Resources\\Texture\\UI\\StartUI\\sky_0.png");
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pMater->SetTexture(pTex);
+		//Resources::Insert(L"skyMater", pMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pMater);
 	}
 	ServerUI::~ServerUI()
 	{
@@ -44,23 +44,23 @@ namespace W
 	{
 		UI::LateUpdate();
 	}
-	void ServerUI::Render()
-	{
-		UI::Render();
-	}
+	//void ServerUI::Render()
+	//{
+	//	UI::Render();
+	//}
 	void ServerUI::MouseOn()
 	{
 
 	}
 	void ServerUI::MouseLbtnDown()
 	{
-		std::shared_ptr<Material> pMater = Resources::Find<Material>(L"skyMater");
-		pMater->SetTexture(Resources::Find<Texture>(L"sky_1Tex"));
+		//std::shared_ptr<Material> pMater = Resources::Find<Material>(L"skyMater");
+		//pMater->SetTexture(Resources::Find<Texture>(L"sky_1Tex"));
 	}
 	void ServerUI::MouseLbtnUp()
 	{
-		std::shared_ptr<Material> pMater = Resources::Find<Material>(L"skyMater");
-		pMater->SetTexture(Resources::Find<Texture>(L"sky_0Tex"));
+		//std::shared_ptr<Material> pMater = Resources::Find<Material>(L"skyMater");
+		//pMater->SetTexture(Resources::Find<Texture>(L"sky_0Tex"));
 	}
 	void ServerUI::MouseLbtnClicked()
 	{

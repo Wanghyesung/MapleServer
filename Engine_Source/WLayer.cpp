@@ -40,15 +40,15 @@ namespace W
 			gameObj->LateUpdate();
 		}
 	}
-	void Layer::Render()
-	{
-		for (GameObject* gameObj : m_vecGameObject)
-		{
-			if (gameObj->GetState() != GameObject::eState::Active)
-				continue;
-			gameObj->Render();
-		}
-	}
+	//void Layer::Render()
+	//{
+	//	for (GameObject* gameObj : m_vecGameObject)
+	//	{
+	//		if (gameObj->GetState() != GameObject::eState::Active)
+	//			continue;
+	//		gameObj->Render();
+	//	}
+	//}
 
 	void Layer::Destory()
 	{

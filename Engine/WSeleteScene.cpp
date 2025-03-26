@@ -12,13 +12,13 @@ namespace W
 {
 	SeleteScene::SeleteScene()
 	{
-		std::shared_ptr<Texture> pBackTex =
-			Resources::Load<Texture>(L"start_logo_2Tex", L"..\\Resources\\Texture\\background\\start_logo_2.png");
-
-		std::shared_ptr<Material> pBackMater = std::make_shared<Material>();
-		pBackMater->SetShader(Resources::Find<Shader>(L"BackgroundShader"));
-		pBackMater->SetTexture(pBackTex);
-		Resources::Insert(L"start_logo_2Mater", pBackMater);
+		//std::shared_ptr<Texture> pBackTex =
+		//	Resources::Load<Texture>(L"start_logo_2Tex", L"..\\Resources\\Texture\\background\\start_logo_2.png");
+		//
+		//std::shared_ptr<Material> pBackMater = std::make_shared<Material>();
+		//pBackMater->SetShader(Resources::Find<Shader>(L"BackgroundShader"));
+		//pBackMater->SetTexture(pBackTex);
+		//Resources::Insert(L"start_logo_2Mater", pBackMater);
 
 	}
 	SeleteScene::~SeleteScene()
@@ -63,10 +63,10 @@ namespace W
 	{
 		Scene::LateUpdate();
 	}
-	void SeleteScene::Render()
-	{
-		Scene::Render();
-	}
+	//void SeleteScene::Render()
+	//{
+	//	Scene::Render();
+	//}
 	void SeleteScene::Destroy()
 	{
 	}
@@ -81,9 +81,9 @@ namespace W
 	{
 		GameObject* pBackGround = new GameObject();
 		AddGameObject(eLayerType::Background, pBackGround);
-		MeshRenderer* pMeshRender = pBackGround->AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(Resources::Find<Material>(L"start_logo_2Mater"));
+		//MeshRenderer* pMeshRender = pBackGround->AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(Resources::Find<Material>(L"start_logo_2Mater"));
 		pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 0.2f);
 		//035 : 1
 		pBackGround->GetComponent<Transform>()->SetScale(4 * 3.5f, 3.f * 2.7f, 1.f);

@@ -22,30 +22,30 @@ namespace W
 		tTime.fCurTime = 0.f;
 		SetCoolTime(tTime);
 
-		m_pEffectAtlas = Resources::Load<Texture>(L"raideffect1", L"..\\Resources\\Texture\\Player\\skill\\effect8.png");
-		Resources::Load<Texture>(L"raideffect2", L"..\\Resources\\Texture\\Player\\skill\\effect9.png");
+		//m_pEffectAtlas = Resources::Load<Texture>(L"raideffect1", L"..\\Resources\\Texture\\Player\\skill\\effect8.png");
+		//Resources::Load<Texture>(L"raideffect2", L"..\\Resources\\Texture\\Player\\skill\\effect9.png");
 
-		Effect* pEffect = CreateEffet(m_pEffectAtlas, L"raideffect1", Vector2(0.f, 0.f),
+		Effect* pEffect = CreateEffet(L"raideffect1", Vector2(0.f, 0.f),
 			Vector2(1060.f, 727.f), 10, 3, Vector2(1000.f, 1000.f), Vector2(0.2f, 2.f), 0.1f);
 		pEffect->AddComponent<Light>();
 
-		Effect* pEffect2 = CreateEffet(Resources::Find<Texture>(L"raideffect2"), L"raideffect2", Vector2(0.f, 0.f), Vector2(880.f, 637.f), 10, 3,
+		Effect* pEffect2 = CreateEffet( L"raideffect2", Vector2(0.f, 0.f), Vector2(880.f, 637.f), 10, 3,
 			Vector2(1000.f, 1000.f), Vector2(0.2f, 2.f), 0.1f);
 		pEffect2->SetFunction(std::bind(&SkillRaid::activeskill_raid, this), 11);
 
 		pEffect->GetComponent<Transform>()->SetScale(10.f, 10.f, 0.f);
 		pEffect2->GetComponent<Transform>()->SetScale(10.f, 10.f, 0.f);
 
-		m_pHitEffectAtlas = Resources::Load<Texture>(L"raidhit", L"..\\Resources\\Texture\\Player\\skill\\hit2.png");
+		//m_pHitEffectAtlas = Resources::Load<Texture>(L"raidhit", L"..\\Resources\\Texture\\Player\\skill\\hit2.png");
 		for (int i = 0; i < 7; ++i)
 		{
-			Effect* pEffet3 = CreateEffet(m_pHitEffectAtlas, L"raid", Vector2(0.f, 0.f), Vector2(276.f, 252.f), 6, 1,
+			Effect* pEffet3 = CreateEffet(L"raid", Vector2(0.f, 0.f), Vector2(276.f, 252.f), 6, 1,
 				Vector2(300.f, 300.f), Vector2(0.f, 0.f), 0.2f);
 			pEffet3->GetComponent<Transform>()->SetScale(3.5f, 3.5f, 0.f);
 		}
 
-		SetSound(Resources::Load<AudioClip>(L"raidsound", L"..\\Resources\\sound\\skill\\raid.mp3"), false);
-		Resources::Load<AudioClip>(L"raid_hit", L"..\\Resources\\sound\\skill\\raid_hit.mp3");
+		//SetSound(Resources::Load<AudioClip>(L"raidsound", L"..\\Resources\\sound\\skill\\raid.mp3"), false);
+		//Resources::Load<AudioClip>(L"raid_hit", L"..\\Resources\\sound\\skill\\raid_hit.mp3");
 	}
 	SkillRaid::~SkillRaid()
 	{
@@ -105,7 +105,7 @@ namespace W
 		pAttackObj->AddComponent<AttackScript>()->SetStayObject(7, 0.8f);
 		pAttackObj->GetComponent<AttackScript>()->SetDeleteTime(1.f);
 
-		pAttackObj->SetHitSound(Resources::Find<AudioClip>(L"raid_hit"),false);
+		//pAttackObj->SetHitSound(Resources::Find<AudioClip>(L"raid_hit"),false);
 	}
 
 	void SkillRaid::activeskill_raid()

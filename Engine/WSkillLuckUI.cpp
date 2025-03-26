@@ -11,21 +11,21 @@ namespace W
 		SetPlayerSkill(Player::ePlayerSkill::luck);
 
 		//cool
-		std::shared_ptr<Texture> pSKillUI =
-			Resources::Load<Texture>(L"SKillluckUI2", L"..\\Resources\\Texture\\UI\\SkillUI\\1\\luck\\2.png");
-		//down
-		pSKillUI = Resources::Load<Texture>(L"SKillluckUI1", L"..\\Resources\\Texture\\UI\\SkillUI\\1\\luck\\1.png");
-		//default
-		pSKillUI = Resources::Load<Texture>(L"SKillluckUI0", L"..\\Resources\\Texture\\UI\\SkillUI\\1\\luck\\0.png");
-
-		std::shared_ptr<Material> pSKillMater = std::make_shared<Material>();
-		pSKillMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pSKillMater->SetTexture(pSKillUI);
-		Resources::Insert(L"SKillLuckMater", pSKillMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pSKillMater);
+		//std::shared_ptr<Texture> pSKillUI =
+		//	Resources::Load<Texture>(L"SKillluckUI2", L"..\\Resources\\Texture\\UI\\SkillUI\\1\\luck\\2.png");
+		////down
+		//pSKillUI = Resources::Load<Texture>(L"SKillluckUI1", L"..\\Resources\\Texture\\UI\\SkillUI\\1\\luck\\1.png");
+		////default
+		//pSKillUI = Resources::Load<Texture>(L"SKillluckUI0", L"..\\Resources\\Texture\\UI\\SkillUI\\1\\luck\\0.png");
+		//
+		//std::shared_ptr<Material> pSKillMater = std::make_shared<Material>();
+		//pSKillMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pSKillMater->SetTexture(pSKillUI);
+		//Resources::Insert(L"SKillLuckMater", pSKillMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pSKillMater);
 	}
 	SkillLuckUI::~SkillLuckUI()
 	{
@@ -43,10 +43,10 @@ namespace W
 	{
 		SKill::LateUpdate();
 	}
-	void SkillLuckUI::Render()
-	{
-		SKill::Render();
-	}
+	//void SkillLuckUI::Render()
+	//{
+	//	SKill::Render();
+	//}
 	void SkillLuckUI::MouseOn()
 	{
 		SKill::MouseOn();
@@ -59,8 +59,8 @@ namespace W
 
 		SKill::MouseLbtnDown();
 
-		std::shared_ptr<Material> pShMater = Resources::Find<Material>(L"SKillLuckMater");
-		pShMater->SetTexture(Resources::Find<Texture>(L"SKillluckUI1"));
+		//std::shared_ptr<Material> pShMater = Resources::Find<Material>(L"SKillLuckMater");
+		//pShMater->SetTexture(Resources::Find<Texture>(L"SKillluckUI1"));
 	}
 
 	void SkillLuckUI::MouseLbtnUp()
@@ -71,8 +71,8 @@ namespace W
 
 		SKill::MouseLbtnUp();
 
-		std::shared_ptr<Material> pShMater = Resources::Find<Material>(L"SKillLuckMater");
-		pShMater->SetTexture(Resources::Find<Texture>(L"SKillluckUI0"));
+		//std::shared_ptr<Material> pShMater = Resources::Find<Material>(L"SKillLuckMater");
+		//pShMater->SetTexture(Resources::Find<Texture>(L"SKillluckUI0"));
 	}
 	void SkillLuckUI::MouseLbtnClicked()
 	{

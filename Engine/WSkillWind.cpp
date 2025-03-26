@@ -18,31 +18,31 @@ namespace W
 		tTime.fCurTime = 0.f;
 		SetCoolTime(tTime);
 
-		m_pEffectAtlas = Resources::Load<Texture>(L"windffect1", L"..\\Resources\\Texture\\Player\\skill\\shuriken\\effect_0.png");
-		Effect* pEffect = CreateEffet(m_pEffectAtlas, L"windffect1", Vector2(0.f, 0.5f), Vector2(626.f, 508.f), 7, 1,
+		//m_pEffectAtlas = Resources::Load<Texture>(L"windffect1", L"..\\Resources\\Texture\\Player\\skill\\shuriken\\effect_0.png");
+		Effect* pEffect = CreateEffet(L"windffect1", Vector2(0.f, 0.5f), Vector2(626.f, 508.f), 7, 1,
 			Vector2(600.f, 600.f), Vector2(0.5f, 0.f), 0.06f);
 
-		Resources::Load<Texture>(L"windffect2", L"..\\Resources\\Texture\\Player\\skill\\shuriken\\effect_1.png");
-		pEffect = CreateEffet(Resources::Find<Texture>(L"windffect2"), L"windffect2", Vector2(0.f, 0.f), 
+		//Resources::Load<Texture>(L"windffect2", L"..\\Resources\\Texture\\Player\\skill\\shuriken\\effect_1.png");
+		pEffect = CreateEffet(L"windffect2", Vector2(0.f, 0.f), 
 			Vector2(572.f, 413.f), 11, 1, Vector2(580.f, 580.f), Vector2(0.5f, 0.5f), 0.06f);
 		pEffect->SetFunction(std::bind(&SkillWind::activeskill_wind, this), 6);
 
 
-		m_pHitEffectAtlas = Resources::Load<Texture>(L"wind", L"..\\Resources\\Texture\\Player\\skill\\shuriken\\hit.png");
+		//m_pHitEffectAtlas = Resources::Load<Texture>(L"wind", L"..\\Resources\\Texture\\Player\\skill\\shuriken\\hit.png");
 		for (int i = 0; i < 7; ++i)
 		{
-			pEffect = CreateEffet(m_pHitEffectAtlas, L"wind", Vector2(0.f, 0.f), Vector2(249.f, 248.f), 6, 1,
+			pEffect = CreateEffet(L"wind", Vector2(0.f, 0.f), Vector2(249.f, 248.f), 6, 1,
 				Vector2(250.f, 250.f), Vector2(0.f, 0.2f), 0.15f);
 			pEffect->GetComponent<Transform>()->SetScale(2.5f, 2.5f, 0.f);
 		}
 
-		std::shared_ptr<Texture> pAtlas
-			= Resources::Load<Texture>(L"windTex", L"..\\Resources\\Texture\\Player\\skill\\shuriken\\windshuriken.png");
-
-		SetSound(Resources::Load<AudioClip>(L"windsound", L"..\\Resources\\sound\\skill\\wind.mp3"), false);
-		Resources::Load<AudioClip>(L"wind_move", L"..\\Resources\\sound\\skill\\wind_loop.mp3");
-		Resources::Load<AudioClip>(L"wind_finish", L"..\\Resources\\sound\\skill\\wind_dead.mp3");
-		Resources::Load<AudioClip>(L"wind_hit", L"..\\Resources\\sound\\skill\\wind_hit.mp3");
+		//std::shared_ptr<Texture> pAtlas
+		//	= Resources::Load<Texture>(L"windTex", L"..\\Resources\\Texture\\Player\\skill\\shuriken\\windshuriken.png");
+		//
+		//SetSound(Resources::Load<AudioClip>(L"windsound", L"..\\Resources\\sound\\skill\\wind.mp3"), false);
+		//Resources::Load<AudioClip>(L"wind_move", L"..\\Resources\\sound\\skill\\wind_loop.mp3");
+		//Resources::Load<AudioClip>(L"wind_finish", L"..\\Resources\\sound\\skill\\wind_dead.mp3");
+		//Resources::Load<AudioClip>(L"wind_hit", L"..\\Resources\\sound\\skill\\wind_hit.mp3");
 
 	}
 	SkillWind::~SkillWind()

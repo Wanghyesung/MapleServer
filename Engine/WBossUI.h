@@ -20,7 +20,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		virtual void Render()override;
+		//virtual void Render()override;
 
 		virtual void MouseOn()override;//UI위에 마우스 올라왔을 떄 
 		virtual void MouseLbtnDown()override;//UI안에서 눌렸을 떄

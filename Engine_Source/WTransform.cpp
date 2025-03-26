@@ -76,20 +76,20 @@ namespace W
 	{
 
 	}
-	void Transform::BindConstantBuffer()
-	{
-		renderer::TransformCB trCB = {};
-		trCB.m_mWorld = m_vWorld;
-		trCB.m_mView = Camera::GetGpuViewMatrix();
-		trCB.m_mProjection = Camera::GetGpuProjectionMatrix();
-
-		ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Transform];
-		//Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
-		pConstBuffer->SetData(&trCB);
-		pConstBuffer->Bind(eShaderStage::VS);
-		pConstBuffer->Bind(eShaderStage::HS);
-		pConstBuffer->Bind(eShaderStage::DS);
-		pConstBuffer->Bind(eShaderStage::GS);
-		pConstBuffer->Bind(eShaderStage::PS);
-	}
+	//void Transform::BindConstantBuffer()
+	//{
+	//	renderer::TransformCB trCB = {};
+	//	trCB.m_mWorld = m_vWorld;
+	//	trCB.m_mView = Camera::GetGpuViewMatrix();
+	//	trCB.m_mProjection = Camera::GetGpuProjectionMatrix();
+	//
+	//	ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Transform];
+	//	//Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
+	//	pConstBuffer->SetData(&trCB);
+	//	pConstBuffer->Bind(eShaderStage::VS);
+	//	pConstBuffer->Bind(eShaderStage::HS);
+	//	pConstBuffer->Bind(eShaderStage::DS);
+	//	pConstBuffer->Bind(eShaderStage::GS);
+	//	pConstBuffer->Bind(eShaderStage::PS);
+	//}
 }

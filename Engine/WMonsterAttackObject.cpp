@@ -13,14 +13,14 @@ namespace W
 		//AddComponent<Collider2D>();
 		//AddComponent<MonsterAttackScript>();
 
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
-		Resources::Insert(L"pMonsterAttackMater", pMater);
-
-		MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pRenderer->SetMaterial(pMater);
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
+		//Resources::Insert(L"pMonsterAttackMater", pMater);
+		//
+		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
+		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pRenderer->SetMaterial(pMater);
 
 		AddComponent<MonsterAttackScript>();
 		Collider2D* pCollider = AddComponent<Collider2D>();
@@ -50,10 +50,10 @@ namespace W
 		GameObject::LateUpdate();
 	}
 
-	void MonsterAttackObject::Render()
-	{
-		GameObject::Render();
-	}
+	//void MonsterAttackObject::Render()
+	//{
+	//	GameObject::Render();
+	//}
 
 	void MonsterAttackObject::SetMonsterAttack(const tMonsterAttack& _tAttackInfo)
 	{

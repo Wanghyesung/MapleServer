@@ -87,7 +87,7 @@ namespace W
 			GameObject* player = new GameObject();
 			player->SetName(L"Particle");
 			AddGameObject(eLayerType::Monster, player);
-			ParticleSystem* mr = player->AddComponent<ParticleSystem>();
+			//ParticleSystem* mr = player->AddComponent<ParticleSystem>();
 			player->GetComponent<Transform>()->SetPosition(Vector3(0.0f, 0.0f, 1.0f));
 			player->GetComponent<Transform>()->SetScale(Vector3(0.2f, 0.2f, 0.2f));
 			//Collider2D* cd = player->AddComponent<Collider2D>();
@@ -156,8 +156,8 @@ namespace W
 	{
 		Scene::LateUpdate();
 	}
-	void PlayScene::Render()
-	{
-		Scene::Render();
-	}
+	//void PlayScene::Render()
+	//{
+	//	Scene::Render();
+	//}
 }

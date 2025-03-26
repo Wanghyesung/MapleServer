@@ -18,30 +18,30 @@ namespace W
 		tTime.fCurTime = 0.f;
 		SetCoolTime(tTime);
 
-		m_pEffectAtlas = Resources::Load<Texture>(L"blastffect1", L"..\\Resources\\Texture\\Player\\skill\\blast\\effect_0.png");
-		Effect* pEffect = CreateEffet(m_pEffectAtlas, L"blastffect1", Vector2(0.f, 0.f),
+		//m_pEffectAtlas = Resources::Load<Texture>(L"blastffect1", L"..\\Resources\\Texture\\Player\\skill\\blast\\effect_0.png");
+		Effect* pEffect = CreateEffet(L"blastffect1", Vector2(0.f, 0.f),
 			Vector2(752.f, 358.f), 13, 1, Vector2(750.f, 750.f), Vector2(0.f, 0.f), 0.1f);
 		pEffect->GetComponent<Transform>()->SetScale(5.f, 5.f, 0.f);
 		pEffect->SetFunction(std::bind(&SkillBlast::activeskill_blast, this), 7);
 
-		Resources::Load<Texture>(L"blastffect2", L"..\\Resources\\Texture\\Player\\skill\\blast\\effect_1.png");
-		pEffect = CreateEffet(Resources::Find<Texture>(L"blastffect2"), L"blastffect2", Vector2(0.f, 0.f),
+		//Resources::Load<Texture>(L"blastffect2", L"..\\Resources\\Texture\\Player\\skill\\blast\\effect_1.png");
+		pEffect = CreateEffet(L"blastffect2", Vector2(0.f, 0.f),
 			Vector2(735.f, 673.f), 9, 1, Vector2(750.f, 750.f), Vector2(0.f, 0.f), 0.1f);
 		pEffect->GetComponent<Transform>()->SetScale(5.f, 5.f, 0.f);
 		pEffect->SetFunction(std::bind(&SkillBlast::exit, this), 8);
 
 		for (int i = 0; i < 25; ++i)
 		{
-			m_pHitEffectAtlas = Resources::Load<Texture>(L"blast", L"..\\Resources\\Texture\\Player\\skill\\blast\\hit.png");
-			pEffect = CreateEffet(m_pHitEffectAtlas, L"blast", Vector2(0.f, 0.f),
+			//m_pHitEffectAtlas = Resources::Load<Texture>(L"blast", L"..\\Resources\\Texture\\Player\\skill\\blast\\hit.png");
+			pEffect = CreateEffet(L"blast", Vector2(0.f, 0.f),
 				Vector2(285.f, 284.f), 8, 1, Vector2(300.f, 300.f), Vector2(0.f, 0.f), 0.1f);
 		}
 
-		std::shared_ptr<Texture> pAtlas
-			= Resources::Load<Texture>(L"blastTex", L"..\\Resources\\Texture\\Player\\skill\\blast\\effect_2.png");
+		//std::shared_ptr<Texture> pAtlas
+		//	= Resources::Load<Texture>(L"blastTex", L"..\\Resources\\Texture\\Player\\skill\\blast\\effect_2.png");
 
-		SetSound(Resources::Load<AudioClip>(L"blastsound", L"..\\Resources\\sound\\skill\\blast.mp3"), false);
-		Resources::Load<AudioClip>(L"blasthit", L"..\\Resources\\sound\\skill\\blast1.mp3");
+		//SetSound(Resources::Load<AudioClip>(L"blastsound", L"..\\Resources\\sound\\skill\\blast.mp3"), false);
+		//Resources::Load<AudioClip>(L"blasthit", L"..\\Resources\\sound\\skill\\blast1.mp3");
 
 	}
 	SkillBlast::~SkillBlast()

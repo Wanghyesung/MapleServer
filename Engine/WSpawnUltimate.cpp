@@ -14,14 +14,14 @@ namespace W
 		m_fActiveTime(20.f),
 		m_iCurIndex(0)
 	{
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
-		Resources::Insert(L"pSpawnMater", pMater);
-
-		MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pRenderer->SetMaterial(pMater);
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
+		//Resources::Insert(L"pSpawnMater", pMater);
+		//
+		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
+		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pRenderer->SetMaterial(pMater);
 
 		m_vecCreateCount.push_back(3);
 		m_vecCreateCount.push_back(4);
@@ -106,10 +106,10 @@ namespace W
 	{
 		GameObject::LateUpdate();
 	}
-	void SpawnUltimate::Render()
-	{
-		//GameObject::Render();
-	}
+	//void SpawnUltimate::Render()
+	//{
+	//	//GameObject::Render();
+	//}
 
 	void SpawnUltimate::off()
 	{

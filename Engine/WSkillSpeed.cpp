@@ -18,12 +18,12 @@ namespace W
 		tTime.fCurTime = 0.f;
 		SetCoolTime(tTime);
 
-		m_pEffectAtlas = Resources::Load<Texture>(L"speedffect", L"..\\Resources\\Texture\\Player\\skill\\effect3.png");
-		Effect* pEffect = CreateEffet(m_pEffectAtlas, L"speedffect", Vector2(0.f, 0.f), Vector2(122.f, 64.f), 9, 1,
+		//m_pEffectAtlas = Resources::Load<Texture>(L"speedffect", L"..\\Resources\\Texture\\Player\\skill\\effect3.png");
+		Effect* pEffect = CreateEffet(L"speedffect", Vector2(0.f, 0.f), Vector2(122.f, 64.f), 9, 1,
 			Vector2(200.f, 200.f), Vector2(0.f, 0.0f), tTime.fActiveTime / 9.f);
 		pEffect->GetComponent<Transform>()->SetScale(2.f, 2.f, 0.f);
 
-		SetSound(Resources::Load<AudioClip>(L"speedskillsound", L"..\\Resources\\sound\\skill\\speed.mp3"), false);
+		//SetSound(Resources::Load<AudioClip>(L"speedskillsound", L"..\\Resources\\sound\\skill\\speed.mp3"), false);
 
 		
 	}

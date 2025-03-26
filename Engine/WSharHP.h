@@ -15,7 +15,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		virtual void Render()override;
+		//virtual void Render()override;
 
 		void SetHPValue(float _fValue) { m_fHP = _fValue; }
 	private:

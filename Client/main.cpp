@@ -158,18 +158,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             application.Run();
             gui::Editor::Run();
 
-            application.Present();
+            //application.Present();
         }
     }
 
-    renderer::Release();
+    //renderer::Release();
     //W::Resources::Release();//전부 shadered_ptr로 바꿈 알아서 해제
 
     W::ThreadPool::Shutdown();
     W::SceneManger::Release();
     //W::BattleManager::Release();
     W::Fmod::Release();
-    W::FontWrapper::Release();
+    //W::FontWrapper::Release();
     gui::Editor::Release();
 
     return (int)msg.wParam;

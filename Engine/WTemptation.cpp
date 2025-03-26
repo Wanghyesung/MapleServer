@@ -10,20 +10,20 @@ namespace W
 {
 	Temptation::Temptation()
 	{
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
-		//pMater->SetTexture(pTex);
-		Resources::Insert(L"TemptationMater", pMater);
-		pMater->SetRenderinMode(eRenderingMode::Transparent);
-
-		MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pRenderer->SetMaterial(pMater);
-
-		std::shared_ptr<Texture> pAtlas =
-			Resources::Load<Texture>(L"temptationTex", L"..\\Resources\\Texture\\Abnormal\\temptation.png");
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
+		////pMater->SetTexture(pTex);
+		//Resources::Insert(L"TemptationMater", pMater);
+		//pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//
+		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
+		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pRenderer->SetMaterial(pMater);
+		//
+		//std::shared_ptr<Texture> pAtlas =
+	//		Resources::Load<Texture>(L"temptationTex", L"..\\Resources\\Texture\\Abnormal\\temptation.png");
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"temptation", pAtlas, Vector2(0.0f, 0.0f), Vector2(50.0f, 63.0f), 8, Vector2(80.f, 80.f), Vector2::Zero, 0.2f);
+		pAnim->Create(L"temptation", Vector2(0.0f, 0.0f), Vector2(50.0f, 63.0f), 8, Vector2(80.f, 80.f), Vector2::Zero, 0.2f);
 
 		pAnim->Play(L"temptation", true);
 
@@ -57,19 +57,19 @@ namespace W
 	{
 		Abnormal::LateUpdate();
 	}
-	void Temptation::Render()
-	{
-		renderer::ObjectCB ObjectCB;
-		ObjectCB.vObjectDir.x = -1;
-		ObjectCB.vObjectColor = Vector4::One;
-
-		ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Object];
-		//Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
-		pConstBuffer->SetData(&ObjectCB);
-		pConstBuffer->Bind(eShaderStage::PS);
-
-		Abnormal::Render();
-	}
+	//void Temptation::Render()
+	//{
+	//	renderer::ObjectCB ObjectCB;
+	//	ObjectCB.vObjectDir.x = -1;
+	//	ObjectCB.vObjectColor = Vector4::One;
+	//
+	//	ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Object];
+	//	//Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
+	//	pConstBuffer->SetData(&ObjectCB);
+	//	pConstBuffer->Bind(eShaderStage::PS);
+	//
+	//	Abnormal::Render();
+	//}
 
 	void Temptation::Restore()
 	{

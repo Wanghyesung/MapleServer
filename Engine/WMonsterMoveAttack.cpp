@@ -38,9 +38,9 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
-	void MonsterMoveAttack::Render()
-	{
-		GameObject::Render();
-	}
+	//void MonsterMoveAttack::Render()
+	//{
+//		GameObject::Render();
+	//}
 
 }

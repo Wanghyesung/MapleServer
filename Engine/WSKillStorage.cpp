@@ -18,17 +18,17 @@ namespace W
 		m_vUIEndPosition(Vector2::One),
 		m_vUIDiffPosition(Vector2::One)
 	{
-		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"SkillUITex", L"..\\Resources\\Texture\\UI\\SkillUI\\SkillUI.png");
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pMater->SetTexture(pTex);
-		Resources::Insert(L"SkillUIMater", pMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pMater);
+		//std::shared_ptr<Texture> pTex =
+		//	Resources::Load<Texture>(L"SkillUITex", L"..\\Resources\\Texture\\UI\\SkillUI\\SkillUI.png");
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pMater->SetTexture(pTex);
+		//Resources::Insert(L"SkillUIMater", pMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pMater);
 
 		m_vecSkillNumber.resize((UINT)eSkillNuber::None);
 	}
@@ -102,12 +102,12 @@ namespace W
 			return;
 		UI::LateUpdate();
 	}
-	void SKillStorage::Render()
-	{
-		if (!m_bRenderOn)
-			return;
-		UI::Render();
-	}
+	//void SKillStorage::Render()
+	//{
+	//	if (!m_bRenderOn)
+	//		return;
+	//	UI::Render();
+	//}
 	void SKillStorage::MouseOn()
 	{
 		if (m_bTargetOn)

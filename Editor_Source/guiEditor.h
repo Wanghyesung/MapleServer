@@ -22,10 +22,10 @@ namespace gui
 
 		static void Update();
 		static void LateUpdate();
-		static void Render();
+		//static void Render();
 		static void Release();
 
-		static void DebugRender(const W::graphics::DebugMesh& _mesh);
+		//static void DebugRender(const W::graphics::DebugMesh& _mesh);
 
 	private:
 		static std::vector<Widget*> m_vecWidgets;

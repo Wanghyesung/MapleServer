@@ -79,20 +79,20 @@ namespace W
 			script->LateUpdate();
 		}
 	}
-	void GameObject::Render()
-	{
-
-		for (Component* comp : m_vecComponent)
-		{
-			comp->Render();
-		}
-		//상수버퍼로 위치정보 크기정보, 색깔, 업데이트 해줘야한다.
-
-		for (Script* script : m_vecScript)
-		{
-			script->Render();
-		}
-	}
+	//void GameObject::Render()
+	//{
+	//
+	//	for (Component* comp : m_vecComponent)
+	//	{
+	//		comp->Render();
+	//	}
+	//	//상수버퍼로 위치정보 크기정보, 색깔, 업데이트 해줘야한다.
+	//
+	//	for (Script* script : m_vecScript)
+	//	{
+	//		script->Render();
+	//	}
+	//}
 	
 	
 }

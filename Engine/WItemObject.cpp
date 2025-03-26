@@ -15,18 +15,18 @@ namespace W
 		m_bActive(false),
 		m_strItemName(_strItemName)
 	{
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
-		std::shared_ptr<Texture> pTex = Resources::Find<Texture>(_strItemName + L"Tex");
-		pMater->SetTexture(Resources::Find<Texture>(_strItemName + L"Tex"));
-		
-		MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pRenderer->SetMaterial(pMater);
-		
-		int x = pTex->GetHeight();
-		int y = pTex->GetWidth();
-		GetComponent<Transform>()->SetScale(0.1f * x/10.f, 0.1f * y/10.f, 0.f);
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
+		//std::shared_ptr<Texture> pTex = Resources::Find<Texture>(_strItemName + L"Tex");
+		//pMater->SetTexture(Resources::Find<Texture>(_strItemName + L"Tex"));
+		//
+		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
+		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pRenderer->SetMaterial(pMater);
+		//
+		//int x = pTex->GetHeight();
+		//int y = pTex->GetWidth();
+		GetComponent<Transform>()->SetScale(0.1f * 30/10.f, 0.1f * 30/10.f, 0.f);
 		
 		AddComponent<Rigidbody>();
 		AddComponent<ItemScript>();
@@ -67,10 +67,10 @@ namespace W
 		GameObject::LateUpdate();
 	}
 
-	void ItemObject::Render()
-	{
-		GameObject::Render();
-	}
+	//void ItemObject::Render()
+	//{
+	//	GameObject::Render();
+	//}
 
 	void ItemObject::SetVelociy(const Vector2& _vVel)
 	{

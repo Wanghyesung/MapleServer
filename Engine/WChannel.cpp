@@ -11,17 +11,17 @@ namespace W
 		m_bRenderOn(false)
 	{
 
-		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"layerbackTex", L"..\\Resources\\Texture\\UI\\StartUI\\layerback.png");
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pMater->SetTexture(pTex);
-		Resources::Insert(L"layerbackMater", pMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pMater);
+		//std::shared_ptr<Texture> pTex =
+		//	Resources::Load<Texture>(L"layerbackTex", L"..\\Resources\\Texture\\UI\\StartUI\\layerback.png");
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pMater->SetTexture(pTex);
+		//Resources::Insert(L"layerbackMater", pMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pMater);
 
 	}
 	Channel::~Channel()
@@ -53,12 +53,12 @@ namespace W
 			return;
 		UI::LateUpdate();
 	}
-	void Channel::Render()
-	{
-		if (!m_bRenderOn)
-			return;
-		UI::Render();
-	}
+	//void Channel::Render()
+	//{
+	//	if (!m_bRenderOn)
+	//		return;
+	//	UI::Render();
+	//}
 	void Channel::MouseOn()
 	{
 

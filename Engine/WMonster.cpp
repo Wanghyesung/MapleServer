@@ -51,21 +51,21 @@ namespace W
 		GameObject::LateUpdate();
 	}
 
-	void Monster::Render()
-	{
-		if (m_bDead)
-			return;
-
-		renderer::MonsterCB MonsterCB;
-		MonsterCB.vMonsterDir.x = m_iDir * -1;
-
-		ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Monster];
-		//Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
-		pConstBuffer->SetData(&MonsterCB);
-		pConstBuffer->Bind(eShaderStage::PS);
-
-		GameObject::Render();
-	}
+	//void Monster::Render()
+	//{
+	//	//if (m_bDead)
+	//	//	return;
+	//	//
+	//	//renderer::MonsterCB MonsterCB;
+	//	//MonsterCB.vMonsterDir.x = m_iDir * -1;
+	//	//
+	//	//ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Monster];
+	//	////Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
+	//	//pConstBuffer->SetData(&MonsterCB);
+	//	//pConstBuffer->Bind(eShaderStage::PS);
+	//	//
+	//	//GameObject::Render();
+	//}
 
 	void Monster::SetItem(const std::vector<std::wstring>& _vecItemNames)
 	{

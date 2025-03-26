@@ -73,20 +73,20 @@ namespace W
 
 	void SkillState::StartSound()
 	{
-		m_pSoundClip->Play();
+		//m_pSoundClip->Play();
 	}
 
 	void SkillState::EndSound()
 	{
-		m_pSoundClip->Stop();
+		//m_pSoundClip->Stop();
 	}
 
-	Effect* SkillState::CreateEffet(std::shared_ptr<Texture> _pAtlas, std::wstring _strName, Vector2 _vLeftTop, Vector2 _vSize,
+	Effect* SkillState::CreateEffet(std::wstring _strName, Vector2 _vLeftTop, Vector2 _vSize,
 		UINT _iColumnLength, UINT _iRowLength, Vector2 _vDivisionSize, Vector2 _vOffset, float _fDuration)
 	{
 		Effect* pEffect = new Effect();
 		pEffect->SetName(_strName);
-		pEffect->CreateAnimation(_pAtlas, _vLeftTop, _vSize, _iColumnLength, _iRowLength, _vDivisionSize, _vOffset, _fDuration);
+		pEffect->CreateAnimation(_vLeftTop, _vSize, _iColumnLength, _iRowLength, _vDivisionSize, _vOffset, _fDuration);
 
 		return pEffect;
 	}

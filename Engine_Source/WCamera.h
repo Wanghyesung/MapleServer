@@ -53,13 +53,13 @@ namespace W
 
 		void AlphaSortGameObjects();
 		void ZSortTransparencyGameObjects();
-		void DivideAlphaBlendGameObjects(const std::vector<GameObject*> _vecGameObj);
-		void RenderOpaque();
-		void RenderCutOut();
-		void RenderTransparent();
-
-		void EnableDepthStencilState();
-		void DisablDepthStencilState();
+		//void DivideAlphaBlendGameObjects(const std::vector<GameObject*> _vecGameObj);
+		//void RenderOpaque();
+		//void RenderCutOut();
+		//void RenderTransparent();
+		//
+		//void EnableDepthStencilState();
+		//void DisablDepthStencilState();
 
 		float GetSize() { return m_fSize; }
 		Matrix& GetViewMatrix() { return m_mView; }

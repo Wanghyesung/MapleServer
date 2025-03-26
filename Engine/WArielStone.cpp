@@ -12,23 +12,23 @@ namespace W
 		m_iCallCount(0),
 		m_tMonsterAttack{}
 	{
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
-		Resources::Insert(L"ArielStoneStoneMater", pMater);
-
-		MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pRenderer->SetMaterial(pMater);
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
+		//Resources::Insert(L"ArielStoneStoneMater", pMater);
+		//
+		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
+		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pRenderer->SetMaterial(pMater);
 
 		Collider2D* pCollider = GetComponent<Collider2D>();
 		pCollider->SetActive(false);
 
 		GetComponent<Transform>()->SetScale(6.f, 6.f, 0.f);
 
-		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"Ariel_attack1");
+		//std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"Ariel_attack1");
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Stone", pAtlas, Vector2(0.0f, 0.0f), Vector2(306.f, 512.0f), 18, Vector2(510.f, 510.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"Stone", Vector2(0.0f, 0.0f), Vector2(306.f, 512.0f), 18, Vector2(510.f, 510.f), Vector2::Zero, 0.15f);
 
 		pAnim->CompleteEvent(L"Stone") = std::bind(&ArielStone::off, this);
 		pAnim->Play(L"Stone", true);
@@ -78,19 +78,19 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
-	void ArielStone::Render()
-	{
-		renderer::ObjectCB ObjectCB;
-		ObjectCB.vObjectDir.x = 1;
-		ObjectCB.vObjectColor = Vector4::One;
-
-		ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Object];
-		//Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
-		pConstBuffer->SetData(&ObjectCB);
-		pConstBuffer->Bind(eShaderStage::PS);
-
-		GameObject::Render();
-	}
+	//void ArielStone::Render()
+	//{
+	//	//renderer::ObjectCB ObjectCB;
+	//	//ObjectCB.vObjectDir.x = 1;
+	//	//ObjectCB.vObjectColor = Vector4::One;
+	//	//
+	//	//ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Object];
+	//	////Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
+	//	//pConstBuffer->SetData(&ObjectCB);
+	//	//pConstBuffer->Bind(eShaderStage::PS);
+	//	//
+	//	//GameObject::Render();
+	//}
 
 	void ArielStone::off()
 	{

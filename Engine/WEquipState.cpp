@@ -26,18 +26,18 @@ namespace W
 		m_vShoesPosition(Vector2::One),
 		m_vWeaponPosition(Vector2::One)
 	{
-		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"EquipUITex", L"..\\Resources\\Texture\\UI\\EquipUI\\EquipUI.png");
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pMater->SetTexture(pTex);
-		Resources::Insert(L"EquipUIMater", pMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pMater);
+		//std::shared_ptr<Texture> pTex =
+		//	Resources::Load<Texture>(L"EquipUITex", L"..\\Resources\\Texture\\UI\\EquipUI\\EquipUI.png");
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		////pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pMater->SetTexture(pTex);
+		//Resources::Insert(L"EquipUIMater", pMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pMater);
 	}
 	EquipState::~EquipState()
 	{
@@ -106,13 +106,13 @@ namespace W
 
 		UI::LateUpdate();
 	}
-	void EquipState::Render()
-	{
-		if (!m_bRenderOn)
-			return;
-
-		UI::Render();
-	}
+	//void EquipState::Render()
+	//{
+	//	if (!m_bRenderOn)
+	//		return;
+	//
+	//	UI::Render();
+	//}
 	void EquipState::MouseOn()
 	{
 		if (m_bTargetOn)

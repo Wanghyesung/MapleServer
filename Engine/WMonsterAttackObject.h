@@ -15,7 +15,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		virtual void Render()override;
+		//virtual void Render()override;
 
 	public:
 		void SetOnwer(Monster* _pOnwer) { m_pOwner = _pOnwer; }

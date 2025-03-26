@@ -52,10 +52,10 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
-	void MegnusAttack::Render()
-	{
-		GameObject::Render();
-	}
+	//void MegnusAttack::Render()
+	//{
+	//	GameObject::Render();
+	//}
 	void MegnusAttack::SetDir(int _iDir)
 	{
 		m_tMonsterAttack.vOffset.x = _iDir * 2.5;

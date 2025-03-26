@@ -48,7 +48,7 @@ namespace W
 		mesh.active = m_bActive;
 
 		//매 프레임마다 editor에 메시정보 넘기기
-		renderer::PushDebugMeshAttribute(mesh);
+		//renderer::PushDebugMeshAttribute(mesh);
 
 	}
 	void Collider2D::Render()

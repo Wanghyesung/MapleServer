@@ -4,17 +4,17 @@ namespace W
 {
 	ServerLayer::ServerLayer()
 	{
-		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"layerTex", L"..\\Resources\\Texture\\UI\\StartUI\\layer.png");
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pMater->SetTexture(pTex);
-		Resources::Insert(L"layerMater", pMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pMater);
+		//std::shared_ptr<Texture> pTex =
+		//	Resources::Load<Texture>(L"layerTex", L"..\\Resources\\Texture\\UI\\StartUI\\layer.png");
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pMater->SetTexture(pTex);
+		//Resources::Insert(L"layerMater", pMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pMater);
 	}
 	ServerLayer::~ServerLayer()
 	{
@@ -38,10 +38,10 @@ namespace W
 	{
 		UI::LateUpdate();
 	}
-	void ServerLayer::Render()
-	{
-		UI::Render();
-	}
+	//void ServerLayer::Render()
+	//{
+	//	UI::Render();
+	//}
 	void ServerLayer::MouseOn()
 	{
 

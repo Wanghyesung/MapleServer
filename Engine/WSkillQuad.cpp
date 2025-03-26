@@ -27,22 +27,22 @@ namespace W
 
 		
 		
-		m_pHitEffectAtlas = Resources::Load<Texture>(L"quadhit", L"..\\Resources\\Texture\\Player\\skill\\hit1.png");
+		//m_pHitEffectAtlas = Resources::Load<Texture>(L"quadhit", L"..\\Resources\\Texture\\Player\\skill\\hit1.png");
 		for (int i = 0; i < 8; ++i)
 		{
-			Effect* pEffect = CreateEffet(m_pHitEffectAtlas, L"quad", Vector2(0.f, 0.f), Vector2(146.f, 146.f), 9, 1,
+			Effect* pEffect = CreateEffet(L"quad", Vector2(0.f, 0.f), Vector2(146.f, 146.f), 9, 1,
 				Vector2(150.f, 150.f), Vector2::Zero, 0.06f);
 			pEffect->GetComponent<Transform>()->SetScale(1.5f, 1.5f, 0.f);
 		}
 		
 		for (int i = 0; i < 2; ++i)
 		{
-			m_pEffectAtlas = Resources::Load<Texture>(L"quadffect", L"..\\Resources\\Texture\\Player\\skill\\effect7.png");
-			CreateEffet(m_pEffectAtlas, L"quadffect", Vector2(0.f, 0.f), Vector2(299, 196.f), 9, 1,
+			//m_pEffectAtlas = Resources::Load<Texture>(L"quadffect", L"..\\Resources\\Texture\\Player\\skill\\effect7.png");
+			CreateEffet(L"quadffect", Vector2(0.f, 0.f), Vector2(299, 196.f), 9, 1,
 				Vector2(300.f, 300.f), Vector2(0.4f, 0.f), 0.06f);
 		}
 
-		SetSound(Resources::Load<AudioClip>(L"quadsound", L"..\\Resources\\sound\\skill\\qs.mp3"), false);
+		//SetSound(Resources::Load<AudioClip>(L"quadsound", L"..\\Resources\\sound\\skill\\qs.mp3"), false);
 
 	}
 	SkillQuad::~SkillQuad()

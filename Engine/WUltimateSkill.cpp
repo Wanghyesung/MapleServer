@@ -28,19 +28,19 @@ namespace W
 		tTime.fCurTime = 0.f;
 		SetCoolTime(tTime);
 
-		Resources::Load<Texture>(L"ultimate0", L"..\\Resources\\Texture\\Player\\skill\\ultimate\\ultimate0.png");
-		Resources::Load<Texture>(L"UltiShuriken", L"..\\Resources\\Texture\\Player\\skill\\ultimate\\s1.png");
-		m_pHitEffectAtlas = Resources::Load<Texture>(L"ultimate_hit", L"..\\Resources\\Texture\\Player\\skill\\ultimate\\hit.png");
+		//Resources::Load<Texture>(L"ultimate0", L"..\\Resources\\Texture\\Player\\skill\\ultimate\\ultimate0.png");
+		//Resources::Load<Texture>(L"UltiShuriken", L"..\\Resources\\Texture\\Player\\skill\\ultimate\\s1.png");
+		//m_pHitEffectAtlas = Resources::Load<Texture>(L"ultimate_hit", L"..\\Resources\\Texture\\Player\\skill\\ultimate\\hit.png");
 		for (int i = 0; i < 30; ++i)
 		{
-			Effect* pEffect = CreateEffet(m_pHitEffectAtlas, L"ultimate_suriken", Vector2(0.f, 0.f), Vector2(219.f, 209.f), 8, 1,
+			Effect* pEffect = CreateEffet(L"ultimate_suriken", Vector2(0.f, 0.f), Vector2(219.f, 209.f), 8, 1,
 				Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.1f);
 			pEffect->GetComponent<Transform>()->SetScale(2.5f, 2.5f, 0.f);
 		}
 
-		SetSound(Resources::Load<AudioClip>(L"ultisound", L"..\\Resources\\sound\\skill\\UltiUse.mp3"), false);
-		Resources::Load<AudioClip>(L"UltiHit", L"..\\Resources\\sound\\skill\\UltiHit.mp3");
-		Resources::Load<AudioClip>(L"UltiShurikenHit", L"..\\Resources\\sound\\skill\\UltiShurikenHit.mp3");
+		//SetSound(Resources::Load<AudioClip>(L"ultisound", L"..\\Resources\\sound\\skill\\UltiUse.mp3"), false);
+		//Resources::Load<AudioClip>(L"UltiHit", L"..\\Resources\\sound\\skill\\UltiHit.mp3");
+		//Resources::Load<AudioClip>(L"UltiShurikenHit", L"..\\Resources\\sound\\skill\\UltiShurikenHit.mp3");
 
 	}
 	SkillUltimate::~SkillUltimate()

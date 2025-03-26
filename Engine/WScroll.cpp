@@ -12,20 +12,20 @@ namespace W
 		m_eParentUI(eParentUI::None)
 	{
 
-		std::shared_ptr<Texture> pTex 
-		= Resources::Load<Texture>(L"scroll1Tex", L"..\\Resources\\Texture\\UI\\InvenUI\\scroll1.png");
-
-		pTex =
-			Resources::Load<Texture>(L"scroll0Tex", L"..\\Resources\\Texture\\UI\\InvenUI\\scroll0.png");
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pMater->SetTexture(pTex);
-		Resources::Insert(L"scrollMater", pMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pMater);
+		//std::shared_ptr<Texture> pTex 
+		//= Resources::Load<Texture>(L"scroll1Tex", L"..\\Resources\\Texture\\UI\\InvenUI\\scroll1.png");
+		//
+		//pTex =
+		//	Resources::Load<Texture>(L"scroll0Tex", L"..\\Resources\\Texture\\UI\\InvenUI\\scroll0.png");
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pMater->SetTexture(pTex);
+		//Resources::Insert(L"scrollMater", pMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pMater);
 
 		GetComponent<Transform>()->SetPosition(0.84f, 1.11f, -0.1f);
 		GetComponent<Transform>()->SetScale(0.423f * 0.3f, 1.f * 0.3f, 0.f);//0.423 : 1
@@ -47,10 +47,10 @@ namespace W
 	{
 		UI::LateUpdate();
 	}
-	void Scroll::Render()
-	{
-		UI::Render();
-	}
+	//void Scroll::Render()
+	//{
+	//	UI::Render();
+	//}
 	void Scroll::MouseOn()
 	{		
 		if (m_bTargetOn)
@@ -89,15 +89,15 @@ namespace W
 
 		m_vDragStartPos = Input::GetMousePos();
 
-		std::shared_ptr<Material> pMater = Resources::Find<Material>(L"scrollMater");
-		pMater->SetTexture(Resources::Find<Texture>(L"scroll1Tex"));
+		//std::shared_ptr<Material> pMater = Resources::Find<Material>(L"scrollMater");
+		//pMater->SetTexture(Resources::Find<Texture>(L"scroll1Tex"));
 	}
 	void Scroll::MouseLbtnUp()
 	{
 		m_bTargetOn = false;
 
-		std::shared_ptr<Material> pMater = Resources::Find<Material>(L"scrollMater");
-		pMater->SetTexture(Resources::Find<Texture>(L"scroll0Tex"));
+		//std::shared_ptr<Material> pMater = Resources::Find<Material>(L"scrollMater");
+		//pMater->SetTexture(Resources::Find<Texture>(L"scroll0Tex"));
 	}
 	void Scroll::MouseLbtnClicked()
 	{

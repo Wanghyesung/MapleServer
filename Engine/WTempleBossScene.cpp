@@ -63,9 +63,9 @@ namespace W
 
 		NPC* pNPC = new NPC();
 		AddGameObject(eLayerType::NPC, pNPC);
-		MeshRenderer* pMeshRender = pNPC->AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(Resources::Find<Material>(L"NPCMater5"));
+		//MeshRenderer* pMeshRender = pNPC->AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(Resources::Find<Material>(L"NPCMater5"));
 		pNPC->GetComponent<Transform>()->SetPosition(-7.f, -2.f, -1.f);
 		pNPC->GetComponent<Transform>()->SetScale(0.547f * 1.2, 1.f * 1.2f, 0.f);
 		pNPC->GetComponent<Transform>()->SetRotation(0.f, 0.f, 0.f);
@@ -100,10 +100,10 @@ namespace W
 	{
 		Scene::LateUpdate();
 	}
-	void TempleBossScene::Render()
-	{
-		Scene::Render();
-	}
+	//void TempleBossScene::Render()
+	//{
+	//	Scene::Render();
+	//}
 	void TempleBossScene::OnEnter()
 	{
 		Scene::OnEnter();
@@ -111,7 +111,7 @@ namespace W
 
 		create_monster();
 
-		StartSound();
+		//StartSound();
 
 		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(eLayerType::ItemObject, eLayerType::Ground, true);
@@ -126,7 +126,7 @@ namespace W
 		DeleteMonsterObject();
 		MonsterManager::DeleteMonster();
 
-		EndSound();
+		//EndSound();
 
 		CollisionManager::Clear();
 	}
@@ -134,12 +134,12 @@ namespace W
 	{
 		GameObject* pBackGround = new GameObject();
 		AudioSource* pAudio = pBackGround->AddComponent<AudioSource>();
-		pAudio->SetClip(Resources::Load<AudioClip>(L"pinkbeansound", L"..\\Resources\\sound\\FightingPinkBeen.mp3"));
+		//pAudio->SetClip(Resources::Load<AudioClip>(L"pinkbeansound", L"..\\Resources\\sound\\FightingPinkBeen.mp3"));
 
 		AddGameObject(eLayerType::Background, pBackGround);
-		MeshRenderer* pMeshRender = pBackGround->AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(Resources::Find<Material>(L"TempleBossMater"));
+		//MeshRenderer* pMeshRender = pBackGround->AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(Resources::Find<Material>(L"TempleBossMater"));
 		pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 0.f);
 		//2 : 1
 		pBackGround->GetComponent<Transform>()->SetScale(2.f * 8.f, 1.f * 8.f, 1.f);
@@ -175,74 +175,74 @@ namespace W
 
 	void TempleBossScene::create_effect()
 	{
-		std::shared_ptr<Texture> pTex =
-			 Resources::Load<Texture>(L"PinkBean_attack0_hit", L"..\\Resources\\Texture\\Monster\\PinkBean\\PinkBean\\attack0_hit.png");
+		//std::shared_ptr<Texture> pTex =
+		//	 Resources::Load<Texture>(L"PinkBean_attack0_hit", L"..\\Resources\\Texture\\Monster\\PinkBean\\PinkBean\\attack0_hit.png");
 		Effect* pEffect = new Effect();
 		pEffect->SetName(L"PinkBean_attack0");
-		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(97.f, 107.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
+		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(97.f, 107.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
-		pTex = Resources::Load<Texture>(L"PinkBean_attack1_hit", L"..\\Resources\\Texture\\Monster\\PinkBean\\PinkBean\\attack1_hit.png");
+		//pTex = Resources::Load<Texture>(L"PinkBean_attack1_hit", L"..\\Resources\\Texture\\Monster\\PinkBean\\PinkBean\\attack1_hit.png");
 		pEffect = new Effect();
 		pEffect->SetName(L"PinkBean_attack1");
-		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(124.f, 112.f), 5, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
+		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(124.f, 112.f), 5, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
 		
-		pTex = Resources::Load<Texture>(L"PinkBean_attack2_hit", L"..\\Resources\\Texture\\Monster\\Pinkbean\\PinkBean\\attack2_hit.png");
+		//pTex = Resources::Load<Texture>(L"PinkBean_attack2_hit", L"..\\Resources\\Texture\\Monster\\Pinkbean\\PinkBean\\attack2_hit.png");
 		pEffect = new Effect();
 		pEffect->SetName(L"PinkBean_attack2");
-		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(112.f, 110.f), 6, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
+		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(112.f, 110.f), 6, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
-		pTex = Resources::Load<Texture>(L"PinkBean_attack3_hit", L"..\\Resources\\Texture\\Monster\\Pinkbean\\PinkBean\\attack3_hit.png");
+		//pTex = Resources::Load<Texture>(L"PinkBean_attack3_hit", L"..\\Resources\\Texture\\Monster\\Pinkbean\\PinkBean\\attack3_hit.png");
 		pEffect = new Effect();
 		pEffect->SetName(L"PinkBean_attack3");
-		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(88.f, 87.f), 4, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
+		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(88.f, 87.f), 4, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
 		
-		pTex = Resources::Load<Texture>(L"MiniBean_attack0", L"..\\Resources\\Texture\\Monster\\PinkBean\\PinkBean\\minibean_attack0_hit.png");
+		//pTex = Resources::Load<Texture>(L"MiniBean_attack0", L"..\\Resources\\Texture\\Monster\\PinkBean\\PinkBean\\minibean_attack0_hit.png");
 		pEffect = new Effect();
 		pEffect->SetName(L"MiniBean_attack0");
-		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(97.f, 107.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
+		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(97.f, 107.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
 
-		pTex =	Resources::Load<Texture>(L"Solomon_attack0", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Solomon\\attack0_hit.png");
+		//pTex =	Resources::Load<Texture>(L"Solomon_attack0", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Solomon\\attack0_hit.png");
 		pEffect = new Effect();
 		pEffect->SetName(L"Solomon_attack0");
-		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(131.f, 128.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f,0.2f), 0.2f);
+		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(131.f, 128.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f,0.2f), 0.2f);
 
-		pTex = Resources::Load<Texture>(L"Solomon_attack2", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Solomon\\attack2_hit.png");
+		//pTex = Resources::Load<Texture>(L"Solomon_attack2", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Solomon\\attack2_hit.png");
 		pEffect = new Effect();
 		pEffect->SetName(L"Solomon_attack2");
-		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(217.f, 163.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
+		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(217.f, 163.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
 
-		pTex = Resources::Load<Texture>(L"Rex_attack0", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Rex\\attack0_hit.png");
+		//pTex = Resources::Load<Texture>(L"Rex_attack0", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Rex\\attack0_hit.png");
 		pEffect = new Effect();
 		pEffect->SetName(L"Rex_attack0");
-		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(129.f, 128.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
+		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(129.f, 128.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
-		pTex = Resources::Load<Texture>(L"Rex_attack2", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Rex\\attack2_hit.png");
+		//pTex = Resources::Load<Texture>(L"Rex_attack2", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Rex\\attack2_hit.png");
 		pEffect = new Effect();
 		pEffect->SetName(L"Rex_attack2");
-		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(219.f, 163.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
+		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(219.f, 163.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
 		
-		pTex = Resources::Load<Texture>(L"Munin_attack0", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Munin\\attack0_hit.png");
+		//pTex = Resources::Load<Texture>(L"Munin_attack0", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Munin\\attack0_hit.png");
 		pEffect = new Effect();
 		pEffect->SetName(L"Munin_attack0");
-		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(117.f, 156.f), 5, 1, Vector2(150.f, 150.f), Vector2(0.f, 0.2f), 0.2f);
+		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(117.f, 156.f), 5, 1, Vector2(150.f, 150.f), Vector2(0.f, 0.2f), 0.2f);
 
-		pTex = Resources::Load<Texture>(L"Munin_attack1", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Munin\\attack1_hit.png");
+		//pTex = Resources::Load<Texture>(L"Munin_attack1", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Munin\\attack1_hit.png");
 		pEffect = new Effect();
 		pEffect->SetName(L"Munin_attack1");
-		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(109.f, 104.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
+		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(109.f, 104.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
 
 		//Resources::Load<Texture>(L"Munin_attack1", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Munin\\attack1_hit.png");
 		pEffect = new Effect();
 		pEffect->SetName(L"Whiggin_attack1");
-		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(109.f, 104.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
+		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(109.f, 104.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
 
-		pTex = Resources::Load<Texture>(L"Whiggin_attack0", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Whiggin\\attack0_hit.png");
+		//pTex = Resources::Load<Texture>(L"Whiggin_attack0", L"..\\Resources\\Texture\\Monster\\Pinkbean\\Whiggin\\attack0_hit.png");
 		pEffect = new Effect();
 		pEffect->SetName(L"Whiggin_attack0");
-		pEffect->CreateAnimation(pTex, Vector2(0.f, 0.f), Vector2(117.f, 156.f), 5, 1, Vector2(150.f, 150.f), Vector2(0.f, 0.2f), 0.2f);
+		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(117.f, 156.f), 5, 1, Vector2(150.f, 150.f), Vector2(0.f, 0.2f), 0.2f);
 
 		
 	
