@@ -33,10 +33,10 @@ namespace W
 	{
 		GameObject::LateUpdate();
 	}
-	void PlayerAttackObject::Render()
-	{
-		GameObject::Render();
-	}
+	//void PlayerAttackObject::Render()
+	//{
+	//	GameObject::Render();
+	//}
 	void PlayerAttackObject::Off()
 	{
 		GetScript<AttackScript>()->off();

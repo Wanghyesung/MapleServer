@@ -39,7 +39,6 @@ namespace W
 		virtual void Render();
 
 		void Create(const std::wstring& _strName,
-			std::shared_ptr<graphics::Texture> _pAtlas,
 			Vector2 _vLeftTop,
 			Vector2 _vSize,
 			UINT _iColumnLength,
@@ -54,7 +53,7 @@ namespace W
 		void Play(const std::wstring& _strName, bool _bLoop);
 		void Stop(bool _bStop) { m_bStop = _bStop; }
 		bool IsStop() { return m_bStop; }
-		void Binds();
+		//void Binds();
 
 		std::function<void()>& StartEvent(const std::wstring _strKey);
 		std::function<void()>& CompleteEvent(const std::wstring _strKey);

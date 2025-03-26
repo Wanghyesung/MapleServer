@@ -40,7 +40,6 @@ namespace W
 		void Render();
 
 		void Create(std::wstring _strName,
-			std::shared_ptr<graphics::Texture> _pAtlas,
 			Vector2 _vLeftTop,
 			Vector2 _vSize,
 			UINT _iColumnLength,
@@ -48,8 +47,8 @@ namespace W
 			Vector2 _vOffset = Vector2::Zero,
 			float _fDuration = 0.f
 		);
-
-		void Binds();
+		
+		void Binds() {};
 		void Reset();
 
 		void SetIndex(int _i, float _fTime = 0.f) { m_iIndex = _i; m_fTime = _fTime; }
@@ -60,7 +59,7 @@ namespace W
 
 		void SetAnimator(Animator* _pAnim) { m_pAnimator = _pAnim; }
 	private:
-		std::weak_ptr<graphics::Texture> m_wpAtlas;
+		//std::weak_ptr<graphics::Texture> m_wpAtlas;
 		Animator* m_pAnimator;
 		std::vector<Sprite> m_vecSprites;
 		int m_iIndex;

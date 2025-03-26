@@ -22,10 +22,10 @@ namespace W
 	{
 		UI::LateUpdate();
 	}
-	void Number::Render()
-	{
-		UI::Render();
-	}
+	//void Number::Render()
+	//{
+	//	UI::Render();
+	//}
 	void Number::MouseOn()
 	{
 	}

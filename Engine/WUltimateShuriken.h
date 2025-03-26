@@ -12,7 +12,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		virtual void Render()override;
+		//virtual void Render()override;
 
 		void SetStartPos(Vector2 _vPos);
 		void SetTarget(GameObject* _pTarget) { m_pTarget = _pTarget; }

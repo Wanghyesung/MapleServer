@@ -47,7 +47,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		virtual void Render()override;
+		//virtual void Render()override;
 
 		void SetDir(int _iDir) { m_iDir = _iDir; }
 		int GetDir() { return m_iDir; }
@@ -105,7 +105,7 @@ namespace W
 		void SetEye(UINT _iEyeNum);
 	private:
 		void child_update();
-		void child_render();
+		//void child_render();
 		void child_lateupdate();
 
 	private:

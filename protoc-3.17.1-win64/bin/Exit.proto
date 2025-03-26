@@ -1,0 +1,25 @@
+syntax = "proto3";
+package Protocol;
+
+//repeated uint64 victims = 3;
+
+//클라가 서버에게
+message C_EXIT
+{
+	string name = 1;
+}
+
+//서버가 클라에게
+message S_EXIT
+{
+	bool success = 1;
+}
+
+message S_NEW_EXIT
+{
+	string name = 1;
+}
+
+//로그인
+//채팅 던지기
+//나가기

@@ -28,18 +28,18 @@ namespace W
 		m_pScroll(nullptr),
 		m_iScrollCurY(0)
 	{
-		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"Inven0Tex", L"..\\Resources\\Texture\\UI\\InvenUI\\Inven0.png");
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pMater->SetTexture(pTex);
-		Resources::Insert(L"Inven0Mater", pMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pMater);
+		//std::shared_ptr<Texture> pTex =
+		//	Resources::Load<Texture>(L"Inven0Tex", L"..\\Resources\\Texture\\UI\\InvenUI\\Inven0.png");
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		////pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pMater->SetTexture(pTex);
+		//Resources::Insert(L"Inven0Mater", pMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pMater);
 	}
 
 	Inventory::~Inventory()
@@ -146,13 +146,13 @@ namespace W
 
 		UI::LateUpdate();
 	}
-	void Inventory::Render()
-	{
-		if (!m_bRenderOn)
-			return;
-
-		UI::Render();
-	}
+	//void Inventory::Render()
+	//{
+	//	if (!m_bRenderOn)
+	//		return;
+	//
+	//	UI::Render();
+	//}
 	void Inventory::MouseOn()
 	{
 		if (m_bTargetOn)

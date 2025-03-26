@@ -22,7 +22,7 @@ namespace W
 		virtual void LateUpdate() override;
 		virtual void Render() override;
 
-		void BindConstantBuffer();
+		//void BindConstantBuffer();
 
 		void SetPosition(Vector3 _vPosition) { m_vPosition = _vPosition; }
 		void SetRotation(Vector3 _vRotation) { m_vRotation = _vRotation; }

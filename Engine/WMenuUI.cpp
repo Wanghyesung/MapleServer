@@ -4,17 +4,17 @@ namespace W
 {
 	MenuUI::MenuUI()
 	{
-		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"MenuTex1", L"..\\Resources\\Texture\\UI\\Interface\\menu.png");
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pMater->SetTexture(pTex);
-		Resources::Insert(L"MenuMater1", pMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pMater);
+		//std::shared_ptr<Texture> pTex =
+		//	Resources::Load<Texture>(L"MenuTex1", L"..\\Resources\\Texture\\UI\\Interface\\menu.png");
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pMater->SetTexture(pTex);
+		//Resources::Insert(L"MenuMater1", pMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pMater);
 	}
 	MenuUI::~MenuUI()
 	{
@@ -30,10 +30,10 @@ namespace W
 	{
 		UI::LateUpdate();
 	}
-	void MenuUI::Render()
-	{
-		UI::Render();
-	}
+	//void MenuUI::Render()
+	//{
+	//	UI::Render();
+	//}
 	void MenuUI::MouseOn()
 	{
 	}

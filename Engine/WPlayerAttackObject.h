@@ -14,7 +14,7 @@ namespace W
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
-		virtual void Render() override;
+		//virtual void Render() override;
 
 		Player* GetPlayer() { return m_pPlayer; }
 		void SetPlayer(Player* _pPlayer){ m_pPlayer = _pPlayer;}

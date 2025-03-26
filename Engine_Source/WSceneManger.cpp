@@ -57,10 +57,10 @@ namespace W
 	{
 		m_pActiveScene->LateUpdate();
 	}
-	void SceneManger::Render()
-	{
-		m_pActiveScene->Render();
-	}
+	//void SceneManger::Render()
+	//{
+	//	m_pActiveScene->Render();
+	//}
 
 	void SceneManger::Destroy()
 	{
@@ -102,7 +102,7 @@ namespace W
 		m_pActiveScene = iter->second;
 		m_pActiveScene->OnEnter();
 
-		SwapCamera();
+		//SwapCamera();
 		return iter->second;
 	}
 
@@ -149,8 +149,8 @@ namespace W
 			m_pActiveScene->GetLayer(eLayerType::Camera).GetGameObjects();
 		
 		////1 main , 2 UI
-		renderer::MainCamera = vecObjs[0]->GetComponent<Camera>();
-		renderer::UICamera = vecObjs[1]->GetComponent<Camera>();
+		//renderer::MainCamera = vecObjs[0]->GetComponent<Camera>();
+		//renderer::UICamera = vecObjs[1]->GetComponent<Camera>();
 
 		vecObjs[0]->GetScript<CameraScript>()->SetPlayer(FindPlayer());
 	}

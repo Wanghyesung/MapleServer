@@ -13,7 +13,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		virtual void Render()override;
+		//virtual void Render()override;
 
 		bool IsActive() { return m_bActive; }
 		void SetActive(bool _bActive) { m_bActive = _bActive; }

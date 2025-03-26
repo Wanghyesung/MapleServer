@@ -32,32 +32,32 @@ namespace W
 
 		GetComponent<Transform>()->SetScale(11.f, 11.f, 0.f);
 
-		MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"MonsterShader"));
-		Resources::Insert(L"horntailMater", pMater);
-
-		pRenderer->SetMaterial(pMater);
-
-		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"HorntailStartTex");
-		pAtlas->BindShaderResource(eShaderStage::PS, 12);
+		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
+		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//pMater->SetShader(Resources::Find<Shader>(L"MonsterShader"));
+		//Resources::Insert(L"horntailMater", pMater);
+		//
+		//pRenderer->SetMaterial(pMater);
+		//
+		//std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"HorntailStartTex");
+		//pAtlas->BindShaderResource(eShaderStage::PS, 12);
 
 		Animator* pAnim = AddComponent<Animator>();
 		//pAnim->Create(L"HorntailStart", pAtlas, Vector2(5316.f, 2673.f), Vector2(886.f, 891.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"HorntailStart", pAtlas, Vector2(0.0f, 0.f), Vector2(886.f, 891.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"HorntailStart")->Create(L"HorntailStart", pAtlas, Vector2(0.0f, 891.0f), Vector2(886.f, 891.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"HorntailStart")->Create(L"HorntailStart", pAtlas, Vector2(0.0f, 1782.f), Vector2(886.f, 891.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"HorntailStart")->Create(L"HorntailStart", pAtlas, Vector2(0.0f, 2673.f), Vector2(886.f, 891.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"HorntailStart", Vector2(0.0f, 0.f), Vector2(886.f, 891.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->FindAnimation(L"HorntailStart")->Create(L"HorntailStart", Vector2(0.0f, 891.0f), Vector2(886.f, 891.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->FindAnimation(L"HorntailStart")->Create(L"HorntailStart", Vector2(0.0f, 1782.f), Vector2(886.f, 891.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->FindAnimation(L"HorntailStart")->Create(L"HorntailStart", Vector2(0.0f, 2673.f), Vector2(886.f, 891.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->CompleteEvent(L"HorntailStart") = std::bind(&Horntail::create_child, this);
 
-		pAtlas = Resources::Find<Texture>(L"HorntailDead");
-		pAnim->Create(L"HorntailDead", pAtlas, Vector2(0.0f, 0.f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"HorntailDead")->Create(L"HorntailDead", pAtlas, Vector2(0.0f, 643.0f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"HorntailDead")->Create(L"HorntailDead", pAtlas, Vector2(0.0f, 1286.f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		//pAtlas = Resources::Find<Texture>(L"HorntailDead");
+		pAnim->Create(L"HorntailDead", Vector2(0.0f, 0.f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->FindAnimation(L"HorntailDead")->Create(L"HorntailDead", Vector2(0.0f, 643.0f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->FindAnimation(L"HorntailDead")->Create(L"HorntailDead", Vector2(0.0f, 1286.f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->CompleteEvent(L"HorntailDead") = std::bind(&Horntail::delete_child, this);
 	}
 
@@ -134,21 +134,21 @@ namespace W
 		Monster::LateUpdate();
 	}
 
-	void Horntail::Render()
-	{
-		if (!m_bStart)
-			return;
-
-		renderer::MonsterCB MonsterCB;
-		MonsterCB.vMonsterDir.x = 1;
-
-		ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Monster];
-		//Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
-		pConstBuffer->SetData(&MonsterCB);
-		pConstBuffer->Bind(eShaderStage::PS);
-
-		GameObject::Render();
-	}
+	//void Horntail::Render()
+	//{
+	//	//if (!m_bStart)
+	//	//	return;
+	//	//
+	//	//renderer::MonsterCB MonsterCB;
+	//	//MonsterCB.vMonsterDir.x = 1;
+	//	//
+	//	//ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Monster];
+	//	////Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
+	//	//pConstBuffer->SetData(&MonsterCB);
+	//	//pConstBuffer->Bind(eShaderStage::PS);
+	//	//
+	//	//GameObject::Render();
+	//}
 	void Horntail::Start()
 	{
 		m_bStart = true;

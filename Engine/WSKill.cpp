@@ -41,10 +41,10 @@ namespace W
 	{
 		IconUI::LateUpdate();
 	}
-	void SKill::Render()
-	{
-		IconUI::Render();
-	}
+	//void SKill::Render()
+	//{
+	//	IconUI::Render();
+	//}
 	void SKill::MouseOn()
 	{
 		//스킬을 누르면 해당 스킬에 맞는 UI를 새로 생성

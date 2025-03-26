@@ -4,17 +4,17 @@ namespace W
 {
 	EXP::EXP()
 	{
-		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"EXPTex", L"..\\Resources\\Texture\\UI\\Interface\\EXP.png");
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pMater->SetTexture(pTex);
-		Resources::Insert(L"EXPMater", pMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pMater);
+		//std::shared_ptr<Texture> pTex =
+		//	Resources::Load<Texture>(L"EXPTex", L"..\\Resources\\Texture\\UI\\Interface\\EXP.png");
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pMater->SetTexture(pTex);
+		//Resources::Insert(L"EXPMater", pMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pMater);
 	}
 	EXP::~EXP()
 	{
@@ -30,10 +30,10 @@ namespace W
 	{
 		UI::LateUpdate();
 	}
-	void EXP::Render()
-	{
-		UI::Render();
-	}
+	//void EXP::Render()
+	//{
+	//	//UI::Render();
+	//}
 	void EXP::MouseOn()
 	{
 	}

@@ -42,7 +42,7 @@ namespace W
 		float m_fEventCurTime;
 		float m_fEventEndTime;
 
-		std::shared_ptr<Texture> m_spFadeInWhite;
+		//std::shared_ptr<Texture> m_spFadeInWhite;
 	};
 
 }

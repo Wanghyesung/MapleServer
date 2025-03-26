@@ -35,10 +35,10 @@ namespace W
 		Abnormal::LateUpdate();
 
 	}
-	void Stop::Render()
-	{
-		//Abnormal::Render();
-	}
+	//void Stop::Render()
+	//{
+	//	//Abnormal::Render();
+	//}
 	void Stop::Restore()
 	{
 		EventManager::Restore(m_pTarget, BattleManager::eAbnormalType::Stop);

@@ -69,9 +69,9 @@ namespace W
 	{
 		GameObject::LateUpdate();
 	}
-	void PullObject::Render()
-	{
-		GameObject::Render();
-
-	}
+	//void PullObject::Render()
+	//{
+	//	GameObject::Render();
+	//
+	//}
 }

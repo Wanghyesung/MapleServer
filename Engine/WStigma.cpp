@@ -9,21 +9,21 @@ namespace W
 	{
 		GetComponent<Transform>()->SetScale(2.5f, 2.5f, 0.f);
 
-		MeshRenderer* mr = AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
-		Resources::Insert(L"StigamMater", pMater);
+		//MeshRenderer* mr = AddComponent<MeshRenderer>();
+		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
+		//Resources::Insert(L"StigamMater", pMater);
 
 		Animator* pAnim = AddComponent<Animator>();
-		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"Stigma");
-		pAnim->Create(L"start", pAtlas, Vector2(0.0f, 0.0f), Vector2(189.0f, 187.0f), 7, Vector2(200.f, 200.f), Vector2::Zero, 0.12f);
+		//std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"Stigma");
+		pAnim->Create(L"start", Vector2(0.0f, 0.0f), Vector2(189.0f, 187.0f), 7, Vector2(200.f, 200.f), Vector2::Zero, 0.12f);
 		
 		pAnim->CompleteEvent(L"start") = std::bind(&Stigma::Restore, this);
 		//pAnim->CompleteEvent(L"stone_end") = std::bind(&MegnusStone::off, this);
-		mr->SetMaterial(pMater);
+		//mr->SetMaterial(pMater);
 		pAnim->Play(L"start", true);
 	}
 	Stigma::~Stigma()
@@ -48,10 +48,10 @@ namespace W
 		GetComponent<Transform>()->SetPosition(vTargetPos);
 	}
 
-	void Stigma::Render()
-	{
-		GameObject::Render();
-	}
+	//void Stigma::Render()
+	//{
+	//	GameObject::Render();
+	//}
 	void Stigma::Restore()
 	{
 		object::Destroy(this);

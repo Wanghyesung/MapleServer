@@ -18,22 +18,22 @@ namespace W
 
 		//std::wstring strNum = std::to_wstring(m_iCount);
 
-		MeshRenderer* mr = AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-
-		//¿©±â ¹Ù²ñ
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"SpriteAnimationShader"));
-		Resources::Insert(L"shurikenMater", pMater);
-
-		mr->SetMaterial(pMater);
+		//MeshRenderer* mr = AddComponent<MeshRenderer>();
+		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//
+		////¿©±â ¹Ù²ñ
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//pMater->SetShader(Resources::Find<Shader>(L"SpriteAnimationShader"));
+		//Resources::Insert(L"shurikenMater", pMater);
+		//
+		//mr->SetMaterial(pMater);
 
 		Animator* pAnimator = AddComponent<Animator>();
-		std::shared_ptr<Texture> pAtlas
-			= Resources::Load<Texture>(L"shurikenTex", L"..\\Resources\\Texture\\Player\\shuriken\\shuriken.png");
-		pAnimator->Create(L"shuriken_left", pAtlas, Vector2(0.0f, 0.0f), Vector2(48.0f, 9.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 0.1f);
-		pAnimator->Create(L"shuriken_right", pAtlas, Vector2(48.0f, 0.0f), Vector2(-48.0f, 9.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 0.1f);
+		//std::shared_ptr<Texture> pAtlas
+		//	= Resources::Load<Texture>(L"shurikenTex", L"..\\Resources\\Texture\\Player\\shuriken\\shuriken.png");
+		pAnimator->Create(L"shuriken_left", Vector2(0.0f, 0.0f), Vector2(48.0f, 9.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 0.1f);
+		pAnimator->Create(L"shuriken_right", Vector2(48.0f, 0.0f), Vector2(-48.0f, 9.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 0.1f);
 	}
 
 	Shuriken::~Shuriken()
@@ -67,18 +67,18 @@ namespace W
 		GameObject::LateUpdate();
 	}
 
-	void Shuriken::Render()
-	{
-		renderer::PlayerCB PlayerCB;
-		PlayerCB.vDir.x = m_iDir * -1;
-		PlayerCB.vColor = Vector4::One;
-		ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Player];
-		//Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
-		pConstBuffer->SetData(&PlayerCB);
-		pConstBuffer->Bind(eShaderStage::PS);
-
-		GameObject::Render();
-	}
+	//void Shuriken::Render()
+	//{
+	//	//renderer::PlayerCB PlayerCB;
+	//	//PlayerCB.vDir.x = m_iDir * -1;
+	//	//PlayerCB.vColor = Vector4::One;
+	//	//ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Player];
+	//	////Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
+	//	//pConstBuffer->SetData(&PlayerCB);
+	//	//pConstBuffer->Bind(eShaderStage::PS);
+	//	//
+	//	//GameObject::Render();
+	//}
 	void Shuriken::SetDir(int _iDir)
 	{
 		m_iDir = _iDir;

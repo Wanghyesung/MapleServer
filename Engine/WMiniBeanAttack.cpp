@@ -13,14 +13,14 @@ namespace W
 		m_fDeleteTIme(0.1f),
 		m_fCurTime(0.f)
 	{
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
-		Resources::Insert(L"MinibeanAttackMater", pMater);
-
-		MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pRenderer->SetMaterial(pMater);
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
+		//Resources::Insert(L"MinibeanAttackMater", pMater);
+		//
+		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
+		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pRenderer->SetMaterial(pMater);
 
 		Collider2D* pCollider = GetComponent<Collider2D>();
 		pCollider->SetActive(true);
@@ -70,10 +70,10 @@ namespace W
 	{
 		MonsterAttackObject::LateUpdate();
 	}
-	void MiniBeanAttack::Render()
-	{
-		MonsterAttackObject::Render();
-	}
+	//void MiniBeanAttack::Render()
+	//{
+	//	MonsterAttackObject::Render();
+	//}
 	void MiniBeanAttack::off()
 	{
 		GetComponent<Collider2D>()->SetActive(false);

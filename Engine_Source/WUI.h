@@ -13,7 +13,7 @@ namespace W
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
-		virtual void Render();
+		//virtual void Render();
 
 		virtual void MouseOn();//UI위에 마우스 올라왔을 떄 
 		virtual void MouseLbtnDown();//UI안에서 눌렸을 떄

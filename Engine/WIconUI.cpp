@@ -93,21 +93,21 @@ namespace W
 
 		UI::LateUpdate();
 	}
-	void IconUI::Render()
-	{
-		if (m_eParentType == eParentUI::Inventory)
-		{
-			Inventory* pInven = dynamic_cast<Inventory*>(GetParentUI());
-			UINT y = pInven->GetScrollCurY();
-			if (m_iItemIndexY < y)
-				return;
-
-			if (!pInven->IsActivePage((UINT)m_eType))
-				return;
-		}
-
-		UI::Render();
-	}
+	//void IconUI::Render()
+	//{
+	//	if (m_eParentType == eParentUI::Inventory)
+	//	{
+	//		Inventory* pInven = dynamic_cast<Inventory*>(GetParentUI());
+	//		UINT y = pInven->GetScrollCurY();
+	//		if (m_iItemIndexY < y)
+	//			return;
+	//
+	//		if (!pInven->IsActivePage((UINT)m_eType))
+	//			return;
+	//	}
+	//
+	//	UI::Render();
+	//}
 	void IconUI::MouseOn()
 	{
 		if (m_bTargetOn)

@@ -43,17 +43,17 @@ namespace W
 		float height = winRect.bottom - winRect.top;
 		Vector2 vResolution(width, height);
 
-		graphics::ConstantBuffer* pConstBF =
-			renderer::constantBuffer[(int)eCBType::Grid];
-
-		renderer::GridCB data;
-		data.m_vCameraPosition = Vector4(vPos.x, vPos.y, vPos.z, 1.f);
-		data.m_vResolution = vResolution;
-		data.m_vCameraScale = Vector2(fScale, fScale);
-
-		pConstBF->SetData(&data);
-		pConstBF->Bind(eShaderStage::VS);
-		pConstBF->Bind(eShaderStage::PS);
+		//graphics::ConstantBuffer* pConstBF =
+		//	renderer::constantBuffer[(int)eCBType::Grid];
+		//
+		//renderer::GridCB data;
+		//data.m_vCameraPosition = Vector4(vPos.x, vPos.y, vPos.z, 1.f);
+		//data.m_vResolution = vResolution;
+		//data.m_vCameraScale = Vector2(fScale, fScale);
+		//
+		//pConstBF->SetData(&data);
+		//pConstBF->Bind(eShaderStage::VS);
+		//pConstBF->Bind(eShaderStage::PS);
 	}
 	void GridScript::LateUpdate()
 	{

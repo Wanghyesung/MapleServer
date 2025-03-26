@@ -58,10 +58,10 @@ namespace W
 	{
 		SkillNumber::LateUpdate();
 	}
-	void SkillNumber3::Render()
-	{
-		SkillNumber::Render();
-	}
+	//void SkillNumber3::Render()
+	//{
+	//	SkillNumber::Render();
+	//}
 	void SkillNumber3::MouseOn()
 	{
 

@@ -32,14 +32,14 @@ namespace W
 	{
 		SetName(L"Player");
 
-		MeshRenderer* mr = AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"PlayerShader"));
-		Resources::Insert(L"Player", pMater);
-		mr->SetMaterial(pMater);
+		//MeshRenderer* mr = AddComponent<MeshRenderer>();
+		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//pMater->SetShader(Resources::Find<Shader>(L"PlayerShader"));
+		//Resources::Insert(L"Player", pMater);
+		//mr->SetMaterial(pMater);
 	}
 	Player::~Player()
 	{
@@ -117,42 +117,42 @@ namespace W
 
 		child_lateupdate();
 	}
-	void Player::Render()
-	{
-		renderer::PlayerCB PlayerCB;
-		PlayerCB.vDir.x = m_iDir * -1;
-		PlayerCB.vColor = Vector4::One;
-
-		if (m_bActiveDark)
-		{
-			PlayerCB.vColor = Vector4(0.8f, 0.8f, 0.8f, 0.7f);
-		}
-
-		else if (m_bAlert)
-		{
-			m_fChangeTime -= Time::DeltaTime();
-			if (m_fChangeTime <= 0.25f /3.f)
-				PlayerCB.vColor = Vector4(0.5f, 0.5f, 0.5f, 1.f);
-			else
-				PlayerCB.vColor = Vector4::One;
-
-			if (m_fChangeTime <= 0.f)
-				m_fChangeTime = 0.25f;
-		}
-
-		ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Player];
-		//Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
-		pConstBuffer->SetData(&PlayerCB);
-		pConstBuffer->Bind(eShaderStage::PS);
-
-		GameObject::Render();
-
-		if (m_pShadow)
-			m_pShadow->Render();
-
-		child_render();
-		
-	}
+	//void Player::Render()
+	//{
+	//	renderer::PlayerCB PlayerCB;
+	//	PlayerCB.vDir.x = m_iDir * -1;
+	//	PlayerCB.vColor = Vector4::One;
+	//
+	//	if (m_bActiveDark)
+	//	{
+	//		PlayerCB.vColor = Vector4(0.8f, 0.8f, 0.8f, 0.7f);
+	//	}
+	//
+	//	else if (m_bAlert)
+	//	{
+	//		m_fChangeTime -= Time::DeltaTime();
+	//		if (m_fChangeTime <= 0.25f /3.f)
+	//			PlayerCB.vColor = Vector4(0.5f, 0.5f, 0.5f, 1.f);
+	//		else
+	//			PlayerCB.vColor = Vector4::One;
+	//
+	//		if (m_fChangeTime <= 0.f)
+	//			m_fChangeTime = 0.25f;
+	//	}
+	//
+	//	ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Player];
+	//	//Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
+	//	pConstBuffer->SetData(&PlayerCB);
+	//	pConstBuffer->Bind(eShaderStage::PS);
+	//
+	//	GameObject::Render();
+	//
+	//	if (m_pShadow)
+	//		m_pShadow->Render();
+	//
+	//	child_render();
+	//	
+	//}
 	
 	void Player::SetAlert(bool _bAlert)
 	{
@@ -229,13 +229,13 @@ namespace W
 			pObj->Update();
 		}
 	}
-	void Player::child_render()
-	{
-		for (GameObject* pObj : m_vecChildObj)
-		{
-			pObj->Render();
-		}
-	}
+	//void Player::child_render()
+	//{
+	//	for (GameObject* pObj : m_vecChildObj)
+	//	{
+	//		pObj->Render();
+	//	}
+	//}
 	void Player::child_lateupdate()
 	{
 		for (GameObject* pObj : m_vecChildObj)

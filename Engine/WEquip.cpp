@@ -42,10 +42,10 @@ namespace W
 	{
 		IconUI::LateUpdate();
 	}
-	void Equip::Render()
-	{
-		IconUI::Render();
-	}
+	//void Equip::Render()
+	//{
+	//	IconUI::Render();
+	//}
 	void Equip::MouseOn()
 	{
 		IconUI::MouseOn();

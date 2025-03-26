@@ -23,9 +23,9 @@ namespace W
 	{
 
 	}
-	void CharState::Render()
-	{
-	}
+	//void CharState::Render()
+	//{
+	//}
 	void CharState::MouseOn()
 	{
 	}

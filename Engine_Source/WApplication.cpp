@@ -17,8 +17,8 @@
 namespace W
 {
 	//0,0의 해상도도 있음
-	Application::Application()
-		:graphicDevice(nullptr),
+	Application::Application():
+		//:graphicDevice(nullptr),
 		m_hHwnd(NULL),
 		m_iWidth(-1),
 		m_iHeight(-1)
@@ -35,7 +35,7 @@ namespace W
 		SkillManager::Update();
 		Update();
 		LateUpdate();
-		Render();
+		//Render();
 		Destroy();
 		UIManger::ReleaseChildUI();
 	}
@@ -46,10 +46,10 @@ namespace W
 		ThreadPool::Initiailize(4);
 		Time::Initiailize();
 		Input::Initialize();
-		Fmod::Initialize();
-		FontWrapper::Initialize();
+		//Fmod::Initialize();
+		//FontWrapper::Initialize();
 
-		renderer::Initialize();
+		//renderer::Initialize();
 		BattleManager::Initialize();
 		ItemManager::Initialize();
 	}
@@ -72,42 +72,42 @@ namespace W
 		SceneManger::LateUpdate();
 	}
 
-	void Application::Render()
-	{
-
-		//graphicDevice->Draw();
-		graphicDevice->ClearTarget();
-		graphicDevice->UpdateViewPort();
-		Time::Render();
-
-		//SceneManger::Render();
-		renderer::Render();
-		//graphicDevice->Present();
-	}
+	//void Application::Render()
+	//{
+	//
+	//	//graphicDevice->Draw();
+	//	graphicDevice->ClearTarget();
+	//	graphicDevice->UpdateViewPort();
+	//	Time::Render();
+	//
+	//	//SceneManger::Render();
+	//	renderer::Render();
+	//	//graphicDevice->Present();
+	//}
 
 	void Application::Destroy()
 	{
 		SceneManger::Destroy();
 	}
 
-	void Application::Present()
-	{
-		graphicDevice->Present();
-	}
+	//void Application::Present()
+	//{
+	//	graphicDevice->Present();
+	//}
 
 	void Application::SetWindow(HWND _hHwnd, UINT _iWidth, UINT _iHeight)
 	{
 		//한번만 호출되게
-		if (graphicDevice == nullptr)
-		{
-			m_hHwnd = _hHwnd;
-			m_iWidth = _iWidth;
-			m_iHeight = _iHeight;
-		
-			graphicDevice = std::make_unique<W::graphics::GraphicDevice_Dx11>();
-			//제일먼저 호출될때 graphicDevice할당
-			W::graphics::GetDevice() = graphicDevice.get();
-		}
+		//if (graphicDevice == nullptr)
+		//{
+		//	m_hHwnd = _hHwnd;
+		//	m_iWidth = _iWidth;
+		//	m_iHeight = _iHeight;
+		//
+		//	graphicDevice = std::make_unique<W::graphics::GraphicDevice_Dx11>();
+		//	//제일먼저 호출될때 graphicDevice할당
+		//	W::graphics::GetDevice() = graphicDevice.get();
+		//}
 
 		RECT rt = { 0, 0, (LONG)_iWidth , (LONG)_iHeight };
 		AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, false);

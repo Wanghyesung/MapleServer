@@ -14,7 +14,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		virtual void Render()override;
+		//virtual void Render()override;
 		
 		void SetVelocity(const Vector2& _vVelocity, const Vector3& _vOffset = Vector3::Zero);
 		void SetTime(float _fTime) { m_fCreateTime = _fTime; }

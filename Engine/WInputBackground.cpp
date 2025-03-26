@@ -14,18 +14,18 @@ namespace W
 		m_vecInput{},
 		m_iCurIndex(0)
 	{
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
-		//pMater->SetTexture(pTex);
-		Resources::Insert(L"DefenseMater", pMater);
-		pMater->SetRenderinMode(eRenderingMode::Transparent);
-
-		MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pRenderer->SetMaterial(pMater);
-
-		std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"demainInputBack");
-		pMater->SetTexture(pAtlas);
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
+		////pMater->SetTexture(pTex);
+		//Resources::Insert(L"DefenseMater", pMater);
+		//pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//
+		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
+		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pRenderer->SetMaterial(pMater);
+		//
+		//std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"demainInputBack");
+		//pMater->SetTexture(pAtlas);
 
 		GetComponent<Transform>()->SetScale(2.5f * 1.8f, 2.5f * 0.5f, 0.f);
 	}
@@ -94,23 +94,23 @@ namespace W
 		}
 
 	}
-	void InputBackground::Render()
-	{
-		renderer::ObjectCB ObjectCB;
-		ObjectCB.vObjectColor = Vector4::One;
-
-		ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Object];
-		//Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
-		pConstBuffer->SetData(&ObjectCB);
-		pConstBuffer->Bind(eShaderStage::PS);
-
-		GameObject::Render();
-
-		for (int i = 0; i < m_vecInput.size(); ++i)
-		{
-			m_vecInput[i]->Render();
-		}
-	}
+	//void InputBackground::Render()
+	//{
+	//	//renderer::ObjectCB ObjectCB;
+	//	//ObjectCB.vObjectColor = Vector4::One;
+	//	//
+	//	//ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Object];
+	//	////Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
+	//	//pConstBuffer->SetData(&ObjectCB);
+	//	//pConstBuffer->Bind(eShaderStage::PS);
+	//
+	//	//GameObject::Render();
+	//	//
+	//	//for (int i = 0; i < m_vecInput.size(); ++i)
+	//	//{
+	//	//	m_vecInput[i]->Render();
+	//	//}
+	//}
 
 	void InputBackground::Failed()
 	{

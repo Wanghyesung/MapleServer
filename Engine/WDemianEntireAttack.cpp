@@ -52,10 +52,10 @@ namespace W
 	{
 		GameObject::LateUpdate();
 	}
-	void DemianEntireAttack::Render()
-	{
-		GameObject::Render();
-	}
+	//void DemianEntireAttack::Render()
+	//{
+	//	GameObject::Render();
+	//}
 
 	void DemianEntireAttack::Restore()
 	{

@@ -13,7 +13,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		virtual void Render()override;
+		//virtual void Render()override;
 
 		void SetPlayerArm(PlayerArm* pPlayerArm) { m_pPlayerArm = pPlayerArm; }
 

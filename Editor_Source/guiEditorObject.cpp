@@ -19,8 +19,8 @@ namespace gui
 	{
 		GameObject::LateUpdate();
 	}
-	void EditorObject::Render()
-	{
-		GameObject::Render();
-	}
+	//void EditorObject::Render()
+	//{
+	//	GameObject::Render();
+	//}
 }

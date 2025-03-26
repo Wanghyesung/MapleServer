@@ -13,7 +13,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		virtual void Render()override;
+		//virtual void Render()override;
 
 		void SetVelocity(const Vector2& _vVel) { m_vVelocity= _vVel; }
 		void SetDir(const Vector2& _vDir);

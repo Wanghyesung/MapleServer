@@ -7,23 +7,23 @@ namespace W
 {
 	UltimateFog::UltimateFog()
 	{
-		MeshRenderer* mr = AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
-		Resources::Insert(L"FogMater", pMater);
-
-		//충돌체 없음
-		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"ultimate2", L"..\\Resources\\Texture\\Player\\skill\\ultimate\\ultimate2.png");
+		//MeshRenderer* mr = AddComponent<MeshRenderer>();
+		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
+		//Resources::Insert(L"FogMater", pMater);
+		//
+		////충돌체 없음
+		//std::shared_ptr<Texture> pTex =
+		//	Resources::Load<Texture>(L"ultimate2", L"..\\Resources\\Texture\\Player\\skill\\ultimate\\ultimate2.png");
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"ultimate2",pTex, Vector2(0.f,0.f), Vector2(1412.f, 812.f),10, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.13f);
-		pAnim->FindAnimation(L"ultimate2")->Create(L"ultimate2", pTex, Vector2(0.f, 812.f), Vector2(1412.f, 812.f), 6, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.13f);
+		pAnim->Create(L"ultimate2", Vector2(0.f,0.f), Vector2(1412.f, 812.f),10, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.13f);
+		pAnim->FindAnimation(L"ultimate2")->Create(L"ultimate2", Vector2(0.f, 812.f), Vector2(1412.f, 812.f), 6, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.13f);
 
-		mr->SetMaterial(pMater);
+		//mr->SetMaterial(pMater);
 
 		AddComponent<Collider2D>()->SetSize(Vector2(0.f, 0.f));
 		AddComponent<AttackScript>()->SetDeleteTime(20.f);
@@ -55,16 +55,16 @@ namespace W
 	{
 		GameObject::LateUpdate();
 	}
-	void UltimateFog::Render()
-	{
-		renderer::ObjectCB ObjcetCB;
-		ObjcetCB.vObjectColor = Vector4::One;
-		ObjcetCB.vObjectDir.x = 1;
-		ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Object];
-
-		pConstBuffer->SetData(&ObjcetCB);
-		pConstBuffer->Bind(eShaderStage::PS);
-
-		GameObject::Render();
-	}
+	//void UltimateFog::Render()
+	//{
+	//	renderer::ObjectCB ObjcetCB;
+	//	ObjcetCB.vObjectColor = Vector4::One;
+	//	ObjcetCB.vObjectDir.x = 1;
+	//	ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Object];
+	//
+	//	pConstBuffer->SetData(&ObjcetCB);
+	//	pConstBuffer->Bind(eShaderStage::PS);
+	//
+	//	GameObject::Render();
+	//}
 }

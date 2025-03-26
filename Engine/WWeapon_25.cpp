@@ -4,18 +4,18 @@ namespace W
 {
 	Weapon_25::Weapon_25()
 	{
-		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"25_weaponTex", L"..\\Resources\\Texture\\UI\\ItemUI\\item1_4.png");
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pMater->SetTexture(pTex);
-		Resources::Insert(L"item1_4Mater", pMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pMater);
+		//std::shared_ptr<Texture> pTex =
+		//	Resources::Load<Texture>(L"25_weaponTex", L"..\\Resources\\Texture\\UI\\ItemUI\\item1_4.png");
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pMater->SetTexture(pTex);
+		//Resources::Insert(L"item1_4Mater", pMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pMater);
 
 		GetComponent<Transform>()->SetScale(0.1f * 2.9f, 0.1f * 2.9f, 0.f);
 
@@ -38,10 +38,10 @@ namespace W
 	{
 		Equip::LateUpdate();
 	}
-	void Weapon_25::Render()
-	{
-		Equip::Render();
-	}
+	//void Weapon_25::Render()
+	//{
+	//	Equip::Render();
+	//}
 	void Weapon_25::MouseOn()
 	{
 		Equip::MouseOn();

@@ -43,7 +43,7 @@ namespace W
 		//처음 들어왔을 떄
 		m_iItemCount++;
 		m_pNumber = new Number();
-		MeshRenderer* pMeshRenderer = m_pNumber->AddComponent<MeshRenderer>();
+		//MeshRenderer* pMeshRenderer = m_pNumber->AddComponent<MeshRenderer>();
 
 		float z = GetComponent<Transform>()->GetPosition().z;
 		m_pNumber->GetComponent<Transform>()->SetPosition(-0.08f, -0.07f, z + -1.1f);
@@ -61,10 +61,10 @@ namespace W
 	{		
 		IconUI::LateUpdate();
 	}
-	void ItemUI::Render()
-	{
-		IconUI::Render();
-	}
+	//void ItemUI::Render()
+	//{
+	//	IconUI::Render();
+	//}
 	void ItemUI::MouseOn()
 	{
 		IconUI::MouseOn();
@@ -271,23 +271,23 @@ namespace W
 			delete this;
 			return;
 		}
-		MeshRenderer* pMeshRenderer = m_pNumber->GetComponent<MeshRenderer>();
+		//MeshRenderer* pMeshRenderer = m_pNumber->GetComponent<MeshRenderer>();
 
-		std::wstring strNum = std::to_wstring(m_iItemCount);
-		std::shared_ptr<Material> Mater = Resources::Find<Material>(strNum + L"Mater");
-		pMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRenderer->SetMaterial(Mater);
+		//std::wstring strNum = std::to_wstring(m_iItemCount);
+		//std::shared_ptr<Material> Mater = Resources::Find<Material>(strNum + L"Mater");
+		//pMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRenderer->SetMaterial(Mater);
 	}
 
 	void ItemUI::AddItemNumber(UINT _iAccNumber)
 	{
-		m_iItemCount += _iAccNumber;
-		MeshRenderer* pMeshRenderer = m_pNumber->GetComponent<MeshRenderer>();
-
-		std::wstring strNum = std::to_wstring(m_iItemCount);
-		std::shared_ptr<Material> Mater = Resources::Find<Material>(strNum + L"Mater");
-		pMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRenderer->SetMaterial(Mater);
+		//m_iItemCount += _iAccNumber;
+		//MeshRenderer* pMeshRenderer = m_pNumber->GetComponent<MeshRenderer>();
+		//
+		//std::wstring strNum = std::to_wstring(m_iItemCount);
+		//std::shared_ptr<Material> Mater = Resources::Find<Material>(strNum + L"Mater");
+		//pMeshRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRenderer->SetMaterial(Mater);
 	}
 
 	bool ItemUI::changepos_interface()

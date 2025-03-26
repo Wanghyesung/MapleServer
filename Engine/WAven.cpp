@@ -13,19 +13,19 @@ namespace W
 		//SetName(L"Aven");
 
 		GetComponent<Transform>()->SetScale(2.f * 0.72, 2.f * 0.72, 0.f);
-		MeshRenderer* mr = AddComponent<MeshRenderer>();
-		mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-
-		//¿©±â ¹Ù²ñ
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetRenderinMode(eRenderingMode::Transparent);
-		pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
-		Resources::Insert(L"AvenMater", pMater);
-
-		std::shared_ptr<Texture> pAtlas
-			= Resources::Load<Texture>(L"avenTex", L"..\\Resources\\Texture\\Player\\skill\\ball.png");
-		pMater->SetTexture(pAtlas);
-		mr->SetMaterial(pMater);
+		//MeshRenderer* mr = AddComponent<MeshRenderer>();
+		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//
+		////¿©±â ¹Ù²ñ
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetRenderinMode(eRenderingMode::Transparent);
+		//pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
+		//Resources::Insert(L"AvenMater", pMater);
+		//
+		//std::shared_ptr<Texture> pAtlas
+		//	= Resources::Load<Texture>(L"avenTex", L"..\\Resources\\Texture\\Player\\skill\\ball.png");
+		//pMater->SetTexture(pAtlas);
+		//mr->SetMaterial(pMater);
 
 	}
 
@@ -64,17 +64,17 @@ namespace W
 		GameObject::LateUpdate();
 	}
 
-	void Aven::Render()
-	{
-		renderer::PlayerCB PlayerCB;
-		PlayerCB.vColor = Vector4::One;
-		ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Player];
-		//Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
-		pConstBuffer->SetData(&PlayerCB);
-		pConstBuffer->Bind(eShaderStage::PS);
-
-		GameObject::Render();
-	}
+	//void Aven::Render()
+	//{
+	//	//renderer::PlayerCB PlayerCB;
+	//	//PlayerCB.vColor = Vector4::One;
+	//	//ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Player];
+	//	////Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
+	//	//pConstBuffer->SetData(&PlayerCB);
+	//	//pConstBuffer->Bind(eShaderStage::PS);
+	//	//
+	//	//GameObject::Render();
+	//}
 	void Aven::Off()
 	{
 		PlayerAttackObject::Off();

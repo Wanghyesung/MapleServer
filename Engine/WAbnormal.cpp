@@ -53,9 +53,9 @@ namespace W
 	{
 
 	}
-	void Abnormal::Render()
+	/*void Abnormal::Render()
 	{	
 		GameObject::Render();
-	}
+	}*/
 
 }

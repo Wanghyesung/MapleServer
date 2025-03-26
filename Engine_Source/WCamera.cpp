@@ -74,8 +74,8 @@ namespace W
 	void Camera::LateUpdate()
 	{
 		//lateupdate마다 내 카메라의 뷰행렬, 투영행렬 구하기
-		CreateViewMatrix();
-		CreateProjectionMatrix(m_eType);
+		//CreateViewMatrix();
+		//CreateProjectionMatrix(m_eType);
 
 		//업데이트마다 오브젝트에 카메라추가하고 그리기
 		RegisterCameraInRenderer();
@@ -83,21 +83,21 @@ namespace W
 	void Camera::Render()
 	{
 		//각각의 카메라마다 다른 뷰,투영행렬
-		View = m_mView;
-		Projection = m_mProjection;
+		//View = m_mView;
+		//Projection = m_mProjection;
+		//
+		//AlphaSortGameObjects();
+		//ZSortTransparencyGameObjects();
 
-		AlphaSortGameObjects();
-		ZSortTransparencyGameObjects();
-
-		RenderOpaque();
-
-		//불투명 먼저 그리고 같은 z값에 투명을 그리면 z값 우선순위에서 밀려서 안그려짐
-		//z버퍼 끄기
-		DisablDepthStencilState();
-		//불투명 -> 반투명 -> 투명
-		RenderCutOut();
-		RenderTransparent();
-		EnableDepthStencilState();
+		//RenderOpaque();
+		//
+		////불투명 먼저 그리고 같은 z값에 투명을 그리면 z값 우선순위에서 밀려서 안그려짐
+		////z버퍼 끄기
+		//DisablDepthStencilState();
+		////불투명 -> 반투명 -> 투명
+		//RenderCutOut();
+		//RenderTransparent();
+		//EnableDepthStencilState();
 	}
 	
 	void Camera::RegisterCameraInRenderer()
@@ -140,7 +140,7 @@ namespace W
 				const std::vector<GameObject*> vecGameObjects =
 					layer.GetGameObjects();
 
-				DivideAlphaBlendGameObjects(vecGameObjects);
+				//DivideAlphaBlendGameObjects(vecGameObjects);
 			}
 		}
 	}
@@ -157,78 +157,78 @@ namespace W
 
 	}
 	
-	void Camera::DivideAlphaBlendGameObjects(const std::vector<GameObject*> _vecGameObj)
-	{
-		for (GameObject* obj : _vecGameObj)
-		{
-			MeshRenderer* pMeshRender =
-				obj->GetComponent<MeshRenderer>();
+	//void Camera::DivideAlphaBlendGameObjects(const std::vector<GameObject*> _vecGameObj)
+	//{
+	//	for (GameObject* obj : _vecGameObj)
+	//	{
+	//		MeshRenderer* pMeshRender =
+	//			obj->GetComponent<MeshRenderer>();
+	//
+	//		if (pMeshRender == nullptr)
+	//			continue;
+	//
+	//		std::shared_ptr<Material> spMater = pMeshRender->GetMaterial();
+	//		eRenderingMode eMode = spMater->GetRenderinMode();
+	//
+	//		switch (eMode)
+	//		{
+	//		case eRenderingMode::Opaque:
+	//			m_vecOpaqueGameObjects.push_back(obj);
+	//			break;
+	//		case eRenderingMode::CutOut:
+	//			m_vecCutOutGameObjects.push_back(obj);
+	//			break;
+	//		case eRenderingMode::Transparent:
+	//			m_vecTransparentGameObjects.push_back(obj);
+	//			break;
+	//		default:
+	//			break;
+	//		}
+	//	}
+	//}
 
-			if (pMeshRender == nullptr)
-				continue;
 
-			std::shared_ptr<Material> spMater = pMeshRender->GetMaterial();
-			eRenderingMode eMode = spMater->GetRenderinMode();
+	//void Camera::RenderOpaque()
+	//{
+	//	for (GameObject* gameObj : m_vecOpaqueGameObjects)
+	//	{
+	//		if (gameObj == nullptr)
+	//			continue;
+	//		if (gameObj->GetState()
+	//			!= GameObject::eState::Active)
+	//			continue;
+	//
+	//		gameObj->Render();
+	//	}
+	//}
 
-			switch (eMode)
-			{
-			case eRenderingMode::Opaque:
-				m_vecOpaqueGameObjects.push_back(obj);
-				break;
-			case eRenderingMode::CutOut:
-				m_vecCutOutGameObjects.push_back(obj);
-				break;
-			case eRenderingMode::Transparent:
-				m_vecTransparentGameObjects.push_back(obj);
-				break;
-			default:
-				break;
-			}
-		}
-	}
-
-
-	void Camera::RenderOpaque()
-	{
-		for (GameObject* gameObj : m_vecOpaqueGameObjects)
-		{
-			if (gameObj == nullptr)
-				continue;
-			if (gameObj->GetState()
-				!= GameObject::eState::Active)
-				continue;
-
-			gameObj->Render();
-		}
-	}
-
-	void Camera::RenderCutOut()
-	{
-		for (GameObject* gameObj : m_vecCutOutGameObjects)
-		{
-			if (gameObj == nullptr)
-				continue;
-			if (gameObj->GetState()
-				!= GameObject::eState::Active)
-				continue;
-
-			gameObj->Render();
-		}
-	}
-
-	void Camera::RenderTransparent()
-	{
-		for (GameObject* gameObj : m_vecTransparentGameObjects)
-		{
-			if (gameObj == nullptr)
-				continue;
-			if (gameObj->GetState()
-				!= GameObject::eState::Active)
-				continue;
-
-			gameObj->Render();
-		}
-	}
+	//void Camera::RenderCutOut()
+	//{
+	//	for (GameObject* gameObj : m_vecCutOutGameObjects)
+	//	{
+	//		if (gameObj == nullptr)
+	//			continue;
+	//		if (gameObj->GetState()
+	//			!= GameObject::eState::Active)
+	//			continue;
+	//
+	//		gameObj->Render();
+	//	}
+	//}
+	//
+	//void Camera::RenderTransparent()
+	//{
+	//	for (GameObject* gameObj : m_vecTransparentGameObjects)
+	//	{
+	//		if (gameObj == nullptr)
+	//			continue;
+	//		if (gameObj->GetState()
+	//			!= GameObject::eState::Active)
+	//			continue;
+	//
+	//		gameObj->Render();
+	//	}
+	//}
 
 	bool Camera::CreateViewMatrix()
 	{
@@ -280,18 +280,18 @@ namespace W
 		return true;
 	}
 	
-	void Camera::EnableDepthStencilState()
-	{
-		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> dsState
-			= renderer::m_cpDepthStencilStates[(UINT)eDSType::Less];
-		GetDevice()->BindDepthStencilState(dsState.Get());
-	}
-
-	void Camera::DisablDepthStencilState()
-	{
-		Microsoft::WRL::ComPtr<ID3D11DepthStencilState> dsState
-			= renderer::m_cpDepthStencilStates[(UINT)eDSType::None];
-		GetDevice()->BindDepthStencilState(dsState.Get());
-	}
+	//void Camera::EnableDepthStencilState()
+	//{
+	//	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> dsState
+	//		= renderer::m_cpDepthStencilStates[(UINT)eDSType::Less];
+	//	GetDevice()->BindDepthStencilState(dsState.Get());
+	//}
+	//
+	//void Camera::DisablDepthStencilState()
+	//{
+	//	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> dsState
+	//		= renderer::m_cpDepthStencilStates[(UINT)eDSType::None];
+	//	GetDevice()->BindDepthStencilState(dsState.Get());
+	//}
 	
 }

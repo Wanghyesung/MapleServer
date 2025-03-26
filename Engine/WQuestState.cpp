@@ -9,17 +9,17 @@ namespace W
 		m_bTargetOn(false),
 		m_vDragStartPos(Vector2::One)
 	{
-		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"questTex", L"..\\Resources\\Texture\\UI\\QuestUI\\quest.png");
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pMater->SetTexture(pTex);
-		Resources::Insert(L"questMaer", pMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pMater);
+		//std::shared_ptr<Texture> pTex =
+		//	Resources::Load<Texture>(L"questTex", L"..\\Resources\\Texture\\UI\\QuestUI\\quest.png");
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pMater->SetTexture(pTex);
+		//Resources::Insert(L"questMaer", pMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pMater);
 	}
 	QuestState::~QuestState()
 	{
@@ -49,13 +49,13 @@ namespace W
 
 		UI::LateUpdate();
 	}
-	void QuestState::Render()
-	{
-		if (!m_bRenderOn)
-			return;
-
-		UI::Render();
-	}
+	//void QuestState::Render()
+	//{
+	//	if (!m_bRenderOn)
+	//		return;
+	//
+	//	UI::Render();
+	//}
 	void QuestState::MouseOn()
 	{
 		if (m_bTargetOn)

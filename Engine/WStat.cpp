@@ -10,17 +10,17 @@ namespace W
 		m_bTargetOn(false),
 		m_vDragStartPos(Vector2::One)
 	{
-		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"StatUITex", L"..\\Resources\\Texture\\UI\\StatUI\\StatUI.png");
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pMater->SetTexture(pTex);
-		Resources::Insert(L"StatUIMater", pMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pMater);
+		//std::shared_ptr<Texture> pTex =
+		//	Resources::Load<Texture>(L"StatUITex", L"..\\Resources\\Texture\\UI\\StatUI\\StatUI.png");
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pMater->SetTexture(pTex);
+		//Resources::Insert(L"StatUIMater", pMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pMater);
 	}
 	Stat::~Stat()
 	{
@@ -84,13 +84,13 @@ namespace W
 
 		UI::LateUpdate();
 	}
-	void Stat::Render()
-	{
-		if (!m_bRenderOn)
-			return;
-
-		UI::Render();
-	}
+	//void Stat::Render()
+	//{
+	//	if (!m_bRenderOn)
+	//		return;
+	//
+	//	UI::Render();
+	//}
 	void Stat::MouseOn()
 	{
 		if (m_bTargetOn)

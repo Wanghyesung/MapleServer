@@ -9,13 +9,13 @@ namespace W
 {
 	CharScene::CharScene()
 	{
-		std::shared_ptr<Texture> pBackTex =
-			Resources::Load<Texture>(L"start_charTex", L"..\\Resources\\Texture\\background\\start_char.png");
-
-		std::shared_ptr<Material> pBackMater = std::make_shared<Material>();
-		pBackMater->SetShader(Resources::Find<Shader>(L"BackgroundShader"));
-		pBackMater->SetTexture(pBackTex);
-		Resources::Insert(L"start_charMater", pBackMater);
+		//std::shared_ptr<Texture> pBackTex =
+		//	Resources::Load<Texture>(L"start_charTex", L"..\\Resources\\Texture\\background\\start_char.png");
+		//
+		//std::shared_ptr<Material> pBackMater = std::make_shared<Material>();
+		//pBackMater->SetShader(Resources::Find<Shader>(L"BackgroundShader"));
+		//pBackMater->SetTexture(pBackTex);
+		//Resources::Insert(L"start_charMater", pBackMater);
 
 	}
 	CharScene::~CharScene()
@@ -61,13 +61,13 @@ namespace W
 	{
 		Scene::LateUpdate();
 	}
-	void CharScene::Render()
-	{
-		Scene::Render();
-	}
-	void CharScene::Destroy()
-	{
-	}
+	//void CharScene::Render()
+	//{
+	//	Scene::Render();
+	//}
+	//void CharScene::Destroy()
+	//{
+	//}
 	void CharScene::OnEnter()
 	{
 	}
@@ -79,9 +79,9 @@ namespace W
 	{
 		GameObject* pBackGround = new GameObject();
 		AddGameObject(eLayerType::Background, pBackGround);
-		MeshRenderer* pMeshRender = pBackGround->AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(Resources::Find<Material>(L"start_charMater"));
+		//MeshRenderer* pMeshRender = pBackGround->AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(Resources::Find<Material>(L"start_charMater"));
 		pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 0.2f);
 		//035 : 1
 		pBackGround->GetComponent<Transform>()->SetScale(4 * 3.5f, 3.f * 3.f, 1.f);

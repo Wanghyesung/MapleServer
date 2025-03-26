@@ -28,7 +28,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		virtual void Render()override;
+		//virtual void Render()override;
 
 
 		const std::wstring& GetCurStateName() { return m_strCurStateName; }

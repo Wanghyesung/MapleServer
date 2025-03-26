@@ -9,20 +9,20 @@ namespace W
 		m_eSkillNumber = _eSKillNumber;
 		std::wstring strNum = std::to_wstring(UINT(_eSKillNumber)+1);
 
-		std::shared_ptr<Texture> pSkillNuber1 =
-			Resources::Load<Texture>(L"SKillNuberTex"+strNum, L"..\\Resources\\Texture\\UI\\SkillUI\\"+ strNum+ L".png");
-
-		std::shared_ptr<Texture> pSkillNuber10 =
-			Resources::Load<Texture>(L"SKillNuberTex"+strNum + L"0", L"..\\Resources\\Texture\\UI\\SkillUI\\" + strNum + L"0.png");
-
-		std::shared_ptr<Material> pSkillNuberMater = std::make_shared<Material>();
-		pSkillNuberMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pSkillNuberMater->SetTexture(pSkillNuber10);
-		Resources::Insert(L"SkillNuberMater" + strNum, pSkillNuberMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pSkillNuberMater);
+		//std::shared_ptr<Texture> pSkillNuber1 =
+		//	Resources::Load<Texture>(L"SKillNuberTex"+strNum, L"..\\Resources\\Texture\\UI\\SkillUI\\"+ strNum+ L".png");
+		//
+		//std::shared_ptr<Texture> pSkillNuber10 =
+		//	Resources::Load<Texture>(L"SKillNuberTex"+strNum + L"0", L"..\\Resources\\Texture\\UI\\SkillUI\\" + strNum + L"0.png");
+		//
+		//std::shared_ptr<Material> pSkillNuberMater = std::make_shared<Material>();
+		//pSkillNuberMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pSkillNuberMater->SetTexture(pSkillNuber10);
+		//Resources::Insert(L"SkillNuberMater" + strNum, pSkillNuberMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pSkillNuberMater);
 
 	}
 	SkillNumber::~SkillNumber()
@@ -51,13 +51,13 @@ namespace W
 		else
 			UI::LateUpdate();
 	}
-	void SkillNumber::Render()
-	{
-		if (!m_bActive)
-			GameObject::Render();
-		else
-			UI::Render();
-	}
+	//void SkillNumber::Render()
+	//{
+	//	if (!m_bActive)
+	//		GameObject::Render();
+	//	else
+	//		UI::Render();
+	//}
 	void SkillNumber::MouseOn()
 	{
 
@@ -80,16 +80,16 @@ namespace W
 		m_bActive = _bOn;
 		std::wstring strNum = std::to_wstring(UINT(m_eSkillNumber) + 1);
 
-		std::shared_ptr<Material> pMater = Resources::Find<Material>(L"SkillNuberMater" + strNum);
+		//std::shared_ptr<Material> pMater = Resources::Find<Material>(L"SkillNuberMater" + strNum);
 		if (!m_bActive)
 		{
 			m_bActive = false;
-			pMater->SetTexture(Resources::Find<Texture>((L"SKillNuberTex" + strNum + L"0")));
+			//pMater->SetTexture(Resources::Find<Texture>((L"SKillNuberTex" + strNum + L"0")));
 		}
 		else
 		{
 			m_bActive = true;
-			pMater->SetTexture(Resources::Find<Texture>(L"SKillNuberTex" + strNum));
+			//pMater->SetTexture(Resources::Find<Texture>(L"SKillNuberTex" + strNum));
 		}
 	}
 }

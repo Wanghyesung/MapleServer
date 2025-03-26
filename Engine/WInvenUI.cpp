@@ -6,17 +6,17 @@ namespace W
 {
 	InvenUI::InvenUI()
 	{
-		std::shared_ptr<Texture> pTex =
-			Resources::Load<Texture>(L"InvenTex0", L"..\\Resources\\Texture\\UI\\Interface\\InvenBt_0.png");
-
-		std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
-		pMater->SetTexture(pTex);
-		Resources::Insert(L"InvenMater0", pMater);
-
-		MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
-		pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		pMeshRender->SetMaterial(pMater);
+		//std::shared_ptr<Texture> pTex =
+		//	Resources::Load<Texture>(L"InvenTex0", L"..\\Resources\\Texture\\UI\\Interface\\InvenBt_0.png");
+		//
+		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
+		//pMater->SetShader(Resources::Find<Shader>(L"UIShader"));
+		//pMater->SetTexture(pTex);
+		//Resources::Insert(L"InvenMater0", pMater);
+		//
+		//MeshRenderer* pMeshRender = AddComponent<MeshRenderer>();
+		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
+		//pMeshRender->SetMaterial(pMater);
 	}
 	InvenUI::~InvenUI()
 	{
@@ -33,10 +33,10 @@ namespace W
 	{
 		UI::LateUpdate();
 	}
-	void InvenUI::Render()
-	{
-		UI::Render();
-	}
+	//void InvenUI::Render()
+	//{
+	//	UI::Render();
+	//}
 	void InvenUI::MouseOn()
 	{
 

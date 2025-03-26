@@ -13,7 +13,7 @@ namespace W
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
-		virtual void Render();
+		//virtual void Render();
 
 		virtual void MouseOn()override;
 		virtual void MouseLbtnDown()override;

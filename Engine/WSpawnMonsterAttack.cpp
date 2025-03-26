@@ -80,10 +80,10 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
-	void SpawnMonsterAttack::Render()
-	{
-		GameObject::Render();
-	}
+	//void SpawnMonsterAttack::Render()
+	//{
+	//	GameObject::Render();
+	//}
 	void SpawnMonsterAttack::SetVelocity(const Vector2& _vVelocity, const Vector3& _vOffset)
 	{
 		m_vecVelocity.push_back(_vVelocity);
