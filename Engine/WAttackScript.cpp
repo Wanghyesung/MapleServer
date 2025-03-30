@@ -197,8 +197,6 @@ namespace W
 			pEffect->StartEffect(pMon->GetDir() * -1);
 		}
 
-		//sound
-		pAttackObject->HitStartSound();
 	}
 
 	void AttackScript::off()

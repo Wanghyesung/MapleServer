@@ -44,173 +44,8 @@
     <ClInclude Include="WCameraScript.h">
       <Filter>Contents\Script</Filter>
     </ClInclude>
-    <ClInclude Include="WInterfaceUI.h">
-      <Filter>Contents\UI\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="WChannleBntUI.h">
-      <Filter>Contents\UI\Interface\Channle</Filter>
-    </ClInclude>
-    <ClInclude Include="WSystemUI.h">
-      <Filter>Contents\UI\Interface\System</Filter>
-    </ClInclude>
-    <ClInclude Include="WMenuUI.h">
-      <Filter>Contents\UI\Interface\Menu</Filter>
-    </ClInclude>
-    <ClInclude Include="WShopUI.h">
-      <Filter>Contents\UI\Interface\Shop</Filter>
-    </ClInclude>
-    <ClInclude Include="WStarUI.h">
-      <Filter>Contents\UI\Interface\Star</Filter>
-    </ClInclude>
-    <ClInclude Include="WInvenUI.h">
-      <Filter>Contents\UI\Interface\Extra\Inven</Filter>
-    </ClInclude>
-    <ClInclude Include="WEquipUI.h">
-      <Filter>Contents\UI\Interface\Extra\Equip</Filter>
-    </ClInclude>
-    <ClInclude Include="WCharUI.h">
-      <Filter>Contents\UI\Interface\Extra\Char</Filter>
-    </ClInclude>
-    <ClInclude Include="WStatUI.h">
-      <Filter>Contents\UI\Interface\Extra\Stat</Filter>
-    </ClInclude>
-    <ClInclude Include="WQuestUI.h">
-      <Filter>Contents\UI\Interface\Extra\Quest</Filter>
-    </ClInclude>
-    <ClInclude Include="WSKillUI.h">
-      <Filter>Contents\UI\Interface\Extra\Skill</Filter>
-    </ClInclude>
-    <ClInclude Include="WLevelUI.h">
-      <Filter>Contents\UI\Interface\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="WGaugeUI.h">
-      <Filter>Contents\UI\Interface\Gauge</Filter>
-    </ClInclude>
-    <ClInclude Include="WInventory.h">
-      <Filter>Contents\UI\Interface\Extra\Inven</Filter>
-    </ClInclude>
-    <ClInclude Include="WItemUI.h">
-      <Filter>Contents\UI\ItemUI</Filter>
-    </ClInclude>
-    <ClInclude Include="WAlixirUI.h">
-      <Filter>Contents\UI\ItemUI\Potion</Filter>
-    </ClInclude>
-    <ClInclude Include="WHP.h">
-      <Filter>Contents\UI\Interface\Gauge</Filter>
-    </ClInclude>
-    <ClInclude Include="WMP.h">
-      <Filter>Contents\UI\Interface\Gauge</Filter>
-    </ClInclude>
-    <ClInclude Include="WEXP.h">
-      <Filter>Contents\UI\Interface\Gauge</Filter>
-    </ClInclude>
-    <ClInclude Include="WCoverGaugeUI.h">
-      <Filter>Contents\UI\Interface\Gauge</Filter>
-    </ClInclude>
-    <ClInclude Include="WHorntailItem.h">
-      <Filter>Contents\UI\Equip</Filter>
-    </ClInclude>
-    <ClInclude Include="WGridScript.h">
-      <Filter>Contents\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="WSKillStorage.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\SkillStorage</Filter>
-    </ClInclude>
-    <ClInclude Include="WSKillBox.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\SkillStorage</Filter>
-    </ClInclude>
-    <ClInclude Include="WSkillNumber1.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\1\SkillNumber1</Filter>
-    </ClInclude>
-    <ClInclude Include="WSKill.h">
-      <Filter>Contents\UI\Interface\Extra\Skill</Filter>
-    </ClInclude>
-    <ClInclude Include="WEquipState.h">
-      <Filter>Contents\UI\Interface\Extra\Equip</Filter>
-    </ClInclude>
-    <ClInclude Include="WEquip.h">
-      <Filter>Contents\UI\Interface\Extra\Equip</Filter>
-    </ClInclude>
-    <ClInclude Include="WStat.h">
-      <Filter>Contents\UI\Interface\Extra\Stat</Filter>
-    </ClInclude>
-    <ClInclude Include="WSkillDarkUI.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\1</Filter>
-    </ClInclude>
-    <ClInclude Include="WSkillLuckUI.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\1</Filter>
-    </ClInclude>
-    <ClInclude Include="WIconUI.h">
-      <Filter>Contents\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="WAutoUI.h">
-      <Filter>Contents\UI\Interface\Extra\Stat</Filter>
-    </ClInclude>
-    <ClInclude Include="WUpBtn.h">
-      <Filter>Contents\UI\Interface\Extra\Stat</Filter>
-    </ClInclude>
     <ClInclude Include="WPlayer.h">
       <Filter>Contents\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="WInvenPage.h">
-      <Filter>Contents\UI\Interface\Extra\Inven\InvenPage</Filter>
-    </ClInclude>
-    <ClInclude Include="WCharState.h">
-      <Filter>Contents\UI\Interface\Extra\Char</Filter>
-    </ClInclude>
-    <ClInclude Include="WQuestState.h">
-      <Filter>Contents\UI\Interface\Extra\Quest</Filter>
-    </ClInclude>
-    <ClInclude Include="WQuestDetail.h">
-      <Filter>Contents\UI\Interface\Extra\Quest</Filter>
-    </ClInclude>
-    <ClInclude Include="WNumber.h">
-      <Filter>Contents\UI\Number</Filter>
-    </ClInclude>
-    <ClInclude Include="WHat_10.h">
-      <Filter>Contents\UI\Equip\Equip_10</Filter>
-    </ClInclude>
-    <ClInclude Include="WTop_10.h">
-      <Filter>Contents\UI\Equip\Equip_10</Filter>
-    </ClInclude>
-    <ClInclude Include="WBottom_10.h">
-      <Filter>Contents\UI\Equip\Equip_10</Filter>
-    </ClInclude>
-    <ClInclude Include="WShoes_10.h">
-      <Filter>Contents\UI\Equip\Equip_10</Filter>
-    </ClInclude>
-    <ClInclude Include="WWeapon_10.h">
-      <Filter>Contents\UI\Equip\Equip_10</Filter>
-    </ClInclude>
-    <ClInclude Include="WSkillNumber2.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\2</Filter>
-    </ClInclude>
-    <ClInclude Include="WSKillJumpUI.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\2</Filter>
-    </ClInclude>
-    <ClInclude Include="WSKillSpeedUI.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\2</Filter>
-    </ClInclude>
-    <ClInclude Include="WSkillNumber.h">
-      <Filter>Contents\UI\Interface\Extra\Skill</Filter>
-    </ClInclude>
-    <ClInclude Include="WSkillNumber3.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\3</Filter>
-    </ClInclude>
-    <ClInclude Include="WSkillAvenUI.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\3</Filter>
-    </ClInclude>
-    <ClInclude Include="WSkillShadowUI.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\3</Filter>
-    </ClInclude>
-    <ClInclude Include="WSkillNumber4.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\4</Filter>
-    </ClInclude>
-    <ClInclude Include="WSkillQSUI.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\4</Filter>
-    </ClInclude>
-    <ClInclude Include="WSkillRaidUI.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\4</Filter>
     </ClInclude>
     <ClInclude Include="WGround.h">
       <Filter>Contents\Object\Ground</Filter>
@@ -235,33 +70,6 @@
     </ClInclude>
     <ClInclude Include="WCharScene.h">
       <Filter>Contents\Scene\Start</Filter>
-    </ClInclude>
-    <ClInclude Include="WStartUI.h">
-      <Filter>Contents\UI\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="WSkillBlastUI.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\5</Filter>
-    </ClInclude>
-    <ClInclude Include="WSkillLoadUI.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\5</Filter>
-    </ClInclude>
-    <ClInclude Include="WSkillWindUI.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\5</Filter>
-    </ClInclude>
-    <ClInclude Include="WServerLayer.h">
-      <Filter>Contents\UI\StartUI</Filter>
-    </ClInclude>
-    <ClInclude Include="WScroll.h">
-      <Filter>Contents\UI\Button</Filter>
-    </ClInclude>
-    <ClInclude Include="WServerUI.h">
-      <Filter>Contents\UI\StartUI</Filter>
-    </ClInclude>
-    <ClInclude Include="WChannel.h">
-      <Filter>Contents\UI\StartUI</Filter>
-    </ClInclude>
-    <ClInclude Include="WChannelNumber.h">
-      <Filter>Contents\UI\StartUI</Filter>
     </ClInclude>
     <ClInclude Include="WPlayerBody.h">
       <Filter>Contents\Player</Filter>
@@ -455,9 +263,6 @@
     <ClInclude Include="WBattleManager.h">
       <Filter>Contents\Manager\BattleMgr</Filter>
     </ClInclude>
-    <ClInclude Include="WDamageFont.h">
-      <Filter>Contents\Manager\BattleMgr\DamageFont</Filter>
-    </ClInclude>
     <ClInclude Include="WEventManager.h">
       <Filter>Contents\Manager\EventManager</Filter>
     </ClInclude>
@@ -541,9 +346,6 @@
     </ClInclude>
     <ClInclude Include="WItemObject.h">
       <Filter>Contents\Object\itemobj</Filter>
-    </ClInclude>
-    <ClInclude Include="WItemManager.h">
-      <Filter>Contents\Manager\ItemManager</Filter>
     </ClInclude>
     <ClInclude Include="WItemScript.h">
       <Filter>Contents\Object\itemobj</Filter>
@@ -650,18 +452,6 @@
     <ClInclude Include="WStop.h">
       <Filter>Contents\Object\Abnormal\Stop</Filter>
     </ClInclude>
-    <ClInclude Include="WBossUI.h">
-      <Filter>Contents\UI\Interface\Extra\bossUI</Filter>
-    </ClInclude>
-    <ClInclude Include="WBossTex.h">
-      <Filter>Contents\UI\Interface\Extra\bossUI\monsterTex</Filter>
-    </ClInclude>
-    <ClInclude Include="WBossEnterUI.h">
-      <Filter>Contents\UI\Interface\Extra\bossUI\SceneEnter</Filter>
-    </ClInclude>
-    <ClInclude Include="WMonsterUI.h">
-      <Filter>Contents\UI\Interface\Extra\bossUI\monsterUI</Filter>
-    </ClInclude>
     <ClInclude Include="WDemianScene.h">
       <Filter>Contents\Scene\Demian</Filter>
     </ClInclude>
@@ -731,36 +521,6 @@
     <ClInclude Include="WStigmaCount.h">
       <Filter>Contents\Object\BossMonster\Demian</Filter>
     </ClInclude>
-    <ClInclude Include="WBottom_40.h">
-      <Filter>Contents\UI\Equip\Equip_40</Filter>
-    </ClInclude>
-    <ClInclude Include="WHat_40.h">
-      <Filter>Contents\UI\Equip\Equip_40</Filter>
-    </ClInclude>
-    <ClInclude Include="WWeapon_25.h">
-      <Filter>Contents\UI\Equip\Equip_40</Filter>
-    </ClInclude>
-    <ClInclude Include="WTop_40.h">
-      <Filter>Contents\UI\Equip\Equip_40</Filter>
-    </ClInclude>
-    <ClInclude Include="WBottom_80.h">
-      <Filter>Contents\UI\Equip\Equip_80</Filter>
-    </ClInclude>
-    <ClInclude Include="WTop_80.h">
-      <Filter>Contents\UI\Equip\Equip_80</Filter>
-    </ClInclude>
-    <ClInclude Include="WHat_80.h">
-      <Filter>Contents\UI\Equip\Equip_80</Filter>
-    </ClInclude>
-    <ClInclude Include="WWeapon_63.h">
-      <Filter>Contents\UI\Equip\Equip_80</Filter>
-    </ClInclude>
-    <ClInclude Include="WShoes_40.h">
-      <Filter>Contents\UI\Equip\Equip_40</Filter>
-    </ClInclude>
-    <ClInclude Include="WShoes_80.h">
-      <Filter>Contents\UI\Equip\Equip_80</Filter>
-    </ClInclude>
     <ClInclude Include="WUltimateSkill.h">
       <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
     </ClInclude>
@@ -778,21 +538,6 @@
     </ClInclude>
     <ClInclude Include="WUltimateObject.h">
       <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
-    </ClInclude>
-    <ClInclude Include="WHairItem.h">
-      <Filter>Contents\UI\cashitem</Filter>
-    </ClInclude>
-    <ClInclude Include="WSKillNumber6.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\1\SkillNumber6</Filter>
-    </ClInclude>
-    <ClInclude Include="WSkillNumber5.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\5</Filter>
-    </ClInclude>
-    <ClInclude Include="WSkillUltimateUI.h">
-      <Filter>Contents\UI\Interface\Extra\Skill\1\SkillNumber6</Filter>
-    </ClInclude>
-    <ClInclude Include="WEyeItem.h">
-      <Filter>Contents\UI\cashitem</Filter>
     </ClInclude>
     <ClInclude Include="WPlayerDead.h">
       <Filter>Contents\Player\PlayerFSM\PlayerDead</Filter>
@@ -842,173 +587,8 @@
     <ClCompile Include="WCameraScript.cpp">
       <Filter>Contents\Script</Filter>
     </ClCompile>
-    <ClCompile Include="WInterfaceUI.cpp">
-      <Filter>Contents\UI\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="WChannleBntUI.cpp">
-      <Filter>Contents\UI\Interface\Channle</Filter>
-    </ClCompile>
-    <ClCompile Include="WSystemUI.cpp">
-      <Filter>Contents\UI\Interface\System</Filter>
-    </ClCompile>
-    <ClCompile Include="WMenuUI.cpp">
-      <Filter>Contents\UI\Interface\Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="WShopUI.cpp">
-      <Filter>Contents\UI\Interface\Shop</Filter>
-    </ClCompile>
-    <ClCompile Include="WStarUI.cpp">
-      <Filter>Contents\UI\Interface\Star</Filter>
-    </ClCompile>
-    <ClCompile Include="WInvenUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Inven</Filter>
-    </ClCompile>
-    <ClCompile Include="WEquipUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Equip</Filter>
-    </ClCompile>
-    <ClCompile Include="WCharUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Char</Filter>
-    </ClCompile>
-    <ClCompile Include="WStatUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Stat</Filter>
-    </ClCompile>
-    <ClCompile Include="WQuestUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Quest</Filter>
-    </ClCompile>
-    <ClCompile Include="WSKillUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill</Filter>
-    </ClCompile>
-    <ClCompile Include="WLevelUI.cpp">
-      <Filter>Contents\UI\Interface\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="WGaugeUI.cpp">
-      <Filter>Contents\UI\Interface\Gauge</Filter>
-    </ClCompile>
-    <ClCompile Include="WInventory.cpp">
-      <Filter>Contents\UI\Interface\Extra\Inven</Filter>
-    </ClCompile>
-    <ClCompile Include="WItemUI.cpp">
-      <Filter>Contents\UI\ItemUI</Filter>
-    </ClCompile>
-    <ClCompile Include="WAlixirUI.cpp">
-      <Filter>Contents\UI\ItemUI\Potion</Filter>
-    </ClCompile>
-    <ClCompile Include="WHP.cpp">
-      <Filter>Contents\UI\Interface\Gauge</Filter>
-    </ClCompile>
-    <ClCompile Include="WEXP.cpp">
-      <Filter>Contents\UI\Interface\Gauge</Filter>
-    </ClCompile>
-    <ClCompile Include="WMP.cpp">
-      <Filter>Contents\UI\Interface\Gauge</Filter>
-    </ClCompile>
-    <ClCompile Include="WCoverGaugeUI.cpp">
-      <Filter>Contents\UI\Interface\Gauge</Filter>
-    </ClCompile>
-    <ClCompile Include="WHorntailItem.cpp">
-      <Filter>Contents\UI\Equip</Filter>
-    </ClCompile>
-    <ClCompile Include="WGridScript.cpp">
-      <Filter>Contents\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="WSKillStorage.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\SkillStorage</Filter>
-    </ClCompile>
-    <ClCompile Include="WSKillBox.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\SkillStorage</Filter>
-    </ClCompile>
-    <ClCompile Include="WSkillNumber1.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\1\SkillNumber1</Filter>
-    </ClCompile>
-    <ClCompile Include="WSKill.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill</Filter>
-    </ClCompile>
-    <ClCompile Include="WEquipState.cpp">
-      <Filter>Contents\UI\Interface\Extra\Equip</Filter>
-    </ClCompile>
-    <ClCompile Include="WEquip.cpp">
-      <Filter>Contents\UI\Interface\Extra\Equip</Filter>
-    </ClCompile>
-    <ClCompile Include="WStat.cpp">
-      <Filter>Contents\UI\Interface\Extra\Stat</Filter>
-    </ClCompile>
-    <ClCompile Include="WSkillLuckUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\1</Filter>
-    </ClCompile>
-    <ClCompile Include="WSkillDarkUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\1</Filter>
-    </ClCompile>
-    <ClCompile Include="WIconUI.cpp">
-      <Filter>Contents\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="WAutoUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Stat</Filter>
-    </ClCompile>
-    <ClCompile Include="WUpBtn.cpp">
-      <Filter>Contents\UI\Interface\Extra\Stat</Filter>
-    </ClCompile>
     <ClCompile Include="WPlayer.cpp">
       <Filter>Contents\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="WInvenPage.cpp">
-      <Filter>Contents\UI\Interface\Extra\Inven\InvenPage</Filter>
-    </ClCompile>
-    <ClCompile Include="WCharState.cpp">
-      <Filter>Contents\UI\Interface\Extra\Char</Filter>
-    </ClCompile>
-    <ClCompile Include="WQuestState.cpp">
-      <Filter>Contents\UI\Interface\Extra\Quest</Filter>
-    </ClCompile>
-    <ClCompile Include="WQuestDetail.cpp">
-      <Filter>Contents\UI\Interface\Extra\Quest</Filter>
-    </ClCompile>
-    <ClCompile Include="WNumber.cpp">
-      <Filter>Contents\UI\Number</Filter>
-    </ClCompile>
-    <ClCompile Include="WHat_10.cpp">
-      <Filter>Contents\UI\Equip\Equip_10</Filter>
-    </ClCompile>
-    <ClCompile Include="WTop_10.cpp">
-      <Filter>Contents\UI\Equip\Equip_10</Filter>
-    </ClCompile>
-    <ClCompile Include="WBottom_10.cpp">
-      <Filter>Contents\UI\Equip\Equip_10</Filter>
-    </ClCompile>
-    <ClCompile Include="WShoes_10.cpp">
-      <Filter>Contents\UI\Equip\Equip_10</Filter>
-    </ClCompile>
-    <ClCompile Include="WWeapon_10.cpp">
-      <Filter>Contents\UI\Equip\Equip_10</Filter>
-    </ClCompile>
-    <ClCompile Include="WSkillNumber2.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\2</Filter>
-    </ClCompile>
-    <ClCompile Include="WSKillJumpUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\2</Filter>
-    </ClCompile>
-    <ClCompile Include="WSKillSpeedUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\2</Filter>
-    </ClCompile>
-    <ClCompile Include="WSkillNumber.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill</Filter>
-    </ClCompile>
-    <ClCompile Include="WSkillNumber3.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\3</Filter>
-    </ClCompile>
-    <ClCompile Include="WSkillAvenUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\3</Filter>
-    </ClCompile>
-    <ClCompile Include="WSkillShadowUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\3</Filter>
-    </ClCompile>
-    <ClCompile Include="WSkillNumber4.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\4</Filter>
-    </ClCompile>
-    <ClCompile Include="WSkillQSUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\4</Filter>
-    </ClCompile>
-    <ClCompile Include="WSkillRaidUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\4</Filter>
     </ClCompile>
     <ClCompile Include="WGround.cpp">
       <Filter>Contents\Object\Ground</Filter>
@@ -1033,36 +613,6 @@
     </ClCompile>
     <ClCompile Include="WCharScene.cpp">
       <Filter>Contents\Scene\Start</Filter>
-    </ClCompile>
-    <ClCompile Include="WStartUI.cpp">
-      <Filter>Contents\UI\Button</Filter>
-    </ClCompile>
-    <ClCompile Include="WSkillBlastUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\5</Filter>
-    </ClCompile>
-    <ClCompile Include="WSkillLoadUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\5</Filter>
-    </ClCompile>
-    <ClCompile Include="WSkillNumber5.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\5</Filter>
-    </ClCompile>
-    <ClCompile Include="WSkillWindUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\5</Filter>
-    </ClCompile>
-    <ClCompile Include="WServerLayer.cpp">
-      <Filter>Contents\UI\StartUI</Filter>
-    </ClCompile>
-    <ClCompile Include="WScroll.cpp">
-      <Filter>Contents\UI\Button</Filter>
-    </ClCompile>
-    <ClCompile Include="WServerUI.cpp">
-      <Filter>Contents\UI\StartUI</Filter>
-    </ClCompile>
-    <ClCompile Include="WChannel.cpp">
-      <Filter>Contents\UI\StartUI</Filter>
-    </ClCompile>
-    <ClCompile Include="WChannelNumber.cpp">
-      <Filter>Contents\UI\StartUI</Filter>
     </ClCompile>
     <ClCompile Include="WPlayerBody.cpp">
       <Filter>Contents\Player</Filter>
@@ -1256,9 +806,6 @@
     <ClCompile Include="WBattleManager.cpp">
       <Filter>Contents\Manager\BattleMgr</Filter>
     </ClCompile>
-    <ClCompile Include="WDamageFont.cpp">
-      <Filter>Contents\Manager\BattleMgr\DamageFont</Filter>
-    </ClCompile>
     <ClCompile Include="WEventManager.cpp">
       <Filter>Contents\Manager\EventManager</Filter>
     </ClCompile>
@@ -1342,9 +889,6 @@
     </ClCompile>
     <ClCompile Include="WItemObject.cpp">
       <Filter>Contents\Object\itemobj</Filter>
-    </ClCompile>
-    <ClCompile Include="WItemManager.cpp">
-      <Filter>Contents\Manager\ItemManager</Filter>
     </ClCompile>
     <ClCompile Include="WItemScript.cpp">
       <Filter>Contents\Object\itemobj</Filter>
@@ -1451,18 +995,6 @@
     <ClCompile Include="WStop.cpp">
       <Filter>Contents\Object\Abnormal\Stop</Filter>
     </ClCompile>
-    <ClCompile Include="WBossUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\bossUI</Filter>
-    </ClCompile>
-    <ClCompile Include="WBossTex.cpp">
-      <Filter>Contents\UI\Interface\Extra\bossUI\monsterTex</Filter>
-    </ClCompile>
-    <ClCompile Include="WBossEnterUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\bossUI\SceneEnter</Filter>
-    </ClCompile>
-    <ClCompile Include="WMonsterUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\bossUI\monsterUI</Filter>
-    </ClCompile>
     <ClCompile Include="WDemianScene.cpp">
       <Filter>Contents\Scene\Demian</Filter>
     </ClCompile>
@@ -1532,36 +1064,6 @@
     <ClCompile Include="WStigmaCount.cpp">
       <Filter>Contents\Object\BossMonster\Demian</Filter>
     </ClCompile>
-    <ClCompile Include="WBottom_40.cpp">
-      <Filter>Contents\UI\Equip\Equip_40</Filter>
-    </ClCompile>
-    <ClCompile Include="WHat_40.cpp">
-      <Filter>Contents\UI\Equip\Equip_40</Filter>
-    </ClCompile>
-    <ClCompile Include="WWeapon_25.cpp">
-      <Filter>Contents\UI\Equip\Equip_40</Filter>
-    </ClCompile>
-    <ClCompile Include="WTop_40.cpp">
-      <Filter>Contents\UI\Equip\Equip_40</Filter>
-    </ClCompile>
-    <ClCompile Include="WBottom_80.cpp">
-      <Filter>Contents\UI\Equip\Equip_80</Filter>
-    </ClCompile>
-    <ClCompile Include="WTop_80.cpp">
-      <Filter>Contents\UI\Equip\Equip_80</Filter>
-    </ClCompile>
-    <ClCompile Include="WHat_80.cpp">
-      <Filter>Contents\UI\Equip\Equip_80</Filter>
-    </ClCompile>
-    <ClCompile Include="WWeapon_63.cpp">
-      <Filter>Contents\UI\Equip\Equip_80</Filter>
-    </ClCompile>
-    <ClCompile Include="WShoes_40.cpp">
-      <Filter>Contents\UI\Equip\Equip_40</Filter>
-    </ClCompile>
-    <ClCompile Include="WShoes_80.cpp">
-      <Filter>Contents\UI\Equip\Equip_80</Filter>
-    </ClCompile>
     <ClCompile Include="WUltimateSkill.cpp">
       <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
     </ClCompile>
@@ -1579,18 +1081,6 @@
     </ClCompile>
     <ClCompile Include="WUltimateObject.cpp">
       <Filter>Contents\Player\PlayerSkill\SkillState\ultimate</Filter>
-    </ClCompile>
-    <ClCompile Include="WHairItem.cpp">
-      <Filter>Contents\UI\cashitem</Filter>
-    </ClCompile>
-    <ClCompile Include="WSKillNumber6.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\1\SkillNumber6</Filter>
-    </ClCompile>
-    <ClCompile Include="WSkillUltimateUI.cpp">
-      <Filter>Contents\UI\Interface\Extra\Skill\1\SkillNumber6</Filter>
-    </ClCompile>
-    <ClCompile Include="WEyeItem.cpp">
-      <Filter>Contents\UI\cashitem</Filter>
     </ClCompile>
     <ClCompile Include="WPlayerDead.cpp">
       <Filter>Contents\Player\PlayerFSM\PlayerDead</Filter>
@@ -1627,113 +1117,11 @@
     <Filter Include="Contents\Scene\Move">
       <UniqueIdentifier>{a1327966-6d29-4c7b-9c87-e9b64670578b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\UI">
-      <UniqueIdentifier>{923d25ad-6dfc-4388-9627-2cdef72811db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface">
-      <UniqueIdentifier>{88744d0b-0e0a-4b42-8f50-5638699784ba}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Channle">
-      <UniqueIdentifier>{68d047e0-eaad-40c1-b5e3-cc4a149b4856}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\System">
-      <UniqueIdentifier>{5520e8df-d8a6-4d6d-b86c-73b68633cf88}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Shop">
-      <UniqueIdentifier>{ccc61f3b-6936-46f4-b6b9-8bd4846204cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Star">
-      <UniqueIdentifier>{51a6b7d5-d4d1-479a-8456-60a5a4da8fa7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Menu">
-      <UniqueIdentifier>{370d0dec-79f0-48be-9417-a6ab001fa59f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra">
-      <UniqueIdentifier>{fd3670e0-ed09-482c-8db8-cdbd824fe2b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\Skill">
-      <UniqueIdentifier>{b14b477c-decd-4ef3-aea8-25d400789cef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\Quest">
-      <UniqueIdentifier>{4ee4eece-175a-4dfa-9ec6-ead2a35496f9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\Inven">
-      <UniqueIdentifier>{bdddee6e-ed3d-4969-b89a-26401601a2bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\Stat">
-      <UniqueIdentifier>{cb03f8bf-0372-468a-91d9-58aa1978846d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\Equip">
-      <UniqueIdentifier>{b04d6b4b-1f40-4f72-ae9f-aa564e7d4a21}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\Char">
-      <UniqueIdentifier>{f064c1ff-f82a-4523-b2e8-facce364f55b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Level">
-      <UniqueIdentifier>{0ab7a315-1a4d-43b6-a756-079506b6707c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Gauge">
-      <UniqueIdentifier>{00b29464-04a4-4845-98c0-a895b60071d7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Gauge\HP">
-      <UniqueIdentifier>{810dacef-827c-4a2d-a92f-12b3b17e6bfd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Gauge\MP">
-      <UniqueIdentifier>{8deb13e5-1132-43fb-9a1f-c7f55a10b77f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Gauge\EXP">
-      <UniqueIdentifier>{57b11561-8a84-47cf-8bd3-17033a4aa72f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Item">
       <UniqueIdentifier>{ec43df9d-b9c0-4da4-90bb-b685a6f85b76}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\UI\ItemUI">
-      <UniqueIdentifier>{64f531d4-5c81-48e0-96c0-49b7c3651a6e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\ItemUI\Potion">
-      <UniqueIdentifier>{89b91c99-324a-42c2-a53b-30ab2461e60f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\Skill\1">
-      <UniqueIdentifier>{3019af27-fac1-4b21-a1fe-5a3bb2676695}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\Skill\2">
-      <UniqueIdentifier>{a7f4658f-296f-46a6-b40b-2fe06a69dd6c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\Skill\3">
-      <UniqueIdentifier>{d3056b9d-a33b-46ae-b053-8220d62ec530}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\Skill\4">
-      <UniqueIdentifier>{f49a63dd-ed21-48ab-9827-fc0afe4cdb15}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\Skill\5">
-      <UniqueIdentifier>{32bcabcf-4fcc-4c2d-ab24-599d3b845cb1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\Skill\SkillStorage">
-      <UniqueIdentifier>{0ffaf433-ba65-40fd-adba-a3dc75d9db1f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\Skill\1\SkillNumber1">
-      <UniqueIdentifier>{a26a92e4-d1ca-4bc1-9b0a-dce9350a0d8e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Equip">
-      <UniqueIdentifier>{7e5125b5-cf62-4aef-b78c-a31f37a52593}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Player">
       <UniqueIdentifier>{3fce86ef-f16b-4886-8744-59a564b8f047}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\Inven\InvenPage">
-      <UniqueIdentifier>{5c1cc198-78d6-4f81-b16d-6447f4faa905}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Number">
-      <UniqueIdentifier>{5614389c-3d37-4dbe-9c68-ab41ba4714c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Equip\Equip_10">
-      <UniqueIdentifier>{04ff3521-3a94-4eb4-acf9-1d55b8b0ba79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Equip\Equip_40">
-      <UniqueIdentifier>{c434cb2e-2905-49eb-97d4-25bc384acca0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Equip\Equip_80">
-      <UniqueIdentifier>{17e0d300-09b1-47a6-b7f6-da44a595b096}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Object">
       <UniqueIdentifier>{1e18e2e9-1c86-48a0-bc29-861fe2be18aa}</UniqueIdentifier>
@@ -1749,12 +1137,6 @@
     </Filter>
     <Filter Include="Contents\Scene\Start">
       <UniqueIdentifier>{1ea4504f-a69f-479c-9171-af27f9829182}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Button">
-      <UniqueIdentifier>{0fc69002-b9f7-4e1a-9710-01b477991026}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\StartUI">
-      <UniqueIdentifier>{d224f379-3b5c-4826-9e8d-f2e77ec0cd34}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Player\Equip">
       <UniqueIdentifier>{ba4e9b0f-259b-4735-b0cb-ac4672e76a13}</UniqueIdentifier>
@@ -1899,9 +1281,6 @@
     </Filter>
     <Filter Include="Contents\Manager\BattleMgr">
       <UniqueIdentifier>{a0661a59-9d4f-46b2-8a33-3381df63e7d3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Manager\BattleMgr\DamageFont">
-      <UniqueIdentifier>{e1fd993f-0539-4ac5-b9db-44da543fce22}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Manager\EventManager">
       <UniqueIdentifier>{80a7d4f2-2389-4f13-9587-ff0c0f0f3479}</UniqueIdentifier>
@@ -2065,21 +1444,6 @@
     <Filter Include="Contents\Object\Abnormal\Stop">
       <UniqueIdentifier>{924e8adf-1b15-4ea0-8443-bd38769250f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\bossUI">
-      <UniqueIdentifier>{5a4c252c-7f32-452a-9436-a83090912b91}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\bossUI\extra">
-      <UniqueIdentifier>{a52fd706-24ef-4a5a-b30f-786001d549ac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\bossUI\monsterUI">
-      <UniqueIdentifier>{41706f2b-5947-4235-a7cb-ce2a20616c28}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\bossUI\monsterTex">
-      <UniqueIdentifier>{243c7dac-ae15-41d6-9781-14b9c86fefd8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\bossUI\SceneEnter">
-      <UniqueIdentifier>{bb4261a6-ef5b-49a7-a12f-490161d11a47}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Scene\Demian">
       <UniqueIdentifier>{9fc9b9e3-8682-4cf6-9838-b604ef7592a4}</UniqueIdentifier>
     </Filter>
@@ -2109,12 +1473,6 @@
     </Filter>
     <Filter Include="Contents\Player\PlayerSkill\SkillState\ultimate">
       <UniqueIdentifier>{6bce2403-cb21-433c-8d66-e1896e616830}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\Interface\Extra\Skill\1\SkillNumber6">
-      <UniqueIdentifier>{d2ca57b5-7d46-4fc2-a810-735005f09911}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\UI\cashitem">
-      <UniqueIdentifier>{546511eb-c1b6-4b41-8fa6-1da9912618da}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Player\PlayerFSM\PlayerDead">
       <UniqueIdentifier>{cee7a89f-de8c-4d80-9112-8dd1fe3953dc}</UniqueIdentifier>

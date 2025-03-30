@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Engine.h"
-#include "WGraphicDevice_Dx11.h"
+
 namespace W
 {
 	using namespace W::math;
@@ -57,8 +57,8 @@ namespace W
 
 		static void Initialize();
 		static void Update();
-		static void Render(HDC hdc);
-		
+
+
 		inline static eKeyState GetKeyState(eKeyCode keyCode)
 		{
 			return m_vecKeys[(UINT)keyCode].state;
@@ -83,11 +83,10 @@ namespace W
 			return m_vecKeys[static_cast<UINT>(keyCode)].state == eKeyState::Up;
 		}
 
-		static __forceinline Vector2 GetMousePos() { return m_vMousePos; }
-
+		
 	private:
 		static std::vector<Key> m_vecKeys;
-		static Vector2 m_vMousePos;
+		
 	};
 
 }

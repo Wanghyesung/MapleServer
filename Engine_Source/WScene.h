@@ -2,8 +2,7 @@
 
 #include "WEntity.h"
 #include "WLayer.h"
-#include "WGraphicDevice_Dx11.h"
-#include "WAudioSource.h"
+
 namespace W
 {
 	class Scene : public Entity
@@ -30,7 +29,7 @@ namespace W
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
-		//virtual void Render();
+		
 		virtual void Destroy();
 
 		virtual void OnEnter();
@@ -38,12 +37,8 @@ namespace W
 
 		virtual void CreateBackground() {};
 
-		virtual void StartSound() {};
-		virtual void EndSound() {};
-
 		void AddGameObject(eLayerType _eType, GameObject* _pGameObj);
-		void DeleteMonsterObject();
-
+	
 		template <typename T>
 		std::vector<T*> FindObjectsOfType()
 		{
@@ -80,10 +75,7 @@ namespace W
 
 		void EraseObject(eLayerType _eType, GameObject* _pGameObj){ m_vecLayer[(UINT)_eType].EraseOnVector(_pGameObj); }
 
-		
-	protected:
-		//맵 나갈 때, 맵 들어올 때 리소스 삭제, 할당
-		std::vector<std::pair<std::wstring, std::wstring>> m_vecResource;
+	
 
 	private:
 		std::vector<Layer> m_vecLayer;
@@ -91,11 +83,6 @@ namespace W
 		tMapSize m_tMapSize;
 		tMapPossibleSize m_tPossibleSize;
 
-		class InterfaceUI* m_pInterface;
-		class Inventory* m_pInventory;
-		class SKillStorage* m_pSKillStorage;
-		class Stat* pStat;
-		class EquipState* pEquipState;
 	};
 }
 

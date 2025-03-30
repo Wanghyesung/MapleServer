@@ -1,5 +1,4 @@
 #include "WMonster.h"
-#include "WRenderer.h"
 #include "WSceneManger.h"
 #include "WCollisionManager.h"
 #include "WObjectPoolManager.h"
@@ -17,21 +16,7 @@ namespace W
 	}
 	Monster::~Monster()
 	{
-		//std::map < std::wstring, std::queue<MonsterAttackObject*>>::iterator iter =
-		//	m_mapAttackObjs.begin();
-		//
-		//for (iter; iter != m_mapAttackObjs.end(); ++iter)
-		//{
-		//	std::queue< MonsterAttackObject*> queue = iter->second;
-		//	while (!queue.empty())
-		//	{
-		//		MonsterAttackObject* pObj =  queue.front();
-		//		delete pObj;
-		//		pObj = nullptr;
-		//		queue.pop();
-		//	}
-		//
-		//}
+		
 	}
 	void Monster::Initialize()
 	{
@@ -50,22 +35,6 @@ namespace W
 			return;
 		GameObject::LateUpdate();
 	}
-
-	//void Monster::Render()
-	//{
-	//	//if (m_bDead)
-	//	//	return;
-	//	//
-	//	//renderer::MonsterCB MonsterCB;
-	//	//MonsterCB.vMonsterDir.x = m_iDir * -1;
-	//	//
-	//	//ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Monster];
-	//	////Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
-	//	//pConstBuffer->SetData(&MonsterCB);
-	//	//pConstBuffer->Bind(eShaderStage::PS);
-	//	//
-	//	//GameObject::Render();
-	//}
 
 	void Monster::SetItem(const std::vector<std::wstring>& _vecItemNames)
 	{

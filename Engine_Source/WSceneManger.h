@@ -1,7 +1,7 @@
 #pragma once
 
 #include "WScene.h"
-#include "WUI.h"
+
 
 namespace W
 {
@@ -33,47 +33,16 @@ namespace W
 			return true;
 		}
 		static Scene* GetActiveScene() { return m_pActiveScene; }
+		static std::vector<Scene*> GetPlayerScene();
 		static Scene* LoadScene(std::wstring _strName);
 
 		//여기서 서버가 클라에게 패킷 전달
 		static void AddGameObject(eLayerType _eType, GameObject* _pGameObj);
 		static GameObject* FindPlayer();
 
-		template <typename T>
-		static T* GetUI()
-		{
-			std::vector<UI*> vecUI = m_pActiveScene->FindObjectsOfType<UI>();
-			for (UI* pUI : vecUI)
-			{
-				std::queue<UI*> queue;
-
-				queue.push(pUI);
-
-				while (!queue.empty())
-				{
-					UI* pTarget = queue.front();
-					queue.pop();
-
-					T* pTargetUI = dynamic_cast<T*>(pTarget);
-					if (pTargetUI != nullptr)
-						return pTargetUI;
-					else
-					{
-						std::vector<UI*> vecChildUI = pTarget->GetChildUI();
-						for (UI* pChildUI : vecChildUI)
-						{
-							queue.push(pChildUI);
-						}
-					}
-				}
-			}
-			return nullptr;
-		}
 
 		static void SwapObject(Scene* _pPrevScene, Scene* _pNextScene, GameObject* _pGameObject);
-		static void SwapUI(Scene* _pPrevScene, Scene* _pNextScene);
 		static void SwapPlayer(Scene* _pPrevScene, Scene* _pNextScene);
-		static void SwapCamera();
 		static void PushObjectPool(Scene* _pPrevScene);
 		static void AddPlayerScene(const std::wstring& _strScene);
 

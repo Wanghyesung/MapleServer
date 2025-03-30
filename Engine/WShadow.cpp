@@ -1,7 +1,6 @@
 #include "WShadow.h"
 #include "WResources.h"
 #include "WAnimator.h"
-#include "WRenderer.h"
 #include "WPlayer.h"
 #include "WPlayerScript.h"
 #include "WTime.h"
@@ -19,17 +18,6 @@ namespace W
 		m_bOff(false),
 		m_strCurAnim{}
 	{
-		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
-		//
-		//Resources::Insert(L"Shadow_Mater", pMater);
-		//
-		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//pRenderer->SetMaterial(pMater);
-		//
-		//std::shared_ptr<Texture> pAtlas =
-		//	Resources::Load<Texture>(L"shadowTex", L"..\\Resources\\Texture\\Player\\skill\\shadow\\shadow.png");
 		Animator* pAnimator = AddComponent<Animator>();
 		pAnimator->Create(L"_alert_left", Vector2(0.0f, 0.0f), Vector2(150.0f, 150.0f), 3, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
 		pAnimator->Create(L"_jump_left", Vector2(0.0f, 150.0f), Vector2(150.0f, 150.0f), 1, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
@@ -143,25 +131,6 @@ namespace W
 		GameObject::LateUpdate();
 	}
 
-	//void Shadow::Render()
-	//{
-	//	//if (!m_bActive)
-	//	//	return;
-	//	//
-	//	//renderer::ObjectCB ObjectCB;
-	//	//int iDir = m_pOwner->GetDir() * -1;
-	//	//if (m_bOff)
-	//	//	iDir = 1;
-	//	//ObjectCB.vObjectDir.x = iDir;
-	//	//ObjectCB.vObjectColor = Vector4::One;
-	//	//
-	//	//ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Object];
-	//	////Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
-	//	//pConstBuffer->SetData(&ObjectCB);
-	//	//pConstBuffer->Bind(eShaderStage::PS);
-	//	//
-	//	//GameObject::Render();
-	//}
 	void Shadow::update_attack()
 	{
 		m_fCurAttackTime += Time::DeltaTime();

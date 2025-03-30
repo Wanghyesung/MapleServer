@@ -1,33 +1,26 @@
 #include "WValleyScene.h"
 #include "WResources.h"
-#include "WShader.h"
+
 #include "WGameObject.h"
-#include "WMesh.h"
-#include "WMaterial.h"
-#include "WMeshRenderer.h"
+
 #include "WTransform.h"
 #include "WInput.h"
 #include "WSceneManger.h"
-#include "WCamera.h"
 #include "WCameraScript.h"
 #include "WLadder.h"
 #include "WNPC.h"
 #include "WCage.h"
-#include "WInterfaceUI.h"
-#include "WEquipState.h"
-#include "WAlixirUI.h"
+
 #include "WPlayer.h"
 #include "WObject.h"
-#include "WRenderer.h"
+
 #include "WGround.h"
 #include "WCollisionManager.h"
 #include "WTexture.h"
 #include "WSkelegon.h"
 #include "WPortal.h"
 #include "WPortalScript.h"
-#include "WBossUI.h"
-#include "WAudioClip.h"
-#include "WAudioSource.h"
+
 namespace W
 {
 	ValleyScene::ValleyScene()
@@ -57,28 +50,28 @@ namespace W
 		pNPC->GetComponent<Transform>()->SetPosition(2.5f, 7.5f, -0.2f);
 		pNPC->GetComponent<Transform>()->SetScale(0.761f, 1.f, 0.f);
 		
-		{
-			GameObject* pCamera = new GameObject();
-			pCamera->SetName(L"ObjCam");
-			AddGameObject(eLayerType::Camera, pCamera);
-			pCamera->GetComponent<Transform>()->SetPosition(Vector3(0.f, 0.f, -10.f));
-			Camera* pCameraComp = pCamera->AddComponent<Camera>();
-			pCameraComp->TurnLayerMask(eLayerType::UI, false);
-			CameraScript* pCameraScript = pCamera->AddComponent<CameraScript>();
-			renderer::MainCamera = pCameraComp;
-			pCameraScript->SetPlayer(pPlayer);
-		}
+		//{
+		//	GameObject* pCamera = new GameObject();
+		//	pCamera->SetName(L"ObjCam");
+		//	AddGameObject(eLayerType::Camera, pCamera);
+		//	pCamera->GetComponent<Transform>()->SetPosition(Vector3(0.f, 0.f, -10.f));
+		//	Camera* pCameraComp = pCamera->AddComponent<Camera>();
+		//	pCameraComp->TurnLayerMask(eLayerType::UI, false);
+		//	CameraScript* pCameraScript = pCamera->AddComponent<CameraScript>();
+		//	renderer::MainCamera = pCameraComp;
+		//	pCameraScript->SetPlayer(pPlayer);
+		//}
 
-		//ui camera
-		{
-			GameObject* pUICamera = new GameObject();
-			pUICamera->SetName(L"UICam");
-			AddGameObject(eLayerType::Camera, pUICamera);
-			pUICamera->GetComponent<Transform>()->SetPosition(Vector3(0.f, 0.f, -10.f));
-			Camera* pCameraComp = pUICamera->AddComponent<Camera>();
-			pCameraComp->TurnUILayerMask();//UI만 그리게
-			renderer::UICamera = pCameraComp;
-		}
+		////ui camera
+		//{
+		//	GameObject* pUICamera = new GameObject();
+		//	pUICamera->SetName(L"UICam");
+		//	AddGameObject(eLayerType::Camera, pUICamera);
+		//	pUICamera->GetComponent<Transform>()->SetPosition(Vector3(0.f, 0.f, -10.f));
+		//	Camera* pCameraComp = pUICamera->AddComponent<Camera>();
+		//	pCameraComp->TurnUILayerMask();//UI만 그리게
+		//	renderer::UICamera = pCameraComp;
+		//}
 	}
 	void ValleyScene::Update()
 	{
@@ -116,19 +109,6 @@ namespace W
 		pBackGround->GetComponent<Transform>()->SetScale(25 * 0.35f,  25.f * 1.f, 1.f);
 	}
 
-	void ValleyScene::StartSound()
-	{
-		const std::vector<GameObject*> m_vecBackGround = GetLayer(eLayerType::Background).GetGameObjects();
-		AudioSource* pAudio = m_vecBackGround[0]->GetComponent<AudioSource>();
-		pAudio->Play();
-	}
-
-	void ValleyScene::EndSound()
-	{
-		const std::vector<GameObject*> m_vecBackGround = GetLayer(eLayerType::Background).GetGameObjects();
-		AudioSource* pAudio = m_vecBackGround[0]->GetComponent<AudioSource>();
-		pAudio->Stop();
-	}
 
 	void ValleyScene::setobject()
 	{
@@ -196,10 +176,7 @@ namespace W
 	{
 		Skelegon* pSkelegon = object::Instantiate<Skelegon>(Vector3(3.f, 1.2f, -1.5f), eLayerType::Monster);
 		pSkelegon->Initialize();
-		//Light* lightComp = pSkelegon->AddComponent<Light>();
-		//lightComp->SetType(eLightType::FadeOut);
-		//lightComp->SetColor(Vector4(0.8f, 0.8f, 0.8f, 0.0f));
-		//lightComp->SetRadius(2.0f);
+		
 
 	}
 }

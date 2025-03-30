@@ -13,8 +13,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//virtual void Render()override;
-
+		
 		void SetClear(bool _bClear);
 		void SetOwner(InputBackground* _pOwner) { m_pOwner = _pOwner; }
 		void SetIndex(UINT _iIndex) { m_iIndex = _iIndex; }

@@ -1,10 +1,9 @@
 #include "WItemScript.h"
 #include "WInput.h"
 #include "WGameObject.h"
-#include "WItemManager.h"
-#include "WIconUI.h"
+
 #include "WSceneManger.h"
-#include "WInventory.h"
+
 #include "WObject.h"
 #include "WItemObject.h"
 #include "WRigidbody.h"

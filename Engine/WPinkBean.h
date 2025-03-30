@@ -22,8 +22,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//virtual void Render()override;
-
+		
 		bool IsStart() { return m_bStart; }
 	private:
 		void update_HP();

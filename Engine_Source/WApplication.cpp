@@ -2,15 +2,13 @@
 
 #include "WTime.h"
 #include "WInput.h"
-#include "WRenderer.h"
+
 #include "WSceneManger.h"
-#include "UIManger.h"
 #include "WCollisionManager.h"
 #include "..\Engine\WSkillManager.h"
 #include "..\Engine\WBattleManager.h"
 #include "..\Engine\WEventManager.h"
 #include "..\Engine\WMonsterManager.h"
-#include "..\Engine\WItemManager.h"
 #include "..\Engine_Source\WThreadPool.h"
 #include "WFmod.h"
 #include "WFontWrapper.h"
@@ -38,7 +36,6 @@ namespace W
 		
 		EventManager::Update();
 		Destroy();
-		UIManger::ReleaseChildUI();
 	}
 
 
@@ -50,7 +47,6 @@ namespace W
 		
 
 		BattleManager::Initialize();
-		ItemManager::Initialize();
 	}
 
 	void Application::Update()
@@ -61,7 +57,6 @@ namespace W
 		CollisionManager::Update();
 		SceneManger::Update();
 		BattleManager::Update();
-		UIManger::Update();
 		MonsterManager::Update();
 		
 	}

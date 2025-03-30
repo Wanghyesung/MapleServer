@@ -14,8 +14,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//virtual void Render()override;
-
+		
 		int GetDir() { return m_iDir; }
 		void SetDir(int _iDir);
 

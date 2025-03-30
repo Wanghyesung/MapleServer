@@ -7,7 +7,6 @@
 #include "WPlayerScript.h"
 #include "WTime.h"
 #include "WAnimator.h"
-#include "WRenderer.h"
 #include "WObject.h"
 namespace W
 {
@@ -52,11 +51,7 @@ namespace W
 	{
 		GameObject::LateUpdate();
 	}
-	//void DemianEntireAttack::Render()
-	//{
-	//	GameObject::Render();
-	//}
-
+	
 	void DemianEntireAttack::Restore()
 	{
 		EventManager::Restore(m_pTarget, BattleManager::eAbnormalType::DemianStop);

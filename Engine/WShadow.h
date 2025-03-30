@@ -14,8 +14,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//virtual void Render()override;
-
+	
 		void Set_Attack(std::function<void()> _pFunc, float _fTime = 0.1f)
 		{
 			m_pFuncAttack = std::move(_pFunc);

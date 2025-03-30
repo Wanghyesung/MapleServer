@@ -15,7 +15,6 @@ namespace W::enums
 		Animator,
 		Script,
 		Light,
-		Camera,
 		AudioListener,
 		AudioSource,
 		End,
@@ -24,7 +23,6 @@ namespace W::enums
 	enum class eLayerType
 	{
 		Default,
-		Camera,
 		Grid,
 		Background,
 		Player,
@@ -45,14 +43,8 @@ namespace W::enums
 	};
 
 	enum class eResourceType
-	{
-		Texture,
-		Shader,
-		Material,
-		Mesh,
+	{	
 		Animation,
-		ComputeShader,
-		AudioClip,
 		End,
 	};
 

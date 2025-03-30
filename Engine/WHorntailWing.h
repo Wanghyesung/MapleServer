@@ -13,8 +13,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//virtual void Render()override;
-
+		
 
 		void SetHeal(std::function<void()> _pFunc){ m_pHealFunc = std::move(_pFunc); }
 	private:

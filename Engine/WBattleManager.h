@@ -1,5 +1,4 @@
 #pragma once
-#include "WDamageFont.h"
 #include "WAbnormal.h"
 #include "WInfo.h"
 #include "WEffect.h"
@@ -62,7 +61,6 @@ namespace W
 		static void Release();
 		static void Update();
 		static void CheckDamage(tObjectInfo& _tObjectInfo, const tAttackInfo& _tAttackInfo, const std::wstring _strName, Vector3 _vPosition);
-		static void PushFont(DamageFont* _pDamageFont);
 		
 		static UINT GetMaxDamage() { return m_iMaxDamage; }
 		static UINT GetStigmaCount() { return m_iStigmaCount; }
@@ -79,10 +77,6 @@ namespace W
 		static void Player_DeBuff_Attack(GameObject* _pTarget, eUpStatType _eType, float _fAccStat);
 
 	private:
-		static void render_damage(std::queue<DamageFont*> _queueFonts, UINT _iDamageCount, const std::wstring& _strName);
-		static void erase_damage(const std::wstring& _strName);
-		static tDamageCount& add_damage(UINT _iDamageCount, const std::wstring& _strName);
-
 
 		static void dark(GameObject* _pGameObject);
 		static void stop(GameObject* _pGameObject);
@@ -114,8 +108,6 @@ namespace W
 		static void buff_MP(GameObject* _pTarget, float _fAccValue);
 
 	private:
-		static std::queue<DamageFont*> m_queueFonts;
-		static std::map<std::wstring, tDamageCount> m_mapDamage;
 		static UINT m_iMaxDamage;
 
 		static std::map<std::wstring, std::queue<Effect*>> m_mapEffects;

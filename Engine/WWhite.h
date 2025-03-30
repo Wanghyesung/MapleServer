@@ -14,8 +14,7 @@ namespace W
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
-		//virtual void Render();
-
+		
 		void SetFunction(std::function<void()> _func) { m_pCompleteEvent = std::move(_func); }
 		void SetEndTime(float _fTime) { m_fEndTime = _fTime; }
 	private:

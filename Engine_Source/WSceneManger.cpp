@@ -1,6 +1,5 @@
 #include "WSceneManger.h"
-#include "WCamera.h"
-#include "WRenderer.h"
+
 #include "WRigidbody.h"
 //#include "WPlayScene.h"
 //#include "WLeafreScene.h"
@@ -11,9 +10,9 @@
 //#include "WTempleScene_2.h"
 //#include "WTempleBossScene.h"
 #include "..\Engine\WCameraScript.h"
-#include "..\Engine\WBossUI.h"
+
 #include "..\Engine\WBattleManager.h"
-#include "..\Engine\WItemManager.h"
+
 #include "..\Engine\WPlayerAttackObject.h"
 #include "..\Engine\WObjectPoolManager.h"
 #include "..\Engine\WMonsterManager.h"
@@ -25,30 +24,7 @@ namespace W
 	std::map<std::wstring, Scene*> SceneManger::m_mapScene = {};
 	void SceneManger::Initialize()
 	{
-		//m_pActiveScene = nullptr;
-		//PlayScene* pPlayScene = new PlayScene();
-		//m_mapScene.insert(std::make_pair(L"PlayScene", pPlayScene));
-		//LeafreScene* pLeaf  = new LeafreScene();
-		//m_mapScene.insert(std::make_pair(L"Leafre", pLeaf));
-		//ValleyScene* pValleyScene = new ValleyScene();
-		//m_mapScene.insert(std::make_pair(L"Valley", pValleyScene));
-		//ValleyScene_2* pValleyScene2 = new ValleyScene_2();
-		//m_mapScene.insert(std::make_pair(L"Valley2", pValleyScene2));
-		//CaveScene* pCaveSene = new CaveScene();
-		//m_mapScene.insert(std::make_pair(L"Cave", pCaveSene));
-		//TempleScene* pTemple = new TempleScene();
-		//m_mapScene.insert(std::make_pair(L"Temple", pTemple));
-		//TempleScene_2* pTemple2 = new TempleScene_2();
-		//m_mapScene.insert(std::make_pair(L"Temple2", pTemple2));
-		//TempleBossScene* pTempleBoss = new TempleBossScene();
-		//m_mapScene.insert(std::make_pair(L"TempleBoss", pTempleBoss));
-		//
-		//m_pActiveScene = pLeaf;
-		//
-		//for (auto iter : m_mapScene)
-		//{
-		//	iter.second->Initialize();
-		//}
+		
 
 	}
 	void SceneManger::Update()
@@ -79,16 +55,25 @@ namespace W
 			iter.second = nullptr;
 		}
 
-		MonsterManager::DeleteMonster();
 		ObjectPoolManager::Release();
 		BattleManager::Release();
-		ItemManager::Release();
 	}
 
 	void SceneManger::Erase(GameObject* _pGameObject)
 	{
 		m_pActiveScene->EraseObject(_pGameObject->GetLayerType(),_pGameObject);
 	}
+
+	std::vector<Scene*> SceneManger::GetPlayerScene()
+	{
+		std::vector<Scene*> vecPlayerScene;
+		for (int i = 0; i < m_vecPlayerScene.size(); ++i)
+		{
+			vecPlayerScene.push_back(m_mapScene.find(m_vecPlayerScene[i])->second);
+		}
+		return vecPlayerScene;
+	}
+
 	Scene* SceneManger::LoadScene(std::wstring _strName)
 	{
 		std::map<std::wstring, Scene*>::iterator iter =
@@ -99,7 +84,7 @@ namespace W
 
 
 		PushObjectPool(m_pActiveScene);//현재 씬 공격 오브젝트 회수
-		//SwapUI(m_pActiveScene, iter->second);
+		
 		SwapPlayer(m_pActiveScene, iter->second);
 
 		m_pActiveScene->OnExit();
@@ -132,15 +117,6 @@ namespace W
 		_pNextScene->AddGameObject(eType, _pGameObject);
 	}
 
-	void SceneManger::SwapUI(Scene* _pPrevScene, Scene* _pNextScene)
-	{
-		SwapObject(_pPrevScene, _pNextScene, (GameObject*)GetUI<class InterfaceUI>());
-		SwapObject(_pPrevScene, _pNextScene, (GameObject*)GetUI<class Inventory>());
-		SwapObject(_pPrevScene, _pNextScene, (GameObject*)GetUI<class Stat>());
-		SwapObject(_pPrevScene, _pNextScene, (GameObject*)GetUI<class EquipState>());
-		SwapObject(_pPrevScene, _pNextScene, (GameObject*)GetUI<class SKillStorage>());
-		SwapObject(_pPrevScene, _pNextScene, (GameObject*)GetUI<class BossUI>());
-	}
 
 	void SceneManger::SwapPlayer(Scene* _pPrevScene, Scene* _pNextScene)
 	{
@@ -153,17 +129,6 @@ namespace W
 		SwapObject(_pPrevScene, _pNextScene, pPlayer);
 	}
 
-	void SceneManger::SwapCamera()
-	{
-		std::vector<GameObject*> vecObjs =
-			m_pActiveScene->GetLayer(eLayerType::Camera).GetGameObjects();
-		
-		////1 main , 2 UI
-		//renderer::MainCamera = vecObjs[0]->GetComponent<Camera>();
-		//renderer::UICamera = vecObjs[1]->GetComponent<Camera>();
-
-		vecObjs[0]->GetScript<CameraScript>()->SetPlayer(FindPlayer());
-	}
 
 	void SceneManger::PushObjectPool(Scene* _pPrevScene)
 	{

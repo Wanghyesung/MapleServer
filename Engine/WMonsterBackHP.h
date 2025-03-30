@@ -14,8 +14,7 @@ namespace W
 		virtual void Initialize() override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//virtual void Render()override;
-
+	
 		void SetHP(MonsterHP* _pHP) { m_pHP = _pHP; }
 	private:
 		MonsterHP* m_pHP;
