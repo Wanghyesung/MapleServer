@@ -7,10 +7,11 @@
 #include "WPlayerScript.h"
 namespace W
 {
-	std::vector<tEvent> EventManager::m_vecEvent = {};
+	std::vector<tEvent> EventManager::m_vecEvent[2] = {};
 	std::vector<GameObject*> EventManager::m_vecPlayer_Pool = {};
 	std::vector<GameObject*> EventManager::m_vecMonster_Pool = {};
 
+	int EventManager::m_iActiveIdx = 1; 
 
 	std::wstring EventManager::m_strNextScene = {};
 #define ObjectPoolPosition 2000.f
@@ -33,17 +34,46 @@ namespace W
 		}
 		m_vecMonster_Pool.clear();
 
-		for (int i = 0; i < m_vecEvent.size(); ++i)
 		{
-			excute(m_vecEvent[i]);
+			std::lock_guard<std::mutex> lock(m_eventMutex);
+			m_iActiveIdx = 1 - m_iActiveIdx;
 		}
-		m_vecEvent.clear();
+
+		std::vector<tEvent>& vecActiveEvent = m_vecEvent[m_iActiveIdx];
+		for (int i = 0; i < vecActiveEvent.size(); ++i)
+		{
+			excute(vecActiveEvent[i]);
+		}
+
+		vecActiveEvent.clear();
+	}
+
+	void EventManager::AddEvent(const tEvent& _tEve)
+	{
+		std::lock_guard<std::mutex> lock(m_eventMutex);
+		m_vecEvent[1 - m_iActiveIdx].push_back(_tEve);
 	}
 	
 	void EventManager::excute(const tEvent& _tEve)
 	{
 		switch (_tEve.eEventType)
 		{
+		case EVENT_TYPE::CREATE_PLAYER:
+		{
+			UINT iPlayerID = (UINT)_tEve.lParm;
+			Player* pPlayer = new Player();
+			pPlayer->Initialize();
+			SceneManger::AddGameObject(eLayerType::Player, pPlayer);
+		}
+
+		case EVENT_TYPE::DELETE_PLAYER:
+		{
+			GameObject* pObj = (GameObject*)_tEve.lParm;
+			SceneManger::Erase(pObj);
+
+			delete pObj;
+		}
+
 		case EVENT_TYPE::CREATE_OBJECT:
 		{
 			GameObject* pObj = (GameObject*)_tEve.lParm;
@@ -78,8 +108,10 @@ namespace W
 		break;
 		case EVENT_TYPE::CHANGE_PLAYER_SKILL:
 		{
-			Player::ePlayerSkill _ePlayerSkill = (Player::ePlayerSkill)_tEve.lParm;
-			SkillManager::SetActiveSkill(_ePlayerSkill);
+			UINT iPlayerID = (UINT)_tEve.lParm;
+			Player::ePlayerSkill _ePlayerSkill = (Player::ePlayerSkill)_tEve.wParm;
+			
+			SkillManager::SetActiveSkill(iPlayerID, _ePlayerSkill);
 		}
 		break;
 
@@ -203,6 +235,24 @@ namespace W
 		}
 	}
 
+	void EventManager::AddPlayer(UINT _iPlayerID)
+	{
+		tEvent eve = {};
+		eve.wParm = (DWORD_PTR)_iPlayerID;
+
+		eve.eEventType = EVENT_TYPE::CREATE_PLAYER;
+		AddEvent(eve);
+	}
+
+	void EventManager::DeletePlayer(GameObject* _pObj)
+	{
+		tEvent eve = {};
+		eve.wParm = (DWORD_PTR)_pObj;
+
+		eve.eEventType = EVENT_TYPE::DELETE_PLAYER;
+		AddEvent(eve);
+	}
+
 	void EventManager::DeleteObject(GameObject* _pObj, Scene* _pScene)
 	{
 		tEvent eve = {};
@@ -264,10 +314,13 @@ namespace W
 
 		AddEvent(eve);
 	}
-	void EventManager::ChangePlayerSkillState(Player::ePlayerSkill _ePlayerSkill)
+	void EventManager::ChangePlayerSkillState(Player* _pObj, Player::ePlayerSkill _ePlayerSkill)
 	{
 		tEvent eve = {};
-		eve.lParm = (DWORD_PTR)_ePlayerSkill;
+		
+		eve.lParm = (DWORD_PTR)_pObj->GetPlayerID();
+		eve.wParm = (DWORD_PTR)_ePlayerSkill;
+		//eve.wParm = (DWORD_PTR)_ePlayerSkill;
 		eve.eEventType = EVENT_TYPE::CHANGE_PLAYER_SKILL;
 		AddEvent(eve);
 	}

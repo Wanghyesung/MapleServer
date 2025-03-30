@@ -1,0 +1,40 @@
+syntax = "proto3";
+package Protocol;
+
+//repeated uint64 victims = 3;
+
+//클라가 서버에게 (이건 UI전용 요청)
+message C_OBJECT
+{
+	string name = 1;
+	string textname = 2;
+	string scene = 3
+	int layer = 4;
+}
+
+//서버가 클라에게 (브로드캐스팅으로 던질거)
+message S_OBJECT
+{
+	string name = 1;
+	string textname = 2;
+	string scene = 3
+	string layer = 4;
+	int id= 5;
+}
+
+message C_DELETE_OBJECT
+{
+	string name = 1;
+	string textname = 2;//material name
+	string scene = 3
+	int layer = 4;
+	int id= 5;
+}
+
+//서버가 클라에게 (브로드캐스팅으로 던질거)
+message S_DELETE_OBJECT
+{
+	string scene = 1;
+	string layer = 2;
+	int id= 3;
+}

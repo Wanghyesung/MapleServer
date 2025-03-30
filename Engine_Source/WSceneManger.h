@@ -35,21 +35,10 @@ namespace W
 		static Scene* GetActiveScene() { return m_pActiveScene; }
 		static Scene* LoadScene(std::wstring _strName);
 
-		static void AddGameObject(eLayerType _eType, GameObject* _pGameObj){ m_pActiveScene->AddGameObject(_eType, _pGameObj);}
+		//여기서 서버가 클라에게 패킷 전달
+		static void AddGameObject(eLayerType _eType, GameObject* _pGameObj);
 		static GameObject* FindPlayer();
 
-		//template <typename T>
-		//static T* GetUI()
-		//{
-		//	std::vector<UI*> vecUI = m_pActiveScene->FindObjectsOfType<UI>();
-		//	for (UI* pUI : vecUI)
-		//	{
-		//		T* pTargetUI = dynamic_cast<T*>(pUI);
-		//		if (pTargetUI != nullptr)
-		//			return pTargetUI;
-		//	}
-		//	return nullptr;
-		//}
 		template <typename T>
 		static T* GetUI()
 		{
@@ -86,9 +75,13 @@ namespace W
 		static void SwapPlayer(Scene* _pPrevScene, Scene* _pNextScene);
 		static void SwapCamera();
 		static void PushObjectPool(Scene* _pPrevScene);
+		static void AddPlayerScene(const std::wstring& _strScene);
+
 	private:
+		
 		static Scene* m_pActiveScene;
 		static std::map<std::wstring, Scene*> m_mapScene;
+		static std::vector<std::wstring> m_vecPlayerScene;//플레이어가 있는 구간만 업데이트
 	};
 }
 

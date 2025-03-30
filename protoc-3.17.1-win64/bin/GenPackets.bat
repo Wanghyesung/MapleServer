@@ -1,2 +1,3 @@
-protoc.exe -I=./ --cpp_out=./ ./Enter.proto Exit.proto Chatting.proto
+protoc.exe -I=./ --cpp_out=./ ./Enter.proto Exit.proto Collision.proto Equip.proto Input.proto Map.proto ObjectState.proto 
+Trasnform.proto
 IF ERRORLEVEL 1 PAUSE

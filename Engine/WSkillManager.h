@@ -6,31 +6,40 @@
 namespace W
 {
 	class PlayerSkill;
-
+		
+	//그냥 이벤트 매니저에서 후처리로 만들떄 순차적으로 만들기
 	class SkillManager
 	{
 	public:
 		static void Update();
-		static void Initialize();
-		static void Release();
+		static void InitPlayerSkill(UINT _iPlayerID, PlayerSkill* _pSkill);
+		static void InitPlayer();
+		static void DeletePlayer();
+		static void Release(UINT _iPlayerID);
 
-		static void AddSkill(SkillState* _pSkill);
-		static void SetPlayerSkill(PlayerSkill* _pSkill){ m_pPlayerSkill = _pSkill;}
-		static void SetActiveSkill(Player::ePlayerSkill _eSkill);
-		static SkillState* FindSkillState(Player::ePlayerSkill _eSkill);
-
-		static void AccAttack(math::Vector3 _vPosition);
+		static void AddSkill(UINT _iPlayerID, SkillState* _pSkill);
+		
+		static void SetActiveSkill(UINT _iPlayerID, Player::ePlayerSkill _eSkill);
+		static SkillState* FindSkillState(UINT _iPlayerID, Player::ePlayerSkill _eSkill);
+		static std::map<Player::ePlayerSkill, SkillState*>& GetPlayerSkill(UINT _iPlayerID);
+		static void AccAttack(UINT _iPlayerID, math::Vector3 _vPosition);
 
 	private:
 		static void update_skill();
-		static void set_max(Player::ePlayerSkill _eTarget);
-		static bool check_cooltime(Player::ePlayerSkill _eTarget);
+		static void set_max(UINT _iPlayerID, Player::ePlayerSkill _eTarget);
+		static bool check_cooltime(UINT _iPlayerID, Player::ePlayerSkill _eTarget);
 
 	private:
-		static PlayerSkill* m_pPlayerSkill;
+		
+		//플레이어 ID당 전부 관리
+		static std::vector<PlayerSkill*> m_vecSkill;
+		static std::vector<std::map<Player::ePlayerSkill, SkillState*>> m_vecSkillState;
+		static std::vector<std::map<Player::ePlayerSkill, tSkillTime>> m_vecSkillTime;
 
-		static std::map<Player::ePlayerSkill, SkillState*> m_mapSkills;
-		static std::map<Player::ePlayerSkill, tSkillTime> m_mapSkillTime;
+
+		static std::queue<UINT> m_queueNewPlayer;
+		static std::queue<UINT> m_queueDeletePlayer;
+
 	};
 }
 

@@ -74,7 +74,8 @@ namespace W
 				//추가 공격
 				if (m_iAccAttCount>0)
 				{
-					SkillManager::AccAttack(other->GetPosition());
+					UINT iPlayerID = ((Player*)GetOwner())->GetPlayerID();
+					SkillManager::AccAttack(iPlayerID, other->GetPosition());
 					--m_iAccAttCount;
 				}
 

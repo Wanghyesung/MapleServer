@@ -103,6 +103,10 @@ namespace W
 
 		void SetHair(UINT _iHairNum);
 		void SetEye(UINT _iEyeNum);
+
+		void SetPlayerID(UINT _iPlayerID) { m_iPlayerID = _iPlayerID; }
+		UINT GetPlayerID() { return m_iPlayerID; }
+
 	private:
 		void child_update();
 		//void child_render();
@@ -130,6 +134,7 @@ namespace W
 
 		std::wstring m_strCurStateName;
 
+		UINT m_iPlayerID;
 	};
 }
 
