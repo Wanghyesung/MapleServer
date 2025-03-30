@@ -35,21 +35,23 @@ enum PACKET_TYPE
 	//물체 생성
 	S_PLAYER_STATE = 1008,
 
+	S_MONSTER_STATE = 1009,
+
 	//클라가 서버에게 누른 키값 전달
-	C_PLAYER_INPUT = 1009,
+	C_PLAYER_INPUT = 1010,
 
 	//충돌
-	S_COLLISION = 1010,
+	S_COLLISION = 1011,
 
 	//클라 인벤에서 옷 변경
-	S_EQUIP = 1011,
-	C_EQUIP = 1012,
-	S_NEW_EQUIP = 1012,
+	S_EQUIP = 1012,
+	C_EQUIP = 1013,
+	S_NEW_EQUIP = 1014,
 
 
-	S_EXIT = 1013,
-	C_EXIT = 1014,
-	S_NEW_EXIT = 1015,
+	S_EXIT = 1015,
+	C_EXIT = 1016,
+	S_NEW_EXIT = 1017,
 };
 
 

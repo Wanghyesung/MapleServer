@@ -35,7 +35,8 @@ namespace W
 		SkillManager::Update();
 		Update();
 		LateUpdate();
-		//Render();
+		
+		EventManager::Update();
 		Destroy();
 		UIManger::ReleaseChildUI();
 	}
@@ -46,10 +47,8 @@ namespace W
 		ThreadPool::Initiailize(4);
 		Time::Initiailize();
 		Input::Initialize();
-		//Fmod::Initialize();
-		//FontWrapper::Initialize();
+		
 
-		//renderer::Initialize();
 		BattleManager::Initialize();
 		ItemManager::Initialize();
 	}
@@ -57,14 +56,14 @@ namespace W
 	void Application::Update()
 	{
 		Time::Update();
-		Input::Update();
+		Input::Update();//이거 변경
 
 		CollisionManager::Update();
 		SceneManger::Update();
 		BattleManager::Update();
 		UIManger::Update();
 		MonsterManager::Update();
-		EventManager::Update();
+		
 	}
 
 	void Application::LateUpdate()
@@ -72,43 +71,17 @@ namespace W
 		SceneManger::LateUpdate();
 	}
 
-	//void Application::Render()
-	//{
-	//
-	//	//graphicDevice->Draw();
-	//	graphicDevice->ClearTarget();
-	//	graphicDevice->UpdateViewPort();
-	//	Time::Render();
-	//
-	//	//SceneManger::Render();
-	//	renderer::Render();
-	//	//graphicDevice->Present();
-	//}
 
 	void Application::Destroy()
 	{
 		SceneManger::Destroy();
 	}
 
-	//void Application::Present()
-	//{
-	//	graphicDevice->Present();
-	//}
 
 	void Application::SetWindow(HWND _hHwnd, UINT _iWidth, UINT _iHeight)
 	{
 		//한번만 호출되게
-		//if (graphicDevice == nullptr)
-		//{
-		//	m_hHwnd = _hHwnd;
-		//	m_iWidth = _iWidth;
-		//	m_iHeight = _iHeight;
-		//
-		//	graphicDevice = std::make_unique<W::graphics::GraphicDevice_Dx11>();
-		//	//제일먼저 호출될때 graphicDevice할당
-		//	W::graphics::GetDevice() = graphicDevice.get();
-		//}
-
+		
 		RECT rt = { 0, 0, (LONG)_iWidth , (LONG)_iHeight };
 		AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, false);
 		SetWindowPos(m_hHwnd, nullptr, 0, 0, rt.right - rt.left, rt.bottom - rt.top, 0);

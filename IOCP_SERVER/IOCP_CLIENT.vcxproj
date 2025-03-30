@@ -166,6 +166,17 @@
     <ClCompile Include="ClientPacketHandler.cpp" />
     <ClCompile Include="ClientSession.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\protoc-3.17.1-win64\bin\Collision.proto" />
+    <None Include="..\protoc-3.17.1-win64\bin\Enter.proto" />
+    <None Include="..\protoc-3.17.1-win64\bin\Equip.proto" />
+    <None Include="..\protoc-3.17.1-win64\bin\Exit.proto" />
+    <None Include="..\protoc-3.17.1-win64\bin\Input.proto" />
+    <None Include="..\protoc-3.17.1-win64\bin\Map.proto" />
+    <None Include="..\protoc-3.17.1-win64\bin\ObjectState.proto" />
+    <None Include="..\protoc-3.17.1-win64\bin\Object.proto" />
+    <None Include="..\protoc-3.17.1-win64\bin\Trasnform.proto" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

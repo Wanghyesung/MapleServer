@@ -19,6 +19,8 @@
 #include "..\Engine\WMonsterManager.h"
 namespace W
 {
+	std::vector<std::wstring> SceneManger::m_vecPlayerScene = {};
+
 	Scene* SceneManger::m_pActiveScene = nullptr;
 	std::map<std::wstring, Scene*> SceneManger::m_mapScene = {};
 	void SceneManger::Initialize()
@@ -51,16 +53,18 @@ namespace W
 	}
 	void SceneManger::Update()
 	{
-		m_pActiveScene->Update();
+		for (const std::wstring& strScene : m_vecPlayerScene)
+		{
+			m_mapScene.find(strScene)->second->Update();
+		}
 	}
 	void SceneManger::LateUpdate()
 	{
-		m_pActiveScene->LateUpdate();
+		for (const std::wstring& strScene : m_vecPlayerScene)
+		{
+			m_mapScene.find(strScene)->second->LateUpdate();
+		}
 	}
-	//void SceneManger::Render()
-	//{
-	//	m_pActiveScene->Render();
-	//}
 
 	void SceneManger::Destroy()
 	{
@@ -95,7 +99,7 @@ namespace W
 
 
 		PushObjectPool(m_pActiveScene);//현재 씬 공격 오브젝트 회수
-		SwapUI(m_pActiveScene, iter->second);
+		//SwapUI(m_pActiveScene, iter->second);
 		SwapPlayer(m_pActiveScene, iter->second);
 
 		m_pActiveScene->OnExit();
@@ -104,6 +108,12 @@ namespace W
 
 		//SwapCamera();
 		return iter->second;
+	}
+
+	void SceneManger::AddGameObject(eLayerType _eType, GameObject* _pGameObj)
+	{
+		//다음 프레임에 넣기, 후처리에 넣기
+		m_pActiveScene->AddGameObject(_eType, _pGameObj);
 	}
 
 	GameObject* SceneManger::FindPlayer()
@@ -162,6 +172,11 @@ namespace W
 
 		for (int i = 0; i < m_vecObj.size(); ++i)
 			dynamic_cast<PlayerAttackObject*>(m_vecObj[i])->Off();
+	}
+
+	void SceneManger::AddPlayerScene(const std::wstring& _strScene)
+	{
+		m_vecPlayerScene.push_back(_strScene);
 	}
 
 }

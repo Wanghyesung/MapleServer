@@ -71,17 +71,12 @@ namespace W
 			if (deleteIter != setDeleteGameObj.end())
 			{
 				iter = m_vecGameObject.erase(iter);
+				delete *iter;
+				
 				continue;
 			}
 
 			++iter;
-		}
-
-		//메모리 해제
-		for (GameObject* pObj : setDeleteGameObj)
-		{
-			delete pObj;
-			pObj = nullptr;
 		}
 
 	}

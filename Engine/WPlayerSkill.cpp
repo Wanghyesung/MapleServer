@@ -14,7 +14,7 @@ namespace W
 
 	PlayerSkill::~PlayerSkill()
 	{
-		SkillManager::Release();
+		SkillManager::Release(m_pPlayer->GetPlayerID());
 	}
 
 	void PlayerSkill::Update()
@@ -25,8 +25,9 @@ namespace W
 
 	void PlayerSkill::Initialize()
 	{
-		SkillManager::SetPlayerSkill(this);
-		SkillManager::Initialize();
+		UINT iPlayerID = m_pPlayer->GetPlayerID();
+		SkillManager::InitPlayerSkill(iPlayerID, this);
+	
 	}
 
 }
