@@ -3,8 +3,7 @@
 #include "WEntity.h"
 #include "WComponent.h"
 #include "WScript.h"
-#include "WMaterial.h"
-#include "WMeshRenderer.h"
+
 
 namespace W
 {

@@ -2,7 +2,6 @@
 #include "WAnimator.h"
 #include "WTexture.h"
 #include "WResources.h"
-#include "WRenderer.h"
 #include "WPlayerHat.h"
 #include "WEyes.h"
 #include "WPlayerHair.h"
@@ -14,9 +13,7 @@ namespace W
 		m_pPlayerHair(nullptr),
 		m_pPlayerEyes(nullptr)
 	{
-		//MeshRenderer* mr = AddComponent<MeshRenderer>();
-		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimaionMaterial"));
+	
 	}
 	PlayerHead::~PlayerHead()
 	{
@@ -40,8 +37,6 @@ namespace W
 	{
 		Animator* pAnimator = AddComponent<Animator>();
 
-		//std::shared_ptr<Texture> pAtlasBdoy
-		//	= Resources::Load<Texture>(L"PlayerheadTex", L"..\\Resources\\Texture\\Player\\head\\Playerhead.png");
 		pAnimator->Create(L"head_alert_left", Vector2(0.0f, 0.0f), Vector2(150.0f, 150.0f), 3, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
 		pAnimator->Create(L"head_jump_left", Vector2(0.0f, 150.0f), Vector2(150.0f, 150.0f), 1, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
 		pAnimator->Create(L"head_ladder_left", Vector2(0.0f, 300.0f), Vector2(150.0f, 150.0f), 2, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
@@ -128,14 +123,6 @@ namespace W
 		m_pPlayerEyes->LateUpdate();
 		m_pPlayerHat->LateUpdate();
 	}
-	//void PlayerHead::Render()
-	//{
-	//	GameObject::Render();
-	//
-	//	m_pPlayerHair->Render();
-	//	m_pPlayerEyes->Render();
-	//	m_pPlayerHat->Render();
-	//}
 
 	void PlayerHead::SetAlert(bool _bAlert)
 	{

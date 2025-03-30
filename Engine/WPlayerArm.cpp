@@ -2,16 +2,13 @@
 #include "WAnimator.h"
 #include "WTexture.h"
 #include "WResources.h"
-#include "WRenderer.h"
 #include "WPlayerWeapon.h"
 namespace W
 {
 	PlayerArm::PlayerArm():
 		m_pPlayerWeapon(nullptr)
 	{
-		//MeshRenderer* mr = AddComponent<MeshRenderer>();
-		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimaionMaterial"));
+		
 	}
 	PlayerArm::~PlayerArm()
 	{
@@ -25,8 +22,6 @@ namespace W
 	{
 		Animator* pAnimator = AddComponent<Animator>();
 
-		//std::shared_ptr<Texture> pAtlasBdoy
-		//	= Resources::Load<Texture>(L"PlayerArmTex", L"..\\Resources\\Texture\\Player\\arm\\PlayerArm.png");
 		pAnimator->Create(L"arm_alert_left", Vector2(0.0f, 0.0f), Vector2(150.0f, 150.0f), 3, Vector2(120.f, 120.f),Vector2::Zero,0.18f);
 		pAnimator->Create(L"arm_jump_left", Vector2(0.0f, 150.0f), Vector2(150.0f, 150.0f), 1, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
 		pAnimator->Create(L"arm_ladder_left", Vector2(0.0f, 300.0f), Vector2(150.0f, 150.0f), 2, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
@@ -74,7 +69,6 @@ namespace W
 	{
 		Animator* pAnimator = GetComponent<Animator>();
 		Vector3 vPlayerPos = m_pPlayer->GetComponent<Transform>()->GetPosition();
-		//vPlayerPos.x += 2.f;
 		GetComponent<Transform>()->SetPosition(vPlayerPos);
 
 		int iDir = m_pPlayer->GetDir();
@@ -100,12 +94,6 @@ namespace W
 
 		m_pPlayerWeapon->LateUpdate();
 	}
-	//void PlayerArm::Render()
-	//{
-	//	GameObject::Render();
-	//
-	//	m_pPlayerWeapon->Render();
-	//}
 
 	void PlayerArm::SetEquipWeapon(Equip* _pEquip)
 	{

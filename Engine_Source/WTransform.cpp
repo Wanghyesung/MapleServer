@@ -1,10 +1,8 @@
 #include "WTransform.h"
-#include "WRenderer.h"
 #include "WConstantBuffer.h"
-#include "WCamera.h"
+
 namespace W
 {
-	using namespace W::graphics;
 
 	Transform::Transform():
 		Component(eComponentType::Transform),
@@ -63,33 +61,11 @@ namespace W
 		if (m_pParentTransform)
 			m_vWorld *= m_pParentTransform->m_vWorld;
 
-		//-2.63 0.27
-		//for (int i = 0; i < 4; ++i)
-		//{
-		//	float x = m_vRight.x * m_vScale.x / 2.f;
-		//
-		//	int a = 10;
-		//}
 		
 	}
 	void Transform::Render()
 	{
 
 	}
-	//void Transform::BindConstantBuffer()
-	//{
-	//	renderer::TransformCB trCB = {};
-	//	trCB.m_mWorld = m_vWorld;
-	//	trCB.m_mView = Camera::GetGpuViewMatrix();
-	//	trCB.m_mProjection = Camera::GetGpuProjectionMatrix();
-	//
-	//	ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Transform];
-	//	//Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
-	//	pConstBuffer->SetData(&trCB);
-	//	pConstBuffer->Bind(eShaderStage::VS);
-	//	pConstBuffer->Bind(eShaderStage::HS);
-	//	pConstBuffer->Bind(eShaderStage::DS);
-	//	pConstBuffer->Bind(eShaderStage::GS);
-	//	pConstBuffer->Bind(eShaderStage::PS);
-	//}
+
 }

@@ -5,7 +5,7 @@
 #include "WAnimator.h"
 #include "WBattleManager.h"
 #include "WMonsterAttackScript.h"
-#include "WRenderer.h"
+
 namespace W
 {
 	DemianFire0::DemianFire0():
@@ -21,23 +21,13 @@ namespace W
 
 		GetComponent<Transform>()->SetScale(18.f, 18.f, 0.f);
 
-		//MeshRenderer* mr = AddComponent<MeshRenderer>();
-		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//
-		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetRenderinMode(eRenderingMode::Transparent);
-		//pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
-		//Resources::Insert(L"demainfire0", pMater);
-
 		Animator* pAnim = AddComponent<Animator>();
-		//std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"demainfire0");
 		pAnim->Create(L"fire_start", Vector2(0.0f, 0.0f), Vector2(144.f, 142.0f), 9, Vector2(2000.f, 2000.f), Vector2::Zero, 0.12f);
 		pAnim->Create(L"fire_end", Vector2(0.0f, 142.f), Vector2(385.f, 209.0f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.1f);
 
 		pAnim->CompleteEvent(L"fire_start") = std::bind(&DemianFire0::start, this);
 		pAnim->CompleteEvent(L"fire_end") = std::bind(&DemianFire0::off, this);
 
-		//mr->SetMaterial(pMater);
 	}
 	DemianFire0::~DemianFire0()
 	{
@@ -67,9 +57,7 @@ namespace W
 			if (m_bEnd)
 			{
 				m_bMove = false;
-				//Vector3 vPosition = GetComponent<Transform>()->GetPosition();
-				//vPosition.y += 0.35f;
-				//GetComponent<Transform>()->SetPosition(vPosition);
+				
 			}
 				
 		}
@@ -99,18 +87,7 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
-	//void DemianFire0::Render()
-	//{
-	//	//renderer::ObjectCB ObjcetCB;
-	//	//ObjcetCB.vObjectColor = Vector4::One;
-	//	//ObjcetCB.vObjectDir.x = 1;
-	//	//ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Object];
-	//	//
-	//	//pConstBuffer->SetData(&ObjcetCB);
-	//	//pConstBuffer->Bind(eShaderStage::PS);
-	//	//
-	//	//GameObject::Render();
-	//}
+	
 	void DemianFire0::off()
 	{
 		m_bMove = false;
@@ -123,7 +100,6 @@ namespace W
 	void DemianFire0::start()
 	{
 		m_bMove = true;
-		//SetMonsterAttack(m_tMonsterAttack);
 	}
 
 	void DemianFire0::move()

@@ -25,14 +25,13 @@
 #include "WInputBackground.h"
 #include "WDemianEntireAttack.h"
 #include "WStop.h"
-#define DamageMap std::map<std::wstring, BattleManager::tDamageCount>
+
 #define EffectMap std::map<std::wstring, std::queue<Effect*>> 
 namespace W
 {
-	std::queue<DamageFont*> BattleManager::m_queueFonts = {};
 
 	EffectMap BattleManager::m_mapEffects = {};
-	DamageMap BattleManager::m_mapDamage = {};
+
 	UINT BattleManager::m_iMaxDamage = 9999999;
 	bool BattleManager::m_bOnAbnormal = false;
 	bool BattleManager::m_bOnUndead = false;
@@ -42,38 +41,12 @@ namespace W
 
 	void BattleManager::Initialize()
 	{
-		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
-		//pMater->SetRenderinMode(eRenderingMode::Transparent);
-		//Resources::Insert(L"DamageMater", pMater);
-		//
-		//for (int i = 0; i < 10; ++i)
-		//{
-		//	std::wstring strNum = std::to_wstring(i);
-		//
-		//	std::shared_ptr<Texture> spTex =
-		//		Resources::Load<Texture>(L"Number_" + strNum, L"..\\Resources\\Texture\\Damage\\" + strNum + L".png");
-		//}
 		
-		//for (int i = 0; i < 300; ++i)
-		//{
-		//	DamageFont* pDamageFont = new DamageFont();
-		//	m_queueFonts.push(pDamageFont);
-		//}
 
 	}
 
 	void BattleManager::Release()
 	{
-		while (!m_queueFonts.empty())
-		{
-			DamageFont* pDamageFont = m_queueFonts.front();
-			m_queueFonts.pop();
-
-			delete pDamageFont;
-			pDamageFont = nullptr;
-		}
-
 		EffectMap::iterator iter = m_mapEffects.begin();
 		for (iter; iter != m_mapEffects.end(); ++iter)
 		{
@@ -92,30 +65,12 @@ namespace W
 
 	void BattleManager::Update()
 	{
-		DamageMap::iterator iter;
-
-		//
-		for (iter = m_mapDamage.begin(); iter != m_mapDamage.end(); )
-		{
-			iter->second.m_fCurTime += Time::DeltaTime();
-		
-			if (iter->second.m_fCurTime >= iter->second.iEndCount)
-			{
-				iter = m_mapDamage.erase(iter);
-			}
-			else
-				++iter;
-		}
-
-		if(m_fCurPotionTime< m_fPotionTime)
-			m_fCurPotionTime += Time::DeltaTime();
 
 	}
 
 	void BattleManager::CheckDamage(tObjectInfo& _tObjectInfo, const tAttackInfo& _tAttackInfo,
 		const std::wstring _strName, Vector3 _vPosition)
 	{
-		std::queue<DamageFont*> finalQueue = {};
 		int iFinalDamage = 0;
 
 		iFinalDamage = floor(_tAttackInfo.fAttackDamage * 10
@@ -131,49 +86,6 @@ namespace W
 		if (_tObjectInfo.fHP <= 0.f)
 			_tObjectInfo.fHP = 0.f;
 
-		UINT iMinus = m_iMaxDamage + 1;
-		
-		while (iMinus > 0)
-		{
-			UINT num = iFinalDamage / iMinus;
-			if (num > 0)
-			{
-				DamageFont* pFont = m_queueFonts.front();
-				m_queueFonts.pop();
-
-				pFont->CheckDamage(num);
-				pFont->GetComponent<Transform>()->SetPosition(_vPosition);
-				finalQueue.push(pFont);
-				iFinalDamage %= iMinus;
-			}
-			iMinus /= 10;
-		}
-
-		render_damage(finalQueue, _tAttackInfo.iDamageCount, _strName);
-	}
-
-	void BattleManager::render_damage(std::queue<DamageFont*> _queueFonts, UINT _iDamageCount, const std::wstring& _strName)
-	{
-		//같은공격이면 그 위에 렌더링
-		tDamageCount tDamage = add_damage(_iDamageCount, _strName);
-
-		float fOffsetX = -0.25f;
-		UINT iQueueSize = _queueFonts.size();
-		iQueueSize /= 2;
-
-		float X = iQueueSize * fOffsetX;
-		
-		while (!_queueFonts.empty())
-		{
-			DamageFont* pDamage = _queueFonts.front();
-			_queueFonts.pop();
-
-			SceneManger::AddGameObject(eLayerType::Effect, pDamage);
-
-		}
-
-		if (tDamage.iCurCount == tDamage.iEndCount)
-			erase_damage(_strName);
 	}
 
 	void BattleManager::HitchAbnormal(eAbnormalType _eType, float _fAccStat)
@@ -195,45 +107,6 @@ namespace W
 		m_bOnAbnormal = true;
 	}
 
-	void BattleManager::erase_damage(const std::wstring& _strName)
-	{
-		DamageMap::iterator iter = m_mapDamage.find(_strName);
-
-		if (iter == m_mapDamage.end())
-			return;
-
-		m_mapDamage.erase(iter);
-	}
-
-	BattleManager::tDamageCount& BattleManager::add_damage(UINT _iDamageCount, const std::wstring& _strName)
-	{
-		BattleManager::tDamageCount Count = {};
-
-		DamageMap::iterator iter = m_mapDamage.find(_strName);
-		if (iter == m_mapDamage.end())
-		{
-			Count.iCurCount = 1;
-			Count.iEndCount = _iDamageCount;
-			Count.m_fCurTime = 0.f;
-			m_mapDamage.insert(std::make_pair(_strName, Count));
-
-			return Count;
-		}
-		else
-		{
-			if (iter->second.iCurCount > _iDamageCount)
-				iter->second.iCurCount = 0;
-
-			++iter->second.iCurCount;
-			return iter->second;
-		}
-	}
-
-
-	void BattleManager::PushFont(DamageFont* _pDamageFont)
-	{
-		m_queueFonts.push(_pDamageFont);	
-	}
 
 	void BattleManager::dark(GameObject* _pGameObject)
 	{

@@ -32,15 +32,12 @@
 #include "framework.h"
 #include "Client.h"
 #include "..\Engine_Source\WApplication.h"
-#include "..\Engine_Source\WRenderer.h"
 #include "..\Engine_Source\WResources.h"
 
 #include "..\Engine_Source/WFmod.h"
 #include "..\Engine_Source\WFontWrapper.h"
 #include "..\Engine\LoadScene.h"
 #include "..\Engine_Source\WThreadPool.h"
-
-#include "guiEditor.h"
 
 //셰이더 만들어진 후 셋팅
 //layout 설정 -> setpustate에서 레이아웃 속성설정 
@@ -156,17 +153,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         {
             // 여기서 게임 로직이 돌아가야한다.
             application.Run();
-            gui::Editor::Run();
-
-            //application.Present();
+            
         }
     }
 
 
     W::ThreadPool::Shutdown();
     W::SceneManger::Release();
-  
-    gui::Editor::Release();
 
     return (int)msg.wParam;
 }
@@ -227,8 +220,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
     application.Initialize();
     W::InitializeScenes();
-    gui::Editor::Initialize();
-
+    
     return TRUE;
 }
 

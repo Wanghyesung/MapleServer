@@ -12,8 +12,7 @@ namespace W
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
-		//virtual void Render();
-
+		
 		virtual void OnEnter();
 		virtual void OnExit();
 

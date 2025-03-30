@@ -11,6 +11,7 @@ namespace W
 	std::vector<GameObject*> EventManager::m_vecPlayer_Pool = {};
 	std::vector<GameObject*> EventManager::m_vecMonster_Pool = {};
 
+	std::mutex EventManager::m_eventMutex = {};
 	int EventManager::m_iActiveIdx = 1; 
 
 	std::wstring EventManager::m_strNextScene = {};

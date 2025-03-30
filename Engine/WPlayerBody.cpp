@@ -3,7 +3,6 @@
 #include "WTexture.h"
 #include "WResources.h"
 #include "WPlayer.h"
-#include "WRenderer.h"
 #include "WPlayerTop.h"
 #include "WPlayerBottom.h"
 #include "WPlayerShoes.h"
@@ -16,9 +15,7 @@ namespace W
 		m_pPlayerBottom(nullptr),
 		m_pPlayerShoes(nullptr)
 	{
-		//MeshRenderer* mr = AddComponent<MeshRenderer>();
-		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimaionMaterial"));
+		
 	}
 	PlayerBody::~PlayerBody()
 	{
@@ -42,8 +39,6 @@ namespace W
 	{
 		Animator* pAnimator = AddComponent<Animator>();
 
-		//std::shared_ptr<Texture> pAtlasBdoy
-		//	= Resources::Load<Texture>(L"PlayerBodyTex", L"..\\Resources\\Texture\\Player\\body\\PlayerBody.png");
 		pAnimator->Create(L"body_alert_left", Vector2(0.0f, 0.0f), Vector2(150.0f, 150.0f), 3, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
 		pAnimator->Create(L"body_jump_left", Vector2(0.0f, 150.0f), Vector2(150.0f, 150.0f), 1, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
 		pAnimator->Create(L"body_ladder_left", Vector2(0.0f, 300.0f), Vector2(150.0f, 150.0f), 2, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
@@ -130,14 +125,7 @@ namespace W
 		m_pPlayerTop->LateUpdate();
 		m_pPlayerShoes->LateUpdate();
 	}
-	//void PlayerBody::Render()
-	//{
-	//	GameObject::Render();
-	//
-	//	m_pPlayerBottom->Render();
-	//	m_pPlayerTop->Render();
-	//	m_pPlayerShoes->Render();
-	//}
+	
 	void PlayerBody::SetEquipTop(Equip* _pEquip)
 	{
 		m_pPlayerTop->SetPlayerEquip(_pEquip);

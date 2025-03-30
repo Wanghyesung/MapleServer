@@ -1,8 +1,6 @@
 #include "WInput.h"
 
 #include "WApplication.h"
-#include "WCamera.h"
-#include "WRenderer.h"
 
 
 extern W::Application application;
@@ -49,7 +47,6 @@ namespace W
 
 
 	std::vector<Input::Key> Input::m_vecKeys;
-	Vector2 Input::m_vMousePos = Vector2::Zero;
 
 	void Input::Initialize()
 	{
@@ -93,21 +90,6 @@ namespace W
 				}
 			}
 
-			POINT mousePos = {};
-			GetCursorPos(&mousePos);
-
-			ScreenToClient(application.GetHwnd(), &mousePos);
-			math::Vector3 vMousePos(mousePos.x, mousePos.y, 0.f);
-
-			RECT tRect = {};
-			GetClientRect(application.GetHwnd(), &tRect);
-
-			math::Viewport view(0.f, 0.f, tRect.right - tRect.left, tRect.bottom - tRect.top);
-			//renderer::MainCamera->GetGpuProjectionMatrix();
-			vMousePos = view.Unproject(vMousePos, renderer::UICamera->GetGpuProjectionMatrix(), renderer::UICamera->GetViewMatrix(), Matrix::Identity);
-
-			m_vMousePos.x = vMousePos.x;
-			m_vMousePos.y = vMousePos.y;
 		}
 		else
 		{
@@ -126,11 +108,6 @@ namespace W
 				m_vecKeys[i].bPressed = false;
 			}
 		}
-	}
-
-	void Input::Render(HDC hdc)
-	{
-
 	}
 }
 

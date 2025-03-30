@@ -1,5 +1,4 @@
 #include "WLight.h"
-#include "WRenderer.h"
 #include "WTransform.h"
 #include "WGameObject.h"
 
@@ -20,8 +19,6 @@ namespace W
 	}
 	void Light::LateUpdate()
 	{
-		renderer::m_vecLights.push_back(this);
-
 		Transform* pTr = GetOwner()->GetComponent<Transform>();
 		Vector3 vPos = pTr->GetPosition();
 		m_eAttribute.position = Vector4(vPos.x, vPos.y, vPos.z, 1.f);

@@ -2,7 +2,6 @@
 #include "WAnimator.h"
 #include "WTexture.h"
 #include "WResources.h"
-#include "WRenderer.h"
 #include "WPlayerHead.h"
 namespace W
 {
@@ -10,19 +9,8 @@ namespace W
 		m_bAlert(false),
 		m_iEyeNumber(0)
 	{
-		//MeshRenderer* mr = AddComponent<MeshRenderer>();
-		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimaionMaterial"));
-
+		
 		Animator* pAnimator = AddComponent<Animator>();
-
-		//Resources::Load<Texture>(L"PlayerEyes2", L"..\\Resources\\Texture\\Player\\eyes\\PlayerEyes2.png");
-		//Resources::Load<Texture>(L"PlayerEyes1", L"..\\Resources\\Texture\\Player\\eyes\\PlayerEyes1.png");
-		//Resources::Load<Texture>(L"PlayerEyes0", L"..\\Resources\\Texture\\Player\\eyes\\PlayerEyes0.png");
-		//
-		//Resources::Load<Texture>(L"PlayerEyesHit2", L"..\\Resources\\Texture\\Player\\eyes\\PlayerEyesHit2.png");
-		//Resources::Load<Texture>(L"PlayerEyesHit1", L"..\\Resources\\Texture\\Player\\eyes\\PlayerEyesHit1.png");
-		//Resources::Load<Texture>(L"PlayerEyesHit0", L"..\\Resources\\Texture\\Player\\eyes\\PlayerEyesHit0.png");
 
 	}
 
@@ -36,7 +24,6 @@ namespace W
 		std::wstring strNum = std::to_wstring(m_iEyeNumber);
 
 		Animator* pAnimator = GetComponent<Animator>();
-		//std::shared_ptr<Texture> pAtlasBdoy = Resources::Find<Texture>(L"PlayerEyes" + strNum);
 		
 		pAnimator->Create(L"eye_alert_left" + strNum, Vector2(0.0f, 0.0f), Vector2(150.0f, 150.0f), 3, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
 		pAnimator->Create(L"eye_jump_left" + strNum, Vector2(0.0f, 150.0f), Vector2(150.0f, 150.0f), 1, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
@@ -149,10 +136,7 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
-	//void Eyes::Render()
-	//{
-	//	GameObject::Render();
-	//}
+
 
 	void Eyes::SetEye(UINT _iNum)
 	{

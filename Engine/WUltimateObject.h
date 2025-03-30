@@ -12,8 +12,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//virtual void Render()override;
-
+		
 		virtual void Off()override;
 
 		int GetCurFrame() { return m_iCurFrame; }

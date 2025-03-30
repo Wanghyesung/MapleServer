@@ -3,8 +3,7 @@
 #include "WTexture.h"
 #include "WResources.h"
 #include "WPlayerBody.h"
-#include "WRenderer.h"
-#include "WEquip.h"
+
 namespace W
 {
 	PlayerBottom::PlayerBottom():
@@ -12,10 +11,7 @@ namespace W
 		m_strCurAnim{},
 		m_strCurEquip{}
 	{
-		//MeshRenderer* mr = AddComponent<MeshRenderer>();
-		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimaionMaterial"));
-
+		
 		Animator* pAnimator = AddComponent<Animator>();
 	}
 	PlayerBottom::~PlayerBottom()
@@ -28,9 +24,7 @@ namespace W
 			return;
 
 		Animator* pAnimator = GetComponent<Animator>();
-		//std::shared_ptr<Texture> pAtlasBdoy
-		//	= Resources::Load<Texture>(L"Player " + m_strCurEquip + L"Tex", L"..\\Resources\\Texture\\Player\\equip\\" + m_strCurEquip + L".png");
-
+	
 		pAnimator->Create(m_strCurEquip + L"_alert_left", Vector2(0.0f, 0.0f), Vector2(150.0f, 150.0f), 3, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
 		pAnimator->Create(m_strCurEquip + L"_jump_left", Vector2(0.0f, 150.0f), Vector2(150.0f, 150.0f), 1, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
 		pAnimator->Create(m_strCurEquip + L"_ladder_left", Vector2(0.0f, 300.0f), Vector2(150.0f, 150.0f), 2, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
@@ -106,22 +100,9 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
-	//void PlayerBottom::Render()
-	//{
-	//
-	//	if (m_strCurEquip.size() == 0)
-	//		return;
-	//
-	//	GameObject::Render();
-	//
-	//}
+
 	void PlayerBottom::SetPlayerEquip(Equip* _pEquip)
 	{
-		if (_pEquip != nullptr)
-			m_strCurEquip = _pEquip->GetEquipName();
-		else
-			m_strCurEquip = L"";
-
-		Initialize();
 	}
+	
 }

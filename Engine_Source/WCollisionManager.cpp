@@ -4,7 +4,7 @@
 #include "WSceneManger.h"
 #include "WLayer.h"
 #include "WCollider2D.h"
-#include "WRenderer.h"
+
 namespace W
 {
 	std::bitset<LAYER_MAX> CollisionManager::m_bitMatrix[LAYER_MAX] = {};
@@ -31,38 +31,41 @@ namespace W
 	}
 	void CollisionManager::LayerCollision(eLayerType _eLeft, eLayerType _eRight)
 	{
-		Scene* pActiveScene = SceneManger::GetActiveScene();
+		std::vector<Scene*> vecPlayerScene = SceneManger::GetPlayerScene();
 
-		const std::vector<GameObject*>& vecLeftObj =
-			pActiveScene->GetLayer(_eLeft).GetGameObjects();
-
-		const std::vector<GameObject*>& vecRightObj =
-			pActiveScene->GetLayer(_eRight).GetGameObjects();
-
-		for (GameObject* pLObj : vecLeftObj)
+		for (Scene* pActiveScene : vecPlayerScene)
 		{
-			Collider2D* pLeftCol = pLObj->GetComponent<Collider2D>();
-			if (pLeftCol == nullptr)
-				continue;
-			if (!pLeftCol->IsActive())
-				continue;
-			if (pLObj->GetState() != GameObject::eState::Active)
-				continue;
+			const std::vector<GameObject*>& vecLeftObj =
+				pActiveScene->GetLayer(_eLeft).GetGameObjects();
 
+			const std::vector<GameObject*>& vecRightObj =
+				pActiveScene->GetLayer(_eRight).GetGameObjects();
 
-			for (GameObject* pRObj : vecRightObj)
+			for (GameObject* pLObj : vecLeftObj)
 			{
-				Collider2D* pRightCol = pRObj->GetComponent<Collider2D>();
-				if (pRightCol == nullptr)
+				Collider2D* pLeftCol = pLObj->GetComponent<Collider2D>();
+				if (pLeftCol == nullptr)
 					continue;
-				if (!pRightCol->IsActive())
+				if (!pLeftCol->IsActive())
 					continue;
-				if (pRObj->GetState() != GameObject::eState::Active)
-					continue;
-				if (pRObj == pLObj)
+				if (pLObj->GetState() != GameObject::eState::Active)
 					continue;
 
-				ColliderCollision(pLeftCol,pRightCol);
+
+				for (GameObject* pRObj : vecRightObj)
+				{
+					Collider2D* pRightCol = pRObj->GetComponent<Collider2D>();
+					if (pRightCol == nullptr)
+						continue;
+					if (!pRightCol->IsActive())
+						continue;
+					if (pRObj->GetState() != GameObject::eState::Active)
+						continue;
+					if (pRObj == pLObj)
+						continue;
+
+					ColliderCollision(pLeftCol, pRightCol);
+				}
 			}
 		}
 	}

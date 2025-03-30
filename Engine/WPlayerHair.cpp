@@ -2,7 +2,6 @@
 #include "WAnimator.h"
 #include "WTexture.h"
 #include "WResources.h"
-#include "WRenderer.h"
 #include "WPlayerHead.h"
 
 namespace W
@@ -11,9 +10,6 @@ namespace W
 		m_bHairDown(true),
 		m_iHairNum(0)
 	{
-		//MeshRenderer* mr = AddComponent<MeshRenderer>();
-		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//mr->SetMaterial(Resources::Find<Material>(L"SpriteAnimaionMaterial"));
 		Animator* pAnimator = AddComponent<Animator>();
 	}
 	PlayerHair::~PlayerHair()
@@ -25,8 +21,6 @@ namespace W
 
 		std::wstring strNum = std::to_wstring(m_iHairNum);
 
-		//std::shared_ptr<Texture> pAtlasBdoy
-		//	= Resources::Load<Texture>(L"PlayerHairTex" + strNum, L"..\\Resources\\Texture\\Player\\hair\\PlayerHair"+ strNum + L".png");
 		pAnimator->Create(L"hair_alert_left" + strNum, Vector2(0.0f, 0.0f), Vector2(150.0f, 150.0f), 3, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
 		pAnimator->Create(L"hair_jump_left" + strNum, Vector2(0.0f, 150.0f), Vector2(150.0f, 150.0f), 1, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
 		pAnimator->Create(L"hair_ladder_left" + strNum, Vector2(0.0f, 300.0f), Vector2(150.0f, 150.0f), 2, Vector2(120.f, 120.f), Vector2::Zero, 0.18f);
@@ -132,10 +126,7 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
-	//void PlayerHair::Render()
-	//{
-	//	GameObject::Render();
-	//}
+	
 	void PlayerHair::SetHair(UINT _iNum)
 	{
 		m_iHairNum = _iNum;

@@ -3,7 +3,6 @@
 #include "WCollider2D.h"
 #include "WPlayerScript.h"
 #include "WResources.h"
-#include "WRenderer.h"
 #include "WInput.h"
 #include "WAnimator.h"
 #include "WPlayerBody.h"
@@ -11,7 +10,7 @@
 #include "WPlayerHead.h"
 #include "WEyes.h"
 #include "WPlayerHair.h"
-#include "WEquip.h"
+
 #include "WTime.h"
 #include "WShadow.h"
 
@@ -118,7 +117,7 @@ namespace W
 			m_bAlertTime = 2.f;
 	}
 
-	void Player::SetEquip(Equip* _pEquip)
+	/*void Player::SetEquip(Equip* _pEquip)
 	{
 		Equip::EquipType eType = _pEquip->GetEquipType();
 		switch (eType)
@@ -141,9 +140,9 @@ namespace W
 		}
 
 		Reset_Animation();
-	}
+	}*/
 
-	void Player::DisableEquip(Equip* _pEquip)
+	/*void Player::DisableEquip(Equip* _pEquip)
 	{
 		Equip::EquipType eType = _pEquip->GetEquipType();
 		switch (eType)
@@ -166,7 +165,7 @@ namespace W
 		}
 
 		Reset_Animation();
-	}
+	}*/
 
 	void Player::SetAnimStop(bool _bStop)
 	{

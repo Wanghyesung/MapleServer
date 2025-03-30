@@ -5,7 +5,6 @@
 #include "WMonsterFSM.h"
 #include "WBossStand.h"
 #include "WMonsterAttack.h"
-#include "WRenderer.h"
 #include "WEffect.h"
 #include "WSceneManger.h"
 #include "WHorntail.h"
@@ -16,21 +15,6 @@ namespace W
 		m_pOwner(_pOwner)
 	{
 		SetName(L"Tail");
-
-		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//
-		//
-		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetRenderinMode(eRenderingMode::Transparent);
-		//pMater->SetShader(Resources::Find<Shader>(L"MonsterShader"));
-		//Resources::Insert(L"horntailTailMater", pMater);
-		//
-		//pRenderer->SetMaterial(pMater);
-		//
-		//std::shared_ptr<Texture> pAtlas =
-		//	Resources::Find<Texture>(L"TailTex");
-		//pAtlas->BindShaderResource(eShaderStage::PS, 12);
 
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"Tail_stand", Vector2(0.f, 0.f), Vector2(550, 450.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
@@ -108,18 +92,7 @@ namespace W
 
 		Monster::LateUpdate();
 	}
-	//void HorntailTail::Render()
-	//{
-	//	//renderer::MonsterCB MonsterCB;
-	//	//MonsterCB.vMonsterDir.x = 1;
-	//	//
-	//	//ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Monster];
-	//	////Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
-	//	//pConstBuffer->SetData(&MonsterCB);
-	//	//pConstBuffer->Bind(eShaderStage::PS);
-	//	//
-	//	//GameObject::Render();
-	//}
+	
 	void HorntailTail::setAttack()
 	{
 		MonsterScript* Pscript = GetComponent<MonsterScript>();

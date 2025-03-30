@@ -14,8 +14,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//virtual void Render()override;
-
+		
 		void SetPlayerHead(PlayerHead* _pPlayerHead) { m_pPlayerHead = _pPlayerHead; }
 
 		const std::wstring& GetCurAnimName() { return m_strCurAnim; }

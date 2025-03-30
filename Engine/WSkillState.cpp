@@ -35,14 +35,12 @@ namespace W
 		GetPlayer()->SetCurStateName(GetStateName());
 		m_tSKillTime.fCurActiveTime = 0.f;
 
-		if (m_pSoundClip)
-			StartSound();
 	}
 
 	void SkillState::Exit()
 	{
 		//SkillManager::SetActiveSkill(Player::ePlayerSkill::end);
-		EventManager::ChangePlayerSkillState(Player::ePlayerSkill::end);
+		EventManager::ChangePlayerSkillState(GetPlayer(),Player::ePlayerSkill::end);
 
 		Player::ePlayerState eState = GetPlayer()->GetCurPlayerState();
 		if(eState != Player::ePlayerState::ladder)
@@ -65,22 +63,7 @@ namespace W
 		return m_pOwner->GetPlayer();
 	}
 
-	void SkillState::SetSound(std::shared_ptr<AudioClip> clip, bool _bLoop)
-	{
-		m_pSoundClip = clip;
-		m_pSoundClip->SetLoop(_bLoop);
-	}
-
-	void SkillState::StartSound()
-	{
-		//m_pSoundClip->Play();
-	}
-
-	void SkillState::EndSound()
-	{
-		//m_pSoundClip->Stop();
-	}
-
+	
 	Effect* SkillState::CreateEffet(std::wstring _strName, Vector2 _vLeftTop, Vector2 _vSize,
 		UINT _iColumnLength, UINT _iRowLength, Vector2 _vDivisionSize, Vector2 _vOffset, float _fDuration)
 	{

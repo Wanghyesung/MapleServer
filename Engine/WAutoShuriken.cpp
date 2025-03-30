@@ -3,7 +3,6 @@
 #include "WLayer.h"
 #include "WAttackScript.h"
 #include "WTime.h"
-#include "WRenderer.h"
 #include "WAnimator.h"
 #include "WMonster.h"
 #include "WPlayer.h"
@@ -19,24 +18,7 @@ namespace W
 		m_fDeleteTime(7.f),
 		m_fContFoce(4.f)
 	{
-		//if(_vDir.x > 0.f)
-		//	m_iDir = 1;
-		//else
-		//	m_iDir = -1;
 		m_iDir = 1;
-
-		//MeshRenderer* mr = AddComponent<MeshRenderer>();
-		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//
-		////¿©±â ¹Ù²ñ
-		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetRenderinMode(eRenderingMode::Transparent);
-		//pMater->SetShader(Resources::Find<Shader>(L"SpriteAnimationShader"));
-		//Resources::Insert(L"shurikenMater", pMater);
-
-		//mr->SetMaterial(pMater);
-
-
 	}
 
 	AutoShuriken::~AutoShuriken()
@@ -68,8 +50,7 @@ namespace W
 		pCollider->SetSize(Vector2(0.5f, 0.5f));
 
 		Animator* pAnimator = AddComponent<Animator>();
-		//std::shared_ptr<Texture> pAtlas
-		//	= Resources::Load<Texture>(L"shurikenTex", L"..\\Resources\\Texture\\Player\\shuriken\\shuriken.png");
+		
 		pAnimator->Create(L"shuriken_left", Vector2(0.0f, 0.0f), Vector2(48.0f, 9.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 0.1f);
 		pAnimator->Create(L"shuriken_right", Vector2(48.0f, 0.0f), Vector2(-48.0f, 9.f), 2, Vector2(100.f, 100.f), Vector2::Zero, 0.1f);
 
@@ -104,18 +85,6 @@ namespace W
 	{
 		GameObject::LateUpdate();
 	}
-	//void AutoShuriken::Render()
-	//{
-	//	//renderer::PlayerCB PlayerCB;
-	//	//PlayerCB.vDir.x = m_iDir * -1;
-	//	//PlayerCB.vColor = Vector4::One;
-	//	//ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Player];
-	//	////Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
-	//	//pConstBuffer->SetData(&PlayerCB);
-	//	//pConstBuffer->Bind(eShaderStage::PS);
-	//	//
-	//	//GameObject::Render();
-	//}
 
 	void AutoShuriken::SetDir(const Vector2& _vDir)
 	{

@@ -36,7 +36,7 @@ namespace W
 
 	void SkillManager::InitPlayerSkill(UINT _iPlayerID, PlayerSkill* _pSkill)
 	{
-		if (m_vecSkillState.size() > _iPlayerID)
+		if (m_vecSkillState.size() <= _iPlayerID)
 		{
 			m_vecSkillState.resize(_iPlayerID + 1);
 			m_vecSkillTime.resize(_iPlayerID + 1);
@@ -72,7 +72,7 @@ namespace W
 
 	void SkillManager::DeletePlayer()
 	{
-		while (m_queueDeletePlayer.empty())
+		while (!m_queueDeletePlayer.empty())
 		{
 			UINT iPlayerID = m_queueDeletePlayer.front();
 			m_queueDeletePlayer.pop();

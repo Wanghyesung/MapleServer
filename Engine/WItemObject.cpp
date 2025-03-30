@@ -5,9 +5,7 @@
 #include "WItemScript.h"
 #include "WPlayer.h"
 #include "WSceneManger.h"
-#include "WIconUI.h"
-#include "WItemManager.h"
-#include "WInventory.h"
+
 #include "WObject.h"
 namespace W
 {
@@ -15,17 +13,6 @@ namespace W
 		m_bActive(false),
 		m_strItemName(_strItemName)
 	{
-		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
-		//std::shared_ptr<Texture> pTex = Resources::Find<Texture>(_strItemName + L"Tex");
-		//pMater->SetTexture(Resources::Find<Texture>(_strItemName + L"Tex"));
-		//
-		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//pRenderer->SetMaterial(pMater);
-		//
-		//int x = pTex->GetHeight();
-		//int y = pTex->GetWidth();
 		GetComponent<Transform>()->SetScale(0.1f * 30/10.f, 0.1f * 30/10.f, 0.f);
 		
 		AddComponent<Rigidbody>();
@@ -99,9 +86,9 @@ namespace W
 	}
 	void ItemObject::add_item()
 	{
-		IconUI* pIcon = ItemManager::GetClone(m_strItemName);
+		/*IconUI* pIcon = ItemManager::GetClone(m_strItemName);
 		assert(pIcon);
 		SceneManger::GetUI<Inventory>()->AddItem(pIcon, pIcon->GetName());
-		object::Destroy(this);
+		object::Destroy(this);*/
 	}
 }

@@ -3,7 +3,6 @@
 #include "WObject.h"
 #include "WGroggy.h"
 #include "WInputObject.h"
-#include "WRenderer.h"
 #include "WObject.h"
 #include "WSceneManger.h"
 
@@ -14,19 +13,7 @@ namespace W
 		m_vecInput{},
 		m_iCurIndex(0)
 	{
-		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
-		////pMater->SetTexture(pTex);
-		//Resources::Insert(L"DefenseMater", pMater);
-		//pMater->SetRenderinMode(eRenderingMode::Transparent);
-		//
-		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//pRenderer->SetMaterial(pMater);
-		//
-		//std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"demainInputBack");
-		//pMater->SetTexture(pAtlas);
-
+		
 		GetComponent<Transform>()->SetScale(2.5f * 1.8f, 2.5f * 0.5f, 0.f);
 	}
 	InputBackground::~InputBackground()
@@ -40,7 +27,7 @@ namespace W
 	}
 	void InputBackground::Initialize()
 	{
-		Vector3 vTargetPos = renderer::MainCamera->GetOwner()->GetComponent<Transform>()->GetPosition();
+		Vector3 vTargetPos = Vector3(0.f, 0.f, -10.f);
 		vTargetPos.y += 1.f;
 		vTargetPos.z += 1.f;
 

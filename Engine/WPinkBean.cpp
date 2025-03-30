@@ -5,7 +5,6 @@
 #include "WMonsterScript.h"
 #include "WMonsterAttack.h"
 #include "WMonsterDead.h"
-#include "WRenderer.h"
 #include "WEventManager.h"
 #include "WSceneManger.h"
 #include "WMonsterStand.h"
@@ -33,29 +32,13 @@ namespace W
 	{
 		SetName(L"PinkBean"); 
 
-		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//
-		//
-		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetRenderinMode(eRenderingMode::Transparent);
-		//pMater->SetShader(Resources::Find<Shader>(L"MonsterShader"));
-		//Resources::Insert(L"PinkBeanlMater", pMater);
-		//
-		//pRenderer->SetMaterial(pMater);
-		//
-		//std::shared_ptr<Texture> pAtlas1 = Resources::Find<Texture>(L"PinkBean1");
-		//std::shared_ptr<Texture> pAtlas2 = Resources::Find<Texture>(L"PinkBean2");
-
 		AddComponent<Rigidbody>();
 
 		Animator* pAnim = AddComponent<Animator>();
 		
 		pAnim->Create(L"PinkBean_start_left", Vector2(0.f, 7200.f), Vector2(750.f, 600.f), 4, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"PinkBean_start_right", Vector2(9750.f, 7200.f), Vector2(-750.f, 600.f), 4, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		//pAnim->StartEvent(L"PinkBean_start_left") = std::bind(&PinkBean::start, this);
-		//pAnim->StartEvent(L"PinkBean_start_right") = std::bind(&PinkBean::start, this);
-
+		
 		pAnim->Create(L"PinkBean_stand_left", Vector2(0.f, 0.f), Vector2(750.f, 600.f), 6, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"PinkBean_move_left", Vector2(0.f, 600.f), Vector2(750.f, 600.f), 8, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"PinkBean_attack0_left",  Vector2(0.f, 1200.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
@@ -206,10 +189,7 @@ namespace W
 		Monster::LateUpdate();
 
 	}
-	//void PinkBean::Render()
-	//{
-	//	Monster::Render();
-	//}
+	
 
 
 	void PinkBean::update_HP()

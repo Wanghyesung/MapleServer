@@ -14,8 +14,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//virtual void Render()override;
-
+		
 		void SetOwner(Monster* _pMon) { m_pMonster = _pMon; }
 		void SetLevel(UINT _iNum);
 	private:

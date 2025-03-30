@@ -1,6 +1,4 @@
 #include "WGameObject.h"
-#include "WRenderer.h"
-#include "WGraphicDevice_Dx11.h"
 #include "WTransform.h"
 
 namespace W

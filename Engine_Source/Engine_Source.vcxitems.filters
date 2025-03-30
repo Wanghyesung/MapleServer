@@ -37,9 +37,6 @@
     <Filter Include="GameObject\Component\Transform">
       <UniqueIdentifier>{e2acf9dc-b7e4-456d-a53f-6d1fac4260d8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Component\MeshRenderer">
-      <UniqueIdentifier>{2b4fb0e3-61bf-4740-bfec-684101f203b9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Component\Script">
       <UniqueIdentifier>{fa3a80e4-681b-46e7-9837-3ee00c75b316}</UniqueIdentifier>
     </Filter>
@@ -64,17 +61,8 @@
     <Filter Include="Resource\ConstantBuffer">
       <UniqueIdentifier>{38e1aa90-7ad6-4ccc-ba1f-ed6713875509}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource\Mesh">
-      <UniqueIdentifier>{047b6c82-99a7-4d37-bc76-1ba3fa465c1c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Component\Camera">
       <UniqueIdentifier>{57f5dce3-be7f-48c5-8645-f44cdae18e0a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource\Material">
-      <UniqueIdentifier>{dd4779db-4960-48a8-a52a-77b52bd8ad65}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI">
-      <UniqueIdentifier>{b130f63c-321a-475a-be85-57688e346cf8}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject\Component\Collider">
       <UniqueIdentifier>{b43d42c2-7212-4101-a4fc-c110d7c8f5ca}</UniqueIdentifier>
@@ -129,12 +117,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WResources.cpp">
       <Filter>Resource\Resources</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WGraphicDevice_Dx11.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WRenderer.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WComponent.cpp">
       <Filter>GameObject\Component</Filter>
     </ClCompile>
@@ -143,9 +125,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WTransform.cpp">
       <Filter>GameObject\Component\Transform</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WMeshRenderer.cpp">
-      <Filter>GameObject\Component\MeshRenderer</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WTexture.cpp">
       <Filter>Resource</Filter>
@@ -161,24 +140,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WConstantBuffer.cpp">
       <Filter>Resource\ConstantBuffer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WShader.cpp">
-      <Filter>Resource\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WMesh.cpp">
-      <Filter>Resource\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WCamera.cpp">
-      <Filter>GameObject\Component\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WMaterial.cpp">
-      <Filter>Resource\Material</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WUI.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)UIManger.cpp">
-      <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WCollisionManager.cpp">
       <Filter>Scene\Manger</Filter>
@@ -202,25 +163,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WStructedBuffer.cpp">
       <Filter>Graphics\StructedBuffer</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WComputeShader.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)WPaintShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)WParticleSystem.cpp">
       <Filter>GameObject\Component</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WParticleShader.cpp">
-      <Filter>Resource\Shader</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WFontWrapper.cpp">
       <Filter>Font</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WAudioClip.cpp">
-      <Filter>Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WAudioListener.cpp">
-      <Filter>Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WAudioSource.cpp">
-      <Filter>Sound</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WFmod.cpp">
       <Filter>Sound</Filter>
@@ -272,12 +219,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WGraphics.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WGraphicDevice_Dx11.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WRenderer.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WComponent.h">
       <Filter>GameObject\Component</Filter>
     </ClInclude>
@@ -286,9 +227,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WTransform.h">
       <Filter>GameObject\Component\Transform</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WMeshRenderer.h">
-      <Filter>GameObject\Component\MeshRenderer</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WTexture.h">
       <Filter>Resource</Filter>
@@ -304,24 +242,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WConstantBuffer.h">
       <Filter>Resource\ConstantBuffer</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WShader.h">
-      <Filter>Resource\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WMesh.h">
-      <Filter>Resource\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WCamera.h">
-      <Filter>GameObject\Component\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WMaterial.h">
-      <Filter>Resource\Material</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WUI.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)UIManger.h">
-      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WObject.h">
       <Filter>Common</Filter>
@@ -348,28 +268,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WStructedBuffer.h">
       <Filter>Graphics\StructedBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WComputeShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WInfo.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WPaintShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WParticleSystem.h">
       <Filter>GameObject\Component</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WParticleShader.h">
-      <Filter>Resource\Shader</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WFontWrapper.h">
       <Filter>Font</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WAudioClip.h">
-      <Filter>Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WAudioListener.h">
-      <Filter>Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WAudioSource.h">
-      <Filter>Sound</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WFmod.h">
       <Filter>Sound</Filter>

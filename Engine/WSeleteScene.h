@@ -12,7 +12,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//Render()override;
+	
 		virtual void Destroy()override;
 
 		virtual void OnEnter()override;

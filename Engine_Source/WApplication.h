@@ -1,6 +1,4 @@
 #pragma once
-//#include "Engine.h"
-#include "WGraphicDevice_Dx11.h"
 
 
 namespace W
@@ -16,17 +14,14 @@ namespace W
 		void Initialize();
 		void Update();
 		void LateUpdate();
-		//void Render();
+	
 		void Destroy();
-		//void Present();
-
+	
 		void SetWindow(HWND _hHwnd, UINT _iWidth, UINT _iHeight);
 
 		UINT GetWidth() { return m_iWidth; }
 		UINT GetHeight() { return m_iHeight; }
 		HWND GetHwnd() { return m_hHwnd; }
-
-		//std::unique_ptr<W::graphics::GraphicDevice_Dx11>& GetDevice() { return graphicDevice; }
 
 	private:
 		bool mbInitialize = false;

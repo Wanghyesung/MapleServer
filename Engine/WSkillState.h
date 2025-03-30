@@ -2,7 +2,7 @@
 #include "WPlayer.h"
 #include "WPlayerSkill.h"
 #include "WInfo.h"
-#include "WAudioSource.h"
+
 namespace W
 {
 	class Effect;
@@ -34,10 +34,6 @@ namespace W
 
 		Player* GetPlayer();
 
-		void SetSound(std::shared_ptr<AudioClip> clip, bool _bLoop);
-		void StartSound();
-		void EndSound();
-
 	protected:
 		Effect* CreateEffet(std::wstring _strName, Vector2 _vLeftTop, Vector2 _vSize, 
 			UINT _iColumnLength, UINT _iRowLength, Vector2 _vDivisionSize, Vector2 _vOffset, float _fDuration);
@@ -52,8 +48,6 @@ namespace W
 
 		PlayerSkill* m_pOwner;
 
-		//기본 사운드
-		std::shared_ptr<AudioClip> m_pSoundClip;
 
 		tSkillTime m_tSKillTime;
 		float m_fAddDamage;
