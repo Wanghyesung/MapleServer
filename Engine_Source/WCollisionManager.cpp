@@ -7,7 +7,7 @@
 
 namespace W
 {
-	std::bitset<LAYER_MAX> CollisionManager::m_bitMatrix[LAYER_MAX] = {};
+	std::vector<UINT> CollisionManager::m_bitMatrix[LAYER_MAX][LAYER_MAX] = {};
 	std::map<UINT64, bool> CollisionManager::m_mapCollision = {};
 
 	void CollisionManager::Initialize()
@@ -17,57 +17,59 @@ namespace W
 
 	void CollisionManager::Update()
 	{
-		for (UINT column = 0 ;column < (UINT)eLayerType::End; ++column)
+		std::vector<Scene*> vecPlayerScene = SceneManger::GetPlayerScene();
+
+		for (Scene* pScene : vecPlayerScene)
 		{
-			for (UINT row = 0; row < (UINT)eLayerType::End; ++row)
+			UINT iSceneIdx = pScene->GetSceneIdx();
+			for (UINT column = 0; column < (UINT)eLayerType::End; ++column)
 			{
-				if (m_bitMatrix[column][row] == true)
+				for (UINT row = 0; row < (UINT)eLayerType::End; ++row)
 				{
-					LayerCollision((eLayerType)column, (eLayerType)row);
+					if (m_bitMatrix[iSceneIdx][column][row] == true)
+					{
+						LayerCollision(pScene,(eLayerType)column, (eLayerType)row);
+					}
 				}
 			}
 		}
 
 	}
-	void CollisionManager::LayerCollision(eLayerType _eLeft, eLayerType _eRight)
+	void CollisionManager::LayerCollision(Scene* _pScene, eLayerType _eLeft, eLayerType _eRight)
 	{
-		std::vector<Scene*> vecPlayerScene = SceneManger::GetPlayerScene();
+		const std::vector<GameObject*>& vecLeftObj =
+			_pScene->GetLayer(_eLeft).GetGameObjects();
 
-		for (Scene* pActiveScene : vecPlayerScene)
+		const std::vector<GameObject*>& vecRightObj =
+			_pScene->GetLayer(_eRight).GetGameObjects();
+
+		for (GameObject* pLObj : vecLeftObj)
 		{
-			const std::vector<GameObject*>& vecLeftObj =
-				pActiveScene->GetLayer(_eLeft).GetGameObjects();
+			Collider2D* pLeftCol = pLObj->GetComponent<Collider2D>();
+			if (pLeftCol == nullptr)
+				continue;
+			if (!pLeftCol->IsActive())
+				continue;
+			if (pLObj->GetState() != GameObject::eState::Active)
+				continue;
 
-			const std::vector<GameObject*>& vecRightObj =
-				pActiveScene->GetLayer(_eRight).GetGameObjects();
 
-			for (GameObject* pLObj : vecLeftObj)
+			for (GameObject* pRObj : vecRightObj)
 			{
-				Collider2D* pLeftCol = pLObj->GetComponent<Collider2D>();
-				if (pLeftCol == nullptr)
+				Collider2D* pRightCol = pRObj->GetComponent<Collider2D>();
+				if (pRightCol == nullptr)
 					continue;
-				if (!pLeftCol->IsActive())
+				if (!pRightCol->IsActive())
 					continue;
-				if (pLObj->GetState() != GameObject::eState::Active)
+				if (pRObj->GetState() != GameObject::eState::Active)
+					continue;
+				if (pRObj == pLObj)
 					continue;
 
-
-				for (GameObject* pRObj : vecRightObj)
-				{
-					Collider2D* pRightCol = pRObj->GetComponent<Collider2D>();
-					if (pRightCol == nullptr)
-						continue;
-					if (!pRightCol->IsActive())
-						continue;
-					if (pRObj->GetState() != GameObject::eState::Active)
-						continue;
-					if (pRObj == pLObj)
-						continue;
-
-					ColliderCollision(pLeftCol, pRightCol);
-				}
+				ColliderCollision(pLeftCol, pRightCol);
 			}
 		}
+		
 	}
 
 	void CollisionManager::ColliderCollision(Collider2D* _pLeft, Collider2D* _pRight)
@@ -245,8 +247,10 @@ namespace W
 		return true;
 	}
 
-	void CollisionManager::SetLayer(eLayerType _eLeft, eLayerType _eRight, bool _bEnable)
+	void CollisionManager::SetLayer(Scene* _pScene, eLayerType _eLeft, eLayerType _eRight, bool _bEnable)
 	{
+		UINT iSceneIdx = _pScene->GetSceneIdx();
+
 		UINT row = -1;
 		UINT col = -1;
 
@@ -265,27 +269,27 @@ namespace W
 			col = iLeft;
 		}
 
-		m_bitMatrix[col][row] = _bEnable;
+		m_bitMatrix[iSceneIdx][col][row] = _bEnable;
 	}
 	void CollisionManager::Clear()
 	{
-		for (int i = 0; i < m_bitMatrix->size(); ++i)
-		{
-			m_bitMatrix[i].reset();
-		}
-
-		m_mapCollision.clear();
+		//for (int i = 0; i < m_bitMatrix->size(); ++i)
+		//{
+		//	m_bitMatrix[i].reset();
+		//}
+		//
+		//m_mapCollision.clear();
 	}
 
 	void CollisionManager::erase(ColliderID _tCollID)
 	{
-		std::map<UINT64, bool>::iterator iter =
-			m_mapCollision.find(_tCollID.ID);
-
-		//처음 들어온 충돌체
-		if (iter == m_mapCollision.end())
-			return;
-
-		m_mapCollision.erase(_tCollID.ID);
+		//std::map<UINT64, bool>::iterator iter =
+		//	m_mapCollision.find(_tCollID.ID);
+		//
+		////처음 들어온 충돌체
+		//if (iter == m_mapCollision.end())
+		//	return;
+		//
+		//m_mapCollision.erase(_tCollID.ID);
 	}
 }

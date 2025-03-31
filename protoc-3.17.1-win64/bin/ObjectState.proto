@@ -4,20 +4,15 @@ package Protocol;
 //repeated uint64 victims = 3;
 
 //서버가 클라에게
-message S_CHATTING
+message S_STATE
 {
-	string scene =1;
-	int	layer = 2;
-	int id =3; //오브젝트별 아이디
+	string scene = 1;
+	int32 layer = 2;
+	int32 id = 3;
 
+	//텍스쳐
 	string state = 4;
-	int animidx = 5;
-}
-
-message S_NEW_CHATTING
-{
-	string name = 1;
-	string text = 2;
+	int32 anim_idx = 5;
 }
 
 

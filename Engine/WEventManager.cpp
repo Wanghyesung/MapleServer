@@ -51,6 +51,7 @@ namespace W
 
 	void EventManager::AddEvent(const tEvent& _tEve)
 	{
+		//더블 버퍼링
 		std::lock_guard<std::mutex> lock(m_eventMutex);
 		m_vecEvent[1 - m_iActiveIdx].push_back(_tEve);
 	}

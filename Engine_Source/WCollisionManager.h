@@ -7,6 +7,7 @@ namespace W
 
 	using namespace enums;
 	class Collider2D;
+	class Scene;
 	class CollisionManager
 	{
 	public:
@@ -22,18 +23,18 @@ namespace W
 
 		static void Initialize();
 		static void Update();
-		static void LayerCollision(eLayerType _eLeft, eLayerType _eRight);
+		static void LayerCollision(Scene* _pScene,eLayerType _eLeft, eLayerType _eRight);
 		static void ColliderCollision(Collider2D* _pLeft, Collider2D* _pRight);
 		static bool Intersect(Collider2D* _pLeft, Collider2D* _pRight);
 
-		static void SetLayer(eLayerType _eLeft, eLayerType _eRight, bool _bEnable);
+		static void SetLayer(Scene* _pScene, eLayerType _eLeft, eLayerType _eRight, bool _bEnable);
 		static void Clear();
 
 	private:
 		static void erase(ColliderID _tCollID);
 
 	private:
-		static std::bitset<LAYER_MAX> m_bitMatrix[LAYER_MAX];
+		static std::vector<UINT> m_bitMatrix[LAYER_MAX][LAYER_MAX];
 		static std::map<UINT64, bool> m_mapCollision;
 
 	};

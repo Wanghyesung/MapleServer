@@ -53,14 +53,14 @@ namespace W
 
 		//StartSound();
 
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Box, true);
-		CollisionManager::SetLayer(eLayerType::AttackObject, eLayerType::Box, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ladder, true);
-		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::AttackObject, true);
-		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Player, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterAttack, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Portal, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Box, true);
+		CollisionManager::SetLayer(this, eLayerType::AttackObject, eLayerType::Box, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ladder, true);
+		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::AttackObject, true);
+		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::Player, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::MonsterAttack, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Portal, true);
 	}
 	void CaveScene::OnExit()
 	{

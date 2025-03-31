@@ -39,9 +39,9 @@ namespace W
 		setobject();
 		setmonster();
 
-		Player* pPlayer = new Player();
-		AddGameObject(eLayerType::Player, pPlayer);
-		pPlayer->Initialize();
+		//Player* pPlayer = new Player();
+		//AddGameObject(eLayerType::Player, pPlayer);
+		//pPlayer->Initialize();
 
 
 		NPC* pNPC = new NPC();
@@ -84,14 +84,14 @@ namespace W
 
 	void ValleyScene::OnEnter()
 	{
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
-		CollisionManager::SetLayer(eLayerType::ItemObject, eLayerType::Ground, true);
-		CollisionManager::SetLayer(eLayerType::ItemObject, eLayerType::Player, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ladder, true);
-		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::AttackObject, true);
-		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::Player, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterAttack, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Portal, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Ground, true);
+		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Player, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ladder, true);
+		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::AttackObject, true);
+		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::Player, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::MonsterAttack, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Portal, true);
 
 	}
 	void ValleyScene::OnExit()

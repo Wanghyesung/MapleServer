@@ -4,14 +4,24 @@ package Protocol;
 //repeated uint64 victims = 3;
 
 
+message ObjectInfo 
+{	
+	string scene = 1;
+	int32 layer = 2;
+	int32 id = 3;
+
+	float x = 4;
+	float y = 5;
+    float z = 6;
+
+	string state = 7;
+	int32 animIdx = 8;
+}
 
 //서버가 클라에게
 message S_MAP
 {
-	int	playerid =1;
-
-	string scene =1;
-	//bool success = 2;
+	repeated ObjectInfo objInfo = 1;
 }
 
 //로그인

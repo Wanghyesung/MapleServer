@@ -6,7 +6,7 @@ package Protocol;
 //클라가 서버에게
 message C_EXIT
 {
-	int playerid;
+	int32 playerid = 1;
 }
 
 //서버가 클라에게
@@ -17,7 +17,7 @@ message S_EXIT
 
 message S_NEW_EXIT
 {
-	int playerid = 1;
+	int32 playerid = 1;
 }
 
 //로그인
