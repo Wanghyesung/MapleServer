@@ -8,10 +8,10 @@ message C_INPUT
 {
 	//어떤 클라인지 구분
 	string clientname = 1;
-	int playerid = 2;
+	int32 playerid = 2;
 
 	//이번 프레임에 들어온 클라별 인풋
-	repeated int inpus = 3;
+	repeated int32 inpus = 3;
 
 }
 

@@ -91,12 +91,12 @@ namespace W
 		create_monster();
 		create_event();
 
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Ground, true);
-		CollisionManager::SetLayer(eLayerType::ItemObject, eLayerType::Ground, true);
-		CollisionManager::SetLayer(eLayerType::ItemObject, eLayerType::Player, true);
-		CollisionManager::SetLayer(eLayerType::Monster, eLayerType::AttackObject, true);
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::MonsterAttack, true);
-		CollisionManager::SetLayer(eLayerType::Ground, eLayerType::MonsterAttack, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Ground, true);
+		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Player, true);
+		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::AttackObject, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::MonsterAttack, true);
+		CollisionManager::SetLayer(this, eLayerType::Ground, eLayerType::MonsterAttack, true);
 
 		m_bEnd = false;
 		m_iFadeCallStack = 1;

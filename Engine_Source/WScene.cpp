@@ -4,7 +4,9 @@
 #include "..\Engine\WMonsterManager.h"
 namespace W
 {
-	Scene::Scene()
+	UINT Scene::SCENECOUNT = 0;
+	Scene::Scene():
+		m_iSceneIdx(SCENECOUNT++)
 	{
 		m_vecLayer.resize((UINT)W::enums::eLayerType::End);
 	}

@@ -75,7 +75,7 @@ namespace W
 
 		void EraseObject(eLayerType _eType, GameObject* _pGameObj){ m_vecLayer[(UINT)_eType].EraseOnVector(_pGameObj); }
 
-	
+		UINT GetSceneIdx() { return m_iSceneIdx; }
 
 	private:
 		std::vector<Layer> m_vecLayer;
@@ -83,6 +83,8 @@ namespace W
 		tMapSize m_tMapSize;
 		tMapPossibleSize m_tPossibleSize;
 
+		static UINT SCENECOUNT;
+		UINT m_iSceneIdx;
 	};
 }
 

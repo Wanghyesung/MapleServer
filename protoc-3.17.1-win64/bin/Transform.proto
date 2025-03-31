@@ -6,8 +6,8 @@ package Protocol;
 message S_TRANSFORM
 {	
 	string scene = 1;
-	int layer = 2;
-	int id = 3;
+	int32 layer = 2;
+	int32 id = 3;
 
 	float x = 4;
 	float y = 5;

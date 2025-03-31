@@ -3,23 +3,16 @@ package Protocol;
 
 //repeated uint64 victims = 3;
 
-//클라가 서버에게
-message C_CHATTING
-{
-	string name = 1;
-	string text = 2;
-}
 
 //서버가 클라에게
-message S_CHATTING
+message S_COLLISIION
 {
-	bool success = 1;
-}
-
-message S_NEW_CHATTING
-{
-	string name = 1;
-	string text = 2;
+	string scene = 1;
+	int32 layer = 2;
+	int32 leftId =3;
+	int32 rightId = 4;
+	   
+	int32 collType = 5; //1 Enter, 2. 
 }
 
 

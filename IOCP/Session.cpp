@@ -258,7 +258,7 @@ void Session::ProcessRecv(int _iNumOfBytes)
 	int proccessLen = OnRecv(m_recvBuffer.GetReadPos(), _iNumOfBytes);
 
 	if (proccessLen < 0 || proccessLen < m_recvBuffer.DataSize() ||
-		m_recvBuffer.Read(_iNumOfBytes) == false)
+		m_recvBuffer.Read(proccessLen) == false)
 	{
 		DisConnect(L"RecvRead Overflow");
 		return;

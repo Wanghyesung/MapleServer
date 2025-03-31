@@ -47,7 +47,7 @@ namespace W
 		//SceneManger::CreateScene<SeleteScene>(L"SeleteScene");
 		//SceneManger::CreateScene<StartScene>(L"StartScen");
 		SceneManger::CreateScene<ValleyScene>(L"Valley");
-		SceneManger::AddPlayerScene(L"Valley");
+		//SceneManger::AddPlayerScene(L"Valley");
 		SceneManger::GetActiveScene()->OnEnter();
 		
 	}

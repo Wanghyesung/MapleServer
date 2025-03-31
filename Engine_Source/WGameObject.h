@@ -111,11 +111,17 @@ namespace W
 		void SetLayerType(eLayerType _eLayerType) { m_eLayerType = _eLayerType; }
 		eLayerType GetLayerType() { return m_eLayerType; }
 
+		void SetObjectID(UINT _iPlayerID) { m_iObjectID = _iPlayerID; }
+		UINT GetObjectID() { return m_iObjectID; }
+
 	private:
 		eState m_eState;
 		std::vector<Component*> m_vecComponent;
 		std::vector<Script*> m_vecScript;
 		eLayerType m_eLayerType;
+
+		UINT m_iObjectID;
+		static UINT OBJECT_ID;
 	};
 }
 

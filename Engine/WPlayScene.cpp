@@ -24,7 +24,7 @@ namespace W
 	}
 	void PlayScene::Initialize()
 	{
-		CollisionManager::SetLayer(eLayerType::Player, eLayerType::Monster, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Monster, true);
 
 		{
 			GameObject* player = new GameObject();

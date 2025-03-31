@@ -104,6 +104,7 @@ namespace W
 		void SetHair(UINT _iHairNum);
 		void SetEye(UINT _iEyeNum);
 
+		//서버 씬 배열에 플레이어 배치된 순서
 		void SetPlayerID(UINT _iPlayerID) { m_iPlayerID = _iPlayerID; }
 		UINT GetPlayerID() { return m_iPlayerID; }
 
