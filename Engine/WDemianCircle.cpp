@@ -106,7 +106,7 @@ namespace W
 	}
 	void DemianCircle::move()
 	{
-		m_pTarget = SceneManger::FindPlayer();
+		m_pTarget = SceneManger::FindPlayer(GetSceneName());
  
 	 	Vector3 vTargetPos = m_pTarget->GetComponent<Transform>()->GetPosition();
 		Vector3 vPosition = GetComponent<Transform>()->GetPosition();

@@ -15,8 +15,7 @@ namespace W
 		
 	private:
 		static void respawn(Monster* _pGameObj);
-		static void create_item(Monster* _pGameObj);
-
+	
 	private:
 		static std::vector<Monster*> m_vecDeadObjs;
 		static std::vector<GameObject*> m_vecExpectedDeleteObjs;

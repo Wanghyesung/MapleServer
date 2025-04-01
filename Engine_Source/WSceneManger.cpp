@@ -1,16 +1,8 @@
 #include "WSceneManger.h"
 
 #include "WRigidbody.h"
-//#include "WPlayScene.h"
-//#include "WLeafreScene.h"
-//#include "WValleyScene.h"
-//#include "WValleyScene_2.h"
-//#include "WCaveScene.h"
-//#include "WTempleScene.h"
-//#include "WTempleScene_2.h"
-//#include "WTempleBossScene.h"
-#include "..\Engine\WCameraScript.h"
 
+#include "..\Engine\WPlayer.h"
 #include "..\Engine\WBattleManager.h"
 
 #include "..\Engine\WPlayerAttackObject.h"
@@ -18,10 +10,10 @@
 #include "..\Engine\WMonsterManager.h"
 namespace W
 {
+	UINT SceneManger::SCENE_IDX = 0;
+	std::unordered_map<std::wstring, Scene*> SceneManger::m_hashScene = {};
 	std::vector<std::wstring> SceneManger::m_vecPlayerScene = {};
 
-	Scene* SceneManger::m_pActiveScene = nullptr;
-	std::map<std::wstring, Scene*> SceneManger::m_mapScene = {};
 	void SceneManger::Initialize()
 	{
 		
@@ -31,25 +23,25 @@ namespace W
 	{
 		for (const std::wstring& strScene : m_vecPlayerScene)
 		{
-			m_mapScene.find(strScene)->second->Update();
+			m_hashScene.find(strScene)->second->Update();
 		}
 	}
 	void SceneManger::LateUpdate()
 	{
 		for (const std::wstring& strScene : m_vecPlayerScene)
 		{
-			m_mapScene.find(strScene)->second->LateUpdate();
+			m_hashScene.find(strScene)->second->LateUpdate();
 		}
 	}
 
 	void SceneManger::Destroy()
 	{
-		m_pActiveScene->Destroy();
+		//m_pActiveScene->Destroy();
 	}
 
 	void SceneManger::Release()
 	{
-		for (auto &iter : m_mapScene)
+		for (auto &iter : m_hashScene)
 		{
 			delete iter.second;
 			iter.second = nullptr;
@@ -61,7 +53,28 @@ namespace W
 
 	void SceneManger::Erase(GameObject* _pGameObject)
 	{
-		m_pActiveScene->EraseObject(_pGameObject->GetLayerType(),_pGameObject);
+		Scene* pScene = FindScene(_pGameObject->GetSceneName());
+		pScene->EraseObject(_pGameObject->GetLayerType(), _pGameObject);
+	}
+
+	Scene* SceneManger::FindScene(const std::wstring& _strSceneName)
+	{
+		const auto& iter = m_hashScene.find(_strSceneName);
+		if(iter == m_hashScene.end())
+			return nullptr;
+
+		return iter->second;
+	}
+
+	Scene* SceneManger::GetActiveScene(GameObject* _pGameObj)
+	{
+		const std::wstring& strSceneName = _pGameObj->GetSceneName();
+		Scene* pScene = FindScene(strSceneName);
+
+		if(!pScene)
+			return nullptr;
+
+		return pScene;
 	}
 
 	std::vector<Scene*> SceneManger::GetPlayerScene()
@@ -69,44 +82,46 @@ namespace W
 		std::vector<Scene*> vecPlayerScene;
 		for (int i = 0; i < m_vecPlayerScene.size(); ++i)
 		{
-			vecPlayerScene.push_back(m_mapScene.find(m_vecPlayerScene[i])->second);
+			vecPlayerScene.push_back(m_hashScene.find(m_vecPlayerScene[i])->second);
 		}
 		return vecPlayerScene;
 	}
 
-	Scene* SceneManger::LoadScene(std::wstring _strName)
+	void SceneManger::AddGameObject(const std::wstring& _strSceneName, eLayerType _eType, GameObject* _pGameObj)
 	{
-		std::map<std::wstring, Scene*>::iterator iter =
-			m_mapScene.find(_strName);
-
-		if (iter == m_mapScene.end())
-			return nullptr;
-
-
-		PushObjectPool(m_pActiveScene);//현재 씬 공격 오브젝트 회수
-		
-		SwapPlayer(m_pActiveScene, iter->second);
-
-		m_pActiveScene->OnExit();
-		m_pActiveScene = iter->second;
-		m_pActiveScene->OnEnter();
-
-		//SwapCamera();
-		return iter->second;
-	}
-
-	void SceneManger::AddGameObject(eLayerType _eType, GameObject* _pGameObj)
-	{
+		Scene* pScene = FindScene(_strSceneName);
 		//다음 프레임에 넣기, 후처리에 넣기
-		m_pActiveScene->AddGameObject(_eType, _pGameObj);
+		pScene->AddGameObject(_eType, _pGameObj);
 	}
 
-	GameObject* SceneManger::FindPlayer()
+	GameObject* SceneManger::FindPlayer(UINT _iPlayerID)
 	{
-		std::vector<GameObject*> vecObjs = 
-			m_pActiveScene->GetLayer(eLayerType::Player).GetGameObjects();
+		for (Scene* pScene : GetPlayerScene())
+		{
+			const std::vector<GameObject*>& vecObjs = pScene->GetLayer(eLayerType::Player).GetGameObjects();
+			for (GameObject* pObj : vecObjs)
+			{
+				if (((Player*)pObj)->GetPlayerID() == _iPlayerID)
+					return pObj;
+			}
+		}
+		return nullptr;
+	}
 
-		return vecObjs[0];
+	GameObject* SceneManger::FindPlayer(const std::wstring& _strSceneName)
+	{
+		Scene* pScene = m_hashScene[_strSceneName];
+		const std::vector<GameObject*> vecPlayer = pScene->GetLayer(eLayerType::Player).GetGameObjects();
+
+		if(vecPlayer.empty())
+			return nullptr;
+		
+		return vecPlayer[0];
+	}
+
+	const std::vector<GameObject*>& SceneManger::GetPlayers(const std::wstring& _strSceneName)
+	{
+		return m_hashScene[_strSceneName]->GetLayer(eLayerType::Player).GetGameObjects();
 	}
 
 	void SceneManger::SwapObject(Scene* _pPrevScene, Scene* _pNextScene, GameObject* _pGameObject)
@@ -118,15 +133,15 @@ namespace W
 	}
 
 
-	void SceneManger::SwapPlayer(Scene* _pPrevScene, Scene* _pNextScene)
+	void SceneManger::SwapPlayer(Player* _pPlayer, Scene* _pPrevScene, Scene* _pNextScene)
 	{
-		GameObject* pPlayer = FindPlayer();
-		Vector3 vPos = pPlayer->GetComponent<Transform>()->GetPosition();
+		
+		Vector3 vPos = _pPlayer->GetComponent<Transform>()->GetPosition();
 		vPos.x = 0.f; vPos.y = 0.f;
-		pPlayer->GetComponent<Transform>()->SetPosition(vPos);
-		pPlayer->GetComponent<Rigidbody>()->SetGround(false);
+		_pPlayer->GetComponent<Transform>()->SetPosition(vPos);
+		_pPlayer->GetComponent<Rigidbody>()->SetGround(false);
 
-		SwapObject(_pPrevScene, _pNextScene, pPlayer);
+		SwapObject(_pPrevScene, _pNextScene, _pPlayer);
 	}
 
 

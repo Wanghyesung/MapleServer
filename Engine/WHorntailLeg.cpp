@@ -35,11 +35,13 @@ namespace W
 	{
 		//1
 		MonsterAttackObject* attack1 = new MonsterAttackObject();
+		attack1->SetSceneName(GetSceneName());
 		attack1->SetName(L"legattack1");
 		AddMonsterSkill(attack1);
 
 		//2
 		MonsterAttackObject* attack2 = new MonsterAttackObject();
+		attack2->SetSceneName(GetSceneName());
 		attack2->SetName(L"legattack2");
 		AddMonsterSkill(attack2);
 	}

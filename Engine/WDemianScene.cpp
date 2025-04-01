@@ -1,7 +1,6 @@
 #include "WDemianScene.h"
 #include "WResources.h"
 
-#include "WCameraScript.h"
 #include "WGround.h"
 #include "WDemian.h"
 #include "WCollisionManager.h"
@@ -14,7 +13,7 @@
 #include "WTime.h"
 #include "WThreadPool.h"
 #include "WMonsterManager.h"
-
+#include "WSceneManger.h"
 namespace W
 {
 	DemianScene::DemianScene():
@@ -28,9 +27,6 @@ namespace W
 		SetMapSize(-1.9f, -1.f, 1.9f, -1.f);
 		SetMapPossibleSize(-8.9f, 8.9f);
 
-		
-
-		
 	}
 	DemianScene::~DemianScene()
 	{
@@ -44,6 +40,18 @@ namespace W
 	{
 		CreateBackground();
 		create_effect();
+		create_monster();
+		create_event();
+
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Ground, true);
+		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Player, true);
+		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::AttackObject, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::MonsterAttack, true);
+		CollisionManager::SetLayer(this, eLayerType::Ground, eLayerType::MonsterAttack, true);
+
+		m_bEnd = false;
+		m_iFadeCallStack = 1;
 
 	}
 	void DemianScene::Update()
@@ -88,31 +96,17 @@ namespace W
 		Scene::OnEnter();
 		ThreadPool::Joinable();
 
-		create_monster();
-		create_event();
-
-		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ground, true);
-		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Ground, true);
-		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Player, true);
-		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::AttackObject, true);
-		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::MonsterAttack, true);
-		CollisionManager::SetLayer(this, eLayerType::Ground, eLayerType::MonsterAttack, true);
-
-		m_bEnd = false;
-		m_iFadeCallStack = 1;
 	}
 	void DemianScene::OnExit()
 	{
 		Scene::OnExit();
 
 		m_pWhite = nullptr;
-
-		CollisionManager::Clear();
 	}
 	void DemianScene::CreateBackground()
 	{
 		GameObject* pBackGround = new GameObject();
-		
+		pBackGround->SetSceneName(GetName());
 		AddGameObject(eLayerType::Background, pBackGround);
 		
 		pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 1.f);
@@ -121,6 +115,7 @@ namespace W
 
 
 		Ground* pGround = new Ground(true);
+		pGround->SetSceneName(GetName());
 		AddGameObject(eLayerType::Ground, pGround);
 		pGround->GetComponent<Transform>()->SetPosition(0.f, -2.95f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(4.3f * 7.f, 1.f * 0.3f, 0.f);
@@ -150,17 +145,20 @@ namespace W
 		if (m_fCurStigmaTime >= m_fStigmaTime)
 		{
 			m_fCurStigmaTime = 0.f;
-			BattleManager::HitchAbnormal(BattleManager::eAbnormalType::Stigma);
+			GameObject* pPlayer = SceneManger::FindPlayer(GetName());
+			BattleManager::HitchAbnormal(pPlayer,BattleManager::eAbnormalType::Stigma);
 		}
 	}
 
 	void DemianScene::create_monster()
 	{
 		Demian* pDemian = new Demian();
+		pDemian->SetSceneName(GetName());
 		pDemian->Initialize();
 		AddGameObject(eLayerType::Monster, pDemian);
 
 		DemianPhase2* pDemian2 = new DemianPhase2();
+		pDemian2->SetSceneName(GetName());
 		pDemian2->Initialize();
 		AddGameObject(eLayerType::Monster, pDemian2);
 		pDemian2->GetComponent<Collider2D>()->SetActive(false);
@@ -170,14 +168,17 @@ namespace W
 	void DemianScene::create_event()
 	{
 		m_pWhite = new White();
+		m_pWhite->SetSceneName(GetName());
 		m_pWhite->SetEndTime(2.f);
 		m_pWhite->SetFunction(std::bind(&DemianScene::phase2, this));
 
 		m_pSharHP = new SharHP();
+		m_pSharHP->SetSceneName(GetName());
 		AddGameObject(eLayerType::UI, m_pSharHP);
 		m_pSharHP->Initialize();
 
 		m_pStigmaBack = new StigmaBack();
+		m_pStigmaBack->SetSceneName(GetName());
 		m_pStigmaBack->Initialize();
 		AddGameObject(eLayerType::Object, m_pStigmaBack);
 	}
@@ -186,10 +187,12 @@ namespace W
 	{
 		
 		Effect* pAttack_hit1 = new Effect();
+		pAttack_hit1->SetSceneName(GetName());
 		pAttack_hit1->SetName(L"Demian2_attack1");
 		pAttack_hit1->CreateAnimation(Vector2(0.f, 0.f), Vector2(227.f, 228.f), 5, 1, Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.2f);
 
 		Effect* pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->GetComponent<Transform>()->SetScale(Vector3(18.f, 18.f, 0.f));
 		pEffect->SetName(L"DemianAttack0Effect");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(1122.f, 382.f), 9, 1, Vector2(2000.f, 2000.f), Vector2(0.f, 0.f), 0.1f);
@@ -198,6 +201,7 @@ namespace W
 		for (int i = 0; i < 2; ++i)
 		{
 			Effect* pClone1 = new Effect();
+			pClone1->SetSceneName(GetName());
 			pClone1->GetComponent<Transform>()->SetScale(Vector3(18.f, 18.f, 0.f));
 			pClone1->SetName(L"DemianClone0");
 			
@@ -205,6 +209,7 @@ namespace W
 		}
 		
 		Effect* pClone2 = new Effect();
+		pClone2->SetSceneName(GetName());
 		pClone2->GetComponent<Transform>()->SetScale(Vector3(18.f, 18.f, 0.f));
 		pClone2->SetName(L"DemianClone1");
 	
@@ -213,6 +218,7 @@ namespace W
 		for (int i = 0; i < 3; ++i)
 		{
 			Effect* pEffect = new Effect();
+			pEffect->SetSceneName(GetName());
 			pEffect->GetComponent<Transform>()->SetScale(3.5f, 3.5f, 0.f);
 			pEffect->SetName(L"DemianTarget");
 			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(286.f, 288.f), 14, 1, Vector2(300.f, 300.f), Vector2::Zero, 0.1f);

@@ -1,6 +1,5 @@
 #include "WHelisiumBoss.h"
 #include "WResources.h"
-#include "WCameraScript.h"
 #include "WCollisionManager.h"
 #include "WGround.h"
 #include "WMegnus.h"
@@ -23,6 +22,15 @@ namespace W
 	{
 		CreateBackground();
 
+		create_monster();
+
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Ground, true);
+		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Player, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ladder, true);
+		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::AttackObject, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::MonsterAttack, true);
+		CollisionManager::SetLayer(this, eLayerType::Ground, eLayerType::MonsterAttack, true);
 	}
 	void HelisiumBoss::Update()
 	{
@@ -38,30 +46,16 @@ namespace W
 		Scene::OnEnter();
 		ThreadPool::Joinable();
 
-		create_monster();
-
-		//StartSound();
-
-		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ground, true);
-		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Ground, true);
-		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Player, true);
-		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ladder, true);
-		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::AttackObject, true);
-		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::MonsterAttack, true);
-		CollisionManager::SetLayer(this, eLayerType::Ground, eLayerType::MonsterAttack, true);
 
 	}
 	void HelisiumBoss::OnExit()
 	{
 		Scene::OnExit();
-
-		//EndSound();
-		CollisionManager::Clear();
 	}
 	void HelisiumBoss::CreateBackground()
 	{
 		GameObject* pBackGround = new GameObject();
-		
+		pBackGround->SetSceneName(GetName());
 		AddGameObject(eLayerType::Background, pBackGround);
 		
 		pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 0.f);
@@ -70,6 +64,7 @@ namespace W
 
 
 		Ground* pGround = new Ground(true);
+		pGround->SetSceneName(GetName());
 		AddGameObject(eLayerType::Ground, pGround);
 		pGround->GetComponent<Transform>()->SetPosition(0.f, -2.95f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(4.3f * 7.f, 1.f * 0.3f, 0.f);
@@ -78,6 +73,8 @@ namespace W
 	void HelisiumBoss::create_monster()
 	{
 		Megnus* pMegnus = new Megnus();
+		pMegnus->SetSceneName(GetName());
+
 		pMegnus->Initialize();
 		AddGameObject(eLayerType::Monster, pMegnus);
 	}
@@ -86,22 +83,27 @@ namespace W
 	{
 		
 		Effect* pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"Megnus_attack0");
 		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(320.f, 244.f), 5, 1, Vector2(320.f, 320.f), Vector2(0.f, 0.f), 0.2f);
 
 		pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"Megnus_attack1");
 		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(256.f, 196.f), 5, 1, Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.2f);
 
 		pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"Megnus_attack2");
 		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(236.f, 229.f), 7, 1, Vector2(240.f, 240.f), Vector2(0.f, 0.f), 0.2f);
 
 		pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"Megnus_attack3");
 		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(228.f, 231.f), 7, 1, Vector2(230.f, 230.f), Vector2(0.f, 0.f), 0.2f);
 
 		pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"Megnus_attack4");
 		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(165.f, 168.f), 7, 1, Vector2(170.f, 170.f), Vector2(0.f, 0.f), 0.2f);
 

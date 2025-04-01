@@ -50,6 +50,7 @@ namespace W
 	MonsterAttackObject* Monster::GetMonsterSkill(const std::wstring& _strName)
 	{
 		GameObject* pGameObj = ObjectPoolManager::FrontObject(_strName);
+		pGameObj->SetSceneName(GetSceneName());
 		return dynamic_cast<MonsterAttackObject*>(pGameObj);
 	}
 

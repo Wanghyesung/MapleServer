@@ -52,13 +52,13 @@ namespace W
 	}
 	void MonsterMove::move_target()
 	{
-		m_pTarget = SceneManger::FindPlayer();
+		Monster* pMonster = GetMonster();
+
+		m_pTarget = SceneManger::FindPlayer(pMonster->GetSceneName());
 		if (m_pTarget == nullptr)
 			return;
 
-		Monster* pMonster = GetMonster();
 		Player* pPlayer = dynamic_cast<Player*>(m_pTarget);
-
 		Vector3 vTargetPosition = m_pTarget->GetComponent<Collider2D>()->GetPosition();
 		Vector3 vPosition = GetMonster()->GetComponent<Collider2D>()->GetPosition();
 		vTargetPosition.z = 0.f;

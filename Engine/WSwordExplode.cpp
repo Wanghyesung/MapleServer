@@ -1,7 +1,6 @@
 #include "WSwordExplode.h"
 #include "WResources.h"
 #include "WAnimator.h"
-#include "WObject.h"
 #include "WMonsterAttackScript.h"
 #include "WMonster.h",
 #include "WDemianSword.h"

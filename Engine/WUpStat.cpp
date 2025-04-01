@@ -1,6 +1,5 @@
 #include "WUpStat.h"
 #include "WMonster.h"
-#include "WObject.h"
 #include "WTime.h"
 #include "WMonsterScript.h"
 #include "WBattleManager.h"
@@ -31,7 +30,7 @@ namespace W
 		if (m_fCurTime >= m_fDeleteTime ||
 			m_pTarget->GetState() == GameObject::Paused)
 		{
-			object::Destroy(this);
+			EventManager::DeleteObject(this);
 			BattleManager::Buff_Stat(m_pTarget, m_eType, -m_fAccStat);
 			return;
 		}

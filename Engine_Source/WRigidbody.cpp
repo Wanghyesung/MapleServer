@@ -103,9 +103,9 @@ namespace W
 
 	void Rigidbody::check_map()
 	{
-		Scene::tMapPossibleSize tMapSize = SceneManger::GetActiveScene()->GetMapPossibleSize();
-
 		GameObject* pGameObj = GetOwner();
+
+		Scene::tMapPossibleSize tMapSize = SceneManger::GetActiveScene(pGameObj)->GetMapPossibleSize();
 
 		Transform* pTr = pGameObj->GetComponent<Transform>();	
 		Collider2D* pCollider = pGameObj->GetComponent<Collider2D>();

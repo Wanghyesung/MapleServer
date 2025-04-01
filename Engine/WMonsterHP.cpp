@@ -1,9 +1,10 @@
 #include "WMonsterHP.h"
 #include "WMonster.h"
-#include "WObject.h"
 #include "WMonsterScript.h"
 #include "WMonsterBackHP.h"
 #include "WMonsterManager.h"
+#include "WEventManager.h"
+
 namespace W
 {
 	UINT MonsterHP::HP_COUNT = 0;
@@ -38,11 +39,12 @@ namespace W
 	void MonsterHP::Initialize()
 	{
 		m_pHPBack = new MonsterBackHP(m_bBoss);
+		m_pHPBack->SetSceneName(GetSceneName());
 		m_pHPBack->SetHP(this);
-		if(!m_bBoss)
-			SceneManger::AddGameObject(eLayerType::Object, m_pHPBack);
+		if (!m_bBoss)
+			EventManager::CreateObject(m_pHPBack, eLayerType::Object);
 		else
-			SceneManger::AddGameObject(eLayerType::UI, m_pHPBack);
+			EventManager::CreateObject(m_pHPBack, eLayerType::UI);
 	}
 	void MonsterHP::Update()
 	{
@@ -52,8 +54,8 @@ namespace W
 		if (m_fHP <= 0.f)
 		{
 			m_bActive = false;
-			object::Destroy(this);
-			object::Destroy(m_pHPBack);
+			EventManager::DeleteObject(this);
+			EventManager::DeleteObject(m_pHPBack);
 			return;
 		}
 

@@ -192,19 +192,22 @@ namespace W
 		for (int i = 0; i < 30; ++i)
 		{
 			MegnusStone* pStone = new MegnusStone();
+			pStone->SetSceneName(GetSceneName());
 			pStone->SetName(L"Megnus_Stone");
 			AddMonsterSkill(pStone);
 		}
 
 		//mobzone
 		m_pZone = new MobZone();
+		m_pZone->SetSceneName(GetSceneName());
 		m_pZone->SetOwner(this);
 		m_pZone->Initialize();
-		SceneManger::AddGameObject(eLayerType::Object, m_pZone);
+		EventManager::CreateObject(m_pZone, eLayerType::Object);
 
 
 		//attack0
 		MonsterAttackObject* pAttack0 = new MonsterAttackObject();
+		pAttack0->SetSceneName(GetSceneName());
 		pAttack0->SetName(L"Megnus_attack0");
 		AddMonsterSkill(pAttack0);
 
@@ -212,12 +215,14 @@ namespace W
 		for (int i = 0; i < 7; ++i)
 		{
 			CloneMegnus* pMegnusClone = new CloneMegnus();
+			pMegnusClone->SetSceneName(GetSceneName());
 			pMegnusClone->SetName(L"Megnus_attack1");
 			AddMonsterSkill(pMegnusClone);
 		}
 
 		//attack2
 		MonsterMoveAttack* attack2 = new MonsterMoveAttack();
+		attack2->SetSceneName(GetSceneName());
 		attack2->SetName(L"Megnus_attack2");
 		AddMonsterSkill(attack2);
 
@@ -225,6 +230,7 @@ namespace W
 		for (int i = -1; i <= 1; i += 2)
 		{
 			MegnusAttack* attack3 = new MegnusAttack();
+			attack3->SetSceneName(GetSceneName());
 			attack3->SetDir(i);
 			//애니메이션 공격 끝나는 프레임
 			attack3->SetName(L"Megnus_attack3");
@@ -232,14 +238,16 @@ namespace W
 		}
 
 		MonsterAttackObject* attack4 = new MonsterAttackObject();
+		attack4->SetSceneName(GetSceneName());
 		attack4->SetName(L"Megnus_attack4");
 		AddMonsterSkill(attack4);
 
 		//가스
 		m_pGas = new SleepGas();
+		m_pGas->SetSceneName(GetSceneName());
 		m_pGas->SetOnwer(this);
 		m_pGas->GetComponent<Transform>()->SetPosition(10.f, -1.95f, -1.5f);
-		SceneManger::AddGameObject(eLayerType::MonsterAttack, m_pGas);
+		EventManager::CreateObject(m_pGas, eLayerType::MonsterAttack);
 	}
 	void Megnus::setattack()
 	{
@@ -412,12 +420,12 @@ namespace W
 	void Megnus::attack5()
 	{
 		//슬로우
-		BattleManager::HitchAbnormal(BattleManager::eAbnormalType::Slow, -1.2f);
+		BattleManager::HitchAbnormal(SceneManger::FindPlayer(GetSceneName()), BattleManager::eAbnormalType::Slow, -1.2f);
 	}
 	void Megnus::attack6()
 	{
 		//언데드화
-		BattleManager::HitchAbnormal(BattleManager::eAbnormalType::Undead);
+		BattleManager::HitchAbnormal(SceneManger::FindPlayer(GetSceneName()), BattleManager::eAbnormalType::Undead);
 	}
 	void Megnus::create_stone()
 	{

@@ -206,7 +206,6 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WBlast.h" />
     <ClInclude Include="WBossStart.h" />
     <ClInclude Include="WCage.h" />
-    <ClInclude Include="WCharScene.h" />
     <ClInclude Include="WCloneMegnus.h" />
     <ClInclude Include="WConfusion.h" />
     <ClInclude Include="WDefenseUp.h" />
@@ -252,8 +251,6 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WIgnore.h" />
     <ClInclude Include="WInputBackground.h" />
     <ClInclude Include="WInputObject.h" />
-    <ClInclude Include="WItemObject.h" />
-    <ClInclude Include="WItemScript.h" />
     <ClInclude Include="WJenesis.h" />
     <ClInclude Include="WLadderScript.h" />
     <ClInclude Include="WLoad.h" />
@@ -306,8 +303,6 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WPlayerTop.h" />
     <ClInclude Include="WPlayerWalk.h" />
     <ClInclude Include="WPlayerWeapon.h" />
-    <ClInclude Include="WPortal.h" />
-    <ClInclude Include="WPortalScript.h" />
     <ClInclude Include="WMonsterManager.h" />
     <ClInclude Include="WPullObject.h" />
     <ClInclude Include="WReflex.h" />
@@ -315,7 +310,6 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WRexThunder.h" />
     <ClInclude Include="WRoccatBean.h" />
     <ClInclude Include="WSealSkill.h" />
-    <ClInclude Include="WSeleteScene.h" />
     <ClInclude Include="WShadow.h" />
     <ClInclude Include="WSharHP.h" />
     <ClInclude Include="WShuriken.h" />
@@ -327,15 +321,9 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WSkillLoad.h" />
     <ClInclude Include="WSkillLuck.h" />
     <ClInclude Include="WSkillManager.h" />
-    <ClInclude Include="WCameraScript.h" />
     <ClInclude Include="WCaveScene.h" />
-    <ClInclude Include="WCaveStartScene.h" />
-    <ClInclude Include="WLeafreScene.h" />
     <ClInclude Include="WPlayer.h" />
     <ClInclude Include="WPlayerScript.h" />
-    <ClInclude Include="WMoveScene.h" />
-    <ClInclude Include="WMoveScene_2.h" />
-    <ClInclude Include="WPlayScene.h" />
     <ClInclude Include="WSkillQuad.h" />
     <ClInclude Include="WSkillRaid.h" />
     <ClInclude Include="WSkillShadow.h" />
@@ -351,14 +339,10 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WSwordExplode.h" />
     <ClInclude Include="WSpawnMonsterAttack.h" />
     <ClInclude Include="WSpear.h" />
-    <ClInclude Include="WStartScene.h" />
     <ClInclude Include="WStone.h" />
     <ClInclude Include="WStoneScript.h" />
     <ClInclude Include="WStop.h" />
     <ClInclude Include="WTempleBossScene.h" />
-    <ClInclude Include="WTempleScene.h" />
-    <ClInclude Include="WTempleScene_2.h" />
-    <ClInclude Include="WTempleStartScene.h" />
     <ClInclude Include="WTemptation.h" />
     <ClInclude Include="WThunder.h" />
     <ClInclude Include="WUltimateBackground.h" />
@@ -369,7 +353,6 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WUndead.h" />
     <ClInclude Include="WUpStat.h" />
     <ClInclude Include="WValleyScene.h" />
-    <ClInclude Include="WValleyScene_2.h" />
     <ClInclude Include="WVariation.h" />
     <ClInclude Include="WWhiggin.h" />
     <ClInclude Include="WWhite.h" />
@@ -389,7 +372,6 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WBlast.cpp" />
     <ClCompile Include="WBossStart.cpp" />
     <ClCompile Include="WCage.cpp" />
-    <ClCompile Include="WCharScene.cpp" />
     <ClCompile Include="WCloneMegnus.cpp" />
     <ClCompile Include="WConfusion.cpp" />
     <ClCompile Include="WDefenseUp.cpp" />
@@ -435,8 +417,6 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WIgnore.cpp" />
     <ClCompile Include="WInputBackground.cpp" />
     <ClCompile Include="WInputObject.cpp" />
-    <ClCompile Include="WItemObject.cpp" />
-    <ClCompile Include="WItemScript.cpp" />
     <ClCompile Include="WJenesis.cpp" />
     <ClCompile Include="WLadderScript.cpp" />
     <ClCompile Include="WLoad.cpp" />
@@ -489,8 +469,6 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WPlayerTop.cpp" />
     <ClCompile Include="WPlayerWalk.cpp" />
     <ClCompile Include="WPlayerWeapon.cpp" />
-    <ClCompile Include="WPortal.cpp" />
-    <ClCompile Include="WPortalScript.cpp" />
     <ClCompile Include="WMonsterManager.cpp" />
     <ClCompile Include="WPullObject.cpp" />
     <ClCompile Include="WReflex.cpp" />
@@ -498,7 +476,6 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WRexThunder.cpp" />
     <ClCompile Include="WRoccatBean.cpp" />
     <ClCompile Include="WSealSkill.cpp" />
-    <ClCompile Include="WSeleteScene.cpp" />
     <ClCompile Include="WShadow.cpp" />
     <ClCompile Include="WSharHP.cpp" />
     <ClCompile Include="WShuriken.cpp" />
@@ -510,15 +487,9 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WSkillLoad.cpp" />
     <ClCompile Include="WSkillLuck.cpp" />
     <ClCompile Include="WSkillManager.cpp" />
-    <ClCompile Include="WCameraScript.cpp" />
     <ClCompile Include="WCaveScene.cpp" />
-    <ClCompile Include="WCaveStartScene.cpp" />
-    <ClCompile Include="WLeafreScene.cpp" />
     <ClCompile Include="WPlayer.cpp" />
     <ClCompile Include="WPlayerScript.cpp" />
-    <ClCompile Include="WMoveScene.cpp" />
-    <ClCompile Include="WMoveScene_2.cpp" />
-    <ClCompile Include="WPlayScene.cpp" />
     <ClCompile Include="WSkillQuad.cpp" />
     <ClCompile Include="WSkillRaid.cpp" />
     <ClCompile Include="WSkillShadow.cpp" />
@@ -534,14 +505,10 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WSwordExplode.cpp" />
     <ClCompile Include="WSpawnMonsterAttack.cpp" />
     <ClCompile Include="WSpear.cpp" />
-    <ClCompile Include="WStartScene.cpp" />
     <ClCompile Include="WStone.cpp" />
     <ClCompile Include="WStoneScript.cpp" />
     <ClCompile Include="WStop.cpp" />
     <ClCompile Include="WTempleBossScene.cpp" />
-    <ClCompile Include="WTempleScene.cpp" />
-    <ClCompile Include="WTempleScene_2.cpp" />
-    <ClCompile Include="WTempleStartScene.cpp" />
     <ClCompile Include="WTemptation.cpp" />
     <ClCompile Include="WThunder.cpp" />
     <ClCompile Include="WUltimateBackground.cpp" />
@@ -552,7 +519,6 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WUndead.cpp" />
     <ClCompile Include="WUpStat.cpp" />
     <ClCompile Include="WValleyScene.cpp" />
-    <ClCompile Include="WValleyScene_2.cpp" />
     <ClCompile Include="WVariation.cpp" />
     <ClCompile Include="WWhiggin.cpp" />
     <ClCompile Include="WWhite.cpp" />

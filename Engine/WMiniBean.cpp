@@ -175,7 +175,7 @@ namespace W
 	}
 	void MiniBean::attack0()
 	{
-		GameObject* pGameObj = SceneManger::FindPlayer();
+		GameObject* pGameObj = SceneManger::FindPlayer(GetSceneName());
 
 		if (pGameObj != nullptr)
 		{
@@ -190,6 +190,7 @@ namespace W
 			if (fLen <= 4.f)
 			{
 				MiniBeanAttack* attack1 = new MiniBeanAttack();
+				attack1->SetSceneName(GetSceneName());
 				attack1->SetOnwer(this);
 				attack1->Initialize();
 				attack1->SetName(L"MiniBean_attack0");

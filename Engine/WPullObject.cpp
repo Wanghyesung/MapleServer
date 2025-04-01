@@ -1,7 +1,7 @@
 #include "WPullObject.h"
 #include "WTime.h"
 #include "WRigidbody.h"
-#include "WObject.h"
+#include "WEventManager.h"
 namespace W
 {
 	PullObject::PullObject():
@@ -47,7 +47,7 @@ namespace W
 		if (m_fCurTime >= m_fDeleteTime)
 		{
 			m_pTarget->GetComponent<Rigidbody>()->SetAccumulation(false);
-			object::Destroy(this);
+			EventManager::DeleteObject(this);
 			return;
 		}
 

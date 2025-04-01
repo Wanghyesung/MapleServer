@@ -2,7 +2,6 @@
 #include "WSceneManger.h"
 #include "WResources.h"
 #include "WAnimator.h"
-#include "WObject.h"
 #include "WMonster.h"
 
 namespace W
@@ -38,7 +37,7 @@ namespace W
 		m_tMonsterAttack.iStartFrame = 0;
 		m_tMonsterAttack.iEndFrame = 4;
 
-		m_pTarget = SceneManger::FindPlayer();
+		m_pTarget = SceneManger::FindPlayer(GetSceneName());
 	}
 	void RexThunder::Update()
 	{

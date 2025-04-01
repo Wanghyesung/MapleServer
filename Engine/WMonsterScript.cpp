@@ -5,13 +5,14 @@
 #include "WTime.h"
 #include "WSceneManger.h"
 #include "WMonsterAttackObject.h"
-#include "WObject.h"
 #include "WBattleManager.h"
 #include "WEventManager.h"
 #include "WMonsterHP.h"
 #include "WPlayerAttackObject.h"
 #include "WPlayerScript.h"
 #include "WMonsterAttackScript.h"
+
+
 namespace W
 {
 	MonsterScript::MonsterScript() :
@@ -166,12 +167,13 @@ namespace W
 	{
 		m_pHP = new MonsterHP(m_bBoss);
 		m_pHP->SetOwner(m_pMonster);
+		m_pHP->SetSceneName(m_pMonster->GetSceneName());
 		m_pHP->Initialize();
 
 		if (!m_bBoss)
-			SceneManger::AddGameObject(eLayerType::Object, m_pHP);
+			EventManager::CreateObject(m_pHP, eLayerType::Object);
 		else
-			SceneManger::AddGameObject(eLayerType::UI, m_pHP);
+			EventManager::CreateObject(m_pHP, eLayerType::UI);
 	}
 
 	void MonsterScript::hit(const tAttackInfo& _tAttackInfo, GameObject* _pAttackObj)

@@ -1,7 +1,6 @@
 #include "WDemianSpear0.h"
 #include "WResources.h"
 #include "WAnimator.h"
-#include "WObject.h"
 #include "WMonsterAttackScript.h"
 #include "WMonster.h"
 #include "WBattleManager.h"

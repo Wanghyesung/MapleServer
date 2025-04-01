@@ -1,7 +1,6 @@
 #include "WLoad.h"
 #include "WResources.h"
 #include "WAnimator.h"
-#include "WObject.h"
 #include "WTime.h"
 #include "WAutoShuriken.h"
 #include "WEventManager.h"

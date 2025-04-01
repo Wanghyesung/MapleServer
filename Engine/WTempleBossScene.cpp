@@ -5,7 +5,6 @@
 #include "WTransform.h"
 #include "WInput.h"
 #include "WSceneManger.h"
-#include "WCameraScript.h"
 #include "WNPC.h"
 #include "WGround.h"
 #include "WSolomon.h"
@@ -34,19 +33,14 @@ namespace W
 	{
 		CreateBackground();
 		create_effect();
+		create_monster();
 
-
-		NPC* pNPC = new NPC();
-		AddGameObject(eLayerType::NPC, pNPC);
-		//MeshRenderer* pMeshRender = pNPC->AddComponent<MeshRenderer>();
-		//pMeshRender->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//pMeshRender->SetMaterial(Resources::Find<Material>(L"NPCMater5"));
-		pNPC->GetComponent<Transform>()->SetPosition(-7.f, -2.f, -1.f);
-		pNPC->GetComponent<Transform>()->SetScale(0.547f * 1.2, 1.f * 1.2f, 0.f);
-		pNPC->GetComponent<Transform>()->SetRotation(0.f, 0.f, 0.f);
-
-
-		
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ground, true);
+		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Ground, true);
+		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Player, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ladder, true);
+		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::AttackObject, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::MonsterAttack, true);
 	}
 	void TempleBossScene::Update()
 	{
@@ -61,26 +55,25 @@ namespace W
 	{
 		Scene::OnEnter();
 		ThreadPool::Joinable();
-
-		create_monster();
-
-		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ground, true);
-		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Ground, true);
-		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Player, true);
-		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ladder, true);
-		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::AttackObject, true);
-		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::MonsterAttack, true);
 	}
 	void TempleBossScene::OnExit()
 	{
 		Scene::OnExit();
-
-		CollisionManager::Clear();
 	}
 	void TempleBossScene::CreateBackground()
 	{
+		NPC* pNPC = new NPC();
+		pNPC->SetSceneName(GetName());
+		AddGameObject(eLayerType::NPC, pNPC);
+
+		pNPC->GetComponent<Transform>()->SetPosition(-7.f, -2.f, -1.f);
+		pNPC->GetComponent<Transform>()->SetScale(0.547f * 1.2, 1.f * 1.2f, 0.f);
+		pNPC->GetComponent<Transform>()->SetRotation(0.f, 0.f, 0.f);
+
+
 		GameObject* pBackGround = new GameObject();
-		
+		pBackGround->SetSceneName(GetName());
+
 		AddGameObject(eLayerType::Background, pBackGround);
 		
 		pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 0.f);
@@ -89,6 +82,7 @@ namespace W
 
 
 		Ground* pGround = new Ground(true);
+		pGround->SetSceneName(GetName());
 		AddGameObject(eLayerType::Ground, pGround);
 		pGround->GetComponent<Transform>()->SetPosition(0.f, -2.75f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(2.7f * 7.f, 1.f * 0.3f, 0.f);
@@ -98,6 +92,7 @@ namespace W
 	void TempleBossScene::create_monster()
 	{
 		PinkBean* pPinkBean = new PinkBean();
+		pPinkBean->SetSceneName(GetName());
 		pPinkBean->Initialize();
 		AddGameObject(eLayerType::Monster, pPinkBean);
 	}
@@ -106,54 +101,67 @@ namespace W
 	{
 		
 		Effect* pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"PinkBean_attack0");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(97.f, 107.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
 		pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"PinkBean_attack1");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(124.f, 112.f), 5, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
 		pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"PinkBean_attack2");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(112.f, 110.f), 6, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
 		pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"PinkBean_attack3");
 		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(88.f, 87.f), 4, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
 		pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"MiniBean_attack0");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(97.f, 107.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
 		pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"Solomon_attack0");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(131.f, 128.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f,0.2f), 0.2f);
 
 		pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"Solomon_attack2");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(217.f, 163.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
 
 		pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"Rex_attack0");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(129.f, 128.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
 		pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"Rex_attack2");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(219.f, 163.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
 	
 		pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"Munin_attack0");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(117.f, 156.f), 5, 1, Vector2(150.f, 150.f), Vector2(0.f, 0.2f), 0.2f);
 
 		pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"Munin_attack1");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(109.f, 104.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
 
 		pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"Whiggin_attack1");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(109.f, 104.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
 
 		pEffect = new Effect();
+		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"Whiggin_attack0");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(117.f, 156.f), 5, 1, Vector2(150.f, 150.f), Vector2(0.f, 0.2f), 0.2f);
 

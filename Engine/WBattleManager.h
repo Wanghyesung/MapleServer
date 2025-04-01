@@ -71,7 +71,7 @@ namespace W
 		static void PushEffect(Effect* _pEffect);
 		static Effect* GetEffect(std::wstring _strName);
 
-		static void HitchAbnormal(eAbnormalType _eType, float _fAccStat = 0.f);
+		static void HitchAbnormal(GameObject* _pPlayer, eAbnormalType _eType, float _fAccStat = 0.f);
 		static void Buff_Stat(GameObject* _pTarget, eUpStatType _eType, float _fAccStat);
 
 		static void Player_DeBuff_Attack(GameObject* _pTarget, eUpStatType _eType, float _fAccStat);

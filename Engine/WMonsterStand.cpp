@@ -33,7 +33,7 @@ namespace W
 
 		else
 		{
-			m_pTarget = SceneManger::FindPlayer();
+			m_pTarget = SceneManger::FindPlayer(GetMonster()->GetSceneName());
 
 			if (m_pTarget == nullptr)
 				return;

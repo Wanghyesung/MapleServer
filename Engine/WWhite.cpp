@@ -1,7 +1,6 @@
 #include "WWhite.h"
 #include "WResources.h"
 
-#include "WCameraScript.h"
 #include "WSceneManger.h"
 #include "WTime.h"
 namespace W

@@ -11,7 +11,7 @@
 #include "WBattleManager.h"
 #include "WHorntailDead.h"
 #include "WEventManager.h"
-
+#include "WHorntail.h"
 namespace W
 {
 	HorntailHeadA::HorntailHeadA(Horntail* _pOwner):
@@ -37,14 +37,15 @@ namespace W
 
 	void HorntailHeadA::add_skill()
 	{
-		//1
 		MonsterAttackObject* breath = new MonsterAttackObject();
+		breath->SetSceneName(GetSceneName());
 		breath->SetName(L"icebreath");
 		AddMonsterSkill(breath);
 		//2
 		for (int i = 0; i < 5; ++i)
 		{
 			Ice* pIce = new Ice();
+			pIce->SetSceneName(GetSceneName());
 			pIce->SetName(L"ice");
 			AddMonsterSkill(pIce);
 		}

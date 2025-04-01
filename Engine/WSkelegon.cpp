@@ -20,19 +20,9 @@ namespace W
 	{
 		SetName(L"skelegon");
 
-		//MeshRenderer* mr = AddComponent<MeshRenderer>();
-		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//
-		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetRenderinMode(eRenderingMode::Transparent);
-		//pMater->SetShader(Resources::Find<Shader>(L"MonsterShader"));
-		//Resources::Insert(L"skelegonMater", pMater);
-		//
-		//mr->SetMaterial(pMater);
 
 		Animator* pAnimator = AddComponent<Animator>();
-		//std::shared_ptr<Texture> pAtlas
-		//	= Resources::Load<Texture>(L"SkelegonTex", L"..\\Resources\\Texture\\Monster\\skelegon.png");
+	
 		pAnimator->Create(L"skelegon_stand_left", Vector2(0.0f, 0.0f), Vector2(600.0f, 200.0f), 6, Vector2(600.f, 200.f));
 		pAnimator->Create(L"skelegon_move_left", Vector2(0.0f, 200.0f), Vector2(600.0f, 200.0f), 4, Vector2(600.f, 200.f));
 		pAnimator->Create(L"skelegon_attack0_left", Vector2(0.0f, 400.0f), Vector2(600.0f, 200.0f), 11, Vector2(600.f, 200.f), Vector2::Zero, 0.2f);
@@ -44,11 +34,6 @@ namespace W
 		pAnimator->Create(L"skelegon_attack0_right", Vector2(6000.0f, 400.0f), Vector2(-600.0f, 200.0f), 11, Vector2(600.f, 200.f), Vector2::Zero, 0.2f);
 		pAnimator->Create(L"skelegon_dead_right", Vector2(6000.0f, 600.0f), Vector2(-600.0f, 200.0f), 8, Vector2(600.f, 200.f), Vector2::Zero, 0.15f);
 		pAnimator->Create(L"skelegon_hit_right", Vector2(6000.0f, 600.0f), Vector2(-600.0f, 200.0f), 1, Vector2(600.f, 200.f));
-
-		//m_spAttackEffect = Resources::Load<Texture>(L"sklaserEffect", L"..\\Resources\\Texture\\Monster\\attack1_hit.png");
-		Effect* pEffect = new Effect();
-		pEffect->SetName(L"sklaserEffect");
-		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(134.f, 97.f), 1, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
 	}
 
@@ -85,6 +70,8 @@ namespace W
 		Collider2D* pCollider = AddComponent<Collider2D>();
 		AddComponent<Rigidbody>();
 		GetComponent<Transform>()->SetScale(6.f, 2.f, 0.f);
+		GetComponent<Transform>()->SetPosition(Vector3(3.f, 1.2f, -1.5f));
+
 		pCollider->SetSize(Vector2(0.4f / 3.f, 0.4f));
 
 
@@ -101,11 +88,17 @@ namespace W
 		pSkelegonScript->SetFSM(pFSM);
 		pFSM->Initialize();
 
+
+		Effect* pEffect = new Effect();
+		pEffect->SetSceneName(GetSceneName());
+		pEffect->SetName(L"sklaserEffect");
+		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(134.f, 97.f), 1, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
+
 		//생성될 아이템
-		
 		std::vector<std::wstring> vecItems = { L"alixir",L"10_weapon"};
 		SetCreateCount(2);
 		SetItem(vecItems);
+
 	}
 
 	void Skelegon::Update()
@@ -150,6 +143,7 @@ namespace W
 	void Skelegon::add_skill()
 	{
 		MonsterAttackObject* pLaser = new MonsterAttackObject();
+		pLaser->SetName(GetSceneName());
 		pLaser->SetName(L"sklaserEffect");
 		AddMonsterSkill(pLaser);
 	}
@@ -164,6 +158,6 @@ namespace W
 		pMonsterScript->SetMonsterAttack(pLaser);
 		pLaser->SetOnwer(this);
 
-		SceneManger::AddGameObject(eLayerType::MonsterAttack, pLaser);
+		EventManager::CreateObject(pLaser, eLayerType::MonsterAttack);
 	}
 }

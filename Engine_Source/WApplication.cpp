@@ -45,7 +45,7 @@ namespace W
 		Time::Initiailize();
 		Input::Initialize();
 		
-
+		CollisionManager::Initialize();
 		BattleManager::Initialize();
 	}
 

@@ -5,44 +5,14 @@
     <ClInclude Include="LoadScene.h">
       <Filter>Contents\Load</Filter>
     </ClInclude>
-    <ClInclude Include="WPlayScene.h">
-      <Filter>Contents\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="WCaveScene.h">
       <Filter>Contents\Scene\Cave</Filter>
-    </ClInclude>
-    <ClInclude Include="WCaveStartScene.h">
-      <Filter>Contents\Scene\Cave</Filter>
-    </ClInclude>
-    <ClInclude Include="WLeafreScene.h">
-      <Filter>Contents\Scene\Leafre</Filter>
-    </ClInclude>
-    <ClInclude Include="WMoveScene.h">
-      <Filter>Contents\Scene\Move</Filter>
-    </ClInclude>
-    <ClInclude Include="WMoveScene_2.h">
-      <Filter>Contents\Scene\Move</Filter>
     </ClInclude>
     <ClInclude Include="WTempleBossScene.h">
       <Filter>Contents\Scene\Temple</Filter>
     </ClInclude>
-    <ClInclude Include="WTempleScene.h">
-      <Filter>Contents\Scene\Temple</Filter>
-    </ClInclude>
-    <ClInclude Include="WTempleScene_2.h">
-      <Filter>Contents\Scene\Temple</Filter>
-    </ClInclude>
-    <ClInclude Include="WTempleStartScene.h">
-      <Filter>Contents\Scene\Temple</Filter>
-    </ClInclude>
     <ClInclude Include="WValleyScene.h">
       <Filter>Contents\Scene\Valley</Filter>
-    </ClInclude>
-    <ClInclude Include="WValleyScene_2.h">
-      <Filter>Contents\Scene\Valley</Filter>
-    </ClInclude>
-    <ClInclude Include="WCameraScript.h">
-      <Filter>Contents\Script</Filter>
     </ClInclude>
     <ClInclude Include="WPlayer.h">
       <Filter>Contents\Player</Filter>
@@ -61,15 +31,6 @@
     </ClInclude>
     <ClInclude Include="WNPC.h">
       <Filter>Contents\Object\NPC</Filter>
-    </ClInclude>
-    <ClInclude Include="WStartScene.h">
-      <Filter>Contents\Scene\Start</Filter>
-    </ClInclude>
-    <ClInclude Include="WSeleteScene.h">
-      <Filter>Contents\Scene\Start</Filter>
-    </ClInclude>
-    <ClInclude Include="WCharScene.h">
-      <Filter>Contents\Scene\Start</Filter>
     </ClInclude>
     <ClInclude Include="WPlayerBody.h">
       <Filter>Contents\Player</Filter>
@@ -206,12 +167,6 @@
     <ClInclude Include="WSkillManager.h">
       <Filter>Contents\Manager\SkillMgr</Filter>
     </ClInclude>
-    <ClInclude Include="WPortal.h">
-      <Filter>Contents\Object\Portal</Filter>
-    </ClInclude>
-    <ClInclude Include="WPortalScript.h">
-      <Filter>Contents\Object\Portal</Filter>
-    </ClInclude>
     <ClInclude Include="WStone.h">
       <Filter>Contents\Object\BossMonster\horntail\horntailStone</Filter>
     </ClInclude>
@@ -343,12 +298,6 @@
     </ClInclude>
     <ClInclude Include="WWind.h">
       <Filter>Contents\Player\PlayerSkill\SkillState\Wind</Filter>
-    </ClInclude>
-    <ClInclude Include="WItemObject.h">
-      <Filter>Contents\Object\itemobj</Filter>
-    </ClInclude>
-    <ClInclude Include="WItemScript.h">
-      <Filter>Contents\Object\itemobj</Filter>
     </ClInclude>
     <ClInclude Include="WSolomon.h">
       <Filter>Contents\Object\Monster\pinkbean\solomon</Filter>
@@ -548,44 +497,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
-    <ClCompile Include="WPlayScene.cpp">
-      <Filter>Contents\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="WCaveScene.cpp">
       <Filter>Contents\Scene\Cave</Filter>
-    </ClCompile>
-    <ClCompile Include="WCaveStartScene.cpp">
-      <Filter>Contents\Scene\Cave</Filter>
-    </ClCompile>
-    <ClCompile Include="WLeafreScene.cpp">
-      <Filter>Contents\Scene\Leafre</Filter>
-    </ClCompile>
-    <ClCompile Include="WMoveScene.cpp">
-      <Filter>Contents\Scene\Move</Filter>
-    </ClCompile>
-    <ClCompile Include="WMoveScene_2.cpp">
-      <Filter>Contents\Scene\Move</Filter>
     </ClCompile>
     <ClCompile Include="WTempleBossScene.cpp">
       <Filter>Contents\Scene\Temple</Filter>
     </ClCompile>
-    <ClCompile Include="WTempleScene.cpp">
-      <Filter>Contents\Scene\Temple</Filter>
-    </ClCompile>
-    <ClCompile Include="WTempleScene_2.cpp">
-      <Filter>Contents\Scene\Temple</Filter>
-    </ClCompile>
-    <ClCompile Include="WTempleStartScene.cpp">
-      <Filter>Contents\Scene\Temple</Filter>
-    </ClCompile>
     <ClCompile Include="WValleyScene.cpp">
       <Filter>Contents\Scene\Valley</Filter>
-    </ClCompile>
-    <ClCompile Include="WValleyScene_2.cpp">
-      <Filter>Contents\Scene\Valley</Filter>
-    </ClCompile>
-    <ClCompile Include="WCameraScript.cpp">
-      <Filter>Contents\Script</Filter>
     </ClCompile>
     <ClCompile Include="WPlayer.cpp">
       <Filter>Contents\Player</Filter>
@@ -604,15 +523,6 @@
     </ClCompile>
     <ClCompile Include="WNPC.cpp">
       <Filter>Contents\Object\NPC</Filter>
-    </ClCompile>
-    <ClCompile Include="WStartScene.cpp">
-      <Filter>Contents\Scene\Start</Filter>
-    </ClCompile>
-    <ClCompile Include="WSeleteScene.cpp">
-      <Filter>Contents\Scene\Start</Filter>
-    </ClCompile>
-    <ClCompile Include="WCharScene.cpp">
-      <Filter>Contents\Scene\Start</Filter>
     </ClCompile>
     <ClCompile Include="WPlayerBody.cpp">
       <Filter>Contents\Player</Filter>
@@ -749,12 +659,6 @@
     <ClCompile Include="WSkillManager.cpp">
       <Filter>Contents\Manager\SkillMgr</Filter>
     </ClCompile>
-    <ClCompile Include="WPortal.cpp">
-      <Filter>Contents\Object\Portal</Filter>
-    </ClCompile>
-    <ClCompile Include="WPortalScript.cpp">
-      <Filter>Contents\Object\Portal</Filter>
-    </ClCompile>
     <ClCompile Include="WStone.cpp">
       <Filter>Contents\Object\BossMonster\horntail\horntailStone</Filter>
     </ClCompile>
@@ -886,12 +790,6 @@
     </ClCompile>
     <ClCompile Include="WWind.cpp">
       <Filter>Contents\Player\PlayerSkill\SkillState\Wind</Filter>
-    </ClCompile>
-    <ClCompile Include="WItemObject.cpp">
-      <Filter>Contents\Object\itemobj</Filter>
-    </ClCompile>
-    <ClCompile Include="WItemScript.cpp">
-      <Filter>Contents\Object\itemobj</Filter>
     </ClCompile>
     <ClCompile Include="WSolomon.cpp">
       <Filter>Contents\Object\Monster\pinkbean\solomon</Filter>
@@ -1105,17 +1003,11 @@
     <Filter Include="Contents\Scene\Cave">
       <UniqueIdentifier>{735468d0-d587-4778-9167-b4941705c8a9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\Scene\Leafre">
-      <UniqueIdentifier>{386690a1-ad02-4a07-baed-214f0e7da814}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\Scene\Temple">
       <UniqueIdentifier>{dc1aa036-ec8d-4cbc-9d38-07666422a6d8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Scene\Valley">
       <UniqueIdentifier>{b6881b7f-30b1-4181-99e1-acfa27b42da2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scene\Move">
-      <UniqueIdentifier>{a1327966-6d29-4c7b-9c87-e9b64670578b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Item">
       <UniqueIdentifier>{ec43df9d-b9c0-4da4-90bb-b685a6f85b76}</UniqueIdentifier>
@@ -1134,9 +1026,6 @@
     </Filter>
     <Filter Include="Contents\Object\NPC">
       <UniqueIdentifier>{38651194-cfcc-48de-a5dc-920cfbec8433}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Scene\Start">
-      <UniqueIdentifier>{1ea4504f-a69f-479c-9171-af27f9829182}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Player\Equip">
       <UniqueIdentifier>{ba4e9b0f-259b-4735-b0cb-ac4672e76a13}</UniqueIdentifier>
@@ -1227,9 +1116,6 @@
     </Filter>
     <Filter Include="Contents\Manager\SkillMgr">
       <UniqueIdentifier>{d882fcb2-0360-4ab6-9b5b-c9a6bd33e773}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Object\Portal">
-      <UniqueIdentifier>{3acb3aa0-f6bb-4528-a533-ecd8ec185e33}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Object\BossMonster">
       <UniqueIdentifier>{e547478d-d4e9-4838-baf3-3ec15e48bfb2}</UniqueIdentifier>
@@ -1335,9 +1221,6 @@
     </Filter>
     <Filter Include="Contents\Player\PlayerSkill\SkillState\blast">
       <UniqueIdentifier>{6fec3630-0515-4e04-8a56-ebca0ef10cd1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Object\itemobj">
-      <UniqueIdentifier>{b4e855b6-ad25-4df7-91b4-b3c79c285c77}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Manager\ItemManager">
       <UniqueIdentifier>{23346d51-ec1e-4e43-bd1d-538a0b1c63c6}</UniqueIdentifier>

@@ -9,6 +9,8 @@
 #include "WSpear.h"
 #include "WBattleManager.h"
 #include "WHorntailDead.h"
+#include "WEventManager.h"
+
 namespace W
 {
 	HorntailRightHand::HorntailRightHand(Horntail* _pOwner):
@@ -35,6 +37,7 @@ namespace W
 		//1
 		Spear* pSpear = new Spear();
 		pSpear->SetName(L"spear");
+		pSpear->SetName(GetSceneName());
 		AddMonsterSkill(pSpear);
 	}
 
@@ -138,7 +141,7 @@ namespace W
 	}
 	void HorntailRightHand::create_spear()
 	{
-		GameObject* pGameObj = SceneManger::FindPlayer();
+		GameObject* pGameObj = SceneManger::FindPlayer(GetSceneName());
 
 		if (pGameObj != nullptr)
 		{
@@ -157,14 +160,16 @@ namespace W
 					return;
 				pSpear->SetOnwer(this);
 				pSpear->Initialize();
-				SceneManger::AddGameObject(eLayerType::MonsterAttack, pSpear);
+				
+				EventManager::CreateObject(pSpear, eLayerType::MonsterAttack);
 			}
 		}
 	}
 
 	void HorntailRightHand::seal_skill()
 	{
-		BattleManager::HitchAbnormal(BattleManager::eAbnormalType::SealSkill);
+		
+		BattleManager::HitchAbnormal(SceneManger::FindPlayer(GetSceneName()), BattleManager::eAbnormalType::SealSkill);
 	}
 
 	void HorntailRightHand::buff_attack()

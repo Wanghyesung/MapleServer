@@ -114,11 +114,15 @@ namespace W
 		void SetObjectID(UINT _iPlayerID) { m_iObjectID = _iPlayerID; }
 		UINT GetObjectID() { return m_iObjectID; }
 
+		void SetSceneName(const std::wstring& _strName) { m_strSceneName = _strName; }
+		const std::wstring& GetSceneName() { return m_strSceneName; }
+
 	private:
 		eState m_eState;
 		std::vector<Component*> m_vecComponent;
 		std::vector<Script*> m_vecScript;
 		eLayerType m_eLayerType;
+		std::wstring m_strSceneName;
 
 		UINT m_iObjectID;
 		static UINT OBJECT_ID;

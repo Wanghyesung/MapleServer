@@ -174,7 +174,7 @@ namespace W
 
 		//맵을 넘으면 방향 반대로 전환
 		int iLen = pTr->GetPosition().x;
-		int iMaxLen = SceneManger::GetActiveScene()->GetMapPossibleSize().RX;
+		int iMaxLen = SceneManger::GetActiveScene(this)->GetMapPossibleSize().RX;
 		if (fabs(iMaxLen) - fabs(iLen) <= 0.0f)
 		{
 			change_dir();
@@ -197,7 +197,7 @@ namespace W
 
 	void DemianSword::set_target()
 	{
-		GameObject* pObj = SceneManger::FindPlayer();
+		GameObject* pObj = SceneManger::FindPlayer(GetSceneName());
 		Vector3 vTargetPosition = pObj->GetComponent<Collider2D>()->GetPosition();
 		m_vTargetPos = Vector2(vTargetPosition.x, vTargetPosition.y);
 		
