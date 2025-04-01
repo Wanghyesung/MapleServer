@@ -1,11 +1,37 @@
 #include "pch.h"
 #include "ClientPacketHandler.h"
+#include "ClientSession.h"
+#include "Room.h"
+#include "Enums.h"
+#include "WPlayer.h"
 
 //event버퍼에 넣기
 bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 {
+	shared_ptr<ClientSession> pSession = static_pointer_cast<ClientSession>(_pSession);
+	const string& _strPersonName = _pkt.name();
+	
+	//성공했다면
+	if (GRoom.Check(_strPersonName) == false)
+		return false;
 
-	return false;
+	
+	//다른 클라들에게 전송
+	//Protocol::S_NEW_ENTER other_pkt;
+	//other_pkt.set_playerid(pPlayer->GetPlayerID());
+	//shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::Make (other_pkt);
+	//GRoom.Broadcast(pSendBuffer);
+	//
+	//vector<UINT> vecUserID = GRoom.GetPersons();
+	//Protocol::S_ENTER pkt;
+	//pkt.set_success(true);
+	//for (int i = 0; i < vecUserID.size(); ++i)
+	//{
+	//	pkt.add_users_ids(vecUserID[i]);
+	//}
+	//pSendBuffer = CClientPacket
+
+	return true;
 }
 
 bool Handle_C_EQUIP(shared_ptr<Session> _pSession, Protocol::C_EQUIP& _pkt)

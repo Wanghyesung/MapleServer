@@ -12,8 +12,12 @@ public:
     virtual void OnSend(int len);
     virtual void OnDisConnected();
 
-private:
+public:
+    const UINT GetPersonID() { return m_iUserID; }
+    void SetPersonID(UINT _iUserID) { m_iUserID = _iUserID; }
 
+private:
+    UINT m_iUserID;
 
 };
 

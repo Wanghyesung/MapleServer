@@ -8,7 +8,6 @@ using namespace std;
 #include <mswsock.h>
 #pragma comment(lib, "ws2_32.lib")
 
-
 #include <Windows.h>
 #include <iostream>
 
