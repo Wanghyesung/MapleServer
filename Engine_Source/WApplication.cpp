@@ -9,7 +9,7 @@
 #include "..\Engine\WBattleManager.h"
 #include "..\Engine\WEventManager.h"
 #include "..\Engine\WMonsterManager.h"
-#include "..\Engine_Source\WThreadPool.h"
+#include "WThreadPool.h"
 #include "WFmod.h"
 #include "WFontWrapper.h"
 namespace W
