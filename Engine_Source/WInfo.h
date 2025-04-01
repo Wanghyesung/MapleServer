@@ -79,7 +79,7 @@ namespace W
 	struct tMonsterAttack
 	{
 		tMonsterAttack():
-			vOffset(math::Vector2::Zero)
+			vOffset(Vector2::Zero)
 		{
 			bSkill = false;
 			tTime.fCoolTime = 4;
@@ -95,10 +95,10 @@ namespace W
 
 		std::function<void()> pFunction;
 
-		math::Vector2 vScale;
-		math::Vector2 vOffset;
-		math::Vector3 vPosition;
-		math::Vector3 vRoatate;
+		Vector2 vScale;
+		Vector2 vOffset;
+		Vector3 vPosition;
+		Vector3 vRoatate;
 
 		//공격시작 프레임 끝나는 프레임
 		UINT iStartFrame;

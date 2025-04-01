@@ -221,7 +221,7 @@ namespace W
 
 	void Ariel::heal()
 	{
-		const std::vector vecMonster =
+		const std::vector<GameObject*> vecMonster =
 			SceneManger::GetActiveScene(this)->GetLayer(eLayerType::Monster).GetGameObjects();
 
 		float fAccValue = 10.f;

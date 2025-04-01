@@ -72,7 +72,7 @@ void Room::BroadcastExcept(shared_ptr<SendBuffer> _pBuffer, shared_ptr<Session> 
 vector<UINT> Room::GetPersons()
 {
 	RLock ReadLock(m_lock);
-
+	
 	std::vector<UINT> vecID = {};
 	for (auto iter : m_hashPerson)
 	{

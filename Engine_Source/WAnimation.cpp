@@ -2,11 +2,10 @@
 #include "WTime.h"
 #include "WAnimator.h"
 
-#include "WConstantBuffer.h"
 namespace W
 {
 	Animation::Animation():
-		Resource(enums::eResourceType::Animation),
+		Resource(eResourceType::Animation),
 		m_pAnimator(nullptr),
 		m_vecSprites{},
 		m_iIndex(-1),

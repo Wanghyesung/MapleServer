@@ -1,5 +1,4 @@
 #include "WTransform.h"
-#include "WConstantBuffer.h"
 
 namespace W
 {

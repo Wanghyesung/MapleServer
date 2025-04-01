@@ -91,7 +91,7 @@ namespace W
 		StartEffect(pEffect);
 	}
 
-	void SkillBlast::create_blast(const math::Vector3& _vPosition)
+	void SkillBlast::create_blast(const Vector3& _vPosition)
 	{
 		int iDir = GetPlayer()->GetDir();
 		PlayerAttackObject* pAttackObj = GetPlayer()->GetScript<PlayerScript>()->GetPlayerSkill(L"blast");
