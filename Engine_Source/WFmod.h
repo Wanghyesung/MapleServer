@@ -18,8 +18,6 @@
 
 namespace W
 {
-	using namespace math;
-
 	class Fmod
 	{
 	public:

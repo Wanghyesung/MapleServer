@@ -5,7 +5,6 @@ namespace W
 {
 #define LAYER_MAX (UINT)eLayerType::End 
 #define SCENE_MAX 10
-	using namespace enums;
 	class Collider2D;
 	class Scene;
 	class CollisionManager

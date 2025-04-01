@@ -59,6 +59,7 @@ bool Handle_C_EXIT(shared_ptr<Session> _pSession, Protocol::C_EXIT& _pkt);
 
 class ClientPacketHandler
 {
+public:
 	static bool HandlePacket(shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
 	{
 		PacketHeader* pHeader = reinterpret_cast<PacketHeader*>(_pBuffer);

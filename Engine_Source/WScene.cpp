@@ -8,7 +8,7 @@ namespace W
 	Scene::Scene():
 		m_iSceneIdx(SCENECOUNT++)
 	{
-		m_vecLayer.resize((UINT)W::enums::eLayerType::End);
+		m_vecLayer.resize((UINT)eLayerType::End);
 	}
 	Scene::~Scene()
 	{

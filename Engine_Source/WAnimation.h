@@ -1,12 +1,8 @@
 #pragma once
 #include "WResource.h"
-#include "WTexture.h"
 
 namespace W
 {
-	using namespace math;
-	using namespace graphics;
-
 	class Animator;
 	class Animation : public Resource
 	{

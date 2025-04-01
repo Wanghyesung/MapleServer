@@ -22,7 +22,7 @@ namespace W
 		static void SetActiveSkill(UINT _iPlayerID, Player::ePlayerSkill _eSkill);
 		static SkillState* FindSkillState(UINT _iPlayerID, Player::ePlayerSkill _eSkill);
 		static std::map<Player::ePlayerSkill, SkillState*>& GetPlayerSkill(UINT _iPlayerID);
-		static void AccAttack(UINT _iPlayerID, math::Vector3 _vPosition);
+		static void AccAttack(UINT _iPlayerID, Vector3 _vPosition);
 
 	private:
 		static void update_skill();

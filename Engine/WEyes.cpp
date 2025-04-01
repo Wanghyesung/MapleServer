@@ -1,6 +1,5 @@
 #include "WEyes.h"
 #include "WAnimator.h"
-#include "WTexture.h"
 #include "WResources.h"
 #include "WPlayerHead.h"
 namespace W

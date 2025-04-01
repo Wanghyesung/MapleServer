@@ -17,7 +17,7 @@ namespace W
 
 	private:
 		void activeskill_blast();
-		void create_blast(const math::Vector3& _vPosition);
+		void create_blast(const Vector3& _vPosition);
 
 		void exit();
 	private:

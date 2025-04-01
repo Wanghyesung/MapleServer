@@ -1,6 +1,5 @@
 #include "WPlayerHead.h"
 #include "WAnimator.h"
-#include "WTexture.h"
 #include "WResources.h"
 #include "WPlayerHat.h"
 #include "WEyes.h"

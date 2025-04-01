@@ -151,7 +151,7 @@ namespace W
 		return m_vecSkillState[_iPlayerID];
 	}
 
-	void SkillManager::AccAttack(UINT _iPlayerID, math::Vector3 _vPosition)
+	void SkillManager::AccAttack(UINT _iPlayerID, Vector3 _vPosition)
 	{
 		SkillState* pState = FindSkillState(_iPlayerID, Player::ePlayerSkill::blast);
 		SkillBlast* pBlast = dynamic_cast<SkillBlast*>(pState);

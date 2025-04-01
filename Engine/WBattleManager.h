@@ -6,7 +6,7 @@
 namespace W
 {
 	//SceneManager 다음 실행
-	using namespace math;
+
 	class BattleManager
 	{
 	public:

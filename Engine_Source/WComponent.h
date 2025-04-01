@@ -3,8 +3,7 @@
 
 namespace W
 {
-	using namespace W::enums;
-	using namespace W::math;
+	using namespace W;
 
 	class GameObject;
 

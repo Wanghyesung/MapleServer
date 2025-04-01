@@ -4,7 +4,7 @@
 
 namespace W
 {
-	using namespace W::math;
+	using namespace W;
 
 	enum class eKeyCode
 	{

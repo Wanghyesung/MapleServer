@@ -6,6 +6,7 @@
 #include <cstdint>
 #include <type_traits>
 
+
 #define arraysize(a) (sizeof(a) / sizeof(a[0]))
 
 //enum enumclass처럼 쓸수있게
