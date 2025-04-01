@@ -1,21 +1,9 @@
 #pragma once
 #include "..\Engine_Source\WSceneManger.h"
-#include "WPlayScene.h"
-#include "WPlayScene.h"
-#include "WLeafreScene.h"
 #include "WValleyScene.h"
-#include "WValleyScene_2.h"
 #include "WCaveScene.h"
-#include "WTempleScene.h"
-#include "WTempleScene_2.h"
 #include "WTempleBossScene.h"
-#include "WMoveScene.h"
-#include "WMoveScene_2.h"
-#include "WCaveStartScene.h"
-#include "WTempleStartScene.h"
-#include "WStartScene.h"
-#include "WCharScene.h"
-#include "WSeleteScene.h"
+
 #include "WHelisiumBoss.h"
 #include "WDemianScene.h"
 #ifdef _DEBUG
@@ -48,7 +36,7 @@ namespace W
 		//SceneManger::CreateScene<StartScene>(L"StartScen");
 		SceneManger::CreateScene<ValleyScene>(L"Valley");
 		//SceneManger::AddPlayerScene(L"Valley");
-		SceneManger::GetActiveScene()->OnEnter();
+		//SceneManger::GetActiveScene()->OnEnter();
 		
 	}
 }

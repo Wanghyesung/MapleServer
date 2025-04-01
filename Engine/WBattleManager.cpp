@@ -5,7 +5,6 @@
 #include "WEventManager.h"
 #include "WPlayerScript.h"
 #include "WSkillManager.h"
-#include "WObject.h"
 #include "WTemptation.h"
 #include "WMonsterScript.h"
 #include "WMonster.h"
@@ -88,21 +87,20 @@ namespace W
 
 	}
 
-	void BattleManager::HitchAbnormal(eAbnormalType _eType, float _fAccStat)
+	void BattleManager::HitchAbnormal(GameObject* _pPlayer, eAbnormalType _eType, float _fAccStat)
 	{
 		if (_eType == eAbnormalType::None)
 			return;
 
-		GameObject* pPlayer = SceneManger::FindPlayer();
 		if (_eType == eAbnormalType::Stigma)
 		{
 			//씬에서 관리하는 게 더 좋음
-			EventManager::HitchAbnormal(pPlayer, _eType, _fAccStat);
+			EventManager::HitchAbnormal(_pPlayer, _eType, _fAccStat);
 			return;
 		}
 			
 		if (!m_bOnAbnormal)
-			EventManager::HitchAbnormal(pPlayer, _eType, _fAccStat);
+			EventManager::HitchAbnormal(_pPlayer, _eType, _fAccStat);
 
 		m_bOnAbnormal = true;
 	}
@@ -429,6 +427,7 @@ namespace W
 
 		//key입력
 		InputBackground* pInput = new InputBackground();
+		pInput->SetSceneName(pPlayer->GetSceneName());
 		pInput->Initialize();
 		pInput->SetOwner(pGroggy);
 
@@ -445,7 +444,7 @@ namespace W
 			tAttackInfo.fAttack = m_iMaxDamage;
 			tAttackInfo.fAttRcnt = 0.f;
 			tAttackInfo.fAttUpperRcnt = 0.f;
-			SceneManger::FindPlayer()->GetScript<PlayerScript>()->Hit(tAttackInfo, L"stigma");
+			SceneManger::FindPlayer(_pGameObject->GetSceneName())->GetScript<PlayerScript>()->Hit(tAttackInfo, L"stigma");
 			
 			Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
 			Stigma* pStigma = new Stigma();
@@ -545,19 +544,7 @@ namespace W
 
 	void BattleManager::variation(GameObject* _pGameObject)
 	{
-		//복제 몬스터 미리 만들어두고 바꾸기
-	/*	Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
-		pPlayer->SetState(GameObject::eState::Paused);
-
-		if (!pPlayer)
-			return;
 		
-		Variation* pVariation = new Variation();
-		pVariation->SetTarget(pPlayer);
-		pVariation->SetTime(1.f);
-		EventManager::CreateObject(pVariation, eLayerType::Object);
-		
-		EventManager::ChangePlayerSkillState(Player::ePlayerSkill::end);*/
 	}
 
 	

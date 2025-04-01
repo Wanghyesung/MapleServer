@@ -39,12 +39,14 @@ namespace W
 	{
 		//1
 		MonsterAttackObject* breath = new MonsterAttackObject();
+		breath->SetSceneName(GetSceneName());
 		breath->SetName(L"firebreath");
 		AddMonsterSkill(breath);
 		//2
 		for (int i = 0; i < 8; ++i)
 		{
 			Fire* pFire = new Fire();
+			pFire->SetSceneName(GetSceneName());
 			pFire->SetName(L"fire");
 			AddMonsterSkill(pFire);
 		}
@@ -192,7 +194,7 @@ namespace W
 
 	void HorntailHeadB::faint()
 	{
-		BattleManager::HitchAbnormal(BattleManager::eAbnormalType::Faint);
+		BattleManager::HitchAbnormal(SceneManger::FindPlayer(GetSceneName()),BattleManager::eAbnormalType::Faint);
 	}
 
 	

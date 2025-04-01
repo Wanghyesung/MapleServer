@@ -66,7 +66,7 @@ namespace W
 			//ex : ½ºÅÏ, ¾ÏÈæ, ³«ÀÎ
 			if (m_iAbnormalStack == 1)
 			{
-				BattleManager::HitchAbnormal(m_eAbnorType, m_fAccValue);
+				BattleManager::HitchAbnormal(pPlayer, m_eAbnorType, m_fAccValue);
 				m_iAbnormalStack = 0;
 			}
 

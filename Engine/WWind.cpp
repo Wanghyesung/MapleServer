@@ -3,7 +3,7 @@
 #include "WAttackScript.h"
 #include "WTime.h"
 #include "WAnimator.h"
-#include "WObject.h"
+
 #include "WEventManager.h"
 namespace W
 {

@@ -1,6 +1,5 @@
 #include "WMonsterDead.h"
 #include "WAnimator.h"
-#include "WObject.h"
 #include "WEventManager.h"
 #include "WMonsterManager.h"
 #include "WMonsterFSM.h"

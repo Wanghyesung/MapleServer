@@ -37,7 +37,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WLight.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WMath.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)WObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WParticleSystem.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)WResources.h" />

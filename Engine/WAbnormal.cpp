@@ -2,7 +2,8 @@
 #include "WTime.h"
 #include "WBattleManager.h"
 #include "WPlayer.h"
-#include "WObject.h"
+#include "WEventManager.h"
+
 
 namespace W
 {
@@ -33,7 +34,7 @@ namespace W
 		if (m_fCurTime >= m_fDeleteTime ||
 			m_pTarget->GetState() == GameObject::Dead)
 		{
-			object::Destroy(this);
+			EventManager::DeleteObject(this);
 			Restore();
 			return;
 		}
@@ -52,6 +53,11 @@ namespace W
 	void Abnormal::Restore()
 	{
 
+	}
+	void Abnormal::SetTarget(Player* _pTarget)
+	{
+		m_pTarget = _pTarget;
+		SetSceneName(_pTarget->GetSceneName());
 	}
 	/*void Abnormal::Render()
 	{	

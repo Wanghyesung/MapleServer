@@ -7,12 +7,12 @@
 
 namespace W
 {
-	std::vector<UINT> CollisionManager::m_bitMatrix[LAYER_MAX][LAYER_MAX] = {};
+	UINT CollisionManager::m_arrMatrix[SCENE_MAX][LAYER_MAX][LAYER_MAX] = {};
 	std::map<UINT64, bool> CollisionManager::m_mapCollision = {};
 
 	void CollisionManager::Initialize()
 	{
-
+		
 	}
 
 	void CollisionManager::Update()
@@ -26,7 +26,7 @@ namespace W
 			{
 				for (UINT row = 0; row < (UINT)eLayerType::End; ++row)
 				{
-					if (m_bitMatrix[iSceneIdx][column][row] == true)
+					if (m_arrMatrix[iSceneIdx][column][row] == true)
 					{
 						LayerCollision(pScene,(eLayerType)column, (eLayerType)row);
 					}
@@ -269,27 +269,7 @@ namespace W
 			col = iLeft;
 		}
 
-		m_bitMatrix[iSceneIdx][col][row] = _bEnable;
-	}
-	void CollisionManager::Clear()
-	{
-		//for (int i = 0; i < m_bitMatrix->size(); ++i)
-		//{
-		//	m_bitMatrix[i].reset();
-		//}
-		//
-		//m_mapCollision.clear();
+		m_arrMatrix[iSceneIdx][col][row] = _bEnable;
 	}
 
-	void CollisionManager::erase(ColliderID _tCollID)
-	{
-		//std::map<UINT64, bool>::iterator iter =
-		//	m_mapCollision.find(_tCollID.ID);
-		//
-		////처음 들어온 충돌체
-		//if (iter == m_mapCollision.end())
-		//	return;
-		//
-		//m_mapCollision.erase(_tCollID.ID);
-	}
 }

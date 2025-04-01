@@ -66,7 +66,7 @@ namespace W
 
 		
 		const std::vector<GameObject*>& vecMonster =
-			SceneManger::GetActiveScene()->GetLayer(eLayerType::Monster).GetGameObjects();
+			SceneManger::GetActiveScene(GetPlayer())->GetLayer(eLayerType::Monster).GetGameObjects();
 
 		//가장 체력이 높은 몬스터
 		float fMax = 0.f;

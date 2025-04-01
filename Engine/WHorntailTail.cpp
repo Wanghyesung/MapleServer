@@ -62,6 +62,7 @@ namespace W
 	{
 		//1
 		MonsterAttackObject* attack1 = new MonsterAttackObject();
+		attack1->SetSceneName(GetSceneName());
 		attack1->SetName(L"tailattack");
 		AddMonsterSkill(attack1);
 	}
@@ -123,6 +124,6 @@ namespace W
 		pMonsterScript->SetMonsterAttack(attack1);
 		attack1->SetOnwer(this);
 
-		SceneManger::AddGameObject(eLayerType::MonsterAttack, attack1);
+		EventManager::CreateObject(attack1, eLayerType::MonsterAttack);
 	}
 }

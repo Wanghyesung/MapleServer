@@ -1,9 +1,9 @@
 #include "WStoneScript.h"
 #include "WGameObject.h"
-#include "WObject.h"
 #include "WPlayerAttackObject.h"
 #include "WPlayer.h"
 #include "WPlayerScript.h"
+#include "WEventManager.h"
 namespace W
 {
 	StoneScript::StoneScript():
@@ -44,7 +44,7 @@ namespace W
 				Player::ePlayerState::stab)
 			{
 				m_pFunction();
-				object::Destroy(GetOwner());
+				EventManager::DeleteObject(GetOwner());
 				pAttackObj->GetPlayer()->GetScript<PlayerScript>()->SetStab(false);
 			}
 		}

@@ -1,5 +1,4 @@
 #pragma once
-#include "WObject.h"
 #include "WInput.h"
 namespace W
 {

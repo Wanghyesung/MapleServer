@@ -7,7 +7,7 @@
 #include "WPlayerScript.h"
 #include "WTime.h"
 #include "WAnimator.h"
-#include "WObject.h"
+
 namespace W
 {
 	DemianEntireAttack::DemianEntireAttack():
@@ -55,6 +55,6 @@ namespace W
 	void DemianEntireAttack::Restore()
 	{
 		EventManager::Restore(m_pTarget, BattleManager::eAbnormalType::DemianStop);
-		object::Destroy(this);
+		EventManager::DeleteObject(this);
 	}
 }

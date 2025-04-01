@@ -6,7 +6,7 @@
 #include "WTime.h"
 #include "WMonster.h"
 #include "WSceneManger.h"
-#include "WCameraScript.h"
+
 #include "WWhite.h"
 #include "WEventManager.h"
 #include "WPlayerScript.h"
@@ -130,8 +130,11 @@ namespace W
 
 	void DemianVine::attack()
 	{
-		if(!m_bClear)
-			SceneManger::FindPlayer()->GetScript<PlayerScript>()->Hit(m_tAttackInfo,L"DemianVine");
+		for (GameObject* pPlayer : SceneManger::GetPlayers(GetSceneName()))
+		{
+			if (!m_bClear)
+				pPlayer->GetScript<PlayerScript>()->Hit(m_tAttackInfo, L"DemianVine");
+		}
 
 		off();
 	}

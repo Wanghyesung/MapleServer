@@ -18,7 +18,7 @@ namespace W
 		virtual void Restore();
 
 		void SetTime(float _fTime) { m_fDeleteTime = _fTime; }
-		void SetTarget(Player* _pTarget) { m_pTarget = _pTarget; }
+		void SetTarget(Player* _pTarget);
 		void SetRenderPos(bool _bUp) { m_bRenderPosUp = _bUp; }
 
 	protected:

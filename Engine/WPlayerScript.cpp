@@ -267,32 +267,12 @@ namespace W
 	void PlayerScript::AddPlayerSkill(PlayerAttackObject* _pObj)
 	{
 		ObjectPoolManager::AddObjectPool(_pObj->GetName(), _pObj);
-		//std::map<std::wstring, std::queue<PlayerAttackObject*>>::iterator iter =
-		//	m_mapAttackObjs.find(_pObj->GetName());
-		//
-		//if (iter == m_mapAttackObjs.end())
-		//{
-		//	std::queue<PlayerAttackObject*> queue = {};
-		//	queue.push(_pObj);
-		//	m_mapAttackObjs.insert(std::make_pair(_pObj->GetName(), queue));
-		//}
-		//else
-		//	iter->second.push(_pObj);
 	}
 
 	PlayerAttackObject* PlayerScript::GetPlayerSkill(const std::wstring& _strName)
 	{
-
-		//std::map<std::wstring, std::queue<PlayerAttackObject*>>::iterator iter =
-		//	m_mapAttackObjs.find(_strName);
-		//
-		//if (iter == m_mapAttackObjs.end())
-		//	assert(nullptr);
-		//
-		//PlayerAttackObject* pObj = iter->second.front();
-		//iter->second.pop();
-		//pObj->GetComponent<Collider2D>()->SetActive(true);
 		GameObject* pGameObj = ObjectPoolManager::FrontObject(_strName);
+		pGameObj->SetSceneName(m_pPlayer->GetSceneName());
 		pGameObj->GetComponent<Collider2D>()->SetActive(true);
 
 		return dynamic_cast<PlayerAttackObject*>(pGameObj);

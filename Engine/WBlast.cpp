@@ -1,6 +1,5 @@
 #include "WBlast.h"
 #include "WAttackScript.h"
-#include "WObject.h"
 #include "WAnimator.h"
 #include "WEventManager.h"
 namespace W

@@ -12,9 +12,8 @@ namespace W
 	std::vector<GameObject*> EventManager::m_vecMonster_Pool = {};
 
 	std::mutex EventManager::m_eventMutex = {};
-	int EventManager::m_iActiveIdx = 1; 
+	int EventManager::m_iActiveIdx = 1;
 
-	std::wstring EventManager::m_strNextScene = {};
 #define ObjectPoolPosition 2000.f
 	void EventManager::Update()
 	{
@@ -62,11 +61,12 @@ namespace W
 		{
 		case EVENT_TYPE::CREATE_PLAYER:
 		{
-			UINT iPlayerID = (UINT)_tEve.lParm;
-			Player* pPlayer = new Player();
-			pPlayer->Initialize();
-			SceneManger::AddGameObject(eLayerType::Player, pPlayer);
+			Player* pPlayer = (Player*)_tEve.lParm;
+			SceneManger::AddPlayerScene(pPlayer->GetSceneName());
+
+			SceneManger::AddGameObject(pPlayer->GetSceneName(), eLayerType::Player, pPlayer);
 		}
+		break;
 
 		case EVENT_TYPE::DELETE_PLAYER:
 		{
@@ -75,29 +75,25 @@ namespace W
 
 			delete pObj;
 		}
+		break;
 
 		case EVENT_TYPE::CREATE_OBJECT:
 		{
 			GameObject* pObj = (GameObject*)_tEve.lParm;
 			eLayerType eLyaer = (eLayerType)_tEve.wParm;
 
-			SceneManger::AddGameObject(eLyaer, pObj);
+			SceneManger::AddGameObject(pObj->GetSceneName(), eLyaer, pObj);
 		}
 		break;
 
 		case EVENT_TYPE::DELET_OBJECT:
 		{
 			GameObject* pObj = (GameObject*)_tEve.lParm;
-			Scene* pScene = (Scene*)_tEve.wParm;
-		
+			
+			Scene* pScene = SceneManger::FindScene(pObj->GetSceneName());
 			pScene->EraseObject(pObj->GetLayerType(),pObj);
-			delete pObj;
-		}
-		break;
 
-		case EVENT_TYPE::SCENE_CHANGE:
-		{
-			SceneManger::LoadScene(m_strNextScene);
+			delete pObj;
 		}
 		break;
 
@@ -237,11 +233,11 @@ namespace W
 		}
 	}
 
-	void EventManager::AddPlayer(UINT _iPlayerID)
+	void EventManager::AddPlayer(GameObject* _pObj)
 	{
 		tEvent eve = {};
-		eve.wParm = (DWORD_PTR)_iPlayerID;
-
+		eve.lParm = (DWORD_PTR)_pObj;
+		
 		eve.eEventType = EVENT_TYPE::CREATE_PLAYER;
 		AddEvent(eve);
 	}
@@ -249,17 +245,16 @@ namespace W
 	void EventManager::DeletePlayer(GameObject* _pObj)
 	{
 		tEvent eve = {};
-		eve.wParm = (DWORD_PTR)_pObj;
+		eve.lParm = (DWORD_PTR)_pObj;
 
 		eve.eEventType = EVENT_TYPE::DELETE_PLAYER;
 		AddEvent(eve);
 	}
 
-	void EventManager::DeleteObject(GameObject* _pObj, Scene* _pScene)
+	void EventManager::DeleteObject(GameObject* _pObj)
 	{
 		tEvent eve = {};
 		eve.lParm = (DWORD_PTR)_pObj;
-		eve.wParm = (DWORD_PTR)_pScene;
 
 		eve.eEventType = EVENT_TYPE::DELET_OBJECT;
 		AddEvent(eve);
@@ -296,17 +291,6 @@ namespace W
 		AddEvent(eve);
 	}
 
-	void EventManager::ChangeScene(const std::wstring& _strNextScene)
-	{
-		tEvent eve = {};
-		eve.eEventType = EVENT_TYPE::SCENE_CHANGE;
-		m_strNextScene = _strNextScene;
-
-		ChangePlayerFSMState(SceneManger::FindPlayer()->GetScript<PlayerScript>()->m_pFSM,
-			Player::ePlayerState::jump);
-
-		AddEvent(eve);
-	}
 	void EventManager::ChangePlayerFSMState(PlayerFSM* _pFSM, Player::ePlayerState _ePlayerState)
 	{
 		tEvent eve = {};

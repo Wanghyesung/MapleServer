@@ -3,7 +3,6 @@
 #include "WStoneScript.h"
 #include "WAnimator.h"
 #include "WMonsterScript.h"
-#include "WObject.h"
 #include "WMonster.h"
 namespace W
 {

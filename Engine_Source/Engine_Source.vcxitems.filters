@@ -243,9 +243,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)WConstantBuffer.h">
       <Filter>Resource\ConstantBuffer</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WObject.h">
-      <Filter>Common</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WCollisionManager.h">
       <Filter>Scene\Manger</Filter>
     </ClInclude>

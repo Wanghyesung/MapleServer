@@ -1,7 +1,6 @@
 #include "WSpear.h"
 #include "WResources.h"
 #include "WAnimator.h"
-#include "WObject.h"
 #include "WMonsterAttackScript.h"
 #include "WSceneManger.h"
 #include "WMonster.h"
@@ -39,7 +38,7 @@ namespace W
 		m_tMonsterAttack.iStartFrame = 11;
 		m_tMonsterAttack.iEndFrame = 12;
 
-		m_pTarget = SceneManger::FindPlayer();
+		m_pTarget = SceneManger::FindPlayer(GetSceneName());
 	}
 
 	void Spear::Update()

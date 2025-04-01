@@ -5,6 +5,7 @@
 
 namespace W
 {
+	class Player;
 	class SceneManger
 	{
 	public:
@@ -17,39 +18,43 @@ namespace W
 		static void Erase(GameObject* _pGameObject);
 
 		template <typename T>
-		static bool CreateScene(std::wstring name)
+		static bool CreateScene(const std::wstring& name)
 		{
 			T* scene = new T();
 
-			std::map<std::wstring, Scene*>::iterator iter
-				= m_mapScene.find(name);
+			std::unordered_map<std::wstring, Scene*>::iterator iter
+				= m_hashScene.find(name);
 
-			if (iter != m_mapScene.end())
+			if (iter != m_hashScene.end())
 				return false;
 
-			m_mapScene.insert(std::make_pair(name, scene));
-			m_pActiveScene = scene;
+			m_hashScene.insert(std::make_pair(name, scene));
+
+			scene->SetSceneIdx(SCENE_IDX++);
+			scene->SetName(name);
 			scene->Initialize();
+
 			return true;
 		}
-		static Scene* GetActiveScene() { return m_pActiveScene; }
+
+		static Scene* FindScene(const std::wstring& _strSceneName);
+		static Scene* GetActiveScene(GameObject* _pGameObj);
 		static std::vector<Scene*> GetPlayerScene();
-		static Scene* LoadScene(std::wstring _strName);
-
+		
 		//여기서 서버가 클라에게 패킷 전달
-		static void AddGameObject(eLayerType _eType, GameObject* _pGameObj);
-		static GameObject* FindPlayer();
-
+		static void AddGameObject(const std::wstring& _strSceneName, eLayerType _eType, GameObject* _pGameObj);
+		static GameObject* FindPlayer(UINT _iPlayerID);
+		static GameObject* FindPlayer(const std::wstring& strSceneName);
+		static const std::vector<GameObject*>& GetPlayers(const std::wstring& _strSceneName);
 
 		static void SwapObject(Scene* _pPrevScene, Scene* _pNextScene, GameObject* _pGameObject);
-		static void SwapPlayer(Scene* _pPrevScene, Scene* _pNextScene);
+		static void SwapPlayer(Player* _pPlayer, Scene* _pPrevScene, Scene* _pNextScene);
 		static void PushObjectPool(Scene* _pPrevScene);
 		static void AddPlayerScene(const std::wstring& _strScene);
 
 	private:
-		
-		static Scene* m_pActiveScene;
-		static std::map<std::wstring, Scene*> m_mapScene;
+		static UINT SCENE_IDX;
+		static std::unordered_map<std::wstring, Scene*> m_hashScene;
 		static std::vector<std::wstring> m_vecPlayerScene;//플레이어가 있는 구간만 업데이트
 	};
 }

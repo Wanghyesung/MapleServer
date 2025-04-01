@@ -1,7 +1,6 @@
 #include "WMiniBeanAttack.h"
 #include "WResources.h"
 #include "WAnimator.h"
-#include "WObject.h"
 #include "WMonsterAttackScript.h"
 #include "WSceneManger.h"
 #include "WTime.h"
@@ -35,8 +34,6 @@ namespace W
 		m_tMonsterAttack.vScale = Vector2(0.2f, 0.2f);
 		m_tMonsterAttack.vOffset = Vector2(0.f, 0.f);
 
-		m_pTarget = SceneManger::FindPlayer();
-
 		SetMonsterAttack(m_tMonsterAttack);
 
 	}
@@ -47,6 +44,7 @@ namespace W
 		if (m_fCurTime >= m_fDeleteTIme)
 			off();
 
+		m_pTarget = SceneManger::FindPlayer(GetSceneName());
 		if (m_pTarget != nullptr)
 		{
 			Vector3 vPos = GetComponent<Transform>()->GetPosition();
@@ -66,6 +64,6 @@ namespace W
 	void MiniBeanAttack::off()
 	{
 		GetComponent<Collider2D>()->SetActive(false);
-		object::Destroy(this);
+		EventManager::DeleteObject(this);
 	}
 }

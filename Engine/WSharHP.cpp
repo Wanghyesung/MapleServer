@@ -2,7 +2,8 @@
 #include "WResources.h"
 #include "WMonsterBackHP.h"
 #include "WSceneManger.h"
-#include "WObject.h"
+#include "WEventManager.h"
+
 namespace W
 {
 	
@@ -19,8 +20,9 @@ namespace W
 	{
 		//보스용으로 만들기
 		m_pHPBack = new MonsterBackHP(true);
+		m_pHPBack->SetSceneName(GetSceneName());
 		m_pHPBack->SetHP(this);
-		SceneManger::AddGameObject(eLayerType::UI, m_pHPBack);
+		EventManager::CreateObject(m_pHPBack, eLayerType::UI);
 	}
 	void SharHP::Update()
 	{
@@ -29,8 +31,8 @@ namespace W
 
 		if (m_fHP <= 0.f)
 		{
-			object::Destroy(this);
-			object::Destroy(m_pHPBack);
+			EventManager::DeleteObject(this);
+			EventManager::DeleteObject(m_pHPBack);
 			return;
 		}
 

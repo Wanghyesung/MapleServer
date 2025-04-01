@@ -2,7 +2,7 @@
 #include "WResources.h"
 #include "WAnimator.h"
 #include "WEventManager.h"
-#include "WObject.h"
+
 namespace W
 {
 	Stigma::Stigma()
@@ -54,8 +54,9 @@ namespace W
 	//}
 	void Stigma::Restore()
 	{
-		object::Destroy(this);
+		
 		EventManager::Restore(m_pTarget, BattleManager::eAbnormalType::Stigma);
+		EventManager::DeleteObject(this);
 		//BattleManager::Restore_move(m_pTarget, BattleManager::eAbnormalType::SealSkill);
 	}
 }

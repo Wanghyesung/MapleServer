@@ -3,7 +3,6 @@
 #include "WMonster.h"
 #include "WMonsterScript.h"
 #include "WEffect.h"
-#include "WObject.h"
 
 namespace W
 {

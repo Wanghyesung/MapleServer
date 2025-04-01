@@ -2,7 +2,6 @@
 #include "WGameObject.h"
 #include "WTime.h"
 #include "WGameObject.h"
-#include "WObject.h"
 #include "WMonster.h"
 #include "WEffect.h"
 #include "WAnimator.h"

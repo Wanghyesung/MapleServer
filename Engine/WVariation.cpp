@@ -4,7 +4,7 @@
 
 #include "WRigidbody.h"
 #include "WPlayer.h"
-#include "WObject.h"
+#include "WEventManager.h"
 namespace W
 {
 	Variation::Variation()
@@ -37,7 +37,7 @@ namespace W
 
 	void Variation::off()
 	{
-		object::Destroy(this);
+		EventManager::DeleteObject(this);
 	}
 
 

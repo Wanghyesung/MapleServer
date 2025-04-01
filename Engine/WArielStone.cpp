@@ -2,7 +2,7 @@
 #include "WResources.h"
 #include "WAnimator.h"
 
-#include "WObject.h"
+#include "WEventManager.h"
 #include "WMonsterAttackScript.h"
 #include "WMonsterScript.h"
 #include "WMonster.h"

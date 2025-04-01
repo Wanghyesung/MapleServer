@@ -1,10 +1,9 @@
 #include "WInputBackground.h"
 #include "WResources.h"
-#include "WObject.h"
 #include "WGroggy.h"
 #include "WInputObject.h"
-#include "WObject.h"
 #include "WSceneManger.h"
+#include "WEventManager.h"
 
 namespace W
 {
@@ -101,7 +100,7 @@ namespace W
 
 	void InputBackground::Failed()
 	{
-		object::Destroy(this);
+		EventManager::DeleteObject(this);
 		dynamic_cast<Groggy*>(m_pOwner)->SetTime(12.f);
 	}
 
@@ -116,7 +115,7 @@ namespace W
 		if (m_iCurIndex >= m_vecInput.size())
 		{
 			dynamic_cast<Groggy*>(m_pOwner)->SetTime(0.f);
-			object::Destroy(this);
+			EventManager::DeleteObject(this);
 		}
 
 		m_bNext = false;

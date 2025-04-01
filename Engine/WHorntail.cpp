@@ -12,8 +12,6 @@
 #include "WHorntailTail.h"
 #include "WSceneManger.h"
 #include "WBattleManager.h"
-#include "WObject.h"
-#include "WCameraScript.h"
 #include "WMonsterManager.h"
 
 //수동으로 exe파일에 넣어주기
@@ -54,48 +52,58 @@ namespace W
 
 	void Horntail::Initialize()
 	{
+		const std::wstring& strScene = GetSceneName();
+
 		HorntailHeadA* pHeadA = new HorntailHeadA(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailHeadA] = pHeadA;
+		pHeadA->SetSceneName(strScene);
 		pHeadA->Initialize();
-		SceneManger::AddGameObject(eLayerType::Monster, pHeadA);
+		SceneManger::AddGameObject(strScene, eLayerType::Monster, pHeadA);
 		//
 		HorntailHeadB* pHeadB = new HorntailHeadB(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailHeadB] = pHeadB;
+		pHeadB->SetSceneName(strScene);
 		pHeadB->Initialize();
-		SceneManger::AddGameObject(eLayerType::Monster, pHeadB);
+		SceneManger::AddGameObject(strScene, eLayerType::Monster, pHeadB);
 		
 		HorntailHeadC* pHeadC = new HorntailHeadC(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailHeadC] = pHeadC;
+		pHeadC->SetSceneName(strScene);
 		pHeadC->Initialize();
-		SceneManger::AddGameObject(eLayerType::Monster, pHeadC);
+		SceneManger::AddGameObject(strScene, eLayerType::Monster, pHeadC);
 		
 		HorntailLeftHand* pLeftHand = new HorntailLeftHand(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailLeftHand] = pLeftHand;
+		pLeftHand->SetSceneName(strScene);
 		pLeftHand->Initialize();
 		pLeftHand->SetBuff(std::bind(&Horntail::up_defense, this));
-		SceneManger::AddGameObject(eLayerType::Monster, pLeftHand);
+		SceneManger::AddGameObject(strScene, eLayerType::Monster, pLeftHand);
 		//
 		HorntailRightHand* pRightHand = new HorntailRightHand(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailRightHand] = pRightHand;
+		pRightHand->SetSceneName(strScene);
 		pRightHand->Initialize();
 		pRightHand->SetBuff(std::bind(&Horntail::up_attack, this));
-		SceneManger::AddGameObject(eLayerType::Monster, pRightHand);
+		SceneManger::AddGameObject(strScene, eLayerType::Monster, pRightHand);
 
 		HorntailLeg* pLegs = new HorntailLeg(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailLeg] = pLegs;
+		pLegs->SetSceneName(strScene);
 		pLegs->Initialize();
-		SceneManger::AddGameObject(eLayerType::Monster, pLegs);
+		SceneManger::AddGameObject(strScene, eLayerType::Monster, pLegs);
 
 		HorntailWing* pWing = new HorntailWing(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailWing] = pWing;
+		pWing->SetSceneName(GetSceneName());
 		pWing->Initialize();
 		pWing->SetHeal(std::bind(&Horntail::heal, this));
-		SceneManger::AddGameObject(eLayerType::Monster, pWing);
+		SceneManger::AddGameObject(strScene, eLayerType::Monster, pWing);
 		
 		HorntailTail* pTail = new HorntailTail(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailTail] = pTail;
+		pTail->SetSceneName(GetSceneName());
 		pTail->Initialize();
-		SceneManger::AddGameObject(eLayerType::Monster, pTail);
+		SceneManger::AddGameObject(strScene, eLayerType::Monster, pTail);
 
 		//정지
 		for (UINT i = 0; i < 8; ++i)

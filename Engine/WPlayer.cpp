@@ -16,6 +16,8 @@
 
 namespace W
 {
+	UINT Player::PLAYER_ID = 0;
+
 	Player::Player():
 		m_pShadow(nullptr),
 		m_bAnimLoop(true),
@@ -29,6 +31,7 @@ namespace W
 		m_ePlayerState(ePlayerState::stand),
 		m_strCurStateName(L"_jump")
 	{
+		m_iPlayerID = PLAYER_ID++;
 		SetName(L"Player");
 	}
 	Player::~Player()

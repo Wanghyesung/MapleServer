@@ -2,11 +2,13 @@
 #include "WResources.h"
 #include "WAnimator.h"
 
-#include "WObject.h"
+#include "WEventManager.h"
 #include "WMonsterAttackScript.h"
 #include "WMonsterScript.h"
 #include "WPlayerScript.h"
 #include "WMonster.h"
+#include "WSceneManger.h"
+
 namespace W
 {
 	ArielLaser::ArielLaser():
@@ -34,7 +36,7 @@ namespace W
 	}
 	void ArielLaser::Initialize()
 	{
-		const tObjectInfo& tInfo = SceneManger::FindPlayer()->GetScript<PlayerScript>()->GetObjectInfo();
+		const tObjectInfo& tInfo = SceneManger::FindPlayer(GetSceneName())->GetScript<PlayerScript>()->GetObjectInfo();
 		//float faccAttack = GetOwner()->GetAttackInfo().fAttack;
 		m_tMonsterAttack.tAttackInfo.fAttackDamage = (tInfo.fMaxHP * (10.f/4.f));
 

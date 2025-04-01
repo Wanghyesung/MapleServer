@@ -110,9 +110,9 @@ namespace W
 	}
 
 	bool AutoShuriken::set_target()
-	{
+	{	
 		const std::vector<GameObject*>& vecObjs =
-			SceneManger::GetActiveScene()->GetLayer(eLayerType::Monster).GetGameObjects();
+			SceneManger::GetActiveScene(GetPlayer())->GetLayer(eLayerType::Monster).GetGameObjects();
 
 		Vector3 vPosistion = GetComponent<Transform>()->GetPosition();
 		float fMaxLen = 10000.f;

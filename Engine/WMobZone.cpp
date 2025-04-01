@@ -93,17 +93,21 @@ namespace W
 	}
 	void MobZone::attack()
 	{
-		m_pTarget = dynamic_cast<Player*>(SceneManger::FindPlayer());
-		if (m_pTarget &&
-			m_pTarget->GetState() == GameObject::eState::Active)
+		for (GameObject* pObj : SceneManger::GetPlayers(GetSceneName()))
 		{
-			float fPlayerX = m_pTarget->GetComponent<Transform>()->GetPosition().x;
-			float fX = GetComponent<Transform>()->GetPosition().x;
+			Player* pPlayer = static_cast<Player*>(pObj);
+			if (pPlayer &&
+				pPlayer->GetState() == GameObject::eState::Active)
+			{
+				float fPlayerX = pPlayer->GetComponent<Transform>()->GetPosition().x;
+				float fX = GetComponent<Transform>()->GetPosition().x;
 
-			float fLen = fPlayerX - fX;
-			if (fabs(fLen) >= m_vecLength[m_iCurLevel])
-				m_pTarget->GetScript<PlayerScript>()->Hit(m_tAttackInfo, L"MobZone");
+				float fLen = fPlayerX - fX;
+				if (fabs(fLen) >= m_vecLength[m_iCurLevel])
+					pPlayer->GetScript<PlayerScript>()->Hit(m_tAttackInfo, L"MobZone");
+			}
 		}
+		
 
 	}
 }

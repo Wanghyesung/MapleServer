@@ -25,16 +25,18 @@ namespace W
 	void StigmaBack::Initialize()
 	{
 		m_pCount = new StigmaCount();
+		m_pCount->SetSceneName(GetSceneName());
 		m_pCount->set_count(0);
 		m_pCount->m_pOwner = this;
 
-		SceneManger::AddGameObject(eLayerType::Object, m_pCount);
+		EventManager::CreateObject(m_pCount, eLayerType::Object);
+
 	}
 	void StigmaBack::Update()
 	{
 		set_count();
 
-		m_pTarget = SceneManger::FindPlayer();
+		m_pTarget = SceneManger::FindPlayer(GetSceneName());
 		Vector3 vPosition =	m_pTarget->GetComponent<Transform>()->GetPosition();
 		vPosition.y += 0.7f;
 		vPosition.z = -2.f;

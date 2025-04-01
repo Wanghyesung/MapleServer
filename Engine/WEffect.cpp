@@ -1,9 +1,9 @@
 #include "WEffect.h"
 #include "WAnimator.h"
 #include "WResources.h"
-#include "WObject.h"
 #include "WInfo.h"
 #include "WBattleManager.h"
+#include "WSceneManger.h"
 namespace W
 {
 	Effect::Effect():
