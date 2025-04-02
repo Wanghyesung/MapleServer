@@ -13,6 +13,9 @@ namespace W
 		DELET_OBJECT,
 		CHANGE_PLAYER_STATE,
 		CHANGE_PLAYER_SKILL,
+		ADD_PLAYER_SKILL,
+		INIT_PLAYER_SKILL,
+		RELEASE_PLAYER_SKILL,
 		CHANGE_MONSTER_STATE,
 		ADD_PLAYER_POOL,
 		ADD_MONSTER_POOL,
@@ -46,6 +49,11 @@ namespace W
 
 		static void ChangePlayerFSMState(PlayerFSM* _pFSM, Player::ePlayerState _ePlayerState);
 		static void ChangePlayerSkillState(Player* _pObj, Player::ePlayerSkill _ePlayerSkill);
+
+		static void AddPlayerSkillState(class SkillState* _pSkillState);
+		static void InitPlayerSkill(UINT _iPlayerID, class PlayerSkill* _pPlayerSkill);
+		static void ReleasePlayerSkill(UINT _iPlayerID);
+
 		static void ChangeMonsterFSMState(MonsterFSM* _pFSM, Monster::eMonsterState _eMonsterState);
 		static void HitchAbnormal(GameObject* _pObj, BattleManager::eAbnormalType _eType, float _fAccStat = 0.f);
 		static void Restore(GameObject* _pObj, BattleManager::eAbnormalType _eType, float _fAccStat = 0.f);

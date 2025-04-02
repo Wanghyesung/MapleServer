@@ -24,6 +24,7 @@ namespace W
 		bool m_bCreate;
 
 		friend class SkillManager;
+		friend class PlayerSkill;
 	};
 }
 

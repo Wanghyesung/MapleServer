@@ -17,8 +17,12 @@ namespace W
 
 		bool IsSkillOn() { return m_bSkillOn; }
 
-	private:
+		SkillState* FindSkillState(Player::ePlayerSkill _eSkill);
+		void AccAttack(Vector3 _vPosition);
+		void AddSkill(SkillState* _pSkill);
 
+	private:	
+		std::map<Player::ePlayerSkill, SkillState*> m_mapSkills;
 		SkillState* m_pActiveSkill;
 
 		Player* m_pPlayer;

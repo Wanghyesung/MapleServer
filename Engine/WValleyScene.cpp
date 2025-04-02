@@ -35,6 +35,11 @@ namespace W
 		setobject();
 		setmonster();
 
+		Player* pPlayer = new Player();
+		pPlayer->SetSceneName(GetName());	
+		pPlayer->Initialize();
+		EventManager::AddPlayer(pPlayer);
+
 
 
 		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ground, true);
