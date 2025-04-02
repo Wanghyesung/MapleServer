@@ -57,21 +57,6 @@ namespace W
 			m_pSkill = nullptr;
 		}
 
-		//std::map < std::wstring, std::queue<PlayerAttackObject*>>::iterator iter =
-		//	m_mapAttackObjs.begin();
-		//
-		//for (iter; iter != m_mapAttackObjs.end(); ++iter)
-		//{
-		//	std::queue< PlayerAttackObject*> queue = iter->second;
-		//	while (!queue.empty())
-		//	{
-		//		PlayerAttackObject* pObj = queue.front();
-		//		delete pObj;
-		//		pObj = nullptr;
-		//		queue.pop();
-		//	}
-		//
-		//}
 	}
 
 	void PlayerScript::Initialize()

@@ -5,6 +5,7 @@
 #include "..\Engine\WPlayerAttackObject.h"
 #include "..\Engine\WMonsterAttackObject.h"
 #include "WPlayerScript.h"
+#include "WSkillState.h"
 namespace W
 {
 	std::vector<tEvent> EventManager::m_vecEvent[2] = {};
@@ -50,7 +51,7 @@ namespace W
 
 	void EventManager::AddEvent(const tEvent& _tEve)
 	{
-		//더블 버퍼링
+		//더블 버퍼링 (스핀락으로 변경)
 		std::lock_guard<std::mutex> lock(m_eventMutex);
 		m_vecEvent[1 - m_iActiveIdx].push_back(_tEve);
 	}
@@ -110,6 +111,31 @@ namespace W
 			Player::ePlayerSkill _ePlayerSkill = (Player::ePlayerSkill)_tEve.wParm;
 			
 			SkillManager::SetActiveSkill(iPlayerID, _ePlayerSkill);
+		}
+		break;
+
+		case EVENT_TYPE::ADD_PLAYER_SKILL:
+		{
+			SkillState* pSkillState = (SkillState*)_tEve.lParm;
+			UINT iPlayerID = pSkillState->GetPlayer()->GetPlayerID();
+			SkillManager::AddSkill(iPlayerID,pSkillState);
+		}
+		break;
+
+		case EVENT_TYPE::INIT_PLAYER_SKILL:
+		{
+			UINT iPlayerID = (UINT)_tEve.lParm;
+			PlayerSkill* pPlayerSkill = (PlayerSkill*)_tEve.wParm;
+
+			SkillManager::InitSkill(iPlayerID, pPlayerSkill);
+		}
+		break;
+
+		case EVENT_TYPE::RELEASE_PLAYER_SKILL:
+		{
+			UINT iPlayerID = (UINT)_tEve.lParm;
+		
+			SkillManager::ReleaseSkill(iPlayerID);
 		}
 		break;
 
@@ -310,6 +336,31 @@ namespace W
 		eve.eEventType = EVENT_TYPE::CHANGE_PLAYER_SKILL;
 		AddEvent(eve);
 	}
+	void EventManager::AddPlayerSkillState(SkillState* _pSkillState)
+	{
+		tEvent eve = {};
+		eve.lParm = (DWORD_PTR)_pSkillState;
+		eve.eEventType = EVENT_TYPE::ADD_PLAYER_SKILL;
+		AddEvent(eve);
+	}
+	void EventManager::InitPlayerSkill(UINT _iPlayerID, PlayerSkill* _pPlayerSkill)
+	{
+		tEvent eve = {};
+		eve.lParm = (DWORD_PTR)_iPlayerID;
+		eve.wParm = (DWORD_PTR)_pPlayerSkill;
+
+		eve.eEventType = EVENT_TYPE::INIT_PLAYER_SKILL;
+		AddEvent(eve);
+	}
+	void EventManager::ReleasePlayerSkill(UINT _iPlayerID)
+	{
+		tEvent eve = {};
+		eve.lParm = (DWORD_PTR)_iPlayerID;
+
+		eve.eEventType = EVENT_TYPE::RELEASE_PLAYER_SKILL;
+		AddEvent(eve);
+	}
+
 	void EventManager::ChangeMonsterFSMState(MonsterFSM* _pFSM, Monster::eMonsterState _eMonsterState)
 	{
 		tEvent eve = {};
