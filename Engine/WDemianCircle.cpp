@@ -70,38 +70,25 @@ namespace W
 	{
 		m_fCurAttackTime += Time::DeltaTime();
 
-		Vector3 vPos = m_pTarget->GetComponent<Transform>()->GetPosition();
-		Vector2 vTargerPos = Vector2(vPos.x, vPos.y);
-		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
-		Vector2 vCirclePos = Vector2(vPosition.x, vPosition.y);
-
-		float fLen = (vTargerPos - vCirclePos).Length();
-
-		bool bEnter = false;
-		if (fabs(fLen) <= (m_vecColliderSize[m_iCurIndex]).Length())
+		for (GameObject* pPlayer : SceneManger::GetPlayers(GetSceneName()))
 		{
-			bEnter = true;
-			if (m_fCurAttackTime >= m_fAttackTime)
+			Vector3 vPos = pPlayer->GetComponent<Transform>()->GetPosition();
+			Vector2 vTargerPos = Vector2(vPos.x, vPos.y);
+			Vector3 vPosition = GetComponent<Transform>()->GetPosition();
+			Vector2 vCirclePos = Vector2(vPosition.x, vPosition.y);
+
+			float fLen = (vTargerPos - vCirclePos).Length();
+
+			bool bEnter = false;
+			if (fabs(fLen) <= (m_vecColliderSize[m_iCurIndex]).Length())
 			{
-				m_pTarget->GetScript<PlayerScript>()->Hit(m_tMonsterAttack.tAttackInfo, L"Circle");
-				m_fCurAttackTime = 0.f;
+				bEnter = true;
+				if (m_fCurAttackTime >= m_fAttackTime)
+				{
+					pPlayer->GetScript<PlayerScript>()->Hit(m_tMonsterAttack.tAttackInfo, L"Circle");
+					m_fCurAttackTime = 0.f;
+				}
 			}
-		}
-			
-		if (m_bEnter == bEnter)
-			return;
-
-		m_bEnter = bEnter;
-
-		Collider2D* pCollider = GetComponent<Collider2D>();
-		if (m_bEnter)
-		{
-			BattleManager::Player_DeBuff_Attack(m_pTarget, BattleManager::eUpStatType::Defense, 9);
-		}
-			
-		else
-		{
-			BattleManager::Player_DeBuff_Attack(m_pTarget, BattleManager::eUpStatType::Defense, -9);
 		}
 	}
 	void DemianCircle::move()

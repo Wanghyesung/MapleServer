@@ -94,9 +94,9 @@ namespace W
 		m_pPlayerWeapon->LateUpdate();
 	}
 
-	void PlayerArm::SetEquipWeapon(Equip* _pEquip)
+	void PlayerArm::SetEquipWeapon(const std::wstring& _strEquipName)
 	{
-		m_pPlayerWeapon->SetPlayerEquip(_pEquip);
+		m_pPlayerWeapon->SetPlayerEquip(_strEquipName);
 	}
 
 	void PlayerArm::SetAnimationIndex()

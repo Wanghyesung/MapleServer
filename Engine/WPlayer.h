@@ -7,6 +7,15 @@ namespace W
 	class Player : public GameObject
 	{
 	public:
+		enum class eEquipType
+		{
+			Hat,
+			Top,
+			Bottom,
+			Shoes,
+			Weapon,
+		};
+
 		enum class ePlayerState
 		{
 			alert,
@@ -79,8 +88,8 @@ namespace W
 		virtual void SetAlert(bool _bAlert);
 		virtual bool IsAlert() { return m_bAlert; }
 
-		void SetEquip(Equip* _pEquip);
-		void DisableEquip(Equip* _pEquip);
+		void SetEquip(eEquipType _eType, const std::wstring _strEquipName);
+		void DisableEquip(eEquipType _eType, const std::wstring _strEquipName);
 
 		template <typename T>
 		T* GetPlayerChild()

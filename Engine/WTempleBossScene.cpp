@@ -5,7 +5,7 @@
 #include "WTransform.h"
 #include "WInput.h"
 #include "WSceneManger.h"
-#include "WNPC.h"
+
 #include "WGround.h"
 #include "WSolomon.h"
 #include "WCollisionManager.h"
@@ -62,14 +62,7 @@ namespace W
 	}
 	void TempleBossScene::CreateBackground()
 	{
-		NPC* pNPC = new NPC();
-		pNPC->SetSceneName(GetName());
-		AddGameObject(eLayerType::NPC, pNPC);
-
-		pNPC->GetComponent<Transform>()->SetPosition(-7.f, -2.f, -1.f);
-		pNPC->GetComponent<Transform>()->SetScale(0.547f * 1.2, 1.f * 1.2f, 0.f);
-		pNPC->GetComponent<Transform>()->SetRotation(0.f, 0.f, 0.f);
-
+	
 
 		GameObject* pBackGround = new GameObject();
 		pBackGround->SetSceneName(GetName());

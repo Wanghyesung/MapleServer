@@ -7,7 +7,6 @@
 #include "WInput.h"
 #include "WSceneManger.h"
 #include "WLadder.h"
-#include "WNPC.h"
 #include "WCage.h"
 
 #include "WPlayer.h"
@@ -35,10 +34,10 @@ namespace W
 		setobject();
 		setmonster();
 
-		Player* pPlayer = new Player();
+		/*Player* pPlayer = new Player();
 		pPlayer->SetSceneName(GetName());	
 		pPlayer->Initialize();
-		EventManager::AddPlayer(pPlayer);
+		EventManager::AddPlayer(pPlayer);*/
 
 
 
@@ -78,12 +77,6 @@ namespace W
 		pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 0.2f);
 		pBackGround->GetComponent<Transform>()->SetScale(25 * 0.35f,  25.f * 1.f, 1.f);
 
-
-		NPC* pNPC = new NPC();
-		pNPC->SetSceneName(GetName());
-		AddGameObject(eLayerType::NPC, pNPC);
-		pNPC->GetComponent<Transform>()->SetPosition(2.5f, 7.5f, -0.2f);
-		pNPC->GetComponent<Transform>()->SetScale(0.761f, 1.f, 0.f);
 	}
 
 
@@ -106,7 +99,6 @@ namespace W
 		pLadder0->Initialize();
 		pLadder0->GetComponent<Collider2D>()->SetCenter(Vector2(0.f, -0.1f));
 	
-
 		Ladder* pLadder1 = new Ladder();
 		pLadder1->SetSceneName(GetName());
 		AddGameObject(eLayerType::Ladder, pLadder1);

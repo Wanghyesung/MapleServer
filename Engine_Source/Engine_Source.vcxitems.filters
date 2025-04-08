@@ -88,6 +88,9 @@
     <Filter Include="Packet">
       <UniqueIdentifier>{dac06cb1-f434-4267-af12-d4b89f583c8b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PacketManager">
+      <UniqueIdentifier>{3893cb8d-a570-4121-ad37-3ef79bce7c97}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)WEntity.cpp">

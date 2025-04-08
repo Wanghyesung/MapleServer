@@ -9,6 +9,7 @@
 #include "..\Engine\WBattleManager.h"
 #include "..\Engine\WEventManager.h"
 #include "..\Engine\WMonsterManager.h"
+#include "..\Engine\WGameObjectManager.h"
 #include "WThreadPool.h"
 #include "WFmod.h"
 #include "WFontWrapper.h"
@@ -47,6 +48,8 @@ namespace W
 		
 		CollisionManager::Initialize();
 		BattleManager::Initialize();
+
+		GameObjectManager::Initialize();
 	}
 
 	void Application::Update()

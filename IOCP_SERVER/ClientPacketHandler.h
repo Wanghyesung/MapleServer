@@ -28,7 +28,7 @@ enum PACKET_TYPE
 	
 	C_INPUT = 1006,
 
-	S_MPA = 1007,
+	S_MAP = 1007,
 
 	S_CREATE= 1008,
 	C_CREATE = 1009,
@@ -98,7 +98,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_DELETE _pkt) { return _MakeSendBuffer(_pkt, S_DELETE); }
 	
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_COLLISIION _pkt) { return _MakeSendBuffer(_pkt, S_COLLISION); }
-	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MAP _pkt) { return _MakeSendBuffer(_pkt, S_MPA); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MAP _pkt) { return _MakeSendBuffer(_pkt, S_MAP); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_STATE _pkt) { return _MakeSendBuffer(_pkt, S_STATE); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_TRANSFORM _pkt) { return _MakeSendBuffer(_pkt, S_TRANSFORM); }
 

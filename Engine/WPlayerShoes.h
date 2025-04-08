@@ -17,7 +17,7 @@ namespace W
 		
 		void SetPlayerBody(PlayerBody* _pPlayerBody) { m_pPlayerBody = _pPlayerBody; }
 
-		void SetPlayerEquip(Equip* _pEquip);
+		void SetPlayerEquip(const std::wstring& _strEquipName);
 
 		const std::wstring& GetCurAnimName() { return m_strCurAnim; }
 

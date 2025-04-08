@@ -6,8 +6,7 @@ namespace W
 	UINT GameObject::OBJECT_ID = 0;
 
 	GameObject::GameObject() :
-		m_eState(eState::Active),
-		m_iObjectID(OBJECT_ID++)
+		m_eState(eState::Active)
 	{
 		AddComponent<Transform>();
 	}
