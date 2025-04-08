@@ -128,14 +128,14 @@ namespace W
 		m_pPlayerEyes->SetAlert(_bAlert);
 	}
 
-	void PlayerHead::SetEquipHat(Equip* _pEquip)
+	void PlayerHead::SetEquipHat(const std::wstring& _strEquipName)
 	{
-		if (_pEquip == nullptr)
+		if (_strEquipName.empty())
 			m_pPlayerHair->SetHairDown(false);
 		else
 			m_pPlayerHair->SetHairDown(true);
 		
-		m_pPlayerHat->SetPlayerEquip(_pEquip);
+		m_pPlayerHat->SetPlayerEquip(_strEquipName);
 	}
 
 	void PlayerHead::SetAnimationIndex()

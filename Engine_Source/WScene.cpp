@@ -53,6 +53,7 @@ namespace W
 	void Scene::AddGameObject(eLayerType _eType, GameObject* _pGameObj)
 	{
 		m_vecLayer[(UINT)_eType].AddGameObject(_pGameObj);
+		
 		_pGameObj->SetLayerType(_eType);
 	}
 

@@ -125,17 +125,17 @@ namespace W
 		m_pPlayerShoes->LateUpdate();
 	}
 	
-	void PlayerBody::SetEquipTop(Equip* _pEquip)
+	void PlayerBody::SetEquipTop(const std::wstring& _strEquipName)
 	{
-		m_pPlayerTop->SetPlayerEquip(_pEquip);
+		m_pPlayerTop->SetPlayerEquip(_strEquipName);
 	}
-	void PlayerBody::SetEquipBottom(Equip* _pEquip)
+	void PlayerBody::SetEquipBottom(const std::wstring& _strEquipName)
 	{
-		m_pPlayerBottom->SetPlayerEquip(_pEquip);
+		m_pPlayerBottom->SetPlayerEquip(_strEquipName);
 	}
-	void PlayerBody::SetEquipShoes(Equip* _pEquip)
+	void PlayerBody::SetEquipShoes(const std::wstring& _strEquipName)
 	{
-		m_pPlayerShoes->SetPlayerEquip(_pEquip);
+		m_pPlayerShoes->SetPlayerEquip(_strEquipName);
 	}
 	void PlayerBody::SetAnimationIndex()
 	{

@@ -20,9 +20,9 @@ namespace W
 		void SetPlayer(Player* _pPlayer) { m_pPlayer = _pPlayer; }
 		Player* GetPlayer() { return m_pPlayer; }
 
-		void SetEquipTop(Equip* _pEquip);
-		void SetEquipBottom(Equip* _pEquip);
-		void SetEquipShoes(Equip* _pEquip);
+		void SetEquipTop(const std::wstring& _strEquipName);
+		void SetEquipBottom(const std::wstring& _strEquipName);
+		void SetEquipShoes(const std::wstring& _strEquipName);
 
 		void SetAnimationIndex();
 

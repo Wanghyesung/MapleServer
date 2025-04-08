@@ -23,7 +23,7 @@ namespace W
 		Player* GetPlayer() { return m_pPlayer; }
 
 		void SetAlert(bool _bAlert);
-		void SetEquipHat(Equip* _pEquip);
+		void SetEquipHat(const std::wstring& _strEquipName);
 
 		void SetAnimationIndex();
 

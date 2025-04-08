@@ -29,9 +29,6 @@
     <ClInclude Include="WLadder.h">
       <Filter>Contents\Object\Ladder</Filter>
     </ClInclude>
-    <ClInclude Include="WNPC.h">
-      <Filter>Contents\Object\NPC</Filter>
-    </ClInclude>
     <ClInclude Include="WPlayerBody.h">
       <Filter>Contents\Player</Filter>
     </ClInclude>
@@ -494,6 +491,12 @@
     <ClInclude Include="WObjectPoolManager.h">
       <Filter>Contents\Manager\ObjectPoolManager</Filter>
     </ClInclude>
+    <ClInclude Include="WGameObjectManager.h">
+      <Filter>Contents\Manager\GameObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectHeader.h">
+      <Filter>Contents\Manager\GameObjectManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -520,9 +523,6 @@
     </ClCompile>
     <ClCompile Include="WLadder.cpp">
       <Filter>Contents\Object\Ladder</Filter>
-    </ClCompile>
-    <ClCompile Include="WNPC.cpp">
-      <Filter>Contents\Object\NPC</Filter>
     </ClCompile>
     <ClCompile Include="WPlayerBody.cpp">
       <Filter>Contents\Player</Filter>
@@ -986,6 +986,9 @@
     <ClCompile Include="WObjectPoolManager.cpp">
       <Filter>Contents\Manager\ObjectPoolManager</Filter>
     </ClCompile>
+    <ClCompile Include="WGameObjectManager.cpp">
+      <Filter>Contents\Manager\GameObjectManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -1023,9 +1026,6 @@
     </Filter>
     <Filter Include="Contents\Object\Ladder">
       <UniqueIdentifier>{1560192a-8ef8-4244-80aa-4759882c359a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Object\NPC">
-      <UniqueIdentifier>{38651194-cfcc-48de-a5dc-920cfbec8433}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Player\Equip">
       <UniqueIdentifier>{ba4e9b0f-259b-4735-b0cb-ac4672e76a13}</UniqueIdentifier>
@@ -1362,6 +1362,9 @@
     </Filter>
     <Filter Include="Contents\Manager\ObjectPoolManager">
       <UniqueIdentifier>{841e6804-6e66-4f01-a41d-731cf8ac634f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Manager\GameObjectManager">
+      <UniqueIdentifier>{51ad96ad-dc42-49f1-8712-99c190c4e73a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

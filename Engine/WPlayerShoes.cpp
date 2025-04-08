@@ -97,7 +97,9 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
-	void PlayerShoes::SetPlayerEquip(Equip* _pEquip)
+	void PlayerShoes::SetPlayerEquip(const std::wstring& _strEquipName)
 	{
+		m_strCurEquip = _strEquipName;
+		Initialize();
 	}
 }

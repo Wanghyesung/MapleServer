@@ -9,7 +9,7 @@ bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 {
 	shared_ptr<ClientSession> pSession = static_pointer_cast<ClientSession>(_pSession);
 	const string& _strPersonName = _pkt.name();
-	
+	pSession->SetName(_strPersonName);
 	//성공했다면
 	if (GRoom.Check(_strPersonName) == false)
 		return false;

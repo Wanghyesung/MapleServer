@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "ClientSession.h"
+#include "Room.h"
+
+Room GRoom;
 
 ClientSession::ClientSession()
 {
@@ -29,4 +32,5 @@ void ClientSession::OnSend(int len)
 
 void ClientSession::OnDisConnected()
 {
+    //GRoom.Exit(m_iName)
 }

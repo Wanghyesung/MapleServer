@@ -194,6 +194,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="LoadScene.h" />
+    <ClInclude Include="ObjectHeader.h" />
     <ClInclude Include="WAbnormal.h" />
     <ClInclude Include="WAriel.h" />
     <ClInclude Include="WArielLaser.h" />
@@ -223,6 +224,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WDemianSpear0.h" />
     <ClInclude Include="WDemianSpear1.h" />
     <ClInclude Include="WDemianVine.h" />
+    <ClInclude Include="WGameObjectManager.h" />
     <ClInclude Include="WObjectPoolManager.h" />
     <ClInclude Include="WPlayerDead.h" />
     <ClInclude Include="WSpawnUltimate.h" />
@@ -285,7 +287,6 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WPlayerFSM.h" />
     <ClInclude Include="WPlayerHair.h" />
     <ClInclude Include="WLadder.h" />
-    <ClInclude Include="WNPC.h" />
     <ClInclude Include="WPlayerArm.h" />
     <ClInclude Include="WPlayerBody.h" />
     <ClInclude Include="WPlayerHat.h" />
@@ -389,6 +390,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WDemianSpear0.cpp" />
     <ClCompile Include="WDemianSpear1.cpp" />
     <ClCompile Include="WDemianVine.cpp" />
+    <ClCompile Include="WGameObjectManager.cpp" />
     <ClCompile Include="WObjectPoolManager.cpp" />
     <ClCompile Include="WPlayerDead.cpp" />
     <ClCompile Include="WSpawnUltimate.cpp" />
@@ -451,7 +453,6 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WPlayerFSM.cpp" />
     <ClCompile Include="WPlayerHair.cpp" />
     <ClCompile Include="WLadder.cpp" />
-    <ClCompile Include="WNPC.cpp" />
     <ClCompile Include="WPlayerArm.cpp" />
     <ClCompile Include="WPlayerBody.cpp" />
     <ClCompile Include="WPlayerHat.cpp" />

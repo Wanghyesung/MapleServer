@@ -100,8 +100,10 @@ namespace W
 		GameObject::LateUpdate();
 	}
 
-	void PlayerBottom::SetPlayerEquip(Equip* _pEquip)
+	void PlayerBottom::SetPlayerEquip(const std::wstring& _strEquipName)
 	{
+		m_strCurEquip = _strEquipName;
+		Initialize();
 	}
 	
 }

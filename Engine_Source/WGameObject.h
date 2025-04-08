@@ -3,6 +3,7 @@
 #include "WEntity.h"
 #include "WComponent.h"
 #include "WScript.h"
+#include "WPacketManager.h"
 
 
 namespace W
@@ -111,12 +112,12 @@ namespace W
 		void SetLayerType(eLayerType _eLayerType) { m_eLayerType = _eLayerType; }
 		eLayerType GetLayerType() { return m_eLayerType; }
 
-		void SetObjectID(UINT _iPlayerID) { m_iObjectID = _iPlayerID; }
-		UINT GetObjectID() { return m_iObjectID; }
-
 		void SetSceneName(const std::wstring& _strName) { m_strSceneName = _strName; }
 		const std::wstring& GetSceneName() { return m_strSceneName; }
-
+		
+		static void SetObjectID(UINT _ID) { OBJECT_ID = _ID; }
+		static UINT GetObjectID() { return OBJECT_ID; }
+		
 	private:
 		eState m_eState;
 		std::vector<Component*> m_vecComponent;
@@ -124,8 +125,9 @@ namespace W
 		eLayerType m_eLayerType;
 		std::wstring m_strSceneName;
 
-		UINT m_iObjectID;
 		static UINT OBJECT_ID;
+
+
 	};
 }
 

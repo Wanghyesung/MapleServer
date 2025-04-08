@@ -17,7 +17,7 @@ namespace W
 		void SetPlayer(Player* _pPlayer) { m_pPlayer = _pPlayer; }
 		Player* GetPlayer() { return m_pPlayer; }
 
-		void SetEquipWeapon(Equip* _pEquip);
+		void SetEquipWeapon(const std::wstring& _strEquipName);
 
 		void SetAnimationIndex();
 

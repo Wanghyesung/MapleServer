@@ -65,16 +65,21 @@ namespace W
 		PlayerBody* pPlayerBody = new PlayerBody();
 		pPlayerBody->SetPlayer(this);
 		pPlayerBody->Initialize();
+		pPlayerBody->SetEquipBottom(L"10_bottom");
+		pPlayerBody->SetEquipTop(L"10_top");
+		pPlayerBody->SetEquipShoes(L"10_shoes");
 		m_vecChildObj[0] = pPlayerBody;
 
 		PlayerHead* pPlayerHead = new PlayerHead();
 		pPlayerHead->SetPlayer(this);
 		pPlayerHead->Initialize();
+		pPlayerHead->SetEquipHat(L"10_hat");
 		m_vecChildObj[1] = pPlayerHead;
 
 		PlayerArm* pPlayerArm = new PlayerArm();
 		pPlayerArm->SetPlayer(this);
 		pPlayerArm->Initialize();
+		pPlayerArm->SetEquipWeapon(L"10_weapon");
 		m_vecChildObj[2] = pPlayerArm;
 
 		pPlayerScript->Initialize();
@@ -120,55 +125,53 @@ namespace W
 			m_bAlertTime = 2.f;
 	}
 
-	/*void Player::SetEquip(Equip* _pEquip)
+	void Player::SetEquip(eEquipType _eType, const std::wstring _strEquipName)
 	{
-		Equip::EquipType eType = _pEquip->GetEquipType();
-		switch (eType)
+		switch (_eType)
 		{
-		case W::Equip::EquipType::Hat:
-			GetPlayerChild<PlayerHead>()->SetEquipHat(_pEquip);
+		case eEquipType::Hat:
+			GetPlayerChild<PlayerHead>()->SetEquipHat(_strEquipName);
 			break;
-		case W::Equip::EquipType::Top:
-			GetPlayerChild<PlayerBody>()->SetEquipTop(_pEquip);
+		case eEquipType::Top:
+			GetPlayerChild<PlayerBody>()->SetEquipTop(_strEquipName);
 			break;
-		case W::Equip::EquipType::Bottom:
-			GetPlayerChild<PlayerBody>()->SetEquipBottom(_pEquip);
+		case eEquipType::Bottom:
+			GetPlayerChild<PlayerBody>()->SetEquipBottom(_strEquipName);
 			break;
-		case W::Equip::EquipType::Shoes:
-			GetPlayerChild<PlayerBody>()->SetEquipShoes(_pEquip);
+		case eEquipType::Shoes:
+			GetPlayerChild<PlayerBody>()->SetEquipShoes(_strEquipName);
 			break;
-		case W::Equip::EquipType::Weapon:
-			GetPlayerChild<PlayerArm>()->SetEquipWeapon(_pEquip);
+		case eEquipType::Weapon:
+			GetPlayerChild<PlayerArm>()->SetEquipWeapon(_strEquipName);
 			break;
 		}
 
 		Reset_Animation();
-	}*/
+	}
 
-	/*void Player::DisableEquip(Equip* _pEquip)
+	void Player::DisableEquip(eEquipType _eType, const std::wstring _strEquipName)
 	{
-		Equip::EquipType eType = _pEquip->GetEquipType();
-		switch (eType)
+		switch (_eType)
 		{
-		case W::Equip::EquipType::Hat:
-			GetPlayerChild<PlayerHead>()->SetEquipHat(nullptr);
+		case eEquipType::Hat:
+			GetPlayerChild<PlayerHead>()->SetEquipHat(L"");
 			break;
-		case W::Equip::EquipType::Top:
-			GetPlayerChild<PlayerBody>()->SetEquipTop(nullptr);
+		case eEquipType::Top:
+			GetPlayerChild<PlayerBody>()->SetEquipTop(L"");
 			break;
-		case W::Equip::EquipType::Bottom:
-			GetPlayerChild<PlayerBody>()->SetEquipBottom(nullptr);
+		case eEquipType::Bottom:
+			GetPlayerChild<PlayerBody>()->SetEquipBottom(L"");
 			break;
-		case W::Equip::EquipType::Shoes:
-			GetPlayerChild<PlayerBody>()->SetEquipShoes(nullptr);
+		case eEquipType::Shoes:
+			GetPlayerChild<PlayerBody>()->SetEquipShoes(L"");
 			break;
-		case W::Equip::EquipType::Weapon:
-			GetPlayerChild<PlayerArm>()->SetEquipWeapon(nullptr);
+		case eEquipType::Weapon:
+			GetPlayerChild<PlayerArm>()->SetEquipWeapon(L"");
 			break;
 		}
 
 		Reset_Animation();
-	}*/
+	}
 
 	void Player::SetAnimStop(bool _bStop)
 	{

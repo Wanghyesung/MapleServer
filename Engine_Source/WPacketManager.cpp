@@ -19,5 +19,11 @@ namespace W
 			pPacket->Send();
 		}
 	}
+
+
+	void PacketManager::Initialize()
+	{	
+
+	}
 }
 
