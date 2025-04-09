@@ -4,6 +4,7 @@
 #include "Room.h"
 #include "WPlayer.h"
 
+PacketHandlerFunc GPacketHandler[UINT16_MAX] = {};
 //event버퍼에 넣기
 bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 {

@@ -24,11 +24,6 @@
 #endif
 
 
-//공유 항목 프로젝트는 어느 플랫폼이여도 사용가능하기 때문에
-//빌드 중속성 굳이 하나하나 빌드가 아니라 하나를 돌리면 같이 빌드되게
-//engine -> editer
-//기존 클래스 복사 -> 기존항복에 추가 
-//c++ 버전 20으로
 #include "framework.h"
 #include "Client.h"
 #include "..\Engine_Source\WApplication.h"
@@ -39,61 +34,31 @@
 #include "..\Engine\LoadScene.h"
 #include "..\Engine_Source\WThreadPool.h"
 
-//셰이더 만들어진 후 셋팅
-//layout 설정 -> setpustate에서 레이아웃 속성설정 
-//레이아웃 설정할 떄 vertexbuffer2진코드 덩어리 필요 
-//레아이웃 셰이더에 묶어서 
-//상수버퍼는 class안에 묶어서 -> 자주 사용하기 때문에, cpu에 데이터를 gpu로 보내야하기 떄문
-//구조화 버퍼는 배열같은 큰 데이터를 보내는 용도
-//버퍼를 만들때 ㅏ용하는 id3d11buffer클래스는 밖에 따로 뺴둠
-//따로 만든 버퍼 struct를 모든 버퍼 부모로 사용 (똑같이 사용하는 id3d11buffer 보관)
-//wrl
-//gpu연결 -> shader 연결
-//상수버퍼 만들때 데이터 크기(vertex)만 인자값으로 넣고 안에 옵션은 고정
-//constbuffer 생성자에 무슨 타입인지 실행중에 바뀌면 안되기 때문
-//ecs 기존의 컴포넌트 방식이 아니라 시스템이 가지고있는 데이터만 업데이트들 돌리기 , 헬스라는 데이터를
-//가지고있지않으면 업데이트를 하지않음 연속적으로 데이터(주소)를 가지고있자 
-//헬스는 헬스대로 트렌스폼은 프랜스폼대로 배열로 가지고있자
-//컴포넌트는 다른 컴포넌트의 주소를 가져와서 바꿀 수 있지만 ecs는 예외처리를 많이 해야함 한 배열에 다 묶여있기때문
-//스크립트도 유니티 compont 처럼 끌어서 쓸 수 있도록
+#ifdef _DEBUG
+#pragma comment(lib, "IOCP\\Debug\\IOCP.lib")
+#pragma comment(lib, "IOCP_SERVER\\Debug\\IOCP_SERVER.lib")
+#else
+#pragma comment(lib, "IOCP\\Release\\IOCP.lib")
+#pragma comment(lib, "IOCP_SERVER\\Release\\IOCP_SERVER.lib")
+#endif
 
-//gpu(buffer)와 cpu 데이터를 묶음 subresourec와 buffer 엮고 
-//데이터전달 후 unmap
-//마이크로소프트 texture github다운
-//directXtex빌드 둘다 빌드, 데스크톱 2-22 win10 x64 
-//내 폴더에 external  directXTex ->lib정적라이브러리(릴리스, 디버그)에 (두개)lib넣기, (실행에필요한 헤더파일)include Tex.h, Tex.inl 넣기
-//헤더 인라인 include, lib파일 추가(#pragma)모드 따로해서
+#include "..\IOCP\pch.h"
 
+#include "..\IOCP\SockHelper.h"
+#include "..\IOCP_SERVER\ClientPacketHandler.h"
+#include "..\IOCP\Service.h"
+#include "..\IOCP_SERVER\ClientSession.h"
+#include "..\IOCP\ThreadManager.h"
+#include "..\IOCP\IOCP.h"
 
-//샘플링작업을 해주지않아도 비주얼스튜디오에서 알아서 보간처리를 해줌
-//안티에일리어싱 (계단현상을 없애기) 샘플링 알고리즘
-//Point 픽셀 그대로 가져오기
-//비등방성
-//만든 샘플링도 다른 texutre와 똑같이 shader와 묶어준다
-//메테리얼, 렌더패스 텍스쳐를 셰이더러를 통해서 어떻게 그릴지 정함
-//텍스쳐 쉐이더 전부 메테리얼이 가지고있게
-//상수버퍼또한 위치기반만있는것이아니라 다른 정보도 넘겨줄수있게 배열로
-//오브젝트 생성시 mesh, meshrender초기화
-//메테리얼을 만들때마다 shader, texture또한 만들어서 넣어주기
+shared_ptr<ClientSession> MakeSharedSesion()
+{
+    return make_shared<ClientSession>();
+}
 
-//스킬립트형 component 배열로 컴포넌트 추가할때 따로 푸쉬
-//둘중에 먼저 update될지 순서를 설정
-//오브젝트 로직은 스크립트에서
-//std라이브러리의 자료형을 캐스팅하기 위해서는 pointcast로
-//리소스 관련한 데이터는 sharedptr로
-
-//게임안의 모든 벡터의 중심은 월드좌표계(0,0)를 기준으로
-//cos함수 비용이 많이 들기 때문에 벡터 두개(단위벡터) 내적해서 각도를 구하는게 비용이 싸다
-//cos구하고 acos을 통해서 각도를 구할수있음
-//SRT(월드행렬)
-
-
-//alignas(16)16바이트로만 사용
-//transform에서 월드행렬, 카메라에서 뷰행렬 투영행렬 관리
-//view porjection은 똑같이 
-//srt의 순서아 맞춰서 달라지면 공전
-//
 W::Application application;
+shared_ptr<ServerService> GServerService;
+atomic<bool> bIsRunning = true;
 
 #define MAX_LOADSTRING 100
 
@@ -131,6 +96,24 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
+    GServerService = make_shared<ServerService>(NetAddress(L"127.0.0.1", 7777),
+        make_shared<IOCP>(), MakeSharedSesion, 1);
+
+    GServerService->Start();
+
+    for (int i = 0; i < 5; ++i)
+    {
+        ThreadMgr->Excute(
+            [=]()
+            {
+                while (bIsRunning)
+                {
+                    GServerService->GetIOCP()->Excute();
+                }
+            }
+        );
+    }
+
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CLIENT));
 
     MSG msg;
@@ -161,6 +144,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     W::ThreadPool::Shutdown();
     W::SceneManger::Release();
 
+    ThreadMgr->Join();
     return (int)msg.wParam;
 }
 
@@ -264,7 +248,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
     case WM_DESTROY:
+    {
+        bIsRunning.store(false);
+        //GServerService->Stop();
+        //프로토버퍼 종료
+        google::protobuf::ShutdownProtobufLibrary();
         PostQuitMessage(0);
+    }
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
