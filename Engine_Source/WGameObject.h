@@ -3,7 +3,6 @@
 #include "WEntity.h"
 #include "WComponent.h"
 #include "WScript.h"
-#include "WPacketManager.h"
 
 
 namespace W

@@ -2,7 +2,6 @@
 #include "ClientPacketHandler.h"
 #include "ClientSession.h"
 #include "Room.h"
-#include "WPlayer.h"
 
 PacketHandlerFunc GPacketHandler[UINT16_MAX] = {};
 //event버퍼에 넣기
@@ -12,17 +11,12 @@ bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 	const string& _strPersonName = _pkt.name();
 	pSession->SetName(_strPersonName);
 	//성공했다면
-	if (GRoom.Check(_strPersonName) == false)
+	if (GRoom.Enter(_strPersonName,pSession) == false)
 		return false;
-
-	W::Player* pPlayer = new W::Player();
-	pPlayer->SetSceneName(L"Valley");
-	pPlayer->Initialize();
-	
 
 	//다른 클라들에게 전송
 	Protocol::S_NEW_ENTER other_pkt;
-	other_pkt.set_playerid(pPlayer->GetPlayerID());
+	
 	shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(other_pkt);
 	GRoom.Broadcast(pSendBuffer);
 	

@@ -6,17 +6,59 @@
 #include "..\Engine\WMonsterAttackObject.h"
 #include "WPlayerScript.h"
 #include "WSkillState.h"
+#include "..\IOCP_SERVER\Room.h"
+
 namespace W
 {
 	std::vector<tEvent> EventManager::m_vecEvent[2] = {};
 	std::vector<GameObject*> EventManager::m_vecPlayer_Pool = {};
 	std::vector<GameObject*> EventManager::m_vecMonster_Pool = {};
 
-	std::mutex EventManager::m_eventMutex = {};
+	RWLock EventManager::m_lock = {};
 	int EventManager::m_iActiveIdx = 1;
 
 #define ObjectPoolPosition 2000.f
 	void EventManager::Update()
+	{
+		pool_excute(); //오브젝트 풀
+
+		enter_excute(); //새로 들러온 플레이어
+
+		//더블버퍼링
+		{
+			WLock lock_guard(m_lock);
+			m_iActiveIdx = 1 - m_iActiveIdx;
+		}
+
+		std::vector<tEvent>& vecActiveEvent = m_vecEvent[m_iActiveIdx];
+		for (int i = 0; i < vecActiveEvent.size(); ++i)
+		{
+			excute(vecActiveEvent[i]);
+		}
+
+		vecActiveEvent.clear();
+	}
+
+	void EventManager::AddEvent(const tEvent& _tEve)
+	{
+		WLock lock_guard(m_lock);
+		m_vecEvent[1 - m_iActiveIdx].push_back(_tEve);
+	}
+	
+	void EventManager::enter_excute()
+	{
+		//새로 들어온 플레이어
+		vector<UINT> vecUserID = GRoom.CheckEnterQueue();
+		for (int i = 0; i < vecUserID.size(); ++i)
+		{
+			Player* pPlayer = new Player();
+			pPlayer->m_iPlayerID = vecUserID[i];
+			pPlayer->Initialize();
+			SceneManger::AddPlayerScene(pPlayer, L"Valley");
+		}
+	}
+
+	void EventManager::pool_excute()
 	{
 		for (int i = 0; i < m_vecPlayer_Pool.size(); ++i)
 		{
@@ -34,33 +76,13 @@ namespace W
 			SceneManger::Erase(m_vecMonster_Pool[i]);
 		}
 		m_vecMonster_Pool.clear();
-
-		{
-			std::lock_guard<std::mutex> lock(m_eventMutex);
-			m_iActiveIdx = 1 - m_iActiveIdx;
-		}
-
-		std::vector<tEvent>& vecActiveEvent = m_vecEvent[m_iActiveIdx];
-		for (int i = 0; i < vecActiveEvent.size(); ++i)
-		{
-			excute(vecActiveEvent[i]);
-		}
-
-		vecActiveEvent.clear();
 	}
 
-	void EventManager::AddEvent(const tEvent& _tEve)
-	{
-		//더블 버퍼링 (스핀락으로 변경)
-		std::lock_guard<std::mutex> lock(m_eventMutex);
-		m_vecEvent[1 - m_iActiveIdx].push_back(_tEve);
-	}
-	
 	void EventManager::excute(const tEvent& _tEve)
 	{
 		switch (_tEve.eEventType)
 		{
-		case EVENT_TYPE::CREATE_PLAYER:
+		/*case EVENT_TYPE::CREATE_PLAYER:
 		{
 			Player* pPlayer = (Player*)_tEve.lParm;
 			SceneManger::AddPlayerScene(pPlayer->GetSceneName());
@@ -76,7 +98,7 @@ namespace W
 
 			delete pObj;
 		}
-		break;
+		break;*/
 
 		case EVENT_TYPE::CREATE_OBJECT:
 		{
@@ -259,7 +281,10 @@ namespace W
 		}
 	}
 
-	void EventManager::AddPlayer(GameObject* _pObj)
+	
+	
+
+	/*void EventManager::AddPlayer(GameObject* _pObj)
 	{
 		tEvent eve = {};
 		eve.lParm = (DWORD_PTR)_pObj;
@@ -275,7 +300,7 @@ namespace W
 
 		eve.eEventType = EVENT_TYPE::DELETE_PLAYER;
 		AddEvent(eve);
-	}
+	}*/
 
 	void EventManager::DeleteObject(GameObject* _pObj)
 	{

@@ -30,25 +30,4 @@ using std::static_pointer_cast;
 #include <random>
 #include <string>
 
-// FileSystem
-#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
-#include <experimental/filesystem>
-using namespace std::experimental;
-using namespace std::experimental::filesystem;
-
-
-
-#include <wrl.h>
-using namespace Microsoft::WRL;
-
-#include <d3d11.h>					// DirectX11
-#include <d3dcompiler.h>			// Shader ÄÄÆÄÀÏ
-#include <DirectXMath.h>			// DX Math
-#include <DirectXPackedVector.h>	
-
-using namespace DirectX;
-using namespace DirectX::PackedVector;
-
-#pragma comment(lib, "d3d11")
-#pragma comment(lib, "d3dcompiler")
 

@@ -50,7 +50,7 @@ namespace W
 		static void SwapObject(Scene* _pPrevScene, Scene* _pNextScene, GameObject* _pGameObject);
 		static void SwapPlayer(Player* _pPlayer, Scene* _pPrevScene, Scene* _pNextScene);
 		static void PushObjectPool(Scene* _pPrevScene);
-		static void AddPlayerScene(const std::wstring& _strScene);
+		static void AddPlayerScene(Player* pPlayer, const std::wstring& _strScene);
 
 	private:
 		static UINT SCENE_IDX;
