@@ -10,7 +10,7 @@ public:
 
 public:
 	bool Check(const string& _strName);
-	bool Enter(const string& _strName, shared_ptr<Session> _pSession);
+	UINT Enter(const string& _strName, shared_ptr<Session> _pSession);
 	vector<UINT> CheckEnterQueue();
 	void Exit(const string& _strName);
 	void Broadcast(shared_ptr<SendBuffer> _pBuffer);

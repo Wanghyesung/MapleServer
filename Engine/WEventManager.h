@@ -9,6 +9,7 @@ namespace W
 	{
 		/*CREATE_PLAYER,
 		DELETE_PLAYER,*/
+		UPDATE_INPUT,
 		CREATE_OBJECT,
 		DELET_OBJECT,
 		CHANGE_PLAYER_STATE,
@@ -41,6 +42,7 @@ namespace W
 		static void CreateObject(GameObject* _pObj, eLayerType _eLayer);
 		static void DeleteObject(GameObject* _pObj);
 
+		static void Update_Input(UINT _iPlayerID, std::vector<UCHAR> _vecInput);
 		//static void AddPlayer(GameObject* _pObj);
 		//static void DeletePlayer(GameObject* _pObj);
 
@@ -64,6 +66,8 @@ namespace W
 		static void enter_excute();
 		static void pool_excute();
 	private:
+		//만약 이벤트처리 벡터에서 lock을 걸면 새로들어오는 이벤트(패킷), 내가지금 처리해야할 이벤트 등 처리할 일이 많아짐
+		//때문에 더블버퍼링으로 지금들어온 패킷은 다음 이벤트배열에 넣고 현재 이벤트들만 Engine에서 처리할 수 있게 만듬
 		static std::vector<tEvent> m_vecEvent[2];
 		static std::vector<GameObject*> m_vecPlayer_Pool;
 		static std::vector<GameObject*> m_vecMonster_Pool;

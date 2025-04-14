@@ -28,16 +28,21 @@ bool Room::Check(const string& _strName)
 	return true;
 }
 
-bool Room::Enter(const string& _strName, shared_ptr<Session> _pSession)
+UINT Room::Enter(const string& _strName, shared_ptr<Session> _pSession)
 {
 	if (Check(_strName) == false)
-		return false;
+		return -1;
 
 	WLock WriteLock(m_EnterLock);
-	static_pointer_cast<ClientSession>(_pSession)->SetPersonID(GetUserID());
+
+	UINT iUserID = GetUserID();
+	if (iUserID == -1)
+		return -1;
+
+	static_pointer_cast<ClientSession>(_pSession)->SetPersonID(iUserID);
 	m_queueEnter.push(make_pair(_strName, _pSession));
 
-	return true;
+	return iUserID;
 }
 
 //Engine쪽에서 접근할 예정
@@ -120,7 +125,7 @@ UINT Room::GetUserID()
 		if (m_vecUserID[i] == false)
 		{
 			m_vecUserID[i] = true;
-			return 1;
+			return i;
 		}
 	}
 	return -1;

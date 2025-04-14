@@ -4,8 +4,7 @@
 
 namespace W
 {
-	using namespace W;
-
+	
 	enum class eKeyCode
 	{
 		LSHIFT,
@@ -84,8 +83,9 @@ namespace W
 		}
 
 		
+		//최대 5명의 플레이어 Input정보
 	private:
-		static std::vector<Key> m_vecKeys;
+		static std::vector<Key> m_vecKeys;//[5];
 		
 	};
 

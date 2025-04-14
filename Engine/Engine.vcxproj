@@ -76,11 +76,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)IOCP_CLIENT\;$(SolutionDir)IOCP\;$(SolutionDir)Lib\Include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)IOCP_SERVER\;$(SolutionDir)IOCP\;$(SolutionDir)Lib\Include\;$(IncludePath)</IncludePath>
     <ReferencePath>$(SolutionDir)\Lib\Libs\;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)IOCP_CLIENT\;$(SolutionDir)IOCP\;$(SolutionDir)Lib\Include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)IOCP_SERVER\;$(SolutionDir)IOCP\;$(SolutionDir)Lib\Include\;$(IncludePath)</IncludePath>
     <ReferencePath>$(SolutionDir)\Lib\Libs\;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
