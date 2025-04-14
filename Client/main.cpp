@@ -99,6 +99,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     GServerService = make_shared<ServerService>(NetAddress(L"127.0.0.1", 7777),
         make_shared<IOCP>(), MakeSharedSesion, 5);
 
+    ClientPacketHandler::Initialize();
+
     GServerService->Start();
 
     for (int i = 0; i < 5; ++i)

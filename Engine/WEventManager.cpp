@@ -311,6 +311,15 @@ namespace W
 		AddEvent(eve);
 	}
 
+	void EventManager::Update_Input(UINT _iPlayerID, std::vector<UCHAR> _vecInput)
+	{
+		/*tEvent eve = {};
+		eve.lParm = (DWORD_PTR)_iPlayerID;
+		eve.wParm = reinterpret_cast<DWORD_PTR>(_vecInput);
+		eve.eEventType = EVENT_TYPE::DELET_OBJECT;
+		AddEvent(eve);*/
+	}
+
 	void EventManager::AddPlayerPool(GameObject* _pObj)
 	{
 		tEvent eve = {};
