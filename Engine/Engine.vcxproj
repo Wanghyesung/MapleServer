@@ -75,6 +75,14 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(SolutionDir)IOCP_CLIENT\;$(SolutionDir)IOCP\;$(SolutionDir)Lib\Include\;$(IncludePath)</IncludePath>
+    <ReferencePath>$(SolutionDir)\Lib\Libs\;$(ReferencePath)</ReferencePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(SolutionDir)IOCP_CLIENT\;$(SolutionDir)IOCP\;$(SolutionDir)Lib\Include\;$(IncludePath)</IncludePath>
+    <ReferencePath>$(SolutionDir)\Lib\Libs\;$(ReferencePath)</ReferencePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -226,6 +234,8 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WDemianVine.h" />
     <ClInclude Include="WGameObjectManager.h" />
     <ClInclude Include="WObjectPoolManager.h" />
+    <ClInclude Include="WPacket.h" />
+    <ClInclude Include="WPacketManager.h" />
     <ClInclude Include="WPlayerDead.h" />
     <ClInclude Include="WSpawnUltimate.h" />
     <ClInclude Include="WStigma.h" />
@@ -392,6 +402,8 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WDemianVine.cpp" />
     <ClCompile Include="WGameObjectManager.cpp" />
     <ClCompile Include="WObjectPoolManager.cpp" />
+    <ClCompile Include="WPacket.cpp" />
+    <ClCompile Include="WPacketManager.cpp" />
     <ClCompile Include="WPlayerDead.cpp" />
     <ClCompile Include="WSpawnUltimate.cpp" />
     <ClCompile Include="WStigma.cpp" />

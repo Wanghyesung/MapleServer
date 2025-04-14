@@ -7,8 +7,8 @@ namespace W
 {
 	enum class EVENT_TYPE
 	{
-		CREATE_PLAYER,
-		DELETE_PLAYER,
+		/*CREATE_PLAYER,
+		DELETE_PLAYER,*/
 		CREATE_OBJECT,
 		DELET_OBJECT,
 		CHANGE_PLAYER_STATE,
@@ -41,8 +41,8 @@ namespace W
 		static void CreateObject(GameObject* _pObj, eLayerType _eLayer);
 		static void DeleteObject(GameObject* _pObj);
 
-		static void AddPlayer(GameObject* _pObj);
-		static void DeletePlayer(GameObject* _pObj);
+		//static void AddPlayer(GameObject* _pObj);
+		//static void DeletePlayer(GameObject* _pObj);
 
 		static void AddPlayerPool (GameObject* _pObj);
 		static void AddMonsterPool(GameObject* _pObj);
@@ -58,14 +58,17 @@ namespace W
 		static void HitchAbnormal(GameObject* _pObj, BattleManager::eAbnormalType _eType, float _fAccStat = 0.f);
 		static void Restore(GameObject* _pObj, BattleManager::eAbnormalType _eType, float _fAccStat = 0.f);
 		static void UpStat(GameObject* _pObj, BattleManager::eUpStatType _eType, float _fAccStat);
+
 	private:
 		static void excute(const tEvent& _tEve);
-
+		static void enter_excute();
+		static void pool_excute();
 	private:
 		static std::vector<tEvent> m_vecEvent[2];
 		static std::vector<GameObject*> m_vecPlayer_Pool;
 		static std::vector<GameObject*> m_vecMonster_Pool;
-		static std::mutex m_eventMutex;
+		static RWLock m_lock;
+		
 
 
 		static int m_iActiveIdx;

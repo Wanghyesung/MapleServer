@@ -55,6 +55,7 @@ namespace W
 		m_vecLayer[(UINT)_eType].AddGameObject(_pGameObj);
 		
 		_pGameObj->SetLayerType(_eType);
+		_pGameObj->SetSceneName(GetName());
 	}
 
 	

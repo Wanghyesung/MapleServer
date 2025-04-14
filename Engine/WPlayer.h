@@ -143,7 +143,8 @@ namespace W
 		std::wstring m_strCurStateName;
 
 		UINT m_iPlayerID;
-		static UINT PLAYER_ID;
+
+		friend class EventManager;
 	};
 }
 

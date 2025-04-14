@@ -154,8 +154,9 @@ namespace W
 			dynamic_cast<PlayerAttackObject*>(m_vecObj[i])->Off();
 	}
 
-	void SceneManger::AddPlayerScene(const std::wstring& _strScene)
+	void SceneManger::AddPlayerScene(Player* pPlayer, const std::wstring& _strScene)
 	{
+		AddGameObject(_strScene, eLayerType::Player, pPlayer);
 		m_vecPlayerScene.push_back(_strScene);
 	}
 

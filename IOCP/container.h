@@ -12,6 +12,7 @@
 #include <array>
 #include "Allocator.h"
 
+using namespace std;
 
 //template<typename Type, int Size>
 //using Array = array<Type, Size>;

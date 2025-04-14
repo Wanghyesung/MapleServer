@@ -85,12 +85,6 @@
     <Filter Include="ThreadPool">
       <UniqueIdentifier>{24ad2f3e-a5b0-4806-ab27-1d84500e448a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Packet">
-      <UniqueIdentifier>{dac06cb1-f434-4267-af12-d4b89f583c8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PacketManager">
-      <UniqueIdentifier>{3893cb8d-a570-4121-ad37-3ef79bce7c97}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)WEntity.cpp">
@@ -165,12 +159,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)WThreadPool.cpp">
       <Filter>ThreadPool</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WPacketManager.cpp">
-      <Filter>Packet</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)WPacket.cpp">
-      <Filter>Packet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -264,12 +252,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WThreadPool.h">
       <Filter>ThreadPool</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WPacketManager.h">
-      <Filter>Packet</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)WPacket.h">
-      <Filter>Packet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
