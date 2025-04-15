@@ -60,21 +60,22 @@ namespace W
 		float fMaxHP = 0.f;
 		float fHP = 0.f;
 
-		const std::vector<GameObject*>& vecMonster =
-			GetLayer(eLayerType::Monster).GetGameObjects();
+		const std::unordered_map<UINT, GameObject*> hashMonster = GetLayer(eLayerType::Monster).GetGameObjects();
 		
-		for (UINT i = 0; i < vecMonster.size(); ++i)
+		auto iter = hashMonster.begin();
+		for (iter; iter != hashMonster.end(); ++iter)
 		{
-			if (vecMonster[0]->GetState() == GameObject::eState::Paused)
+			GameObject* pMon = iter->second;
+			if (pMon->GetState() == GameObject::eState::Paused)
 			{
 				if (m_iFadeCallStack == 1 &&
-					dynamic_cast<Demian*>(vecMonster[0]))
+					dynamic_cast<Demian*>(pMon))
 				{
 					fadein();
 				}
 			}
-				
-			const tObjectInfo& tInfo = vecMonster[i]->GetScript<MonsterScript>()->GetObjectInfo();
+
+			const tObjectInfo& tInfo = pMon->GetScript<MonsterScript>()->GetObjectInfo();
 
 			fMaxHP += tInfo.fMaxHP;
 			fHP += tInfo.fHP;
@@ -131,12 +132,11 @@ namespace W
 	void DemianScene::phase2()
 	{
 		m_bEnd = false;
-		const std::vector<GameObject*>& vecGameObj =
-			GetLayer(eLayerType::Monster).GetGameObjects();
+		std::unordered_map<UINT, GameObject*> hashMonster = GetLayer(eLayerType::Monster).GetGameObjects();
 
 		//phase2 µ¥¹Ì¾È
-		vecGameObj[1]->GetComponent<Collider2D>()->SetActive(true);
-		vecGameObj[1]->SetState(GameObject::eState::Active);
+		hashMonster[LAYER_STARAT_IDX + 1]->GetComponent<Collider2D>()->SetActive(true);
+		hashMonster[LAYER_STARAT_IDX + 1]->SetState(GameObject::eState::Active);
 	}
 
 	void DemianScene::check_stigma()

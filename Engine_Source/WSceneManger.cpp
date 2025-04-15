@@ -34,11 +34,6 @@ namespace W
 		}
 	}
 
-	void SceneManger::Destroy()
-	{
-		//m_pActiveScene->Destroy();
-	}
-
 	void SceneManger::Release()
 	{
 		for (auto &iter : m_hashScene)
@@ -98,9 +93,14 @@ namespace W
 	{
 		for (Scene* pScene : GetPlayerScene())
 		{
-			const std::vector<GameObject*>& vecObjs = pScene->GetLayer(eLayerType::Player).GetGameObjects();
-			for (GameObject* pObj : vecObjs)
+			const std::unordered_map<UINT,GameObject*>& hashObjs
+				= pScene->GetLayer(eLayerType::Player).GetGameObjects();
+
+			auto iter = hashObjs.begin();
+			for (iter; iter != hashObjs.end(); ++iter)
 			{
+				GameObject* pObj = iter->second;
+
 				if (((Player*)pObj)->GetPlayerID() == _iPlayerID)
 					return pObj;
 			}
@@ -111,17 +111,28 @@ namespace W
 	GameObject* SceneManger::FindPlayer(const std::wstring& _strSceneName)
 	{
 		Scene* pScene = m_hashScene[_strSceneName];
-		const std::vector<GameObject*> vecPlayer = pScene->GetLayer(eLayerType::Player).GetGameObjects();
+		std::unordered_map<UINT, GameObject*> hashPlayer = 
+			pScene->GetLayer(eLayerType::Player).GetGameObjects();
 
-		if(vecPlayer.empty())
+		if(hashPlayer.empty())
 			return nullptr;
 		
-		return vecPlayer[0];
+		return hashPlayer[0];
 	}
 
-	const std::vector<GameObject*>& SceneManger::GetPlayers(const std::wstring& _strSceneName)
+	std::vector<GameObject*> SceneManger::GetPlayers(const std::wstring& _strSceneName)
 	{
-		return m_hashScene[_strSceneName]->GetLayer(eLayerType::Player).GetGameObjects();
+		std::vector<GameObject*> vecPlayer;
+
+		const std::unordered_map<UINT, GameObject*>& hashObjs
+			= m_hashScene[_strSceneName]->GetLayer(eLayerType::Player).GetGameObjects();
+
+		auto iter = hashObjs.begin();
+		for (iter; iter != hashObjs.end(); ++iter)
+		{
+			vecPlayer.push_back(iter->second);
+		}
+		return vecPlayer;
 	}
 
 	void SceneManger::SwapObject(Scene* _pPrevScene, Scene* _pNextScene, GameObject* _pGameObject)
@@ -147,11 +158,12 @@ namespace W
 
 	void SceneManger::PushObjectPool(Scene* _pPrevScene)
 	{
-		std::vector<GameObject*> m_vecObj =
-			_pPrevScene->GetLayer(eLayerType::AttackObject).GetGameObjects();
+		const std::unordered_map<UINT, GameObject*>& hashObjs
+			= _pPrevScene->GetLayer(eLayerType::AttackObject).GetGameObjects();
 
-		for (int i = 0; i < m_vecObj.size(); ++i)
-			dynamic_cast<PlayerAttackObject*>(m_vecObj[i])->Off();
+		auto iter = hashObjs.begin();
+		for (iter; iter != hashObjs.end(); ++iter)
+			dynamic_cast<PlayerAttackObject*>(iter->second)->Off();
 	}
 
 	void SceneManger::AddPlayerScene(Player* pPlayer, const std::wstring& _strScene)

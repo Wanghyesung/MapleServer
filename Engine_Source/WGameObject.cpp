@@ -3,7 +3,7 @@
 
 namespace W
 {
-	UINT GameObject::OBJECT_ID = 0;
+	UINT GameObject::CREATE_ID = 0;
 
 	GameObject::GameObject() :
 		m_eState(eState::Active)

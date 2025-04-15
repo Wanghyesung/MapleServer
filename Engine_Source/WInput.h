@@ -47,12 +47,6 @@ namespace W
 	class Input
 	{
 	public:
-		struct Key
-		{
-			eKeyCode key;
-			eKeyState state;
-			bool bPressed;
-		};
 
 		static void Initialize();
 		static void Update_Key(UINT _iPlayerID, const std::vector<USHORT>& _vecKey);
@@ -60,28 +54,28 @@ namespace W
 
 		inline static eKeyState GetKeyState(UINT _iPlayerID, eKeyCode keyCode)
 		{
-			return m_vecKeys[_iPlayerID][static_cast<UINT>(keyCode)].state;
+			return m_vecKeys[_iPlayerID][static_cast<UINT>(keyCode)];
 		};
 
 		static __forceinline bool GetKey(UINT _iPlayerID, eKeyCode keyCode)
 		{
-			return m_vecKeys[_iPlayerID][static_cast<UINT>(keyCode)].state == eKeyState::Pressed;
+			return m_vecKeys[_iPlayerID][static_cast<UINT>(keyCode)] == eKeyState::Pressed;
 		}
 
 		static __forceinline bool GetKeyDown(UINT _iPlayerID, eKeyCode keyCode)
 		{
-			return m_vecKeys[_iPlayerID][static_cast<UINT>(keyCode)].state == eKeyState::Down;
+			return m_vecKeys[_iPlayerID][static_cast<UINT>(keyCode)] == eKeyState::Down;
 		}
 
 		static __forceinline bool GetKeyUp(UINT _iPlayerID, eKeyCode keyCode)
 		{
-			return m_vecKeys[_iPlayerID][static_cast<UINT>(keyCode)].state == eKeyState::Up;
+			return m_vecKeys[_iPlayerID][static_cast<UINT>(keyCode)] == eKeyState::Up;
 		}
 
 		
 		//최대 5명의 플레이어 Input정보
 	private:
-		static std::vector<Key> m_vecKeys[5];
+		static std::vector<eKeyState> m_vecKeys[5];
 		
 	};
 

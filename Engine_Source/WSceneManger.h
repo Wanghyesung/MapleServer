@@ -12,8 +12,7 @@ namespace W
 		static void Initialize();
 		static void Update();
 		static void LateUpdate();
-		//static void Render();
-		static void Destroy();
+		
 		static void Release();
 		static void Erase(GameObject* _pGameObject);
 
@@ -45,7 +44,7 @@ namespace W
 		static void AddGameObject(const std::wstring& _strSceneName, eLayerType _eType, GameObject* _pGameObj);
 		static GameObject* FindPlayer(UINT _iPlayerID);
 		static GameObject* FindPlayer(const std::wstring& strSceneName);
-		static const std::vector<GameObject*>& GetPlayers(const std::wstring& _strSceneName);
+		static std::vector<GameObject*> GetPlayers(const std::wstring& _strSceneName);
 
 		static void SwapObject(Scene* _pPrevScene, Scene* _pNextScene, GameObject* _pGameObject);
 		static void SwapPlayer(Player* _pPlayer, Scene* _pPrevScene, Scene* _pNextScene);

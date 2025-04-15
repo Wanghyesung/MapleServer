@@ -3,7 +3,7 @@
 #include "ObjectHeader.h"
 
 #define REGISTER_OBJECT_ID(name, id)\
-{ name::SetObjectID(id); };
+{ name::SetCreateID(id); };
 
 namespace W
 {
