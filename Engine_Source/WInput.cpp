@@ -28,7 +28,7 @@ namespace W
 		0x37,
 		0x38,
 		0x39,
-
+		
 		'Q', 'W', 'E', 'R', 'T',
 		'A', 'S', 'D', 'F', 'G',
 
@@ -46,68 +46,40 @@ namespace W
 	};
 
 
-	std::vector<Input::Key> Input::m_vecKeys;
+	std::vector<Input::Key> Input::m_vecKeys[5] = {};
 
 	void Input::Initialize()
 	{
-		for (UINT i = 0; i < (UINT)eKeyCode::NONE; i++)
+		for (int i = 0; i < 5; ++i)
 		{
-			Key keyInfo;
-			keyInfo.key = (eKeyCode)i;
-			keyInfo.state = eKeyState::None;
-			keyInfo.bPressed = false;
+			for (UINT j = 0; j < (UINT)eKeyCode::NONE; j++)
+			{
+				Key keyInfo;
+				keyInfo.key = (eKeyCode)i;
+				keyInfo.state = eKeyState::None;
+				keyInfo.bPressed = false;
 
-			m_vecKeys.push_back(keyInfo);
+				m_vecKeys[i].push_back(keyInfo);
+			}
 		}
 	}
 
-	void Input::Update()
+	void Input::Update_Key(UINT _iPlayerID, const std::vector<USHORT>& _vecKey)
 	{
-		if (GetFocus())
+		for (UINT i = 0; i < _vecKey.size(); ++i)
 		{
+			USHORT sKey = _vecKey[i];
+			// 상위 8비트는 key, 하위 8비트는 상태
+			UCHAR ekey = (sKey >> 8) & 0xFF;     
+			UCHAR eState = sKey & 0xFF;
 
-			for (UINT i = 0; i < (UINT)eKeyCode::NONE; i++)
-			{
-				if (GetAsyncKeyState(ASCII[i]) & 0x8000)
-				{
-					// 이전 프레임에도 눌려 있었다
-					if (m_vecKeys[i].bPressed)
-						m_vecKeys[i].state = eKeyState::Pressed;
-					else
-						m_vecKeys[i].state = eKeyState::Down;
-
-					m_vecKeys[i].bPressed = true;
-				}
-				else // 현재 프레임에 키가 눌려있지 않다.
-				{
-					// 이전 프레임에 내키가 눌려있엇다.
-					if (m_vecKeys[i].bPressed)
-						m_vecKeys[i].state = eKeyState::Up;
-					else
-						m_vecKeys[i].state = eKeyState::None;
-
-					m_vecKeys[i].bPressed = false;
-				}
-			}
-
+			//enum class는 암묵 변환X
+			m_vecKeys[_iPlayerID].push_back({ (eKeyCode)ekey, (eKeyState)eState });
 		}
-		else
-		{
-			for (UINT i = 0; i < (UINT)eKeyCode::NONE; i++)
-			{
-				if (eKeyState::Down == m_vecKeys[i].state
-					|| eKeyState::Pressed == m_vecKeys[i].state)
-				{
-					m_vecKeys[i].state = eKeyState::Up;
-				}
-				else if (eKeyState::Up == m_vecKeys[i].state)
-				{
-					m_vecKeys[i].state = eKeyState::None;
-				}
 
-				m_vecKeys[i].bPressed = false;
-			}
-		}
+		int a = 10;
 	}
+
+
 }
 

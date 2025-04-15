@@ -30,9 +30,9 @@ namespace W
 	{
 		m_fCurTime += Time::DeltaTime();
 
-		if (Input::GetKeyDown(eKeyCode::LEFT))
+		if (Input::GetKeyDown(m_pTarget->GetPlayerID(),eKeyCode::LEFT))
 			--m_iKeyDonwCount;
-		else if(Input::GetKeyDown(eKeyCode::RIGHT))
+		else if(Input::GetKeyDown(m_pTarget->GetPlayerID(),eKeyCode::RIGHT))
 			--m_iKeyDonwCount;
 		
 		if (m_iKeyDonwCount <= 0.f)

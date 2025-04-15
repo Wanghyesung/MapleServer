@@ -1,6 +1,6 @@
 #pragma once
 #include "WMonsterFSM.h"
-#include "WInfo.h"
+#include "..\Engine_Source\WInfo.h"
 namespace W
 {
 	class MonsterFSM;

@@ -1,6 +1,6 @@
 #pragma once
 #include "WAbnormal.h"
-#include "WInfo.h"
+#include "..\Engine_Source\WInfo.h"
 #include "WEffect.h"
 
 namespace W

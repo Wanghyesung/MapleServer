@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "ClientPacketHandler.h"
 #include "ClientSession.h"
+
 #include "Room.h"
+#include "WEventManager.h"
 
 PacketHandlerFunc GPacketHandler[UINT16_MAX] = {};
 //event버퍼에 넣기
@@ -47,8 +49,18 @@ bool Handle_C_EQUIP(shared_ptr<Session> _pSession, Protocol::C_EQUIP& _pkt)
 
 bool Handle_C_INPUT(shared_ptr<Session> _pSession, Protocol::C_INPUT& _pkt)
 {
+	UINT iPlayerID = _pkt.playerid();
 
-	return false;
+	vector<USHORT> vecKey;
+	for (int i = 0; i < _pkt.inpus_size(); ++i)
+	{
+		vecKey.push_back(_pkt.inpus(i));
+	}
+
+	//eventmgr에 보내기
+	W::EventManager::Update_Input(iPlayerID, vecKey);
+
+	return true;
 }
 
 bool Handle_C_CREATE(shared_ptr<Session> _pSession, Protocol::C_CREATE& _pkt)

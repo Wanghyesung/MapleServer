@@ -17,20 +17,21 @@ namespace W
 	}
 	void PlayerPronestab::Update()
 	{
+		Player* pPlayer = GetPlayer();
 		m_fTime += Time::DeltaTime();
 
-		if (Input::GetKey(eKeyCode::X) && m_fTime>= 0.25f)
+		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::X) && m_fTime>= 0.25f)
 		{
 			m_fTime = 0.f;
 			EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::proneattack);
 		}
 
-		if (Input::GetKeyUp(eKeyCode::DOWN))
+		if (Input::GetKeyUp(pPlayer->GetPlayerID(), eKeyCode::DOWN))
 		{
 			EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::stand);
 		}
 
-		if (Input::GetKeyDown(eKeyCode::SPACE))
+		if (Input::GetKeyDown(pPlayer->GetPlayerID(), eKeyCode::SPACE))
 		{
 			EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::jump);
 			GetPlayer()->GetComponent<Rigidbody>()->SetGround(false);

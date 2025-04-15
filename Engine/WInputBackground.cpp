@@ -80,23 +80,7 @@ namespace W
 		}
 
 	}
-	//void InputBackground::Render()
-	//{
-	//	//renderer::ObjectCB ObjectCB;
-	//	//ObjectCB.vObjectColor = Vector4::One;
-	//	//
-	//	//ConstantBuffer* pConstBuffer = renderer::constantBuffer[(UINT)eCBType::Object];
-	//	////Vector4 vPosition(m_vPosition.x, m_vPosition.y, m_vPosition.z, 1.f);
-	//	//pConstBuffer->SetData(&ObjectCB);
-	//	//pConstBuffer->Bind(eShaderStage::PS);
-	//
-	//	//GameObject::Render();
-	//	//
-	//	//for (int i = 0; i < m_vecInput.size(); ++i)
-	//	//{
-	//	//	m_vecInput[i]->Render();
-	//	//}
-	//}
+	
 
 	void InputBackground::Failed()
 	{

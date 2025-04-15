@@ -56,8 +56,7 @@ namespace W
 	{
 		
 		Time::Update();
-		Input::Update();//이거 변경
-
+		
 		CollisionManager::Update();
 		SceneManger::Update();
 		BattleManager::Update();

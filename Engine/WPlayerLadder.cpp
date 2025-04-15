@@ -30,12 +30,12 @@ namespace W
 			EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::jump);
 
 
-		if (Input::GetKeyDown(eKeyCode::SPACE))
+		if (Input::GetKeyDown(pPlayer->GetPlayerID(), eKeyCode::SPACE))
 		{
 			int iDir = pPlayer->GetDir();
-			if (Input::GetKey(eKeyCode::RIGHT))
+			if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::RIGHT))
 				iDir = 1;
-			else if (Input::GetKey(eKeyCode::LEFT))
+			else if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::LEFT))
 				iDir = -1;
 
 			EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::jump);
@@ -48,12 +48,12 @@ namespace W
 			return;
 		}
 
-		if (Input::GetKey(eKeyCode::UP))
+		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::UP))
 			pRigidbody->AddForce(Vector2(0.f, 1.f));
 		else
 			--iStopCount;
 			
-		if (Input::GetKey(eKeyCode::DOWN))
+		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::DOWN))
 			pRigidbody->AddForce(Vector2(0.f, -1.f));
 		else
 			--iStopCount;

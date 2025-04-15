@@ -429,6 +429,7 @@ namespace W
 		InputBackground* pInput = new InputBackground();
 		pInput->SetSceneName(pPlayer->GetSceneName());
 		pInput->Initialize();
+		pInput->SetTarget(pPlayer);
 		pInput->SetOwner(pGroggy);
 
 		EventManager::CreateObject(pInput, eLayerType::Object);
