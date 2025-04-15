@@ -3,6 +3,7 @@
 
 namespace W
 {
+	class Player;
 	class InputBackground : public GameObject
 	{
 	public:
@@ -19,13 +20,16 @@ namespace W
 		void Failed();
 		void Next();
 		UINT GetCurIndex() { return m_iCurIndex; }
-		void DeleteObject(UINT _iIndex);
+		void SetTarget(Player* _pPlayer) { m_pTarget = _pPlayer; }
+
 	private:
 		void next_button();
+
 	private:
 		//성공이나 실패시 groggy오브젝트에 time 변경
 		GameObject* m_pOwner;
 
+		Player* m_pTarget;
 		UINT m_iCurIndex;
 		std::vector<class InputObject*> m_vecInput;
 		bool m_bNext;

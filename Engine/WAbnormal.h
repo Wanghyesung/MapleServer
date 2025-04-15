@@ -1,5 +1,5 @@
 #pragma once
-#include "WGameObject.h"
+#include "..\Engine_Source\WGameObject.h"
 
 namespace W
 {

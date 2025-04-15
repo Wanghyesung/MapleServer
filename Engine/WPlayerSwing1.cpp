@@ -42,10 +42,10 @@ namespace W
 
 		if (!bRround)
 		{
-			if (Input::GetKey(eKeyCode::RIGHT))
+			if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::RIGHT))
 				pRigidbody->AddForce(Vector2(1.5f, 0.f));
 
-			if (Input::GetKey(eKeyCode::LEFT))
+			if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::LEFT))
 				pRigidbody->AddForce(Vector2(-1.5f, 0.f));
 		}
 

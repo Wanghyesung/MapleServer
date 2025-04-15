@@ -1,6 +1,6 @@
 #pragma once
-#include "WGameObject.h"
-#include "WInfo.h"
+#include "..\Engine_Source\WGameObject.h"
+#include "..\Engine_Source\WInfo.h"
 #include "WEventManager.h"
 
 namespace W

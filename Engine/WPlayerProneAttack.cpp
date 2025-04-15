@@ -29,7 +29,7 @@ namespace W
 		if (bComplete)
 			EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::pronestab);
 
-		if (Input::GetKeyUp(eKeyCode::DOWN))
+		if (Input::GetKeyUp(pPlayer->GetPlayerID(), eKeyCode::DOWN))
 		{
 			EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::stand);
 		}

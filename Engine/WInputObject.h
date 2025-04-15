@@ -3,6 +3,7 @@
 namespace W
 {
 	class InputBackground;
+	class Player;
 	class InputObject : public GameObject
 	{
 	public:
@@ -17,11 +18,16 @@ namespace W
 		void SetOwner(InputBackground* _pOwner) { m_pOwner = _pOwner; }
 		void SetIndex(UINT _iIndex) { m_iIndex = _iIndex; }
 		UINT GetIndex() { return m_iIndex; }
+
+		void SetTarget(Player* _pPlayer) { m_pTarget = _pPlayer; }
 	private:
 		void check();
 		void failed();
 		void clear();
+
 	private:
+		Player* m_pTarget;
+
 		eKeyCode m_eKeyCode;
 		InputBackground* m_pOwner;
 		UINT m_iIndex;

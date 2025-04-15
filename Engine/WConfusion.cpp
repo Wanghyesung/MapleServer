@@ -35,19 +35,19 @@ namespace W
 		int iDir = m_pTarget->GetDir();
 		if (m_pTarget->GetCurPlayerState() == Player::ePlayerState::walk)
 		{
-			if (Input::GetKey(eKeyCode::RIGHT))
+			if (Input::GetKey(m_pTarget->GetPlayerID(),eKeyCode::RIGHT))
 			{
 				pRigidbody->AddForce(Vector2(-tInfo.fSpeed, 0.f));
 				iDir = -1;
 				
 			}
-			else if (Input::GetKey(eKeyCode::LEFT))
+			else if (Input::GetKey(m_pTarget->GetPlayerID(), eKeyCode::LEFT))
 			{
 				iDir = 1;
 				pRigidbody->AddForce(Vector2(tInfo.fSpeed, 0.f));
 			
 			}
-			if (Input::GetKeyDown(eKeyCode::SPACE))
+			if (Input::GetKeyDown(m_pTarget->GetPlayerID(),eKeyCode::SPACE))
 			{
 				pRigidbody->SetVelocity(Vector2(iDir * 1.5f, 3.5f));
 			}
@@ -55,12 +55,12 @@ namespace W
 		else if (m_pTarget->GetCurPlayerState() == Player::ePlayerState::jump)
 		{
 			Vector2 vForece = Vector2::Zero;
-			if (Input::GetKey(eKeyCode::RIGHT))
+			if (Input::GetKey(m_pTarget->GetPlayerID(), eKeyCode::RIGHT))
 			{
 				iDir = -1;
 				vForece.x -= (tInfo.fSpeed - 1.f);
 			}
-			else if (Input::GetKey(eKeyCode::LEFT))
+			else if (Input::GetKey(m_pTarget->GetPlayerID(), eKeyCode::LEFT))
 			{
 				iDir = 1;
 				vForece.x += (tInfo.fSpeed - 1.f);

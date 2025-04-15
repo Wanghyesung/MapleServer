@@ -55,37 +55,33 @@ namespace W
 		};
 
 		static void Initialize();
-		static void Update();
+		static void Update_Key(UINT _iPlayerID, const std::vector<USHORT>& _vecKey);
 
 
-		inline static eKeyState GetKeyState(eKeyCode keyCode)
+		inline static eKeyState GetKeyState(UINT _iPlayerID, eKeyCode keyCode)
 		{
-			return m_vecKeys[(UINT)keyCode].state;
+			return m_vecKeys[_iPlayerID][static_cast<UINT>(keyCode)].state;
 		};
 
-		//GetKey()		키를 누르는 시간만큼 true를 반환
-		//GetKeyDown()	키를 눌렀을 때, 딱 한번 true를 반환
-		//GetKeyUp()	키를 누르다 땠을 때, 딱 한번 true를 반환
-
-		static __forceinline bool GetKey(eKeyCode keyCode)
+		static __forceinline bool GetKey(UINT _iPlayerID, eKeyCode keyCode)
 		{
-			return m_vecKeys[static_cast<UINT>(keyCode)].state == eKeyState::Pressed;
+			return m_vecKeys[_iPlayerID][static_cast<UINT>(keyCode)].state == eKeyState::Pressed;
 		}
 
-		static __forceinline bool GetKeyDown(eKeyCode keyCode)
+		static __forceinline bool GetKeyDown(UINT _iPlayerID, eKeyCode keyCode)
 		{
-			return m_vecKeys[static_cast<UINT>(keyCode)].state == eKeyState::Down;
+			return m_vecKeys[_iPlayerID][static_cast<UINT>(keyCode)].state == eKeyState::Down;
 		}
 
-		static __forceinline bool GetKeyUp(eKeyCode keyCode)
+		static __forceinline bool GetKeyUp(UINT _iPlayerID, eKeyCode keyCode)
 		{
-			return m_vecKeys[static_cast<UINT>(keyCode)].state == eKeyState::Up;
+			return m_vecKeys[_iPlayerID][static_cast<UINT>(keyCode)].state == eKeyState::Up;
 		}
 
 		
 		//최대 5명의 플레이어 Input정보
 	private:
-		static std::vector<Key> m_vecKeys;//[5];
+		static std::vector<Key> m_vecKeys[5];
 		
 	};
 

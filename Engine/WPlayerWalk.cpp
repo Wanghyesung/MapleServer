@@ -18,8 +18,9 @@ namespace W
 	}
 	void PlayerWalk::Update()
 	{
+		Player* pPlayer = new Player();
 		tObjectInfo tInfo = GetPlayer()->GetScript<PlayerScript>()->GetObjectInfo();
-		if (Input::GetKey(eKeyCode::X))
+		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::X))
 		{
 			bool bStab = GetPlayer()->GetScript<PlayerScript>()->IsStab();
 			if (bStab)
@@ -33,28 +34,28 @@ namespace W
 		}
 
 		Rigidbody* pRigidbody = GetPlayer()->GetComponent<Rigidbody>();
-		if (Input::GetKey(eKeyCode::RIGHT))
+		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::RIGHT))
 		{
 			pRigidbody->AddForce(Vector2(tInfo.fSpeed, 0.f));
 			GetPlayer()->SetDir(1);
 		}
-		else if (Input::GetKeyUp(eKeyCode::RIGHT))
+		else if (Input::GetKeyUp(pPlayer->GetPlayerID(), eKeyCode::RIGHT))
 		{
 			EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::stand);
 		}
 
-		if (Input::GetKey(eKeyCode::LEFT))
+		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::LEFT))
 		{
 			pRigidbody->AddForce(Vector2(-tInfo.fSpeed, 0.f));
 			GetPlayer()->SetDir(-1);
 		}
 
-		else if (Input::GetKeyUp(eKeyCode::LEFT))
+		else if (Input::GetKeyUp(pPlayer->GetPlayerID(), eKeyCode::LEFT))
 		{
 			EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::stand);
 		}
 
-		if (Input::GetKeyDown(eKeyCode::SPACE))
+		if (Input::GetKeyDown(pPlayer->GetPlayerID(), eKeyCode::SPACE))
 		{
 			Rigidbody* pRigidbody = GetPlayer()->GetComponent<Rigidbody>();
 			if (!pRigidbody->IsGround())

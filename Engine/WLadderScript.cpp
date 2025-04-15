@@ -57,13 +57,13 @@ namespace W
 
 			}
 
-			if (Input::GetKeyDown(eKeyCode::UP))
+			if (Input::GetKeyDown(pPlayer->GetPlayerID(), eKeyCode::UP))
 			{
 				if (vPlayerCollPos.y > vCollPos.y)
 					return;
 			}
 
-			else if (Input::GetKeyDown(eKeyCode::DOWN))
+			else if (Input::GetKeyDown(pPlayer->GetPlayerID(), eKeyCode::DOWN))
 			{
 				if (vPlayerCollPos.y < vCollPos.y)
 					return;

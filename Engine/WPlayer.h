@@ -1,5 +1,6 @@
 #pragma once
-#include "WGameObject.h"
+#include "..\Engine_Source\WGameObject.h"
+#include "..\Engine_Source\WInfo.h"
 namespace W
 {
 	class Equip;

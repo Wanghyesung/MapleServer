@@ -2,6 +2,7 @@
 #include "WAnimator.h"
 #include "WInputBackground.h"
 #include "WInput.h"
+#include "WPlayer.h"
 namespace W
 {
 	InputObject::InputObject(eKeyCode _eKeyCode):
@@ -85,7 +86,7 @@ namespace W
 		bool m_bInput = false;
 		bool m_bClear = false;
 
-		if (Input::GetKeyDown(eKeyCode::RIGHT))
+		if (Input::GetKeyDown(m_pTarget->GetPlayerID(), eKeyCode::RIGHT))
 		{
 			m_bInput = true;
 
@@ -93,7 +94,7 @@ namespace W
 				m_bClear = true;
 		}
 
-		else if (Input::GetKeyDown(eKeyCode::LEFT))
+		else if (Input::GetKeyDown(m_pTarget->GetPlayerID(), eKeyCode::LEFT))
 		{
 			m_bInput = true;
 
@@ -101,7 +102,7 @@ namespace W
 				m_bClear = true;
 		}
 
-		else if (Input::GetKeyDown(eKeyCode::UP))
+		else if (Input::GetKeyDown(m_pTarget->GetPlayerID(), eKeyCode::UP))
 		{
 			m_bInput = true;
 
@@ -109,7 +110,7 @@ namespace W
 				m_bClear = true;
 		}
 
-		else if (Input::GetKeyDown(eKeyCode::DOWN))
+		else if (Input::GetKeyDown(m_pTarget->GetPlayerID(), eKeyCode::DOWN))
 		{
 			m_bInput = true;
 

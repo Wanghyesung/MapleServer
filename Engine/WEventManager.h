@@ -1,5 +1,5 @@
 #pragma once
-#include "Engine.h"
+#include "..\Engine\WEventManager.h"
 #include "WPlayerFSM.h"
 #include "WMonsterFSM.h"
 #include "WBattleManager.h"
@@ -42,7 +42,7 @@ namespace W
 		static void CreateObject(GameObject* _pObj, eLayerType _eLayer);
 		static void DeleteObject(GameObject* _pObj);
 
-		static void Update_Input(UINT _iPlayerID, std::vector<UCHAR> _vecInput);
+		static void Update_Input(UINT _iPlayerID, const vector<USHORT>& _vecInput);
 		//static void AddPlayer(GameObject* _pObj);
 		//static void DeletePlayer(GameObject* _pObj);
 
@@ -71,11 +71,13 @@ namespace W
 		static std::vector<tEvent> m_vecEvent[2];
 		static std::vector<GameObject*> m_vecPlayer_Pool;
 		static std::vector<GameObject*> m_vecMonster_Pool;
+		static std::vector<USHORT> m_vecInput[5];
+
 		static RWLock m_lock;
 		
 
 
-		static int m_iActiveIdx;
+		static atomic<int> m_iActiveIdx;
 	};
 }
 

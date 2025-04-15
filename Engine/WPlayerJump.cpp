@@ -16,7 +16,8 @@ namespace W
 	}
 	void PlayerJump::Update()
 	{
-		if (Input::GetKey(eKeyCode::X))
+		Player* pPlayer = GetPlayer();
+		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::X))
 		{
 			bool bStab = GetPlayer()->GetScript<PlayerScript>()->IsStab();
 			if (bStab)
@@ -29,7 +30,7 @@ namespace W
 			return;
 		}
 
-		if (Input::GetKey(eKeyCode::UP))
+		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::UP))
 		{
 			bool bLadder = GetPlayer()->GetScript<PlayerScript>()->IsLadder();
 			if (bLadder)
@@ -51,13 +52,13 @@ namespace W
 			return;
 		}
 
-		if (Input::GetKey(eKeyCode::RIGHT))
+		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::RIGHT))
 		{
 			GetPlayer()->SetDir(1);
 			vForece.x += (tInfo.fSpeed - 1.f);
 		}
 
-		else if (Input::GetKey(eKeyCode::LEFT))
+		else if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::LEFT))
 		{
 			GetPlayer()->SetDir(-1);
 			vForece.x -= (tInfo.fSpeed - 1.f);

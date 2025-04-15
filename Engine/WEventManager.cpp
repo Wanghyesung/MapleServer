@@ -7,15 +7,16 @@
 #include "WPlayerScript.h"
 #include "WSkillState.h"
 #include "..\IOCP_SERVER\Room.h"
-
+#include "WInput.h"
 namespace W
 {
 	std::vector<tEvent> EventManager::m_vecEvent[2] = {};
 	std::vector<GameObject*> EventManager::m_vecPlayer_Pool = {};
 	std::vector<GameObject*> EventManager::m_vecMonster_Pool = {};
+	std::vector<USHORT> EventManager::m_vecInput[5] = {};
 
 	RWLock EventManager::m_lock = {};
-	int EventManager::m_iActiveIdx = 1;
+	atomic<int> EventManager::m_iActiveIdx = 1;
 
 #define ObjectPoolPosition 2000.f
 	void EventManager::Update()
@@ -82,24 +83,13 @@ namespace W
 	{
 		switch (_tEve.eEventType)
 		{
-		/*case EVENT_TYPE::CREATE_PLAYER:
+		case EVENT_TYPE::UPDATE_INPUT:
 		{
-			Player* pPlayer = (Player*)_tEve.lParm;
-			SceneManger::AddPlayerScene(pPlayer->GetSceneName());
-
-			SceneManger::AddGameObject(pPlayer->GetSceneName(), eLayerType::Player, pPlayer);
+			UINT iPlayerID = (UINT)_tEve.lParm;
+			
+			Input::Update_Key(iPlayerID, m_vecInput[iPlayerID]);
 		}
 		break;
-
-		case EVENT_TYPE::DELETE_PLAYER:
-		{
-			GameObject* pObj = (GameObject*)_tEve.lParm;
-			SceneManger::Erase(pObj);
-
-			delete pObj;
-		}
-		break;*/
-
 		case EVENT_TYPE::CREATE_OBJECT:
 		{
 			GameObject* pObj = (GameObject*)_tEve.lParm;
@@ -311,13 +301,15 @@ namespace W
 		AddEvent(eve);
 	}
 
-	void EventManager::Update_Input(UINT _iPlayerID, std::vector<UCHAR> _vecInput)
+	void EventManager::Update_Input(UINT _iPlayerID, const std::vector<USHORT>& _vecInput)
 	{
-		/*tEvent eve = {};
+		tEvent eve = {};
 		eve.lParm = (DWORD_PTR)_iPlayerID;
-		eve.wParm = reinterpret_cast<DWORD_PTR>(_vecInput);
-		eve.eEventType = EVENT_TYPE::DELET_OBJECT;
-		AddEvent(eve);*/
+		
+		m_vecInput[_iPlayerID] = _vecInput;
+
+		eve.eEventType = EVENT_TYPE::UPDATE_INPUT;
+		AddEvent(eve);
 	}
 
 	void EventManager::AddPlayerPool(GameObject* _pObj)

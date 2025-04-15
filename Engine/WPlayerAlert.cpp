@@ -19,13 +19,14 @@ namespace W
 
 	void PlayerAlert::Update()
 	{
+		Player* pPlayer = GetPlayer();
 		bool bIsAlert = GetPlayer()->IsAlert();
 		if (!bIsAlert)
 		{
 			EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::stand);
 		}
 		
-		if (Input::GetKey(eKeyCode::X))
+		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::X))
 		{
 			bool bStab = GetPlayer()->GetScript<PlayerScript>()->IsStab();
 			if (bStab)
@@ -39,21 +40,21 @@ namespace W
 			return;
 		}
 
-		if (Input::GetKey(eKeyCode::RIGHT))
+		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::RIGHT))
 		{
 			EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::walk);
 			GetPlayer()->SetDir(1);
 		}
 
 
-		if (Input::GetKey(eKeyCode::LEFT))
+		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::LEFT))
 		{
 			EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::walk);
 			GetPlayer()->SetDir(-1);
 		}
 
 
-		if (Input::GetKey(eKeyCode::DOWN))
+		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::DOWN))
 		{
 			bool bLadder = GetPlayer()->GetScript<PlayerScript>()->IsLadder();
 
@@ -62,13 +63,13 @@ namespace W
 			else
 			{
 				EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::pronestab);
-				if (Input::GetKey(eKeyCode::SPACE))
+				if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::SPACE))
 					EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::jump);
 			}
 			return;
 
 		}
-		if (Input::GetKey(eKeyCode::UP))
+		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::UP))
 		{
 			bool bLadder = GetPlayer()->GetScript<PlayerScript>()->IsLadder();
 			if (bLadder)
@@ -77,7 +78,7 @@ namespace W
 			}
 		}
 
-		if (Input::GetKeyDown(eKeyCode::SPACE))
+		if (Input::GetKeyDown(pPlayer->GetPlayerID(), eKeyCode::SPACE))
 		{
 			Rigidbody* pRigidbody = GetPlayer()->GetComponent<Rigidbody>();
 			if (!pRigidbody->IsGround())
