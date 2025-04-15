@@ -37,14 +37,17 @@ namespace W
 	}
 	void CollisionManager::LayerCollision(Scene* _pScene, eLayerType _eLeft, eLayerType _eRight)
 	{
-		const std::vector<GameObject*>& vecLeftObj =
+		const std::unordered_map<UINT, GameObject*>& hashLeftObj =
 			_pScene->GetLayer(_eLeft).GetGameObjects();
 
-		const std::vector<GameObject*>& vecRightObj =
+		const std::unordered_map<UINT, GameObject*>& hashRightObj =
 			_pScene->GetLayer(_eRight).GetGameObjects();
 
-		for (GameObject* pLObj : vecLeftObj)
+
+		for (auto leftIter = hashLeftObj.begin(); leftIter != hashLeftObj.end(); ++leftIter)
 		{
+			GameObject* pLObj = leftIter->second;
+
 			Collider2D* pLeftCol = pLObj->GetComponent<Collider2D>();
 			if (pLeftCol == nullptr)
 				continue;
@@ -54,8 +57,10 @@ namespace W
 				continue;
 
 
-			for (GameObject* pRObj : vecRightObj)
+			for (auto rightIter = hashRightObj.begin(); rightIter != hashRightObj.end(); ++rightIter)
 			{
+				GameObject* pRObj = rightIter->second;
+
 				Collider2D* pRightCol = pRObj->GetComponent<Collider2D>();
 				if (pRightCol == nullptr)
 					continue;

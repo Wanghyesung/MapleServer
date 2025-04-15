@@ -111,20 +111,20 @@ namespace W
 
 	bool AutoShuriken::set_target()
 	{	
-		const std::vector<GameObject*>& vecObjs =
-			SceneManger::GetActiveScene(GetPlayer())->GetLayer(eLayerType::Monster).GetGameObjects();
+		const std::unordered_map<UINT, GameObject*> hashMonster =
+			SceneManger::GetActiveScene(this)->GetLayer(eLayerType::Monster).GetGameObjects();
 
 		Vector3 vPosistion = GetComponent<Transform>()->GetPosition();
 		float fMaxLen = 10000.f;
 	
-		if (vecObjs.size() == 0)
-		{
+		if (hashMonster.size() == 0)
 			return false;
-		}
 			
-
-		for (GameObject* pObj : vecObjs)
+		auto iter = hashMonster.begin();
+		for (iter; iter != hashMonster.end(); ++iter)
 		{
+			GameObject* pObj = iter->second;
+
 			if (pObj->GetState() != GameObject::Active)
 				continue;
 			if (!pObj->GetComponent<Collider2D>()->IsActive())

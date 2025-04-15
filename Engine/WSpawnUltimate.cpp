@@ -64,24 +64,28 @@ namespace W
 		EventManager::CreateObject(pAttackObj1, eLayerType::AttackObject);
 		EventManager::CreateObject(pAttackObj2, eLayerType::AttackObject);
 
-		
-		const std::vector<GameObject*>& vecMonster =
-			SceneManger::GetActiveScene(GetPlayer())->GetLayer(eLayerType::Monster).GetGameObjects();
+		const std::unordered_map<UINT, GameObject*> hashMonster =
+			SceneManger::GetActiveScene(this)->GetLayer(eLayerType::Monster).GetGameObjects();
+
 
 		//가장 체력이 높은 몬스터
 		float fMax = 0.f;
-		for (int i = 0; i < vecMonster.size(); ++i)
+
+		auto iter = hashMonster.begin();
+		for (iter; iter != hashMonster.end(); ++iter)
 		{
-			if (vecMonster[i]->GetState() == GameObject::eState::Paused)
+			GameObject* pMon = iter->second;
+			if (pMon->GetState() == GameObject::eState::Paused)
 				continue;
 
-			float fHP = vecMonster[i]->GetScript<MonsterScript>()->GetObjectInfo().fHP;
+			float fHP = pMon->GetScript<MonsterScript>()->GetObjectInfo().fHP;
 			if (fMax < fHP)
 			{
 				fMax = fHP;
-				m_pTarget = vecMonster[i];
+				m_pTarget = pMon;
 			}
 		}
+
 	}
 	void SpawnUltimate::Update()
 	{

@@ -36,7 +36,7 @@ namespace W
 		LateUpdate();
 		
 		EventManager::Update();
-		Destroy();
+	
 	}
 
 
@@ -70,10 +70,6 @@ namespace W
 	}
 
 
-	void Application::Destroy()
-	{
-		SceneManger::Destroy();
-	}
 
 
 	void Application::SetWindow(HWND _hHwnd, UINT _iWidth, UINT _iHeight)

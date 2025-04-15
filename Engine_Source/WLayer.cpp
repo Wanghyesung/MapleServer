@@ -3,19 +3,18 @@
 #include "WScene.h"
 namespace W
 {
-	Layer::Layer()
+	Layer::Layer():
+		m_iObjectID(LAYER_STARAT_IDX)
 	{
 		
 	}
 	Layer::~Layer()
 	{
-		for (GameObject* gameObj : m_vecGameObject)
+		auto iter = m_hashGameObject.begin();
+		for (iter; iter != m_hashGameObject.end(); ++iter)
 		{
-			if (gameObj == nullptr)
-				continue;
-
-			delete gameObj;
-			gameObj = nullptr;
+			delete iter->second;
+			iter->second = nullptr;
 		}
 	}
 	void Layer::Initialize()
@@ -23,8 +22,11 @@ namespace W
 	}
 	void Layer::Update()
 	{
-		for (GameObject* gameObj : m_vecGameObject)
+		auto iter = m_hashGameObject.begin();
+		for (iter; iter != m_hashGameObject.end(); ++iter)
 		{
+			GameObject* gameObj = iter->second;
+
 			if (gameObj->GetState() != GameObject::eState::Active)
 				continue;
 
@@ -33,78 +35,47 @@ namespace W
 	}
 	void Layer::LateUpdate()
 	{
-		for (GameObject* gameObj : m_vecGameObject)
+		auto iter = m_hashGameObject.begin();
+		for (iter; iter != m_hashGameObject.end(); ++iter)
 		{
+			GameObject* gameObj = iter->second;
+
 			if (gameObj->GetState() != GameObject::eState::Active)
 				continue;
+
 			gameObj->LateUpdate();
 		}
 	}
-	//void Layer::Render()
-	//{
-	//	for (GameObject* gameObj : m_vecGameObject)
-	//	{
-	//		if (gameObj->GetState() != GameObject::eState::Active)
-	//			continue;
-	//		gameObj->Render();
-	//	}
-	//}
 
-	void Layer::Destory()
-	{
-		std::set<GameObject*> setDeleteGameObj = {};
 
-		for (GameObject* pGameObj : m_vecGameObject)
-		{
-			if (pGameObj->GetState() ==
-				GameObject::eState::Dead)
-				setDeleteGameObj.insert(pGameObj);
-		}
-
-		typedef std::vector<GameObject*>::iterator GameObjectIter;
-		for (GameObjectIter iter = m_vecGameObject.begin();
-			iter != m_vecGameObject.end();)
-		{
-			std::set<GameObject*>::iterator deleteIter =
-				setDeleteGameObj.find(*(iter));
-
-			if (deleteIter != setDeleteGameObj.end())
-			{
-				iter = m_vecGameObject.erase(iter);
-				delete *iter;
-				
-				continue;
-			}
-
-			++iter;
-		}
-
-	}
 
 	void Layer::DestroyAll(Scene* _pScene)
 	{
-		for (int i = 0; i < m_vecGameObject.size(); ++i)
+		auto iter = m_hashGameObject.begin();
+		for (iter; iter != m_hashGameObject.end(); ++iter)
 		{
-			EventManager::DeleteObject(m_vecGameObject[i]);
+			GameObject* gameObj = iter->second;
+
+			EventManager::DeleteObject(gameObj);
 		}
 	}
 
 	void Layer::AddGameObject(GameObject* _pGameObj)
 	{
-		m_vecGameObject.push_back(_pGameObj);
+		_pGameObj->SetObjectID(m_iObjectID);
+		m_hashGameObject.insert(std::make_pair(m_iObjectID, _pGameObj));
+
+		++m_iObjectID;
 	}
 
 	void Layer::EraseOnVector(GameObject* _pGameObject)
 	{
-		std::vector<GameObject*>::iterator iter = m_vecGameObject.begin();
-		for (iter; iter != m_vecGameObject.end(); ++iter)
-		{
-			if (*iter == _pGameObject)
-			{
-				m_vecGameObject.erase(iter);
-				return;
-			}
-		}
+		UINT iGameObjectID = _pGameObject->GetObjectID();
+		auto iter = m_hashGameObject.find(iGameObjectID);
+		GameObject* pGameObject = iter->second;
+
+		if (pGameObject != nullptr)
+			m_hashGameObject.erase(iGameObjectID);
 	}
 
 }

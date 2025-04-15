@@ -114,9 +114,15 @@ namespace W
 		void SetSceneName(const std::wstring& _strName) { m_strSceneName = _strName; }
 		const std::wstring& GetSceneName() { return m_strSceneName; }
 		
-		static void SetObjectID(UINT _ID) { OBJECT_ID = _ID; }
-		static UINT GetObjectID() { return OBJECT_ID; }
 		
+		void SetObjectID(UINT _ID) { m_iObjectID = _ID; }
+		UINT GetObjectID() { return m_iObjectID; }
+
+		static UINT GetCreateID() { return CREATE_ID; }
+
+	private:
+		static void SetCreateID(UINT _ID) { CREATE_ID = _ID; }
+
 	private:
 		eState m_eState;
 		std::vector<Component*> m_vecComponent;
@@ -124,9 +130,10 @@ namespace W
 		eLayerType m_eLayerType;
 		std::wstring m_strSceneName;
 
-		static UINT OBJECT_ID;
+		static UINT CREATE_ID;
+		UINT m_iObjectID;
 
-
+		friend class GameObjectManager;
 	};
 }
 

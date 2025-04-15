@@ -221,20 +221,22 @@ namespace W
 
 	void Ariel::heal()
 	{
-		const std::vector<GameObject*> vecMonster =
+		const std::unordered_map<UINT , GameObject*> hashMonster =
 			SceneManger::GetActiveScene(this)->GetLayer(eLayerType::Monster).GetGameObjects();
 
 		float fAccValue = 10.f;
-		for (GameObject* pMon : vecMonster)
+
+		auto iter = hashMonster.begin();
+		for (iter; iter != hashMonster.end(); ++iter)
 		{
+			GameObject* pMon = iter->second;
 			if (dynamic_cast<PinkBean*>(pMon))
 				continue;
 
 			MonsterScript* pMonster = pMon->GetScript<MonsterScript>();
-			if(pMon->GetState() == GameObject::eState::Active && pMonster->GetObjectInfo().fHP>0)
+			if (pMon->GetState() == GameObject::eState::Active && pMonster->GetObjectInfo().fHP > 0)
 				BattleManager::Buff_Stat(pMon, BattleManager::eUpStatType::Heal, fAccValue);
-		}
-			
+		}			
 	}
 
 	void Ariel::pull()

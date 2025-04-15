@@ -46,7 +46,7 @@ namespace W
 	};
 
 
-	std::vector<Input::Key> Input::m_vecKeys[5] = {};
+	std::vector<eKeyState> Input::m_vecKeys[5] = {};
 
 	void Input::Initialize()
 	{
@@ -54,12 +54,7 @@ namespace W
 		{
 			for (UINT j = 0; j < (UINT)eKeyCode::NONE; j++)
 			{
-				Key keyInfo;
-				keyInfo.key = (eKeyCode)i;
-				keyInfo.state = eKeyState::None;
-				keyInfo.bPressed = false;
-
-				m_vecKeys[i].push_back(keyInfo);
+				m_vecKeys[i].push_back(eKeyState::None);
 			}
 		}
 	}
@@ -70,11 +65,11 @@ namespace W
 		{
 			USHORT sKey = _vecKey[i];
 			// 상위 8비트는 key, 하위 8비트는 상태
-			UCHAR ekey = (sKey >> 8) & 0xFF;     
+			UCHAR ikey = (sKey >> 8) & 0xFF;     
 			UCHAR eState = sKey & 0xFF;
 
 			//enum class는 암묵 변환X
-			m_vecKeys[_iPlayerID].push_back({ (eKeyCode)ekey, (eKeyState)eState });
+			m_vecKeys[_iPlayerID][ikey] = (eKeyState)eState;
 		}
 
 		int a = 10;

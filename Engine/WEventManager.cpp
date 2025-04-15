@@ -56,6 +56,7 @@ namespace W
 			pPlayer->m_iPlayerID = vecUserID[i];
 			pPlayer->Initialize();
 			SceneManger::AddPlayerScene(pPlayer, L"Valley");
+
 		}
 	}
 
