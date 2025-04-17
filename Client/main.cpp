@@ -103,7 +103,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     GServerService->Start();
 
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < 6; ++i)
     {
         ThreadMgr->Excute(
             [=]()
@@ -121,8 +121,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg;
 
     // 기본 메시지 루프입니다:
+
+    const int targetFPS = 120;
+    const int frameDelayMs = 1000 / targetFPS; // 16ms
+
     while (true)
     {
+        auto frameStart = std::chrono::high_resolution_clock::now();
+
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
             if (WM_QUIT == msg.message)
@@ -138,8 +144,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         {
             // 여기서 게임 로직이 돌아가야한다.
             application.Run();
-            
         }
+
+        auto frameEnd = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double, std::milli> elapsed = frameEnd - frameStart;
+
+        int sleepTime = frameDelayMs - static_cast<int>(elapsed.count());
+
+        if (sleepTime > 0)
+            std::this_thread::sleep_for(std::chrono::milliseconds(sleepTime));
     }
 
 

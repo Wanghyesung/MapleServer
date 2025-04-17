@@ -7,8 +7,8 @@ package Protocol;
 message S_STATE
 {
 	string scene = 1;
-	int32 layer = 2;
-	int32 id = 3;
+	uint32 layer = 2;
+	uint32 id = 3;
 
 	//ÅØ½ºÃÄ
 	string state = 4;

@@ -18,7 +18,7 @@ namespace W
 
 	void SkillManager::InitSkill(UINT _iPlayerID, PlayerSkill* _pSkill)
 	{
-		if (_iPlayerID <= m_vecSkill.size())
+		if (_iPlayerID >= m_vecSkill.size())
 		{
 			m_vecSkill.resize(_iPlayerID + 1);
 			m_vecSkillTime.resize(_iPlayerID + 1);

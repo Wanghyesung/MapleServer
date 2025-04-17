@@ -151,24 +151,49 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Collision.pb.h" />
+    <ClInclude Include="..\protoc-3.17.1-win64\bin\Equip.pb.h" />
+    <ClInclude Include="..\protoc-3.17.1-win64\bin\Exit.pb.h" />
+    <ClInclude Include="..\protoc-3.17.1-win64\bin\Input.pb.h" />
+    <ClInclude Include="..\protoc-3.17.1-win64\bin\Object.pb.h" />
+    <ClInclude Include="..\protoc-3.17.1-win64\bin\ObjectState.pb.h" />
+    <ClInclude Include="..\protoc-3.17.1-win64\bin\Transform.pb.h" />
+    <ClInclude Include="..\protoc-3.17.1-win64\bin\Trasnform.pb.h" />
     <ClInclude Include="Enter.pb.h" />
-    <ClInclude Include="Equip.pb.h" />
-    <ClInclude Include="Exit.pb.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameObject.pb.h" />
     <ClInclude Include="header.h" />
-    <ClInclude Include="Input.pb.h" />
     <ClInclude Include="Map.pb.h" />
-    <ClInclude Include="ObjectState.pb.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ClientPacketHandler.h" />
     <ClInclude Include="ClientSession.h" />
     <ClInclude Include="Room.h" />
-    <ClInclude Include="Transform.pb.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Collision.pb.cc">
+    <ClCompile Include="..\protoc-3.17.1-win64\bin\Equip.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\protoc-3.17.1-win64\bin\Exit.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\protoc-3.17.1-win64\bin\Input.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\protoc-3.17.1-win64\bin\Object.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\protoc-3.17.1-win64\bin\ObjectState.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\protoc-3.17.1-win64\bin\Transform.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\protoc-3.17.1-win64\bin\Trasnform.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -176,27 +201,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Equip.pb.cc">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Exit.pb.cc">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="GameObject.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Input.pb.cc">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="Map.pb.cc">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="ObjectState.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -209,13 +218,8 @@
     <ClCompile Include="ClientPacketHandler.cpp" />
     <ClCompile Include="ClientSession.cpp" />
     <ClCompile Include="Room.cpp" />
-    <ClCompile Include="Transform.pb.cc">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\protoc-3.17.1-win64\bin\Collision.proto" />
     <None Include="..\protoc-3.17.1-win64\bin\Enter.proto" />
     <None Include="..\protoc-3.17.1-win64\bin\Equip.proto" />
     <None Include="..\protoc-3.17.1-win64\bin\Exit.proto" />
@@ -223,7 +227,6 @@
     <None Include="..\protoc-3.17.1-win64\bin\Input.proto" />
     <None Include="..\protoc-3.17.1-win64\bin\Map.proto" />
     <None Include="..\protoc-3.17.1-win64\bin\ObjectState.proto" />
-    <None Include="..\protoc-3.17.1-win64\bin\Object.proto" />
     <None Include="..\protoc-3.17.1-win64\bin\Transform.proto" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

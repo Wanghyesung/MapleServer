@@ -23,8 +23,6 @@ namespace W
 	{
 		pool_excute(); //오브젝트 풀
 
-		enter_excute(); //새로 들러온 플레이어
-
 		//더블버퍼링
 		{
 			WLock lock_guard(m_lock);
@@ -46,19 +44,6 @@ namespace W
 		m_vecEvent[1 - m_iActiveIdx].push_back(_tEve);
 	}
 	
-	void EventManager::enter_excute()
-	{
-		//새로 들어온 플레이어
-		vector<UINT> vecUserID = GRoom.CheckEnterQueue();
-		for (int i = 0; i < vecUserID.size(); ++i)
-		{
-			Player* pPlayer = new Player();
-			pPlayer->m_iPlayerID = vecUserID[i];
-			pPlayer->Initialize();
-			SceneManger::AddPlayerScene(pPlayer, L"Valley");
-
-		}
-	}
 
 	void EventManager::pool_excute()
 	{
@@ -84,6 +69,17 @@ namespace W
 	{
 		switch (_tEve.eEventType)
 		{
+		case EVENT_TYPE::CREATE_PLAYER:
+		{
+			UINT iPlayerID = (UINT)_tEve.lParm;
+
+			Player* pPlayer = new Player();
+			pPlayer->m_iPlayerID = iPlayerID;
+			pPlayer->SetObjectID(iPlayerID);
+			pPlayer->Initialize();
+			SceneManger::AddPlayerScene(pPlayer, L"Valley");
+
+		}
 		case EVENT_TYPE::UPDATE_INPUT:
 		{
 			UINT iPlayerID = (UINT)_tEve.lParm;
@@ -310,6 +306,15 @@ namespace W
 		m_vecInput[_iPlayerID] = _vecInput;
 
 		eve.eEventType = EVENT_TYPE::UPDATE_INPUT;
+		AddEvent(eve);
+	}
+
+	void EventManager::CreatePlayer(UINT _ID)
+	{
+		tEvent eve = {};
+		eve.lParm = (DWORD_PTR)_ID;
+
+		eve.eEventType = EVENT_TYPE::CREATE_PLAYER;
 		AddEvent(eve);
 	}
 

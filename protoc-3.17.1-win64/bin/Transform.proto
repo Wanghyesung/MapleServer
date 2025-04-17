@@ -6,16 +6,11 @@ package Protocol;
 message S_TRANSFORM
 {	
 	string scene = 1;
-	int32 layer = 2;
-	int32 id = 3;
+	uint32 layer = 2;
+	uint32 id = 3;
 
 	float x = 4;
 	float y = 5;
 	float z = 6;
 }
 
-
-
-//로그인
-//채팅 던지기
-//나가기

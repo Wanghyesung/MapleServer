@@ -11,10 +11,12 @@ public:
 public:
 	bool Check(const string& _strName);
 	UINT Enter(const string& _strName, shared_ptr<Session> _pSession);
-	vector<UINT> CheckEnterQueue();
+
 	void Exit(const string& _strName);
+
 	void Broadcast(shared_ptr<SendBuffer> _pBuffer);
 	void BroadcastExcept(shared_ptr<SendBuffer> _pBuffer, shared_ptr<Session> _pExceptSession);
+	void Unicast(shared_ptr<SendBuffer> _pBuffer, vector<UINT> _vecTarget);
 
 	vector<UINT> GetPersons();
 
@@ -23,10 +25,10 @@ private:
 
 private:
 	RWLock m_lock;
-	RWLock m_EnterLock;
+
 
 	unordered_map<string, shared_ptr<Session>> m_hashPerson;
-	queue<pair<string, shared_ptr<Session>>> m_queueEnter;
+	unordered_map<UINT, shared_ptr<Session>> m_hashPersonID;
 
 	atomic<UINT> m_iMaxCount;
 	atomic<UINT> m_iCurCount;

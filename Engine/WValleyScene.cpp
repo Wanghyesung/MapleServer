@@ -34,11 +34,6 @@ namespace W
 		setobject();
 		setmonster();
 
-		Player* pPlayer = new Player();
-		//pPlayer->m_iPlayerID = vecUserID[i];
-		pPlayer->Initialize();
-		SceneManger::AddPlayerScene(pPlayer, L"Valley");
-
 		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ground, true);
 		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Ground, true);
 		CollisionManager::SetLayer(this, eLayerType::ItemObject, eLayerType::Player, true);
@@ -68,12 +63,12 @@ namespace W
 	}
 	void ValleyScene::CreateBackground()
 	{
-		GameObject* pBackGround = new GameObject();
+		/*GameObject* pBackGround = new GameObject();
 		pBackGround->SetSceneName(GetName());
 		AddGameObject(eLayerType::Background, pBackGround);
 		
 		pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 0.2f);
-		pBackGround->GetComponent<Transform>()->SetScale(25 * 0.35f,  25.f * 1.f, 1.f);
+		pBackGround->GetComponent<Transform>()->SetScale(25 * 0.35f,  25.f * 1.f, 1.f);*/
 
 	}
 

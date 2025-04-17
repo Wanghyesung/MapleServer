@@ -45,6 +45,7 @@ namespace W
 		static GameObject* FindPlayer(UINT _iPlayerID);
 		static GameObject* FindPlayer(const std::wstring& strSceneName);
 		static std::vector<GameObject*> GetPlayers(const std::wstring& _strSceneName);
+		static std::vector<UINT> GetPlayerIDs(const std::wstring& _strSceneName);
 
 		static void SwapObject(Scene* _pPrevScene, Scene* _pNextScene, GameObject* _pGameObject);
 		static void SwapPlayer(Player* _pPlayer, Scene* _pPrevScene, Scene* _pNextScene);
@@ -54,7 +55,7 @@ namespace W
 	private:
 		static UINT SCENE_IDX;
 		static std::unordered_map<std::wstring, Scene*> m_hashScene;
-		static std::vector<std::wstring> m_vecPlayerScene;//플레이어가 있는 구간만 업데이트
+		static std::unordered_map<std::wstring, std::vector<UINT>> m_hashPlayerScene;//플레이어가 있는 구간만 업데이트
 	};
 }
 

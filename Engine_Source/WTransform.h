@@ -43,6 +43,11 @@ namespace W
 		void SetParent(Transform* transform) { m_pParentTransform = transform; }
 		Transform* GetParent() { return m_pParentTransform; }
 		Matrix& GetMatrix() { return m_vWorld; }
+
+	//네트워크
+	public:
+		void SendTransform();
+
 	private:
 		Vector3 m_vPosition;
 		Vector3 m_vRotation;

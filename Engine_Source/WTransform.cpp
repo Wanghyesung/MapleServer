@@ -1,5 +1,9 @@
 #include "WTransform.h"
-
+#include "WSceneManger.h"
+#include "Room.h"
+#include "Transform.pb.h"
+#include "ClientPacketHandler.h"
+extern Room GRoom;
 namespace W
 {
 
@@ -30,9 +34,11 @@ namespace W
 	}
 	void Transform::Initialize()
 	{
+
 	}
 	void Transform::Update()
 	{
+
 	}
 	void Transform::LateUpdate()
 	{
@@ -59,12 +65,24 @@ namespace W
 		//내 로컬 -> 월드 -> 부모 행렬
 		if (m_pParentTransform)
 			m_vWorld *= m_pParentTransform->m_vWorld;
-
-		
 	}
+
 	void Transform::Render()
 	{
 
+	}
+
+	void Transform::SendTransform()
+	{
+		std::vector<UINT> vecID = SceneManger::GetPlayerIDs(GetOwner()->GetSceneName());
+
+		Protocol::S_TRANSFORM pkt;
+		pkt.set_x(m_vPosition.x);	pkt.set_y(m_vPosition.y);	pkt.set_z(m_vPosition.z);
+		pkt.set_layer((UINT)GetOwner()->GetLayerType());
+		pkt.set_id(GetOwner()->GetObjectID());
+		
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, vecID);
 	}
 
 }

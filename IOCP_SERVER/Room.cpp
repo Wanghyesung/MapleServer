@@ -7,7 +7,7 @@ Room::Room() :
 	m_iMaxCount(5),
 	m_iCurCount(0)
 {
-	m_vecUserID.resize(5, false);
+	m_vecUserID.resize(6, false);
 }
 
 Room::~Room()
@@ -33,41 +33,20 @@ UINT Room::Enter(const string& _strName, shared_ptr<Session> _pSession)
 	if (Check(_strName) == false)
 		return -1;
 
-	WLock WriteLock(m_EnterLock);
+	WLock WriteLock(m_lock);
 
 	UINT iUserID = GetUserID();
 	if (iUserID == -1)
 		return -1;
 
 	static_pointer_cast<ClientSession>(_pSession)->SetPersonID(iUserID);
-	m_queueEnter.push(make_pair(_strName, _pSession));
+
+	m_hashPerson.insert(make_pair(_strName, _pSession));
+	m_hashPersonID.insert(make_pair(iUserID, _pSession));
 
 	return iUserID;
 }
 
-//Engine쪽에서 접근할 예정
-vector<UINT> Room::CheckEnterQueue()
-{
-	vector<UINT> vecUserID = {};
-	{
-		WLock WriteLock(m_EnterLock);
-
-		while (!m_queueEnter.empty())
-		{
-			auto& pSession = m_queueEnter.front();
-			m_queueEnter.pop();
-
-			vecUserID.push_back(static_pointer_cast<ClientSession>(pSession.second)->GetPersonID());
-
-			//Enter자원을 들고 main 자원을 요청 -> main은 하나의 락으로만 동작 데드락 X
-			WLock lock(m_lock); 
-			m_hashPerson.insert(make_pair(pSession.first, pSession.second));
-			m_iCurCount.fetch_add(1);
-		}
-	}
-	
-	return vecUserID;
-}
 
 void Room::Exit(const string& _strName)
 {
@@ -102,10 +81,18 @@ void Room::BroadcastExcept(shared_ptr<SendBuffer> _pBuffer, shared_ptr<Session> 
 	}
 }
 
+void Room::Unicast(shared_ptr<SendBuffer> _pBuffer, vector<UINT> _vecTarget)
+{
+	WLock lock(m_lock);
+	for (int i = 0; i < _vecTarget.size(); ++i)
+	{
+		m_hashPersonID[_vecTarget[i]]->Send(_pBuffer);
+	}
+}
+
 vector<UINT> Room::GetPersons()
 {
 	std::vector<UINT> vecID = {};
-
 	{
 		RLock ReadLock(m_lock);
 		for (auto iter : m_hashPerson)
@@ -120,7 +107,7 @@ vector<UINT> Room::GetPersons()
 
 UINT Room::GetUserID()
 {
-	for (int i = 0; i < m_iMaxCount; ++i)
+	for (int i = 1; i <= m_iMaxCount; ++i)
 	{
 		if (m_vecUserID[i] == false)
 		{

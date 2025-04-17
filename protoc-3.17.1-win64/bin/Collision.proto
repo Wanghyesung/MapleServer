@@ -1,4 +1,4 @@
-syntax = "proto3";
+yntax = "proto3";
 package Protocol;
 
 //repeated uint64 victims = 3;

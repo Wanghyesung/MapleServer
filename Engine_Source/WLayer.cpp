@@ -62,10 +62,17 @@ namespace W
 
 	void Layer::AddGameObject(GameObject* _pGameObj)
 	{
-		_pGameObj->SetObjectID(m_iObjectID);
-		m_hashGameObject.insert(std::make_pair(m_iObjectID, _pGameObj));
-
-		++m_iObjectID;
+		if (_pGameObj->GetObjectID() == 0)
+		{
+			_pGameObj->SetObjectID(m_iObjectID);
+			m_hashGameObject.insert(std::make_pair(m_iObjectID, _pGameObj));
+			
+			++m_iObjectID;
+		}
+		else
+		{
+			m_hashGameObject.insert(std::make_pair(_pGameObj->GetObjectID(), _pGameObj));
+		}
 	}
 
 	void Layer::EraseOnVector(GameObject* _pGameObject)

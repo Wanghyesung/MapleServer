@@ -12,7 +12,7 @@ namespace W
 {
 	UINT SceneManger::SCENE_IDX = 0;
 	std::unordered_map<std::wstring, Scene*> SceneManger::m_hashScene = {};
-	std::vector<std::wstring> SceneManger::m_vecPlayerScene = {};
+	std::unordered_map<std::wstring, std::vector<UINT>> SceneManger::m_hashPlayerScene = {};
 
 	void SceneManger::Initialize()
 	{
@@ -21,17 +21,27 @@ namespace W
 	}
 	void SceneManger::Update()
 	{
-		for (const std::wstring& strScene : m_vecPlayerScene)
+		auto iter = m_hashPlayerScene.begin();
+		for (iter; iter != m_hashPlayerScene.end(); ++iter)
 		{
-			m_hashScene.find(strScene)->second->Update();
+			if (iter->second.size() > 0)
+			{
+				m_hashScene.find(iter->first)->second->Update();
+			}
 		}
 	}
+
 	void SceneManger::LateUpdate()
 	{
-		for (const std::wstring& strScene : m_vecPlayerScene)
+		auto iter = m_hashPlayerScene.begin();
+		for (iter; iter != m_hashPlayerScene.end(); ++iter)
 		{
-			m_hashScene.find(strScene)->second->LateUpdate();
+			if (iter->second.size() > 0)
+			{
+				m_hashScene.find(iter->first)->second->LateUpdate();
+			}
 		}
+
 	}
 
 	void SceneManger::Release()
@@ -74,10 +84,15 @@ namespace W
 
 	std::vector<Scene*> SceneManger::GetPlayerScene()
 	{
-		std::vector<Scene*> vecPlayerScene;
-		for (int i = 0; i < m_vecPlayerScene.size(); ++i)
+		std::vector<Scene*> vecPlayerScene = {};
+
+		auto iter = m_hashPlayerScene.begin();
+		for (iter; iter != m_hashPlayerScene.end(); ++iter)
 		{
-			vecPlayerScene.push_back(m_hashScene.find(m_vecPlayerScene[i])->second);
+			if (iter->second.size() > 0)
+			{
+				vecPlayerScene.push_back(m_hashScene.find(iter->first)->second);
+			}
 		}
 		return vecPlayerScene;
 	}
@@ -135,6 +150,11 @@ namespace W
 		return vecPlayer;
 	}
 
+	std::vector<UINT> SceneManger::GetPlayerIDs(const std::wstring& _strSceneName)
+	{
+		return m_hashPlayerScene[_strSceneName];
+	}
+
 	void SceneManger::SwapObject(Scene* _pPrevScene, Scene* _pNextScene, GameObject* _pGameObject)
 	{
 		eLayerType eType = _pGameObject->GetLayerType();
@@ -153,6 +173,20 @@ namespace W
 		_pPlayer->GetComponent<Rigidbody>()->SetGround(false);
 
 		SwapObject(_pPrevScene, _pNextScene, _pPlayer);
+
+		UINT iPlayerID = _pPlayer->GetPlayerID();
+		std::wstring strPrevSceneName = _pPrevScene->GetName();
+		std::wstring strNextSceneName = _pNextScene->GetName();
+
+		// 이전 씬에서 해당 플레이어 ID 제거
+		auto& iterPrev = m_hashPlayerScene[strPrevSceneName];
+		iterPrev.erase(
+			std::remove(iterPrev.begin(), iterPrev.end(), iPlayerID),
+			iterPrev.end()
+		);
+
+		// 다음 씬에 플레이어 ID 추가
+		m_hashPlayerScene[strNextSceneName].push_back(iPlayerID);
 	}
 
 
@@ -169,7 +203,8 @@ namespace W
 	void SceneManger::AddPlayerScene(Player* pPlayer, const std::wstring& _strScene)
 	{
 		AddGameObject(_strScene, eLayerType::Player, pPlayer);
-		m_vecPlayerScene.push_back(_strScene);
+
+		m_hashPlayerScene[_strScene].push_back(pPlayer->GetPlayerID());
 	}
 
 }

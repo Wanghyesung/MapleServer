@@ -112,6 +112,8 @@ namespace W
 			m_pShadow->LateUpdate();
 
 		child_lateupdate();
+
+		UpdatePacket();
 	}
 
 	void Player::SetAlert(bool _bAlert)
