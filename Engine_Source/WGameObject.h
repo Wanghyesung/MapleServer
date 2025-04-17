@@ -24,7 +24,8 @@ namespace W
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
-	
+		virtual void UpdatePacket();
+
 		template <typename T>
 		T* GetComponent()
 		{

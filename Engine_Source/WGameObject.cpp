@@ -6,7 +6,8 @@ namespace W
 	UINT GameObject::CREATE_ID = 0;
 
 	GameObject::GameObject() :
-		m_eState(eState::Active)
+		m_eState(eState::Active),
+		m_iObjectID(0)
 	{
 		AddComponent<Transform>();
 	}
@@ -78,6 +79,14 @@ namespace W
 		{
 			script->LateUpdate();
 		}
+	}
+
+	void GameObject::UpdatePacket()
+	{
+		//tr
+		GetComponent<Transform>()->SendTransform();
+
+		//anim
 	}
 	
 	

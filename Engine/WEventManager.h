@@ -7,8 +7,8 @@ namespace W
 {
 	enum class EVENT_TYPE
 	{
-		/*CREATE_PLAYER,
-		DELETE_PLAYER,*/
+		CREATE_PLAYER,
+		DELETE_PLAYER,
 		UPDATE_INPUT,
 		CREATE_OBJECT,
 		DELET_OBJECT,
@@ -43,7 +43,7 @@ namespace W
 		static void DeleteObject(GameObject* _pObj);
 
 		static void Update_Input(UINT _iPlayerID, const vector<USHORT>& _vecInput);
-		//static void AddPlayer(GameObject* _pObj);
+		static void CreatePlayer(UINT _ID);
 		//static void DeletePlayer(GameObject* _pObj);
 
 		static void AddPlayerPool (GameObject* _pObj);

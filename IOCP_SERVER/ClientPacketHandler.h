@@ -3,7 +3,6 @@
 #include "PacketSession.h"
 #include "Enter.pb.h"
 #include "Exit.pb.h"
-#include "Collision.pb.h"
 #include "Equip.pb.h"
 #include "Input.pb.h"
 #include "Map.pb.h"
@@ -97,7 +96,6 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_CREATE _pkt) { return _MakeSendBuffer(_pkt, S_CREATE); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_DELETE _pkt) { return _MakeSendBuffer(_pkt, S_DELETE); }
 	
-	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_COLLISIION _pkt) { return _MakeSendBuffer(_pkt, S_COLLISION); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MAP _pkt) { return _MakeSendBuffer(_pkt, S_MAP); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_STATE _pkt) { return _MakeSendBuffer(_pkt, S_STATE); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_TRANSFORM _pkt) { return _MakeSendBuffer(_pkt, S_TRANSFORM); }

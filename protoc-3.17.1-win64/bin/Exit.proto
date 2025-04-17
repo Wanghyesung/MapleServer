@@ -17,7 +17,7 @@ message S_EXIT
 
 message S_NEW_EXIT
 {
-	int32 playerid = 1;
+	uint32 playerid = 1;
 }
 
 //·Î±×ÀÎ

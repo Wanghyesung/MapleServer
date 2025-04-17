@@ -106,13 +106,13 @@ namespace W
 	}
 	void DemianScene::CreateBackground()
 	{
-		GameObject* pBackGround = new GameObject();
-		pBackGround->SetSceneName(GetName());
-		AddGameObject(eLayerType::Background, pBackGround);
-		
-		pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 1.f);
-		//2 : 1
-		pBackGround->GetComponent<Transform>()->SetScale(2.2372f * 8.f, 1.f * 8.f, 1.f);
+		//GameObject* pBackGround = new GameObject();
+		//pBackGround->SetSceneName(GetName());
+		//AddGameObject(eLayerType::Background, pBackGround);
+		//
+		//pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 1.f);
+		////2 : 1
+		//pBackGround->GetComponent<Transform>()->SetScale(2.2372f * 8.f, 1.f * 8.f, 1.f);
 
 
 		Ground* pGround = new Ground(true);
