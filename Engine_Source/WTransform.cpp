@@ -10,6 +10,7 @@ namespace W
 	Transform::Transform():
 		Component(eComponentType::Transform),
 		m_vPosition(Vector3::Zero),
+		m_vPrevPosition(Vector3::Zero),
 		m_vRotation(Vector3::Zero),
 		m_vScale(Vector3::One),
 		m_pParentTransform(nullptr)
@@ -65,6 +66,7 @@ namespace W
 		//내 로컬 -> 월드 -> 부모 행렬
 		if (m_pParentTransform)
 			m_vWorld *= m_pParentTransform->m_vWorld;
+
 	}
 
 	void Transform::Render()
@@ -74,6 +76,9 @@ namespace W
 
 	void Transform::SendTransform()
 	{
+		if (m_vPosition == m_vPrevPosition)
+			return;
+
 		std::vector<UINT> vecID = SceneManger::GetPlayerIDs(GetOwner()->GetSceneName());
 
 		Protocol::S_TRANSFORM pkt;

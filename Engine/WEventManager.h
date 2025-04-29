@@ -71,12 +71,12 @@ namespace W
 		static std::vector<tEvent> m_vecEvent[2];
 		static std::vector<GameObject*> m_vecPlayer_Pool;
 		static std::vector<GameObject*> m_vecMonster_Pool;
-		static std::vector<USHORT> m_vecInput[5];
+		static std::vector<USHORT> m_vecInput[5][2];
 
 		static RWLock m_lock;
-		
+		static RWLock m_inputLock;
 
-
+		static atomic<int> m_iActiveInputIdx;
 		static atomic<int> m_iActiveIdx;
 	};
 }

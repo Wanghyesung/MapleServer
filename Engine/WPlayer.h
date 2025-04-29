@@ -58,6 +58,7 @@ namespace W
 		virtual void Update()override;
 		virtual void LateUpdate()override;
 		//virtual void Render()override;
+		virtual void UpdatePacket()override;
 
 		void SetDir(int _iDir) { m_iDir = _iDir; }
 		int GetDir() { return m_iDir; }
@@ -121,6 +122,7 @@ namespace W
 		//void child_render();
 		void child_lateupdate();
 
+		void update_state();
 	private:
 		Shadow* m_pShadow;
 

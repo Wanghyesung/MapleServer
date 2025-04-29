@@ -13,10 +13,13 @@ namespace W
 	std::vector<tEvent> EventManager::m_vecEvent[2] = {};
 	std::vector<GameObject*> EventManager::m_vecPlayer_Pool = {};
 	std::vector<GameObject*> EventManager::m_vecMonster_Pool = {};
-	std::vector<USHORT> EventManager::m_vecInput[5] = {};
+	std::vector<USHORT> EventManager::m_vecInput[5][2] = {};
 
 	RWLock EventManager::m_lock = {};
+	RWLock EventManager::m_inputLock = {};
+
 	atomic<int> EventManager::m_iActiveIdx = 1;
+	atomic<int> EventManager::m_iActiveInputIdx = 1;
 
 #define ObjectPoolPosition 2000.f
 	void EventManager::Update()
@@ -83,8 +86,13 @@ namespace W
 		case EVENT_TYPE::UPDATE_INPUT:
 		{
 			UINT iPlayerID = (UINT)_tEve.lParm;
-			
-			Input::Update_Key(iPlayerID, m_vecInput[iPlayerID]);
+			{
+				WLock lock_guard(m_inputLock);
+				Input::Update_Key(iPlayerID, m_vecInput[iPlayerID][m_iActiveInputIdx]);
+
+				m_vecInput[iPlayerID][m_iActiveInputIdx].clear();
+				m_iActiveInputIdx.exchange(1 - m_iActiveInputIdx);
+			}
 		}
 		break;
 		case EVENT_TYPE::CREATE_OBJECT:
@@ -271,24 +279,6 @@ namespace W
 	
 	
 
-	/*void EventManager::AddPlayer(GameObject* _pObj)
-	{
-		tEvent eve = {};
-		eve.lParm = (DWORD_PTR)_pObj;
-		
-		eve.eEventType = EVENT_TYPE::CREATE_PLAYER;
-		AddEvent(eve);
-	}
-
-	void EventManager::DeletePlayer(GameObject* _pObj)
-	{
-		tEvent eve = {};
-		eve.lParm = (DWORD_PTR)_pObj;
-
-		eve.eEventType = EVENT_TYPE::DELETE_PLAYER;
-		AddEvent(eve);
-	}*/
-
 	void EventManager::DeleteObject(GameObject* _pObj)
 	{
 		tEvent eve = {};
@@ -303,7 +293,12 @@ namespace W
 		tEvent eve = {};
 		eve.lParm = (DWORD_PTR)_iPlayerID;
 		
-		m_vecInput[_iPlayerID] = _vecInput;
+		{
+			WLock lock_guard(m_inputLock);
+
+			for(int i = 0; i<_vecInput.size(); ++i)
+				m_vecInput[_iPlayerID][m_iActiveInputIdx].push_back(_vecInput[i]);
+		}
 
 		eve.eEventType = EVENT_TYPE::UPDATE_INPUT;
 		AddEvent(eve);

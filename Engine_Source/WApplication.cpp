@@ -31,6 +31,7 @@ namespace W
 
 	void Application::Run()
 	{
+		Input::Update();
 		SkillManager::Update();
 		Update();
 		LateUpdate();

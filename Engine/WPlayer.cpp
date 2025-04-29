@@ -13,10 +13,16 @@
 
 #include "WTime.h"
 #include "WShadow.h"
+#include "ObjectState.pb.h"
+#include "NetFunc.h"
+#include "ClientPacketHandler.h"
+#include "Room.h"
+
+extern Room GRoom;
 
 namespace W
 {
-	
+
 	Player::Player():
 		m_pShadow(nullptr),
 		m_bAnimLoop(true),
@@ -116,6 +122,13 @@ namespace W
 		UpdatePacket();
 	}
 
+	void Player::UpdatePacket()
+	{
+		GameObject::UpdatePacket();
+
+		update_state();
+	}
+
 	void Player::SetAlert(bool _bAlert)
 	{
 		dynamic_cast<PlayerHead*>(m_vecChildObj[1])->SetAlert(_bAlert);
@@ -202,6 +215,22 @@ namespace W
 		{
 			pObj->LateUpdate();
 		}
+	}
+
+	void Player::update_state()
+	{
+		Protocol::S_STATE pkt;
+		pkt.set_state(WstringToString(m_strCurStateName));
+		pkt.set_layer((UINT)eLayerType::Player);
+		pkt.set_id(GetObjectID());
+
+		//UCHAR cCurIdx = m_vecChildObj[0]->GetComponent<Animator>()->GetActiveAnimation()->GetCurIndex();
+		//UCHAR cDir = m_iDir;
+		//pkt.set_anim_idx(cDir<<8 | cCurIdx);
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Broadcast(pSendBuffer);
+
 	}
 	void Player::Reset_Animation()
 	{

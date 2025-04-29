@@ -18,8 +18,8 @@ namespace W
 	}
 	void PlayerWalk::Update()
 	{
-		Player* pPlayer = new Player();
-		tObjectInfo tInfo = GetPlayer()->GetScript<PlayerScript>()->GetObjectInfo();
+		Player* pPlayer = GetPlayer();
+		tObjectInfo tInfo = pPlayer->GetScript<PlayerScript>()->GetObjectInfo();
 		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::X))
 		{
 			bool bStab = GetPlayer()->GetScript<PlayerScript>()->IsStab();
