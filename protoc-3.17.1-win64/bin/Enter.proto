@@ -14,17 +14,14 @@ message C_ENTER
 message S_ENTER
 {
 	bool success = 1;
-	uint32 playerid =2;
-	uint32 create_id = 3;
-	repeated uint32 player_ids = 4;
-	repeated uint32 object_ids = 5;
+	uint32 player_id =2;
+	repeated uint32 player_ids = 3;
 }
 
 //기존에 있던 새로운 인원
 message S_NEW_ENTER //새로운 인원 추가되었다는 걸 다른 클라에게 전송
 {
 	uint32 playerid = 1;
-	uint32 create_id = 2;
 }
 
 

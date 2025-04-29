@@ -178,10 +178,9 @@ class C_EQUIP final :
 
   enum : int {
     kSceneFieldNumber = 1,
-    kItemNameFieldNumber = 4,
-    kLayerFieldNumber = 2,
-    kPlayerIdFieldNumber = 3,
-    kEquipTypeFieldNumber = 5,
+    kItemNameFieldNumber = 3,
+    kLayerPlayeridFieldNumber = 2,
+    kEquipTypeFieldNumber = 4,
   };
   // string scene = 1;
   void clear_scene();
@@ -197,7 +196,7 @@ class C_EQUIP final :
   std::string* _internal_mutable_scene();
   public:
 
-  // string item_name = 4;
+  // string item_name = 3;
   void clear_item_name();
   const std::string& item_name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -211,25 +210,16 @@ class C_EQUIP final :
   std::string* _internal_mutable_item_name();
   public:
 
-  // uint32 layer = 2;
-  void clear_layer();
-  ::PROTOBUF_NAMESPACE_ID::uint32 layer() const;
-  void set_layer(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  // uint32 layer_playerid = 2;
+  void clear_layer_playerid();
+  ::PROTOBUF_NAMESPACE_ID::uint32 layer_playerid() const;
+  void set_layer_playerid(::PROTOBUF_NAMESPACE_ID::uint32 value);
   private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_layer() const;
-  void _internal_set_layer(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_layer_playerid() const;
+  void _internal_set_layer_playerid(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // uint32 player_id = 3;
-  void clear_player_id();
-  ::PROTOBUF_NAMESPACE_ID::uint32 player_id() const;
-  void set_player_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_player_id() const;
-  void _internal_set_player_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // uint32 equip_type = 5;
+  // uint32 equip_type = 4;
   void clear_equip_type();
   ::PROTOBUF_NAMESPACE_ID::uint32 equip_type() const;
   void set_equip_type(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -247,8 +237,7 @@ class C_EQUIP final :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr scene_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr item_name_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 layer_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 player_id_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 layer_playerid_;
   ::PROTOBUF_NAMESPACE_ID::uint32 equip_type_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Equip_2eproto;
@@ -364,10 +353,9 @@ class S_EQUIP final :
 
   enum : int {
     kSceneFieldNumber = 1,
-    kItemNameFieldNumber = 4,
-    kLayerFieldNumber = 2,
-    kPlayerIdFieldNumber = 3,
-    kEquipTypeFieldNumber = 5,
+    kItemNameFieldNumber = 3,
+    kLayerPlayeridFieldNumber = 2,
+    kEquipTypeFieldNumber = 4,
   };
   // string scene = 1;
   void clear_scene();
@@ -383,7 +371,7 @@ class S_EQUIP final :
   std::string* _internal_mutable_scene();
   public:
 
-  // string item_name = 4;
+  // string item_name = 3;
   void clear_item_name();
   const std::string& item_name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -397,25 +385,16 @@ class S_EQUIP final :
   std::string* _internal_mutable_item_name();
   public:
 
-  // uint32 layer = 2;
-  void clear_layer();
-  ::PROTOBUF_NAMESPACE_ID::uint32 layer() const;
-  void set_layer(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  // uint32 layer_playerid = 2;
+  void clear_layer_playerid();
+  ::PROTOBUF_NAMESPACE_ID::uint32 layer_playerid() const;
+  void set_layer_playerid(::PROTOBUF_NAMESPACE_ID::uint32 value);
   private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_layer() const;
-  void _internal_set_layer(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_layer_playerid() const;
+  void _internal_set_layer_playerid(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // uint32 player_id = 3;
-  void clear_player_id();
-  ::PROTOBUF_NAMESPACE_ID::uint32 player_id() const;
-  void set_player_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_player_id() const;
-  void _internal_set_player_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // uint32 equip_type = 5;
+  // uint32 equip_type = 4;
   void clear_equip_type();
   ::PROTOBUF_NAMESPACE_ID::uint32 equip_type() const;
   void set_equip_type(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -433,8 +412,7 @@ class S_EQUIP final :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr scene_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr item_name_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 layer_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 player_id_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 layer_playerid_;
   ::PROTOBUF_NAMESPACE_ID::uint32 equip_type_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Equip_2eproto;
@@ -495,47 +473,27 @@ inline void C_EQUIP::set_allocated_scene(std::string* scene) {
   // @@protoc_insertion_point(field_set_allocated:Protocol.C_EQUIP.scene)
 }
 
-// uint32 layer = 2;
-inline void C_EQUIP::clear_layer() {
-  layer_ = 0u;
+// uint32 layer_playerid = 2;
+inline void C_EQUIP::clear_layer_playerid() {
+  layer_playerid_ = 0u;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint32 C_EQUIP::_internal_layer() const {
-  return layer_;
+inline ::PROTOBUF_NAMESPACE_ID::uint32 C_EQUIP::_internal_layer_playerid() const {
+  return layer_playerid_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint32 C_EQUIP::layer() const {
-  // @@protoc_insertion_point(field_get:Protocol.C_EQUIP.layer)
-  return _internal_layer();
+inline ::PROTOBUF_NAMESPACE_ID::uint32 C_EQUIP::layer_playerid() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_EQUIP.layer_playerid)
+  return _internal_layer_playerid();
 }
-inline void C_EQUIP::_internal_set_layer(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+inline void C_EQUIP::_internal_set_layer_playerid(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   
-  layer_ = value;
+  layer_playerid_ = value;
 }
-inline void C_EQUIP::set_layer(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _internal_set_layer(value);
-  // @@protoc_insertion_point(field_set:Protocol.C_EQUIP.layer)
+inline void C_EQUIP::set_layer_playerid(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_layer_playerid(value);
+  // @@protoc_insertion_point(field_set:Protocol.C_EQUIP.layer_playerid)
 }
 
-// uint32 player_id = 3;
-inline void C_EQUIP::clear_player_id() {
-  player_id_ = 0u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint32 C_EQUIP::_internal_player_id() const {
-  return player_id_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint32 C_EQUIP::player_id() const {
-  // @@protoc_insertion_point(field_get:Protocol.C_EQUIP.player_id)
-  return _internal_player_id();
-}
-inline void C_EQUIP::_internal_set_player_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  
-  player_id_ = value;
-}
-inline void C_EQUIP::set_player_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _internal_set_player_id(value);
-  // @@protoc_insertion_point(field_set:Protocol.C_EQUIP.player_id)
-}
-
-// string item_name = 4;
+// string item_name = 3;
 inline void C_EQUIP::clear_item_name() {
   item_name_.ClearToEmpty();
 }
@@ -580,7 +538,7 @@ inline void C_EQUIP::set_allocated_item_name(std::string* item_name) {
   // @@protoc_insertion_point(field_set_allocated:Protocol.C_EQUIP.item_name)
 }
 
-// uint32 equip_type = 5;
+// uint32 equip_type = 4;
 inline void C_EQUIP::clear_equip_type() {
   equip_type_ = 0u;
 }
@@ -649,47 +607,27 @@ inline void S_EQUIP::set_allocated_scene(std::string* scene) {
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_EQUIP.scene)
 }
 
-// uint32 layer = 2;
-inline void S_EQUIP::clear_layer() {
-  layer_ = 0u;
+// uint32 layer_playerid = 2;
+inline void S_EQUIP::clear_layer_playerid() {
+  layer_playerid_ = 0u;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint32 S_EQUIP::_internal_layer() const {
-  return layer_;
+inline ::PROTOBUF_NAMESPACE_ID::uint32 S_EQUIP::_internal_layer_playerid() const {
+  return layer_playerid_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint32 S_EQUIP::layer() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_EQUIP.layer)
-  return _internal_layer();
+inline ::PROTOBUF_NAMESPACE_ID::uint32 S_EQUIP::layer_playerid() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_EQUIP.layer_playerid)
+  return _internal_layer_playerid();
 }
-inline void S_EQUIP::_internal_set_layer(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+inline void S_EQUIP::_internal_set_layer_playerid(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   
-  layer_ = value;
+  layer_playerid_ = value;
 }
-inline void S_EQUIP::set_layer(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _internal_set_layer(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_EQUIP.layer)
+inline void S_EQUIP::set_layer_playerid(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_layer_playerid(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_EQUIP.layer_playerid)
 }
 
-// uint32 player_id = 3;
-inline void S_EQUIP::clear_player_id() {
-  player_id_ = 0u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint32 S_EQUIP::_internal_player_id() const {
-  return player_id_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint32 S_EQUIP::player_id() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_EQUIP.player_id)
-  return _internal_player_id();
-}
-inline void S_EQUIP::_internal_set_player_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  
-  player_id_ = value;
-}
-inline void S_EQUIP::set_player_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _internal_set_player_id(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_EQUIP.player_id)
-}
-
-// string item_name = 4;
+// string item_name = 3;
 inline void S_EQUIP::clear_item_name() {
   item_name_.ClearToEmpty();
 }
@@ -734,7 +672,7 @@ inline void S_EQUIP::set_allocated_item_name(std::string* item_name) {
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_EQUIP.item_name)
 }
 
-// uint32 equip_type = 5;
+// uint32 equip_type = 4;
 inline void S_EQUIP::clear_equip_type() {
   equip_type_ = 0u;
 }

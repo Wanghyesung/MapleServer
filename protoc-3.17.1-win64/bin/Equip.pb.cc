@@ -21,8 +21,7 @@ constexpr C_EQUIP::C_EQUIP(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : scene_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , item_name_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , layer_(0u)
-  , player_id_(0u)
+  , layer_playerid_(0u)
   , equip_type_(0u){}
 struct C_EQUIPDefaultTypeInternal {
   constexpr C_EQUIPDefaultTypeInternal()
@@ -37,8 +36,7 @@ constexpr S_EQUIP::S_EQUIP(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : scene_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
   , item_name_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , layer_(0u)
-  , player_id_(0u)
+  , layer_playerid_(0u)
   , equip_type_(0u){}
 struct S_EQUIPDefaultTypeInternal {
   constexpr S_EQUIPDefaultTypeInternal()
@@ -61,8 +59,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_Equip_2eproto::offsets[] PROTO
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::Protocol::C_EQUIP, scene_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::C_EQUIP, layer_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::C_EQUIP, player_id_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::C_EQUIP, layer_playerid_),
   PROTOBUF_FIELD_OFFSET(::Protocol::C_EQUIP, item_name_),
   PROTOBUF_FIELD_OFFSET(::Protocol::C_EQUIP, equip_type_),
   ~0u,  // no _has_bits_
@@ -71,14 +68,13 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_Equip_2eproto::offsets[] PROTO
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_EQUIP, scene_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_EQUIP, layer_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::S_EQUIP, player_id_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_EQUIP, layer_playerid_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_EQUIP, item_name_),
   PROTOBUF_FIELD_OFFSET(::Protocol::S_EQUIP, equip_type_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::Protocol::C_EQUIP)},
-  { 10, -1, sizeof(::Protocol::S_EQUIP)},
+  { 9, -1, sizeof(::Protocol::S_EQUIP)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -87,16 +83,16 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_Equip_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\013Equip.proto\022\010Protocol\"a\n\007C_EQUIP\022\r\n\005sc"
-  "ene\030\001 \001(\t\022\r\n\005layer\030\002 \001(\r\022\021\n\tplayer_id\030\003 "
-  "\001(\r\022\021\n\titem_name\030\004 \001(\t\022\022\n\nequip_type\030\005 \001"
-  "(\r\"a\n\007S_EQUIP\022\r\n\005scene\030\001 \001(\t\022\r\n\005layer\030\002 "
-  "\001(\r\022\021\n\tplayer_id\030\003 \001(\r\022\021\n\titem_name\030\004 \001("
-  "\t\022\022\n\nequip_type\030\005 \001(\rb\006proto3"
+  "\n\013Equip.proto\022\010Protocol\"W\n\007C_EQUIP\022\r\n\005sc"
+  "ene\030\001 \001(\t\022\026\n\016layer_playerid\030\002 \001(\r\022\021\n\tite"
+  "m_name\030\003 \001(\t\022\022\n\nequip_type\030\004 \001(\r\"W\n\007S_EQ"
+  "UIP\022\r\n\005scene\030\001 \001(\t\022\026\n\016layer_playerid\030\002 \001"
+  "(\r\022\021\n\titem_name\030\003 \001(\t\022\022\n\nequip_type\030\004 \001("
+  "\rb\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Equip_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Equip_2eproto = {
-  false, false, 229, descriptor_table_protodef_Equip_2eproto, "Equip.proto", 
+  false, false, 209, descriptor_table_protodef_Equip_2eproto, "Equip.proto", 
   &descriptor_table_Equip_2eproto_once, nullptr, 0, 2,
   schemas, file_default_instances, TableStruct_Equip_2eproto::offsets,
   file_level_metadata_Equip_2eproto, file_level_enum_descriptors_Equip_2eproto, file_level_service_descriptors_Equip_2eproto,
@@ -134,9 +130,9 @@ C_EQUIP::C_EQUIP(const C_EQUIP& from)
     item_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_item_name(), 
       GetArenaForAllocation());
   }
-  ::memcpy(&layer_, &from.layer_,
+  ::memcpy(&layer_playerid_, &from.layer_playerid_,
     static_cast<size_t>(reinterpret_cast<char*>(&equip_type_) -
-    reinterpret_cast<char*>(&layer_)) + sizeof(equip_type_));
+    reinterpret_cast<char*>(&layer_playerid_)) + sizeof(equip_type_));
   // @@protoc_insertion_point(copy_constructor:Protocol.C_EQUIP)
 }
 
@@ -144,9 +140,9 @@ void C_EQUIP::SharedCtor() {
 scene_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 item_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&layer_) - reinterpret_cast<char*>(this)),
+    reinterpret_cast<char*>(&layer_playerid_) - reinterpret_cast<char*>(this)),
     0, static_cast<size_t>(reinterpret_cast<char*>(&equip_type_) -
-    reinterpret_cast<char*>(&layer_)) + sizeof(equip_type_));
+    reinterpret_cast<char*>(&layer_playerid_)) + sizeof(equip_type_));
 }
 
 C_EQUIP::~C_EQUIP() {
@@ -179,9 +175,9 @@ void C_EQUIP::Clear() {
 
   scene_.ClearToEmpty();
   item_name_.ClearToEmpty();
-  ::memset(&layer_, 0, static_cast<size_t>(
+  ::memset(&layer_playerid_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&equip_type_) -
-      reinterpret_cast<char*>(&layer_)) + sizeof(equip_type_));
+      reinterpret_cast<char*>(&layer_playerid_)) + sizeof(equip_type_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -200,32 +196,25 @@ const char* C_EQUIP::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::in
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // uint32 layer = 2;
+      // uint32 layer_playerid = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          layer_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          layer_playerid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // uint32 player_id = 3;
+      // string item_name = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          player_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // string item_name = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           auto str = _internal_mutable_item_name();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "Protocol.C_EQUIP.item_name"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // uint32 equip_type = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+      // uint32 equip_type = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
           equip_type_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
@@ -269,32 +258,26 @@ failure:
         1, this->_internal_scene(), target);
   }
 
-  // uint32 layer = 2;
-  if (this->layer() != 0) {
+  // uint32 layer_playerid = 2;
+  if (this->layer_playerid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_layer(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_layer_playerid(), target);
   }
 
-  // uint32 player_id = 3;
-  if (this->player_id() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(3, this->_internal_player_id(), target);
-  }
-
-  // string item_name = 4;
+  // string item_name = 3;
   if (!this->item_name().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_item_name().data(), static_cast<int>(this->_internal_item_name().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "Protocol.C_EQUIP.item_name");
     target = stream->WriteStringMaybeAliased(
-        4, this->_internal_item_name(), target);
+        3, this->_internal_item_name(), target);
   }
 
-  // uint32 equip_type = 5;
+  // uint32 equip_type = 4;
   if (this->equip_type() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(5, this->_internal_equip_type(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(4, this->_internal_equip_type(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -320,28 +303,21 @@ size_t C_EQUIP::ByteSizeLong() const {
         this->_internal_scene());
   }
 
-  // string item_name = 4;
+  // string item_name = 3;
   if (!this->item_name().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_item_name());
   }
 
-  // uint32 layer = 2;
-  if (this->layer() != 0) {
+  // uint32 layer_playerid = 2;
+  if (this->layer_playerid() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->_internal_layer());
+        this->_internal_layer_playerid());
   }
 
-  // uint32 player_id = 3;
-  if (this->player_id() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->_internal_player_id());
-  }
-
-  // uint32 equip_type = 5;
+  // uint32 equip_type = 4;
   if (this->equip_type() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
@@ -385,11 +361,8 @@ void C_EQUIP::MergeFrom(const C_EQUIP& from) {
   if (!from.item_name().empty()) {
     _internal_set_item_name(from._internal_item_name());
   }
-  if (from.layer() != 0) {
-    _internal_set_layer(from._internal_layer());
-  }
-  if (from.player_id() != 0) {
-    _internal_set_player_id(from._internal_player_id());
+  if (from.layer_playerid() != 0) {
+    _internal_set_layer_playerid(from._internal_layer_playerid());
   }
   if (from.equip_type() != 0) {
     _internal_set_equip_type(from._internal_equip_type());
@@ -430,9 +403,9 @@ void C_EQUIP::InternalSwap(C_EQUIP* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(C_EQUIP, equip_type_)
       + sizeof(C_EQUIP::equip_type_)
-      - PROTOBUF_FIELD_OFFSET(C_EQUIP, layer_)>(
-          reinterpret_cast<char*>(&layer_),
-          reinterpret_cast<char*>(&other->layer_));
+      - PROTOBUF_FIELD_OFFSET(C_EQUIP, layer_playerid_)>(
+          reinterpret_cast<char*>(&layer_playerid_),
+          reinterpret_cast<char*>(&other->layer_playerid_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata C_EQUIP::GetMetadata() const {
@@ -466,9 +439,9 @@ S_EQUIP::S_EQUIP(const S_EQUIP& from)
     item_name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_item_name(), 
       GetArenaForAllocation());
   }
-  ::memcpy(&layer_, &from.layer_,
+  ::memcpy(&layer_playerid_, &from.layer_playerid_,
     static_cast<size_t>(reinterpret_cast<char*>(&equip_type_) -
-    reinterpret_cast<char*>(&layer_)) + sizeof(equip_type_));
+    reinterpret_cast<char*>(&layer_playerid_)) + sizeof(equip_type_));
   // @@protoc_insertion_point(copy_constructor:Protocol.S_EQUIP)
 }
 
@@ -476,9 +449,9 @@ void S_EQUIP::SharedCtor() {
 scene_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 item_name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
-    reinterpret_cast<char*>(&layer_) - reinterpret_cast<char*>(this)),
+    reinterpret_cast<char*>(&layer_playerid_) - reinterpret_cast<char*>(this)),
     0, static_cast<size_t>(reinterpret_cast<char*>(&equip_type_) -
-    reinterpret_cast<char*>(&layer_)) + sizeof(equip_type_));
+    reinterpret_cast<char*>(&layer_playerid_)) + sizeof(equip_type_));
 }
 
 S_EQUIP::~S_EQUIP() {
@@ -511,9 +484,9 @@ void S_EQUIP::Clear() {
 
   scene_.ClearToEmpty();
   item_name_.ClearToEmpty();
-  ::memset(&layer_, 0, static_cast<size_t>(
+  ::memset(&layer_playerid_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&equip_type_) -
-      reinterpret_cast<char*>(&layer_)) + sizeof(equip_type_));
+      reinterpret_cast<char*>(&layer_playerid_)) + sizeof(equip_type_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -532,32 +505,25 @@ const char* S_EQUIP::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::in
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // uint32 layer = 2;
+      // uint32 layer_playerid = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          layer_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          layer_playerid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // uint32 player_id = 3;
+      // string item_name = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          player_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // string item_name = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
           auto str = _internal_mutable_item_name();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "Protocol.S_EQUIP.item_name"));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // uint32 equip_type = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+      // uint32 equip_type = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
           equip_type_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
@@ -601,32 +567,26 @@ failure:
         1, this->_internal_scene(), target);
   }
 
-  // uint32 layer = 2;
-  if (this->layer() != 0) {
+  // uint32 layer_playerid = 2;
+  if (this->layer_playerid() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_layer(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_layer_playerid(), target);
   }
 
-  // uint32 player_id = 3;
-  if (this->player_id() != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(3, this->_internal_player_id(), target);
-  }
-
-  // string item_name = 4;
+  // string item_name = 3;
   if (!this->item_name().empty()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_item_name().data(), static_cast<int>(this->_internal_item_name().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "Protocol.S_EQUIP.item_name");
     target = stream->WriteStringMaybeAliased(
-        4, this->_internal_item_name(), target);
+        3, this->_internal_item_name(), target);
   }
 
-  // uint32 equip_type = 5;
+  // uint32 equip_type = 4;
   if (this->equip_type() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(5, this->_internal_equip_type(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(4, this->_internal_equip_type(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -652,28 +612,21 @@ size_t S_EQUIP::ByteSizeLong() const {
         this->_internal_scene());
   }
 
-  // string item_name = 4;
+  // string item_name = 3;
   if (!this->item_name().empty()) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_item_name());
   }
 
-  // uint32 layer = 2;
-  if (this->layer() != 0) {
+  // uint32 layer_playerid = 2;
+  if (this->layer_playerid() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->_internal_layer());
+        this->_internal_layer_playerid());
   }
 
-  // uint32 player_id = 3;
-  if (this->player_id() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->_internal_player_id());
-  }
-
-  // uint32 equip_type = 5;
+  // uint32 equip_type = 4;
   if (this->equip_type() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
@@ -717,11 +670,8 @@ void S_EQUIP::MergeFrom(const S_EQUIP& from) {
   if (!from.item_name().empty()) {
     _internal_set_item_name(from._internal_item_name());
   }
-  if (from.layer() != 0) {
-    _internal_set_layer(from._internal_layer());
-  }
-  if (from.player_id() != 0) {
-    _internal_set_player_id(from._internal_player_id());
+  if (from.layer_playerid() != 0) {
+    _internal_set_layer_playerid(from._internal_layer_playerid());
   }
   if (from.equip_type() != 0) {
     _internal_set_equip_type(from._internal_equip_type());
@@ -762,9 +712,9 @@ void S_EQUIP::InternalSwap(S_EQUIP* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(S_EQUIP, equip_type_)
       + sizeof(S_EQUIP::equip_type_)
-      - PROTOBUF_FIELD_OFFSET(S_EQUIP, layer_)>(
-          reinterpret_cast<char*>(&layer_),
-          reinterpret_cast<char*>(&other->layer_));
+      - PROTOBUF_FIELD_OFFSET(S_EQUIP, layer_playerid_)>(
+          reinterpret_cast<char*>(&layer_playerid_),
+          reinterpret_cast<char*>(&other->layer_playerid_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata S_EQUIP::GetMetadata() const {

@@ -221,12 +221,16 @@ namespace W
 	{
 		Protocol::S_STATE pkt;
 		pkt.set_state(WstringToString(m_strCurStateName));
-		pkt.set_layer((UINT)eLayerType::Player);
-		pkt.set_id(GetObjectID());
 
-		//UCHAR cCurIdx = m_vecChildObj[0]->GetComponent<Animator>()->GetActiveAnimation()->GetCurIndex();
-		//UCHAR cDir = m_iDir;
-		//pkt.set_anim_idx(cDir<<8 | cCurIdx);
+		UCHAR cLayer = (UCHAR)eLayerType::Player;
+		UINT iObjectID = m_iPlayerID;
+		pkt.set_layer_id((cLayer << 24) | m_iPlayerID);
+
+		UCHAR cDir = m_iDir > 0 ? 1 : 0; //0보다 크면 오른쪽 
+		UCHAR cAnimIdx = m_vecChildObj[0]->GetComponent<Animator>()->GetActiveAnimation()->GetCurIndex();
+		
+		pkt.set_anim((cDir << 8) | cAnimIdx);
+
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.Broadcast(pSendBuffer);

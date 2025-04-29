@@ -7,17 +7,15 @@ package Protocol;
 message ObjectInfo 
 {	
 	string scene = 1;
-	uint32 layer = 2;
-	uint32 id = 3;
-	uint32 create_id =4;
-
-	float x = 5;
-	float y = 6;
-    float z = 7;
+	uint32 layer_createid_id = 2;
+	
+	float x = 3;
+	float y = 4;
+    float z = 5;
 
 	//현재 애니메이션 이름, 애니메이션 인덱스, 만약 iDX가 -1이면 Textrue이름
-	string state = 8;
-	int32 animIdx = 9;
+	string state = 6;
+	int32 anim = 7;
 }
 
 //서버가 클라에게

@@ -79,10 +79,7 @@ namespace W
 		int iDir = pPlayer->GetDir();
 		std::wstring strDir;
 		std::wstring strState;
-		if (iDir > 0)
-			strDir = L"_right";
-		else
-			strDir = L"_left";
+		strDir = iDir > 0 ? L"_right" : L"_left";
 
 		strState = pPlayer->GetCurStateName();
 

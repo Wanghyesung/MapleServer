@@ -83,9 +83,11 @@ namespace W
 
 		Protocol::S_TRANSFORM pkt;
 		pkt.set_x(m_vPosition.x);	pkt.set_y(m_vPosition.y);	pkt.set_z(m_vPosition.z);
-		pkt.set_layer((UINT)GetOwner()->GetLayerType());
-		pkt.set_id(GetOwner()->GetObjectID());
-		
+		UCHAR cLayer = (UINT)GetOwner()->GetLayerType();
+		UINT iObjectID = GetOwner()->GetObjectID();
+
+		pkt.set_layer_id((cLayer<<24) | iObjectID);
+	
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.Unicast(pSendBuffer, vecID);
 	}

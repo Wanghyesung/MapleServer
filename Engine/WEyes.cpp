@@ -108,10 +108,7 @@ namespace W
 		std::wstring strDir;
 		std::wstring strState;
 		std::wstring strEye = L"eye";
-		if (iDir > 0)
-			strDir = L"_right";
-		else
-			strDir = L"_left";
+		strDir = iDir > 0 ? L"_right" : L"_left";
 
 		strState = pPlayer->GetCurStateName();
 

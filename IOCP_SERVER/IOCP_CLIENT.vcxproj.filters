@@ -11,74 +11,62 @@
       <Filter>Packet</Filter>
     </ClInclude>
     <ClInclude Include="Room.h" />
-    <ClInclude Include="..\protoc-3.17.1-win64\bin\Equip.pb.h">
+    <ClInclude Include="NetFunc.h" />
+    <ClInclude Include="Enter.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
-    <ClInclude Include="..\protoc-3.17.1-win64\bin\Exit.pb.h">
+    <ClInclude Include="Equip.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
-    <ClInclude Include="..\protoc-3.17.1-win64\bin\Input.pb.h">
-      <Filter>Packet</Filter>
-    </ClInclude>
-    <ClInclude Include="..\protoc-3.17.1-win64\bin\ObjectState.pb.h">
-      <Filter>Packet</Filter>
-    </ClInclude>
-    <ClInclude Include="..\protoc-3.17.1-win64\bin\Transform.pb.h">
-      <Filter>Packet</Filter>
-    </ClInclude>
-    <ClInclude Include="..\protoc-3.17.1-win64\bin\Object.pb.h">
-      <Filter>Packet</Filter>
-    </ClInclude>
-    <ClInclude Include="..\protoc-3.17.1-win64\bin\Trasnform.pb.h">
-      <Filter>Packet</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.pb.h">
+    <ClInclude Include="Exit.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
-    <ClInclude Include="Enter.pb.h">
+    <ClInclude Include="Input.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
-    <ClInclude Include="NetFunc.h" />
+    <ClInclude Include="Map.pb.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.pb.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectState.pb.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="ClientSession.cpp" />
     <ClCompile Include="ClientPacketHandler.cpp" />
     <ClCompile Include="Room.cpp" />
-    <ClCompile Include="..\protoc-3.17.1-win64\bin\Equip.pb.cc">
+    <ClCompile Include="NetFunc.cpp" />
+    <ClCompile Include="Enter.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
-    <ClCompile Include="..\protoc-3.17.1-win64\bin\Exit.pb.cc">
+    <ClCompile Include="Equip.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
-    <ClCompile Include="..\protoc-3.17.1-win64\bin\Input.pb.cc">
-      <Filter>Packet</Filter>
-    </ClCompile>
-    <ClCompile Include="..\protoc-3.17.1-win64\bin\ObjectState.pb.cc">
-      <Filter>Packet</Filter>
-    </ClCompile>
-    <ClCompile Include="..\protoc-3.17.1-win64\bin\Transform.pb.cc">
-      <Filter>Packet</Filter>
-    </ClCompile>
-    <ClCompile Include="..\protoc-3.17.1-win64\bin\Object.pb.cc">
-      <Filter>Packet</Filter>
-    </ClCompile>
-    <ClCompile Include="..\protoc-3.17.1-win64\bin\Trasnform.pb.cc">
-      <Filter>Packet</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.pb.cc">
+    <ClCompile Include="Exit.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
-    <ClCompile Include="Enter.pb.cc">
+    <ClCompile Include="Input.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
-    <ClCompile Include="NetFunc.cpp" />
+    <ClCompile Include="Map.pb.cc">
+      <Filter>Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.pb.cc">
+      <Filter>Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectState.pb.cc">
+      <Filter>Packet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\protoc-3.17.1-win64\bin\Enter.proto">

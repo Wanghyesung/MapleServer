@@ -23,21 +23,18 @@ bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 	//다른 클라들에게 전송
 	Protocol::S_NEW_ENTER other_pkt;
 	other_pkt.set_playerid(iUserID);
-	other_pkt.set_create_id(iUserID);
 	shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(other_pkt);
 	GRoom.BroadcastExcept(pSendBuffer,_pSession);
 	
 	//연결된 클라에게 전송
 	Protocol::S_ENTER pkt;
-	pkt.set_playerid(iUserID);
-	pkt.set_create_id(iUserID);
-
+	pkt.set_player_id(iUserID);
+	
 	pkt.set_success(true);
 	
 	for (int i = 0; i < vecUserID.size(); ++i)
 	{
 		pkt.add_player_ids(vecUserID[i]);
-		pkt.add_object_ids(vecUserID[i]);
 	}
 	pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 	_pSession->Send(pSendBuffer);

@@ -7,22 +7,18 @@ package Protocol;
 message C_CREATE
 {
 	string scene = 1;
-	uint32 layer = 2;
-
-	uint32 create_id = 3;
+	uint32 layer_createid = 2;
 }
 
 //서버가 클라에게 (브로드캐스팅으로 던질거)
 message S_CREATE
 {
 	string scene = 1;
-	uint32 layer = 2;
-	uint32 id = 3;
-	uint32 create_id =4;
+	uint32 layer_createid_id = 2;
 
 	//텍스쳐
-	string state = 5;
-	uint32 anim_idx = 6;
+	string state = 3;
+	uint32 anim = 4;
 }
 
 
@@ -30,6 +26,5 @@ message S_CREATE
 message S_DELETE
 {
 	string scene = 1;
-	uint32 layer = 2;
-	uint32 delete_id= 3;
+	uint32 layer_deleteid = 2;
 }
