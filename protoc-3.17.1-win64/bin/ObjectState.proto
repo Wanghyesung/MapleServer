@@ -7,12 +7,11 @@ package Protocol;
 message S_STATE
 {
 	string scene = 1;
-	uint32 layer = 2;
-	uint32 id = 3;
-
+	uint32 layer_id = 2;
+	
 	//텍스쳐
-	string state = 4;
-	int32 anim_idx = 5; //상위 8비트 방향, 하위 애님 인덱스
+	string state = 3;
+	int32 anim = 4; //상위 8비트 방향, 하위 애님 인덱스
 }
 
 

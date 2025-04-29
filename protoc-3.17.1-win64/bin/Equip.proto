@@ -7,22 +7,20 @@ package Protocol;
 message C_EQUIP
 {
 	string scene = 1;
-	uint32 layer = 2;
-	uint32 player_id =3;
-
-	string item_name = 4;
-	uint32 equip_type = 5;
+	uint32 layer_playerid = 2;
+	
+	string item_name = 3;
+	uint32 equip_type = 4;
 }
 
 //서버가 다른 클라에게
 message S_EQUIP
 {
 	string scene = 1;
-	uint32 layer = 2;
-	uint32 player_id = 3;
+	uint32 layer_playerid = 2;
 
-	string item_name = 4;
-	uint32 equip_type = 5;
+	string item_name = 3;
+	uint32 equip_type = 4;
 }
 
 

@@ -63,8 +63,8 @@ namespace W
 
 	private:
 		static void excute(const tEvent& _tEve);
-		static void enter_excute();
 		static void pool_excute();
+
 	private:
 		//만약 이벤트처리 벡터에서 lock을 걸면 새로들어오는 이벤트(패킷), 내가지금 처리해야할 이벤트 등 처리할 일이 많아짐
 		//때문에 더블버퍼링으로 지금들어온 패킷은 다음 이벤트배열에 넣고 현재 이벤트들만 Engine에서 처리할 수 있게 만듬

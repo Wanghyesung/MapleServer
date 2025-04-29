@@ -6,11 +6,10 @@ package Protocol;
 message S_TRANSFORM
 {	
 	string scene = 1;
-	uint32 layer = 2;
-	uint32 id = 3;
-
-	float x = 4;
-	float y = 5;
-	float z = 6;
+	uint32 layer_id = 2;
+	
+	float x = 3;
+	float y = 4;
+	float z = 5;
 }
 
