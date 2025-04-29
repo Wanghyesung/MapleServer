@@ -111,6 +111,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                 while (bIsRunning)
                 {
                     GServerService->GetIOCP()->Excute();
+                   
                 }
             }
         );
@@ -143,7 +144,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             // 여기서 게임 로직이 돌아가야한다.
-            application.Run();
+                application.Run();
         }
 
         auto frameEnd = std::chrono::high_resolution_clock::now();

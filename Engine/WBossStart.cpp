@@ -18,6 +18,9 @@ namespace W
 	{
 		Animator* pAnimator = GetMonster()->GetComponent<Animator>();
 		Animation* pAnim = pAnimator->GetActiveAnimation();
+		if (!pAnim)
+			return;
+
 		if (pAnim->IsComplete() && m_iCount == 0)
 		{
 			Collider2D* pCollider = GetMonster()->GetComponent<Collider2D>();

@@ -24,11 +24,11 @@ namespace W
 
 		//void BindConstantBuffer();
 
-		void SetPosition(Vector3 _vPosition) { m_vPosition = _vPosition; }
+		void SetPosition(Vector3 _vPosition) { m_vPrevPosition = m_vPosition; m_vPosition = _vPosition; }
 		void SetRotation(Vector3 _vRotation) { m_vRotation = _vRotation; }
 		void SetScale(Vector3 _vScale) { m_vScale = _vScale; }
 
-		void SetPosition(float x, float y, float z) { m_vPosition = Vector3(x, y, z); }
+		void SetPosition(float x, float y, float z) { m_vPrevPosition = m_vPosition; m_vPosition = Vector3(x, y, z); }
 		void SetRotation(float x, float y, float z) { m_vRotation = Vector3(x, y, z); }
 		void SetScale(float x, float y, float z) { m_vScale = Vector3(x, y, z); }
 
@@ -49,6 +49,7 @@ namespace W
 		void SendTransform();
 
 	private:
+		Vector3 m_vPrevPosition;
 		Vector3 m_vPosition;
 		Vector3 m_vRotation;
 		Vector3 m_vScale;

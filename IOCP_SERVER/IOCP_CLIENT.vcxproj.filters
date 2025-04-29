@@ -41,6 +41,7 @@
     <ClInclude Include="Enter.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
+    <ClInclude Include="NetFunc.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -77,6 +78,7 @@
     <ClCompile Include="Enter.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
+    <ClCompile Include="NetFunc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\protoc-3.17.1-win64\bin\Enter.proto">

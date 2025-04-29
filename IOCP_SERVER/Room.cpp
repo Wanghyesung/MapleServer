@@ -107,7 +107,7 @@ vector<UINT> Room::GetPersons()
 
 UINT Room::GetUserID()
 {
-	for (int i = 1; i <= m_iMaxCount; ++i)
+	for (UINT i = 1; i <= m_iMaxCount; ++i)
 	{
 		if (m_vecUserID[i] == false)
 		{

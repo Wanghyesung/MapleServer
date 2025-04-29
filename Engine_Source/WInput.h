@@ -19,7 +19,7 @@ namespace W
 		KEY0, KEY1, KEY2, KEY3, KEY4, KEY5, KEY6, KEY7, KEY8, KEY9,
 
 		Q, W, E, R, T,
-		A, S, D, F, G,
+		A, S, D, F, G,	
 
 		Z, X, C, V, B, N, M,
 
@@ -49,6 +49,7 @@ namespace W
 	public:
 
 		static void Initialize();
+		static void Update();
 		static void Update_Key(UINT _iPlayerID, const std::vector<USHORT>& _vecKey);
 
 
@@ -75,8 +76,8 @@ namespace W
 		
 		//최대 5명의 플레이어 Input정보
 	private:
-		static std::vector<eKeyState> m_vecKeys[5];
-		
+		static std::queue<UCHAR> m_queueKeys[6][(UINT)eKeyCode::NONE + 1];//지금까지 들어온 키 처리
+		static std::vector<eKeyState> m_vecKeys[6];//현 체크할 키
 	};
 
 }

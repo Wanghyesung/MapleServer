@@ -61,9 +61,7 @@ bool Handle_C_INPUT(shared_ptr<Session> _pSession, Protocol::C_INPUT& _pkt)
 
 	vector<USHORT> vecKey;
 	for (int i = 0; i < _pkt.inpus_size(); ++i)
-	{
 		vecKey.push_back(_pkt.inpus(i));
-	}
 
 	//eventmgr에 보내기
 	W::EventManager::Update_Input(iPlayerID, vecKey);
