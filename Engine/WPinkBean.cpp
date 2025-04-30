@@ -568,7 +568,7 @@ namespace W
 	{
 		GameObject* pObj = SceneManger::FindPlayer(GetSceneName());
 		//º¯½Å
-		BattleManager::HitchAbnormal(pObj, BattleManager::eAbnormalType::Variation);
+		//BattleManager::HitchAbnormal(pObj, BattleManager::eAbnormalType::Variation);
 	}
 	void PinkBean::attack11()
 	{

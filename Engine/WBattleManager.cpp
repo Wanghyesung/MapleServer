@@ -25,10 +25,15 @@
 #include "WDemianEntireAttack.h"
 #include "WStop.h"
 
-#define EffectMap std::map<std::wstring, std::queue<Effect*>> 
+
 namespace W
 {
+#define EffectMap std::map<std::wstring, std::queue<Effect*>> 
+#define FuncAbnormalArr std::function<void (GameObject* _pTarget, float _fAccValue)>
+#define FuncStatArr std::function<void(GameObject* _pTarget, float _fAccValue)>
 
+	FuncAbnormalArr BattleManager::m_arrAbnormalFunc[(UINT)eAbnormalType::End];
+	FuncStatArr BattleManager::m_arrStatFunc[(UINT)eUpStatType::End];
 	EffectMap BattleManager::m_mapEffects = {};
 
 	UINT BattleManager::m_iMaxDamage = 9999999;
@@ -38,10 +43,29 @@ namespace W
 	float BattleManager::m_fCurPotionTime = 0.f;
 	UINT BattleManager::m_iStigmaCount = 6;
 
+		
 	void BattleManager::Initialize()
 	{
-		
-
+		m_arrAbnormalFunc[(UINT)eAbnormalType::None] = nullptr;
+		m_arrAbnormalFunc[(UINT)eAbnormalType::SealSkill] = seal_skill;
+		m_arrAbnormalFunc[(UINT)eAbnormalType::Faint] = faint;
+		m_arrAbnormalFunc[(UINT)eAbnormalType::Confusion] = confusion;
+		m_arrAbnormalFunc[(UINT)eAbnormalType::Slow] = debuff_slow;
+		m_arrAbnormalFunc[(UINT)eAbnormalType::Stop] = stop;
+		m_arrAbnormalFunc[(UINT)eAbnormalType::Undead] = undead;
+		m_arrAbnormalFunc[(UINT)eAbnormalType::DemianStop] = demianstop;
+		m_arrAbnormalFunc[(UINT)eAbnormalType::InputKey] = inputkey;
+		m_arrAbnormalFunc[(UINT)eAbnormalType::Stigma] = stigma;
+	
+		m_arrStatFunc[(UINT)eUpStatType::None] = nullptr;
+		m_arrStatFunc[(UINT)eUpStatType::Attack] = buff_attack;
+		m_arrStatFunc[(UINT)eUpStatType::Speed] = buff_speed;
+		m_arrStatFunc[(UINT)eUpStatType::Defense] = buff_defense;
+		m_arrStatFunc[(UINT)eUpStatType::Heal] = buff_heal;
+		m_arrStatFunc[(UINT)eUpStatType::Ignore] = buff_ignore;
+		m_arrStatFunc[(UINT)eUpStatType::ReflexAttack] = buff_reflex;
+		m_arrStatFunc[(UINT)eUpStatType::AccHP] = buff_HP;
+		m_arrStatFunc[(UINT)eUpStatType::AccMP] = buff_MP;
 	}
 
 	void BattleManager::Release()
@@ -106,11 +130,17 @@ namespace W
 	}
 
 
-	void BattleManager::dark(GameObject* _pGameObject)
+	void BattleManager::excute_abnormal(eAbnormalType _eType, GameObject* _pTarget, float _fAccValue)
 	{
-
+		m_arrAbnormalFunc[(UINT)_eType](_pTarget, _fAccValue);
 	}
-	void BattleManager::stop(GameObject* _pGameObject)
+
+	void BattleManager::excute_stat(eUpStatType _eType, GameObject* _pTarget, float _fAccValue)
+	{
+		m_arrStatFunc[(UINT)_eType](_pTarget, _fAccValue);
+	}
+
+	void BattleManager::stop(GameObject* _pGameObject, float _fAccValue)
 	{
 		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
 		if (!pPlayer)
@@ -127,7 +157,7 @@ namespace W
 		EventManager::ChangePlayerSkillState(pPlayer, Player::ePlayerSkill::end);
 		EventManager::ChangePlayerFSMState(pScript->m_pFSM, Player::ePlayerState::alert);
 	}
-	void BattleManager::faint(GameObject* _pGameObject)
+	void BattleManager::faint(GameObject* _pGameObject, float _fAccValue)
 	{
 		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
 		if (!pPlayer)
@@ -145,11 +175,7 @@ namespace W
 		EventManager::ChangePlayerFSMState(pScript->m_pFSM, Player::ePlayerState::alert);
 		//SkillManager::SetActiveSkill(Player::ePlayerSkill::end);
 	}
-	void BattleManager::seal_potion(GameObject* _pGameObject)
-	{
-
-	}
-
+	
 	//음수로 넣어야함
 	void BattleManager::debuff_slow(GameObject* _pGameObject, float _fAccSpeed)
 	{
@@ -169,7 +195,7 @@ namespace W
 		tInfo.fSpeed += _fAccSpeed;
 	}
 
-	void BattleManager::seal_skill(GameObject* _pGameObject)
+	void BattleManager::seal_skill(GameObject* _pGameObject, float _fAccValue)
 	{
 		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
 		if (!pPlayer)
@@ -187,7 +213,7 @@ namespace W
 		//SkillManager::SetActiveSkill(Player::ePlayerSkill::end);
 	}
 
-	void BattleManager::temptation(GameObject* _pGameObject)
+	void BattleManager::temptation(GameObject* _pGameObject, float _fAccValue)
 	{
 		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
 		if (!pPlayer)
@@ -218,7 +244,7 @@ namespace W
 			pPlayer->SetDir(-1);
 	}
 
-	void BattleManager::undead(GameObject* _pGameObject)
+	void BattleManager::undead(GameObject* _pGameObject, float _fAccValue)
 	{
 		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
 		if (!pPlayer)
@@ -268,8 +294,6 @@ namespace W
 		PlayerScript* pScript = _pTarget->GetScript<PlayerScript>();
 		switch (_eType)
 		{
-		case W::BattleManager::eAbnormalType::SealPotion:
-			break;
 		case W::BattleManager::eAbnormalType::SealSkill:
 			pScript->m_bSealSkill = false;
 			break;
@@ -376,7 +400,7 @@ namespace W
 		
 	}
 
-	void BattleManager::confusion(GameObject* _pGameObject)
+	void BattleManager::confusion(GameObject* _pGameObject, float _fAccValue)
 	{
 		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
 		if (!pPlayer)
@@ -388,7 +412,7 @@ namespace W
 
 		EventManager::CreateObject(pConfusion, eLayerType::Object);
 	}
-	void BattleManager::demianstop(GameObject* _pGameObject)
+	void BattleManager::demianstop(GameObject* _pGameObject, float _fAccValue)
 	{
 		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
 		if (!pPlayer)
@@ -406,7 +430,7 @@ namespace W
 		EventManager::CreateObject(DemianEnire, eLayerType::Object);
 	}
 
-	void BattleManager::inputkey(GameObject* _pGameObject)
+	void BattleManager::inputkey(GameObject* _pGameObject, float _fAccValue)
 	{
 		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
 		if (!pPlayer)
@@ -436,7 +460,7 @@ namespace W
 		EventManager::CreateObject(pGroggy, eLayerType::Object);
 	}
 
-	void BattleManager::stigma(GameObject* _pGameObject)
+	void BattleManager::stigma(GameObject* _pGameObject, float _fAccValue)
 	{
 		++m_iStigmaCount;
 		if (m_iStigmaCount >= 7)
@@ -541,12 +565,6 @@ namespace W
 			_pTarget->GetScript<PlayerScript>()->m_tObjectInfo.fDefense * fabs(_fAccStat);
 	}
 
-	
-
-	void BattleManager::variation(GameObject* _pGameObject)
-	{
-		
-	}
 
 	
 	

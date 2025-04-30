@@ -132,7 +132,16 @@ namespace W
 		if(hashPlayer.empty())
 			return nullptr;
 		
-		return hashPlayer[0];
+		srand(time(nullptr));
+
+		int iPlayerCount = hashPlayer.size();
+		int iNumber = rand() % iPlayerCount;
+
+		auto iter = hashPlayer.begin();
+		for (int i = 0; i < iNumber; ++i)
+			++iter;
+
+		return iter->second;
 	}
 
 	std::vector<GameObject*> SceneManger::GetPlayers(const std::wstring& _strSceneName)

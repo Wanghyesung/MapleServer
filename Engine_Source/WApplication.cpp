@@ -49,6 +49,7 @@ namespace W
 		
 		CollisionManager::Initialize();
 		BattleManager::Initialize();
+		EventManager::Initialize();
 
 		GameObjectManager::Initialize();
 	}
