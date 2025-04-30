@@ -13,16 +13,13 @@ namespace W
 		enum class eAbnormalType
 		{
 			None,
-			SealPotion,
 			SealSkill,
 			temptation,
 			Faint,
-			Dark,
 			Confusion,
 			Slow,
 			Stop,
 			Undead,
-			Variation,
 			DemianStop,
 			InputKey,
 			Stigma,
@@ -77,19 +74,19 @@ namespace W
 		static void Player_DeBuff_Attack(GameObject* _pTarget, eUpStatType _eType, float _fAccStat);
 
 	private:
+		static void excute_abnormal(eAbnormalType _eType, GameObject* _pTarget, float _fAccValue);
+		static void excute_stat(eUpStatType _eType, GameObject* _pTarget, float _fAccValue);
 
-		static void dark(GameObject* _pGameObject);
-		static void stop(GameObject* _pGameObject);
-		static void faint(GameObject* _pGameObject);
-		static void seal_potion(GameObject* _pGameObject);
-		static void seal_skill(GameObject* _pGameObject);
-		static void temptation(GameObject* _pGameObject);
-		static void confusion(GameObject* _pGameObject);//변이
-		static void undead(GameObject* _pGameObject);
-		static void variation(GameObject* _pGameObject);
-		static void demianstop(GameObject* _pGameObject);
-		static void inputkey(GameObject* _pGameObject);
-		static void stigma(GameObject* _pGameObject);
+		static void stop(GameObject* _pGameObject ,float _fAccValue);
+		static void faint(GameObject* _pGameObject, float _fAccValue);
+		static void seal_skill(GameObject* _pGameObject, float _fAccValue);
+		static void temptation(GameObject* _pGameObject, float _fAccValue);
+		static void confusion(GameObject* _pGameObject, float _fAccValue);//변이
+		static void undead(GameObject* _pGameObject, float _fAccValue);
+		static void demianstop(GameObject* _pGameObject, float _fAccValue);
+		static void inputkey(GameObject* _pGameObject, float _fAccValue);
+		static void stigma(GameObject* _pGameObject, float _fAccValue);
+
 		//상태이상 해제
 		static void restore(GameObject* _pTarget, eAbnormalType _eType, float _fAccValue = 0.f);
 		//static void restore_move(Player* _pTarget);
@@ -110,8 +107,10 @@ namespace W
 	private:
 		static UINT m_iMaxDamage;
 
+		static std::function<void(GameObject* _pTarget, float _fAccValue)> m_arrAbnormalFunc[(UINT)eAbnormalType::End];
+		static std::function<void(GameObject* _pTarget, float _fAccValue)> m_arrStatFunc[(UINT)eUpStatType::End];
 		static std::map<std::wstring, std::queue<Effect*>> m_mapEffects;
-
+		
 		//상태이상 
 		static bool m_bOnAbnormal;
 		static bool m_bOnUndead;
