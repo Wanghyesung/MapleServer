@@ -111,14 +111,18 @@ namespace W
 			const std::unordered_map<UINT,GameObject*>& hashObjs
 				= pScene->GetLayer(eLayerType::Player).GetGameObjects();
 
-			auto iter = hashObjs.begin();
-			for (iter; iter != hashObjs.end(); ++iter)
-			{
-				GameObject* pObj = iter->second;
+			auto iter = hashObjs.find(_iPlayerID);
+			if (iter != hashObjs.end())
+				return iter->second;
 
-				if (((Player*)pObj)->GetPlayerID() == _iPlayerID)
-					return pObj;
-			}
+			//auto iter = hashObjs.begin();
+			//for (iter; iter != hashObjs.end(); ++iter)
+			//{
+			//	GameObject* pObj = iter->second;
+			//
+			//	if (((Player*)pObj)->GetPlayerID() == _iPlayerID)
+			//		return pObj;
+			//}
 		}
 		return nullptr;
 	}

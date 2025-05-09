@@ -72,6 +72,12 @@ bool Handle_C_CREATE(shared_ptr<Session> _pSession, Protocol::C_CREATE& _pkt)
 	return false;
 }
 
+bool Handle_C_MAP(shared_ptr<Session> _pSession, Protocol::C_MAP& _pkt)
+{
+	Protocol::S_MAP pkt;
+	return false;
+}
+
 bool Handle_C_EXIT(shared_ptr<Session> _pSession, Protocol::C_EXIT& _pkt)
 {
 

@@ -4,7 +4,7 @@
 #include "WInputObject.h"
 #include "WSceneManger.h"
 #include "WEventManager.h"
-
+#include "WSceneManger.h"
 namespace W
 {
 	InputBackground::InputBackground():
@@ -32,6 +32,7 @@ namespace W
 
 		UINT iIndex = 0;
 		GetComponent<Transform>()->SetPosition(vTargetPos);
+	
 		for (int i = -2; i < 3; ++i)
 		{
 			UINT iStart = (UINT)eKeyCode::UP;
@@ -44,6 +45,7 @@ namespace W
 		
 			InputObject* pObj = new InputObject((eKeyCode)iNum);
 			pObj->SetOwner(this);
+			pObj->SetTarget(m_pTarget);
 			pObj->SetIndex(iIndex);
 
 			float x = vTargetPos.x + (i * 0.8f);
@@ -72,13 +74,10 @@ namespace W
 	{
 
 		GameObject::LateUpdate();
-
 		for (int i = 0; i < m_vecInput.size(); ++i)
 		{
-
 			m_vecInput[i]->LateUpdate();
 		}
-
 	}
 	
 

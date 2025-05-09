@@ -36,6 +36,7 @@ namespace W
 
 		SetMonsterAttack(m_tMonsterAttack);
 
+		m_pTarget = SceneManger::FindPlayer(GetSceneName());
 	}
 
 	void MiniBeanAttack::Update()
@@ -44,7 +45,6 @@ namespace W
 		if (m_fCurTime >= m_fDeleteTIme)
 			off();
 
-		m_pTarget = SceneManger::FindPlayer(GetSceneName());
 		if (m_pTarget != nullptr)
 		{
 			Vector3 vPos = GetComponent<Transform>()->GetPosition();

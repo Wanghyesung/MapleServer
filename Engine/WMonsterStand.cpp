@@ -33,8 +33,6 @@ namespace W
 
 		else
 		{
-			m_pTarget = SceneManger::FindPlayer(GetMonster()->GetSceneName());
-
 			if (m_pTarget == nullptr)
 				return;
 
@@ -57,6 +55,8 @@ namespace W
 		Collider2D* pCollider = GetMonster()->GetComponent<Collider2D>();
 		if (!pCollider->IsActive())
 			pCollider->SetActive(true);
+
+		m_pTarget = SceneManger::FindPlayer(GetMonster()->GetSceneName());
 	}
 	void MonsterStand::Exit()
 	{

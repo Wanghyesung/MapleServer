@@ -28,20 +28,21 @@ enum PACKET_TYPE
 	C_INPUT = 1006,
 
 	S_MAP = 1007,
+	C_MAP = 1008,
 
-	S_CREATE= 1008,
-	C_CREATE = 1009,
-	S_DELETE = 1010,
+	S_CREATE= 1009,
+	C_CREATE = 1010,
+	S_DELETE = 1011,
 	
 
 	//물체 위치
-	S_STATE = 1011,
+	S_STATE = 1012,
 
-	S_TRANSFORM = 1012,
+	S_TRANSFORM = 1013,
 
-	S_EXIT = 1013,
-	C_EXIT = 1014,
-	S_NEW_EXIT = 1015,
+	S_EXIT = 1014,
+	C_EXIT = 1015,
+	S_NEW_EXIT = 1016,
 };
 
 
@@ -53,6 +54,7 @@ bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt);
 bool Handle_C_EQUIP(shared_ptr<Session> _pSession, Protocol::C_EQUIP& _pkt);
 bool Handle_C_INPUT(shared_ptr<Session> _pSession, Protocol::C_INPUT& _pkt);
 bool Handle_C_CREATE(shared_ptr<Session> _pSession, Protocol::C_CREATE& _pkt);
+bool Handle_C_MAP(shared_ptr<Session> _pSession, Protocol::C_MAP& _pkt);
 bool Handle_C_EXIT(shared_ptr<Session> _pSession, Protocol::C_EXIT& _pkt);
 
 
@@ -75,6 +77,8 @@ public:
 			{return  HandlePacket<Protocol::C_INPUT>(Handle_C_INPUT, _pSession, _pBuffer, _iLen); };
 		GPacketHandler[C_CREATE] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
 			{return  HandlePacket<Protocol::C_CREATE>(Handle_C_CREATE, _pSession, _pBuffer, _iLen); };
+		GPacketHandler[C_MAP] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
+			{return  HandlePacket<Protocol::C_MAP>(Handle_C_MAP, _pSession, _pBuffer, _iLen); };
 		GPacketHandler[C_EXIT] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
 			{return  HandlePacket<Protocol::C_EXIT>(Handle_C_EXIT, _pSession, _pBuffer, _iLen); };
 	}

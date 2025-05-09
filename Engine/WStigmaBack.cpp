@@ -30,13 +30,13 @@ namespace W
 		m_pCount->m_pOwner = this;
 
 		EventManager::CreateObject(m_pCount, eLayerType::Object);
-
+		
+		m_pTarget = SceneManger::FindPlayer(GetSceneName());
 	}
 	void StigmaBack::Update()
 	{
 		set_count();
 
-		m_pTarget = SceneManger::FindPlayer(GetSceneName());
 		Vector3 vPosition =	m_pTarget->GetComponent<Transform>()->GetPosition();
 		vPosition.y += 0.7f;
 		vPosition.z = -2.f;
