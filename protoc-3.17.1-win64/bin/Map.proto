@@ -24,6 +24,11 @@ message S_MAP
 	repeated ObjectInfo objInfo = 1;
 }
 
+message C_MAP
+{
+	string scene = 1;
+	uint32 player_id = 2;
+}
 //로그인
 //채팅 던지기
 //나가기

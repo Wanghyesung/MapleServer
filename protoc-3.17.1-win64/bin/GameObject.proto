@@ -10,9 +10,10 @@ message C_CREATE
 	uint32 layer_createid = 2;
 }
 
-//서버가 클라에게 (브로드캐스팅으로 던질거)
+//서버가 클라에게 
 message S_CREATE
 {
+	//ObjectInfo tem =1;
 	string scene = 1;
 	uint32 layer_createid_id = 2;
 
@@ -28,3 +29,4 @@ message S_DELETE
 	string scene = 1;
 	uint32 layer_deleteid = 2;
 }
+

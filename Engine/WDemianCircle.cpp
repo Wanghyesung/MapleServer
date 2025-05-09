@@ -45,6 +45,8 @@ namespace W
 		m_tMonsterAttack.tAttackInfo.fAttackDamage = 3;
 		m_tMonsterAttack.tAttackInfo.fAttRcnt = 0.f;//¸ÂÀ¸
 		m_tMonsterAttack.tAttackInfo.fAttUpperRcnt = 0.f;
+
+		m_pTarget = SceneManger::FindPlayer(GetSceneName());
 	}
 	void DemianCircle::Update()
 	{
@@ -93,8 +95,7 @@ namespace W
 	}
 	void DemianCircle::move()
 	{
-		m_pTarget = SceneManger::FindPlayer(GetSceneName());
- 
+		
 	 	Vector3 vTargetPos = m_pTarget->GetComponent<Transform>()->GetPosition();
 		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
 

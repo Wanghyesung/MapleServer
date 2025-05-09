@@ -20,6 +20,7 @@ namespace W
 		CHANGE_MONSTER_STATE,
 		ADD_PLAYER_POOL,
 		ADD_MONSTER_POOL,
+		CHANGE_PLAYER_SCENE,
 		HITCH_ABNORMAL,
 		UP_STAT,
 		RESTORE,
@@ -59,6 +60,7 @@ namespace W
 		static void InitPlayerSkill(UINT _iPlayerID, class PlayerSkill* _pPlayerSkill);
 		static void ReleasePlayerSkill(UINT _iPlayerID);
 
+		//static void ChangePlayerScene(Player*)
 		static void ChangeMonsterFSMState(MonsterFSM* _pFSM, Monster::eMonsterState _eMonsterState);
 		static void HitchAbnormal(GameObject* _pObj, BattleManager::eAbnormalType _eType, float _fAccStat = 0.f);
 		static void Restore(GameObject* _pObj, BattleManager::eAbnormalType _eType, float _fAccStat = 0.f);
@@ -76,6 +78,8 @@ namespace W
 
 		static void add_player_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
 		static void add_monster_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
+
+		static void change_player_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
 
 		static void change_player_fsmstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
 		static void change_player_skillstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);

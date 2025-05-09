@@ -452,8 +452,8 @@ namespace W
 		//keyÀÔ·Â
 		InputBackground* pInput = new InputBackground();
 		pInput->SetSceneName(pPlayer->GetSceneName());
-		pInput->Initialize();
 		pInput->SetTarget(pPlayer);
+		pInput->Initialize();
 		pInput->SetOwner(pGroggy);
 
 		EventManager::CreateObject(pInput, eLayerType::Object);
@@ -469,9 +469,10 @@ namespace W
 			tAttackInfo.fAttack = m_iMaxDamage;
 			tAttackInfo.fAttRcnt = 0.f;
 			tAttackInfo.fAttUpperRcnt = 0.f;
-			SceneManger::FindPlayer(_pGameObject->GetSceneName())->GetScript<PlayerScript>()->Hit(tAttackInfo, L"stigma");
-			
 			Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
+
+			pPlayer->GetScript<PlayerScript>()->Hit(tAttackInfo, L"stigma");
+			
 			Stigma* pStigma = new Stigma();
 			pStigma->SetTarget(pPlayer);
 			pStigma->SetTime(999.f);

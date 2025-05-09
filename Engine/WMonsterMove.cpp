@@ -45,6 +45,8 @@ namespace W
 		MonsterState* pState = GetFSM()->FindState(Monster::eMonsterState::stand);
 		m_fTargetDistance =  dynamic_cast<MonsterStand*>(pState)->GetTargetDistance();
 		m_fTime = 1.f;
+
+		m_pTarget = SceneManger::FindPlayer(GetMonster()->GetSceneName());
 	}
 	void MonsterMove::Exit()
 	{
@@ -54,7 +56,6 @@ namespace W
 	{
 		Monster* pMonster = GetMonster();
 
-		m_pTarget = SceneManger::FindPlayer(pMonster->GetSceneName());
 		if (m_pTarget == nullptr)
 			return;
 

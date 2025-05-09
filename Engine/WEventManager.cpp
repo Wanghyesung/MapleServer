@@ -8,6 +8,9 @@
 #include "WSkillState.h"
 #include "..\IOCP_SERVER\Room.h"
 #include "WInput.h"
+#include "GameObject.pb.h"
+#include "ClientPacketHandler.h"
+
 namespace W
 {
 	std::function<void(DWORD_PTR, DWORD_PTR, LONG_PTR)> EventManager::m_arrFunction[(UINT)EVENT_TYPE::END] = {};
@@ -40,6 +43,7 @@ namespace W
 		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_MONSTER_STATE] = change_monster_fsmstate;
 		m_arrFunction[(UINT)EVENT_TYPE::ADD_PLAYER_POOL] = add_player_pool;
 		m_arrFunction[(UINT)EVENT_TYPE::ADD_MONSTER_POOL] = add_monster_pool;
+		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_PLAYER_SCENE] = add_monster_pool;
 		m_arrFunction[(UINT)EVENT_TYPE::HITCH_ABNORMAL] = hitch_abnormal;
 		m_arrFunction[(UINT)EVENT_TYPE::UP_STAT] = up_stat;
 		m_arrFunction[(UINT)EVENT_TYPE::RESTORE] = restore;
@@ -101,9 +105,19 @@ namespace W
 	void EventManager::create_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
 	{
 		GameObject* pObj = (GameObject*)_lParm;
-		eLayerType eLyaer = (eLayerType)_wParm;
+		eLayerType eLayer = (eLayerType)_wParm;
 
-		SceneManger::AddGameObject(pObj->GetSceneName(), eLyaer, pObj);
+		SceneManger::AddGameObject(pObj->GetSceneName(), eLayer, pObj);
+
+		//여기 클라에 패킷 던지기
+		//UINT iCreateID = pObj->GetCreateID();
+		//UINT iObjectID = pObj->GetObjectID();
+		//
+		//Protocol::S_CREATE pkt;
+		//pkt.set_layer_createid_id((UCHAR)eLayer << 24 | iCreateID << 16 | iObjectID);
+		//
+		//shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		//GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));
 	}
 
 	void EventManager::delete_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
@@ -112,8 +126,14 @@ namespace W
 
 		Scene* pScene = SceneManger::FindScene(pObj->GetSceneName());
 		pScene->EraseObject(pObj->GetLayerType(), pObj);
-
 		delete pObj;
+
+		UINT iObjectID = pObj->GetObjectID();
+		Protocol::S_DELETE pkt;
+		pkt.set_layer_deleteid((UCHAR)pObj->GetLayerType() << 24 | iObjectID);
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));
 	}
 
 	void EventManager::update_input(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
@@ -151,6 +171,11 @@ namespace W
 		GameObject* pObj = (GameObject*)_lParm;
 
 		m_vecMonster_Pool.push_back(pObj);
+	}
+
+	void EventManager::change_player_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	{
+
 	}
 
 	void EventManager::change_player_fsmstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
