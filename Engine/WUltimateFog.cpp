@@ -4,6 +4,8 @@
 #include "WAttackScript.h"
 namespace W
 {
+	UINT UltimateFog::CREATE_ID = 0;
+
 	UltimateFog::UltimateFog()
 	{
 		

@@ -13,7 +13,7 @@ namespace W
 		virtual void LateUpdate()override;
 		//virtual void Render()override;
 
-
+		DECLARE_CREATE_ID;
 	private:
 	};
 

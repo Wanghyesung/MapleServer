@@ -3,6 +3,8 @@
 #include "WAnimator.h"
 namespace W
 {
+	UINT StigmaCount::CREATE_ID = 0;
+
 	StigmaCount::StigmaCount():
 		m_iNumber(0),
 		m_pOwner(nullptr)

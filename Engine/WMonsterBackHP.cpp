@@ -4,6 +4,8 @@
 
 namespace W
 {
+	UINT MonsterBackHP::CREATE_ID = 0;
+
 	MonsterBackHP::MonsterBackHP(bool _bBoss):
 		m_pHP(nullptr)
 	{

@@ -5,6 +5,8 @@
 
 namespace W
 {
+	UINT Ladder::CREATE_ID = 0;
+
 	Ladder::Ladder()
 	{
 		Collider2D* pDcollider = AddComponent<Collider2D>();

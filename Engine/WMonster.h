@@ -29,6 +29,7 @@ namespace W
 		virtual void Update()override;
 		virtual void LateUpdate()override;
 	
+		DECLARE_CREATE_ID;
 
 		const std::wstring& GetCurStateName() { return m_strCurStateName; }
 		void SetCurStateName(const std::wstring& _strName) { m_strCurStateName = _strName; }

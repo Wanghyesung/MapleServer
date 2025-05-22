@@ -6,6 +6,8 @@
 #include "WAttackScript.h"
 namespace W
 {
+	UINT UltimateShuriken::CREATE_ID = 0;
+
 	UltimateShuriken::UltimateShuriken()
 	{
 

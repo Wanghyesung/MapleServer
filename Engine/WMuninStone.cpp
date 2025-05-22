@@ -6,6 +6,8 @@
 #include "WMonster.h"
 namespace W
 {
+	UINT MuninStone::CREATE_ID = 0;
+
 	MuninStone::MuninStone() :
 		m_iCallCount(0),
 		m_tMonsterAttack{}

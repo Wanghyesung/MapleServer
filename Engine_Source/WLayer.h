@@ -25,15 +25,18 @@ namespace W
 		virtual void DestroyAll(Scene* _pScene);
 
 		void AddGameObject(GameObject* _pGameObj);
-		const unordered_map<UINT, GameObject*>& GetGameObjects() { return m_hashGameObject; }
+		const unordered_map<UINT, GameObject*>& GetGameObjects();
+		std::unordered_map<UINT, GameObject*> GetCopyGameObjects();
 
 		void EraseOnVector(GameObject* _pGameObject);
 
+		
 	private:
-		//UM으로 변경
+		
 		std::unordered_map<UINT, GameObject*> m_hashGameObject;
 
 		UINT m_iObjectID;
+		RWLock m_lock;
 
 		friend class UIManger;
 	};
@@ -52,6 +55,8 @@ namespace W
 		}
 		return nullptr;
 	}
+
+
 }
 
 

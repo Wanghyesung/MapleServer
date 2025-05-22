@@ -14,7 +14,9 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		
+
+		DECLARE_CREATE_ID;
+
 		void SetPlayerBody(PlayerBody* _pPlayerBody) { m_pPlayerBody = _pPlayerBody; }
 
 		void SetPlayerEquip(const std::wstring& _strEquipName);

@@ -7,6 +7,8 @@
 
 namespace W
 {
+	UINT PlayerHead::CREATE_ID = 0;
+
 	PlayerHead::PlayerHead():
 		m_pPlayerHat(nullptr),
 		m_pPlayerHair(nullptr),

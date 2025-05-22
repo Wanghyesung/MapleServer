@@ -13,6 +13,7 @@
 
 namespace W
 {
+	UINT Rex::CREATE_ID = 0;
 	Rex::Rex()
 	{
 		SetName(L"Rex");

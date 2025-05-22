@@ -7,6 +7,8 @@
 #include "WAnimator.h"
 namespace W
 {
+	UINT SpawnMonsterAttack::CREATE_ID = 0;
+
 	SpawnMonsterAttack::SpawnMonsterAttack():
 		m_fCreateTime(0.f),
 		m_fCurCreateTime(0.f),

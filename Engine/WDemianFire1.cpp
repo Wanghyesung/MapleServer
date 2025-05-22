@@ -9,6 +9,8 @@
 #include "WTime.h"
 namespace W
 {
+	UINT DemianFire1::CREATE_ID = 0;
+
 	DemianFire1::DemianFire1() :
 		m_vVelocity(Vector2::Zero),
 		m_fCurTime(0.f),

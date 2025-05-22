@@ -15,6 +15,8 @@ namespace W
 		virtual void Update()override;
 		virtual void LateUpdate()override;
 		
+		DECLARE_CREATE_ID;
+
 		void SetOwner(Monster* _pMon) { m_pMonster = _pMon; }
 		void SetLevel(UINT _iNum);
 	private:

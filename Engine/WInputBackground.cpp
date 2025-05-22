@@ -7,6 +7,7 @@
 #include "WSceneManger.h"
 namespace W
 {
+	UINT InputBackground::CREATE_ID = 0;
 	InputBackground::InputBackground():
 		m_pOwner(nullptr),
 		m_vecInput{},

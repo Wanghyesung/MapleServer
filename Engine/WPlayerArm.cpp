@@ -4,6 +4,8 @@
 #include "WPlayerWeapon.h"
 namespace W
 {
+	UINT PlayerArm::CREATE_ID = 0;
+
 	PlayerArm::PlayerArm():
 		m_pPlayerWeapon(nullptr)
 	{

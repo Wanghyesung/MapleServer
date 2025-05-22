@@ -8,6 +8,7 @@
 namespace W
 {
 	UINT MonsterHP::HP_COUNT = 0;
+	UINT MonsterHP::CREATE_ID = 0;
 
 	MonsterHP::MonsterHP(bool bBoss):
 		m_pOwner(nullptr),
@@ -21,7 +22,6 @@ namespace W
 
 		if (!m_bBoss)
 		{
-		
 			GetComponent<Transform>()->SetScale(1.f * 0.66f, 1.f * 0.13f, 0.f);
 		}
 		else

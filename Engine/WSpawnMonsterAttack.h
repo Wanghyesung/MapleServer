@@ -15,7 +15,9 @@ namespace W
 		virtual void Update()override;
 		virtual void LateUpdate()override;
 		//virtual void Render()override;
-		
+
+		DECLARE_CREATE_ID;
+
 		void SetVelocity(const Vector2& _vVelocity, const Vector3& _vOffset = Vector3::Zero);
 		void SetTime(float _fTime) { m_fCreateTime = _fTime; }
 		void SetAttackName(const std::wstring _strName) { m_strAttackName = _strName; }

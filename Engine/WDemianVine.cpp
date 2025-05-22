@@ -16,6 +16,8 @@
 #define CLEAR_VALUE 10
 namespace W
 {
+	UINT DemianVine::CREATE_ID = 0;
+
 	DemianVine::DemianVine() :
 		m_fDeleteTime(6.f),
 		m_pWhite(nullptr),

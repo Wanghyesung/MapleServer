@@ -5,6 +5,8 @@
 #include "WSceneManger.h"
 namespace W
 {
+	UINT MegnusAttack::CREATE_ID = 0;
+
 	MegnusAttack::MegnusAttack():
 		m_iCallCount(0),
 		m_tMonsterAttack{}

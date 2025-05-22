@@ -10,6 +10,8 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT AutoShuriken::CREATE_ID = 0;
+
 	AutoShuriken::AutoShuriken():
 		m_pTarget(nullptr),
 		m_vVelocity(Vector2::Zero),
@@ -112,7 +114,7 @@ namespace W
 	bool AutoShuriken::set_target()
 	{	
 		const std::unordered_map<UINT, GameObject*> hashMonster =
-			SceneManger::GetActiveScene(this)->GetLayer(eLayerType::Monster).GetGameObjects();
+			SceneManger::GetActiveScene(this)->GetLayer(eLayerType::Monster)->GetGameObjects();
 
 		Vector3 vPosistion = GetComponent<Transform>()->GetPosition();
 		float fMaxLen = 10000.f;

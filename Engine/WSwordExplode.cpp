@@ -6,6 +6,8 @@
 #include "WDemianSword.h"
 namespace W
 {
+	UINT SwordExplode::CREATE_ID = 0;
+
 	SwordExplode::SwordExplode() :
 		m_iCallCount(0),
 		m_tMonsterAttack{},

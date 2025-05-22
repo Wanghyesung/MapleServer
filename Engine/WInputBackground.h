@@ -15,6 +15,8 @@ namespace W
 		virtual void LateUpdate()override;
 		//virtual void Render()override;
 
+		DECLARE_CREATE_ID;
+
 		void SetOwner(GameObject* _pObj) { m_pOwner = _pObj; }
 
 		void Failed();

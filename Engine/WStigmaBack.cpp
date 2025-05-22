@@ -7,6 +7,7 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT StigmaBack::CREATE_ID = 0;
 	StigmaBack::StigmaBack():
 		m_iCount(0)
 	{

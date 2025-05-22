@@ -60,6 +60,9 @@ namespace W
 		//virtual void Render()override;
 		virtual void UpdatePacket()override;
 
+
+		DECLARE_CREATE_ID;
+
 		void SetDir(int _iDir) { m_iDir = _iDir; }
 		int GetDir() { return m_iDir; }
 		

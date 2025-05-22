@@ -7,6 +7,8 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT Temptation::CREATE_ID = 0;
+
 	Temptation::Temptation()
 	{
 	

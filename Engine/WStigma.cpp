@@ -5,17 +5,13 @@
 
 namespace W
 {
+	UINT Stigma::CREATE_ID = 0;
+
 	Stigma::Stigma()
 	{
 		GetComponent<Transform>()->SetScale(2.5f, 2.5f, 0.f);
 
-		//MeshRenderer* mr = AddComponent<MeshRenderer>();
-		//mr->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//
-		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetRenderinMode(eRenderingMode::Transparent);
-		//pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
-		//Resources::Insert(L"StigamMater", pMater);
+	
 
 		Animator* pAnim = AddComponent<Animator>();
 		//std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"Stigma");

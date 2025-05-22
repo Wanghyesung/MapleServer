@@ -5,6 +5,8 @@
 
 namespace W
 {
+	UINT PlayerWeapon::CREATE_ID = 0;
+
 	PlayerWeapon::PlayerWeapon():
 		m_pPlayerArm(nullptr),
 		m_strCurEquip{},

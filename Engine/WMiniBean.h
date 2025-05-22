@@ -16,6 +16,8 @@ namespace W
 		virtual void LateUpdate()override;
 		//virtual void Render()override;
 
+		DECLARE_CREATE_ID;
+
 		void SetOwner(PinkBean* _pOwner) { m_pOwner = _pOwner; }
 
 	private:

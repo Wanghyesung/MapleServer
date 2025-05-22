@@ -21,6 +21,7 @@ namespace W
 		void SetTarget(Player* _pTarget);
 		void SetRenderPos(bool _bUp) { m_bRenderPosUp = _bUp; }
 
+		DECLARE_CREATE_ID;
 	protected:
 		Player* m_pTarget;
 		

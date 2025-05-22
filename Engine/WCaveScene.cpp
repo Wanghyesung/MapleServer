@@ -76,38 +76,36 @@ namespace W
 	{	
 		Ground* pGround = new Ground(true);
 		pGround->SetSceneName(GetName());
-		AddGameObject(eLayerType::Ground, pGround);
 		pGround->GetComponent<Transform>()->SetPosition(0.f, -3.8f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(2.7f * 5.f, 1.f * 0.3f, 0.f);
+		AddGameObject(eLayerType::Ground, pGround);
 
 		pGround = new Ground();
 		pGround->SetSceneName(GetName());
-		AddGameObject(eLayerType::Ground, pGround);
 		pGround->GetComponent<Transform>()->SetPosition(2.71f, -1.7f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(1.f * 0.6f, 1.f * 0.2f, 0.f);
+		AddGameObject(eLayerType::Ground, pGround);
 
 		pGround = new Ground();
 		pGround->SetSceneName(GetName());
-		AddGameObject(eLayerType::Ground, pGround);
 		pGround->GetComponent<Transform>()->SetPosition(2.8f, -0.7f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(1.f * 0.6f, 1.f * 0.2f, 0.f);
-		//
+		AddGameObject(eLayerType::Ground, pGround);
+		
 		pGround = new Ground();
 		pGround->SetSceneName(GetName());
-		AddGameObject(eLayerType::Ground, pGround);
 		pGround->GetComponent<Transform>()->SetPosition(4.3f, -1.18f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(1.f * 2.f, 1.f * 0.2f, 0.f);
+		AddGameObject(eLayerType::Ground, pGround);
 
 		Ladder* pLadder2 = new Ladder();
 		pGround->SetSceneName(GetName());
-		AddGameObject(eLayerType::Ladder, pLadder2);
-		
 		pLadder2->GetComponent<Transform>()->SetPosition(3.5f, -2.4f, -0.1f);
 		pLadder2->GetComponent<Transform>()->SetScale(1.f * 0.6f, 4.5f * 0.6f, 0.f);
 		pLadder2->Initialize();
 		pLadder2->GetComponent<Collider2D>()->SetSize(Vector2(0.3f, 0.9f));
 		pLadder2->GetComponent<Collider2D>()->SetCenter(Vector2(0.f, 0.11f));
-	
+		AddGameObject(eLayerType::Ladder, pLadder2);
 
 
 	}
@@ -165,14 +163,14 @@ namespace W
 	{
 		Stone* pStone = new Stone();
 		pStone->SetSceneName(GetName());
-		AddGameObject(eLayerType::Box, pStone);
 		pStone->GetComponent<Transform>()->SetPosition(4.45f, 0.f, -0.1f);
+		AddGameObject(eLayerType::Box, pStone);
 
 		Horntail* pHorntail = new Horntail();
 		pHorntail->SetSceneName(GetName());
 		pHorntail->Initialize();
-		AddGameObject(eLayerType::Monster, pHorntail);
 		pHorntail->GetComponent<Transform>()->SetPosition(-1.2f, 0.73f, -1.5f);
+		AddGameObject(eLayerType::Monster, pHorntail);
 
 		std::function<void()> start = std::bind(&Horntail::Start, pHorntail);
 		pStone->GetScript<StoneScript>()->SetFunction(start);

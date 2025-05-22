@@ -13,7 +13,9 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		
+
+		DECLARE_CREATE_ID;
+
 		void SetTarget(GameObject* _pObject) { m_pTarget = _pObject; }
 		GameObject* GetTarget() { return m_pTarget; }
 		void SetDeleteTime(float _fTime) { m_fDeleteTime = _fTime; }

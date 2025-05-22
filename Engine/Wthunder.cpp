@@ -6,6 +6,8 @@
 
 namespace W
 {
+	UINT Thunder::CREATE_ID = 0;
+
 	Thunder::Thunder() :
 		m_iCallCount(0),
 		m_tMonsterAttack{}

@@ -7,6 +7,8 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT Wind::CREATE_ID = 0;
+
 	Wind::Wind():
 		m_fResetTime(0.6f),
 		m_fCurResetTime(0.f),

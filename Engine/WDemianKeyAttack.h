@@ -15,6 +15,7 @@ namespace W
 		
 		void SetTime(float _fTime) { m_fTime = _fTime; }
 		
+		DECLARE_CREATE_ID;
 	private:
 		void off();
 

@@ -5,6 +5,9 @@
 #include "WMonster.h"
 namespace W
 {
+	UINT Fire::CREATE_ID = 0;
+
+
 	Fire::Fire() :
 		m_iCallCount(0),
 		m_tMonsterAttack{}

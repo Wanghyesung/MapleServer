@@ -5,6 +5,8 @@
 #include "WTime.h"
 namespace W
 {
+	UINT SleepGas::CREATE_ID = 0;
+
 	SleepGas::SleepGas() :
 		m_strCurAnim(L""),
 		m_bStart(false),

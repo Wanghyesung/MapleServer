@@ -12,6 +12,8 @@
 #include "WHorntailDead.h"
 namespace W
 {
+	UINT HorntailLeftHand::CREATE_ID = 0;
+
 	HorntailLeftHand::HorntailLeftHand(Horntail* _pOwner):
 		m_pOwner(_pOwner)
 	{

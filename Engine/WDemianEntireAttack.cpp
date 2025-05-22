@@ -10,6 +10,8 @@
 
 namespace W
 {
+	UINT DemianEntireAttack::CREATE_ID = 0;
+
 	DemianEntireAttack::DemianEntireAttack():
 		m_iKeyDonwCount(50),
 		m_fDeleteTime(5.f),

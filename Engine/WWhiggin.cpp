@@ -12,6 +12,8 @@
 #include "WMuninStone.h"
 namespace W
 {
+	UINT Whiggin::CREATE_ID = 0;
+
 	Whiggin::Whiggin()
 	{
 		SetName(L"Whiggin");

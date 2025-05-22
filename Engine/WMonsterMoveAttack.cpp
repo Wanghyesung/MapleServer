@@ -5,6 +5,8 @@
 #include "WRigidbody.h"
 namespace W
 {
+	UINT MonsterMoveAttack::CREATE_ID = 0;
+
 	MonsterMoveAttack::MonsterMoveAttack():
 		m_tMonsterAttack{}
 	{

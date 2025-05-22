@@ -8,6 +8,8 @@
 #include "WMonster.h"
 namespace W
 {
+	UINT ArielStone::CREATE_ID = 0;
+
 	ArielStone::ArielStone():
 		m_iCallCount(0),
 		m_tMonsterAttack{}

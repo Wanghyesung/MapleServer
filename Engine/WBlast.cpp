@@ -4,6 +4,8 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT Blast::CREATE_ID = 0;
+
 	Blast::Blast()
 	{
 		Animator* pAnim = AddComponent<Animator>();

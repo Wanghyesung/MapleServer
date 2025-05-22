@@ -6,6 +6,8 @@
 #include "WMonster.h"
 namespace W
 {
+	UINT PinkBeanStone::CREATE_ID = 0;
+
 	PinkBeanStone::PinkBeanStone():
 		m_iCallCount(0),
 		m_tMonsterAttack{}

@@ -13,6 +13,8 @@
 #include "WMuninStone.h"
 namespace W
 {
+	UINT Munin::CREATE_ID = 0;
+
 	Munin::Munin()
 	{
 		SetName(L"Munin");

@@ -6,6 +6,13 @@
 #include <cstdint>
 #include <type_traits>
 
+#define DECLARE_CREATE_ID		                           \
+private:                                                   \
+    static UINT CREATE_ID;                                 \
+public:                                                    \
+    static void SetCreateID(UINT _ID) { CREATE_ID = _ID; } \
+    static UINT GetCreateID() { return CREATE_ID; }		   \
+
 
 #define arraysize(a) (sizeof(a) / sizeof(a[0]))
 

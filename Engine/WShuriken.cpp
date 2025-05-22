@@ -7,6 +7,7 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT Shuriken::CREATE_ID = 0;
 	UINT Shuriken::COUNT = 0;
 
 	Shuriken::Shuriken():

@@ -17,6 +17,8 @@ namespace W
 		virtual void LateUpdate()override;
 		//virtual void Render()override;
 
+		DECLARE_CREATE_ID;
+
 		void SetHPValue(float _fValue) { m_fHP = _fValue; }
 	private:
 		float m_fHP;

@@ -5,6 +5,8 @@
 #include "WPlayer.h"
 namespace W
 {
+	UINT InputObject::CREATE_ID = 0;
+
 	InputObject::InputObject(eKeyCode _eKeyCode):
 		m_eKeyCode(_eKeyCode),
 		m_pOwner(nullptr),

@@ -5,6 +5,8 @@
 
 namespace W
 {
+	UINT PlayerHat::CREATE_ID = 0;
+
 	PlayerHat::PlayerHat():
 		m_pPlayerHead(nullptr),
 		m_strCurAnim{},

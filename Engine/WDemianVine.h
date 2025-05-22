@@ -14,6 +14,7 @@ namespace W
 		virtual void Update()override;
 		virtual void LateUpdate()override;
 		
+		DECLARE_CREATE_ID;
 
 		bool IsActive() { return m_bActive; }
 		void SetActive(bool _bActive) { m_bActive = _bActive; }

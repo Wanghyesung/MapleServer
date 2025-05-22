@@ -16,6 +16,8 @@
 #include "WPinkBean.h"
 namespace W
 {
+	UINT Ariel::CREATE_ID = 0;
+
 	Ariel::Ariel()
 	{
 		SetName(L"Ariel");
@@ -222,7 +224,7 @@ namespace W
 	void Ariel::heal()
 	{
 		const std::unordered_map<UINT , GameObject*> hashMonster =
-			SceneManger::GetActiveScene(this)->GetLayer(eLayerType::Monster).GetGameObjects();
+			SceneManger::GetActiveScene(this)->GetLayer(eLayerType::Monster)->GetGameObjects();
 
 		float fAccValue = 10.f;
 

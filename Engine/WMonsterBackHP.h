@@ -15,6 +15,7 @@ namespace W
 		virtual void Update()override;
 		virtual void LateUpdate()override;
 	
+		DECLARE_CREATE_ID
 		void SetHP(MonsterHP* _pHP) { m_pHP = _pHP; }
 	private:
 		MonsterHP* m_pHP;

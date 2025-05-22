@@ -13,7 +13,9 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-	
+
+		DECLARE_CREATE_ID;
+
 	private:
 		void set_count();
 

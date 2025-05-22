@@ -7,7 +7,8 @@ namespace W
 
 	GameObject::GameObject() :
 		m_eState(eState::Active),
-		m_iObjectID(0)
+		m_iObjectID(0),
+		m_bRender(true)
 	{
 		AddComponent<Transform>();
 	}
@@ -69,7 +70,6 @@ namespace W
 
 	void GameObject::LateUpdate()
 	{
-
 		for (Component* comp : m_vecComponent)
 		{
 			comp->LateUpdate();

@@ -18,6 +18,8 @@
 //속성 -> 빌드이벤트 -> 복사해서 넘기기
 namespace W
 {
+	UINT Horntail::CREATE_ID = 0;
+
 	Horntail::Horntail():
 		m_iDeadCount(0)
 	{

@@ -27,13 +27,13 @@
     <ClInclude Include="Transform.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.pb.h">
-      <Filter>Packet</Filter>
-    </ClInclude>
     <ClInclude Include="Map.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
     <ClInclude Include="ObjectState.pb.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
   </ItemGroup>
@@ -58,13 +58,13 @@
     <ClCompile Include="Transform.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.pb.cc">
-      <Filter>Packet</Filter>
-    </ClCompile>
     <ClCompile Include="Map.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
     <ClCompile Include="ObjectState.pb.cc">
+      <Filter>Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
   </ItemGroup>

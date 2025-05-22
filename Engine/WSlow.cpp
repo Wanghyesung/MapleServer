@@ -6,6 +6,8 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT Slow::CREATE_ID = 0;
+
 	Slow::Slow(float _fAccStat):
 		m_fAccValue(_fAccStat)
 	{

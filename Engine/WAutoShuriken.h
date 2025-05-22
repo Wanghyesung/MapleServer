@@ -19,6 +19,8 @@ namespace W
 		void SetDir(const Vector2& _vDir);
 
 		virtual void Off()override;
+
+		DECLARE_CREATE_ID;
 	private:
 		bool set_target();
 		void move_target();

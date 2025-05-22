@@ -6,6 +6,8 @@
 #include "WTime.h"
 namespace W
 {
+	UINT MiniBeanAttack::CREATE_ID = 0;
+
 	MiniBeanAttack::MiniBeanAttack() :
 		m_pTarget(nullptr),
 		m_fDeleteTIme(0.1f),

@@ -1,6 +1,7 @@
 syntax = "proto3";
 package Protocol;
 
+import "Map.proto";
 //repeated uint64 victims = 3;
 
 //클라가 서버에게 (이건 UI전용 요청 ex: 스킬 오브젝트, 아이템 떨구기)
@@ -13,13 +14,7 @@ message C_CREATE
 //서버가 클라에게 
 message S_CREATE
 {
-	//ObjectInfo tem =1;
-	string scene = 1;
-	uint32 layer_createid_id = 2;
-
-	//텍스쳐
-	string state = 3;
-	uint32 anim = 4;
+	ObjectInfo object_info =1;
 }
 
 

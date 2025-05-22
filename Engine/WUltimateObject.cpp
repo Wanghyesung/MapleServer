@@ -7,6 +7,8 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT UltimateObject::CREATE_ID = 0;
+
 	UltimateObject::UltimateObject():
 		m_fCurResetTime(0.f),
 		m_fResetTime(0.25f),

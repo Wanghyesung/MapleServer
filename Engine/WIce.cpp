@@ -6,6 +6,8 @@
 #include "WMonster.h"
 namespace W
 {
+	UINT Ice::CREATE_ID = 0;
+
 	Ice::Ice():
 		m_iCallCount(0),
 		m_tMonsterAttack{}

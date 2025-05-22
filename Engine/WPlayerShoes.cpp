@@ -6,6 +6,8 @@
 
 namespace W
 {
+	UINT PlayerShoes::CREATE_ID = 0;
+
 	PlayerShoes::PlayerShoes():
 		m_pPlayerBody(nullptr),
 		m_strCurAnim{},

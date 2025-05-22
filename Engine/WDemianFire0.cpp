@@ -8,6 +8,8 @@
 
 namespace W
 {
+	UINT DemianFire0::CREATE_ID = 0;
+
 	DemianFire0::DemianFire0():
 		m_bMove(false),
 		m_bEnd(false),

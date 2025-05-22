@@ -16,6 +16,8 @@ namespace W
 
 		virtual void Restore()override;
 
+		DECLARE_CREATE_ID;
+
 	private:
 	};
 }

@@ -6,7 +6,7 @@
 
 namespace W
 {
-	
+	UINT SharHP::CREATE_ID = 0;
 	SharHP::SharHP():
 		MonsterHP(true),
 		m_fHP(100.f)

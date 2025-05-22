@@ -15,7 +15,7 @@ namespace W
 
 		virtual void Restore()override;
 
-
+		DECLARE_CREATE_ID;
 	private:
 		UINT m_iCallStack;
 		UINT m_iKeyDonwCount;

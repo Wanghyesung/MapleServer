@@ -19,6 +19,8 @@
 #include "WSleepGas.h"
 namespace W
 {
+	UINT Megnus::CREATE_ID = 0;
+
 	Megnus::Megnus() :
 		m_pZone(nullptr),
 		m_pGas(nullptr),
