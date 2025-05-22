@@ -4,6 +4,8 @@
 
 namespace W
 {
+	UINT Ground::CREATE_ID = 0;
+
 	Ground::Ground(bool _bFinalGround)
 	{
 		//기본적으로 충돌체 가지게

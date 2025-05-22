@@ -8,26 +8,34 @@ namespace W
 	Scene::Scene():
 		m_iSceneIdx(SCENECOUNT++)
 	{
-		m_vecLayer.resize((UINT)eLayerType::End);
+		for (UINT i = 0; i < (UINT)eLayerType::End; ++i)
+		{
+			m_vecLayer.push_back(new Layer());
+		}
 	}
 	Scene::~Scene()
 	{
+		for (UINT i = 0; i < (UINT)eLayerType::End; ++i)
+		{
+			delete m_vecLayer[i];
+			m_vecLayer[i] = nullptr;
+		}
 	}
 	void Scene::Initialize()
 	{
 	}
 	void Scene::Update()
 	{
-		for (Layer& layer : m_vecLayer)
+		for (Layer* layer : m_vecLayer)
 		{
-			layer.Update();
+			layer->Update();
 		}
 	}
 	void Scene::LateUpdate()
 	{
-		for (Layer& layer : m_vecLayer)
+		for (Layer* layer : m_vecLayer)
 		{
-			layer.LateUpdate();
+			layer->LateUpdate();
 		}
 	}
 
@@ -42,7 +50,7 @@ namespace W
 	}
 	void Scene::AddGameObject(eLayerType _eType, GameObject* _pGameObj)
 	{
-		m_vecLayer[(UINT)_eType].AddGameObject(_pGameObj);
+		m_vecLayer[(UINT)_eType]->AddGameObject(_pGameObj);
 		
 		_pGameObj->SetLayerType(_eType);
 		_pGameObj->SetSceneName(GetName());

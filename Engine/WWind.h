@@ -12,6 +12,8 @@ namespace W
 		virtual void Update()override;
 		virtual void LateUpdate()override;
 		
+		DECLARE_CREATE_ID;
+
 		int GetDir() { return m_iDir; }
 		void SetDir(int _iDir) { m_iDir = _iDir; }
 		void SetStop() { m_bStop = true; }

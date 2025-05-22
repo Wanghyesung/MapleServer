@@ -41,7 +41,7 @@ namespace W
 	{
 		m_tObjectInfo.fHP = 100.f;
 		m_tObjectInfo.fMP = 100.f;
-		m_tObjectInfo.fSpeed = 2.5f;
+		m_tObjectInfo.fSpeed = 3.5f;
 	}
 	PlayerScript::~PlayerScript()
 	{

@@ -2,6 +2,7 @@
 
 #include "WGameObject.h"
 #include "WPlayer.h"
+#include "WAnimator.h"
 
 namespace W
 {
@@ -16,6 +17,8 @@ namespace W
 		virtual void Update()override;
 		virtual void LateUpdate()override;
 		//virtual void Render()override;
+
+		DECLARE_CREATE_ID;
 
 		void SetPlayerHead(PlayerHead* _pPlayerHead) { m_pPlayerHead = _pPlayerHead; }
 

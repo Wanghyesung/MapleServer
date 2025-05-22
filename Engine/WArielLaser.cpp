@@ -11,6 +11,8 @@
 
 namespace W
 {
+	UINT ArielLaser::CREATE_ID = 0;
+
 	ArielLaser::ArielLaser():
 		m_iCallCount(0),
 		m_tMonsterAttack{}

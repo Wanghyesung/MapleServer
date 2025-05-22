@@ -15,6 +15,9 @@ namespace W
 		virtual void Update() override;
 		virtual void LateUpdate() override;
 	
+
+		DECLARE_CREATE_ID;
+
 		Player* GetPlayer() { return m_pPlayer; }
 		void SetPlayer(Player* _pPlayer){ m_pPlayer = _pPlayer;}
 

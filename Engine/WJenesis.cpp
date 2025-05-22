@@ -6,6 +6,8 @@
 #include "WMonster.h"
 namespace W
 {
+	UINT Jenesis::CREATE_ID = 0;
+
 	Jenesis::Jenesis():
 		m_iCallCount(0),
 		m_tMonsterAttack{}

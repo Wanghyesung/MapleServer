@@ -6,6 +6,8 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT Undead::CREATE_ID = 0;
+
 	Undead::Undead()
 	{
 		Animator* pAnim = AddComponent<Animator>();

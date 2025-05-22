@@ -6,21 +6,12 @@
 
 namespace W
 {
+	UINT MonsterAttackObject::CREATE_ID = 0;
+
 	MonsterAttackObject::MonsterAttackObject() :
 		m_pOwner(nullptr)
 	{
-		//AddComponent<Collider2D>();
-		//AddComponent<MonsterAttackScript>();
-
-		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetRenderinMode(eRenderingMode::Transparent);
-		//pMater->SetShader(Resources::Find<Shader>(L"ObjectShader"));
-		//Resources::Insert(L"pMonsterAttackMater", pMater);
-		//
-		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//pRenderer->SetMaterial(pMater);
-
+		
 		AddComponent<MonsterAttackScript>();
 		Collider2D* pCollider = AddComponent<Collider2D>();
 		pCollider->SetActive(false);

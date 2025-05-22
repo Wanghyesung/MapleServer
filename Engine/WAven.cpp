@@ -6,6 +6,8 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT Aven::CREATE_ID = 0;
+
 	Aven::Aven() :
 		m_iDir(1)
 	{

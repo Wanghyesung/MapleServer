@@ -7,6 +7,8 @@
 #include "WPlayerShoes.h"
 namespace W
 {
+	UINT PlayerBody::CREATE_ID = 0;
+
 	PlayerBody::PlayerBody() :
 		m_pPlayer(nullptr),
 		m_strCurAnim{},

@@ -8,6 +8,8 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT SealSkill::CREATE_ID = 0;
+
 	SealSkill::SealSkill()
 	{
 		Animator* pAnim = AddComponent<Animator>();

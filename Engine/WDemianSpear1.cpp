@@ -6,6 +6,8 @@
 #include "WBattleManager.h"
 namespace W
 {
+	UINT DemianSpear1::CREATE_ID = 0;
+
 	DemianSpear1::DemianSpear1() :
 		m_iCallCount(0),
 		m_tMonsterAttack{}

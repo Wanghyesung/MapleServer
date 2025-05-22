@@ -14,6 +14,8 @@ namespace W
 		virtual void Update()override;
 		virtual void LateUpdate()override;
 		
+		DECLARE_CREATE_ID;
+
 		void SetClear(bool _bClear);
 		void SetOwner(InputBackground* _pOwner) { m_pOwner = _pOwner; }
 		void SetIndex(UINT _iIndex) { m_iIndex = _iIndex; }

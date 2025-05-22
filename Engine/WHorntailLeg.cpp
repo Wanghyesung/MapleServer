@@ -11,6 +11,8 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT HorntailLeg::CREATE_ID = 0;
+
 	HorntailLeg::HorntailLeg(Horntail* _pOwner):
 		m_pOwner(_pOwner)
 	{

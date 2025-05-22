@@ -5,6 +5,8 @@
 
 namespace W
 {
+	UINT PlayerBottom::CREATE_ID = 0;
+
 	PlayerBottom::PlayerBottom():
 		m_pPlayerBody(nullptr),
 		m_strCurAnim{},

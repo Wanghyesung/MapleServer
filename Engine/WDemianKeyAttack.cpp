@@ -10,6 +10,7 @@
 #include "WTime.h"
 namespace W
 {
+	UINT DemianKeyAttack::CREATE_ID = 0;
 	DemianKeyAttack::DemianKeyAttack():
 		m_fTime(5.f),
 		m_fCurTime(0.f),

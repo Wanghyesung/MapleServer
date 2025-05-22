@@ -9,6 +9,8 @@
 
 namespace W
 {
+	UINT DemianExplode::CREATE_ID = 0;
+
 	DemianExplode::DemianExplode():
 		m_iCallCount(0),
 		m_tMonsterAttack{}

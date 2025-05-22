@@ -5,6 +5,8 @@
 #include "WMonster.h"
 namespace W
 {
+	UINT SolThunder::CREATE_ID = 0;
+
 	SolThunder::SolThunder():
 		m_pTarget(nullptr)
 	{

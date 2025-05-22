@@ -5,18 +5,11 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT Stop::CREATE_ID = 0;
+
 	Stop::Stop()
 	{
-		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetShader(Resources::Find<Shader>(L"ObjectAnimShader"));
-		////pMater->SetTexture(pTex);
-		//Resources::Insert(L"faintSkillMater", pMater);
-		//pMater->SetRenderinMode(eRenderingMode::Transparent);
-		//
-		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//pRenderer->SetMaterial(pMater);
-
+		
 	}
 	Stop::~Stop()
 	{

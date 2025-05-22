@@ -16,6 +16,9 @@ namespace W
 
 		void SetStartPos(Vector2 _vPos);
 		void SetTarget(GameObject* _pTarget) { m_pTarget = _pTarget; }
+
+		DECLARE_CREATE_ID;
+
 	private:
 		Vector2 m_vDir;
 		GameObject* m_pTarget;

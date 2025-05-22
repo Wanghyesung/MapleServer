@@ -9,6 +9,8 @@
 #include "WTime.h"
 namespace W
 {
+	UINT DemianCircle::CREATE_ID = 0;
+
 	DemianCircle::DemianCircle():
 		m_bEnter(false),
 		m_bActive(false),

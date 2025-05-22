@@ -10,6 +10,8 @@
 #include "WTime.h"
 namespace W
 {
+	UINT MobZone::CREATE_ID = 0;
+
 	MobZone::MobZone():
 		m_pTarget(nullptr),
 		m_pMonster(nullptr),

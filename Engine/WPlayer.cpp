@@ -22,6 +22,7 @@ extern Room GRoom;
 
 namespace W
 {
+	UINT Player::CREATE_ID = 0;
 
 	Player::Player():
 		m_pShadow(nullptr),

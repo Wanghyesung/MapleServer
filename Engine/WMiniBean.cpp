@@ -17,6 +17,8 @@
 #include "WMiniBeanAttack.h"
 namespace W
 {
+	UINT MiniBean::CREATE_ID = 0;
+
 	MiniBean::MiniBean():
 		//m_vDir(Vector2::Zero),
 		m_pOwner(nullptr)

@@ -14,6 +14,8 @@
 #include "WHorntail.h"
 namespace W
 {
+	UINT HorntailHeadA::CREATE_ID = 0;
+
 	HorntailHeadA::HorntailHeadA(Horntail* _pOwner):
 		m_pOwner(_pOwner)
 	{

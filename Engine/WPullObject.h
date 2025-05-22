@@ -14,6 +14,8 @@ namespace W
 		virtual void LateUpdate()override;
 		//virtual void Render()override;
 
+		DECLARE_CREATE_ID;
+
 		void SetTarget(GameObject* _pTarget) { m_pTarget = _pTarget; }
 		void SetPosition(Vector2 _vPosition) { m_vPullPosition = _vPosition; }
 		void SetDeleteTime(float _fTime) { m_fDeleteTime = _fTime; }

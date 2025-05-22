@@ -65,7 +65,7 @@ namespace W
 		EventManager::CreateObject(pAttackObj2, eLayerType::AttackObject);
 
 		const std::unordered_map<UINT, GameObject*> hashMonster =
-			SceneManger::GetActiveScene(this)->GetLayer(eLayerType::Monster).GetGameObjects();
+			SceneManger::GetActiveScene(this)->GetLayer(eLayerType::Monster)->GetGameObjects();
 
 
 		//가장 체력이 높은 몬스터

@@ -60,7 +60,7 @@ namespace W
 		float fMaxHP = 0.f;
 		float fHP = 0.f;
 
-		const std::unordered_map<UINT, GameObject*> hashMonster = GetLayer(eLayerType::Monster).GetGameObjects();
+		const std::unordered_map<UINT, GameObject*> hashMonster = GetLayer(eLayerType::Monster)->GetGameObjects();
 		
 		auto iter = hashMonster.begin();
 		for (iter; iter != hashMonster.end(); ++iter)
@@ -117,9 +117,9 @@ namespace W
 
 		Ground* pGround = new Ground(true);
 		pGround->SetSceneName(GetName());
-		AddGameObject(eLayerType::Ground, pGround);
 		pGround->GetComponent<Transform>()->SetPosition(0.f, -2.95f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(4.3f * 7.f, 1.f * 0.3f, 0.f);
+		AddGameObject(eLayerType::Ground, pGround);
 	}
 
 	void DemianScene::fadein()
@@ -132,7 +132,7 @@ namespace W
 	void DemianScene::phase2()
 	{
 		m_bEnd = false;
-		std::unordered_map<UINT, GameObject*> hashMonster = GetLayer(eLayerType::Monster).GetGameObjects();
+		std::unordered_map<UINT, GameObject*> hashMonster = GetLayer(eLayerType::Monster)->GetGameObjects();
 
 		//phase2 µ¥¹Ì¾È
 		hashMonster[LAYER_STARAT_IDX + 1]->GetComponent<Collider2D>()->SetActive(true);
@@ -160,9 +160,9 @@ namespace W
 		DemianPhase2* pDemian2 = new DemianPhase2();
 		pDemian2->SetSceneName(GetName());
 		pDemian2->Initialize();
-		AddGameObject(eLayerType::Monster, pDemian2);
 		pDemian2->GetComponent<Collider2D>()->SetActive(false);
 		pDemian2->SetState(GameObject::eState::Paused);
+		AddGameObject(eLayerType::Monster, pDemian2);
 	}
 
 	void DemianScene::create_event()
@@ -174,8 +174,8 @@ namespace W
 
 		m_pSharHP = new SharHP();
 		m_pSharHP->SetSceneName(GetName());
-		AddGameObject(eLayerType::UI, m_pSharHP);
 		m_pSharHP->Initialize();
+		AddGameObject(eLayerType::UI, m_pSharHP);
 
 		m_pStigmaBack = new StigmaBack();
 		m_pStigmaBack->SetSceneName(GetName());

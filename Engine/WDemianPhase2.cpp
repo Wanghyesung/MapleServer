@@ -23,6 +23,8 @@
 #include "WMonsterAttackScript.h"
 namespace W
 {
+	UINT DemianPhase2::CREATE_ID = 0;
+
 	DemianPhase2::DemianPhase2():
 		m_bGroggy(false),
 		m_iSpearCount(0),

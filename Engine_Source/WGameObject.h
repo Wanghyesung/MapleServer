@@ -4,7 +4,6 @@
 #include "WComponent.h"
 #include "WScript.h"
 
-
 namespace W
 {
 	class GameObject : public Entity
@@ -115,15 +114,13 @@ namespace W
 		void SetSceneName(const std::wstring& _strName) { m_strSceneName = _strName; }
 		const std::wstring& GetSceneName() { return m_strSceneName; }
 		
-		
+		bool IsRender() { return m_bRender; }
+		void SetRender(bool _bRender) { m_bRender = _bRender; }
+
 		void SetObjectID(UINT _ID) { m_iObjectID = _ID; }
 		UINT GetObjectID() { return m_iObjectID; }
 
-		static UINT GetCreateID() { return CREATE_ID; }
-
-	private:
-		static void SetCreateID(UINT _ID) { CREATE_ID = _ID; }
-
+		DECLARE_CREATE_ID;
 	private:
 		eState m_eState;
 		std::vector<Component*> m_vecComponent;
@@ -131,7 +128,8 @@ namespace W
 		eLayerType m_eLayerType;
 		std::wstring m_strSceneName;
 
-		static UINT CREATE_ID;
+		bool m_bRender = true;
+
 		UINT m_iObjectID;
 
 		friend class GameObjectManager;

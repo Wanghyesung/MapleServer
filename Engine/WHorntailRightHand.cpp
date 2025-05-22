@@ -13,6 +13,8 @@
 
 namespace W
 {
+	UINT HorntailRightHand::CREATE_ID = 0;
+
 	HorntailRightHand::HorntailRightHand(Horntail* _pOwner):
 		m_pOwner(_pOwner)
 	{

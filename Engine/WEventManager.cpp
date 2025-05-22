@@ -10,6 +10,7 @@
 #include "WInput.h"
 #include "GameObject.pb.h"
 #include "ClientPacketHandler.h"
+#include "WAnimator.h"
 
 namespace W
 {
@@ -109,15 +110,27 @@ namespace W
 
 		SceneManger::AddGameObject(pObj->GetSceneName(), eLayer, pObj);
 
-		//여기 클라에 패킷 던지기
-		//UINT iCreateID = pObj->GetCreateID();
-		//UINT iObjectID = pObj->GetObjectID();
-		//
-		//Protocol::S_CREATE pkt;
-		//pkt.set_layer_createid_id((UCHAR)eLayer << 24 | iCreateID << 16 | iObjectID);
-		//
-		//shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		//GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));
+		UINT iCreateID = pObj->GetCreateID();
+		UINT iObjectID = pObj->GetObjectID();
+		
+		Protocol::S_CREATE pkt;
+		Protocol::ObjectInfo* tInfo = pkt.mutable_object_info();
+		tInfo->set_layer_createid_id((UCHAR)eLayer << 24 | iCreateID << 16 | iObjectID);
+		
+		Vector3 vPosition = pObj->GetComponent<Transform>()->GetPosition();
+		tInfo->set_x(vPosition.x);	tInfo->set_y(vPosition.y);	tInfo->set_z(vPosition.z);
+		
+		UCHAR cDir = 1 ;
+		UCHAR cAnimIdx = 0;
+		UCHAR bRender = pObj->IsRender();
+		Animator* pAnim = pObj->GetComponent<Animator>();
+		if (pAnim)
+			cAnimIdx = 0;
+		
+		tInfo->set_anim((bRender<<16) | (cDir << 8) | cAnimIdx);
+		
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));
 	}
 
 	void EventManager::delete_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)

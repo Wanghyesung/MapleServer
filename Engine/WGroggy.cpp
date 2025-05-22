@@ -5,6 +5,8 @@
 #include "WBattleManager.h"
 namespace W
 {
+	UINT Groggy::CREATE_ID = 0;
+
 	Groggy::Groggy()
 	{
 		

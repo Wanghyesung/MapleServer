@@ -6,6 +6,8 @@
 #include "WMonster.h"
 namespace W
 {
+	UINT RoccatBean::CREATE_ID = 0;
+
 	RoccatBean::RoccatBean() :
 		m_iCallCount(0),
 		m_tMonsterAttack{}

@@ -7,6 +7,8 @@
 
 namespace W
 {
+	UINT Abnormal::CREATE_ID = 0;
+
 	Abnormal::Abnormal() :
 		m_pTarget(nullptr),
 		m_bRender(false),

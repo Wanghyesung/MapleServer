@@ -4,6 +4,8 @@
 #include "WPlayerHead.h"
 namespace W
 {
+	UINT Eyes::CREATE_ID = 0;
+
 	Eyes::Eyes():
 		m_bAlert(false),
 		m_iEyeNumber(0)

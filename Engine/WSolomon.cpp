@@ -12,6 +12,8 @@
 #include "WBossStart.h"
 namespace W
 {
+	UINT Solomon::CREATE_ID = 0;
+
 	Solomon::Solomon()
 	{
 		SetName(L"Solomon");

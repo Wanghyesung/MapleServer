@@ -109,7 +109,7 @@ namespace W
 		for (Scene* pScene : GetPlayerScene())
 		{
 			const std::unordered_map<UINT,GameObject*>& hashObjs
-				= pScene->GetLayer(eLayerType::Player).GetGameObjects();
+				= pScene->GetLayer(eLayerType::Player)->GetGameObjects();
 
 			auto iter = hashObjs.find(_iPlayerID);
 			if (iter != hashObjs.end())
@@ -131,7 +131,7 @@ namespace W
 	{
 		Scene* pScene = m_hashScene[_strSceneName];
 		std::unordered_map<UINT, GameObject*> hashPlayer = 
-			pScene->GetLayer(eLayerType::Player).GetGameObjects();
+			pScene->GetLayer(eLayerType::Player)->GetGameObjects();
 
 		if(hashPlayer.empty())
 			return nullptr;
@@ -153,7 +153,7 @@ namespace W
 		std::vector<GameObject*> vecPlayer;
 
 		const std::unordered_map<UINT, GameObject*>& hashObjs
-			= m_hashScene[_strSceneName]->GetLayer(eLayerType::Player).GetGameObjects();
+			= m_hashScene[_strSceneName]->GetLayer(eLayerType::Player)->GetGameObjects();
 
 		auto iter = hashObjs.begin();
 		for (iter; iter != hashObjs.end(); ++iter)
@@ -206,7 +206,7 @@ namespace W
 	void SceneManger::PushObjectPool(Scene* _pPrevScene)
 	{
 		const std::unordered_map<UINT, GameObject*>& hashObjs
-			= _pPrevScene->GetLayer(eLayerType::AttackObject).GetGameObjects();
+			= _pPrevScene->GetLayer(eLayerType::AttackObject)->GetGameObjects();
 
 		auto iter = hashObjs.begin();
 		for (iter; iter != hashObjs.end(); ++iter)

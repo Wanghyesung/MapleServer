@@ -22,6 +22,8 @@
 #include "WTime.h"
 namespace W
 {
+	UINT Demian::CREATE_ID = 0;
+
 	Demian::Demian():
 		m_fCreateTime(20.f),
 		m_fCurCreateTime(0.f)

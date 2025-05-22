@@ -8,6 +8,8 @@
 #include "WAttackScript.h"
 namespace W
 {
+	UINT Load::CREATE_ID = 0;
+
 	Load::Load():
 		m_fEndTime(10.f),
 		m_fCurEndTime(0.f),

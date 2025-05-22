@@ -5,6 +5,8 @@
 
 namespace W
 {
+	UINT PlayerTop::CREATE_ID = 0;
+
 	PlayerTop::PlayerTop():
 		m_pPlayerBody(nullptr),
 		m_strCurEquip{},

@@ -5,6 +5,8 @@
 #include "WTime.h"
 namespace W
 {
+	UINT White::CREATE_ID = 0;
+
 	White::White():
 		m_vColor(Vector4::Zero)
 	{

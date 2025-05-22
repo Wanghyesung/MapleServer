@@ -4,6 +4,8 @@
 #include "WAnimator.h"
 namespace W
 {
+	UINT Stone::CREATE_ID = 0;
+
 	Stone::Stone()
 	{
 		

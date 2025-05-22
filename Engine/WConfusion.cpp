@@ -8,6 +8,7 @@
 #include "WInfo.h"
 namespace W
 {
+	UINT Confusion::CREATE_ID = 0;
 	Confusion::Confusion()
 	{
 

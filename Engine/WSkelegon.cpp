@@ -15,6 +15,8 @@
 
 namespace W
 {
+	UINT Skelegon::CREATE_ID = 0;
+
 	Skelegon::Skelegon()
 		//m_spAttackEffect(nullptr)
 	{

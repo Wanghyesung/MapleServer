@@ -9,6 +9,8 @@
 #include "WSceneManger.h"
 namespace W
 {
+	UINT MegnusStone::CREATE_ID = 0;
+
 	MegnusStone::MegnusStone() :
 		m_bMove(false),
 		m_bEnd(false),

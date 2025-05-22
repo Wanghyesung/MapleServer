@@ -6,6 +6,8 @@
 #include "WSceneManger.h"
 namespace W
 {
+	UINT Effect::CREATE_ID = 0;
+
 	Effect::Effect():
 		m_pOwner(nullptr),
 		m_bActive(false),

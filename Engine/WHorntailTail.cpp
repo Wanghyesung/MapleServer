@@ -11,6 +11,8 @@
 #include "WHorntailDead.h"
 namespace W
 {
+	UINT HorntailTail::CREATE_ID = 0;
+
 	HorntailTail::HorntailTail(Horntail* _pOwner):
 		m_pOwner(_pOwner)
 	{

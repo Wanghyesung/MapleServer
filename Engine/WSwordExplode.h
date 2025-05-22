@@ -13,7 +13,9 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		
+
+		DECLARE_CREATE_ID;
+
 		void SetSword(DemianSword* _pSword) { m_pSword = _pSword; }
 	private:
 		void off();

@@ -38,10 +38,10 @@ namespace W
 	void CollisionManager::LayerCollision(Scene* _pScene, eLayerType _eLeft, eLayerType _eRight)
 	{
 		const std::unordered_map<UINT, GameObject*>& hashLeftObj =
-			_pScene->GetLayer(_eLeft).GetGameObjects();
+			_pScene->GetLayer(_eLeft)->GetGameObjects();
 
 		const std::unordered_map<UINT, GameObject*>& hashRightObj =
-			_pScene->GetLayer(_eRight).GetGameObjects();
+			_pScene->GetLayer(_eRight)->GetGameObjects();
 
 
 		for (auto leftIter = hashLeftObj.begin(); leftIter != hashLeftObj.end(); ++leftIter)

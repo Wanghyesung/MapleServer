@@ -65,9 +65,9 @@ namespace W
 
 		Ground* pGround = new Ground(true);
 		pGround->SetSceneName(GetName());
-		AddGameObject(eLayerType::Ground, pGround);
 		pGround->GetComponent<Transform>()->SetPosition(0.f, -2.95f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(4.3f * 7.f, 1.f * 0.3f, 0.f);
+		AddGameObject(eLayerType::Ground, pGround);
 	}
 	
 	void HelisiumBoss::create_monster()

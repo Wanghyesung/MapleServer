@@ -7,6 +7,8 @@
 #include "WSceneManger.h"
 namespace W
 {
+	UINT Shadow::CREATE_ID = 0;
+
 	Shadow::Shadow() :
 		m_pOwner(nullptr),
 		m_pFuncAttack(nullptr),

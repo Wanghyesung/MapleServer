@@ -7,6 +7,8 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT Faint::CREATE_ID = 0;
+
 	Faint::Faint()
 	{
 		Animator* pAnim = AddComponent<Animator>();

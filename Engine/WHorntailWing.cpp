@@ -8,6 +8,8 @@
 #include "WHorntailDead.h"
 namespace W
 {
+	UINT HorntailWing::CREATE_ID = 0;
+
 	HorntailWing::HorntailWing(Horntail* _pOwner):
 		m_pOwner(_pOwner)
 	{

@@ -6,6 +6,8 @@
 #include "WMonster.h"
 namespace W
 {
+	UINT Spear::CREATE_ID = 0;
+
 	Spear::Spear():
 		m_pTarget(nullptr)
 	{

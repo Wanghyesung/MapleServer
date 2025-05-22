@@ -4,6 +4,8 @@
 #include "WAttackScript.h"
 namespace W
 {
+	UINT UltimateBackground::CREATE_ID = 0;
+
 	UltimateBackground::UltimateBackground()
 	{
 	

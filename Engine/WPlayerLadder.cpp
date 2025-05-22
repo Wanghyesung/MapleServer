@@ -39,7 +39,7 @@ namespace W
 				iDir = -1;
 
 			EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::jump);
-			pRigidbody->SetVelocity(Vector2(iDir * 1.2f, 3.5f));
+			pRigidbody->SetVelocity(Vector2(iDir * 2.f, 4.f));
 			pRigidbody->SetGround(false);
 			pScript->SetLadder(false);
 		
@@ -49,12 +49,12 @@ namespace W
 		}
 
 		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::UP))
-			pRigidbody->AddForce(Vector2(0.f, 1.f));
+			pRigidbody->AddForce(Vector2(0.f, 2.f));
 		else
 			--iStopCount;
 			
 		if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::DOWN))
-			pRigidbody->AddForce(Vector2(0.f, -1.f));
+			pRigidbody->AddForce(Vector2(0.f, -2.f));
 		else
 			--iStopCount;
 

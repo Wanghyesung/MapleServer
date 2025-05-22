@@ -7,6 +7,8 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT Variation::CREATE_ID = 0;
+
 	Variation::Variation()
 	{
 		

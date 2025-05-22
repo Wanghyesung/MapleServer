@@ -17,6 +17,8 @@ namespace W
 		virtual void Off()override;
 
 		void SetDir(int _iDir);
+
+		DECLARE_CREATE_ID;
 	private:
 		int m_iDir;
 

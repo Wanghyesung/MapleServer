@@ -56,7 +56,7 @@ namespace W
 			return vecObjects;
 		}
 		
-		Layer& GetLayer(eLayerType _eType) { return m_vecLayer[(UINT)_eType];}
+		Layer* GetLayer(eLayerType _eType) { return m_vecLayer[(UINT)_eType];}
 
 		void SetMapSize(float _lx, float _ly, float _rx, float _ry) 
 		{
@@ -71,12 +71,12 @@ namespace W
 		tMapSize GetMapSize() { return m_tMapSize; }
 		tMapPossibleSize GetMapPossibleSize() { return m_tPossibleSize; }
 
-		void EraseObject(eLayerType _eType, GameObject* _pGameObj){ m_vecLayer[(UINT)_eType].EraseOnVector(_pGameObj); }
+		void EraseObject(eLayerType _eType, GameObject* _pGameObj){ m_vecLayer[(UINT)_eType]->EraseOnVector(_pGameObj); }
 
 		UINT GetSceneIdx() { return m_iSceneIdx; }
 		void SetSceneIdx(UINT _iIdx) { m_iSceneIdx = _iIdx; }
 	private:
-		std::vector<Layer> m_vecLayer;
+		std::vector<Layer*> m_vecLayer;
 
 		tMapSize m_tMapSize;
 		tMapPossibleSize m_tPossibleSize;

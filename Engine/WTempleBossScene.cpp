@@ -62,8 +62,6 @@ namespace W
 	}
 	void TempleBossScene::CreateBackground()
 	{
-	
-
 		//GameObject* pBackGround = new GameObject();
 		//pBackGround->SetSceneName(GetName());
 
@@ -76,9 +74,9 @@ namespace W
 
 		Ground* pGround = new Ground(true);
 		pGround->SetSceneName(GetName());
-		AddGameObject(eLayerType::Ground, pGround);
 		pGround->GetComponent<Transform>()->SetPosition(0.f, -2.75f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(2.7f * 7.f, 1.f * 0.3f, 0.f);
+		AddGameObject(eLayerType::Ground, pGround);
 	}
 
 

@@ -4,6 +4,8 @@
 #include "WObjectPoolManager.h"
 namespace W
 {
+	UINT Monster::CREATE_ID = 0;
+
 	Monster::Monster():
 		m_iDir(1),
 		m_eMonsterState(eMonsterState::stand),

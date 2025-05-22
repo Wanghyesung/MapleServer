@@ -13,6 +13,7 @@ namespace W
 		virtual void Update();
 		virtual void LateUpdate();
 		
+		DECLARE_CREATE_ID;
 	private:
 
 

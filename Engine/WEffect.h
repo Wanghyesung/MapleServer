@@ -14,6 +14,8 @@ namespace W
 		virtual void LateUpdate()override;
 		//virtual void Render()override;
 
+		DECLARE_CREATE_ID;
+
 		void SetOwner(GameObject* _pOwner) { m_pOwner = _pOwner; }
 		void CreateAnimation(Vector2 _vLeftTop, Vector2 _vSize, UINT _iColumnLength,
 			UINT _iRowLength, Vector2 _vDivisionSize, Vector2 _vOffset, float _fDuration);

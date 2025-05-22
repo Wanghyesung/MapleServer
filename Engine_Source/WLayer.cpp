@@ -4,7 +4,8 @@
 namespace W
 {
 	Layer::Layer():
-		m_iObjectID(LAYER_STARAT_IDX)
+		m_iObjectID(LAYER_STARAT_IDX),
+		m_lock{}
 	{
 		
 	}
@@ -22,6 +23,8 @@ namespace W
 	}
 	void Layer::Update()
 	{
+		RLock lock(m_lock);
+
 		auto iter = m_hashGameObject.begin();
 		for (iter; iter != m_hashGameObject.end(); ++iter)
 		{
@@ -35,6 +38,8 @@ namespace W
 	}
 	void Layer::LateUpdate()
 	{
+		RLock lock(m_lock);
+
 		auto iter = m_hashGameObject.begin();
 		for (iter; iter != m_hashGameObject.end(); ++iter)
 		{
@@ -51,6 +56,7 @@ namespace W
 
 	void Layer::DestroyAll(Scene* _pScene)
 	{
+		WLock lock(m_lock);
 		auto iter = m_hashGameObject.begin();
 		for (iter; iter != m_hashGameObject.end(); ++iter)
 		{
@@ -62,6 +68,8 @@ namespace W
 
 	void Layer::AddGameObject(GameObject* _pGameObj)
 	{
+		WLock lock(m_lock);
+
 		if (_pGameObj->GetObjectID() == 0)
 		{
 			_pGameObj->SetObjectID(m_iObjectID);
@@ -74,11 +82,28 @@ namespace W
 	void Layer::EraseOnVector(GameObject* _pGameObject)
 	{
 		UINT iGameObjectID = _pGameObject->GetObjectID();
+
+		WLock lock(m_lock);
+
 		auto iter = m_hashGameObject.find(iGameObjectID);
 		GameObject* pGameObject = iter->second;
 
 		if (pGameObject != nullptr)
 			m_hashGameObject.erase(iGameObjectID);
+	}
+
+	const unordered_map<UINT, GameObject*>& Layer::GetGameObjects()
+	{
+		RLock lock(m_lock);
+
+		return m_hashGameObject;
+	}
+
+	std::unordered_map<UINT, GameObject*> Layer::GetCopyGameObjects()
+	{
+		RLock lock(m_lock);
+
+		return m_hashGameObject;
 	}
 
 }

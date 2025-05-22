@@ -6,6 +6,8 @@
 
 namespace W
 {
+	UINT RexThunder::CREATE_ID = 0;
+
 	RexThunder::RexThunder() :
 		m_pTarget(nullptr)
 	{

@@ -4,6 +4,8 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT PullObject::CREATE_ID = 0;
+
 	PullObject::PullObject():
 		m_pTarget(nullptr),
 		m_vPullPosition(Vector2::Zero),

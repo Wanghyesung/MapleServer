@@ -5,6 +5,8 @@
 #include "WBattleManager.h"
 namespace W
 {
+	UINT UpStat::CREATE_ID = 0;
+
 	UpStat::UpStat(float _fAccStat):
 		m_fCurTime(0.f),
 		m_fAccStat(_fAccStat)

@@ -6,6 +6,8 @@
 #include "WMonsterScript.h"
 namespace W
 {
+	UINT CloneMegnus::CREATE_ID = 0;
+
 	CloneMegnus::CloneMegnus():
 		m_iCallCount(0),
 		m_tMonsterAttack{}

@@ -18,6 +18,8 @@ namespace W
 		void SetActive(bool _bActive) { m_bActive = _bActive; }
 		bool IsActive() { return m_bActive; }
 		void SetSpeed(float _fSpeed) { m_fSpeed = _fSpeed; }
+
+		DECLARE_CREATE_ID;
 	private:
 		//void off();
 		void check_enter();

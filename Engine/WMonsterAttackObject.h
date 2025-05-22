@@ -17,6 +17,7 @@ namespace W
 		virtual void LateUpdate()override;
 		//virtual void Render()override;
 
+		DECLARE_CREATE_ID
 	public:
 		void SetOnwer(Monster* _pOnwer) { m_pOwner = _pOnwer; }
 

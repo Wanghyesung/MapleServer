@@ -5,6 +5,8 @@
 
 namespace W
 {
+	UINT PlayerHair::CREATE_ID = 0;
+
 	PlayerHair::PlayerHair():
 		m_bHairDown(true),
 		m_iHairNum(0)

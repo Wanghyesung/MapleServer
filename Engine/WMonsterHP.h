@@ -16,6 +16,8 @@ namespace W
 		virtual void Update()override;
 		virtual void LateUpdate()override;
 	
+		DECLARE_CREATE_ID
+
 		UINT GetHPCount() { return m_iHPCount; }
 		bool IsActive() { return m_bActive; }
 		void ActiveOn() { m_bActive = true; }

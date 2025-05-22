@@ -17,6 +17,8 @@ namespace W
 
 		int GetCurFrame() { return m_iCurFrame; }
 		int GetAttackFrame() { return m_iAttackFrame; }
+
+		DECLARE_CREATE_ID;
 	private:
 		void attack();
 		

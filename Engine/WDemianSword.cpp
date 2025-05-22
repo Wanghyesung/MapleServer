@@ -12,6 +12,8 @@
 
 namespace W
 {
+	UINT DemianSword::CREATE_ID = 0;
+
 	DemianSword::DemianSword() :
 		m_bEnd(false),
 		m_bMove(false),
@@ -28,8 +30,6 @@ namespace W
 		m_iDirIndex(0)
 	{
 		AddComponent<Rigidbody>();
-
-		//기본적으로 제공하는 script를 제거하고 전용 script로
 
 		GetComponent<Transform>()->SetScale(20.f, 20.f, 0.f);
 

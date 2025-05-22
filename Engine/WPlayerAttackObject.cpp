@@ -7,6 +7,8 @@
 #include "WEventManager.h"
 namespace W
 {
+	UINT PlayerAttackObject::CREATE_ID = 0;
+
 	PlayerAttackObject::PlayerAttackObject():
 		m_pPlayer(nullptr)
 	{

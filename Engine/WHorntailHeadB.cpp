@@ -14,6 +14,8 @@
 
 namespace W
 {
+	UINT HorntailHeadB::CREATE_ID = 0;
+
 	HorntailHeadB::HorntailHeadB(Horntail* _pOwner) :
 		m_pOwner(_pOwner)
 	{

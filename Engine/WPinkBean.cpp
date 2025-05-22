@@ -24,6 +24,8 @@
 #include "WSharHP.h"
 namespace W
 {
+	UINT PinkBean::CREATE_ID = 0;
+
 	PinkBean::PinkBean():
 		m_bStart(false),
 		m_queueMiniBean{},

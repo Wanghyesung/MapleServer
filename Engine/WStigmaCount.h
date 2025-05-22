@@ -13,6 +13,8 @@ namespace W
 		virtual void LateUpdate()override;
 		//virtual void Render()override;
 
+		DECLARE_CREATE_ID;
+
 	private:
 		void set_count(UINT _iCount);
 

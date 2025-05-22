@@ -17,6 +17,8 @@ namespace W
 			HorntailWing,
 		};
 
+		DECLARE_CREATE_ID;
+
 		Horntail();
 		virtual ~Horntail();
 
