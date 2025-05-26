@@ -1,6 +1,6 @@
 #include "WObjectPoolManager.h"
 #include "WGameObject.h"
-
+#include "GameObject.pb.h"
 
 namespace W
 {

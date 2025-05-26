@@ -8,11 +8,15 @@
 
 #define DECLARE_CREATE_ID		                           \
 private:                                                   \
-    static UINT CREATE_ID;                                 \
+    static UINT CREATE_ID;								   \
+	UINT m_iCreateID;									   \
 public:                                                    \
-    static void SetCreateID(UINT _ID) { CREATE_ID = _ID; } \
-    static UINT GetCreateID() { return CREATE_ID; }		   \
-
+    static void SET_CREATE_ID(UINT _ID) { CREATE_ID = _ID; } \
+    virtual UINT GetCreateID()							   \
+	{													   \
+		return m_iCreateID = CREATE_ID;					   \
+	}													   \
+	
 
 #define arraysize(a) (sizeof(a) / sizeof(a[0]))
 

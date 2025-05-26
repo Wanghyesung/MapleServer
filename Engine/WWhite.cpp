@@ -3,6 +3,8 @@
 
 #include "WSceneManger.h"
 #include "WTime.h"
+#include "WEventManager.h"
+
 namespace W
 {
 	UINT White::CREATE_ID = 0;
@@ -31,7 +33,7 @@ namespace W
 		if (m_vColor.w >= 1.f)
 		{
 			m_vColor = Vector4::Zero;
-			SceneManger::Erase(this);
+			EventManager::EraseObject(this);
 			m_pCompleteEvent();
 			return;
 		}

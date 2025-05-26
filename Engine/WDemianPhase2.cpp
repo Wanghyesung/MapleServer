@@ -591,7 +591,7 @@ namespace W
 		{
 			for (int i = 0; i < 2; ++i)
 			{
-				SceneManger::Erase(m_vecCircle[i]);
+				EventManager::EraseObject(m_vecCircle[i]);
 				m_vecCircle[i]->SetActive(false);
 			}
 		}

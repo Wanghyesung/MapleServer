@@ -91,6 +91,7 @@ namespace W
 
 		m_pShadow = new Shadow();
 	}
+
 	void Player::Update()
 	{
 		if (m_bAlert)
@@ -229,8 +230,8 @@ namespace W
 
 		UCHAR cDir = m_iDir > 0 ? 1 : 0; //0보다 크면 오른쪽 
 		UCHAR cAnimIdx = m_vecChildObj[0]->GetComponent<Animator>()->GetActiveAnimation()->GetCurIndex();
-		
-		pkt.set_anim((cDir << 8) | cAnimIdx);
+		UCHAR cAlert = m_bAlert ? 1 : 0;
+		pkt.set_anim((cAlert<<16) | (cDir << 8) | cAnimIdx);
 
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);

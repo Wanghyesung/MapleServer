@@ -8,6 +8,11 @@
 #include "..\Engine\WPlayerAttackObject.h"
 #include "..\Engine\WObjectPoolManager.h"
 #include "..\Engine\WMonsterManager.h"
+#include "ClientPacketHandler.h"
+#include "GameObject.pb.h"
+
+#include "Room.h"
+extern Room GRoom;
 namespace W
 {
 	UINT SceneManger::SCENE_IDX = 0;
@@ -58,8 +63,18 @@ namespace W
 
 	void SceneManger::Erase(GameObject* _pGameObject)
 	{
-		Scene* pScene = FindScene(_pGameObject->GetSceneName());
-		pScene->EraseObject(_pGameObject->GetLayerType(), _pGameObject);
+		eLayerType eLayer = _pGameObject->GetLayerType();
+		const wstring& strSceneName = _pGameObject->GetSceneName();
+
+		Scene* pScene = FindScene(strSceneName);
+		pScene->EraseObject(eLayer, _pGameObject);
+
+		Protocol::S_DELETE pkt;
+		UINT iObjectID = _pGameObject->GetObjectID();
+
+		pkt.set_layer_deleteid((((UCHAR)eLayer) << 24) | iObjectID);
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(strSceneName));
 	}
 
 	Scene* SceneManger::FindScene(const std::wstring& _strSceneName)

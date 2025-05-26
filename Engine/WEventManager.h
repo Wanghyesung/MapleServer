@@ -12,6 +12,7 @@ namespace W
 		UPDATE_INPUT,
 		CREATE_OBJECT,
 		DELET_OBJECT,
+		ERASE_OBJECT,
 		CHANGE_PLAYER_STATE,
 		CHANGE_PLAYER_SKILL,
 		ADD_PLAYER_SKILL,
@@ -46,6 +47,7 @@ namespace W
 		
 		static void CreateObject(GameObject* _pObj, eLayerType _eLayer);
 		static void DeleteObject(GameObject* _pObj);
+		static void EraseObject(GameObject* _pObj);
 
 		static void Update_Input(UINT _iPlayerID, const vector<USHORT>& _vecInput);
 		static void CreatePlayer(UINT _ID);
@@ -72,6 +74,7 @@ namespace W
 
 		static void create_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
 		static void delete_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
+		static void erase_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
 
 		static void update_input(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
 		static void create_player(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);

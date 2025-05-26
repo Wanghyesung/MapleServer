@@ -36,7 +36,7 @@ namespace W
 		std::unordered_map<UINT, GameObject*> m_hashGameObject;
 
 		UINT m_iObjectID;
-		RWLock m_lock;
+		//RWLock m_lock;
 
 		friend class UIManger;
 	};
