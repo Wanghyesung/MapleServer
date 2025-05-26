@@ -36,6 +36,7 @@ namespace W
 		m_arrFunction[(UINT)EVENT_TYPE::UPDATE_INPUT] = update_input;
 		m_arrFunction[(UINT)EVENT_TYPE::CREATE_OBJECT] = create_object;
 		m_arrFunction[(UINT)EVENT_TYPE::DELET_OBJECT] = delete_object;
+		m_arrFunction[(UINT)EVENT_TYPE::ERASE_OBJECT] = erase_object;
 		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_PLAYER_STATE] = change_player_fsmstate;
 		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_PLAYER_SKILL] = change_player_skillstate;
 		m_arrFunction[(UINT)EVENT_TYPE::ADD_PLAYER_SKILL] = add_player_skillstate;
@@ -85,14 +86,16 @@ namespace W
 
 			dynamic_cast<PlayerAttackObject*>(m_vecPlayer_Pool[i])->Off();
 		}
-		m_vecPlayer_Pool.clear();
-
+		
 		for (int i = 0; i < m_vecMonster_Pool.size(); ++i)
 		{
 			ObjectPoolManager::AddObjectPool(m_vecMonster_Pool[i]->GetName(), m_vecMonster_Pool[i]);
 			//erase를 여기서 시키기
 			SceneManger::Erase(m_vecMonster_Pool[i]);
 		}
+
+
+		m_vecPlayer_Pool.clear();
 		m_vecMonster_Pool.clear();
 	}
 
@@ -139,7 +142,6 @@ namespace W
 
 		Scene* pScene = SceneManger::FindScene(pObj->GetSceneName());
 		pScene->EraseObject(pObj->GetLayerType(), pObj);
-		delete pObj;
 
 		UINT iObjectID = pObj->GetObjectID();
 		Protocol::S_DELETE pkt;
@@ -147,6 +149,16 @@ namespace W
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));
+
+		delete pObj;
+	}
+
+	void EventManager::erase_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	{
+		GameObject* pObj = (GameObject*)_lParm;
+
+		Scene* pScene = SceneManger::FindScene(pObj->GetSceneName());
+		pScene->EraseObject(pObj->GetLayerType(), pObj);
 	}
 
 	void EventManager::update_input(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
@@ -272,6 +284,15 @@ namespace W
 		AddEvent(eve);
 	}
 
+	void EventManager::EraseObject(GameObject* _pObj)
+	{
+		tEvent eve = {};
+		eve.lParm = (DWORD_PTR)_pObj;
+
+		eve.eEventType = EVENT_TYPE::ERASE_OBJECT;
+		AddEvent(eve);
+	}
+
 	void EventManager::Update_Input(UINT _iPlayerID, const std::vector<USHORT>& _vecInput)
 	{
 		tEvent eve = {};
@@ -318,7 +339,6 @@ namespace W
 		eve.lParm = (DWORD_PTR)_pObj;
 		
 		eve.eEventType = EVENT_TYPE::ADD_MONSTER_POOL;
-
 
 		Vector3 vPosition = _pObj->GetComponent<Transform>()->GetPosition();
 		vPosition.x += ObjectPoolPosition;

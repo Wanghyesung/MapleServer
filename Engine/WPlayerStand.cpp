@@ -89,7 +89,7 @@ namespace W
 				return;
 
 			EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::jump);
-			pRigidbody->SetVelocity(Vector2(0.f, 4.f));
+			pRigidbody->SetVelocity(Vector2(0.f, 6.f));
 			pRigidbody->SetGround(false);
 		}
 

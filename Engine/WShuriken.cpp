@@ -5,6 +5,13 @@
 #include "WSceneManger.h"
 #include "WTime.h"
 #include "WEventManager.h"
+#include "GameObject.pb.h"
+#include "NetFunc.h"
+#include "ClientPacketHandler.h"
+#include "Room.h"
+
+extern Room GRoom;
+
 namespace W
 {
 	UINT Shuriken::CREATE_ID = 0;
@@ -35,7 +42,6 @@ namespace W
 		Collider2D* pCollider = AddComponent<Collider2D>();
 		GetComponent<Transform>()->SetScale(1.f, 1.f, 0.f);
 		pCollider->SetSize(Vector2(0.5f, 0.5f));
-
 	}
 
 	//이동, 삭제시간, attackscript말고 각각의 클래스에서
@@ -48,10 +54,19 @@ namespace W
 	{
 		Transform* pTr =GetComponent<Transform>();
 		Vector3 vPosition = pTr->GetPosition();
-		vPosition.x += (m_iDir * 8.f * Time::DeltaTime());
+		vPosition.x += (m_iDir * 16.f * Time::DeltaTime());
 		pTr->SetPosition(vPosition);
 
 		GameObject::LateUpdate();
+
+		UpdatePacket();
+	}
+
+	void Shuriken::UpdatePacket()
+	{
+		GameObject::UpdatePacket();
+
+		update_state();
 	}
 
 	void Shuriken::SetDir(int _iDir)
@@ -71,5 +86,24 @@ namespace W
 	void Shuriken::Off()
 	{
 		PlayerAttackObject::Off();
+	}
+
+	void Shuriken::update_state()
+	{
+		Protocol::S_STATE pkt;
+
+		UCHAR cLayer = (UCHAR)eLayerType::AttackObject;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = GetComponent<Animator>()->GetActiveAnimation();
+		UCHAR cDir = m_iDir > 0 ? 1 : 0;
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+
+		pkt.set_anim((cDir << 8) | cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Broadcast(pSendBuffer);
 	}
 }

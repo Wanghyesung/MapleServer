@@ -20,7 +20,7 @@ namespace W
 	{
 		m_vLimitedVelocity.x = 10.0f;
 		m_vLimitedVelocity.y = 10.0f;
-		m_vGravity = Vector2(0.0f, -12.f);
+		m_vGravity = Vector2(0.0f, -20.f);
 		m_vFriction = Vector2::Zero; //사용하지 않음
 	}
 	Rigidbody::~Rigidbody()

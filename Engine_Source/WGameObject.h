@@ -121,6 +121,7 @@ namespace W
 		UINT GetObjectID() { return m_iObjectID; }
 
 		DECLARE_CREATE_ID;
+
 	private:
 		eState m_eState;
 		std::vector<Component*> m_vecComponent;

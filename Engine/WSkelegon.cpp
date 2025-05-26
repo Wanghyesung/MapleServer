@@ -12,7 +12,11 @@
 #include "WSceneManger.h"
 #include "WEffect.h"
 #include "WMonsterDead.h"
-
+#include "ObjectState.pb.h"
+#include "NetFunc.h"
+#include "ClientPacketHandler.h"
+#include "Room.h"
+extern Room GRoom;
 namespace W
 {
 	UINT Skelegon::CREATE_ID = 0;
@@ -27,16 +31,17 @@ namespace W
 	
 		pAnimator->Create(L"skelegon_stand_left", Vector2(0.0f, 0.0f), Vector2(600.0f, 200.0f), 6, Vector2(600.f, 200.f));
 		pAnimator->Create(L"skelegon_move_left", Vector2(0.0f, 200.0f), Vector2(600.0f, 200.0f), 4, Vector2(600.f, 200.f));
-		pAnimator->Create(L"skelegon_attack0_left", Vector2(0.0f, 400.0f), Vector2(600.0f, 200.0f), 11, Vector2(600.f, 200.f), Vector2::Zero, 0.2f);
-		pAnimator->Create(L"skelegon_dead_left", Vector2(0.0f, 600.0f), Vector2(600.0f, 200.0f), 8, Vector2(600.f, 200.f), Vector2::Zero, 0.15f);
+		pAnimator->Create(L"skelegon_attack0_left", Vector2(0.0f, 400.0f), Vector2(600.0f, 200.0f), 11, Vector2(600.f, 200.f), Vector2::Zero, 0.1f);
+		pAnimator->Create(L"skelegon_dead_left", Vector2(0.0f, 600.0f), Vector2(600.0f, 200.0f), 8, Vector2(600.f, 200.f), Vector2::Zero, 0.07f);
 		pAnimator->Create(L"skelegon_hit_left", Vector2(0.0f, 600.0f), Vector2(600.0f, 200.0f), 1, Vector2(600.f, 200.f));
 
 		pAnimator->Create(L"skelegon_stand_right", Vector2(6000.0f, 0.0f), Vector2(-600.0f, 200.0f), 6, Vector2(600.f, 200.f));
 		pAnimator->Create(L"skelegon_move_right", Vector2(6000.0f, 200.0f), Vector2(-600.0f, 200.0f), 4, Vector2(600.f, 200.f));
-		pAnimator->Create(L"skelegon_attack0_right", Vector2(6000.0f, 400.0f), Vector2(-600.0f, 200.0f), 11, Vector2(600.f, 200.f), Vector2::Zero, 0.2f);
-		pAnimator->Create(L"skelegon_dead_right", Vector2(6000.0f, 600.0f), Vector2(-600.0f, 200.0f), 8, Vector2(600.f, 200.f), Vector2::Zero, 0.15f);
+		pAnimator->Create(L"skelegon_attack0_right", Vector2(6000.0f, 400.0f), Vector2(-600.0f, 200.0f), 11, Vector2(600.f, 200.f), Vector2::Zero, 0.1f);
+		pAnimator->Create(L"skelegon_dead_right", Vector2(6000.0f, 600.0f), Vector2(-600.0f, 200.0f), 8, Vector2(600.f, 200.f), Vector2::Zero, 0.07f);
 		pAnimator->Create(L"skelegon_hit_right", Vector2(6000.0f, 600.0f), Vector2(-600.0f, 200.0f), 1, Vector2(600.f, 200.f));
 
+	
 	}
 
 	Skelegon::~Skelegon()
@@ -52,7 +57,7 @@ namespace W
 		tObjectInfo tObjInfo = {};
 		//tObjInfo.fAttack = 5.f;
 		tObjInfo.fDefense = 5.f;
-		tObjInfo.fSpeed = 1.f;
+		tObjInfo.fSpeed = 2.f;
 		pSkelegonScript->SetObjectInfo(tObjInfo);
 
 
@@ -78,7 +83,7 @@ namespace W
 
 
 		MonsterFSM* pFSM = new MonsterFSM();
-		//m_pFSM->SetPlayer(m_pPlayer);5
+		//m_pFSM->SetPlayer(m_pPlayer);
 		pFSM->SetMonster(this);
 		pFSM->AddState(new MonsterStand());
 		pFSM->AddState(new MonsterMove());
@@ -135,6 +140,15 @@ namespace W
 		}
 
 		Monster::LateUpdate();
+
+		UpdatePacket();
+	}
+
+	void Skelegon::UpdatePacket()
+	{
+		Monster::UpdatePacket();
+		
+		update_state();
 	}
 
 	//void Skelegon::Render()
@@ -161,5 +175,23 @@ namespace W
 		pLaser->SetOnwer(this);
 
 		EventManager::CreateObject(pLaser, eLayerType::MonsterAttack);
+	}
+	void Skelegon::update_state()
+	{
+		Protocol::S_STATE pkt;
+		
+		UCHAR cLayer = (UCHAR)eLayerType::Monster;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = GetComponent<Animator>()->GetActiveAnimation();
+		UCHAR cDir = GetDir() > 0 ? 1 : 0; 
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+		
+		pkt.set_anim((cDir << 8) | cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Broadcast(pSendBuffer);
 	}
 }

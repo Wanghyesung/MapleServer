@@ -4,8 +4,7 @@
 namespace W
 {
 	Layer::Layer():
-		m_iObjectID(LAYER_STARAT_IDX),
-		m_lock{}
+		m_iObjectID(LAYER_STARAT_IDX)
 	{
 		
 	}
@@ -20,10 +19,11 @@ namespace W
 	}
 	void Layer::Initialize()
 	{
+
 	}
 	void Layer::Update()
 	{
-		RLock lock(m_lock);
+		//RLock lock(m_lock);
 
 		auto iter = m_hashGameObject.begin();
 		for (iter; iter != m_hashGameObject.end(); ++iter)
@@ -38,7 +38,7 @@ namespace W
 	}
 	void Layer::LateUpdate()
 	{
-		RLock lock(m_lock);
+		//RLock lock(m_lock);
 
 		auto iter = m_hashGameObject.begin();
 		for (iter; iter != m_hashGameObject.end(); ++iter)
@@ -56,7 +56,7 @@ namespace W
 
 	void Layer::DestroyAll(Scene* _pScene)
 	{
-		WLock lock(m_lock);
+		//WLock lock(m_lock);
 		auto iter = m_hashGameObject.begin();
 		for (iter; iter != m_hashGameObject.end(); ++iter)
 		{
@@ -68,7 +68,7 @@ namespace W
 
 	void Layer::AddGameObject(GameObject* _pGameObj)
 	{
-		WLock lock(m_lock);
+		//WLock lock(m_lock);
 
 		if (_pGameObj->GetObjectID() == 0)
 		{
@@ -83,7 +83,7 @@ namespace W
 	{
 		UINT iGameObjectID = _pGameObject->GetObjectID();
 
-		WLock lock(m_lock);
+		//WLock lock(m_lock);
 
 		auto iter = m_hashGameObject.find(iGameObjectID);
 		GameObject* pGameObject = iter->second;
@@ -94,14 +94,14 @@ namespace W
 
 	const unordered_map<UINT, GameObject*>& Layer::GetGameObjects()
 	{
-		RLock lock(m_lock);
+		//RLock lock(m_lock);
 
 		return m_hashGameObject;
 	}
 
 	std::unordered_map<UINT, GameObject*> Layer::GetCopyGameObjects()
 	{
-		RLock lock(m_lock);
+		//RLock lock(m_lock);
 
 		return m_hashGameObject;
 	}

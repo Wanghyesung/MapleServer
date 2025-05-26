@@ -14,6 +14,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
+		virtual void UpdatePacket()override;
 
 		DECLARE_CREATE_ID;
 
@@ -21,6 +22,10 @@ namespace W
 		void SetDir(int _iDir);
 
 		virtual void Off()override;
+
+	private:
+		void update_state();
+
 	private:
 		int m_iDir;
 

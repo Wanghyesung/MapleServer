@@ -34,6 +34,10 @@ namespace W
 		GameObject::LateUpdate();
 	}
 
+	void PlayerAttackObject::UpdatePacket()
+	{
+	}
+
 	void PlayerAttackObject::Off()
 	{
 		GetScript<AttackScript>()->off();

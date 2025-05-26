@@ -35,7 +35,15 @@ namespace W
 	{
 		if (m_bDead)
 			return;
+
 		GameObject::LateUpdate();
+
+		UpdatePacket();
+	}
+
+	void Monster::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
 	}
 
 	void Monster::SetItem(const std::vector<std::wstring>& _vecItemNames)

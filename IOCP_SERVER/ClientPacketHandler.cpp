@@ -7,7 +7,7 @@
 #include "NetFunc.h"
 #include "..\Engine_Source\WSceneManger.h"
 #include "..\Engine_Source\WLayer.h"
-
+#include "..\Engine_Source\WAnimator.h"
 PacketHandlerFunc GPacketHandler[UINT16_MAX] = {};
 //event버퍼에 넣기
 bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
@@ -77,44 +77,58 @@ bool Handle_C_CREATE(shared_ptr<Session> _pSession, Protocol::C_CREATE& _pkt)
 
 bool Handle_C_MAP(shared_ptr<Session> _pSession, Protocol::C_MAP& _pkt)
 {
-	//Protocol::S_MAP pkt;
-	//
-	//UINT iPlayerID = _pkt.player_id();
-	//const wstring& strScene = StringToWString(_pkt.scene());
-	//
-	////monster, monsterattack, player, ,playerattack
-	//vector<unordered_map<UINT, W::GameObject*>*> vecObjects;
-	//
-	//auto* pMonster = &W::SceneManger::FindScene(strScene)->GetLayer(W::eLayerType::Monster).GetCopyGameObjects();
-	//auto* pMonsterAttack = &W::SceneManger::FindScene(strScene)->GetLayer(W::eLayerType::MonsterAttack).GetCopyGameObjects();
-	//auto* pPlayer = &W::SceneManger::FindScene(strScene)->GetLayer(W::eLayerType::Player).GetCopyGameObjects();
-	//auto* pPlayerAttack = &W::SceneManger::FindScene(strScene)->GetLayer(W::eLayerType::AttackObject).GetCopyGameObjects();
-	//
-	//vecObjects.push_back(pMonster);
-	//vecObjects.push_back(pMonsterAttack);
-	//vecObjects.push_back(pPlayer);
-	//vecObjects.push_back(pPlayerAttack);
-	//
-	//Protocol::S_CREATE pkt;
-	//for (int i = 0; i < vecObjects.size(); ++i)
-	//{
-	//
-	//}
-	//Protocol::ObjectInfo* tInfo = pkt.mutable_object_info();
-	//tInfo->set_layer_createid_id((UCHAR)eLayer << 24 | iCreateID << 16 | iObjectID);
-	//
-	//Vector3 vPosition = pObj->GetComponent<Transform>()->GetPosition();
-	//tInfo->set_x(vPosition.x);	tInfo->set_y(vPosition.y);	tInfo->set_z(vPosition.z);
-	//
-	//UCHAR cDir = 1;
-	//UCHAR cAnimIdx = 0;
-	//UCHAR bRender = pObj->IsRender();
-	//Animator* pAnim = pObj->GetComponent<Animator>();
-	//if (pAnim)
-	//	cAnimIdx = 0;
-	//
-	//tInfo->set_anim((bRender << 16) | (cDir << 8) | cAnimIdx);
-	return false;
+	Protocol::S_MAP pkt;
+	
+	UINT iPlayerID = _pkt.player_id();
+	const wstring& strScene = StringToWString(_pkt.scene());
+	
+	//monster, monsterattack, player, ,playerattack
+	vector<unordered_map<UINT, W::GameObject*>> vecObjects;
+	W::Scene* pScene = W::SceneManger::FindScene(strScene);
+	auto pMonster = pScene->GetLayer(W::eLayerType::Monster)->GetCopyGameObjects();
+	auto pMonsterAttack = pScene->GetLayer(W::eLayerType::MonsterAttack)->GetCopyGameObjects();
+	auto pPlayer = pScene->GetLayer(W::eLayerType::Player)->GetCopyGameObjects();
+	pPlayer.erase(iPlayerID);
+	auto pPlayerAttack = pScene->GetLayer(W::eLayerType::AttackObject)->GetCopyGameObjects();
+	
+	vecObjects.push_back(move(pMonster));
+	vecObjects.push_back(move(pMonsterAttack));
+	vecObjects.push_back(move(pPlayer));
+	vecObjects.push_back(move(pPlayerAttack));
+	
+	for (int i = 0; i < vecObjects.size(); ++i)
+	{
+		auto iter = vecObjects[i].begin();
+		for (iter; iter != vecObjects[i].end(); ++iter)
+		{
+			Protocol::ObjectInfo tInfo = {};
+			W::GameObject* pGameObj = iter->second;
+
+			W::eLayerType eLayer = pGameObj->GetLayerType();
+			UINT iCreateID = pGameObj->GetCreateID();
+			UINT iObjectID = pGameObj->GetObjectID();
+			tInfo.set_layer_createid_id((UCHAR)eLayer << 24 | iCreateID << 16 | iObjectID);
+
+			W::Vector3 vPosition = pGameObj->GetComponent<W::Transform>()->GetPosition();
+			tInfo.set_x(vPosition.x);	tInfo.set_y(vPosition.y);	tInfo.set_z(vPosition.z);
+
+			UCHAR cDir = 1;
+			CHAR cAnimIdx = 0;
+			UCHAR bRender = pGameObj->IsRender();
+			W::Animator* pAnim = pGameObj->GetComponent<W::Animator>();
+			if (pAnim)
+				cAnimIdx = 0;
+
+			tInfo.set_anim((bRender << 16) | (cDir << 8) | cAnimIdx);
+
+			*pkt.add_objinfo() = tInfo;
+		}
+	}
+	
+	shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+	_pSession->Send(pSendBuffer);
+	
+	return true;
 }
 
 bool Handle_C_EXIT(shared_ptr<Session> _pSession, Protocol::C_EXIT& _pkt)

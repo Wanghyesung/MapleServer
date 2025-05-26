@@ -4,6 +4,8 @@
 #include "WInfo.h"
 #include "WBattleManager.h"
 #include "WSceneManger.h"
+#include "WEventManager.h"
+
 namespace W
 {
 	UINT Effect::CREATE_ID = 0;
@@ -139,6 +141,6 @@ namespace W
 		m_iFuncCount = 1;
 		m_bActive = false;
 		BattleManager::PushEffect(this);
-		SceneManger::Erase(this);
+		EventManager::EraseObject(this);
 	}
 }
