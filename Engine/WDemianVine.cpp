@@ -25,7 +25,7 @@ namespace W
 	{
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"vine", Vector2(0.0f, 0.0f), Vector2(244.f, 150.f), 9, Vector2(250.f, 250.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"vine", Vector2(0.0f, 0.0f), Vector2(244.f, 150.f), 9, Vector2(250.f, 250.f), Vector2::Zero, 0.07f);
 
 
 	

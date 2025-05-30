@@ -25,7 +25,7 @@ namespace W
 		
 		Animator* pAnim = AddComponent<Animator>();
 		
-		pAnim->Create(L"fire1", Vector2(0.0f, 0.0f), Vector2(78.f, 78.0f), 6, Vector2(2000.f, 2000.f), Vector2::Zero, 0.12f);
+		pAnim->Create(L"fire1", Vector2(0.0f, 0.0f), Vector2(78.f, 78.0f), 6, Vector2(2000.f, 2000.f), Vector2::Zero, 0.06f);
 
 		pAnim->Play(L"fire1", true);
 

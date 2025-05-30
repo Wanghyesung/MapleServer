@@ -40,7 +40,7 @@ namespace W
 	void SkillState::Exit()
 	{
 		//SkillManager::SetActiveSkill(Player::ePlayerSkill::end);
-		EventManager::ChangePlayerSkillState(GetPlayer(),Player::ePlayerSkill::end);
+		EventManager::ChangePlayerSkillState(GetPlayer()->GetPlayerID(), Player::ePlayerSkill::end);
 
 		Player::ePlayerState eState = GetPlayer()->GetCurPlayerState();
 		if(eState != Player::ePlayerState::ladder)
@@ -75,11 +75,14 @@ namespace W
 	}
 	void SkillState::StartEffect(Effect* _pEffect)
 	{
-		EventManager::CreateObject(_pEffect, eLayerType::Effect);
-		_pEffect->SetOwner(GetPlayer());
+		Player* pPlayer = GetPlayer();
+		_pEffect->SetOwner(pPlayer);
 		_pEffect->SetActive(true);
 
-		_pEffect->StartEffect(GetPlayer()->GetDir());
+		_pEffect->StartEffect(pPlayer->GetDir());
+		_pEffect->SetSceneName(pPlayer->GetSceneName());
+
+		EventManager::CreateObject(_pEffect, eLayerType::Effect);
 	}
 	void SkillState::AddDamage(PlayerAttackObject* _pAttackObject)
 	{

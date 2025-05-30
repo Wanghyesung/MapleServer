@@ -39,6 +39,14 @@ namespace W
 		}
 	}
 
+	void Scene::UpdatePacket()
+	{
+		for (Layer* layer : m_vecLayer)
+		{
+			layer->UpdatePacket();
+		}
+	}
+
 
 	void Scene::OnEnter()
 	{

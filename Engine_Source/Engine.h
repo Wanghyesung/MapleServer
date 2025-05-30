@@ -64,3 +64,10 @@ using namespace std::experimental::filesystem;
 #include "Common.h"
 #include "Enums.h"
 #include "WMath.h"
+
+
+#include "..\IOCP_SERVER\NetFunc.h"
+#include "..\IOCP_SERVER\ClientPacketHandler.h"
+#include "..\IOCP_SERVER\Room.h"
+
+extern Room GRoom;

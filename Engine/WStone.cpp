@@ -14,7 +14,7 @@ namespace W
 		pCollider->SetSize(Vector2(0.8f, 0.8f));
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"stone_left", Vector2(0.0f, 0.0f), Vector2(69.0f, 106.0f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
+		pAnim->Create(L"stone_left", Vector2(0.0f, 0.0f), Vector2(69.0f, 106.0f), 3, Vector2(100.f, 100.f), Vector2::Zero, 0.1f);
 
 		pAnim->Play(L"stone_left", true);
 

@@ -26,7 +26,7 @@ namespace W
 
 	
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Laser", Vector2(0.0f, 0.0f), Vector2(189.f, 847.0f), 20, Vector2(850.f, 850.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"Laser", Vector2(0.0f, 0.0f), Vector2(189.f, 847.0f), 20, Vector2(850.f, 850.f), Vector2::Zero, 0.07f);
 
 		pAnim->CompleteEvent(L"Laser") = std::bind(&ArielLaser::off, this);
 		pAnim->Play(L"Laser", true);

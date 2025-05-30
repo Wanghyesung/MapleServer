@@ -52,6 +52,20 @@ namespace W
 		}
 	}
 
+	void Layer::UpdatePacket()
+	{
+		auto iter = m_hashGameObject.begin();
+		for (iter; iter != m_hashGameObject.end(); ++iter)
+		{
+			GameObject* gameObj = iter->second;
+
+			if (gameObj->GetState() != GameObject::eState::Active)
+				continue;
+
+			gameObj->UpdatePacket();
+		}
+	}
+
 
 
 	void Layer::DestroyAll(Scene* _pScene)
@@ -68,12 +82,12 @@ namespace W
 
 	void Layer::AddGameObject(GameObject* _pGameObj)
 	{
-		//WLock lock(m_lock);
-
 		if (_pGameObj->GetObjectID() == 0)
 		{
 			_pGameObj->SetObjectID(m_iObjectID);
 			m_hashGameObject.insert(std::make_pair(m_iObjectID++, _pGameObj));
+
+			//21억을 넘긴다면 다시 0으로
 		}
 		else
 			m_hashGameObject.insert(std::make_pair(_pGameObj->GetObjectID(), _pGameObj));

@@ -25,9 +25,9 @@ namespace W
 
 		Animator* pAnim = AddComponent<Animator>();
 	
-		pAnim->Create(L"stone_start", Vector2(0.0f, 0.0f), Vector2(350.0f, 350.0f), 7, Vector2(1100.f, 1100.f), Vector2::Zero, 0.12f);
-		pAnim->Create(L"stone_move", Vector2(0.0f, 350.0f), Vector2(350.0f, 350.0f), 8, Vector2(1100.f, 1100.f), Vector2::Zero, 0.12f);
-		pAnim->Create(L"stone_end", Vector2(0.0f, 700.f), Vector2(350.0f, 350.0f), 6, Vector2(1100.f, 1100.f), Vector2::Zero, 0.1f);
+		pAnim->Create(L"stone_start", Vector2(0.0f, 0.0f), Vector2(350.0f, 350.0f), 7, Vector2(1100.f, 1100.f), Vector2::Zero, 0.06f);
+		pAnim->Create(L"stone_move", Vector2(0.0f, 350.0f), Vector2(350.0f, 350.0f), 8, Vector2(1100.f, 1100.f), Vector2::Zero, 0.06f);
+		pAnim->Create(L"stone_end", Vector2(0.0f, 700.f), Vector2(350.0f, 350.0f), 6, Vector2(1100.f, 1100.f), Vector2::Zero, 0.05f);
 
 		pAnim->CompleteEvent(L"stone_start") = std::bind(&MegnusStone::start, this);
 		pAnim->CompleteEvent(L"stone_end") = std::bind(&MegnusStone::off, this);

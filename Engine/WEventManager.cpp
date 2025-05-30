@@ -159,6 +159,13 @@ namespace W
 
 		Scene* pScene = SceneManger::FindScene(pObj->GetSceneName());
 		pScene->EraseObject(pObj->GetLayerType(), pObj);
+
+		UINT iObjectID = pObj->GetObjectID();
+		Protocol::S_DELETE pkt;
+		pkt.set_layer_deleteid((UCHAR)pObj->GetLayerType() << 24 | iObjectID);
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));
 	}
 
 	void EventManager::update_input(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
@@ -357,11 +364,11 @@ namespace W
 
 		AddEvent(eve);
 	}
-	void EventManager::ChangePlayerSkillState(Player* _pObj, Player::ePlayerSkill _ePlayerSkill)
+	void EventManager::ChangePlayerSkillState(UINT _iPlayerID, Player::ePlayerSkill _ePlayerSkill)
 	{
 		tEvent eve = {};
 		
-		eve.lParm = (DWORD_PTR)_pObj->GetPlayerID();
+		eve.lParm = (DWORD_PTR)_iPlayerID;
 		eve.wParm = (DWORD_PTR)_ePlayerSkill;
 		//eve.wParm = (DWORD_PTR)_ePlayerSkill;
 		eve.eEventType = EVENT_TYPE::CHANGE_PLAYER_SKILL;

@@ -24,8 +24,8 @@ namespace W
 		GetComponent<Transform>()->SetScale(18.f, 18.f, 0.f);
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"fire_start", Vector2(0.0f, 0.0f), Vector2(144.f, 142.0f), 9, Vector2(2000.f, 2000.f), Vector2::Zero, 0.12f);
-		pAnim->Create(L"fire_end", Vector2(0.0f, 142.f), Vector2(385.f, 209.0f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.1f);
+		pAnim->Create(L"fire_start", Vector2(0.0f, 0.0f), Vector2(144.f, 142.0f), 9, Vector2(2000.f, 2000.f), Vector2::Zero, 0.06f);
+		pAnim->Create(L"fire_end", Vector2(0.0f, 142.f), Vector2(385.f, 209.0f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.05f);
 
 		pAnim->CompleteEvent(L"fire_start") = std::bind(&DemianFire0::start, this);
 		pAnim->CompleteEvent(L"fire_end") = std::bind(&DemianFire0::off, this);

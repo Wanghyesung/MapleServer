@@ -26,8 +26,8 @@ namespace W
 		
 		Animator* pAnim = AddComponent<Animator>();
 	
-		pAnim->Create(L"fire_start", Vector2(0.0f, 0.0f), Vector2(62.f, 64.0f), 9, Vector2(2000.f, 2000.f), Vector2::Zero, 0.12f);
-		pAnim->Create(L"fire_end", Vector2(0.0f, 64.f), Vector2(167.f, 291.0f), 10, Vector2(2000.f, 2000.f), Vector2::Zero, 0.1f);
+		pAnim->Create(L"fire_start", Vector2(0.0f, 0.0f), Vector2(62.f, 64.0f), 9, Vector2(2000.f, 2000.f), Vector2::Zero, 0.06f);
+		pAnim->Create(L"fire_end", Vector2(0.0f, 64.f), Vector2(167.f, 291.0f), 10, Vector2(2000.f, 2000.f), Vector2::Zero, 0.05f);
 
 		pAnim->CompleteEvent(L"fire_start") = std::bind(&DemianFire2::start, this);
 		pAnim->CompleteEvent(L"fire_end") = std::bind(&DemianFire2::off, this);

@@ -13,10 +13,7 @@
 #include "WEffect.h"
 #include "WMonsterDead.h"
 #include "ObjectState.pb.h"
-#include "NetFunc.h"
-#include "ClientPacketHandler.h"
-#include "Room.h"
-extern Room GRoom;
+
 namespace W
 {
 	UINT Skelegon::CREATE_ID = 0;
@@ -141,12 +138,11 @@ namespace W
 
 		Monster::LateUpdate();
 
-		UpdatePacket();
 	}
 
 	void Skelegon::UpdatePacket()
 	{
-		Monster::UpdatePacket();
+		GetComponent<Transform>()->SendTransform();
 		
 		update_state();
 	}

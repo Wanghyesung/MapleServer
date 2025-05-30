@@ -17,7 +17,7 @@ namespace W
 		GetComponent<Transform>()->SetScale(8.f, 8.f, 0.f);
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Thunder_left", Vector2(0.0f, 0.0f), Vector2(174.f, 821.0f), 5, Vector2(800.f, 800.f), Vector2::Zero, 0.3f);
+		pAnim->Create(L"Thunder_left", Vector2(0.0f, 0.0f), Vector2(174.f, 821.0f), 5, Vector2(800.f, 800.f), Vector2::Zero, 0.15f);
 
 		pAnim->CompleteEvent(L"Thunder_left") = std::bind(&RexThunder::off, this);
 		pAnim->Play(L"Thunder_left", true);

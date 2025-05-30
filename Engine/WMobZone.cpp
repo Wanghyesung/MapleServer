@@ -24,7 +24,7 @@ namespace W
 		GetComponent<Transform>()->SetScale(10.f, 10.f, 0.f);
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Megnus_Zone0", Vector2(0.0f, 0.0f), Vector2(796.f, 852.0f), 8, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"Megnus_Zone0", Vector2(0.0f, 0.0f), Vector2(796.f, 852.0f), 8, Vector2(1100.f, 1100.f), Vector2::Zero, 0.07f);
 		
 		pAnim->Play(L"Megnus_Zone0", true);
 	}

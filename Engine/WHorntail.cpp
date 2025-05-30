@@ -34,16 +34,16 @@ namespace W
 
 		Animator* pAnim = AddComponent<Animator>();
 
-		pAnim->Create(L"HorntailStart", Vector2(0.0f, 0.f), Vector2(886.f, 891.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"HorntailStart")->Create(L"HorntailStart", Vector2(0.0f, 891.0f), Vector2(886.f, 891.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"HorntailStart")->Create(L"HorntailStart", Vector2(0.0f, 1782.f), Vector2(886.f, 891.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"HorntailStart")->Create(L"HorntailStart", Vector2(0.0f, 2673.f), Vector2(886.f, 891.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"HorntailStart", Vector2(0.0f, 0.f), Vector2(886.f, 891.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+		pAnim->FindAnimation(L"HorntailStart")->Create(L"HorntailStart", Vector2(0.0f, 891.0f), Vector2(886.f, 891.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+		pAnim->FindAnimation(L"HorntailStart")->Create(L"HorntailStart", Vector2(0.0f, 1782.f), Vector2(886.f, 891.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+		pAnim->FindAnimation(L"HorntailStart")->Create(L"HorntailStart", Vector2(0.0f, 2673.f), Vector2(886.f, 891.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
 		pAnim->CompleteEvent(L"HorntailStart") = std::bind(&Horntail::create_child, this);
 
 	
-		pAnim->Create(L"HorntailDead", Vector2(0.0f, 0.f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"HorntailDead")->Create(L"HorntailDead", Vector2(0.0f, 643.0f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"HorntailDead")->Create(L"HorntailDead", Vector2(0.0f, 1286.f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"HorntailDead", Vector2(0.0f, 0.f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+		pAnim->FindAnimation(L"HorntailDead")->Create(L"HorntailDead", Vector2(0.0f, 643.0f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+		pAnim->FindAnimation(L"HorntailDead")->Create(L"HorntailDead", Vector2(0.0f, 1286.f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
 		pAnim->CompleteEvent(L"HorntailDead") = std::bind(&Horntail::delete_child, this);
 	}
 

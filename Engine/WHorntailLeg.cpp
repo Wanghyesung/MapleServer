@@ -20,10 +20,10 @@ namespace W
 
 		
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Leg_stand", Vector2(0.f, 0.f), Vector2(600.f, 300.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Leg_attack0", Vector2(0.f, 300.f), Vector2(600.f, 300.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Leg_attack1", Vector2(0.f, 600.f), Vector2(600.f, 300.f), 18, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Leg_dead", Vector2(0.f, 900.f), Vector2(600.f, 300.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"Leg_stand", Vector2(0.f, 0.f), Vector2(600.f, 300.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+		pAnim->Create(L"Leg_attack0", Vector2(0.f, 300.f), Vector2(600.f, 300.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+		pAnim->Create(L"Leg_attack1", Vector2(0.f, 600.f), Vector2(600.f, 300.f), 18, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+		pAnim->Create(L"Leg_dead", Vector2(0.f, 900.f), Vector2(600.f, 300.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
 
 	}
 	HorntailLeg::~HorntailLeg()

@@ -3,7 +3,7 @@
 #include "Room.h"
 #include "Transform.pb.h"
 #include "ClientPacketHandler.h"
-extern Room GRoom;
+
 namespace W
 {
 

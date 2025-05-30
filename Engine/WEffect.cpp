@@ -68,6 +68,13 @@ namespace W
 		GameObject::LateUpdate();
 	}
 
+	void Effect::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
+
+		update_state();
+	}
+
 	void Effect::CreateAnimation(Vector2 _vLeftTop, Vector2 _vSize, UINT _iColumnLength,
 		UINT _iRowLength, Vector2 _vDivisionSize, Vector2 _vOffset, float _fDuration)
 	{
@@ -84,16 +91,12 @@ namespace W
 
 		for (int i = 1; i < _iRowLength; ++i)
 		{
-			//_vLeftTop = vTemLeftTop;
-			//_vSize = vTemSize;
-
+			
 			_vLeftTop.y = i * _vSize.y;
 
 			pAnimator->FindAnimation(GetName() + L"Anim_left")->Create(GetName() + L"Anim_left", _vLeftTop,
 				_vSize, _iColumnLength, _vDivisionSize, Vector2::Zero, _fDuration);
 
-			//_vLeftTop.x = _pAtlas->GetWidth() - _vSize.x;
-			//_vSize.x *= -1;
 
 			pAnimator->FindAnimation(GetName() + L"Anim_right")->Create(GetName() + L"Anim_right", _vLeftTop,
 				_vSize, _iColumnLength, _vDivisionSize, Vector2::Zero, _fDuration);
@@ -142,5 +145,24 @@ namespace W
 		m_bActive = false;
 		BattleManager::PushEffect(this);
 		EventManager::EraseObject(this);
+	}
+
+	void Effect::update_state()
+	{
+		Protocol::S_STATE pkt;
+
+		UCHAR cLayer = (UCHAR)eLayerType::Effect;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = GetComponent<Animator>()->GetActiveAnimation();
+		UCHAR cDir = m_iDir > 0 ? 1 : 0;
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+
+		pkt.set_anim((cDir << 8) | cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Broadcast(pSendBuffer);
 	}
 }
