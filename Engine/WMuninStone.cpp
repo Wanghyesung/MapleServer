@@ -19,7 +19,7 @@ namespace W
 		GetComponent<Transform>()->SetScale(6.f, 6.f, 0.f);
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Stone_left", Vector2(0.0f, 0.0f), Vector2(145.f, 514.0f), 20, Vector2(510.f, 510.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"Stone_left", Vector2(0.0f, 0.0f), Vector2(145.f, 514.0f), 20, Vector2(510.f, 510.f), Vector2::Zero, 0.07f);
 
 		pAnim->CompleteEvent(L"Stone_left") = std::bind(&MuninStone::off, this);
 		pAnim->Play(L"Stone_left", true);

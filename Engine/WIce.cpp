@@ -19,7 +19,7 @@ namespace W
 		GetComponent<Transform>()->SetScale(2.1f, 2.1f, 0.f);
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Ice_left", Vector2(0.0f, 0.0f), Vector2(216.f, 242.0f), 30, Vector2(220.f, 220.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"Ice_left", Vector2(0.0f, 0.0f), Vector2(216.f, 242.0f), 30, Vector2(220.f, 220.f), Vector2::Zero, 0.07f);
 
 		pAnim->CompleteEvent(L"Ice_left") = std::bind(&Ice::off, this);
 		pAnim->Play(L"Ice_left", true);

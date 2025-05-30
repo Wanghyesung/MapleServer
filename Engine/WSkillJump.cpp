@@ -51,9 +51,8 @@ namespace W
 		pRigidbody->SetVelocity(Vector2(pPlayer->GetDir() * 4.f, 3.5f));
 
 		//skillState::exit
-		EventManager::ChangePlayerSkillState(pPlayer, Player::ePlayerSkill::end);
-		//SkillManager::SetActiveSkill(Player::ePlayerSkill::end);
-
+		EventManager::ChangePlayerSkillState(pPlayer->GetPlayerID(), Player::ePlayerSkill::end);
+	
 		//StartSound();
 	}
 

@@ -19,7 +19,7 @@ namespace W
 		GetComponent<Transform>()->SetScale(10.f, 10.f, 0.f);
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Clone_Megnus", Vector2(0.0f, 0.0f), Vector2(408.f, 354.0f), 27, Vector2(1100.f, 1100.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"Clone_Megnus", Vector2(0.0f, 0.0f), Vector2(408.f, 354.0f), 27, Vector2(1100.f, 1100.f), Vector2::Zero, 0.07f);
 
 		pAnim->CompleteEvent(L"Clone_Megnus") = std::bind(&CloneMegnus::off, this);
 		pAnim->Play(L"Clone_Megnus", true);

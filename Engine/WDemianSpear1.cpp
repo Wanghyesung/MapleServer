@@ -19,7 +19,7 @@ namespace W
 		GetComponent<Transform>()->SetScale(18.f, 18.f, 0.f);
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Spear", Vector2(0.0f, 0.0f), Vector2(258.f, 538.0f), 29, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"Spear", Vector2(0.0f, 0.0f), Vector2(258.f, 538.0f), 29, Vector2(2000.f, 2000.f), Vector2::Zero, 0.07f);
 
 		pAnim->CompleteEvent(L"Spear") = std::bind(&DemianSpear1::off, this);
 		pAnim->Play(L"Spear", true);

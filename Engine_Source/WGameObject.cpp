@@ -84,7 +84,7 @@ namespace W
 	void GameObject::UpdatePacket()
 	{
 		//tr
-		GetComponent<Transform>()->SendTransform();
+		
 
 		//anim
 	}

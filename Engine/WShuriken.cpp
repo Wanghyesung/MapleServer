@@ -6,11 +6,8 @@
 #include "WTime.h"
 #include "WEventManager.h"
 #include "GameObject.pb.h"
-#include "NetFunc.h"
-#include "ClientPacketHandler.h"
-#include "Room.h"
 
-extern Room GRoom;
+
 
 namespace W
 {
@@ -59,12 +56,11 @@ namespace W
 
 		GameObject::LateUpdate();
 
-		UpdatePacket();
 	}
 
 	void Shuriken::UpdatePacket()
 	{
-		GameObject::UpdatePacket();
+		GetComponent<Transform>()->SendTransform();
 
 		update_state();
 	}

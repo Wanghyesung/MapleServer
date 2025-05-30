@@ -35,7 +35,8 @@ namespace W
 		SkillManager::Update();
 		Update();
 		LateUpdate();
-		
+		UpdatePacket();
+
 		EventManager::Update();
 	
 	}
@@ -69,6 +70,11 @@ namespace W
 	void Application::LateUpdate()
 	{
 		SceneManger::LateUpdate();
+	}
+
+	void Application::UpdatePacket()
+	{
+		SceneManger::UpdatePacket();
 	}
 
 

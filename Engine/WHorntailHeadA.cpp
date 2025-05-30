@@ -22,11 +22,11 @@ namespace W
 		SetName(L"HeadA");
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"HeadA_stand", Vector2(0.f, 0.f), Vector2(550.f, 650.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"HeadA_attack0", Vector2(0.f, 650.f), Vector2(550.f, 650.f), 21, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"HeadA_attack1", Vector2(0.f, 1300.f), Vector2(550.f, 650.f), 17, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"HeadA_attack2", Vector2(0.f, 1950.f), Vector2(550.f, 650.f), 16, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"HeadA_dead", Vector2(0.f, 2600.f), Vector2(550.f, 650.f), 15, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"HeadA_stand", Vector2(0.f, 0.f), Vector2(550.f, 650.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+		pAnim->Create(L"HeadA_attack0", Vector2(0.f, 650.f), Vector2(550.f, 650.f), 21, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+		pAnim->Create(L"HeadA_attack1", Vector2(0.f, 1300.f), Vector2(550.f, 650.f), 17, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+		pAnim->Create(L"HeadA_attack2", Vector2(0.f, 1950.f), Vector2(550.f, 650.f), 16, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+		pAnim->Create(L"HeadA_dead", Vector2(0.f, 2600.f), Vector2(550.f, 650.f), 15, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
 
 		pAnim->Play(L"HeadA_stand", true);
 	}

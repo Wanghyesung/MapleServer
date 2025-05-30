@@ -20,7 +20,7 @@ namespace W
 		GetComponent<Transform>()->SetScale(6.f, 6.f, 0.f);
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"attack2", Vector2(0.0f, 0.0f), Vector2(214.f, 555.0f), 27, Vector2(550.f, 550.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"attack2", Vector2(0.0f, 0.0f), Vector2(214.f, 555.0f), 27, Vector2(550.f, 550.f), Vector2::Zero, 0.07f);
 	
 		pAnim->CompleteEvent(L"attack2") = std::bind(&PinkBeanStone::off, this);
 		pAnim->Play(L"attack2", true);

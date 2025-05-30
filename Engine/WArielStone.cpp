@@ -22,7 +22,7 @@ namespace W
 
 		//std::shared_ptr<Texture> pAtlas = Resources::Find<Texture>(L"Ariel_attack1");
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Stone", Vector2(0.0f, 0.0f), Vector2(306.f, 512.0f), 18, Vector2(510.f, 510.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"Stone", Vector2(0.0f, 0.0f), Vector2(306.f, 512.0f), 18, Vector2(510.f, 510.f), Vector2::Zero, 0.07f);
 
 		pAnim->CompleteEvent(L"Stone") = std::bind(&ArielStone::off, this);
 		pAnim->Play(L"Stone", true);

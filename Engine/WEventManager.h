@@ -56,7 +56,7 @@ namespace W
 		static void AddMonsterPool(GameObject* _pObj);
 
 		static void ChangePlayerFSMState(PlayerFSM* _pFSM, Player::ePlayerState _ePlayerState);
-		static void ChangePlayerSkillState(Player* _pObj, Player::ePlayerSkill _ePlayerSkill);
+		static void ChangePlayerSkillState(UINT _iPlayerID, Player::ePlayerSkill _ePlayerSkill);
 
 		static void AddPlayerSkillState(class SkillState* _pSkillState);
 		static void InitPlayerSkill(UINT _iPlayerID, class PlayerSkill* _pPlayerSkill);

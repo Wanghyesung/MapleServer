@@ -14,11 +14,8 @@
 #include "WTime.h"
 #include "WShadow.h"
 #include "ObjectState.pb.h"
-#include "NetFunc.h"
-#include "ClientPacketHandler.h"
-#include "Room.h"
 
-extern Room GRoom;
+
 
 namespace W
 {
@@ -121,13 +118,11 @@ namespace W
 
 		child_lateupdate();
 
-		UpdatePacket();
 	}
 
 	void Player::UpdatePacket()
 	{
-		GameObject::UpdatePacket();
-
+		GetComponent<Transform>()->SendTransform();
 		update_state();
 	}
 

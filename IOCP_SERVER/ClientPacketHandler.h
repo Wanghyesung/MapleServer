@@ -9,6 +9,7 @@
 #include "Transform.pb.h"
 #include "GameObject.pb.h"
 #include "ObjectState.pb.h"
+#include "Skill.pb.h"
 
 using PacketHandlerFunc = std::function<bool(shared_ptr<PacketSession>&, BYTE*, INT)>;
 extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
@@ -40,9 +41,12 @@ enum PACKET_TYPE
 
 	S_TRANSFORM = 1013,
 
-	S_EXIT = 1014,
-	C_EXIT = 1015,
-	S_NEW_EXIT = 1016,
+	S_SKILL = 1014,
+	C_SKILL = 1015,
+
+	S_EXIT = 1016,
+	C_EXIT = 1017,
+	S_NEW_EXIT = 1018,
 };
 
 
@@ -56,6 +60,7 @@ bool Handle_C_INPUT(shared_ptr<Session> _pSession, Protocol::C_INPUT& _pkt);
 bool Handle_C_CREATE(shared_ptr<Session> _pSession, Protocol::C_CREATE& _pkt);
 bool Handle_C_MAP(shared_ptr<Session> _pSession, Protocol::C_MAP& _pkt);
 bool Handle_C_EXIT(shared_ptr<Session> _pSession, Protocol::C_EXIT& _pkt);
+bool Handle_C_SKILL(shared_ptr<Session> _pSession, Protocol::C_Skill& _pkt);
 
 
 class ClientPacketHandler
@@ -79,6 +84,8 @@ public:
 			{return  HandlePacket<Protocol::C_CREATE>(Handle_C_CREATE, _pSession, _pBuffer, _iLen); };
 		GPacketHandler[C_MAP] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
 			{return  HandlePacket<Protocol::C_MAP>(Handle_C_MAP, _pSession, _pBuffer, _iLen); };
+		GPacketHandler[C_SKILL] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
+			{return  HandlePacket<Protocol::C_Skill>(Handle_C_SKILL, _pSession, _pBuffer, _iLen); };
 		GPacketHandler[C_EXIT] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
 			{return  HandlePacket<Protocol::C_EXIT>(Handle_C_EXIT, _pSession, _pBuffer, _iLen); };
 	}
@@ -103,6 +110,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MAP _pkt) { return _MakeSendBuffer(_pkt, S_MAP); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_STATE _pkt) { return _MakeSendBuffer(_pkt, S_STATE); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_TRANSFORM _pkt) { return _MakeSendBuffer(_pkt, S_TRANSFORM); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_Skill _pkt) { return _MakeSendBuffer(_pkt, S_SKILL); }
 
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_EXIT _pkt) { return _MakeSendBuffer(_pkt, S_EXIT); }
 

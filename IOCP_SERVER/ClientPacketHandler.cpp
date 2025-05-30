@@ -131,8 +131,21 @@ bool Handle_C_MAP(shared_ptr<Session> _pSession, Protocol::C_MAP& _pkt)
 	return true;
 }
 
+bool Handle_C_SKILL(shared_ptr<Session> _pSession, Protocol::C_Skill& _pkt)
+{
+	W::Player::ePlayerSkill eSkillID = (W::Player::ePlayerSkill)_pkt.skill_id();
+	UINT iPlayerID = _pkt.player_id();
+	const wstring& strScene = StringToWString(_pkt.scene());
+
+	W::EventManager::ChangePlayerSkillState(iPlayerID, eSkillID);
+	
+	return true;
+}
+
+
 bool Handle_C_EXIT(shared_ptr<Session> _pSession, Protocol::C_EXIT& _pkt)
 {
 
 	return false;
 }
+

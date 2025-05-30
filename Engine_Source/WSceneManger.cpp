@@ -8,11 +8,7 @@
 #include "..\Engine\WPlayerAttackObject.h"
 #include "..\Engine\WObjectPoolManager.h"
 #include "..\Engine\WMonsterManager.h"
-#include "ClientPacketHandler.h"
-#include "GameObject.pb.h"
 
-#include "Room.h"
-extern Room GRoom;
 namespace W
 {
 	UINT SceneManger::SCENE_IDX = 0;
@@ -47,6 +43,18 @@ namespace W
 			}
 		}
 
+	}
+
+	void SceneManger::UpdatePacket()
+	{
+		auto iter = m_hashPlayerScene.begin();
+		for (iter; iter != m_hashPlayerScene.end(); ++iter)
+		{
+			if (iter->second.size() > 0)
+			{
+				m_hashScene.find(iter->first)->second->UpdatePacket();
+			}
+		}
 	}
 
 	void SceneManger::Release()

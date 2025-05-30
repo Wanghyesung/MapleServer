@@ -12,7 +12,8 @@ namespace W
 		static void Initialize();
 		static void Update();
 		static void LateUpdate();
-		
+		static void UpdatePacket();
+
 		static void Release();
 		static void Erase(GameObject* _pGameObject);
 

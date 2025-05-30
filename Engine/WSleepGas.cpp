@@ -19,8 +19,8 @@ namespace W
 		//25
 		Animator* pAnim = AddComponent<Animator>();
 	
-		pAnim->Create(L"sleepGas_start", Vector2(0.0f, 0.0f), Vector2(135.0f, 210.0f), 25, Vector2(450.f, 450.f), Vector2::Zero, 0.12f);
-		pAnim->Create(L"sleepGas_end", Vector2(0.0f, 210.f), Vector2(420.0f, 271.0f), 6, Vector2(450.f, 450.f), Vector2::Zero, 0.12f);
+		pAnim->Create(L"sleepGas_start", Vector2(0.0f, 0.0f), Vector2(135.0f, 210.0f), 25, Vector2(450.f, 450.f), Vector2::Zero, 0.06f);
+		pAnim->Create(L"sleepGas_end", Vector2(0.0f, 210.f), Vector2(420.0f, 271.0f), 6, Vector2(450.f, 450.f), Vector2::Zero, 0.06f);
 
 		pAnim->CompleteEvent(L"sleepGas_start") = std::bind(&SleepGas::end, this);
 		pAnim->CompleteEvent(L"sleepGas_end") = std::bind(&SleepGas::off, this);

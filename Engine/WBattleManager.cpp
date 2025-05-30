@@ -154,7 +154,7 @@ namespace W
 		PlayerScript* pScript = pPlayer->GetScript<PlayerScript>();
 		pScript->m_bAbnormal = true;
 
-		EventManager::ChangePlayerSkillState(pPlayer, Player::ePlayerSkill::end);
+		EventManager::ChangePlayerSkillState(pPlayer->GetPlayerID(), Player::ePlayerSkill::end);
 		EventManager::ChangePlayerFSMState(pScript->m_pFSM, Player::ePlayerState::alert);
 	}
 	void BattleManager::faint(GameObject* _pGameObject, float _fAccValue)
@@ -171,7 +171,7 @@ namespace W
 		PlayerScript* pScript = pPlayer->GetScript<PlayerScript>();
 		pScript->m_bAbnormal = true;
 		
-		EventManager::ChangePlayerSkillState(pPlayer, Player::ePlayerSkill::end);
+		EventManager::ChangePlayerSkillState(pPlayer->GetPlayerID(), Player::ePlayerSkill::end);
 		EventManager::ChangePlayerFSMState(pScript->m_pFSM, Player::ePlayerState::alert);
 		//SkillManager::SetActiveSkill(Player::ePlayerSkill::end);
 	}
@@ -209,7 +209,7 @@ namespace W
 		PlayerScript* pScript = pPlayer->GetScript<PlayerScript>();
 		pScript->m_bSealSkill = true;
 
-		EventManager::ChangePlayerSkillState(pPlayer, Player::ePlayerSkill::end);
+		EventManager::ChangePlayerSkillState(pPlayer->GetPlayerID(), Player::ePlayerSkill::end);
 		//SkillManager::SetActiveSkill(Player::ePlayerSkill::end);
 	}
 
@@ -226,8 +226,8 @@ namespace W
 
 
 		//스킬 초기화
-		//SkillManager::SetActiveSkill(Player::ePlayerSkill::end);
-		EventManager::ChangePlayerSkillState(pPlayer, Player::ePlayerSkill::end);
+	
+		EventManager::ChangePlayerSkillState(pPlayer->GetPlayerID(), Player::ePlayerSkill::end);
 
 		PlayerScript* pScript = pPlayer->GetScript<PlayerScript>();
 		pScript->m_pFSM->SetActiveState(Player::ePlayerState::jump);
@@ -424,7 +424,7 @@ namespace W
 		PlayerScript* pScript = pPlayer->GetScript<PlayerScript>();
 		pScript->m_bAbnormal = true;
 
-		EventManager::ChangePlayerSkillState(pPlayer, Player::ePlayerSkill::end);
+		EventManager::ChangePlayerSkillState(pPlayer->GetPlayerID(), Player::ePlayerSkill::end);
 		EventManager::ChangePlayerFSMState(pScript->m_pFSM, Player::ePlayerState::alert);
 
 		EventManager::CreateObject(DemianEnire, eLayerType::Object);
@@ -446,7 +446,7 @@ namespace W
 		PlayerScript* pScript = pPlayer->GetScript<PlayerScript>();
 		pScript->m_bAbnormal = true;
 
-		EventManager::ChangePlayerSkillState(pPlayer, Player::ePlayerSkill::end);
+		EventManager::ChangePlayerSkillState(pPlayer->GetPlayerID(), Player::ePlayerSkill::end);
 		EventManager::ChangePlayerFSMState(pScript->m_pFSM, Player::ePlayerState::alert);
 
 		//key입력

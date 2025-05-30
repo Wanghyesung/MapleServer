@@ -35,9 +35,9 @@ namespace W
 
 		
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"sword_start", Vector2(0.0f, 0.0f), Vector2(419.0f, 342.0f), 13, Vector2(2000.f, 2000.f), Vector2::Zero, 0.12f);
-		pAnim->Create(L"sword_move", Vector2(0.0f, 342.0f), Vector2(419.0f, 342.0f), 8, Vector2(2000.f, 2000.f), Vector2::Zero, 0.12f);
-		pAnim->Create(L"sword_end", Vector2(0.0f, 684.f), Vector2(419.0f, 342.0f), 11, Vector2(2000.f, 2000.f), Vector2::Zero, 0.12f);
+		pAnim->Create(L"sword_start", Vector2(0.0f, 0.0f), Vector2(419.0f, 342.0f), 13, Vector2(2000.f, 2000.f), Vector2::Zero, 0.06f);
+		pAnim->Create(L"sword_move", Vector2(0.0f, 342.0f), Vector2(419.0f, 342.0f), 8, Vector2(2000.f, 2000.f), Vector2::Zero, 0.06f);
+		pAnim->Create(L"sword_end", Vector2(0.0f, 684.f), Vector2(419.0f, 342.0f), 11, Vector2(2000.f, 2000.f), Vector2::Zero, 0.06f);
 
 		pAnim->CompleteEvent(L"sword_start") = std::bind(&DemianSword::start, this);
 		pAnim->CompleteEvent(L"sword_end") = std::bind(&DemianSword::off, this);

@@ -19,7 +19,7 @@ namespace W
 		GetComponent<Transform>()->SetScale(1.5f, 1.5f, 0.f);
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"attack3", Vector2(0.0f, 0.0f), Vector2(109.f, 159.0f), 6, Vector2(150.f, 150.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"attack3", Vector2(0.0f, 0.0f), Vector2(109.f, 159.0f), 6, Vector2(150.f, 150.f), Vector2::Zero, 0.07f);
 
 		pAnim->CompleteEvent(L"attack3") = std::bind(&RoccatBean::off, this);
 		pAnim->Play(L"attack3", true);

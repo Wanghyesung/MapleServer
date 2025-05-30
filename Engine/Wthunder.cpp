@@ -20,7 +20,7 @@ namespace W
 		GetComponent<Transform>()->SetScale(6.f, 6.f, 0.f);
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Thunder_left", Vector2(0.0f, 0.0f), Vector2(180.f, 845.0f), 30, Vector2(800.f, 800.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"Thunder_left", Vector2(0.0f, 0.0f), Vector2(180.f, 845.0f), 30, Vector2(800.f, 800.f), Vector2::Zero, 0.07f);
 
 		pAnim->CompleteEvent(L"Thunder_left") = std::bind(&Thunder::off, this);
 		pAnim->Play(L"Thunder_left", true);
