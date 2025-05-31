@@ -80,7 +80,9 @@ namespace W
 		Protocol::S_DELETE pkt;
 		UINT iObjectID = _pGameObject->GetObjectID();
 
+		pkt.set_pool_object(_pGameObject->IsPoolObject());
 		pkt.set_layer_deleteid((((UCHAR)eLayer) << 24) | iObjectID);
+
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(strSceneName));
 	}

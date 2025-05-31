@@ -73,6 +73,7 @@ namespace W
 
 		return pEffect;
 	}
+
 	void SkillState::StartEffect(Effect* _pEffect)
 	{
 		Player* pPlayer = GetPlayer();

@@ -123,6 +123,7 @@ namespace W
 
 		AddGameObject(eLayerType::Ground, pGround3);
 	}
+
 	void ValleyScene::setmonster()
 	{
 		Skelegon* pSkelegon = new Skelegon();

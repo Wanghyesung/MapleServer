@@ -95,7 +95,7 @@ namespace W
 
 		Effect* pEffect = new Effect();
 		pEffect->SetSceneName(GetSceneName());
-		pEffect->SetName(L"sklaserEffect");
+		pEffect->SetName(L"sklaser");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(134.f, 97.f), 1, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
 		//생성될 아이템
@@ -155,14 +155,14 @@ namespace W
 	void Skelegon::add_skill()
 	{
 		MonsterAttackObject* pLaser = new MonsterAttackObject();
-		pLaser->SetName(GetSceneName());
-		pLaser->SetName(L"sklaserEffect");
+		pLaser->SetSceneName(GetSceneName());
+		pLaser->SetName(L"sklaser");
 		AddMonsterSkill(pLaser);
 	}
 
 	void Skelegon::create_laser()
 	{
-		MonsterAttackObject* pLaser = GetMonsterSkill(L"sklaserEffect");
+		MonsterAttackObject* pLaser = GetMonsterSkill(L"sklaser");
 		if (pLaser == nullptr)
 			return;
 

@@ -78,6 +78,9 @@ namespace W
 	void Effect::CreateAnimation(Vector2 _vLeftTop, Vector2 _vSize, UINT _iColumnLength,
 		UINT _iRowLength, Vector2 _vDivisionSize, Vector2 _vOffset, float _fDuration)
 	{
+		//이름 변경
+		SetName(GetName() + L"_effect");
+
 		Vector2 vTemLeftTop = _vLeftTop;
 		Vector2 vTemSize = _vSize;
 		

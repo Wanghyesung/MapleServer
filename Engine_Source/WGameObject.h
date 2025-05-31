@@ -114,6 +114,9 @@ namespace W
 		void SetSceneName(const std::wstring& _strName) { m_strSceneName = _strName; }
 		const std::wstring& GetSceneName() { return m_strSceneName; }
 		
+		bool IsPoolObject() { return m_bPoolObject; }
+		void SetPoolObject(bool _bPoolObject) { m_bPoolObject = _bPoolObject; }
+
 		bool IsRender() { return m_bRender; }
 		void SetRender(bool _bRender) { m_bRender = _bRender; }
 
@@ -129,7 +132,8 @@ namespace W
 		eLayerType m_eLayerType;
 		std::wstring m_strSceneName;
 
-		bool m_bRender = true;
+		bool m_bRender;
+		bool m_bPoolObject;
 
 		UINT m_iObjectID;
 
