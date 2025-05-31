@@ -27,16 +27,16 @@
     <ClInclude Include="Transform.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
-    <ClInclude Include="Map.pb.h">
-      <Filter>Packet</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectState.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.pb.h">
+    <ClInclude Include="..\protoc-3.17.1-win64\bin\Skill.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
-    <ClInclude Include="..\protoc-3.17.1-win64\bin\Skill.pb.h">
+    <ClInclude Include="Map.pb.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
   </ItemGroup>
@@ -61,16 +61,16 @@
     <ClCompile Include="Transform.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
-    <ClCompile Include="Map.pb.cc">
+    <ClCompile Include="ObjectState.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectState.pb.cc">
+    <ClCompile Include="..\protoc-3.17.1-win64\bin\Skill.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
-    <ClCompile Include="..\protoc-3.17.1-win64\bin\Skill.pb.cc">
+    <ClCompile Include="Map.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
   </ItemGroup>

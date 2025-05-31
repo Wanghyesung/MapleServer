@@ -90,10 +90,8 @@ namespace W
 		for (int i = 0; i < m_vecMonster_Pool.size(); ++i)
 		{
 			ObjectPoolManager::AddObjectPool(m_vecMonster_Pool[i]->GetName(), m_vecMonster_Pool[i]);
-			//erase를 여기서 시키기
 			SceneManger::Erase(m_vecMonster_Pool[i]);
 		}
-
 
 		m_vecPlayer_Pool.clear();
 		m_vecMonster_Pool.clear();
@@ -115,8 +113,11 @@ namespace W
 
 		UINT iCreateID = pObj->GetCreateID();
 		UINT iObjectID = pObj->GetObjectID();
-		
+	
 		Protocol::S_CREATE pkt;
+		if (pObj->IsPoolObject())
+			pkt.set_object_name(WstringToString(pObj->GetName()));
+		
 		Protocol::ObjectInfo* tInfo = pkt.mutable_object_info();
 		tInfo->set_layer_createid_id((UCHAR)eLayer << 24 | iCreateID << 16 | iObjectID);
 		
@@ -146,6 +147,7 @@ namespace W
 		UINT iObjectID = pObj->GetObjectID();
 		Protocol::S_DELETE pkt;
 		pkt.set_layer_deleteid((UCHAR)pObj->GetLayerType() << 24 | iObjectID);
+		pkt.set_pool_object(pObj->IsPoolObject());
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));
@@ -163,6 +165,7 @@ namespace W
 		UINT iObjectID = pObj->GetObjectID();
 		Protocol::S_DELETE pkt;
 		pkt.set_layer_deleteid((UCHAR)pObj->GetLayerType() << 24 | iObjectID);
+		pkt.set_pool_object(pObj->IsPoolObject());
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));

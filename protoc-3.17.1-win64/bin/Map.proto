@@ -22,6 +22,7 @@ message ObjectInfo
 message S_MAP
 {
 	repeated ObjectInfo objInfo = 1;
+	string object_name = 2;
 }
 
 message C_MAP

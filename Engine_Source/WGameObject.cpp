@@ -8,6 +8,7 @@ namespace W
 	GameObject::GameObject() :
 		m_eState(eState::Active),
 		m_iObjectID(0),
+		m_bPoolObject(false),
 		m_bRender(true)
 	{
 		AddComponent<Transform>();

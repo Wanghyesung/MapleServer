@@ -260,6 +260,7 @@ namespace W
 
 	void BattleManager::PushEffect(Effect* _pEffect)
 	{
+		
 		EffectMap::iterator iter = m_mapEffects.find(_pEffect->GetName());
 		if (iter == m_mapEffects.end())
 		{
@@ -272,11 +273,13 @@ namespace W
 			iter->second.push(_pEffect);
 			_pEffect->SetActive(false);
 		}
+
+		_pEffect->SetPoolObject(true);
 	}
 
 	Effect* BattleManager::GetEffect(std::wstring _strName)
 	{
-		EffectMap::iterator iter = m_mapEffects.find(_strName);
+		EffectMap::iterator iter = m_mapEffects.find(_strName + L"_effect");
 
 		if (iter == m_mapEffects.end() ||
 			iter->second.empty())
