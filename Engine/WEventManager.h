@@ -13,6 +13,7 @@ namespace W
 		CREATE_OBJECT,
 		DELET_OBJECT,
 		ERASE_OBJECT,
+		CHANGE_STATE,
 		CHANGE_PLAYER_STATE,
 		CHANGE_PLAYER_SKILL,
 		ADD_PLAYER_SKILL,
@@ -55,6 +56,8 @@ namespace W
 		static void AddPlayerPool (GameObject* _pObj);
 		static void AddMonsterPool(GameObject* _pObj);
 
+		static void ChanageState(GameObject* _pObj, GameObject::eState _eState);
+
 		static void ChangePlayerFSMState(PlayerFSM* _pFSM, Player::ePlayerState _ePlayerState);
 		static void ChangePlayerSkillState(UINT _iPlayerID, Player::ePlayerSkill _ePlayerSkill);
 
@@ -83,6 +86,8 @@ namespace W
 		static void add_monster_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
 
 		static void change_player_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
+
+		static void chanage_state(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
 
 		static void change_player_fsmstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
 		static void change_player_skillstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
