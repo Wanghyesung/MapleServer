@@ -37,6 +37,7 @@ namespace W
 		m_arrFunction[(UINT)EVENT_TYPE::CREATE_OBJECT] = create_object;
 		m_arrFunction[(UINT)EVENT_TYPE::DELET_OBJECT] = delete_object;
 		m_arrFunction[(UINT)EVENT_TYPE::ERASE_OBJECT] = erase_object;
+		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_STATE] = chanage_state;
 		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_PLAYER_STATE] = change_player_fsmstate;
 		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_PLAYER_SKILL] = change_player_skillstate;
 		m_arrFunction[(UINT)EVENT_TYPE::ADD_PLAYER_SKILL] = add_player_skillstate;
@@ -214,6 +215,14 @@ namespace W
 
 	}
 
+	void EventManager::chanage_state(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	{
+		GameObject* pObj = (GameObject*)_lParm;
+		GameObject::eState eState = (GameObject::eState)_wParm;
+
+		pObj->SetState(eState);
+	}
+
 	void EventManager::change_player_fsmstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
 	{
 		PlayerFSM* pFSM = (PlayerFSM*)_lParm;
@@ -356,6 +365,17 @@ namespace W
 		vPosition.y += ObjectPoolPosition;
 		_pObj->GetComponent<Transform>()->SetPosition(vPosition);
 
+		AddEvent(eve);
+	}
+
+	void EventManager::ChanageState(GameObject* _pObj, GameObject::eState _eState)
+	{
+		tEvent eve = {};
+		eve.lParm = (DWORD_PTR)_pObj;
+		eve.wParm = (DWORD_PTR)_eState;;
+
+		eve.eEventType = EVENT_TYPE::CHANGE_STATE;
+		
 		AddEvent(eve);
 	}
 

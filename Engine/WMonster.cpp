@@ -38,7 +38,7 @@ namespace W
 
 		GameObject::LateUpdate();
 
-		UpdatePacket();
+		
 	}
 
 	void Monster::UpdatePacket()

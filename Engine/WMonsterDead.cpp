@@ -24,7 +24,8 @@ namespace W
 		{
 			++m_iCount;
 			//Á¤Áö
-			pMonster->SetState(GameObject::eState::Paused);
+			EventManager::ChanageState(pMonster, GameObject::eState::Paused);
+			//pMonster->SetState(GameObject::eState::Paused);
 			GetFSM()->SetActiveState(Monster::eMonsterState::stand);
 			pMonster->SetCurStateName(L"_stand");
 
