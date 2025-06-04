@@ -152,13 +152,17 @@ namespace W
 
 	void Effect::update_state()
 	{
+		Animator* pAnimator = GetComponent<Animator>();
+		if (!pAnimator->TrySendPacket())
+			return;
+
 		Protocol::S_STATE pkt;
 
 		UCHAR cLayer = (UCHAR)eLayerType::Effect;
 		UINT iObjectID = GetObjectID();
 		pkt.set_layer_id((cLayer << 24) | iObjectID);
 
-		Animation* pAnim = GetComponent<Animator>()->GetActiveAnimation();
+		Animation* pAnim = pAnimator->GetActiveAnimation();
 		UCHAR cDir = m_iDir > 0 ? 1 : 0;
 		UCHAR cAnimIdx = pAnim->GetCurIndex();
 
@@ -166,6 +170,6 @@ namespace W
 		pkt.set_state(WstringToString(pAnim->GetKey()));
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Broadcast(pSendBuffer);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
 	}
 }

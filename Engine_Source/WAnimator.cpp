@@ -5,7 +5,8 @@ namespace W
 	Animator::Animator() :
 		Component(eComponentType::Animator),
 		m_bStop(false),
-		m_pActiveAnimation(nullptr)
+		m_pActiveAnimation(nullptr),
+		m_pPrevAnimation(nullptr)
 	{
 
 	}
@@ -56,6 +57,19 @@ namespace W
 	{
 
 	}
+	bool Animator::TrySendPacket()
+	{
+		if (m_pPrevAnimation == m_pActiveAnimation)
+		{
+			if (m_pActiveAnimation->TrySendPacket())
+				return true;
+
+			return false;
+		}
+
+		m_pPrevAnimation = m_pActiveAnimation;
+		return true;
+	}
 	void Animator::Create(const std::wstring& _strName, Vector2 _vLeftTop, 
 		Vector2 _vSize, UINT _iColumnLength, Vector2 _vDivisionSize, Vector2 _vOffset, float _fDuration)
 	{
@@ -104,12 +118,12 @@ namespace W
 	}
 	void Animator::Play(const std::wstring& _strName, bool _bLoop)
 	{
-		Animation* pPrevAnimation = m_pActiveAnimation;
+		m_pPrevAnimation = m_pActiveAnimation;
 
 		Events* pEvents;
-		if (pPrevAnimation != nullptr)
+		if (m_pPrevAnimation != nullptr)
 		{
-			pEvents = FindEvents(pPrevAnimation->GetKey());
+			pEvents = FindEvents(m_pPrevAnimation->GetKey());
 			if (pEvents)
 				pEvents->tEndEvent();
 		}

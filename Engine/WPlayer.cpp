@@ -14,7 +14,7 @@
 #include "WTime.h"
 #include "WShadow.h"
 #include "ObjectState.pb.h"
-
+#include "WSceneManger.h"
 
 
 namespace W
@@ -216,6 +216,10 @@ namespace W
 
 	void Player::update_state()
 	{
+		Animator* pAnim = m_vecChildObj[0]->GetComponent<Animator>();
+		if (!pAnim->TrySendPacket())
+			return;
+
 		Protocol::S_STATE pkt;
 		pkt.set_state(WstringToString(m_strCurStateName));
 
@@ -224,13 +228,13 @@ namespace W
 		pkt.set_layer_id((cLayer << 24) | m_iPlayerID);
 
 		UCHAR cDir = m_iDir > 0 ? 1 : 0; //0보다 크면 오른쪽 
-		UCHAR cAnimIdx = m_vecChildObj[0]->GetComponent<Animator>()->GetActiveAnimation()->GetCurIndex();
+		UCHAR cAnimIdx = pAnim->GetActiveAnimation()->GetCurIndex();
 		UCHAR cAlert = m_bAlert ? 1 : 0;
 		pkt.set_anim((cAlert<<16) | (cDir << 8) | cAnimIdx);
 
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Broadcast(pSendBuffer);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
 
 	}
 	void Player::Reset_Animation()

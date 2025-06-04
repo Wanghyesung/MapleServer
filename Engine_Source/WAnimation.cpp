@@ -9,6 +9,7 @@ namespace W
 		m_pAnimator(nullptr),
 		m_vecSprites{},
 		m_iIndex(-1),
+		m_iPreIndxe(-1),
 		m_fTime(0.f),
 		m_bComplete(false)
 	{
@@ -31,6 +32,7 @@ namespace W
 
 		if (m_vecSprites[m_iIndex].fDuration <= m_fTime)
 		{
+			m_iPreIndxe = m_iIndex;
 			++m_iIndex;
 			m_fTime = 0.f;
 
@@ -67,5 +69,13 @@ namespace W
 		m_fTime = 0.f;
 		m_bComplete = false;
 		m_iIndex = 0;
+	}
+	bool Animation::TrySendPacket()
+	{
+		if (m_iIndex == m_iPreIndxe)
+			return false;
+
+		m_iPreIndxe = m_iIndex;
+		return true;
 	}
 }

@@ -49,6 +49,11 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
+
+	void MonsterBackHP::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
+	}
 	
 }
 
