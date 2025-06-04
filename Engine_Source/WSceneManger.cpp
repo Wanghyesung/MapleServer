@@ -190,6 +190,7 @@ namespace W
 
 	std::vector<UINT> SceneManger::GetPlayerIDs(const std::wstring& _strSceneName)
 	{
+		//씬 바뀌는 거 후처리로 락없이
 		return m_hashPlayerScene[_strSceneName];
 	}
 

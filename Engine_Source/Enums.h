@@ -23,7 +23,7 @@ namespace W
 	enum class eLayerType
 	{
 		Default,
-		Grid,
+		Camera,
 		Background,
 		Player,
 		Ladder,
@@ -37,9 +37,8 @@ namespace W
 		Effect,
 		ItemObject,
 		Light,
-		Portal,
 		UI,
-		End = 20,
+		End,
 	};
 
 	enum class eResourceType

@@ -43,7 +43,7 @@ namespace W
 	void MonsterManager::AddDeleteObject(GameObject* _pGameObj)
 	{
 		_pGameObj->SetState(GameObject::eState::Paused);
-		SceneManger::Erase(_pGameObj);
+		EventManager::EraseObject(_pGameObj);
 		m_vecExpectedDeleteObjs.push_back(_pGameObj);
 	}
 

@@ -54,11 +54,14 @@ namespace W
 		bool IsComplete() { return m_bComplete; }
 
 		void SetAnimator(Animator* _pAnim) { m_pAnimator = _pAnim; }
+
+		bool TrySendPacket();
 	private:
 		//std::weak_ptr<graphics::Texture> m_wpAtlas;
 		Animator* m_pAnimator;
 		std::vector<Sprite> m_vecSprites;
 		int m_iIndex;
+		int m_iPreIndxe;
 		float m_fTime;
 		bool m_bComplete;
 	};

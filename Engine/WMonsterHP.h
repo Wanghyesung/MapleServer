@@ -15,7 +15,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-	
+		virtual void UpdatePacket()override;
 		DECLARE_CREATE_ID
 
 		UINT GetHPCount() { return m_iHPCount; }
@@ -27,6 +27,8 @@ namespace W
 
 		void DeleteHP();
 
+	private:
+		void update_hp();
 	protected:
 		MonsterBackHP* m_pHPBack;
 

@@ -90,11 +90,15 @@ bool Handle_C_MAP(shared_ptr<Session> _pSession, Protocol::C_MAP& _pkt)
 	auto pPlayer = pScene->GetLayer(W::eLayerType::Player)->GetCopyGameObjects();
 	pPlayer.erase(iPlayerID);
 	auto pPlayerAttack = pScene->GetLayer(W::eLayerType::AttackObject)->GetCopyGameObjects();
+	auto pObject = pScene->GetLayer(W::eLayerType::Object)->GetCopyGameObjects();
+	auto pUI = pScene->GetLayer(W::eLayerType::UI)->GetCopyGameObjects();
 	
 	vecObjects.push_back(move(pMonster));
 	vecObjects.push_back(move(pMonsterAttack));
 	vecObjects.push_back(move(pPlayer));
 	vecObjects.push_back(move(pPlayerAttack));
+	vecObjects.push_back(move(pObject));
+	vecObjects.push_back(move(pUI));
 	
 	for (int i = 0; i < vecObjects.size(); ++i)
 	{

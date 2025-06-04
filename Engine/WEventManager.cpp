@@ -146,7 +146,8 @@ namespace W
 
 		UINT iObjectID = pObj->GetObjectID();
 		Protocol::S_DELETE pkt;
-		pkt.set_layer_deleteid((UCHAR)pObj->GetLayerType() << 24 | iObjectID);
+	
+		pkt.set_layer_deleteid((UINT)pObj->GetLayerType() << 24 | iObjectID & 0x00FFFFFF);
 		pkt.set_pool_object(pObj->IsPoolObject());
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);

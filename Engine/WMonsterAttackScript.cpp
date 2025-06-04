@@ -71,11 +71,12 @@ namespace W
 			}
 
 			Effect* pEffect = BattleManager::GetEffect(pMonsterAttack->GetName());
+			pEffect->SetSceneName(pOther->GetSceneName());
 			if (pEffect)
 			{
+				pEffect->SetPosition(other);
 				EventManager::CreateObject(pEffect, eLayerType::Effect);
 				pEffect->SetOwner(pOther);
-				pEffect->SetPosition(other);
 				pEffect->SetActive(true);
 				pEffect->StartEffect(pPlayer->GetDir() * -1);
 			}

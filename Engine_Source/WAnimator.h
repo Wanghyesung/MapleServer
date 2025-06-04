@@ -38,6 +38,8 @@ namespace W
 		virtual void LateUpdate();
 		virtual void Render();
 
+		bool TrySendPacket();
+
 		void Create(const std::wstring& _strName,
 			Vector2 _vLeftTop,
 			Vector2 _vSize,
@@ -65,6 +67,7 @@ namespace W
 		std::map<std::wstring, Animation*> m_mapAnimation;
 		std::map<std::wstring, Events*> m_mapEvent;
 		Animation* m_pActiveAnimation;
+		Animation* m_pPrevAnimation;
 
 		bool m_bLoop;
 		bool m_bStop;

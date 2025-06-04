@@ -4,7 +4,7 @@
 #include "WMonsterBackHP.h"
 #include "WMonsterManager.h"
 #include "WEventManager.h"
-
+#include "WSceneManger.h"
 namespace W
 {
 	UINT MonsterHP::HP_COUNT = 0;
@@ -14,7 +14,7 @@ namespace W
 		m_pOwner(nullptr),
 		m_fHP(100.f),
 		m_iHPCount(HP_COUNT),
-		m_bActive(false),
+		m_bActive(true),
 		m_bBoss(bBoss)
 	{
 		++HP_COUNT;
@@ -28,7 +28,6 @@ namespace W
 		{
 			GetComponent<Transform>()->SetScale(1.2f * 7.6f, 1.2f * 0.4f, 0.f);
 			GetComponent<Transform>()->SetPosition(0.f, 3.5f, -2.f);
-			m_bActive = true;
 		}
 
 	}
@@ -79,11 +78,31 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
+
+	void MonsterHP::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
+		update_hp();
+	}
 	
 	void MonsterHP::DeleteHP()
 	{
 		MonsterManager::AddDeleteObject(m_pHPBack);
 		MonsterManager::AddDeleteObject(this);
 		
+	}
+	void MonsterHP::update_hp()
+	{
+		Protocol::S_STATE pkt;
+
+		UCHAR cLayer = (UCHAR)GetLayerType();
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		//이거 패킷 이름 set_int , set_string으로 변경하기
+		pkt.set_anim(m_fHP);
+		
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
 	}
 }
