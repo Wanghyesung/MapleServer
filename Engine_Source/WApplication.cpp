@@ -38,7 +38,6 @@ namespace W
 		UpdatePacket();
 
 		EventManager::Update();
-	
 	}
 
 
@@ -76,8 +75,6 @@ namespace W
 	{
 		SceneManger::UpdatePacket();
 	}
-
-
 
 
 	void Application::SetWindow(HWND _hHwnd, UINT _iWidth, UINT _iHeight)

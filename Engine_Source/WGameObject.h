@@ -43,7 +43,6 @@ namespace W
 					return component;
 			}
 
-
 			return nullptr;
 		}
 

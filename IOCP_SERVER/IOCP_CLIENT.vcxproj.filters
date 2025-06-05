@@ -33,10 +33,10 @@
     <ClInclude Include="..\protoc-3.17.1-win64\bin\Skill.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
-    <ClInclude Include="Map.pb.h">
+    <ClInclude Include="GameObject.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.pb.h">
+    <ClInclude Include="Map.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
   </ItemGroup>

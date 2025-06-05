@@ -13,6 +13,8 @@
 
 using PacketHandlerFunc = std::function<bool(shared_ptr<PacketSession>&, BYTE*, INT)>;
 extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
+
+extern unordered_map<string, wstring> GHashName;
 //기본 : ID, LAYER, SCENE
 
 enum PACKET_TYPE
@@ -25,28 +27,31 @@ enum PACKET_TYPE
 
 	S_EQUIP = 1004,
 	C_EQUIP = 1005, //클라가 서버에게
-	
+
 	C_INPUT = 1006,
 
 	S_MAP = 1007,
 	C_MAP = 1008,
 
-	S_CREATE= 1009,
-	C_CREATE = 1010,
-	S_DELETE = 1011,
-	
+	S_START_MAP = 1009,
+	C_START_MAP = 1010,
 
+	S_CREATE = 1011,
+	C_CREATE = 1012,
+	S_DELETE = 1013,
+
+		
 	//물체 위치
-	S_STATE = 1012,
+	S_STATE = 1014,
 
-	S_TRANSFORM = 1013,
+	S_TRANSFORM = 1015,
 
-	S_SKILL = 1014,
-	C_SKILL = 1015,
+	S_SKILL = 1016,
+	C_SKILL = 1017,
 
-	S_EXIT = 1016,
-	C_EXIT = 1017,
-	S_NEW_EXIT = 1018,
+	S_EXIT = 1018,
+	C_EXIT = 1019,
+	S_NEW_EXIT = 1020,
 };
 
 
@@ -60,6 +65,7 @@ bool Handle_C_INPUT(shared_ptr<Session> _pSession, Protocol::C_INPUT& _pkt);
 bool Handle_C_CREATE(shared_ptr<Session> _pSession, Protocol::C_CREATE& _pkt);
 bool Handle_C_MAP(shared_ptr<Session> _pSession, Protocol::C_MAP& _pkt);
 bool Handle_C_EXIT(shared_ptr<Session> _pSession, Protocol::C_EXIT& _pkt);
+bool Handle_C_START_MAP(shared_ptr<Session> _pSession, Protocol::C_START_MAP& _pkt);
 bool Handle_C_SKILL(shared_ptr<Session> _pSession, Protocol::C_Skill& _pkt);
 
 
@@ -86,6 +92,8 @@ public:
 			{return  HandlePacket<Protocol::C_MAP>(Handle_C_MAP, _pSession, _pBuffer, _iLen); };
 		GPacketHandler[C_SKILL] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
 			{return  HandlePacket<Protocol::C_Skill>(Handle_C_SKILL, _pSession, _pBuffer, _iLen); };
+		GPacketHandler[C_START_MAP] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
+			{return  HandlePacket<Protocol::C_START_MAP>(Handle_C_START_MAP, _pSession, _pBuffer, _iLen); };
 		GPacketHandler[C_EXIT] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
 			{return  HandlePacket<Protocol::C_EXIT>(Handle_C_EXIT, _pSession, _pBuffer, _iLen); };
 	}
@@ -111,6 +119,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_STATE _pkt) { return _MakeSendBuffer(_pkt, S_STATE); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_TRANSFORM _pkt) { return _MakeSendBuffer(_pkt, S_TRANSFORM); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_Skill _pkt) { return _MakeSendBuffer(_pkt, S_SKILL); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_START_MAP _pkt) { return _MakeSendBuffer(_pkt, C_START_MAP); }
 
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_EXIT _pkt) { return _MakeSendBuffer(_pkt, S_EXIT); }
 

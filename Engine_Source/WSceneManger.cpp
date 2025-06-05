@@ -1,6 +1,7 @@
 #include "WSceneManger.h"
 
 #include "WRigidbody.h"
+#include "WAnimator.h"
 
 #include "..\Engine\WPlayer.h"
 #include "..\Engine\WBattleManager.h"
@@ -140,16 +141,20 @@ namespace W
 			if (iter != hashObjs.end())
 				return iter->second;
 
-			//auto iter = hashObjs.begin();
-			//for (iter; iter != hashObjs.end(); ++iter)
-			//{
-			//	GameObject* pObj = iter->second;
-			//
-			//	if (((Player*)pObj)->GetPlayerID() == _iPlayerID)
-			//		return pObj;
-			//}
 		}
 		return nullptr;
+	}
+
+	GameObject* SceneManger::FindPlayer(const std::wstring& strSceneName, UINT _iPlayerID)
+	{
+		Scene* pScene = FindScene(strSceneName);
+		if(pScene == nullptr)
+			return nullptr;
+		
+		GameObject* pGameObj = 
+			pScene->GetLayer(eLayerType::Player)->GetGameObjects().find(_iPlayerID)->second;
+
+		return pGameObj;
 	}
 
 	GameObject* SceneManger::FindPlayer(const std::wstring& _strSceneName)
@@ -190,7 +195,6 @@ namespace W
 
 	std::vector<UINT> SceneManger::GetPlayerIDs(const std::wstring& _strSceneName)
 	{
-		//씬 바뀌는 거 후처리로 락없이
 		return m_hashPlayerScene[_strSceneName];
 	}
 
@@ -203,29 +207,28 @@ namespace W
 	}
 
 
-	void SceneManger::SwapPlayer(Player* _pPlayer, Scene* _pPrevScene, Scene* _pNextScene)
+	void SceneManger::SwapPlayer(GameObject* _pPlayer, const wstring& _strPrevScene, const wstring& _strNextScene)
 	{
-		
 		Vector3 vPos = _pPlayer->GetComponent<Transform>()->GetPosition();
 		vPos.x = 0.f; vPos.y = 0.f;
 		_pPlayer->GetComponent<Transform>()->SetPosition(vPos);
 		_pPlayer->GetComponent<Rigidbody>()->SetGround(false);
 
-		SwapObject(_pPrevScene, _pNextScene, _pPlayer);
+		Scene* pPrevScene = FindScene(_strPrevScene);
+		Scene* pNextScene = FindScene(_strNextScene);
 
-		UINT iPlayerID = _pPlayer->GetPlayerID();
-		std::wstring strPrevSceneName = _pPrevScene->GetName();
-		std::wstring strNextSceneName = _pNextScene->GetName();
+		SwapObject(pPrevScene, pNextScene, _pPlayer);
 
-		// 이전 씬에서 해당 플레이어 ID 제거
-		auto& iterPrev = m_hashPlayerScene[strPrevSceneName];
+		UINT iPlayerID = _pPlayer->GetObjectID(); //obj == playerid
+
+		auto& iterPrev = m_hashPlayerScene[_strPrevScene];
 		iterPrev.erase(
 			std::remove(iterPrev.begin(), iterPrev.end(), iPlayerID),
 			iterPrev.end()
 		);
 
 		// 다음 씬에 플레이어 ID 추가
-		m_hashPlayerScene[strNextSceneName].push_back(iPlayerID);
+		m_hashPlayerScene[_strNextScene].push_back(iPlayerID);
 	}
 
 
@@ -245,5 +248,62 @@ namespace W
 
 		m_hashPlayerScene[_strScene].push_back(pPlayer->GetPlayerID());
 	}
+
+	void SceneManger::SendEnterScene(UINT _iPlayerID, const std::wstring& _strNextScene)
+	{
+		Protocol::S_MAP pkt;
+
+		// monster, monsterattack, player, , playerattack
+			vector<unordered_map<UINT, W::GameObject*>> vecObjects;
+		W::Scene* pScene = W::SceneManger::FindScene(_strNextScene);
+		auto pMonster = pScene->GetLayer(W::eLayerType::Monster)->GetGameObjects();
+		auto pMonsterAttack = pScene->GetLayer(W::eLayerType::MonsterAttack)->GetGameObjects();
+		auto pPlayer = pScene->GetLayer(W::eLayerType::Player)->GetGameObjects();
+		pPlayer.erase(_iPlayerID);
+		auto pPlayerAttack = pScene->GetLayer(W::eLayerType::AttackObject)->GetGameObjects();
+		auto pObject = pScene->GetLayer(W::eLayerType::Object)->GetGameObjects();
+		auto pUI = pScene->GetLayer(W::eLayerType::UI)->GetGameObjects();
+
+		vecObjects.push_back(move(pMonster));
+		vecObjects.push_back(move(pMonsterAttack));
+		vecObjects.push_back(move(pPlayer));
+		vecObjects.push_back(move(pPlayerAttack));
+		vecObjects.push_back(move(pObject));
+		vecObjects.push_back(move(pUI));
+
+		for (int i = 0; i < vecObjects.size(); ++i)
+		{
+			auto iter = vecObjects[i].begin();
+			for (iter; iter != vecObjects[i].end(); ++iter)
+			{
+				Protocol::ObjectInfo tInfo = {};
+				W::GameObject* pGameObj = iter->second;
+
+				W::eLayerType eLayer = pGameObj->GetLayerType();
+				UINT iCreateID = pGameObj->GetCreateID();
+				UINT iObjectID = pGameObj->GetObjectID();
+				tInfo.set_layer_createid_id((UCHAR)eLayer << 24 | iCreateID << 16 | iObjectID);
+
+				W::Vector3 vPosition = pGameObj->GetComponent<W::Transform>()->GetPosition();
+				tInfo.set_x(vPosition.x);	tInfo.set_y(vPosition.y);	tInfo.set_z(vPosition.z);
+
+				UCHAR cDir = 1;
+				CHAR cAnimIdx = 0;
+				UCHAR bRender = pGameObj->IsRender();
+				W::Animator* pAnim = pGameObj->GetComponent<W::Animator>();
+				if (pAnim)
+					cAnimIdx = 0;
+
+				tInfo.set_anim((bRender << 16) | (cDir << 8) | cAnimIdx);
+
+				*pkt.add_objinfo() = tInfo;
+			}
+		}
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.GetPersonByID(_iPlayerID)->Send(pSendBuffer);
+	}
+
+	
 
 }

@@ -46,7 +46,8 @@ namespace W
 		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_MONSTER_STATE] = change_monster_fsmstate;
 		m_arrFunction[(UINT)EVENT_TYPE::ADD_PLAYER_POOL] = add_player_pool;
 		m_arrFunction[(UINT)EVENT_TYPE::ADD_MONSTER_POOL] = add_monster_pool;
-		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_PLAYER_SCENE] = add_monster_pool;
+		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_SCENE] = change_scene;
+		m_arrFunction[(UINT)EVENT_TYPE::START_SCENE] = start_scene;
 		m_arrFunction[(UINT)EVENT_TYPE::HITCH_ABNORMAL] = hitch_abnormal;
 		m_arrFunction[(UINT)EVENT_TYPE::UP_STAT] = up_stat;
 		m_arrFunction[(UINT)EVENT_TYPE::RESTORE] = restore;
@@ -116,10 +117,12 @@ namespace W
 		UINT iObjectID = pObj->GetObjectID();
 	
 		Protocol::S_CREATE pkt;
-		if (pObj->IsPoolObject())
-			pkt.set_object_name(WstringToString(pObj->GetName()));
-		
 		Protocol::ObjectInfo* tInfo = pkt.mutable_object_info();
+		
+		if (pObj->IsPoolObject())
+			tInfo->set_object_name(WstringToString(pObj->GetName()));
+		
+		
 		tInfo->set_layer_createid_id((UCHAR)eLayer << 24 | iCreateID << 16 | iObjectID);
 		
 		Vector3 vPosition = pObj->GetComponent<Transform>()->GetPosition();
@@ -210,10 +213,37 @@ namespace W
 		m_vecMonster_Pool.push_back(pObj);
 	}
 
-	void EventManager::change_player_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::change_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
 	{
+		UINT iPlayerID = (UINT)(_lParm);
+		const wstring& strNextScene = *reinterpret_cast<wstring*>(_accParm);
+		GameObject* pPlayer = SceneManger::FindPlayer(iPlayerID);
 
+		const wstring& strPrevScene = pPlayer->GetSceneName();
+		
+		//이전 맵에 플레이어 삭제됐다고 알리기
+		erase_object((DWORD_PTR)pPlayer, 0, 0);
+
+		SceneManger::SwapPlayer(pPlayer, strPrevScene, strNextScene);
+
+		//현재 맵에 플레이어 넣기
+		SceneManger::AddGameObject(strNextScene, eLayerType::Player, pPlayer);
+
+		SceneManger::SendEnterScene(iPlayerID, strNextScene);
+
+		delete &strNextScene;
 	}
+
+	void EventManager::start_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	{
+		UINT iPlayerID = (UINT)(_lParm);
+		const wstring& strScene = *reinterpret_cast<wstring*>(_accParm);
+
+		SceneManger::SendEnterScene(iPlayerID, strScene);
+
+		delete& strScene;
+	}
+
 
 	void EventManager::chanage_state(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
 	{
@@ -365,6 +395,26 @@ namespace W
 		vPosition.y += ObjectPoolPosition;
 		_pObj->GetComponent<Transform>()->SetPosition(vPosition);
 
+		AddEvent(eve);
+	}
+
+	void EventManager::StartScene(UINT _iPlayerID, const wstring& _strSceneName)
+	{
+		tEvent eve = {};
+		eve.lParm = (DWORD_PTR)_iPlayerID;
+		eve.accParm = (LONG_PTR)new wstring(_strSceneName);
+
+		eve.eEventType = EVENT_TYPE::START_SCENE;
+		AddEvent(eve);
+	}
+
+	void EventManager::ChanageScene(UINT _iPlayerID, const wstring& _strNextSceneName)
+	{
+		tEvent eve = {};
+		eve.lParm = (DWORD_PTR)_iPlayerID;
+		eve.accParm = (LONG_PTR)new wstring(_strNextSceneName);
+
+		eve.eEventType = EVENT_TYPE::CHANGE_SCENE;
 		AddEvent(eve);
 	}
 

@@ -9,6 +9,7 @@
 #include "..\Engine_Source\WLayer.h"
 #include "..\Engine_Source\WAnimator.h"
 PacketHandlerFunc GPacketHandler[UINT16_MAX] = {};
+unordered_map<string, wstring> GHashName = {};
 //event버퍼에 넣기
 bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 {
@@ -77,75 +78,45 @@ bool Handle_C_CREATE(shared_ptr<Session> _pSession, Protocol::C_CREATE& _pkt)
 
 bool Handle_C_MAP(shared_ptr<Session> _pSession, Protocol::C_MAP& _pkt)
 {
-	Protocol::S_MAP pkt;
 	
-	UINT iPlayerID = _pkt.player_id();
-	const wstring& strScene = StringToWString(_pkt.scene());
+	UINT iPlayerID = _pkt.player_id();	
+	if (GHashName.find(_pkt.scene()) == GHashName.end())
+				GHashName[_pkt.scene()] = StringToWString(_pkt.scene());
+
+	const wstring& strScene = GHashName[_pkt.scene()];
 	
-	//monster, monsterattack, player, ,playerattack
-	vector<unordered_map<UINT, W::GameObject*>> vecObjects;
-	W::Scene* pScene = W::SceneManger::FindScene(strScene);
-	auto pMonster = pScene->GetLayer(W::eLayerType::Monster)->GetCopyGameObjects();
-	auto pMonsterAttack = pScene->GetLayer(W::eLayerType::MonsterAttack)->GetCopyGameObjects();
-	auto pPlayer = pScene->GetLayer(W::eLayerType::Player)->GetCopyGameObjects();
-	pPlayer.erase(iPlayerID);
-	auto pPlayerAttack = pScene->GetLayer(W::eLayerType::AttackObject)->GetCopyGameObjects();
-	auto pObject = pScene->GetLayer(W::eLayerType::Object)->GetCopyGameObjects();
-	auto pUI = pScene->GetLayer(W::eLayerType::UI)->GetCopyGameObjects();
-	
-	vecObjects.push_back(move(pMonster));
-	vecObjects.push_back(move(pMonsterAttack));
-	vecObjects.push_back(move(pPlayer));
-	vecObjects.push_back(move(pPlayerAttack));
-	vecObjects.push_back(move(pObject));
-	vecObjects.push_back(move(pUI));
-	
-	for (int i = 0; i < vecObjects.size(); ++i)
-	{
-		auto iter = vecObjects[i].begin();
-		for (iter; iter != vecObjects[i].end(); ++iter)
-		{
-			Protocol::ObjectInfo tInfo = {};
-			W::GameObject* pGameObj = iter->second;
-
-			W::eLayerType eLayer = pGameObj->GetLayerType();
-			UINT iCreateID = pGameObj->GetCreateID();
-			UINT iObjectID = pGameObj->GetObjectID();
-			tInfo.set_layer_createid_id((UCHAR)eLayer << 24 | iCreateID << 16 | iObjectID);
-
-			W::Vector3 vPosition = pGameObj->GetComponent<W::Transform>()->GetPosition();
-			tInfo.set_x(vPosition.x);	tInfo.set_y(vPosition.y);	tInfo.set_z(vPosition.z);
-
-			UCHAR cDir = 1;
-			CHAR cAnimIdx = 0;
-			UCHAR bRender = pGameObj->IsRender();
-			W::Animator* pAnim = pGameObj->GetComponent<W::Animator>();
-			if (pAnim)
-				cAnimIdx = 0;
-
-			tInfo.set_anim((bRender << 16) | (cDir << 8) | cAnimIdx);
-
-			*pkt.add_objinfo() = tInfo;
-		}
-	}
-	
-	shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-	_pSession->Send(pSendBuffer);
+	W::EventManager::ChanageScene(iPlayerID, strScene);
 	
 	return true;
 }
+
+bool Handle_C_START_MAP(shared_ptr<Session> _pSession, Protocol::C_START_MAP& _pkt)
+{
+	UINT iPlayerID = _pkt.player_id();
+	if (GHashName.find(_pkt.scene()) == GHashName.end())
+		GHashName[_pkt.scene()] = StringToWString(_pkt.scene());
+
+	const wstring& strScene = GHashName[_pkt.scene()];
+
+	W::EventManager::StartScene(iPlayerID, strScene);
+
+	return true;
+}
+
 
 bool Handle_C_SKILL(shared_ptr<Session> _pSession, Protocol::C_Skill& _pkt)
 {
 	W::Player::ePlayerSkill eSkillID = (W::Player::ePlayerSkill)_pkt.skill_id();
 	UINT iPlayerID = _pkt.player_id();
-	const wstring& strScene = StringToWString(_pkt.scene());
+	if (GHashName.find(_pkt.scene()) == GHashName.end())
+		GHashName[_pkt.scene()] = StringToWString(_pkt.scene());
+
+	const wstring& strScene = GHashName[_pkt.scene()];
 
 	W::EventManager::ChangePlayerSkillState(iPlayerID, eSkillID);
 	
 	return true;
 }
-
 
 bool Handle_C_EXIT(shared_ptr<Session> _pSession, Protocol::C_EXIT& _pkt)
 {
