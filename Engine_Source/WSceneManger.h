@@ -43,16 +43,19 @@ namespace W
 		
 		//여기서 서버가 클라에게 패킷 전달
 		static void AddGameObject(const std::wstring& _strSceneName, eLayerType _eType, GameObject* _pGameObj);
+
 		static GameObject* FindPlayer(UINT _iPlayerID);
+		static GameObject* FindPlayer(const std::wstring& strSceneName, UINT _iPlayerID);
 		static GameObject* FindPlayer(const std::wstring& strSceneName);
 		static std::vector<GameObject*> GetPlayers(const std::wstring& _strSceneName);
 		static std::vector<UINT> GetPlayerIDs(const std::wstring& _strSceneName);
 
 		static void SwapObject(Scene* _pPrevScene, Scene* _pNextScene, GameObject* _pGameObject);
-		static void SwapPlayer(Player* _pPlayer, Scene* _pPrevScene, Scene* _pNextScene);
+		static void SwapPlayer(GameObject* _pPlayer, const wstring& _strPrevScene, const wstring& _strNextScene);
 		static void PushObjectPool(Scene* _pPrevScene);
 		static void AddPlayerScene(Player* pPlayer, const std::wstring& _strScene);
 
+		static void SendEnterScene(UINT _iPlayerID, const std::wstring& _strNextScene);
 	private:
 		static UINT SCENE_IDX;
 		static std::unordered_map<std::wstring, Scene*> m_hashScene;

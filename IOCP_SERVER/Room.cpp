@@ -81,7 +81,7 @@ void Room::BroadcastExcept(shared_ptr<SendBuffer> _pBuffer, shared_ptr<Session> 
 	}
 }
 
-void Room::Unicast(shared_ptr<SendBuffer> _pBuffer, vector<UINT> _vecTarget)
+void Room::Unicast(shared_ptr<SendBuffer> _pBuffer, const vector<UINT>& _vecTarget)
 {
 	WLock lock(m_lock);
 	for (int i = 0; i < _vecTarget.size(); ++i)
@@ -103,6 +103,14 @@ vector<UINT> Room::GetPersons()
 	}
 
 	return vecID;
+}
+
+shared_ptr<Session> Room::GetPersonByID(UINT _ID)
+{
+	if(m_hashPersonID.find(_ID) == m_hashPersonID.end())
+		return nullptr;
+	
+	return m_hashPersonID[_ID];
 }
 
 UINT Room::GetUserID()

@@ -16,7 +16,6 @@ message C_CREATE
 message S_CREATE
 {
 	ObjectInfo object_info =1;
-	string object_name = 2;
 }
 
 //서버가 클라에게 (브로드캐스팅으로 던질거)

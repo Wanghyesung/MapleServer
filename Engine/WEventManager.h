@@ -13,6 +13,8 @@ namespace W
 		CREATE_OBJECT,
 		DELET_OBJECT,
 		ERASE_OBJECT,
+		START_SCENE,
+		CHANGE_SCENE,
 		CHANGE_STATE,
 		CHANGE_PLAYER_STATE,
 		CHANGE_PLAYER_SKILL,
@@ -22,7 +24,6 @@ namespace W
 		CHANGE_MONSTER_STATE,
 		ADD_PLAYER_POOL,
 		ADD_MONSTER_POOL,
-		CHANGE_PLAYER_SCENE,
 		HITCH_ABNORMAL,
 		UP_STAT,
 		RESTORE,
@@ -56,6 +57,8 @@ namespace W
 		static void AddPlayerPool (GameObject* _pObj);
 		static void AddMonsterPool(GameObject* _pObj);
 
+		static void StartScene(UINT _iPlayerID, const wstring& _strSceneName);
+		static void ChanageScene(UINT _iPlayerID, const wstring& _strNextSceneName);
 		static void ChanageState(GameObject* _pObj, GameObject::eState _eState);
 
 		static void ChangePlayerFSMState(PlayerFSM* _pFSM, Player::ePlayerState _ePlayerState);
@@ -85,7 +88,8 @@ namespace W
 		static void add_player_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
 		static void add_monster_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
 
-		static void change_player_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
+		static void change_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
+		static void start_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
 
 		static void chanage_state(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
 

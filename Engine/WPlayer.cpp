@@ -199,13 +199,7 @@ namespace W
 			pObj->Update();
 		}
 	}
-	//void Player::child_render()
-	//{
-	//	for (GameObject* pObj : m_vecChildObj)
-	//	{
-	//		pObj->Render();
-	//	}
-	//}
+	
 	void Player::child_lateupdate()
 	{
 		for (GameObject* pObj : m_vecChildObj)
@@ -227,7 +221,7 @@ namespace W
 		UINT iObjectID = m_iPlayerID;
 		pkt.set_layer_id((cLayer << 24) | m_iPlayerID);
 
-		UCHAR cDir = m_iDir > 0 ? 1 : 0; //0보다 크면 오른쪽 
+		UCHAR cDir = m_iDir > 0 ? 1 : 0; 
 		UCHAR cAnimIdx = pAnim->GetActiveAnimation()->GetCurIndex();
 		UCHAR cAlert = m_bAlert ? 1 : 0;
 		pkt.set_anim((cAlert<<16) | (cDir << 8) | cAnimIdx);
