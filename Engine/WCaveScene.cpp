@@ -164,7 +164,7 @@ namespace W
 		Stone* pStone = new Stone();
 		pStone->SetSceneName(GetName());
 		pStone->GetComponent<Transform>()->SetPosition(4.45f, 0.f, -0.1f);
-		AddGameObject(eLayerType::Box, pStone);
+		AddGameObject(eLayerType::Object, pStone);
 
 		Horntail* pHorntail = new Horntail();
 		pHorntail->SetSceneName(GetName());

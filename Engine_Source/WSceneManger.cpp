@@ -214,13 +214,11 @@ namespace W
 		_pPlayer->GetComponent<Transform>()->SetPosition(vPos);
 		_pPlayer->GetComponent<Rigidbody>()->SetGround(false);
 
-		Scene* pPrevScene = FindScene(_strPrevScene);
+		
 		Scene* pNextScene = FindScene(_strNextScene);
-
-		SwapObject(pPrevScene, pNextScene, _pPlayer);
+		pNextScene->AddGameObject(eLayerType::Player, _pPlayer);
 
 		UINT iPlayerID = _pPlayer->GetObjectID(); //obj == playerid
-
 		auto& iterPrev = m_hashPlayerScene[_strPrevScene];
 		iterPrev.erase(
 			std::remove(iterPrev.begin(), iterPrev.end(), iPlayerID),

@@ -152,7 +152,7 @@ namespace W
 
 		Transform* pTr = pPlayer->GetComponent<Transform>();
 		Collider2D* pCollider = pPlayer->GetComponent<Collider2D>();
-		Vector3 vPlayerY = pTr->Up() * (pCollider->GetSize().y * pTr->GetScale().y * 0.4f);
+		Vector3 vPlayerY = pTr->Up() * (pCollider->GetSize().y * pTr->GetScale().y * 0.3f);
 		float fPlayerPos = pTr->GetPosition().y - vPlayerY.y;
 
 		Transform* pGroundTr = GetOwner()->GetComponent<Transform>();
