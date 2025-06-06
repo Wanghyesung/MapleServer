@@ -219,17 +219,20 @@ namespace W
 		const wstring& strNextScene = *reinterpret_cast<wstring*>(_accParm);
 		GameObject* pPlayer = SceneManger::FindPlayer(iPlayerID);
 
-		const wstring& strPrevScene = pPlayer->GetSceneName();
+		wstring strPrevScene = pPlayer->GetSceneName(); //swap 후 이름이 변경되지 않게 복사
 		
-		//이전 맵에 플레이어 삭제됐다고 알리기
-		erase_object((DWORD_PTR)pPlayer, 0, 0);
-
 		SceneManger::SwapPlayer(pPlayer, strPrevScene, strNextScene);
 
-		//현재 맵에 플레이어 넣기
-		SceneManger::AddGameObject(strNextScene, eLayerType::Player, pPlayer);
-
 		SceneManger::SendEnterScene(iPlayerID, strNextScene);
+
+
+		//이전 맵에 플레이어 삭제됐다고 알리기
+		Protocol::S_DELETE pkt;
+		pkt.set_layer_deleteid((UCHAR)eLayerType::Player << 24 | iPlayerID);
+		pkt.set_pool_object(pPlayer->IsPoolObject());
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(strPrevScene));
 
 		delete &strNextScene;
 	}
