@@ -100,7 +100,7 @@ namespace W
 		pkt.set_layer_id((cLayer << 24) | iObjectID);
 
 		//이거 패킷 이름 set_int , set_string으로 변경하기
-		pkt.set_anim(m_fHP);
+		pkt.set_state_value(m_fHP);
 		
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));

@@ -11,6 +11,6 @@ message S_STATE
 	
 	//텍스쳐
 	string state = 3;
-	int32 anim = 4; //상위 8비트 방향, 하위 애님 인덱스
+	int32 state_value = 4; //상위 8비트 방향, 하위 애님 인덱스
 }
 

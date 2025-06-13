@@ -150,7 +150,7 @@ namespace W
 				Hit(tAttack, pGameObj->GetName());
 			}
 		}
-		else if (pGameObj->GetLayerType() == eLayerType::Box)
+		else if (pGameObj->GetLayerType() == eLayerType::Object)
 		{
 			m_bStab = true;
 		}

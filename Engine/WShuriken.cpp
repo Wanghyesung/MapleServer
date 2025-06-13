@@ -100,7 +100,7 @@ namespace W
 		UCHAR cDir = m_iDir > 0 ? 1 : 0;
 		UCHAR cAnimIdx = pAnim->GetCurIndex();
 
-		pkt.set_anim((cDir << 8) | cAnimIdx);
+		pkt.set_state_value((cDir << 8) | cAnimIdx);
 		pkt.set_state(WstringToString(pAnim->GetKey()));
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);

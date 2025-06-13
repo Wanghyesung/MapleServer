@@ -188,9 +188,9 @@ namespace W
 		Animation* pAnim = pAnimator->GetActiveAnimation();
 		UCHAR cDir = GetDir() > 0 ? 1 : 0; 
 		UCHAR cAnimIdx = pAnim->GetCurIndex();
-		bool bRender = IsDead();
+		bool bRender = !IsDead();
 
-		pkt.set_anim(!bRender <<16 | (cDir << 8) | cAnimIdx);
+		pkt.set_state_value(bRender <<16 | (cDir << 8) | cAnimIdx);
 		pkt.set_state(WstringToString(pAnim->GetKey()));
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);

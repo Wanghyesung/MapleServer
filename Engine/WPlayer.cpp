@@ -224,7 +224,7 @@ namespace W
 		UCHAR cDir = m_iDir > 0 ? 1 : 0; 
 		UCHAR cAnimIdx = pAnim->GetActiveAnimation()->GetCurIndex();
 		UCHAR cAlert = m_bAlert ? 1 : 0;
-		pkt.set_anim((cAlert<<16) | (cDir << 8) | cAnimIdx);
+		pkt.set_state_value((cAlert<<16) | (cDir << 8) | cAnimIdx);
 
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
