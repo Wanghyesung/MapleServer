@@ -59,6 +59,9 @@ namespace W
 	}
 	bool Animator::TrySendPacket()
 	{
+		if (!m_pActiveAnimation)
+			return false;
+
 		if (m_pPrevAnimation == m_pActiveAnimation)
 		{
 			if (m_pActiveAnimation->TrySendPacket())

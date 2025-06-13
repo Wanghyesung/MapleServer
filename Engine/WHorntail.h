@@ -5,6 +5,8 @@ namespace W
 	class Horntail : public Monster
 	{
 	public:
+		DECLARE_CREATE_ID;
+
 		enum class eHorntailChild
 		{
 			HorntailHeadA,
@@ -16,19 +18,19 @@ namespace W
 			HorntailTail,
 			HorntailWing,
 		};
-
-		DECLARE_CREATE_ID;
-
 		Horntail();
 		virtual ~Horntail();
 
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		
+		virtual void UpdatePacket()override;
+
 		void Start();
 
 	private:
+		void update_state();
+
 		void create_child();
 		void delete_child();
 

@@ -27,9 +27,6 @@
     <ClInclude Include="Transform.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectState.pb.h">
-      <Filter>Packet</Filter>
-    </ClInclude>
     <ClInclude Include="..\protoc-3.17.1-win64\bin\Skill.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
@@ -37,6 +34,9 @@
       <Filter>Packet</Filter>
     </ClInclude>
     <ClInclude Include="Map.pb.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectState.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
   </ItemGroup>
@@ -61,9 +61,6 @@
     <ClCompile Include="Transform.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectState.pb.cc">
-      <Filter>Packet</Filter>
-    </ClCompile>
     <ClCompile Include="..\protoc-3.17.1-win64\bin\Skill.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
@@ -71,6 +68,9 @@
       <Filter>Packet</Filter>
     </ClCompile>
     <ClCompile Include="Map.pb.cc">
+      <Filter>Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectState.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
   </ItemGroup>

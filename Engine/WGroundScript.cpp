@@ -49,7 +49,7 @@ namespace W
 		{
 			if (pGameObj->GetLayerType() == eLayerType::Player)
 			{
-				Player* pPlayer = dynamic_cast<Player*>(pGameObj);
+				Player* pPlayer = static_cast<Player*>(pGameObj);
 				PlayerScript* pPlayerScript = pGameObj->GetScript<PlayerScript>();
 
 				if (pPlayer->GetCurPlayerState() == Player::ePlayerState::ladder)

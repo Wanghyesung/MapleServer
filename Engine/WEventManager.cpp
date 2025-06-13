@@ -135,7 +135,7 @@ namespace W
 		if (pAnim)
 			cAnimIdx = 0;
 		
-		tInfo->set_anim((bRender<<16) | (cDir << 8) | cAnimIdx);
+		tInfo->set_state_value((bRender<<16) | (cDir << 8) | cAnimIdx);
 		
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));

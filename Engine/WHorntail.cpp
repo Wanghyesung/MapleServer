@@ -45,6 +45,7 @@ namespace W
 		pAnim->FindAnimation(L"HorntailDead")->Create(L"HorntailDead", Vector2(0.0f, 643.0f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
 		pAnim->FindAnimation(L"HorntailDead")->Create(L"HorntailDead", Vector2(0.0f, 1286.f), Vector2(731.f, 643.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
 		pAnim->CompleteEvent(L"HorntailDead") = std::bind(&Horntail::delete_child, this);
+
 	}
 
 	Horntail::~Horntail()
@@ -61,7 +62,7 @@ namespace W
 		pHeadA->SetSceneName(strScene);
 		pHeadA->Initialize();
 		SceneManger::AddGameObject(strScene, eLayerType::Monster, pHeadA);
-		//
+		
 		HorntailHeadB* pHeadB = new HorntailHeadB(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailHeadB] = pHeadB;
 		pHeadB->SetSceneName(strScene);
@@ -108,8 +109,13 @@ namespace W
 		SceneManger::AddGameObject(strScene, eLayerType::Monster, pTail);
 
 		//Á¤Áö
-		for (UINT i = 0; i < 8; ++i)
+		SetRender(false);
+		for (UINT i = 0; i < m_vecMonster.size(); ++i)
+		{
+			m_vecMonster[i]->SetRender(false);
 			m_vecMonster[i]->SetState(eState::Paused);
+		}
+			
 	}
 
 	void Horntail::Update()
@@ -128,6 +134,13 @@ namespace W
 			return;
 
 		Monster::LateUpdate();
+	}
+
+	void Horntail::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
+	
+		update_state();
 	}
 
 
@@ -186,6 +199,31 @@ namespace W
 			if(m_iDeadCount == 0)
 				dead();
 		}
+	}
+
+	void Horntail::update_state()
+	{
+		Animator* pAnimator = GetComponent<Animator>();
+
+		if (!pAnimator->TrySendPacket())
+			return;
+
+		Protocol::S_STATE pkt;
+
+		UCHAR cLayer = (UCHAR)eLayerType::Monster;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = pAnimator->GetActiveAnimation();
+		UCHAR cDir = GetDir() > 0 ? 1 : 0;
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+		bool bRender = !IsDead();
+
+		pkt.set_state_value(bRender << 16 | (cDir << 8) | cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
 	}
 
 	void Horntail::create_child()

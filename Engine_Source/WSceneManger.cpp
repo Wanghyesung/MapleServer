@@ -292,7 +292,7 @@ namespace W
 				if (pAnim)
 					cAnimIdx = 0;
 
-				tInfo.set_anim((bRender << 16) | (cDir << 8) | cAnimIdx);
+				tInfo.set_state_value((bRender << 16) | (cDir << 8) | cAnimIdx);
 
 				*pkt.add_objinfo() = tInfo;
 			}

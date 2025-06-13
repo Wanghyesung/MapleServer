@@ -32,8 +32,8 @@ namespace W
 		create_monster();
 
 		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ground, true);
-		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Box, true);
-		CollisionManager::SetLayer(this, eLayerType::AttackObject, eLayerType::Box, true);
+		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Object, true);
+		CollisionManager::SetLayer(this, eLayerType::AttackObject, eLayerType::Object, true);
 		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Ladder, true);
 		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::AttackObject, true);
 		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::Player, true);

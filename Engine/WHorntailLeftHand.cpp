@@ -19,6 +19,13 @@ namespace W
 	{
 		SetName(L"LeftHand");
 
+		Animator* pAnim = AddComponent<Animator>();
+		pAnim->Create(L"LeftHand_stand", Vector2(0.f, 0.f), Vector2(500.f, 300.f), 5, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+		pAnim->Create(L"LeftHand_attack0", Vector2(0.f, 300.f), Vector2(500.f, 300.f), 18, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+		pAnim->Create(L"LeftHand_attack1", Vector2(0.f, 600.f), Vector2(500.f, 300.f), 16, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+		pAnim->Create(L"LeftHand_attack2", Vector2(0.f, 900.f), Vector2(500.f, 300.f), 17, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+		pAnim->Create(L"LeftHand_dead", Vector2(0.f, 1200.f), Vector2(500.f, 300.f), 16, Vector2(1000.f, 1000.f), Vector2::Zero, 0.07f);
+
 	}
 	HorntailLeftHand::~HorntailLeftHand()
 	{
