@@ -21,7 +21,7 @@ namespace W
 
 		//m_pEffectAtlas = Resources::Load<Texture>(L"jumpeffect", L"..\\Resources\\Texture\\Player\\skill\\effect2.png");
 		Effect* pEffect = CreateEffet(L"jumpeffect", Vector2(0.f, 0.f), Vector2(235.5f, 133.f), 8, 1,
-			Vector2(200.f, 200.f), Vector2(-1.f, 0.0f), 0.1f);
+			Vector2(200.f, 200.f), Vector2(-1.f, 0.0f), 0.05f);
 		pEffect->GetComponent<Transform>()->SetScale(2.f, 2.f, 0.f);
 
 		//SetSound(Resources::Load<AudioClip>(L"fjumpsound", L"..\\Resources\\sound\\skill\\fjump.mp3"), false);

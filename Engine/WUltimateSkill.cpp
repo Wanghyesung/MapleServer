@@ -30,7 +30,7 @@ namespace W
 		for (int i = 0; i < 30; ++i)
 		{
 			Effect* pEffect = CreateEffet(L"ultimate_suriken_hit", Vector2(0.f, 0.f), Vector2(219.f, 209.f), 8, 1,
-				Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.1f);
+				Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.05f);
 			pEffect->GetComponent<Transform>()->SetScale(2.5f, 2.5f, 0.f);
 		}
 

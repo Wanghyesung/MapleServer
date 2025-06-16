@@ -25,7 +25,7 @@ namespace W
 
 		//m_pEffectAtlas = Resources::Load<Texture>(L"aveneffect", L"..\\Resources\\Texture\\Player\\skill\\effect4.png");
 		Effect* pEffect = CreateEffet(L"aveneffect", Vector2(0.f, 0.f), Vector2(121.f, 71.f), 14, 1,
-			Vector2(110.f, 110.f), Vector2(0.f, 0.f), 0.06f);
+			Vector2(110.f, 110.f), Vector2(0.f, 0.f), 0.03f);
 		pEffect->SetFunction(std::bind(&SkillAven::activeskill_aven, this), 12);
 		//m_pHitEffectAtlas = Resources::Load<Texture>(L"kuckhit", L"..\\Resources\\Texture\\Player\\skill\\hit.png");
 

@@ -21,11 +21,11 @@ namespace W
 
 		Animator* pAnim = AddComponent<Animator>();
 		
-		pAnim->Create(L"ultimate", Vector2(0.f, 0.f), Vector2(1456.f, 860.f), 10, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.08f);
-		pAnim->FindAnimation(L"ultimate")->Create(L"ultimate", Vector2(0.f, 860.f), Vector2(1456.f, 860.f), 10, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.08f);
-		pAnim->FindAnimation(L"ultimate")->Create(L"ultimate", Vector2(0.f, 1720.f), Vector2(1456.f, 860.f), 10, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.08f);
-		pAnim->FindAnimation(L"ultimate")->Create(L"ultimate", Vector2(0.f, 2580.f), Vector2(1456.f, 860.f), 10, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.08f);
-		pAnim->FindAnimation(L"ultimate")->Create(L"ultimate", Vector2(0.f, 3440.f), Vector2(1456.f, 860.f), 10, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.08f);
+		pAnim->Create(L"ultimate", Vector2(0.f, 0.f), Vector2(1456.f, 860.f), 10, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.04f);
+		pAnim->FindAnimation(L"ultimate")->Create(L"ultimate", Vector2(0.f, 860.f), Vector2(1456.f, 860.f), 10, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f), 0.04f);
+		pAnim->FindAnimation(L"ultimate")->Create(L"ultimate", Vector2(0.f, 1720.f), Vector2(1456.f, 860.f), 10, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f),0.04f);
+		pAnim->FindAnimation(L"ultimate")->Create(L"ultimate", Vector2(0.f, 2580.f), Vector2(1456.f, 860.f), 10, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f),0.04f);
+		pAnim->FindAnimation(L"ultimate")->Create(L"ultimate", Vector2(0.f, 3440.f), Vector2(1456.f, 860.f), 10, Vector2(1500.f, 1500.f), Vector2(0.0f, 0.f),0.04f);
 
 		GetComponent<Transform>()->SetScale(15.5f, 15.5f, 0.f);
 

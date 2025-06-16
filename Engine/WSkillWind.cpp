@@ -20,11 +20,11 @@ namespace W
 
 		//m_pEffectAtlas = Resources::Load<Texture>(L"windffect1", L"..\\Resources\\Texture\\Player\\skill\\shuriken\\effect_0.png");
 		Effect* pEffect = CreateEffet(L"windffect1", Vector2(0.f, 0.5f), Vector2(626.f, 508.f), 7, 1,
-			Vector2(600.f, 600.f), Vector2(0.5f, 0.f), 0.06f);
+			Vector2(600.f, 600.f), Vector2(0.5f, 0.f), 0.03f);
 
 		//Resources::Load<Texture>(L"windffect2", L"..\\Resources\\Texture\\Player\\skill\\shuriken\\effect_1.png");
 		pEffect = CreateEffet(L"windffect2", Vector2(0.f, 0.f), 
-			Vector2(572.f, 413.f), 11, 1, Vector2(580.f, 580.f), Vector2(0.5f, 0.5f), 0.06f);
+			Vector2(572.f, 413.f), 11, 1, Vector2(580.f, 580.f), Vector2(0.5f, 0.5f), 0.03f);
 		pEffect->SetFunction(std::bind(&SkillWind::activeskill_wind, this), 6);
 
 
@@ -32,7 +32,7 @@ namespace W
 		for (int i = 0; i < 7; ++i)
 		{
 			pEffect = CreateEffet(L"wind_hit", Vector2(0.f, 0.f), Vector2(249.f, 248.f), 6, 1,
-				Vector2(250.f, 250.f), Vector2(0.f, 0.2f), 0.15f);
+				Vector2(250.f, 250.f), Vector2(0.f, 0.2f), 0.07f);
 			pEffect->GetComponent<Transform>()->SetScale(2.5f, 2.5f, 0.f);
 		}
 

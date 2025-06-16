@@ -20,13 +20,13 @@ namespace W
 
 		//m_pEffectAtlas = Resources::Load<Texture>(L"blastffect1", L"..\\Resources\\Texture\\Player\\skill\\blast\\effect_0.png");
 		Effect* pEffect = CreateEffet(L"blastffect1", Vector2(0.f, 0.f),
-			Vector2(752.f, 358.f), 13, 1, Vector2(750.f, 750.f), Vector2(0.f, 0.f), 0.1f);
+			Vector2(752.f, 358.f), 13, 1, Vector2(750.f, 750.f), Vector2(0.f, 0.f), 0.05f);
 		pEffect->GetComponent<Transform>()->SetScale(5.f, 5.f, 0.f);
 		pEffect->SetFunction(std::bind(&SkillBlast::activeskill_blast, this), 7);
 
 		//Resources::Load<Texture>(L"blastffect2", L"..\\Resources\\Texture\\Player\\skill\\blast\\effect_1.png");
 		pEffect = CreateEffet(L"blastffect2", Vector2(0.f, 0.f),
-			Vector2(735.f, 673.f), 9, 1, Vector2(750.f, 750.f), Vector2(0.f, 0.f), 0.1f);
+			Vector2(735.f, 673.f), 9, 1, Vector2(750.f, 750.f), Vector2(0.f, 0.f), 0.05f);
 		pEffect->GetComponent<Transform>()->SetScale(5.f, 5.f, 0.f);
 		pEffect->SetFunction(std::bind(&SkillBlast::exit, this), 8);
 
@@ -34,7 +34,7 @@ namespace W
 		{
 			//m_pHitEffectAtlas = Resources::Load<Texture>(L"blast", L"..\\Resources\\Texture\\Player\\skill\\blast\\hit.png");
 			pEffect = CreateEffet(L"blast_hit", Vector2(0.f, 0.f),
-				Vector2(285.f, 284.f), 8, 1, Vector2(300.f, 300.f), Vector2(0.f, 0.f), 0.1f);
+				Vector2(285.f, 284.f), 8, 1, Vector2(300.f, 300.f), Vector2(0.f, 0.f), 0.05f);
 		}
 
 		//std::shared_ptr<Texture> pAtlas

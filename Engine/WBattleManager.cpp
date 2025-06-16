@@ -345,6 +345,7 @@ namespace W
 		if (_fAccDamage > 0.f)
 		{
 			AttackUp* pAttackUp = new AttackUp(_fAccDamage);
+			pAttackUp->SetSceneName(_pTarget->GetSceneName());
 			pAttackUp->SetTarget(pTarget);
 			pAttackUp->SetType(eUpStatType::Attack);
 			pAttackUp->SetDeleteTime(10.f);
@@ -371,6 +372,7 @@ namespace W
 		if (_fDefense > 0.f)
 		{
 			DefenseUp* pAttackUp = new DefenseUp(_fDefense);
+			pAttackUp->SetSceneName(_pTarget->GetSceneName());
 			pAttackUp->SetTarget(pTarget);
 			pAttackUp->SetType(eUpStatType::Defense);
 			pAttackUp->SetDeleteTime(10.f);
@@ -389,6 +391,7 @@ namespace W
 		if (_fsign >=0.f)
 		{
 			Ignore* pIgnore = new Ignore(m_iMaxDamage);
+			pIgnore->SetSceneName(_pTarget->GetSceneName());
 			pIgnore->SetTarget(pTarget);
 			pIgnore->SetType(eUpStatType::Ignore);
 			pIgnore->SetDeleteTime(10.f);
@@ -410,6 +413,7 @@ namespace W
 			return;
 
 		Confusion* pConfusion = new Confusion();
+		pConfusion->SetSceneName(pPlayer->GetSceneName());
 		pConfusion->SetTarget(pPlayer);
 		pConfusion->SetTime(7.f);
 
@@ -422,6 +426,7 @@ namespace W
 			return;
 
 		DemianEntireAttack* DemianEnire = new DemianEntireAttack();
+		DemianEnire->SetSceneName(pPlayer->GetSceneName());
 		DemianEnire->SetTarget(pPlayer);
 		 
 		PlayerScript* pScript = pPlayer->GetScript<PlayerScript>();
@@ -441,6 +446,7 @@ namespace W
 
 		Groggy* pGroggy = new Groggy();
 		pGroggy->SetTarget(pPlayer);
+		pGroggy->SetSceneName(pPlayer->GetSceneName());
 		pGroggy->SetTime(999999.f);
 		//플레이어 아래에 그리기
 		pGroggy->SetRenderPos(false);
@@ -477,6 +483,7 @@ namespace W
 			pPlayer->GetScript<PlayerScript>()->Hit(tAttackInfo, L"stigma");
 			
 			Stigma* pStigma = new Stigma();
+			pStigma->SetSceneName(pPlayer->GetSceneName());
 			pStigma->SetTarget(pPlayer);
 			pStigma->SetTime(999.f);
 			EventManager::CreateObject(pStigma, eLayerType::Object);
@@ -500,6 +507,7 @@ namespace W
 		{
 			UpStat* pStat = new UpStat(_fAccSpeed);
 			pStat->SetTarget(pTarget);
+			pStat->SetSceneName(pTarget->GetSceneName());
 			pStat->SetDeleteTime(10.f);
 			pStat->SetType(eUpStatType::Speed);
 			EventManager::CreateObject(pStat, eLayerType::Object);
@@ -539,6 +547,7 @@ namespace W
 		if (_fsign >= 0.f)
 		{
 			Reflex* pReflex = new Reflex(m_iMaxDamage);
+			pReflex->SetSceneName(pTarget->GetSceneName());
 			pReflex->SetTarget(pTarget);
 			pReflex->SetType(eUpStatType::ReflexAttack);
 			pReflex->SetDeleteTime(10.f);
