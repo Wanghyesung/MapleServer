@@ -26,11 +26,11 @@ namespace W
 		//Resources::Load<Texture>(L"raideffect2", L"..\\Resources\\Texture\\Player\\skill\\effect9.png");
 
 		Effect* pEffect = CreateEffet(L"raideffect1", Vector2(0.f, 0.f),
-			Vector2(1060.f, 727.f), 10, 3, Vector2(1000.f, 1000.f), Vector2(0.2f, 2.f), 0.1f);
+			Vector2(1060.f, 727.f), 10, 3, Vector2(1000.f, 1000.f), Vector2(0.2f, 2.f), 0.05f);
 		pEffect->AddComponent<Light>();
 
 		Effect* pEffect2 = CreateEffet( L"raideffect2", Vector2(0.f, 0.f), Vector2(880.f, 637.f), 10, 3,
-			Vector2(1000.f, 1000.f), Vector2(0.2f, 2.f), 0.1f);
+			Vector2(1000.f, 1000.f), Vector2(0.2f, 2.f), 0.05f);
 		pEffect2->SetFunction(std::bind(&SkillRaid::activeskill_raid, this), 11);
 
 		pEffect->GetComponent<Transform>()->SetScale(10.f, 10.f, 0.f);
@@ -40,7 +40,7 @@ namespace W
 		for (int i = 0; i < 7; ++i)
 		{
 			Effect* pEffet3 = CreateEffet(L"raid_hit", Vector2(0.f, 0.f), Vector2(276.f, 252.f), 6, 1,
-				Vector2(300.f, 300.f), Vector2(0.f, 0.f), 0.2f);
+				Vector2(300.f, 300.f), Vector2(0.f, 0.f), 0.1f);
 			pEffet3->GetComponent<Transform>()->SetScale(3.5f, 3.5f, 0.f);
 		}
 

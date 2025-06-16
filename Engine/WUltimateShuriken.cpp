@@ -13,7 +13,7 @@ namespace W
 
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"shuriken", Vector2(0.f, 0.f), Vector2(581.f, 252.f), 6, Vector2(600.f, 600.f), Vector2(0.0f, 0.f), 0.1f);
+		pAnim->Create(L"shuriken", Vector2(0.f, 0.f), Vector2(581.f, 252.f), 6, Vector2(600.f, 600.f), Vector2(0.0f, 0.f), 0.05f);
 		pAnim->Play(L"shuriken", true);
 
 		AddComponent<Collider2D>();
