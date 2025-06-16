@@ -39,7 +39,7 @@ namespace W
 		//m_pHitEffectAtlas = Resources::Load<Texture>(L"raidhit", L"..\\Resources\\Texture\\Player\\skill\\hit2.png");
 		for (int i = 0; i < 7; ++i)
 		{
-			Effect* pEffet3 = CreateEffet(L"raid", Vector2(0.f, 0.f), Vector2(276.f, 252.f), 6, 1,
+			Effect* pEffet3 = CreateEffet(L"raid_hit", Vector2(0.f, 0.f), Vector2(276.f, 252.f), 6, 1,
 				Vector2(300.f, 300.f), Vector2(0.f, 0.f), 0.2f);
 			pEffet3->GetComponent<Transform>()->SetScale(3.5f, 3.5f, 0.f);
 		}

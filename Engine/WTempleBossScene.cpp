@@ -93,67 +93,67 @@ namespace W
 		
 		Effect* pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
-		pEffect->SetName(L"PinkBean_attack0");
+		pEffect->SetName(L"PinkBean_attack0_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(97.f, 107.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
 		pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
-		pEffect->SetName(L"PinkBean_attack1");
+		pEffect->SetName(L"PinkBean_attack1_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(124.f, 112.f), 5, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
 		pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
-		pEffect->SetName(L"PinkBean_attack2");
+		pEffect->SetName(L"PinkBean_attack2_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(112.f, 110.f), 6, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
 		pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
-		pEffect->SetName(L"PinkBean_attack3");
+		pEffect->SetName(L"PinkBean_attack3_hit");
 		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(88.f, 87.f), 4, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
 		pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
-		pEffect->SetName(L"MiniBean_attack0");
+		pEffect->SetName(L"MiniBean_attack0_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(97.f, 107.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
 		pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
-		pEffect->SetName(L"Solomon_attack0");
+		pEffect->SetName(L"Solomon_attack0_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(131.f, 128.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f,0.2f), 0.2f);
 
 		pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
-		pEffect->SetName(L"Solomon_attack2");
+		pEffect->SetName(L"Solomon_attack2_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(217.f, 163.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
 
 		pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
-		pEffect->SetName(L"Rex_attack0");
+		pEffect->SetName(L"Rex_attack0_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(129.f, 128.f), 7, 1, Vector2(120.f, 120.f), Vector2(0.f, 0.2f), 0.2f);
 
 		pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
-		pEffect->SetName(L"Rex_attack2");
+		pEffect->SetName(L"Rex_attack2_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(219.f, 163.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
 	
 		pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
-		pEffect->SetName(L"Munin_attack0");
+		pEffect->SetName(L"Munin_attack0_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(117.f, 156.f), 5, 1, Vector2(150.f, 150.f), Vector2(0.f, 0.2f), 0.2f);
 
 		pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
-		pEffect->SetName(L"Munin_attack1");
+		pEffect->SetName(L"Munin_attack1_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(109.f, 104.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
 
 		pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
-		pEffect->SetName(L"Whiggin_attack1");
+		pEffect->SetName(L"Whiggin_attack1_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(109.f, 104.f), 8, 1, Vector2(200.f, 200.f), Vector2::Zero, 0.1f);
 
 		pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
-		pEffect->SetName(L"Whiggin_attack0");
+		pEffect->SetName(L"Whiggin_attack0_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(117.f, 156.f), 5, 1, Vector2(150.f, 150.f), Vector2(0.f, 0.2f), 0.2f);
 
 		

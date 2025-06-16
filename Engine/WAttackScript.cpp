@@ -187,7 +187,7 @@ namespace W
 			= dynamic_cast<PlayerAttackObject*>(GetOwner());
 		Monster* pMon = dynamic_cast<Monster*>(pOther);
 
-		Effect* pEffect = BattleManager::GetEffect(pAttackObject->GetName());
+		Effect* pEffect = BattleManager::GetEffect(pAttackObject->GetName() + L"_hit");
 		if (pEffect)
 		{
 			pEffect->SetSceneName(pOther->GetSceneName());

@@ -30,7 +30,7 @@ namespace W
 		//m_pHitEffectAtlas = Resources::Load<Texture>(L"quadhit", L"..\\Resources\\Texture\\Player\\skill\\hit1.png");
 		for (int i = 0; i < 8; ++i)
 		{
-			Effect* pEffect = CreateEffet(L"quad", Vector2(0.f, 0.f), Vector2(146.f, 146.f), 9, 1,
+			Effect* pEffect = CreateEffet(L"quad_hit", Vector2(0.f, 0.f), Vector2(146.f, 146.f), 9, 1,
 				Vector2(150.f, 150.f), Vector2::Zero, 0.06f);
 			pEffect->GetComponent<Transform>()->SetScale(1.5f, 1.5f, 0.f);
 		}

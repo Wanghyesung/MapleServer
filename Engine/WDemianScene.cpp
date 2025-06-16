@@ -188,13 +188,13 @@ namespace W
 		
 		Effect* pAttack_hit1 = new Effect();
 		pAttack_hit1->SetSceneName(GetName());
-		pAttack_hit1->SetName(L"Demian2_attack1");
+		pAttack_hit1->SetName(L"Demian2_attack1_hit");
 		pAttack_hit1->CreateAnimation(Vector2(0.f, 0.f), Vector2(227.f, 228.f), 5, 1, Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.2f);
 
 		Effect* pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
 		pEffect->GetComponent<Transform>()->SetScale(Vector3(18.f, 18.f, 0.f));
-		pEffect->SetName(L"DemianAttack0Effect");
+		pEffect->SetName(L"DemianAttack0Effect_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(1122.f, 382.f), 9, 1, Vector2(2000.f, 2000.f), Vector2(0.f, 0.f), 0.1f);
 
 
@@ -220,7 +220,7 @@ namespace W
 			Effect* pEffect = new Effect();
 			pEffect->SetSceneName(GetName());
 			pEffect->GetComponent<Transform>()->SetScale(3.5f, 3.5f, 0.f);
-			pEffect->SetName(L"DemianTarget");
+			pEffect->SetName(L"DemianTarget_hit");
 			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(286.f, 288.f), 14, 1, Vector2(300.f, 300.f), Vector2::Zero, 0.1f);
 		}
 	}

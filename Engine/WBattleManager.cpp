@@ -279,7 +279,7 @@ namespace W
 
 	Effect* BattleManager::GetEffect(std::wstring _strName)
 	{
-		EffectMap::iterator iter = m_mapEffects.find(_strName + L"_effect");
+		EffectMap::iterator iter = m_mapEffects.find(_strName);
 
 		if (iter == m_mapEffects.end() ||
 			iter->second.empty())

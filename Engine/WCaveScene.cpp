@@ -59,7 +59,6 @@ namespace W
 	{
 		Scene::OnExit();//리소스 해제
 
-		
 		ThreadPool::Joinable();
 	}
 	void CaveScene::CreateBackground()
@@ -69,7 +68,6 @@ namespace W
 		//pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 1.f);
 		////14::10
 		//pBackGround->GetComponent<Transform>()->SetScale(14.f * 1.f, 10.f * 1.f, 1.f);
-		
 	}
 	
 	void CaveScene::create_object()
@@ -106,56 +104,54 @@ namespace W
 		pLadder2->GetComponent<Collider2D>()->SetSize(Vector2(0.3f, 0.9f));
 		pLadder2->GetComponent<Collider2D>()->SetCenter(Vector2(0.f, 0.11f));
 		AddGameObject(eLayerType::Ladder, pLadder2);
-
-
 	}
 	void CaveScene::create_effect()
 	{	
 		const std::wstring& strSceneName = GetName();
 		Effect* pEffect = new Effect();
 		pEffect->SetSceneName(strSceneName);
-		pEffect->SetName(L"icebreath");
+		pEffect->SetName(L"icebreath_hit");
 		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(110.f, 113.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
 		pEffect = new Effect();
 		pEffect->SetSceneName(strSceneName);
-		pEffect->SetName(L"ice");
+		pEffect->SetName(L"ice_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(118.f, 87.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
 	
 		pEffect = new Effect();
 		pEffect->SetSceneName(strSceneName);
-		pEffect->SetName(L"firebreath");
+		pEffect->SetName(L"firebreath_hit");	
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(99.f, 107.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
 		pEffect = new Effect();
-		pEffect->SetName(L"fire");
+		pEffect->SetName(L"fire_hit");
 		pEffect->SetSceneName(strSceneName);
 		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(92.f, 91.f), 4, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
 		pEffect = new Effect();
 		pEffect->SetSceneName(strSceneName);
-		pEffect->SetName(L"thunderbreath");
+		pEffect->SetName(L"thunderbreath_hit");
 		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(72.f, 82.f), 4, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
 		pEffect = new Effect();
 		pEffect->SetSceneName(strSceneName);
-		pEffect->SetName(L"thunder");
+		pEffect->SetName(L"thunder_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(78.f, 75.f), 5, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
 		pEffect = new Effect();
 		pEffect->SetSceneName(strSceneName);
-		pEffect->SetName(L"legattack1");
+		pEffect->SetName(L"legattack1_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(126.f, 107.f), 5, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
 		pEffect = new Effect();
 		pEffect->SetSceneName(strSceneName);
-		pEffect->SetName(L"legattack2");
+		pEffect->SetName(L"legattack2_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(197, 119.f), 6, 1, Vector2(100.f, 100.f), Vector2(0.f, 0.3f), 0.1f);
 	
 		pEffect = new Effect();
 		pEffect->SetSceneName(strSceneName);
-		pEffect->SetName(L"tailattack");
+		pEffect->SetName(L"tailattack_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(132.f, 120.f), 5, 1, Vector2(100.f, 100.f), Vector2(0.f, 0.3f), 0.2f);
 	}
 

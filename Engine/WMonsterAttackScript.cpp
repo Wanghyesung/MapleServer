@@ -70,10 +70,11 @@ namespace W
 				m_iAbnormalStack = 0;
 			}
 
-			Effect* pEffect = BattleManager::GetEffect(pMonsterAttack->GetName());
-			pEffect->SetSceneName(pOther->GetSceneName());
+			Effect* pEffect = BattleManager::GetEffect(pMonsterAttack->GetName() + L"_hit");
+			
 			if (pEffect)
 			{
+				pEffect->SetSceneName(pOther->GetSceneName());
 				pEffect->SetPosition(other);
 				EventManager::CreateObject(pEffect, eLayerType::Effect);
 				pEffect->SetOwner(pOther);
