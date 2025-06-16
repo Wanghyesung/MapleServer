@@ -33,7 +33,7 @@ namespace W
 		for (int i = 0; i < 25; ++i)
 		{
 			//m_pHitEffectAtlas = Resources::Load<Texture>(L"blast", L"..\\Resources\\Texture\\Player\\skill\\blast\\hit.png");
-			pEffect = CreateEffet(L"blast", Vector2(0.f, 0.f),
+			pEffect = CreateEffet(L"blast_hit", Vector2(0.f, 0.f),
 				Vector2(285.f, 284.f), 8, 1, Vector2(300.f, 300.f), Vector2(0.f, 0.f), 0.1f);
 		}
 

@@ -34,7 +34,7 @@ namespace W
 
 		for (int i = 0; i < 8; ++i)
 		{
-			CreateEffet(L"luck", Vector2(0.f, 0.f), Vector2(74.f, 74.f), 4, 1,
+			CreateEffet(L"luck_hit", Vector2(0.f, 0.f), Vector2(74.f, 74.f), 4, 1,
 				Vector2(90.f, 90.f), Vector2::Zero, 0.1f);
 		}
 

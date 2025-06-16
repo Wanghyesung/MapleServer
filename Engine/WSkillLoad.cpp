@@ -26,7 +26,7 @@ namespace W
 		//m_pHitEffectAtlas = Resources::Load<Texture>(L"load", L"..\\Resources\\Texture\\Player\\skill\\load\\hit.png");
 		for (int i = 0; i < 30; ++i)
 		{
-			pEffect = CreateEffet(L"load", Vector2(0.f, 0.f), Vector2(315.f, 204.f), 14, 1,
+			pEffect = CreateEffet(L"load_hit", Vector2(0.f, 0.f), Vector2(315.f, 204.f), 14, 1,
 				Vector2(300.f, 300.f), Vector2(0.f, 0.f), 0.07f);
 			pEffect->GetComponent<Transform>()->SetScale(3.f, 3.f, 0.f);
 		}

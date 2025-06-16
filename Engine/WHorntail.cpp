@@ -143,7 +143,6 @@ namespace W
 		update_state();
 	}
 
-
 	void Horntail::Start()
 	{
 		m_bStart = true;
@@ -154,6 +153,7 @@ namespace W
 		//GameObject* pMainCamera = renderer::MainCamera->GetOwner();
 		//pMainCamera->GetScript<CameraScript>()->SetEventType(CameraScript::eCameraEventType::Wave,4.f);
 	}
+
 	void Horntail::dead()
 	{
 		m_iDeadCount = 1;
@@ -233,9 +233,12 @@ namespace W
 
 		GetScript<MonsterScript>()->CreateHP();
 		for (UINT i = 0; i < 8; ++i)
+		{
 			m_vecMonster[i]->SetState(eState::Active);
-
+			m_vecMonster[i]->SetRender(true);
+		}
 	}
+
 	void Horntail::delete_child()
 	{
 		MonsterManager::AddDeleteObject(this);

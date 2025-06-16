@@ -31,8 +31,9 @@ namespace W
 
 		
 		m_dDeltaTime = differnceFrequency / m_lCpuFrequency.QuadPart;
-		if (m_dDeltaTime >= (1.0 / 120.0))
-			m_dDeltaTime = (1.0 / 120.0);
+		//if (m_dDeltaTime >= (1.0 / 120.0))
+		//	m_dDeltaTime = (1.0 / 120.0);
+		m_dDeltaTime = 1 / 120.f;
 
 		m_lPrevFrequency.QuadPart = m_lCurFrequency.QuadPart;
 	}

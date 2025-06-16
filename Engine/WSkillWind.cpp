@@ -31,7 +31,7 @@ namespace W
 		//m_pHitEffectAtlas = Resources::Load<Texture>(L"wind", L"..\\Resources\\Texture\\Player\\skill\\shuriken\\hit.png");
 		for (int i = 0; i < 7; ++i)
 		{
-			pEffect = CreateEffet(L"wind", Vector2(0.f, 0.f), Vector2(249.f, 248.f), 6, 1,
+			pEffect = CreateEffet(L"wind_hit", Vector2(0.f, 0.f), Vector2(249.f, 248.f), 6, 1,
 				Vector2(250.f, 250.f), Vector2(0.f, 0.2f), 0.15f);
 			pEffect->GetComponent<Transform>()->SetScale(2.5f, 2.5f, 0.f);
 		}
