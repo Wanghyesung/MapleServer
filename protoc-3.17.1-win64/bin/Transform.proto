@@ -2,14 +2,22 @@ syntax = "proto3";
 package Protocol;
 
 
-//서버가 클라에게 (브로드캐스팅)
+message TransformInfo
+{
+	float p_x = 1;
+	float p_y = 2;
+	float p_z = 3;
+
+	float r_x = 4;
+	float r_y = 5;
+	float r_z = 6;
+}
+
 message S_TRANSFORM
 {	
 	string scene = 1;
 	uint32 layer_id = 2;
 	
-	float x = 3;
-	float y = 4;
-	float z = 5;
+	TransformInfo transform =3;
 }
 

@@ -48,7 +48,7 @@ namespace W
 			m_pActiveAnimation->Reset();
 		}
 
-		m_pActiveAnimation->LateUpdate();
+		m_pActiveAnimation->Update();
 	}
 	void Animator::LateUpdate()
 	{

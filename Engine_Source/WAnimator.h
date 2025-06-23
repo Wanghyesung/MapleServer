@@ -51,6 +51,7 @@ namespace W
 
 
 		Animation* FindAnimation(const std::wstring& _strName);
+
 		Events* FindEvents(const std::wstring& _strName);
 		void Play(const std::wstring& _strName, bool _bLoop);
 		void Stop(bool _bStop) { m_bStop = _bStop; }

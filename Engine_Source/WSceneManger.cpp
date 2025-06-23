@@ -282,8 +282,13 @@ namespace W
 				UINT iObjectID = pGameObj->GetObjectID();
 				tInfo.set_layer_createid_id((UCHAR)eLayer << 24 | iCreateID << 16 | iObjectID);
 
-				W::Vector3 vPosition = pGameObj->GetComponent<W::Transform>()->GetPosition();
-				tInfo.set_x(vPosition.x);	tInfo.set_y(vPosition.y);	tInfo.set_z(vPosition.z);
+				Transform* pTr = pGameObj->GetComponent<Transform>();
+				const Vector3 vPosition = pTr->GetPosition();
+				const Vector3 vRotation = pTr->GetRotation();
+				Protocol::TransformInfo* tTrInfo = tInfo.mutable_transform();
+
+				tTrInfo->set_p_x(vPosition.x);	tTrInfo->set_p_y(vPosition.y);	tTrInfo->set_p_z(vPosition.z);
+				tTrInfo->set_r_x(vRotation.x);	tTrInfo->set_r_y(vRotation.y);	tTrInfo->set_r_z(vRotation.z);
 
 				if (pGameObj->IsPoolObject())
 					tInfo.set_object_name(WstringToString(pGameObj->GetName()));

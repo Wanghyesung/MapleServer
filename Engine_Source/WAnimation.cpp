@@ -21,10 +21,6 @@ namespace W
 	}
 	void Animation::Update()
 	{
-
-	}
-	void Animation::LateUpdate()
-	{
 		if (m_bComplete)
 			return;
 
@@ -32,7 +28,6 @@ namespace W
 
 		if (m_vecSprites[m_iIndex].fDuration <= m_fTime)
 		{
-			m_iPreIndxe = m_iIndex;
 			++m_iIndex;
 			m_fTime = 0.f;
 
@@ -43,6 +38,10 @@ namespace W
 			}
 		}
 	}
+	void Animation::LateUpdate()
+	{
+
+	}
 	void Animation::Render()
 	{
 
@@ -50,8 +49,6 @@ namespace W
 	void Animation::Create(std::wstring _strName,  Vector2 _vLeftTop, 
 		Vector2 _vSize, UINT _iColumnLength, Vector2 _vDivisionSize, Vector2 _vOffset, float _fDuration)
 	{
-		
-	
 		for (UINT i = 0; i < _iColumnLength; ++i)
 		{
 			//전부 uv좌표 기준으로
@@ -73,9 +70,12 @@ namespace W
 
 	bool Animation::TrySendPacket()
 	{
-		if (m_iIndex == m_iPreIndxe)
-			return false;
+		if (m_iIndex != m_iPreIndxe)
+		{
+			m_iPreIndxe = m_iIndex;
+			return true;
+		}
 
-		return true;
+		return false;
 	}
 }

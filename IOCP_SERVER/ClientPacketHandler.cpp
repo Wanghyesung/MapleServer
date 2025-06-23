@@ -9,7 +9,7 @@
 #include "..\Engine_Source\WLayer.h"
 #include "..\Engine_Source\WAnimator.h"
 PacketHandlerFunc GPacketHandler[UINT16_MAX] = {};
-unordered_map<string, wstring> GHashName = {};
+
 //event버퍼에 넣기
 bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 {
@@ -80,10 +80,8 @@ bool Handle_C_MAP(shared_ptr<Session> _pSession, Protocol::C_MAP& _pkt)
 {
 	
 	UINT iPlayerID = _pkt.player_id();	
-	if (GHashName.find(_pkt.scene()) == GHashName.end())
-				GHashName[_pkt.scene()] = StringToWString(_pkt.scene());
 
-	const wstring& strScene = GHashName[_pkt.scene()];
+	const wstring& strScene = StringToWString(_pkt.scene());
 	
 	W::EventManager::ChanageScene(iPlayerID, strScene);
 	
@@ -93,10 +91,8 @@ bool Handle_C_MAP(shared_ptr<Session> _pSession, Protocol::C_MAP& _pkt)
 bool Handle_C_START_MAP(shared_ptr<Session> _pSession, Protocol::C_START_MAP& _pkt)
 {
 	UINT iPlayerID = _pkt.player_id();
-	if (GHashName.find(_pkt.scene()) == GHashName.end())
-		GHashName[_pkt.scene()] = StringToWString(_pkt.scene());
 
-	const wstring& strScene = GHashName[_pkt.scene()];
+	const wstring& strScene = StringToWString(_pkt.scene());
 
 	W::EventManager::StartScene(iPlayerID, strScene);
 
@@ -108,10 +104,8 @@ bool Handle_C_SKILL(shared_ptr<Session> _pSession, Protocol::C_Skill& _pkt)
 {
 	W::Player::ePlayerSkill eSkillID = (W::Player::ePlayerSkill)_pkt.skill_id();
 	UINT iPlayerID = _pkt.player_id();
-	if (GHashName.find(_pkt.scene()) == GHashName.end())
-		GHashName[_pkt.scene()] = StringToWString(_pkt.scene());
 
-	const wstring& strScene = GHashName[_pkt.scene()];
+	const wstring& strScene = StringToWString(_pkt.scene());
 
 	W::EventManager::ChangePlayerSkillState(iPlayerID, eSkillID);
 	

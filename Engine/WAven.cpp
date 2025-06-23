@@ -4,6 +4,7 @@
 #include "WAttackScript.h"
 #include "WTime.h"
 #include "WEventManager.h"
+#include "WSceneManger.h"
 namespace W
 {
 	UINT Aven::CREATE_ID = 0;
@@ -11,8 +12,6 @@ namespace W
 	Aven::Aven() :
 		m_iDir(1)
 	{
-		
-
 		GetComponent<Transform>()->SetScale(2.f * 0.72, 2.f * 0.72, 0.f);
 
 	}
@@ -55,5 +54,35 @@ namespace W
 	void Aven::Off()
 	{
 		PlayerAttackObject::Off();
+	}
+
+	void Aven::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
+
+		update_state();
+	}
+
+	void Aven::update_state()
+	{
+		Animator* pAnimator = GetComponent<Animator>();
+		if (!pAnimator || pAnimator->TrySendPacket())
+			return;
+
+		Protocol::S_STATE pkt;
+
+		UCHAR cLayer = (UCHAR)eLayerType::AttackObject;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = pAnimator->GetActiveAnimation();
+		UCHAR cDir = m_iDir > 0 ? 1 : 0;
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+
+		pkt.set_state_value((cDir << 8) | cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
 	}
 }

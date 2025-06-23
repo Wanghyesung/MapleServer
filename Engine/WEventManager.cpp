@@ -63,6 +63,7 @@ namespace W
 			m_iActiveIdx = 1 - m_iActiveIdx;
 		}
 
+
 		std::vector<tEvent>& vecActiveEvent = m_vecEvent[m_iActiveIdx];
 		for (int i = 0; i < vecActiveEvent.size(); ++i)
 		{
@@ -125,8 +126,13 @@ namespace W
 		
 		tInfo->set_layer_createid_id((UCHAR)eLayer << 24 | iCreateID << 16 | iObjectID);
 		
-		Vector3 vPosition = pObj->GetComponent<Transform>()->GetPosition();
-		tInfo->set_x(vPosition.x);	tInfo->set_y(vPosition.y);	tInfo->set_z(vPosition.z);
+		Transform* pTr = pObj->GetComponent<Transform>();
+		const Vector3 vPosition = pTr->GetPosition();
+		const Vector3 vRotation = pTr->GetRotation();
+		Protocol::TransformInfo* tTrInfo = tInfo->mutable_transform();
+
+		tTrInfo->set_p_x(vPosition.x);	tTrInfo->set_p_y(vPosition.y);	tTrInfo->set_p_z(vPosition.z);
+		tTrInfo->set_r_x(vRotation.x);	tTrInfo->set_r_y(vRotation.y);	tTrInfo->set_r_z(vRotation.z);
 		
 		UCHAR cDir = 1 ;
 		UCHAR cAnimIdx = 0;

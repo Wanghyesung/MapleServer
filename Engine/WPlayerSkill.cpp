@@ -104,4 +104,12 @@ namespace W
 		EventManager::AddPlayerSkillState(_pSkill);
 	}
 
+	const wstring& PlayerSkill::GetCurSkillName()
+	{
+		if (m_pActiveSkill == nullptr)
+			return {};
+
+		return m_pActiveSkill->GetStateName();
+	}
+
 }

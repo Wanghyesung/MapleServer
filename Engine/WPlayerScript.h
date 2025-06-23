@@ -30,6 +30,8 @@ namespace W
 		bool IsAttack() { return m_bAttack; }
 		void SetAttack(bool _bActive) { m_bAttack = _bActive; }
 
+		bool IsSkillOn();
+
 		bool IsStab() { return m_bStab; }
 		void SetStab(bool _bActive) { m_bStab = _bActive; }
 
@@ -37,6 +39,7 @@ namespace W
 		void SetLadder(bool _bLadder) { m_bLadder = _bLadder; }
 
 		const std::wstring& GetCurStateName();
+		const std::wstring& GetCurSkillName();
 
 		void MinusAttackCnt();
 		void SetAccAttack() { m_fCurAccTime = 0.f; m_iAccAttCnt = 20; }

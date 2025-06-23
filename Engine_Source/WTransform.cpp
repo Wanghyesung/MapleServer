@@ -76,13 +76,19 @@ namespace W
 
 	void Transform::SendTransform()
 	{
-		if (m_vPosition == m_vPrevPosition)
-			return;
+		if (m_vPosition == m_vPrevPosition &&
+			m_vRotation == m_vPrevRotation)
+			return;	
 
 		std::vector<UINT> vecID = SceneManger::GetPlayerIDs(GetOwner()->GetSceneName());
 
 		Protocol::S_TRANSFORM pkt;
-		pkt.set_x(m_vPosition.x);	pkt.set_y(m_vPosition.y);	pkt.set_z(m_vPosition.z);
+
+		Protocol::TransformInfo* tTrInfo = pkt.mutable_transform();
+		tTrInfo->set_p_x(m_vPosition.x);	tTrInfo->set_p_y(m_vPosition.y);	tTrInfo->set_p_z(m_vPosition.z);
+		tTrInfo->set_r_x(m_vRotation.x);	tTrInfo->set_r_y(m_vRotation.y);	tTrInfo->set_r_z(m_vRotation.z);
+
+		
 		UCHAR cLayer = (UINT)GetOwner()->GetLayerType();
 		UINT iObjectID = GetOwner()->GetObjectID();
 
