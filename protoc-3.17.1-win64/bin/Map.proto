@@ -1,6 +1,8 @@
 syntax = "proto3";
 package Protocol;
 
+
+import "Transform.proto";
 //repeated uint64 victims = 3;
 
 
@@ -9,15 +11,13 @@ message ObjectInfo
 	string scene = 1;
 	uint32 layer_createid_id = 2;
 	
-	float x = 3;
-	float y = 4;
-    float z = 5;
-
+	TransformInfo transform =3;
+	
 	//현재 애니메이션 이름, 애니메이션 인덱스, 만약 iDX가 -1이면 Textrue이름
-	string state = 6;
-	int32 state_value = 7;
+	string state = 4;
+	int32 state_value = 5;
 
-	string object_name = 8;
+	string object_name = 6;
 }
 
 message S_MAP

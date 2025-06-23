@@ -14,7 +14,6 @@
 using PacketHandlerFunc = std::function<bool(shared_ptr<PacketSession>&, BYTE*, INT)>;
 extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
 
-extern unordered_map<string, wstring> GHashName;
 //±âº» : ID, LAYER, SCENE
 
 enum PACKET_TYPE

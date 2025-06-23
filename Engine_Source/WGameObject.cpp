@@ -84,10 +84,6 @@ namespace W
 
 	void GameObject::UpdatePacket()
 	{
-		//tr
-		
-
-		//anim
 	}
 	
 	

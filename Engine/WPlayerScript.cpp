@@ -85,9 +85,7 @@ namespace W
 		if (m_bAbnormal || m_bSuperKnockback)
 			return;
 
-		
-		bool bSkillOn = m_pSkill->IsSkillOn();
-		if(bSkillOn)
+		if(IsSkillOn())
 			m_pSkill->Update();
 		else
 			m_pFSM->Update();
@@ -174,9 +172,20 @@ namespace W
 		m_pFSM->ChangeState(Player::ePlayerState::jump);
 	}
 
+	bool PlayerScript::IsSkillOn()
+	{
+		return m_pSkill->IsSkillOn();
+	}
+
 	const std::wstring& PlayerScript::GetCurStateName()
 	{
 		return m_pFSM->GetActiveState()->GetStateName();
+	}
+
+	const std::wstring& PlayerScript::GetCurSkillName()
+	{
+		return m_pSkill->GetCurSkillName();
+		// TODO: 여기에 return 문을 삽입합니다.
 	}
 
 	void PlayerScript::MinusAttackCnt()

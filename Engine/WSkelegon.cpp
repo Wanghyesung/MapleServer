@@ -22,6 +22,7 @@ namespace W
 		//m_spAttackEffect(nullptr)
 	{
 		SetName(L"skelegon");
+		SetPoolObject(true);
 
 		Animator* pAnimator = AddComponent<Animator>();
 	

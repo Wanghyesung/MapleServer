@@ -14,6 +14,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
+		
 
 		DECLARE_CREATE_ID;
 
@@ -22,7 +23,7 @@ namespace W
 			m_pFuncAttack = std::move(_pFunc);
 			m_fAttackTime = _fTime;
 		}
-
+		
 	private:
 		void update_attack();
 		void off();

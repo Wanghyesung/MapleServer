@@ -100,7 +100,7 @@ namespace W
 				SetAlert(false);
 			}
 		}
-
+		
 
 		GameObject::Update();
 
@@ -124,6 +124,16 @@ namespace W
 	{
 		GetComponent<Transform>()->SendTransform();
 		update_state();
+	}
+
+	void Player::ActiveShadow()
+	{
+		m_bActiveShadow = true;
+	}
+
+	void Player::InactiveShadow()
+	{
+		m_bActiveShadow = false;
 	}
 
 	void Player::SetAlert(bool _bAlert)
@@ -213,9 +223,14 @@ namespace W
 		Animator* pAnim = m_vecChildObj[0]->GetComponent<Animator>();
 		if (!pAnim->TrySendPacket())
 			return;
-
+		
 		Protocol::S_STATE pkt;
-		pkt.set_state(WstringToString(m_strCurStateName));
+		PlayerScript* pScript = GetScript<PlayerScript>();
+		
+		if (pScript->IsSkillOn())
+			pkt.set_state(WstringToString(pScript->GetCurSkillName()));
+		else
+			pkt.set_state(WstringToString(m_strCurStateName));
 
 		UCHAR cLayer = (UCHAR)eLayerType::Player;
 		UINT iObjectID = m_iPlayerID;
@@ -224,12 +239,15 @@ namespace W
 		UCHAR cDir = m_iDir > 0 ? 1 : 0; 
 		UCHAR cAnimIdx = pAnim->GetActiveAnimation()->GetCurIndex();
 		UCHAR cAlert = m_bAlert ? 1 : 0;
-		pkt.set_state_value((cAlert<<16) | (cDir << 8) | cAnimIdx);
-
+		UCHAR cShadow = m_bActiveShadow ? 1 : 0;
+		pkt.set_state_value((cShadow<<24) | (cAlert<<16) | (cDir << 8) | cAnimIdx);
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
-
+	}
+	void Player::update_shadow()
+	{
+		
 	}
 	void Player::Reset_Animation()
 	{

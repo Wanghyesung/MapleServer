@@ -21,6 +21,7 @@ namespace W
 		void AccAttack(Vector3 _vPosition);
 		void AddSkill(SkillState* _pSkill);
 
+		const wstring& GetCurSkillName();
 	private:	
 		std::map<Player::ePlayerSkill, SkillState*> m_mapSkills;
 		SkillState* m_pActiveSkill;

@@ -14,7 +14,7 @@ namespace W
 		m_iCreateCount(1)
 		//m_mapAttackObjs{}
 	{
-		SetPoolObject(true);
+		
 	}
 	Monster::~Monster()
 	{

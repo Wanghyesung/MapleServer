@@ -60,7 +60,6 @@ namespace W
 		//virtual void Render()override;
 		virtual void UpdatePacket()override;
 
-
 		DECLARE_CREATE_ID;
 
 		void SetDir(int _iDir) { m_iDir = _iDir; }
@@ -82,8 +81,9 @@ namespace W
 		void SetCurStateName(const std::wstring& _strName) { m_strCurStateName = _strName; }
 
 		bool IsShadow() { return m_bActiveShadow; }
-		void SetShadow(bool _bActive) { m_bActiveShadow = _bActive; }
-
+		void ActiveShadow();
+		void InactiveShadow();
+	
 		Shadow* GetShadow() { return m_pShadow; }
 
 		void SetDark(bool _bActive){m_bActiveDark = _bActive;}
@@ -126,6 +126,7 @@ namespace W
 		void child_lateupdate();
 
 		void update_state();
+		void update_shadow();
 	private:
 		Shadow* m_pShadow;
 
@@ -147,7 +148,7 @@ namespace W
 		ePlayerSkill m_ePlayerSkill;
 
 		std::wstring m_strCurStateName;
-
+	
 		UINT m_iPlayerID;
 
 		friend class EventManager;
