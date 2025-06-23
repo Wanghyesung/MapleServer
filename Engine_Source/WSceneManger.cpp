@@ -285,6 +285,9 @@ namespace W
 				W::Vector3 vPosition = pGameObj->GetComponent<W::Transform>()->GetPosition();
 				tInfo.set_x(vPosition.x);	tInfo.set_y(vPosition.y);	tInfo.set_z(vPosition.z);
 
+				if (pGameObj->IsPoolObject())
+					tInfo.set_object_name(WstringToString(pGameObj->GetName()));
+
 				UCHAR cDir = 1;
 				CHAR cAnimIdx = 0;
 				UCHAR bRender = pGameObj->IsRender();

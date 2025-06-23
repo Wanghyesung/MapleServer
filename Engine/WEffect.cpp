@@ -85,26 +85,26 @@ namespace W
 		Animator* pAnimator = AddComponent<Animator>();
 		m_vOffset = _vOffset;
 
-		pAnimator->Create(GetName() + L"Anim_left", _vLeftTop, _vSize, _iColumnLength, _vDivisionSize, Vector2::Zero, _fDuration);
+		pAnimator->Create(GetName() + L"_left", _vLeftTop, _vSize, _iColumnLength, _vDivisionSize, Vector2::Zero, _fDuration);
 		//_vLeftTop.x = _pAtlas->GetWidth() - _vSize.x;
 		//_vSize.x *= -1;
-		pAnimator->Create(GetName() + L"Anim_right", _vLeftTop, _vSize, _iColumnLength, _vDivisionSize, Vector2::Zero, _fDuration);
+		pAnimator->Create(GetName() + L"_right", _vLeftTop, _vSize, _iColumnLength, _vDivisionSize, Vector2::Zero, _fDuration);
 
 		for (int i = 1; i < _iRowLength; ++i)
 		{
 			
 			_vLeftTop.y = i * _vSize.y;
 
-			pAnimator->FindAnimation(GetName() + L"Anim_left")->Create(GetName() + L"Anim_left", _vLeftTop,
+			pAnimator->FindAnimation(GetName() + L"_left")->Create(GetName() + L"_left", _vLeftTop,
 				_vSize, _iColumnLength, _vDivisionSize, Vector2::Zero, _fDuration);
 
 
-			pAnimator->FindAnimation(GetName() + L"Anim_right")->Create(GetName() + L"Anim_right", _vLeftTop,
+			pAnimator->FindAnimation(GetName() + L"_right")->Create(GetName() + L"_right", _vLeftTop,
 				_vSize, _iColumnLength, _vDivisionSize, Vector2::Zero, _fDuration);
 		}
 
-		pAnimator->CompleteEvent(GetName() + L"Anim_right") = std::bind(&Effect::off, this);
-		pAnimator->CompleteEvent(GetName() + L"Anim_left") = std::bind(&Effect::off, this);
+		pAnimator->CompleteEvent(GetName() + L"_right") = std::bind(&Effect::off, this);
+		pAnimator->CompleteEvent(GetName() + L"_left") = std::bind(&Effect::off, this);
 
 		BattleManager::PushEffect(this);
 	}
@@ -124,7 +124,7 @@ namespace W
 		pTr->SetPosition(vPosition);
 
 		std::wstring strDir = _iDir > 0 ? L"_right" : L"_left";
-		GetComponent<Animator>()->Play(GetName() + L"Anim" + strDir, true);
+		GetComponent<Animator>()->Play(GetName() + strDir, true);
 	}
 
 	void Effect::SetPosition(Collider2D* _pCollider)

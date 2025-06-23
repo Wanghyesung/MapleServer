@@ -70,12 +70,12 @@ namespace W
 		m_bComplete = false;
 		m_iIndex = 0;
 	}
+
 	bool Animation::TrySendPacket()
 	{
 		if (m_iIndex == m_iPreIndxe)
 			return false;
 
-		m_iPreIndxe = m_iIndex;
 		return true;
 	}
 }
