@@ -23,7 +23,6 @@ namespace W
 	{
 		SetName(L"skelegon");
 
-
 		Animator* pAnimator = AddComponent<Animator>();
 	
 		pAnimator->Create(L"skelegon_stand_left", Vector2(0.0f, 0.0f), Vector2(600.0f, 200.0f), 6, Vector2(600.f, 200.f));
@@ -37,8 +36,6 @@ namespace W
 		pAnimator->Create(L"skelegon_attack0_right", Vector2(6000.0f, 400.0f), Vector2(-600.0f, 200.0f), 11, Vector2(600.f, 200.f), Vector2::Zero, 0.1f);
 		pAnimator->Create(L"skelegon_dead_right", Vector2(6000.0f, 600.0f), Vector2(-600.0f, 200.0f), 8, Vector2(600.f, 200.f), Vector2::Zero, 0.07f);
 		pAnimator->Create(L"skelegon_hit_right", Vector2(6000.0f, 600.0f), Vector2(-600.0f, 200.0f), 1, Vector2(600.f, 200.f));
-
-	
 	}
 
 	Skelegon::~Skelegon()

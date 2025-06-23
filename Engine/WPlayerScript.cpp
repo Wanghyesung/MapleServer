@@ -256,7 +256,7 @@ namespace W
 
 	PlayerAttackObject* PlayerScript::GetPlayerSkill(const std::wstring& _strName)
 	{
-		GameObject* pGameObj = ObjectPoolManager::FrontObject(_strName);
+		GameObject* pGameObj = ObjectPoolManager::PopObject(_strName);
 		pGameObj->SetSceneName(m_pPlayer->GetSceneName());
 		pGameObj->GetComponent<Collider2D>()->SetActive(true);
 

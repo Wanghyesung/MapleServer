@@ -14,7 +14,7 @@ namespace W
 		m_iCreateCount(1)
 		//m_mapAttackObjs{}
 	{
-
+		SetPoolObject(true);
 	}
 	Monster::~Monster()
 	{
@@ -37,8 +37,6 @@ namespace W
 			return;
 
 		GameObject::LateUpdate();
-
-		
 	}
 
 	void Monster::UpdatePacket()
@@ -59,7 +57,7 @@ namespace W
 
 	MonsterAttackObject* Monster::GetMonsterSkill(const std::wstring& _strName)
 	{
-		GameObject* pGameObj = ObjectPoolManager::FrontObject(_strName);
+		GameObject* pGameObj = ObjectPoolManager::PopObject(_strName);
 		pGameObj->SetSceneName(GetSceneName());
 		return dynamic_cast<MonsterAttackObject*>(pGameObj);
 	}
