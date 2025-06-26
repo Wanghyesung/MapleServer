@@ -149,13 +149,13 @@ namespace W
 	}
 	void SkillUltimate::create_shuriken()
 	{
-		//PlayerAttackObject* pAttackObj = GetPlayer()->GetScript<PlayerScript>()->GetPlayerSkill(L"ultimate_spawn");
-		//SpawnUltimate* pSpawn = dynamic_cast<SpawnUltimate*>(pAttackObj);
-		//pSpawn->Initialize();
-		//EventManager::CreateObject(pSpawn, eLayerType::AttackObject);
-		//
-		//Vector3 vCamPos = renderer::MainCamera->GetOwner()->GetComponent<Transform>()->GetPosition();
-		//Transform* pTr = pSpawn->GetComponent<Transform>();
-		//pTr->SetPosition(Vector3(vCamPos.x, vCamPos.y, -4.f));
+		PlayerAttackObject* pAttackObj = GetPlayer()->GetScript<PlayerScript>()->GetPlayerSkill(L"ultimate_spawn");
+		SpawnUltimate* pSpawn = static_cast<SpawnUltimate*>(pAttackObj);
+		pSpawn->Initialize();
+		EventManager::CreateObject(pSpawn, eLayerType::AttackObject);
+		
+		Vector3 vCamPos = GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Transform* pTr = pSpawn->GetComponent<Transform>();
+		pTr->SetPosition(Vector3(vCamPos.x, vCamPos.y, -4.f));
 	}
 }

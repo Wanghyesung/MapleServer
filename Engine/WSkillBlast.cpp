@@ -34,7 +34,7 @@ namespace W
 		{
 			//m_pHitEffectAtlas = Resources::Load<Texture>(L"blast", L"..\\Resources\\Texture\\Player\\skill\\blast\\hit.png");
 			pEffect = CreateEffet(L"blast_hit", Vector2(0.f, 0.f),
-				Vector2(285.f, 284.f), 8, 1, Vector2(300.f, 300.f), Vector2(0.f, 0.f), 0.05f);
+				Vector2(285.f, 284.f), 8, 1, Vector2(300.f, 300.f), Vector2(0.f, 0.f), 0.03f);
 		}
 
 		//std::shared_ptr<Texture> pAtlas

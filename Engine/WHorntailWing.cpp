@@ -28,8 +28,6 @@ namespace W
 	HorntailWing::~HorntailWing()
 	{
 		ObjectPoolManager::ReleaseObject(L"tailattack");
-
-
 	}
 	void HorntailWing::Initialize()
 	{

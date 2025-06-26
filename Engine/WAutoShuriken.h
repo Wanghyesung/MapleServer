@@ -13,7 +13,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//virtual void Render()override;
+		virtual void UpdatePacket()override;
 
 		void SetVelocity(const Vector2& _vVel) { m_vVelocity= _vVel; }
 		void SetDir(const Vector2& _vDir);
@@ -21,7 +21,10 @@ namespace W
 		virtual void Off()override;
 
 		DECLARE_CREATE_ID;
+
 	private:
+		void update_state();
+
 		bool set_target();
 		void move_target();
 		

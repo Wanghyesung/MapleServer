@@ -14,7 +14,7 @@ namespace W
 		//SetStateName(L"_stand");
 
 		tSkillTime tTime = {};
-		tTime.fCoolTime = 5.f;
+		tTime.fCoolTime = 10.f;
 		tTime.fCurTime = 0.f;
 		SetCoolTime(tTime);
 		

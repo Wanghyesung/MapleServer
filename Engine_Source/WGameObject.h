@@ -71,29 +71,6 @@ namespace W
 		}
 
 		template<typename T>
-		std::vector<T*> GetComponents()
-		{
-			std::vector<T*> comps;
-
-			T* component;
-			for (Component* comp : m_vecComponent)
-			{
-				component = dynamic_cast<T*>(comp);
-				if (component != nullptr)
-					comps.push_back(component);
-			}
-
-			for (Script* script : m_vecScript)
-			{
-				component = dynamic_cast<T*>(script);
-				if (component != nullptr)
-					comps.push_back(component);
-			}
-
-			return comps;
-		}
-
-		template<typename T>
 		T* GetScript()
 		{
 			for (Script* pScript : m_vecScript)
@@ -102,6 +79,7 @@ namespace W
 				if (pTarget != nullptr)
 					return pTarget;
 			}
+			return nullptr;
 		}
 		
 		void SetState(eState _eState) { m_eState = _eState; }

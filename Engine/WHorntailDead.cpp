@@ -21,7 +21,6 @@ namespace W
 		{
 			pAnimator->Stop(true);
 			m_iCount++;
-			GetMonster()->SetDead(true);
 		}
 	}
 	void HorntailDead::Enter()

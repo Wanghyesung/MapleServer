@@ -12,13 +12,15 @@ namespace W
 		virtual void Initialize() override;
 		virtual void Update() override;
 		virtual void LateUpdate() override;
-		//virtual void Render() override;
+		virtual void UpdatePacket() override;
 
 		DECLARE_CREATE_ID;
 
 		virtual void Off()override;
 		void Start();
+
 	private:
+		void update_state();
 		void end();
 		void create_shuriken();
 

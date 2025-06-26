@@ -12,7 +12,8 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		
+		virtual void UpdatePacket()override;
+
 		virtual void Off()override;
 
 		int GetCurFrame() { return m_iCurFrame; }
@@ -20,6 +21,7 @@ namespace W
 
 		DECLARE_CREATE_ID;
 	private:
+		void update_state();
 		void attack();
 		
 	private:
