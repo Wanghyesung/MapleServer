@@ -4,6 +4,9 @@
 #include "WCollider2D.h"
 #include "WTime.h"
 #include "WAttackScript.h"
+#include "WSceneManger.h"
+#include "WPlayer.h"
+
 namespace W
 {
 	UINT UltimateShuriken::CREATE_ID = 0;
@@ -72,24 +75,56 @@ namespace W
 
 	void UltimateShuriken::SetStartPos(Vector2 _vPos)
 	{
-		//Transform* pTransform = GetComponent<Transform>();
-		//pTransform->SetPosition(0.f, 0.f, 0.f);
-		//
-		//Vector3 vTemPos = renderer::MainCamera->GetOwner()->GetComponent<Transform>()->GetPosition();
-		//Vector2 vCamPos = Vector2(vTemPos.x, vTemPos.y);
-		//
-		//vCamPos += (_vPos * 5.f);
-		//
-		//Vector3 vPosition = pTransform->GetPosition();
-		//pTransform->SetPosition(vCamPos.x, vCamPos.y,vPosition.z);
-		//
-		//Vector3 vPos = pTransform->GetPosition();
-		//vPos.z = 0.f;
-		//Vector3 vTargetPos = m_pTarget->GetComponent<Transform>()->GetPosition();
-		//vTargetPos.z = 0.f;
-		//
-		//Vector3 vDiff = vTargetPos - vPos;
-		//vDiff.Normalize();
-		//m_vDir = Vector2(vDiff.x,vDiff.y);
+		Transform* pTransform = GetComponent<Transform>();
+		pTransform->SetPosition(0.f, 0.f, 0.f);
+		
+		Vector3 vTemPos = GetPlayer()->GetComponent<Transform>()->GetPosition();
+		Vector2 vCamPos = Vector2(vTemPos.x, vTemPos.y);
+		
+		vCamPos += (_vPos * 5.f);
+		
+		Vector3 vPosition = pTransform->GetPosition();
+		pTransform->SetPosition(vCamPos.x, vCamPos.y,vPosition.z);
+		
+		Vector3 vPos = pTransform->GetPosition();
+		vPos.z = 0.f;
+		Vector3 vTargetPos = m_pTarget->GetComponent<Transform>()->GetPosition();
+		vTargetPos.z = 0.f;
+		
+		Vector3 vDiff = vTargetPos - vPos;
+		vDiff.Normalize();
+		m_vDir = Vector2(vDiff.x,vDiff.y);
 	}
+
+	void UltimateShuriken::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
+
+		update_state();
+	}
+
+	void UltimateShuriken::update_state()
+	{
+		Animator* pAnimator = GetComponent<Animator>();
+		if (!pAnimator->TrySendPacket())
+			return;
+
+		Protocol::S_STATE pkt;
+
+		UCHAR cLayer = (UCHAR)eLayerType::AttackObject;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = pAnimator->GetActiveAnimation();
+		UCHAR cDir = 1;
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+
+		pkt.set_state_value((cDir << 8) | cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+	}
+
+
 }

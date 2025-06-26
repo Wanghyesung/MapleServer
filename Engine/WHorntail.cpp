@@ -23,6 +23,8 @@ namespace W
 	Horntail::Horntail():
 		m_iDeadCount(0)
 	{
+		SetPoolObject(true);
+
 		m_vecMonster.resize(8);
 
 		MonsterScript* pScript = AddComponent<MonsterScript>();
@@ -59,24 +61,28 @@ namespace W
 
 		HorntailHeadA* pHeadA = new HorntailHeadA(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailHeadA] = pHeadA;
+		pHeadA->SetPoolObject(true);
 		pHeadA->SetSceneName(strScene);
 		pHeadA->Initialize();
 		SceneManger::AddGameObject(strScene, eLayerType::Monster, pHeadA);
 		
 		HorntailHeadB* pHeadB = new HorntailHeadB(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailHeadB] = pHeadB;
+		pHeadB->SetPoolObject(true);
 		pHeadB->SetSceneName(strScene);
 		pHeadB->Initialize();
 		SceneManger::AddGameObject(strScene, eLayerType::Monster, pHeadB);
 		
 		HorntailHeadC* pHeadC = new HorntailHeadC(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailHeadC] = pHeadC;
+		pHeadC->SetPoolObject(true);
 		pHeadC->SetSceneName(strScene);
 		pHeadC->Initialize();
 		SceneManger::AddGameObject(strScene, eLayerType::Monster, pHeadC);
 		
 		HorntailLeftHand* pLeftHand = new HorntailLeftHand(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailLeftHand] = pLeftHand;
+		pLeftHand->SetPoolObject(true);
 		pLeftHand->SetSceneName(strScene);
 		pLeftHand->Initialize();
 		pLeftHand->SetBuff(std::bind(&Horntail::up_defense, this));
@@ -84,6 +90,7 @@ namespace W
 		//
 		HorntailRightHand* pRightHand = new HorntailRightHand(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailRightHand] = pRightHand;
+		pRightHand->SetPoolObject(true);
 		pRightHand->SetSceneName(strScene);
 		pRightHand->Initialize();
 		pRightHand->SetBuff(std::bind(&Horntail::up_attack, this));
@@ -91,12 +98,14 @@ namespace W
 
 		HorntailLeg* pLegs = new HorntailLeg(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailLeg] = pLegs;
+		pLegs->SetPoolObject(true);
 		pLegs->SetSceneName(strScene);
 		pLegs->Initialize();
 		SceneManger::AddGameObject(strScene, eLayerType::Monster, pLegs);
 
 		HorntailWing* pWing = new HorntailWing(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailWing] = pWing;
+		pWing->SetPoolObject(true);
 		pWing->SetSceneName(GetSceneName());
 		pWing->Initialize();
 		pWing->SetHeal(std::bind(&Horntail::heal, this));
@@ -104,6 +113,7 @@ namespace W
 		
 		HorntailTail* pTail = new HorntailTail(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailTail] = pTail;
+		pTail->SetPoolObject(true);
 		pTail->SetSceneName(GetSceneName());
 		pTail->Initialize();
 		SceneManger::AddGameObject(strScene, eLayerType::Monster, pTail);
@@ -149,9 +159,6 @@ namespace W
 
 		Animator* pAnimator = GetComponent<Animator>();
 		pAnimator->Play(L"HorntailStart", true);
-
-		//GameObject* pMainCamera = renderer::MainCamera->GetOwner();
-		//pMainCamera->GetScript<CameraScript>()->SetEventType(CameraScript::eCameraEventType::Wave,4.f);
 	}
 
 	void Horntail::dead()
@@ -242,8 +249,12 @@ namespace W
 	void Horntail::delete_child()
 	{
 		MonsterManager::AddDeleteObject(this);
+		SetDead(true);
 		for (int i = 0; i < 8; ++i)
+		{
+			m_vecMonster[i]->SetDead(true);
 			MonsterManager::AddDeleteObject(m_vecMonster[i]);
+		}
 	}
 	void Horntail::up_attack()
 	{

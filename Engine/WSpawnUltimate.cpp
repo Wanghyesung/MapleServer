@@ -135,7 +135,7 @@ namespace W
 			for (int j = 0; i < m_vecShurikenDir[m_iCurIndex].size(); ++i)
 			{
 				PlayerAttackObject* pAttackObj = GetPlayer()->GetScript<PlayerScript>()->GetPlayerSkill(L"ultimate_suriken");
-				UltimateShuriken* pShuriken = dynamic_cast<UltimateShuriken*>(pAttackObj);
+				UltimateShuriken* pShuriken = static_cast<UltimateShuriken*>(pAttackObj);
 				Vector2 vDir = m_vecShurikenDir[m_iCurIndex][i];
 				pShuriken->SetTarget(m_pTarget);
 				pShuriken->SetStartPos(vDir);

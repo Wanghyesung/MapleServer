@@ -5,6 +5,7 @@
 #include "WAnimator.h"
 
 #include "WEventManager.h"
+#include "WSceneManger.h"
 namespace W
 {
 	UINT Wind::CREATE_ID = 0;
@@ -116,6 +117,36 @@ namespace W
 		GameObject::LateUpdate();
 	}
 	
+	void Wind::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
+
+		update_state();
+	}
+
+	void Wind::update_state()
+	{
+		Animator* pAnimator = GetComponent<Animator>();
+		if (!pAnimator->TrySendPacket())
+			return;
+
+		Protocol::S_STATE pkt;
+
+		UCHAR cLayer = (UCHAR)eLayerType::AttackObject;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = pAnimator->GetActiveAnimation();
+		UCHAR cDir = m_iDir > 0 ? 1 : 0;;
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+
+		pkt.set_state_value((cDir << 8) | cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+	}
+
 	void Wind::Off()
 	{
 		m_fResetTime = 0.6f;

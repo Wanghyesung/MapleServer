@@ -9,13 +9,17 @@ namespace W
 	public:
 		HorntailHeadA(Horntail* _pOwner);
 		virtual ~HorntailHeadA();
+		
+		DECLARE_CREATE_ID;
 
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//virtual void Render()override;
+		virtual void UpdatePacket()override;
 
-		DECLARE_CREATE_ID;
+	private:
+		void update_state();
+
 	private:
 		void add_skill();
 

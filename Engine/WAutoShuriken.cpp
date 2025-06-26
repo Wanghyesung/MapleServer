@@ -88,6 +88,36 @@ namespace W
 		GameObject::LateUpdate();
 	}
 
+	void AutoShuriken::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
+
+		update_state();
+	}
+
+	void AutoShuriken::update_state()
+	{
+		Animator* pAnimator = GetComponent<Animator>();
+		if (!pAnimator->TrySendPacket())
+			return;
+
+		Protocol::S_STATE pkt;
+
+		UCHAR cLayer = (UCHAR)eLayerType::AttackObject;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = pAnimator->GetActiveAnimation();
+		UCHAR cDir = m_iDir > 0 ? 1 : 0;
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+
+		pkt.set_state_value((cDir << 8) | cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+	}
+
 	void AutoShuriken::SetDir(const Vector2& _vDir)
 	{
 		m_vDir = _vDir;
@@ -110,6 +140,8 @@ namespace W
 
 		PlayerAttackObject::Off();
 	}
+
+	
 
 	bool AutoShuriken::set_target()
 	{	

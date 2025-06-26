@@ -82,7 +82,7 @@ namespace W
 		PlayerScript* pScript = m_pPlayer->GetScript<PlayerScript>();
 
 		SkillState* pState = FindSkillState(Player::ePlayerSkill::blast);
-		SkillBlast* pBlast = dynamic_cast<SkillBlast*>(pState);
+		SkillBlast* pBlast = static_cast<SkillBlast*>(pState);
 		_vPosition.z -= 1.f;
 		pBlast->create_blast(_vPosition);
 		pScript->MinusAttackCnt();
