@@ -135,18 +135,12 @@ namespace W
 		}
 
 		Monster::LateUpdate();
-
 	}
 
 	void Skelegon::UpdatePacket()
 	{
 		Monster::UpdatePacket();
 	}
-
-	//void Skelegon::Render()
-	//{
-	//	Monster::Render();
-	//}
 
 	void Skelegon::add_skill()
 	{

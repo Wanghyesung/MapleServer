@@ -39,5 +39,9 @@ namespace W
 		EventManager::Restore(m_pTarget, BattleManager::eAbnormalType::SealSkill);
 	}
 
+	void SealSkill::UpdatePacket()
+	{
+		Abnormal::UpdatePacket();
+	}
 
 }

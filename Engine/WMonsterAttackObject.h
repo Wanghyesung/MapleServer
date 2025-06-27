@@ -18,6 +18,9 @@ namespace W
 		virtual void UpdatePacket()override;
 
 		DECLARE_CREATE_ID
+
+	private:
+		void update_state();
 	public:
 		void SetOnwer(Monster* _pOnwer) { m_pOwner = _pOnwer; }
 

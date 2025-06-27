@@ -39,5 +39,10 @@ namespace W
 
 	}
 
+	void Faint::UpdatePacket()
+	{
+		Abnormal::UpdatePacket();
+	}
+
 
 }

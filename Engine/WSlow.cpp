@@ -39,4 +39,8 @@ namespace W
 	{
 		EventManager::Restore(m_pTarget, BattleManager::eAbnormalType::Slow, -m_fAccValue);
 	}
+	void Slow::UpdatePacket()
+	{
+		Abnormal::UpdatePacket();
+	}
 }

@@ -190,8 +190,7 @@ namespace W
 			float fOffsetX = -i * 2 + vStartPos.x;
 
 			MonsterAttackObject* pThunder = GetMonsterSkill(L"thunder");
-			if (pThunder == nullptr)
-				return;
+		
 			pThunder->SetOnwer(this);
 
 			pThunder->GetComponent<Transform>()->SetPosition(fOffsetX, vStartPos.y, vStartPos.z);

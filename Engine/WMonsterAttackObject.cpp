@@ -44,6 +44,13 @@ namespace W
 
 	void MonsterAttackObject::UpdatePacket()
 	{
+		GetComponent<Transform>()->SendTransform();
+
+		update_state();
+	}
+
+	void MonsterAttackObject::update_state()
+	{
 		Animator* pAnimator = GetComponent<Animator>();
 		if (!pAnimator || pAnimator->TrySendPacket())
 			return;

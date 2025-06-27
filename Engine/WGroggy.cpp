@@ -39,4 +39,9 @@ namespace W
 	{
 		EventManager::Restore(m_pTarget, BattleManager::eAbnormalType::InputKey);
 	}
+
+	void Groggy::UpdatePacket()
+	{
+		Abnormal::UpdatePacket();
+	}
 }

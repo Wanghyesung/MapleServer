@@ -30,6 +30,7 @@ namespace W
 			pMonster->SetCurStateName(L"_stand");
 
 			pMonster->SetDead(true);
+			pMonster->SetRender(false);
 
 			//юс╫ц╥н
 			if(!pMonster->GetScript<MonsterScript>()->IsBoss())

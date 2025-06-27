@@ -42,5 +42,9 @@ namespace W
 		EventManager::DeleteObject(this);
 	}
 
+	void Variation::UpdatePacket()
+	{
+		Abnormal::UpdatePacket();
+	}
 
 }

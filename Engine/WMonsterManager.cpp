@@ -52,6 +52,7 @@ namespace W
 		_pGameObj->SetState(GameObject::Active);
 		_pGameObj->GetComponent<Collider2D>()->SetActive(true);
 		_pGameObj->SetDead(false);
+		_pGameObj->SetRender(true);
 
 		MonsterScript* pScript =_pGameObj->GetScript<MonsterScript>();
 		tObjectInfo& tInfo = pScript->m_tObjectInfo;
