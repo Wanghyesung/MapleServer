@@ -19,7 +19,7 @@
 #else
 #pragma comment (lib, "..\\x64\\Release\\Engine.lib")
 #pragma comment(lib, "IOCP\\Release\\IOCP.lib")
-#pragma comment(lib, "ProtoBuf\\Release\\libprotobufd.lib")
+#pragma comment(lib, "ProtoBuf\\Release\\libprotobuf.lib")
 
 #endif
 

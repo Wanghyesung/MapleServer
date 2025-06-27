@@ -18,9 +18,6 @@ namespace W
 		virtual void UpdatePacket()override;
 
 	private:
-		void update_state();
-
-	private:
 		void add_skill();
 
 		void setAttack();

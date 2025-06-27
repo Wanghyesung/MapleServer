@@ -9,8 +9,7 @@ namespace W
 {
 	UINT Aven::CREATE_ID = 0;
 
-	Aven::Aven() :
-		m_iDir(1)
+	Aven::Aven()
 	{
 		GetComponent<Transform>()->SetScale(2.f * 0.72, 2.f * 0.72, 0.f);
 

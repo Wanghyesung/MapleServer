@@ -3,6 +3,7 @@
 #include "WAnimator.h"
 #include "WAttackScript.h"
 #include "WSceneManger.h"
+#include "WPlayer.h"
 namespace W
 {
 	UINT UltimateFog::CREATE_ID = 0;
@@ -61,7 +62,7 @@ namespace W
 		pkt.set_state(WstringToString(pAnim->GetKey()));
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+		GRoom.GetPersonByID(GetPlayer()->GetPlayerID())->Send(pSendBuffer);
 	}
 
 }

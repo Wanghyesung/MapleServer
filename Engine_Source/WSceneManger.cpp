@@ -3,13 +3,14 @@
 #include "WRigidbody.h"
 #include "WAnimator.h"
 
+
 #include "..\Engine\WPlayer.h"
 #include "..\Engine\WBattleManager.h"
 
 #include "..\Engine\WPlayerAttackObject.h"
 #include "..\Engine\WObjectPoolManager.h"
 #include "..\Engine\WMonsterManager.h"
-
+#include "..\Engine\WPlayerScript.h"
 namespace W
 {
 	UINT SceneManger::SCENE_IDX = 0;
@@ -213,7 +214,6 @@ namespace W
 		vPos.x = 0.f; vPos.y = 0.f;
 		_pPlayer->GetComponent<Transform>()->SetPosition(vPos);
 		_pPlayer->GetComponent<Rigidbody>()->SetGround(false);
-
 		
 		Scene* pNextScene = FindScene(_strNextScene);
 		pNextScene->AddGameObject(eLayerType::Player, _pPlayer);

@@ -14,8 +14,7 @@ namespace W
 	UINT Shuriken::CREATE_ID = 0;
 	UINT Shuriken::COUNT = 0;
 
-	Shuriken::Shuriken():
-		m_iDir(1)
+	Shuriken::Shuriken()
 	{
 		m_iCount = COUNT;
 		++COUNT;
@@ -87,7 +86,7 @@ namespace W
 	void Shuriken::update_state()
 	{
 		Animator* pAnimator = GetComponent<Animator>();
-		if (!pAnimator->TrySendPacket())
+		if (!pAnimator || pAnimator->TrySendPacket())
 			return;
 
 		Protocol::S_STATE pkt;

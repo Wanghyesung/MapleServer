@@ -13,8 +13,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//virtual void Render()override;
-
+		virtual void UpdatePacket()override;
 		DECLARE_CREATE_ID;
 		void SetBuff(std::function<void()> _func) { m_pBuffFunc = std::move(_func); }
 	private:

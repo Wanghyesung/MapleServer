@@ -268,8 +268,11 @@ namespace W
 		GameObject* pGameObj = ObjectPoolManager::PopObject(_strName);
 		pGameObj->SetSceneName(m_pPlayer->GetSceneName());
 		pGameObj->GetComponent<Collider2D>()->SetActive(true);
+		
+		PlayerAttackObject* pAttackObj = static_cast<PlayerAttackObject*>(pGameObj);
+		pAttackObj->SetPlayer(m_pPlayer);
 
-		return dynamic_cast<PlayerAttackObject*>(pGameObj);
+		return pAttackObj;
 	}
 
 	void PlayerScript::add_skill()

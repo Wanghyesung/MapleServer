@@ -34,8 +34,6 @@ namespace W
 
 		pAnim->CompleteEvent(L"finish_left") = std::bind(&PlayerAttackObject::PushObjectPool, this);
 		pAnim->CompleteEvent(L"finish_right") = std::bind(&PlayerAttackObject::PushObjectPool, this);
-
-	
 	}
 	Wind::~Wind()
 	{

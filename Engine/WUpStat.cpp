@@ -45,5 +45,10 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
+
+	void UpStat::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
+	}
 	
 }

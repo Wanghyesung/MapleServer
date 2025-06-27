@@ -70,6 +70,11 @@ namespace W
 		GameObject::LateUpdate();
 	}
 	
+	void Thunder::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
+
 	void Thunder::off()
 	{
 		m_iCallCount = 0;

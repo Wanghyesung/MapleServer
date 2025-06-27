@@ -10,13 +10,13 @@ LPFN_ACCEPTEX SockHelper::AcceptEx = nullptr;
 void SockHelper::init()
 {
 	WSAData wsaData;
-	assert(WSAStartup(MAKEWORD(2, 2), &wsaData) == 0);
+	WSAStartup(MAKEWORD(2, 2), &wsaData);
 
 	/* 런타임에 주소 얻어오는 API */
 	SOCKET dummySocket = Create_Socket();
-	assert(BindWindowFunc(dummySocket, WSAID_CONNECTEX, reinterpret_cast<LPVOID*>(&ConnectEx)));
-	assert(BindWindowFunc(dummySocket, WSAID_DISCONNECTEX, reinterpret_cast<LPVOID*>(&DisConnectEx)));
-	assert(BindWindowFunc(dummySocket, WSAID_ACCEPTEX, reinterpret_cast<LPVOID*>(&AcceptEx)));
+	BindWindowFunc(dummySocket, WSAID_CONNECTEX, reinterpret_cast<LPVOID*>(&ConnectEx));
+	BindWindowFunc(dummySocket, WSAID_DISCONNECTEX, reinterpret_cast<LPVOID*>(&DisConnectEx));
+	BindWindowFunc(dummySocket, WSAID_ACCEPTEX, reinterpret_cast<LPVOID*>(&AcceptEx));
 
 	Close(dummySocket);
 }

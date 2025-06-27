@@ -69,6 +69,11 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
+
+	void Ice::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
 	
 	void Ice::off()
 	{

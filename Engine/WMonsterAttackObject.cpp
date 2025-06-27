@@ -3,13 +3,15 @@
 #include "WMonster.h"
 #include "WMonsterScript.h"
 #include "WEffect.h"
-
+#include "WAnimator.h"
+#include "WSceneManger.h"
 namespace W
 {
 	UINT MonsterAttackObject::CREATE_ID = 0;
 
 	MonsterAttackObject::MonsterAttackObject() :
-		m_pOwner(nullptr)
+		m_pOwner(nullptr),
+		m_iDir(1)
 	{
 		
 		AddComponent<MonsterAttackScript>();
@@ -40,10 +42,28 @@ namespace W
 		GameObject::LateUpdate();
 	}
 
-	//void MonsterAttackObject::Render()
-	//{
-	//	GameObject::Render();
-	//}
+	void MonsterAttackObject::UpdatePacket()
+	{
+		Animator* pAnimator = GetComponent<Animator>();
+		if (!pAnimator || pAnimator->TrySendPacket())
+			return;
+
+		Protocol::S_STATE pkt;
+
+		UCHAR cLayer = (UCHAR)eLayerType::MonsterAttack;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = pAnimator->GetActiveAnimation();
+		UCHAR cDir = m_iDir > 0 ? 1 : 0;
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+
+		pkt.set_state_value((cDir << 8) | cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+	}
 
 	void MonsterAttackObject::SetMonsterAttack(const tMonsterAttack& _tAttackInfo)
 	{

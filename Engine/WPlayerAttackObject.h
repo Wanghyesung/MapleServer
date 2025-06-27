@@ -24,6 +24,14 @@ namespace W
 		virtual void Off();
 		void PushObjectPool();
 
+		int GetDir() { return m_iDir; }
+		void SetDir(int _iDir) { m_iDir = _iDir; }
+
+	protected:
+		int m_iDir;
+
+	private:
+		void update_state();
 		
 	private:
 		Player* m_pPlayer;
