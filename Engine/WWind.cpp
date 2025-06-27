@@ -24,13 +24,13 @@ namespace W
 		
 		Animator* pAnim = AddComponent<Animator>();
 	
-		pAnim->Create(L"move_left", Vector2(0.0f, 0.0f), Vector2(402.0f, 316.0f), 6, Vector2(600.f, 600.f), Vector2::Zero, 0.06f);
-		pAnim->Create(L"stop_left", Vector2(0.0f, 316.0f), Vector2(460.0f, 460.0f), 6, Vector2(600.f, 600.f), Vector2::Zero, 0.06f);
-		pAnim->Create(L"finish_left", Vector2(0.0f, 776.0f), Vector2(612.0f, 580.0f), 18, Vector2(600.f, 600.f), Vector2::Zero, 0.06f);
+		pAnim->Create(L"move_left", Vector2(0.0f, 0.0f), Vector2(402.0f, 316.0f), 6, Vector2(600.f, 600.f), Vector2::Zero, 0.03f);
+		pAnim->Create(L"stop_left", Vector2(0.0f, 316.0f), Vector2(460.0f, 460.0f), 6, Vector2(600.f, 600.f), Vector2::Zero, 0.03f);
+		pAnim->Create(L"finish_left", Vector2(0.0f, 776.0f), Vector2(612.0f, 580.0f), 18, Vector2(600.f, 600.f), Vector2::Zero, 0.03f);
 		
-		pAnim->Create(L"move_right", Vector2(10614.f, 0.0f), Vector2(-402.0f, 316.0f), 6, Vector2(600.f, 600.f), Vector2::Zero, 0.06f);
-		pAnim->Create(L"stop_right", Vector2(10556.f, 316.0f), Vector2(-460.0f, 460.0f), 6, Vector2(600.f, 600.f), Vector2::Zero, 0.06f);
-		pAnim->Create(L"finish_right", Vector2(10404.f, 776.0f), Vector2(-612.0f, 580.0f), 18, Vector2(600.f, 600.f), Vector2::Zero, 0.06f);
+		pAnim->Create(L"move_right", Vector2(10614.f, 0.0f), Vector2(-402.0f, 316.0f), 6, Vector2(600.f, 600.f), Vector2::Zero, 0.03f);
+		pAnim->Create(L"stop_right", Vector2(10556.f, 316.0f), Vector2(-460.0f, 460.0f), 6, Vector2(600.f, 600.f), Vector2::Zero, 0.03f);
+		pAnim->Create(L"finish_right", Vector2(10404.f, 776.0f), Vector2(-612.0f, 580.0f), 18, Vector2(600.f, 600.f), Vector2::Zero, 0.03f);
 
 		pAnim->CompleteEvent(L"finish_left") = std::bind(&PlayerAttackObject::PushObjectPool, this);
 		pAnim->CompleteEvent(L"finish_right") = std::bind(&PlayerAttackObject::PushObjectPool, this);

@@ -166,8 +166,11 @@ namespace W
 		m_iDeadCount = 1;
 
 		for (UINT i = 0; i < 8; ++i)
-			m_vecMonster[i]->SetState(eState::Paused);
-
+		{
+			//m_vecMonster[i]->SetState(eState::Paused);
+			m_vecMonster[i]->SetDead(true);
+		}
+		
 		Transform* pTr = GetComponent<Transform>();
 		Vector3 vPosition = pTr->GetPosition();
 		vPosition.y -= 0.99f;
@@ -252,7 +255,6 @@ namespace W
 		SetDead(true);
 		for (int i = 0; i < 8; ++i)
 		{
-			m_vecMonster[i]->SetDead(true);
 			MonsterManager::AddDeleteObject(m_vecMonster[i]);
 		}
 	}

@@ -37,6 +37,10 @@ namespace W
 	void Undead::Restore()
 	{
 		EventManager::Restore(m_pTarget, BattleManager::eAbnormalType::Undead);
+	}
 
+	void Undead::UpdatePacket()
+	{
+		Abnormal::UpdatePacket();
 	}
 }

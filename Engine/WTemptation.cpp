@@ -51,8 +51,10 @@ namespace W
 	void Temptation::Restore()
 	{
 		EventManager::Restore(m_pTarget, BattleManager::eAbnormalType::temptation);
-
 	}
-
 	
+	void Temptation::UpdatePacket()
+	{
+		Abnormal::UpdatePacket();
+	}
 }

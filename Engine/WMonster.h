@@ -63,6 +63,8 @@ namespace W
 		int m_iDir;
 		
 		bool m_bDead;
+		bool m_bPrevDead;
+
 		eMonsterState m_eMonsterState;
 
 		std::wstring m_strCurStateName;

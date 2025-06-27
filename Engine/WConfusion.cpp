@@ -77,5 +77,10 @@ namespace W
 	{
 		Abnormal::LateUpdate();
 	}
+
+	void Confusion::UpdatePacket()
+	{
+		Abnormal::UpdatePacket();
+	}
 	
 }

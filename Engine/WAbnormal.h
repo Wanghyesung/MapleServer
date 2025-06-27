@@ -13,7 +13,7 @@ namespace W
 		virtual void Initialize() override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//virtual void Render()override;
+		virtual void UpdatePacket()override;
 
 		virtual void Restore();
 
@@ -22,6 +22,10 @@ namespace W
 		void SetRenderPos(bool _bUp) { m_bRenderPosUp = _bUp; }
 
 		DECLARE_CREATE_ID;
+
+	private:
+		void update_packet();
+
 	protected:
 		Player* m_pTarget;
 		

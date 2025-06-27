@@ -62,18 +62,21 @@ namespace W
 	{
 		GameObject* pGameObj = ObjectPoolManager::PopObject(_strName);
 		pGameObj->SetSceneName(GetSceneName());
-		return dynamic_cast<MonsterAttackObject*>(pGameObj);
+		return static_cast<MonsterAttackObject*>(pGameObj);
 	}
 
 	void Monster::update_state()
 	{
 		Animator* pAnimator = GetComponent<Animator>();
 
-		if (!pAnimator->TrySendPacket())
+		bool bRender = IsDead();
+
+		if (!pAnimator->TrySendPacket() && m_bPrevDead == bRender)
 			return;
 
-		Protocol::S_STATE pkt;
+		m_bPrevDead = m_bDead;
 
+		Protocol::S_STATE pkt;
 		UCHAR cLayer = (UCHAR)eLayerType::Monster;
 		UINT iObjectID = GetObjectID();
 		pkt.set_layer_id((cLayer << 24) | iObjectID);
@@ -81,9 +84,8 @@ namespace W
 		Animation* pAnim = pAnimator->GetActiveAnimation();
 		UCHAR cDir = GetDir() > 0 ? 1 : 0;
 		UCHAR cAnimIdx = pAnim->GetCurIndex();
-		bool bRender = !IsDead();
 
-		pkt.set_state_value(bRender << 16 | (cDir << 8) | cAnimIdx);
+		pkt.set_state_value(!bRender << 16 | (cDir << 8) | cAnimIdx);
 		pkt.set_state(WstringToString(pAnim->GetKey()));
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);

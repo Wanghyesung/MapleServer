@@ -3,8 +3,8 @@
 #include "WBattleManager.h"
 #include "WPlayer.h"
 #include "WEventManager.h"
-
-
+#include "WAnimator.h"
+#include "WSceneManger.h"
 namespace W
 {
 	UINT Abnormal::CREATE_ID = 0;
@@ -52,6 +52,12 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
+	void Abnormal::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
+		
+		update_packet();
+	}
 	void Abnormal::Restore()
 	{
 
@@ -61,9 +67,29 @@ namespace W
 		m_pTarget = _pTarget;
 		SetSceneName(_pTarget->GetSceneName());
 	}
-	/*void Abnormal::Render()
-	{	
-		GameObject::Render();
-	}*/
+
+	void Abnormal::update_packet()
+	{
+		Animator* pAnimator = GetComponent<Animator>();
+		if (!pAnimator || pAnimator->TrySendPacket())
+			return;
+
+		Protocol::S_STATE pkt;
+
+		UCHAR cLayer = (UCHAR)eLayerType::AttackObject;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = pAnimator->GetActiveAnimation();
+		UCHAR cDir = 0;
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+
+		pkt.set_state_value((cDir << 8) | cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+	}
+	
 
 }

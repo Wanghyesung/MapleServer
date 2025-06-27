@@ -59,7 +59,7 @@ namespace W
 		{
 			GameObject* gameObj = iter->second;
 
-			if (gameObj->GetState() != GameObject::eState::Active)
+			if (gameObj->GetState() == GameObject::eState::Active)
 				continue;
 
 			gameObj->UpdatePacket();
