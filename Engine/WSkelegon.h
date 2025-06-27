@@ -13,8 +13,7 @@ namespace W
 		virtual void Update()override;
 		virtual void LateUpdate()override;
 		virtual void UpdatePacket()override;
-		//virtual void Render()override;
-
+		
 		DECLARE_CREATE_ID;
 
 	private:
@@ -23,8 +22,6 @@ namespace W
 	private:
 		void create_laser();
 
-		void update_state();
-		//std::shared_ptr<Texture> m_spAttackEffect;
 	};
 }
 

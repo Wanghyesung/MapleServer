@@ -2,6 +2,7 @@
 #include "WSceneManger.h"
 #include "WCollisionManager.h"
 #include "WObjectPoolManager.h"
+#include "WAnimator.h"
 namespace W
 {
 	UINT Monster::CREATE_ID = 0;
@@ -42,6 +43,8 @@ namespace W
 	void Monster::UpdatePacket()
 	{
 		GetComponent<Transform>()->SendTransform();
+
+		update_state();
 	}
 
 	void Monster::SetItem(const std::vector<std::wstring>& _vecItemNames)
@@ -60,6 +63,31 @@ namespace W
 		GameObject* pGameObj = ObjectPoolManager::PopObject(_strName);
 		pGameObj->SetSceneName(GetSceneName());
 		return dynamic_cast<MonsterAttackObject*>(pGameObj);
+	}
+
+	void Monster::update_state()
+	{
+		Animator* pAnimator = GetComponent<Animator>();
+
+		if (!pAnimator->TrySendPacket())
+			return;
+
+		Protocol::S_STATE pkt;
+
+		UCHAR cLayer = (UCHAR)eLayerType::Monster;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = pAnimator->GetActiveAnimation();
+		UCHAR cDir = GetDir() > 0 ? 1 : 0;
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+		bool bRender = !IsDead();
+
+		pkt.set_state_value(bRender << 16 | (cDir << 8) | cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
 	}
 
 	

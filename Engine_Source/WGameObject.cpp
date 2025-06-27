@@ -84,6 +84,7 @@ namespace W
 
 	void GameObject::UpdatePacket()
 	{
+
 	}
 	
 	

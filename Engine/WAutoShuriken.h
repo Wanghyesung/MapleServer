@@ -36,8 +36,6 @@ namespace W
 	private:
 		Monster* m_pTarget;
 
-		int m_iDir;
-
 		float m_fDeleteTime;
 		float m_fCurTime;
 		const float m_fContFoce;

@@ -15,8 +15,6 @@ namespace W
 
 		DECLARE_CREATE_ID;
 
-		int GetDir() { return m_iDir; }
-		void SetDir(int _iDir) { m_iDir = _iDir; }
 		void SetStop() { m_bStop = true; }
 		void SetFinish() { m_bFinish = true; }
 
@@ -26,7 +24,6 @@ namespace W
 		void update_state();
 
 	private:
-		int m_iDir;
 
 		float m_fResetTime;
 		float m_fCurResetTime;

@@ -29,8 +29,9 @@ namespace W
 	{
 		UpStat::LateUpdate();
 	}
-	//void AttackUp::Render()
-	//{
-	//	UpStat::Render();
-	//}
+	void AttackUp::UpdatePacket()
+	{
+		UpStat::UpdatePacket();
+	}
+	
 }

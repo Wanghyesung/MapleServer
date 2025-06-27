@@ -113,7 +113,11 @@ namespace W
 		Monster::LateUpdate();
 	}
 
-	
+	void HorntailHeadC::UpdatePacket()
+	{
+		Monster::UpdatePacket();
+	}
+
 	void HorntailHeadC::setAttack()
 	{
 		MonsterScript* Pscript = GetComponent<MonsterScript>();

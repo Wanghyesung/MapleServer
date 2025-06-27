@@ -19,7 +19,6 @@ namespace W
 
 		DECLARE_CREATE_ID;
 
-		int GetDir() { return m_iDir; }
 		void SetDir(int _iDir);
 
 		virtual void Off()override;
@@ -28,7 +27,6 @@ namespace W
 		void update_state();
 
 	private:
-		int m_iDir;
 
 		UINT m_iCount;
 		static UINT COUNT;

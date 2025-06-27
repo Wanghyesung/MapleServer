@@ -69,6 +69,11 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
+
+	void Fire::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
 	
 	void Fire::off()
 	{

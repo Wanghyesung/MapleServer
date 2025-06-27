@@ -57,6 +57,9 @@ namespace W
 		MonsterAttackObject* GetMonsterSkill(const std::wstring& _strName);
 
 	private:
+		void update_state();
+
+	private:
 		int m_iDir;
 		
 		bool m_bDead;
@@ -69,8 +72,6 @@ namespace W
 		UINT m_iCreateCount;
 		std::vector<std::wstring> m_vecItemNames;
 
-		//사용할 스킬들
-		//std::map < std::wstring, std::queue<MonsterAttackObject*>> m_mapAttackObjs;
 
 		friend class MonsterManager;
 	};

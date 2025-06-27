@@ -96,6 +96,11 @@ namespace W
 		Monster::LateUpdate();
 	}
 	
+	void HorntailTail::UpdatePacket()
+	{
+		Monster::UpdatePacket();
+	}
+
 	void HorntailTail::setAttack()
 	{
 		MonsterScript* Pscript = GetComponent<MonsterScript>();

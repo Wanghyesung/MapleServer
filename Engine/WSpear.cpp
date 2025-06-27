@@ -77,7 +77,12 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
-	
+
+	void Spear::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
+
 	void Spear::off()
 	{
 		m_iCallCount = 0;

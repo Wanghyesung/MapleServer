@@ -114,6 +114,10 @@ namespace W
 		Monster::LateUpdate();
 	}
 
+	void HorntailHeadB::UpdatePacket()
+	{
+		Monster::UpdatePacket();
+	}
 
 	void HorntailHeadB::setAttack()
 	{

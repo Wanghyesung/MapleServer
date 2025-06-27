@@ -98,6 +98,11 @@ namespace W
 
 		Monster::LateUpdate();
 	}
+	void HorntailLeftHand::UpdatePacket()
+	{
+		Monster::UpdatePacket();
+	}
+
 
 	void HorntailLeftHand::setAttack()
 	{

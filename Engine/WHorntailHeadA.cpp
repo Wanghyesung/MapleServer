@@ -201,34 +201,6 @@ namespace W
 
 	void HorntailHeadA::UpdatePacket()
 	{
-		GetComponent<Transform>()->SendTransform();
-
-		update_state();
-	}
-
-	void HorntailHeadA::update_state()
-	{
-		Animator* pAnimator = GetComponent<Animator>();
-
-		if (!pAnimator->TrySendPacket())
-			return;
-
-		Protocol::S_STATE pkt;
-
-		UCHAR cLayer = (UCHAR)eLayerType::Monster;
-		UINT iObjectID = GetObjectID();
-		pkt.set_layer_id((cLayer << 24) | iObjectID);
-
-		Animation* pAnim = pAnimator->GetActiveAnimation();
-		UCHAR cDir = 1;
-		UCHAR cAnimIdx = pAnim->GetCurIndex();
-		bool bRender = !IsDead();
-
-		pkt.set_state_value(bRender << 16 | (cDir << 8) | cAnimIdx);
-		pkt.set_state(WstringToString(pAnim->GetKey()));
-
-		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
-
+		Monster::UpdatePacket();
 	}
 }

@@ -224,13 +224,13 @@ namespace W
 		UINT iPlayerID = (UINT)(_lParm);
 		const wstring& strNextScene = *reinterpret_cast<wstring*>(_accParm);
 		GameObject* pPlayer = SceneManger::FindPlayer(iPlayerID);
+		
+		change_player_fsmstate((DWORD_PTR)pPlayer->GetScript<PlayerScript>()->m_pFSM, (DWORD_PTR)Player::ePlayerState::jump, 0);
 
 		wstring strPrevScene = pPlayer->GetSceneName(); //swap 후 이름이 변경되지 않게 복사
-		
+	
 		SceneManger::SwapPlayer(pPlayer, strPrevScene, strNextScene);
-
 		SceneManger::SendEnterScene(iPlayerID, strNextScene);
-
 
 		//이전 맵에 플레이어 삭제됐다고 알리기
 		Protocol::S_DELETE pkt;

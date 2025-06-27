@@ -23,8 +23,6 @@ namespace W
 	private:
 		void update_state();
 
-	private:
-		int m_iDir;
 
 		
 	};

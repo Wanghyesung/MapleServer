@@ -48,6 +48,7 @@ namespace W
 	{
 		m_arrAbnormalFunc[(UINT)eAbnormalType::None] = nullptr;
 		m_arrAbnormalFunc[(UINT)eAbnormalType::SealSkill] = seal_skill;
+		m_arrAbnormalFunc[(UINT)eAbnormalType::temptation] = temptation;
 		m_arrAbnormalFunc[(UINT)eAbnormalType::Faint] = faint;
 		m_arrAbnormalFunc[(UINT)eAbnormalType::Confusion] = confusion;
 		m_arrAbnormalFunc[(UINT)eAbnormalType::Slow] = debuff_slow;

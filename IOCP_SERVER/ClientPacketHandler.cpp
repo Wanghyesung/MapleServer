@@ -93,7 +93,7 @@ bool Handle_C_START_MAP(shared_ptr<Session> _pSession, Protocol::C_START_MAP& _p
 	UINT iPlayerID = _pkt.player_id();
 
 	const wstring& strScene = StringToWString(_pkt.scene());
-
+	
 	W::EventManager::StartScene(iPlayerID, strScene);
 
 	return true;
