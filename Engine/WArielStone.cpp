@@ -72,6 +72,11 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
+	
+	void ArielStone::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
 
 	void ArielStone::off()
 	{

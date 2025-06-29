@@ -77,6 +77,11 @@ namespace W
 		GameObject::LateUpdate();
 	}
 	
+	void SolThunder::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
+
 	void SolThunder::off()
 	{
 		m_iCallCount = 0;

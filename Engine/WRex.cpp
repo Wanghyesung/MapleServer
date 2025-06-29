@@ -19,12 +19,12 @@ namespace W
 		SetName(L"Rex");
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Rex_stand", Vector2(0.f, 0.f), Vector2(500.f, 1000.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Rex_start", Vector2(0.f, 1000.f), Vector2(500.f, 1000.f), 11, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Rex_attack0", Vector2(0.f, 2000.f), Vector2(500.f, 1000.f), 18, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Rex_attack1", Vector2(0.f, 3000.f), Vector2(500.f, 1000.f), 20, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Rex_attack2", Vector2(0.f, 4000.f), Vector2(500.f, 1000.f), 20, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Rex_dead", Vector2(0.f, 5000.f), Vector2(500.f, 1000.f), 15, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"Rex_stand", Vector2(0.f, 0.f), Vector2(500.f, 1000.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Rex_start", Vector2(0.f, 1000.f), Vector2(500.f, 1000.f), 11, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Rex_attack0", Vector2(0.f, 2000.f), Vector2(500.f, 1000.f), 18, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Rex_attack1", Vector2(0.f, 3000.f), Vector2(500.f, 1000.f), 20, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Rex_attack2", Vector2(0.f, 4000.f), Vector2(500.f, 1000.f), 20, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Rex_dead", Vector2(0.f, 5000.f), Vector2(500.f, 1000.f), 15, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
 
 	}
 	Rex::~Rex()
@@ -108,6 +108,12 @@ namespace W
 
 		Monster::LateUpdate();
 	}
+
+	void Rex::UpdatePacket()
+	{
+		Monster::UpdatePacket();
+	}
+
 	void Rex::setattack()
 	{
 		MonsterScript* Pscript = GetComponent<MonsterScript>();

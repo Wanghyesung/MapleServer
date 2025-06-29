@@ -66,6 +66,11 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
+
+	void RoccatBean::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
 	
 	void RoccatBean::off()
 	{	

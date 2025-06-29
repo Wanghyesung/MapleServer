@@ -41,7 +41,7 @@ namespace W
 	{
 		m_tObjectInfo.fHP = 100.f;
 		m_tObjectInfo.fMP = 100.f;
-		m_tObjectInfo.fSpeed = 3.5f;
+		m_tObjectInfo.fSpeed = 5.f;
 	}
 	PlayerScript::~PlayerScript()
 	{
@@ -167,7 +167,7 @@ namespace W
 		
 		Rigidbody* pRigidbody = m_pPlayer->GetComponent<Rigidbody>();
 		pRigidbody->SetGround(false);
-		pRigidbody->AddVelocity(Vector2(m_pPlayer->GetDir() * 1.8f, 0.1f));
+		pRigidbody->AddVelocity(Vector2(m_pPlayer->GetDir() * 3.6f, 0.1f));
 
 		m_pFSM->ChangeState(Player::ePlayerState::jump);
 	}
@@ -321,7 +321,7 @@ namespace W
 		if (m_tHitInfo.eAttType == eAttackType::SuperKnockback)
 		{
 			super_knockback(m_tHitInfo.fHitRigidityTime);
-			pRigidbody->SetVelocity(Vector2(iDir * m_tHitInfo.fHitRcnt * 2.5f, 0.f));
+			pRigidbody->SetVelocity(Vector2(iDir * m_tHitInfo.fHitRcnt * 5.f, 0.f));
 			EventManager::ChangePlayerFSMState(m_pFSM, Player::ePlayerState::alert);
 		}
 		else
@@ -332,7 +332,7 @@ namespace W
 
 			if (m_pPlayer->GetCurPlayerState() == Player::ePlayerState::walk)
 			{
-				pRigidbody->SetVelocity(Vector2(iDir * m_tHitInfo.fHitRcnt * 2.5f, m_tHitInfo.fHitUpperRcnt));
+				pRigidbody->SetVelocity(Vector2(iDir * m_tHitInfo.fHitRcnt * 5.f, m_tHitInfo.fHitUpperRcnt));
 			}
 			else
 				pRigidbody->SetVelocity(Vector2(iDir * m_tHitInfo.fHitRcnt, m_tHitInfo.fHitUpperRcnt));

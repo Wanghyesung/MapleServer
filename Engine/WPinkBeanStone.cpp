@@ -67,6 +67,11 @@ namespace W
 		GameObject::LateUpdate();
 	}
 	
+	void PinkBeanStone::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
+
 	void PinkBeanStone::off()
 	{
 		m_iCallCount = 0;

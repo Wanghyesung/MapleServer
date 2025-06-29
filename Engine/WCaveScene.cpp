@@ -38,7 +38,7 @@ namespace W
 		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::AttackObject, true);
 		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::Player, true);
 		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::MonsterAttack, true);
-		//CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Portal, true);
+	
 	}
 	void CaveScene::Update()
 	{
@@ -61,14 +61,7 @@ namespace W
 
 		ThreadPool::Joinable();
 	}
-	void CaveScene::CreateBackground()
-	{
-		//GameObject* pBackGround = new GameObject();
-		//pBackGround->SetSceneName(GetName());
-		//pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 1.f);
-		////14::10
-		//pBackGround->GetComponent<Transform>()->SetScale(14.f * 1.f, 10.f * 1.f, 1.f);
-	}
+	
 	
 	void CaveScene::create_object()
 	{	
