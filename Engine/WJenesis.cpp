@@ -68,6 +68,10 @@ namespace W
 		GameObject::LateUpdate();
 	}
 	
+	void Jenesis::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
 
 	void Jenesis::off()
 	{

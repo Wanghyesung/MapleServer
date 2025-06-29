@@ -63,6 +63,11 @@ namespace W
 		MonsterAttackObject::LateUpdate();
 	}
 	
+	void MiniBeanAttack::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
+
 	void MiniBeanAttack::off()
 	{
 		GetComponent<Collider2D>()->SetActive(false);

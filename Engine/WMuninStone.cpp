@@ -65,6 +65,11 @@ namespace W
 		GameObject::LateUpdate();
 	}
 
+	void MuninStone::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
+
 	void MuninStone::off()
 	{
 		m_iCallCount = 0;

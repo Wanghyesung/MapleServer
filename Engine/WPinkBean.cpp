@@ -38,63 +38,63 @@ namespace W
 
 		Animator* pAnim = AddComponent<Animator>();
 		
-		pAnim->Create(L"PinkBean_start_left", Vector2(0.f, 7200.f), Vector2(750.f, 600.f), 4, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_start_right", Vector2(9750.f, 7200.f), Vector2(-750.f, 600.f), 4, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"PinkBean_start_left", Vector2(0.f, 7200.f), Vector2(750.f, 600.f), 4, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_start_right", Vector2(9750.f, 7200.f), Vector2(-750.f, 600.f), 4, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
 		
-		pAnim->Create(L"PinkBean_stand_left", Vector2(0.f, 0.f), Vector2(750.f, 600.f), 6, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_move_left", Vector2(0.f, 600.f), Vector2(750.f, 600.f), 8, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack0_left",  Vector2(0.f, 1200.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack1_left",  Vector2(0.f, 1800.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack1_left")->Create(L"PinkBean_attack1_left", Vector2(0.f, 2400.f), Vector2(750.f, 600.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack2_left",  Vector2(0.f, 3000.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack2_left")->Create(L"PinkBean_attack2_left", Vector2(0.f, 3600.f), Vector2(750.f, 600.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack3_left",  Vector2(0.f, 4200.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack3_left")->Create(L"PinkBean_attack3_left", Vector2(0.f, 4800.f), Vector2(750.f, 600.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_dead_left", Vector2(0.f, 5400.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_dead_left")->Create(L"PinkBean_dead_left", Vector2(0.f, 6000.f), Vector2(750.f, 600.f),14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_dead_left")->Create(L"PinkBean_dead_left", Vector2(0.f, 6600.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"PinkBean_stand_left", Vector2(0.f, 0.f), Vector2(750.f, 600.f), 6, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_move_left", Vector2(0.f, 600.f), Vector2(750.f, 600.f), 8, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack0_left",  Vector2(0.f, 1200.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack1_left",  Vector2(0.f, 1800.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack1_left")->Create(L"PinkBean_attack1_left", Vector2(0.f, 2400.f), Vector2(750.f, 600.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack2_left",  Vector2(0.f, 3000.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack2_left")->Create(L"PinkBean_attack2_left", Vector2(0.f, 3600.f), Vector2(750.f, 600.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack3_left",  Vector2(0.f, 4200.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack3_left")->Create(L"PinkBean_attack3_left", Vector2(0.f, 4800.f), Vector2(750.f, 600.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_dead_left", Vector2(0.f, 5400.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_dead_left")->Create(L"PinkBean_dead_left", Vector2(0.f, 6000.f), Vector2(750.f, 600.f),14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_dead_left")->Create(L"PinkBean_dead_left", Vector2(0.f, 6600.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
 
-		pAnim->Create(L"PinkBean_stand_right", Vector2(9750.f, 0.f), Vector2(-750.f, 600.f), 6, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_move_right", Vector2(9750.f, 600.f), Vector2(-750.f, 600.f), 8, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack0_right", Vector2(9750.f, 1200.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack1_right", Vector2(9750.f, 1800.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack1_right")->Create(L"PinkBean_attack1_right", Vector2(9750.f, 2400.f), Vector2(-750.f, 600.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack2_right", Vector2(9750.f, 3000.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack2_right")->Create(L"PinkBean_attack2_right", Vector2(9750.f, 3600.f), Vector2(-750.f, 600.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack3_right", Vector2(9750.f, 4200.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack3_right")->Create(L"PinkBean_attack3_right", Vector2(9750.f, 4800.f), Vector2(-750.f, 600.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_dead_right", Vector2(9750.f, 5400.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_dead_right")->Create(L"PinkBean_dead_right", Vector2(9750.f, 6000.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_dead_right")->Create(L"PinkBean_dead_right", Vector2(9750.f, 6600.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"PinkBean_stand_right", Vector2(9750.f, 0.f), Vector2(-750.f, 600.f), 6, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_move_right", Vector2(9750.f, 600.f), Vector2(-750.f, 600.f), 8, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack0_right", Vector2(9750.f, 1200.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack1_right", Vector2(9750.f, 1800.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack1_right")->Create(L"PinkBean_attack1_right", Vector2(9750.f, 2400.f), Vector2(-750.f, 600.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack2_right", Vector2(9750.f, 3000.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack2_right")->Create(L"PinkBean_attack2_right", Vector2(9750.f, 3600.f), Vector2(-750.f, 600.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack3_right", Vector2(9750.f, 4200.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack3_right")->Create(L"PinkBean_attack3_right", Vector2(9750.f, 4800.f), Vector2(-750.f, 600.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_dead_right", Vector2(9750.f, 5400.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_dead_right")->Create(L"PinkBean_dead_right", Vector2(9750.f, 6000.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_dead_right")->Create(L"PinkBean_dead_right", Vector2(9750.f, 6600.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
 		
 		//atlas2
-		pAnim->Create(L"PinkBean_attack4_left", Vector2(0.f, 0.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack4_left")->Create(L"PinkBean_attack4_left", Vector2(0.f, 600.f), Vector2(750.f, 600.f), 3, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack5_left", Vector2(0.f, 1200.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack5_left")->Create(L"PinkBean_attack5_left", Vector2(0.f, 1800.f), Vector2(750.f, 600.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack6_left", Vector2(0.f, 2400.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack6_left")->Create(L"PinkBean_attack6_left", Vector2(0.f, 3000.f), Vector2(750.f, 600.f), 11, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack7_left", Vector2(0.f, 3600.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack7_left")->Create(L"PinkBean_attack7_left", Vector2(0.f, 4200.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack8_left", Vector2(0.f, 4800.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack8_left")->Create(L"PinkBean_attack8_left", Vector2(0.f, 5400.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack9_left", Vector2(0.f, 6000.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack9_left")->Create(L"PinkBean_attack9_left", Vector2(0.f, 6600.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack10_left", Vector2(0.f, 7200.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"PinkBean_attack4_left", Vector2(0.f, 0.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack4_left")->Create(L"PinkBean_attack4_left", Vector2(0.f, 600.f), Vector2(750.f, 600.f), 3, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack5_left", Vector2(0.f, 1200.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack5_left")->Create(L"PinkBean_attack5_left", Vector2(0.f, 1800.f), Vector2(750.f, 600.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack6_left", Vector2(0.f, 2400.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack6_left")->Create(L"PinkBean_attack6_left", Vector2(0.f, 3000.f), Vector2(750.f, 600.f), 11, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack7_left", Vector2(0.f, 3600.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack7_left")->Create(L"PinkBean_attack7_left", Vector2(0.f, 4200.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack8_left", Vector2(0.f, 4800.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack8_left")->Create(L"PinkBean_attack8_left", Vector2(0.f, 5400.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack9_left", Vector2(0.f, 6000.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack9_left")->Create(L"PinkBean_attack9_left", Vector2(0.f, 6600.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack10_left", Vector2(0.f, 7200.f), Vector2(750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
 		
-		pAnim->Create(L"PinkBean_attack4_right", Vector2(9750.f, 0.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack4_right")->Create(L"PinkBean_attack4_right", Vector2(9750.f, 600.f), Vector2(-750.f, 600.f), 3, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack5_right", Vector2(9750.f, 1200.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack5_right")->Create(L"PinkBean_attack5_right", Vector2(9750.f, 1800.f), Vector2(-750.f, 600.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack6_right", Vector2(9750.f, 2400.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack6_right")->Create(L"PinkBean_attack6_right", Vector2(9750.f, 3000.f), Vector2(-750.f, 600.f), 11, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack7_right", Vector2(9750.f, 3600.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack7_right")->Create(L"PinkBean_attack7_right", Vector2(9750.f, 4200.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack8_right", Vector2(9750.f, 4800.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack8_right")->Create(L"PinkBean_attack8_right", Vector2(9750.f, 5400.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack9_right", Vector2(9750.f, 6000.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->FindAnimation(L"PinkBean_attack9_right")->Create(L"PinkBean_attack9_right", Vector2(9750.f, 6600.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"PinkBean_attack10_right", Vector2(9750.f, 7200.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"PinkBean_attack4_right", Vector2(9750.f, 0.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack4_right")->Create(L"PinkBean_attack4_right", Vector2(9750.f, 600.f), Vector2(-750.f, 600.f), 3, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack5_right", Vector2(9750.f, 1200.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack5_right")->Create(L"PinkBean_attack5_right", Vector2(9750.f, 1800.f), Vector2(-750.f, 600.f), 7, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack6_right", Vector2(9750.f, 2400.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack6_right")->Create(L"PinkBean_attack6_right", Vector2(9750.f, 3000.f), Vector2(-750.f, 600.f), 11, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack7_right", Vector2(9750.f, 3600.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack7_right")->Create(L"PinkBean_attack7_right", Vector2(9750.f, 4200.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack8_right", Vector2(9750.f, 4800.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack8_right")->Create(L"PinkBean_attack8_right", Vector2(9750.f, 5400.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack9_right", Vector2(9750.f, 6000.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->FindAnimation(L"PinkBean_attack9_right")->Create(L"PinkBean_attack9_right", Vector2(9750.f, 6600.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"PinkBean_attack10_right", Vector2(9750.f, 7200.f), Vector2(-750.f, 600.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
 
 	}
 	PinkBean::~PinkBean()
@@ -128,8 +128,8 @@ namespace W
 
 		m_pSharHP = new SharHP();
 		m_pSharHP->SetSceneName(GetSceneName());
-		EventManager::CreateObject(m_pSharHP, eLayerType::UI);
 		m_pSharHP->Initialize();
+		EventManager::CreateObject(m_pSharHP, eLayerType::UI);
 
 		setattack();
 		add_skill();
@@ -193,7 +193,10 @@ namespace W
 
 	}
 	
-
+	void PinkBean::UpdatePacket()
+	{
+		Monster::UpdatePacket();
+	}
 
 	void PinkBean::update_HP()
 	{

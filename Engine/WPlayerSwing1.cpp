@@ -43,10 +43,10 @@ namespace W
 		if (!bRround)
 		{
 			if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::RIGHT))
-				pRigidbody->AddForce(Vector2(1.5f, 0.f));
+				pRigidbody->AddForce(Vector2(3.f, 0.f));
 
 			if (Input::GetKey(pPlayer->GetPlayerID(), eKeyCode::LEFT))
-				pRigidbody->AddForce(Vector2(-1.5f, 0.f));
+				pRigidbody->AddForce(Vector2(-3.f, 0.f));
 		}
 
 		if (pBodyAnim->GetCurIndex() == ATTACK1_FRAME && m_iSwingCount == 1)

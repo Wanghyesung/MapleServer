@@ -73,6 +73,11 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
+
+	void ArielLaser::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
 	
 	void ArielLaser::off()
 	{

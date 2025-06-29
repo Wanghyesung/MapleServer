@@ -7,11 +7,10 @@
 namespace W
 {
 	UINT SharHP::CREATE_ID = 0;
-	SharHP::SharHP():
-		MonsterHP(true),
-		m_fHP(100.f)
+	SharHP::SharHP() :
+		MonsterHP(true)
 	{
-	
+		m_fHP = 100.f;
 	}
 	SharHP::~SharHP()
 	{
@@ -24,6 +23,7 @@ namespace W
 		m_pHPBack->SetHP(this);
 		EventManager::CreateObject(m_pHPBack, eLayerType::UI);
 	}
+
 	void SharHP::Update()
 	{
 		if (!IsActive())
@@ -44,6 +44,11 @@ namespace W
 			return;
 
 		GameObject::LateUpdate();
+	}
+
+	void SharHP::UpdatePacket()
+	{
+		MonsterHP::UpdatePacket();
 	}
 	
 }

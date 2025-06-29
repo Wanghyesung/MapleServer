@@ -20,13 +20,13 @@ namespace W
 		SetName(L"Munin");
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Munin_stand",  Vector2(0.f, 0.f), Vector2(350.f, 500.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Munin_start",  Vector2(0.f, 500.f), Vector2(350.f, 500.f), 11, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Munin_attack0", Vector2(0.f, 1000.f), Vector2(350.f, 500.f), 16, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Munin_attack1", Vector2(0.f, 1500.f), Vector2(350.f, 500.f), 23, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Munin_attack2", Vector2(0.f, 2000.f), Vector2(350.f, 500.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Munin_attack3", Vector2(0.f, 2500.f), Vector2(350.f, 500.f), 17, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Munin_dead", Vector2(0.f, 3000.f), Vector2(350.f, 500.f), 17, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"Munin_stand",  Vector2(0.f, 0.f), Vector2(350.f, 500.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Munin_start",  Vector2(0.f, 500.f), Vector2(350.f, 500.f), 11, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Munin_attack0", Vector2(0.f, 1000.f), Vector2(350.f, 500.f), 16, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Munin_attack1", Vector2(0.f, 1500.f), Vector2(350.f, 500.f), 23, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Munin_attack2", Vector2(0.f, 2000.f), Vector2(350.f, 500.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Munin_attack3", Vector2(0.f, 2500.f), Vector2(350.f, 500.f), 17, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Munin_dead", Vector2(0.f, 3000.f), Vector2(350.f, 500.f), 17, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
 
 	}
 	Munin::~Munin()
@@ -106,6 +106,11 @@ namespace W
 		Monster::LateUpdate();
 	}
 	
+	void Munin::UpdatePacket()
+	{
+		Monster::UpdatePacket();
+	}
+
 	void Munin::setattack()
 	{
 		MonsterScript* Pscript = GetComponent<MonsterScript>();

@@ -62,15 +62,6 @@ namespace W
 	}
 	void TempleBossScene::CreateBackground()
 	{
-		//GameObject* pBackGround = new GameObject();
-		//pBackGround->SetSceneName(GetName());
-
-		//AddGameObject(eLayerType::Background, pBackGround);
-		//
-		//pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 0.f);
-		////2 : 1
-		//pBackGround->GetComponent<Transform>()->SetScale(2.f * 8.f, 1.f * 8.f, 1.f);
-
 
 		Ground* pGround = new Ground(true);
 		pGround->SetSceneName(GetName());
@@ -89,8 +80,7 @@ namespace W
 	}
 
 	void TempleBossScene::create_effect()
-	{
-		
+	{	
 		Effect* pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"PinkBean_attack0_hit");
@@ -155,8 +145,5 @@ namespace W
 		pEffect->SetSceneName(GetName());
 		pEffect->SetName(L"Whiggin_attack0_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(117.f, 156.f), 5, 1, Vector2(150.f, 150.f), Vector2(0.f, 0.2f), 0.2f);
-
-		
-	
 	}
 }

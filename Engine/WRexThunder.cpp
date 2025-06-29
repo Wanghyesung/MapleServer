@@ -77,6 +77,11 @@ namespace W
 		GameObject::LateUpdate();
 	}
 
+	void RexThunder::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
+
 	void RexThunder::off()
 	{
 		m_iCallCount = 0;

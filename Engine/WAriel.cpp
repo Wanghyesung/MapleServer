@@ -24,13 +24,13 @@ namespace W
 
 		
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Ariel_stand", Vector2(0.f, 0.f), Vector2(400.f, 400.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Ariel_start", Vector2(0.f, 400.f), Vector2(400.f, 400.f), 11, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Ariel_attack0", Vector2(0.f, 800.f), Vector2(400.f, 400.f), 16, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Ariel_attack1", Vector2(0.f, 1200.f), Vector2(400.f, 400.f), 23, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Ariel_attack2", Vector2(0.f, 1600.f), Vector2(400.f, 400.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Ariel_attack3", Vector2(0.f, 2000.f), Vector2(400.f, 400.f), 17, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Ariel_dead", Vector2(0.f, 2400.f), Vector2(400.f, 400.f), 17, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"Ariel_stand", Vector2(0.f, 0.f), Vector2(400.f, 400.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Ariel_start", Vector2(0.f, 400.f), Vector2(400.f, 400.f), 11, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Ariel_attack0", Vector2(0.f, 800.f), Vector2(400.f, 400.f), 16, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Ariel_attack1", Vector2(0.f, 1200.f), Vector2(400.f, 400.f), 23, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Ariel_attack2", Vector2(0.f, 1600.f), Vector2(400.f, 400.f), 14, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Ariel_attack3", Vector2(0.f, 2000.f), Vector2(400.f, 400.f), 17, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Ariel_dead", Vector2(0.f, 2400.f), Vector2(400.f, 400.f), 17, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
 	}
 
 	Ariel::~Ariel()
@@ -116,6 +116,11 @@ namespace W
 		Monster::LateUpdate();
 	}
 	
+	void Ariel::UpdatePacket()
+	{
+		Monster::UpdatePacket();
+	}
+
 	void Ariel::setattack()
 	{
 		MonsterScript* Pscript = GetComponent<MonsterScript>();

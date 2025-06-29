@@ -16,6 +16,7 @@ namespace W
 		virtual void Update()override;
 		virtual void LateUpdate()override;
 		virtual void UpdatePacket()override;
+
 		DECLARE_CREATE_ID
 
 		UINT GetHPCount() { return m_iHPCount; }
@@ -29,15 +30,16 @@ namespace W
 
 	private:
 		void update_hp();
+
 	protected:
 		MonsterBackHP* m_pHPBack;
 
+		float m_fHP;
 	private:
 		UINT m_iHPCount;
 		static UINT HP_COUNT;
 
 		Monster* m_pOwner;
-		float m_fHP;
 		bool m_bActive;
 		bool m_bBoss;
 

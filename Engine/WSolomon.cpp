@@ -19,12 +19,12 @@ namespace W
 		SetName(L"Solomon");
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Solomon_stand", Vector2(0.f, 0.f), Vector2(500.f, 1000.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Solomon_start", Vector2(0.f, 1000.f), Vector2(500.f, 1000.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Solomon_attack0",Vector2(0.f, 2000.f), Vector2(500.f, 1000.f), 18, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Solomon_attack1",Vector2(0.f, 3000.f), Vector2(500.f, 1000.f), 20, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Solomon_attack2",Vector2(0.f, 4000.f), Vector2(500.f, 1000.f), 19, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"Solomon_dead", Vector2(0.f, 5000.f), Vector2(500.f, 1000.f), 16, Vector2(1000.f, 1000.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"Solomon_stand", Vector2(0.f, 0.f), Vector2(500.f, 1000.f), 1, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Solomon_start", Vector2(0.f, 1000.f), Vector2(500.f, 1000.f), 10, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Solomon_attack0",Vector2(0.f, 2000.f), Vector2(500.f, 1000.f), 18, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Solomon_attack1",Vector2(0.f, 3000.f), Vector2(500.f, 1000.f), 20, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Solomon_attack2",Vector2(0.f, 4000.f), Vector2(500.f, 1000.f), 19, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
+		pAnim->Create(L"Solomon_dead", Vector2(0.f, 5000.f), Vector2(500.f, 1000.f), 16, Vector2(1000.f, 1000.f), Vector2::Zero, 0.075f);
 	}
 	Solomon::~Solomon()
 	{
@@ -108,6 +108,11 @@ namespace W
 		}
 
 		Monster::LateUpdate();
+	}
+
+	void Solomon::UpdatePacket()
+	{
+		Monster::UpdatePacket();
 	}
 
 	void Solomon::setattack()

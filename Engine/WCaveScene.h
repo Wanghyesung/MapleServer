@@ -16,8 +16,6 @@ namespace W
 		virtual void OnEnter()override;
 		virtual void OnExit()override;
 
-		virtual void CreateBackground() override;
-
 	private:
 		void create_object();
 		void create_effect();
