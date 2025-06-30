@@ -14,6 +14,7 @@ namespace W
 	}
 	SharHP::~SharHP()
 	{
+
 	}
 	void SharHP::Initialize()
 	{
