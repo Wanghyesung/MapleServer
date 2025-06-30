@@ -3,6 +3,7 @@
 #include "WAnimator.h"
 #include "WMonsterAttackScript.h"
 #include "WTime.h"
+#include "WSceneManger.h"
 namespace W
 {
 	UINT SleepGas::CREATE_ID = 0;
@@ -14,7 +15,6 @@ namespace W
 	{
 		GetComponent<MonsterAttackScript>()->SeteAbnormalType(BattleManager::eAbnormalType::Stop);
 		GetComponent<Transform>()->SetScale(4.f, 4.f, 0.f);
-
 
 		//25
 		Animator* pAnim = AddComponent<Animator>();
@@ -65,7 +65,39 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
+
+	void SleepGas::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
+
+		Animator* pAnimator = GetComponent<Animator>();
+		if (pAnimator->TrySendPacket())
+			return;
+
+		send_packet();
+	}
 	
+	void SleepGas::send_packet()
+	{
+		Protocol::S_STATE pkt;
+
+		Animator* pAnimator = GetComponent<Animator>();
+
+		UCHAR cLayer = (UCHAR)eLayerType::MonsterAttack;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = pAnimator->GetActiveAnimation();
+		UCHAR cStart = m_bStart;
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+
+		pkt.set_state_value((cStart << 8) | cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+	}
+
 	void SleepGas::end()
 	{
 		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
@@ -95,6 +127,8 @@ namespace W
 	{
 		m_bStart = false;
 		m_bEnd = false;
+
+		send_packet();
 
 		GetComponent<MonsterAttackScript>()->InitStack();
 		SetState(GameObject::eState::Paused);

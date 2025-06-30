@@ -22,7 +22,6 @@ namespace W
 		
 		GetComponent<Transform>()->SetScale(10.f, 10.f, 0.f);
 
-
 		Animator* pAnim = AddComponent<Animator>();
 	
 		pAnim->Create(L"stone_start", Vector2(0.0f, 0.0f), Vector2(350.0f, 350.0f), 7, Vector2(1100.f, 1100.f), Vector2::Zero, 0.06f);
@@ -83,6 +82,11 @@ namespace W
 		}
 
 		GameObject::LateUpdate();
+	}
+
+	void MegnusStone::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
 	}
 	
 	void MegnusStone::move()

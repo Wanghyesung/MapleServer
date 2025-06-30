@@ -14,11 +14,16 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		
+		virtual void UpdatePacket()override;
+
 		DECLARE_CREATE_ID;
 
 		void SetOwner(Monster* _pMon) { m_pMonster = _pMon; }
 		void SetLevel(UINT _iNum);
+
+	private:
+		void send_packet();
+
 	private:
 		void attack();
 	private:

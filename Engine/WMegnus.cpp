@@ -31,21 +31,6 @@ namespace W
 		m_iCurLevel(0)
 	{
 		SetName(L"Megnus");
-
-		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//
-		//
-		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetRenderinMode(eRenderingMode::Transparent);
-		//pMater->SetShader(Resources::Find<Shader>(L"MonsterShader"));
-		//Resources::Insert(L"MegnuslMater", pMater);
-		//
-		//pRenderer->SetMaterial(pMater);
-		//
-		//std::shared_ptr<Texture> pAtlas1 = Resources::Find<Texture>(L"Megnus1");
-		//std::shared_ptr<Texture> pAtlas2 = Resources::Find<Texture>(L"Megnus2");
-
 		AddComponent<Rigidbody>();
 
 		Animator* pAnim = AddComponent<Animator>();
@@ -105,7 +90,6 @@ namespace W
 		pAnim->Create(L"Megnus_dead_right", Vector2(8800.f, 4400.f), Vector2(-1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.07f);
 		pAnim->FindAnimation(L"Megnus_dead_right")->Create(L"Megnus_dead_right", Vector2(8800.f, 4950.f), Vector2(1100.f, 550.f), 9, Vector2(1100.f, 1100.f), Vector2::Zero, 0.07f);
 		pAnim->FindAnimation(L"Megnus_dead_right")->Create(L"Megnus_dead_right", Vector2(8800.f, 5500.f), Vector2(1100.f, 550.f), 8, Vector2(1100.f, 1100.f), Vector2::Zero, 0.07f);
-
 	}
 	Megnus::~Megnus()
 	{
@@ -131,7 +115,6 @@ namespace W
 
 		setattack();
 		add_skill();
-
 
 		MonsterFSM* pFSM = new MonsterFSM();
 		pFSM->SetMonster(this);
@@ -184,10 +167,12 @@ namespace W
 
 		Monster::LateUpdate();
 	}
-	//void Megnus::Render()
-	//{
-	//	Monster::Render();
-	//}
+
+	void Megnus::UpdatePacket()
+	{
+		Monster::UpdatePacket();
+	}
+
 	void Megnus::add_skill()
 	{
 		//¿î¼®
@@ -458,7 +443,7 @@ namespace W
 		std::mt19937 en(rDiv());
 		std::uniform_int_distribution<int> disX(-13, 12);
 		float fPosX = (float)disX(en);
-
+		
 		if((fPosX >= 0))
 			fPosX = 10.f;
 		else

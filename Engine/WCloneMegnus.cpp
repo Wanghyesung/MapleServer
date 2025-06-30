@@ -64,6 +64,11 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
+
+	void CloneMegnus::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
 	
 	void CloneMegnus::off()
 	{

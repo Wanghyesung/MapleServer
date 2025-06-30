@@ -35,7 +35,7 @@ namespace W
 	void MobZone::Initialize()
 	{
 		m_tAttackInfo.fAttackDamage = 10.f;
-		m_tAttackInfo.fAttRcnt = 0.f;//¸ÂÀ¸
+		m_tAttackInfo.fAttRcnt = 0.f;
 		m_tAttackInfo.fAttUpperRcnt = 0.f;
 
 		m_vecLength.push_back(3.3f);
@@ -46,8 +46,6 @@ namespace W
 	}
 	void MobZone::Update()
 	{
-		
-
 		Vector3 vPosition = m_pMonster->GetComponent<Transform>()->GetPosition();
 		GetComponent<Transform>()->SetPosition(vPosition);
 
@@ -64,6 +62,17 @@ namespace W
 	{
 		GameObject::LateUpdate();
 	}
+
+	void MobZone::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
+
+		Animator* pAnimator = GetComponent<Animator>();
+		if (!pAnimator || pAnimator->TrySendPacket())
+			return;
+
+		send_packet();
+	}
 	
 	void MobZone::SetLevel(UINT _iNum)
 	{
@@ -71,6 +80,7 @@ namespace W
 
 		if (m_iCurLevel >= 4)
 		{
+			send_packet();
 			SetState(GameObject::eState::Paused);
 			return;
 		}
@@ -92,6 +102,25 @@ namespace W
 		}
 		
 		pAnim->Play(L"Megnus_Zone" + strLevel, true);
+	}
+	void MobZone::send_packet()
+	{
+		Protocol::S_STATE pkt;
+
+	 	Animator* pAnimator = GetComponent<Animator>();
+		UCHAR cLayer = (UCHAR)eLayerType::Object;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = pAnimator->GetActiveAnimation();
+		UCHAR cLevel = m_iCurLevel;
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+
+		pkt.set_state_value((cLevel << 8) | cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
 	}
 	void MobZone::attack()
 	{
