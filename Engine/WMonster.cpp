@@ -61,6 +61,9 @@ namespace W
 	MonsterAttackObject* Monster::GetMonsterSkill(const std::wstring& _strName)
 	{
 		GameObject* pGameObj = ObjectPoolManager::PopObject(_strName);
+		if (!pGameObj)
+			return nullptr;
+
 		pGameObj->SetSceneName(GetSceneName());
 		return static_cast<MonsterAttackObject*>(pGameObj);
 	}
