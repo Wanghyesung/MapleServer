@@ -12,7 +12,6 @@ namespace W
 	White::White():
 		m_vColor(Vector4::Zero)
 	{
-		
 		GetComponent<Transform>()->SetScale(12.f * 1.52f, 22.f * 1.f, 0.f);
 		GetComponent<Transform>()->SetPosition(0.f,0.f,-3.f);
 	}
@@ -46,6 +45,22 @@ namespace W
 	{
 		GameObject::LateUpdate();
 	}
+
+	void White::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
+
+		Protocol::S_STATE pkt;
+
+		UCHAR cLayer = (UCHAR)eLayerType::Object;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		pkt.set_state_value(m_vColor.w * 10000);
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+	}
+
 
 
 	

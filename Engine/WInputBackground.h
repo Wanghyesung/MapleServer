@@ -13,7 +13,7 @@ namespace W
 		virtual void Initialize() override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//virtual void Render()override;
+		virtual void UpdatePacket()override;
 
 		DECLARE_CREATE_ID;
 
@@ -22,7 +22,7 @@ namespace W
 		void Failed();
 		void Next();
 		UINT GetCurIndex() { return m_iCurIndex; }
-		void SetTarget(Player* _pPlayer) { m_pTarget = _pPlayer; }
+		void SetTarget(Player* _pPlayer);
 
 	private:
 		void next_button();

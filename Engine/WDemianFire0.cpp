@@ -89,6 +89,11 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
+
+	void DemianFire0::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
 	
 	void DemianFire0::off()
 	{

@@ -12,7 +12,7 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//virtual void Render()override;
+		virtual void UpdatePacket()override;
 
 		void LevelUp(UINT _iLevel);
 		void SetActive(bool _bActive) { m_bActive = _bActive; }

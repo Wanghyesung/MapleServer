@@ -91,6 +91,10 @@ namespace W
 		void SetSceneName(const std::wstring& _strName) { m_strSceneName = _strName; }
 		const std::wstring& GetSceneName() { return m_strSceneName; }
 		
+
+		void AddExclusiveClient(UINT _iPlayerID) { m_vecExclusiveClients.push_back(_iPlayerID);}
+		const std::vector<UINT>& GetExclusiveClients() const {return m_vecExclusiveClients;}
+
 		bool IsPoolObject() { return m_bPoolObject; }
 		void SetPoolObject(bool _bPoolObject) { m_bPoolObject = _bPoolObject; }
 
@@ -109,9 +113,10 @@ namespace W
 		eLayerType m_eLayerType;
 		std::wstring m_strSceneName;
 
+		//network
+		std::vector<UINT> m_vecExclusiveClients;
 		bool m_bRender;
 		bool m_bPoolObject;
-
 		UINT m_iObjectID;
 
 		friend class GameObjectManager;

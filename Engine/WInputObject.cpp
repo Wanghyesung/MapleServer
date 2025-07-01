@@ -13,23 +13,6 @@ namespace W
 		m_bRender(true),
 		m_bActive(true)
 	{
-		std::wstring strDir = L"";
-		switch (m_eKeyCode)
-		{
-		case W::eKeyCode::UP:
-			strDir = L"up";
-			break;
-		case W::eKeyCode::DOWN:
-			strDir = L"down";
-			break;
-		case W::eKeyCode::LEFT:
-			strDir = L"left";
-			break;
-		case W::eKeyCode::RIGHT:
-			strDir = L"right";
-			break;
-		}
-	
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"clear", Vector2(0.0f, 0.0f), Vector2(80.f, 79.0f), 7, Vector2(100.f, 100.f), Vector2::Zero, 0.15f);
 		pAnim->Create(L"failed", Vector2(0.0f, 79.0f), Vector2(89.f, 77.0f), 4, Vector2(100.f, 100.f), Vector2::Zero, 0.15f);
@@ -70,12 +53,42 @@ namespace W
 		GameObject::LateUpdate();
 	}
 
+	void InputObject::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
+
+		Animator* pAnimator = GetComponent<Animator>();
+		if (!pAnimator || pAnimator->TrySendPacket())
+			return;
+
+		Protocol::S_STATE pkt;
+
+		UCHAR cLayer = (UCHAR)eLayerType::Object;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = pAnimator->GetActiveAnimation();
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+
+		pkt.set_state_value(cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, GetExclusiveClients());
+	}
+
 	void InputObject::SetClear(bool _bClear)
 	{
 		std::wstring strAnim = L"";
 		strAnim = _bClear == true ? L"clear" : L"failed";
 		GetComponent<Animator>()->Stop(false);
 		GetComponent<Animator>()->Play(strAnim, true);
+	}
+
+	void InputObject::SetTarget(Player* _pPlayer)
+	{
+		m_pTarget = _pPlayer;
+		AddExclusiveClient(_pPlayer->GetPlayerID());
 	}
 
 	void InputObject::check()

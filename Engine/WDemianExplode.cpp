@@ -70,6 +70,11 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
+
+	void DemianExplode::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
 	
 	void DemianExplode::off()
 	{

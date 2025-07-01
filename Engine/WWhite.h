@@ -14,6 +14,7 @@ namespace W
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
+		virtual void UpdatePacket();
 
 		DECLARE_CREATE_ID;
 

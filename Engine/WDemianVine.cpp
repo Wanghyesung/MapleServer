@@ -44,6 +44,7 @@ namespace W
 		m_tAttackInfo.fAttRcnt = 0.f;//¸ÂÀ¸
 		m_tAttackInfo.fAttUpperRcnt = 0.f;
 	}
+
 	DemianVine::~DemianVine()
 	{
 		if (!m_bActive)
@@ -52,6 +53,7 @@ namespace W
 			m_pWhite = nullptr;
 		}
 	}
+
 	void DemianVine::Initialize()
 	{
 		const tObjectInfo& tInfo = GetOwner()->GetScript<MonsterScript>()->GetObjectInfo();
@@ -93,6 +95,10 @@ namespace W
 		GameObject::LateUpdate();
 	}
 
+	void DemianVine::UpdatePacket()
+	{
+		update_state();
+	}
 
 	void DemianVine::start()
 	{

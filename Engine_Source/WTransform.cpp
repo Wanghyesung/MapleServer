@@ -80,22 +80,24 @@ namespace W
 			m_vRotation == m_vPrevRotation)
 			return;	
 
-		std::vector<UINT> vecID = SceneManger::GetPlayerIDs(GetOwner()->GetSceneName());
-
 		Protocol::S_TRANSFORM pkt;
 
 		Protocol::TransformInfo* tTrInfo = pkt.mutable_transform();
 		tTrInfo->set_p_x(m_vPosition.x);	tTrInfo->set_p_y(m_vPosition.y);	tTrInfo->set_p_z(m_vPosition.z);
 		tTrInfo->set_r_x(m_vRotation.x);	tTrInfo->set_r_y(m_vRotation.y);	tTrInfo->set_r_z(m_vRotation.z);
 
-		
-		UCHAR cLayer = (UINT)GetOwner()->GetLayerType();
-		UINT iObjectID = GetOwner()->GetObjectID();
+		GameObject* pOwner = GetOwner();
+		UCHAR cLayer = (UINT)pOwner->GetLayerType();
+		UINT iObjectID = pOwner->GetObjectID();
 
 		pkt.set_layer_id((cLayer<<24) | iObjectID);
 	
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, vecID);
+		const vector<UINT>& vecTarget = pOwner->GetExclusiveClients();
+		if (vecTarget.empty())
+			GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pOwner->GetSceneName()));
+		else
+			GRoom.Unicast(pSendBuffer, vecTarget);
 	}
 
 }

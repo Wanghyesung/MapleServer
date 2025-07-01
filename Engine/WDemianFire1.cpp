@@ -72,6 +72,11 @@ namespace W
 		GameObject::LateUpdate();
 	}
 
+	void DemianFire1::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
+
 	void DemianFire1::off()
 	{
 		m_fCurTime = 0.f;

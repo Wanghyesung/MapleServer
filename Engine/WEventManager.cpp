@@ -143,8 +143,15 @@ namespace W
 		
 		tInfo->set_state_value((bRender<<16) | (cDir << 8) | cAnimIdx);
 		
+
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));
+		const vector<UINT>& vecTarget = pObj->GetExclusiveClients();
+
+		//전용으로 보낼 클라가 있다면
+		if(vecTarget.empty())
+			GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));
+		else
+			GRoom.Unicast(pSendBuffer, vecTarget);
 	}
 
 	void EventManager::delete_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
@@ -161,8 +168,11 @@ namespace W
 		pkt.set_pool_object(pObj->IsPoolObject());
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));
-
+		const vector<UINT>& vecTarget = pObj->GetExclusiveClients();
+		if (vecTarget.empty())
+			GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));
+		else
+			GRoom.Unicast(pSendBuffer, vecTarget);
 		delete pObj;
 	}
 
@@ -179,7 +189,11 @@ namespace W
 		pkt.set_pool_object(pObj->IsPoolObject());
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));
+		const vector<UINT>& vecTarget = pObj->GetExclusiveClients();
+		if (vecTarget.empty())
+			GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));
+		else
+			GRoom.Unicast(pSendBuffer, vecTarget);
 	}
 
 	void EventManager::update_input(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)

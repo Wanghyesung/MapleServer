@@ -195,6 +195,11 @@ namespace W
 		GetComponent<Rigidbody>()->AddForce(m_vActiveDir * 5.f);
 	}
 
+	void DemianSword::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
+
 	void DemianSword::set_target()
 	{
 		GameObject* pObj = SceneManger::FindPlayer(GetSceneName());

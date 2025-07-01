@@ -19,7 +19,7 @@ namespace W
 
 		DECLARE_CREATE_ID
 
-	private:
+	protected:
 		void update_state();
 	public:
 		void SetOnwer(Monster* _pOnwer) { m_pOwner = _pOnwer; }

@@ -106,15 +106,7 @@ namespace W
 	}
 	void DemianScene::CreateBackground()
 	{
-		//GameObject* pBackGround = new GameObject();
-		//pBackGround->SetSceneName(GetName());
-		//AddGameObject(eLayerType::Background, pBackGround);
-		//
-		//pBackGround->GetComponent<Transform>()->SetPosition(0.f, 0.f, 1.f);
-		////2 : 1
-		//pBackGround->GetComponent<Transform>()->SetScale(2.2372f * 8.f, 1.f * 8.f, 1.f);
-
-
+		
 		Ground* pGround = new Ground(true);
 		pGround->SetSceneName(GetName());
 		pGround->GetComponent<Transform>()->SetPosition(0.f, -2.95f, -0.1f);
@@ -169,7 +161,7 @@ namespace W
 	{
 		m_pWhite = new White();
 		m_pWhite->SetSceneName(GetName());
-		m_pWhite->SetEndTime(2.f);
+		m_pWhite->SetEndTime(1.f);
 		m_pWhite->SetFunction(std::bind(&DemianScene::phase2, this));
 
 		m_pSharHP = new SharHP();
@@ -177,10 +169,10 @@ namespace W
 		m_pSharHP->Initialize();
 		AddGameObject(eLayerType::UI, m_pSharHP);
 
-		m_pStigmaBack = new StigmaBack();
-		m_pStigmaBack->SetSceneName(GetName());
-		m_pStigmaBack->Initialize();
-		AddGameObject(eLayerType::Object, m_pStigmaBack);
+		//m_pStigmaBack = new StigmaBack();
+		//m_pStigmaBack->SetSceneName(GetName());
+		//m_pStigmaBack->Initialize();
+		//AddGameObject(eLayerType::Object, m_pStigmaBack);
 	}
 
 	void DemianScene::create_effect()

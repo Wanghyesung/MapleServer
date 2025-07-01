@@ -20,7 +20,6 @@ namespace W
 	{
 		for (int i = 0; i < m_vecInput.size(); ++i)
 		{
-			
 			delete m_vecInput[i];
 			m_vecInput[i] = nullptr;
 		}
@@ -80,12 +79,20 @@ namespace W
 			m_vecInput[i]->LateUpdate();
 		}
 	}
+
+	void InputBackground::UpdatePacket()
+	{
+		for (int i = 0; i < m_vecInput.size(); ++i)
+		{
+			m_vecInput[i]->UpdatePacket();
+		}
+	}
 	
 
 	void InputBackground::Failed()
 	{
 		EventManager::DeleteObject(this);
-		dynamic_cast<Groggy*>(m_pOwner)->SetTime(12.f);
+		static_cast<Groggy*>(m_pOwner)->SetTime(12.f);
 	}
 
 	void InputBackground::Next()
@@ -93,12 +100,18 @@ namespace W
 		m_bNext = true;
 	}
 
+	void InputBackground::SetTarget(Player* _pPlayer)
+	{
+		m_pTarget = _pPlayer;
+		AddExclusiveClient(_pPlayer->GetPlayerID());
+	}
+
 	void InputBackground::next_button()
 	{
 		++m_iCurIndex;
 		if (m_iCurIndex >= m_vecInput.size())
 		{
-			dynamic_cast<Groggy*>(m_pOwner)->SetTime(0.f);
+			static_cast<Groggy*>(m_pOwner)->SetTime(0.f);
 			EventManager::DeleteObject(this);
 		}
 

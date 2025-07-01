@@ -13,7 +13,8 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		
+		virtual void UpdatePacket()override;
+
 		DECLARE_CREATE_ID;
 
 		void SetClear(bool _bClear);
@@ -21,7 +22,7 @@ namespace W
 		void SetIndex(UINT _iIndex) { m_iIndex = _iIndex; }
 		UINT GetIndex() { return m_iIndex; }
 
-		void SetTarget(Player* _pPlayer) { m_pTarget = _pPlayer; }
+		void SetTarget(Player* _pPlayer);
 	private:
 		void check();
 		void failed();

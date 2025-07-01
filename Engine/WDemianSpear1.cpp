@@ -75,6 +75,11 @@ namespace W
 		GameObject::LateUpdate();
 	}
 	
+	void DemianSpear1::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
+
 	void DemianSpear1::off()
 	{
 		m_iCallCount = 0;

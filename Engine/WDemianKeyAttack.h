@@ -12,7 +12,8 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		
+		virtual void UpdatePacket()override;
+
 		void SetTime(float _fTime) { m_fTime = _fTime; }
 		
 		DECLARE_CREATE_ID;

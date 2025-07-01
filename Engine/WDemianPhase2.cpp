@@ -341,6 +341,12 @@ namespace W
 		pDemianVine->SetOnwer(this);
 		AddMonsterSkill(pDemianVine);
 	}
+
+	void DemianPhase2::UpdatePacket()
+	{
+		Monster::UpdatePacket();
+	}
+
 	void DemianPhase2::setattack()
 	{
 		MonsterScript* Pscript = GetComponent<MonsterScript>();

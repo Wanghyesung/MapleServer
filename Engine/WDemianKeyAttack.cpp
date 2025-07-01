@@ -100,6 +100,11 @@ namespace W
 
 		GameObject::LateUpdate();
 	}
+
+	void DemianKeyAttack::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
+	}
 	
 	
 	void DemianKeyAttack::off()

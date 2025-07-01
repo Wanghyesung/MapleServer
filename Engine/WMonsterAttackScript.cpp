@@ -58,7 +58,7 @@ namespace W
 		if (pOther->GetLayerType() == eLayerType::Player)
 		{
 			MonsterAttackObject* pMonsterAttack = dynamic_cast<MonsterAttackObject*>(GetOwner());
-			Player* pPlayer = dynamic_cast<Player*>(pOther);
+			Player* pPlayer = static_cast<Player*>(pOther);
 			bool bHit = pPlayer->IsAlert();
 			if (bHit)
 				return;

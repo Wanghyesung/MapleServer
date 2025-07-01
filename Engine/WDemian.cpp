@@ -227,10 +227,12 @@ namespace W
 
 		Monster::LateUpdate();
 	}
-	//void Demian::Render()
-	//{
-	//	Monster::Render();
-	//}
+
+	void Demian::UpdatePacket()
+	{
+		Monster::UpdatePacket();
+	}
+	
 	void Demian::add_skill()
 	{
 		DemianSword* pSword = new DemianSword();

@@ -62,6 +62,30 @@ namespace W
 	{
 		GameObject::LateUpdate();
 	}
+
+	void DemianCircle::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
+	
+		Animator* pAnimator = GetComponent<Animator>();
+		if (!pAnimator || pAnimator->TrySendPacket())
+			return;
+
+		Protocol::S_STATE pkt;
+
+		UCHAR cLayer = (UCHAR)eLayerType::Object;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = pAnimator->GetActiveAnimation();
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+
+		pkt.set_state_value(cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+	}
 	
 	void DemianCircle::LevelUp(UINT _iLevel)
 	{
