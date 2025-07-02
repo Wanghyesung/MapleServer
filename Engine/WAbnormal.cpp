@@ -76,7 +76,7 @@ namespace W
 
 		Protocol::S_STATE pkt;
 
-		UCHAR cLayer = (UCHAR)eLayerType::AttackObject;
+		UCHAR cLayer = (UCHAR)GetLayerType();
 		UINT iObjectID = GetObjectID();
 		pkt.set_layer_id((cLayer << 24) | iObjectID);
 

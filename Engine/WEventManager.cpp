@@ -243,6 +243,8 @@ namespace W
 
 		wstring strPrevScene = pPlayer->GetSceneName(); //swap 후 이름이 변경되지 않게 복사
 	
+		LOG_PACKET_SEND(ExcuteScene);
+
 		SceneManger::SwapPlayer(pPlayer, strPrevScene, strNextScene);
 		SceneManger::SendEnterScene(iPlayerID, strNextScene);
 

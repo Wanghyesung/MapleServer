@@ -18,11 +18,7 @@ namespace W
 	}
 	InputBackground::~InputBackground()
 	{
-		for (int i = 0; i < m_vecInput.size(); ++i)
-		{
-			delete m_vecInput[i];
-			m_vecInput[i] = nullptr;
-		}
+	
 	}
 	void InputBackground::Initialize()
 	{
@@ -42,17 +38,24 @@ namespace W
 			std::mt19937 en(rDiv());
 			std::uniform_int_distribution<int> num(iStart, iEnd);
 			int iNum = (int)num(en);
-		
-			InputObject* pObj = new InputObject((eKeyCode)iNum);
-			pObj->SetOwner(this);
-			pObj->SetTarget(m_pTarget);
-			pObj->SetIndex(iIndex);
+			
+			wstring strDir = InputObject::GetWDir((eKeyCode)iNum);
+			GameObject* pObj = ObjectPoolManager::PopObject(L"Input" + strDir);
+			InputObject* pInputObj = static_cast<InputObject*>(pObj);
+
+			pObj->Initialize();
+			pInputObj->SetOwner(this);
+			pInputObj->SetSceneName(GetSceneName());
+			pInputObj->SetTarget(m_pTarget);
+			pInputObj->SetIndex(iIndex);
 
 			float x = vTargetPos.x + (i * 0.8f);
 			Vector3 vPos = Vector3(x, vTargetPos.y, vTargetPos.z - 0.2f);
-			pObj->GetComponent<Transform>()->SetPosition(vPos);
+			pInputObj->GetComponent<Transform>()->SetPosition(vPos);
 
-			m_vecInput.push_back(pObj);
+			m_vecInput.push_back(pInputObj);
+			EventManager::CreateObject(pInputObj, eLayerType::Object);
+
 			++iIndex;
 		}
 	}
@@ -62,30 +65,15 @@ namespace W
 			next_button();
 	
 		GameObject::Update();
-
-		for (int i = 0; i < m_vecInput.size(); ++i)
-		{
-			
-			m_vecInput[i]->Update();
-		}
-
 	}
 	void InputBackground::LateUpdate()
 	{
-
 		GameObject::LateUpdate();
-		for (int i = 0; i < m_vecInput.size(); ++i)
-		{
-			m_vecInput[i]->LateUpdate();
-		}
 	}
 
 	void InputBackground::UpdatePacket()
 	{
-		for (int i = 0; i < m_vecInput.size(); ++i)
-		{
-			m_vecInput[i]->UpdatePacket();
-		}
+		
 	}
 	
 
@@ -93,6 +81,9 @@ namespace W
 	{
 		EventManager::DeleteObject(this);
 		static_cast<Groggy*>(m_pOwner)->SetTime(12.f);
+
+		for (int i = 0; i < m_vecInput.size(); ++i)
+			EventManager::AddMonsterPool(m_vecInput[i]);
 	}
 
 	void InputBackground::Next()
@@ -113,6 +104,9 @@ namespace W
 		{
 			static_cast<Groggy*>(m_pOwner)->SetTime(0.f);
 			EventManager::DeleteObject(this);
+
+			for (int i = 0; i < m_vecInput.size(); ++i)
+				EventManager::AddMonsterPool(m_vecInput[i]);
 		}
 
 		m_bNext = false;

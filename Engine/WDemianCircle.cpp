@@ -14,7 +14,8 @@ namespace W
 	DemianCircle::DemianCircle():
 		m_bEnter(false),
 		m_bActive(false),
-		m_pTarget(nullptr),
+		m_fCurTime(0.f),
+		m_fTime(2.f),
 		m_iCurIndex(0),
 		m_fCurAttackTime(0.f),
 		m_fAttackTime(1.4f)
@@ -48,7 +49,6 @@ namespace W
 		m_tMonsterAttack.tAttackInfo.fAttRcnt = 0.f;//¸ÂÀ¸
 		m_tMonsterAttack.tAttackInfo.fAttUpperRcnt = 0.f;
 
-		m_pTarget = SceneManger::FindPlayer(GetSceneName());
 	}
 	void DemianCircle::Update()
 	{
@@ -121,12 +121,12 @@ namespace W
 	}
 	void DemianCircle::move()
 	{
-		
-	 	Vector3 vTargetPos = m_pTarget->GetComponent<Transform>()->GetPosition();
-		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
+		std::random_device rDiv;
+		std::mt19937 en(rDiv());
+		std::uniform_int_distribution<int> num(0, 1);
+		int iNum = (int)num(en);
 
-		Vector3 vLen = vTargetPos - vPosition;
-		int iDir = vLen.x > 0.f ? 1 : -1;
+		int iDir = iNum > 0.f ? 1 : -1;
 
 		GetComponent<Rigidbody>()->AddForce(Vector2(iDir * m_fSpeed, 0.f));
 	}

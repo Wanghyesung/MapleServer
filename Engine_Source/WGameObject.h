@@ -94,6 +94,7 @@ namespace W
 
 		void AddExclusiveClient(UINT _iPlayerID) { m_vecExclusiveClients.push_back(_iPlayerID);}
 		const std::vector<UINT>& GetExclusiveClients() const {return m_vecExclusiveClients;}
+		void ClearExclusiveClients() { m_vecExclusiveClients.clear(); }
 
 		bool IsPoolObject() { return m_bPoolObject; }
 		void SetPoolObject(bool _bPoolObject) { m_bPoolObject = _bPoolObject; }

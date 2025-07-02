@@ -12,7 +12,7 @@ namespace W
 		
 		GetComponent<Transform>()->SetScale(2.f, 2.f, 0.f);
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"groggy", Vector2(0.0f, 0.0f), Vector2(129.0f, 67.0f), 8, Vector2(139.f, 130.f), Vector2::Zero, 0.2f);
+		pAnim->Create(L"groggy", Vector2(0.0f, 0.0f), Vector2(129.0f, 67.0f), 8, Vector2(139.f, 130.f), Vector2::Zero, 0.1f);
 
 		pAnim->Play(L"groggy", true);
 

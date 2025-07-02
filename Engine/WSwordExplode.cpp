@@ -20,8 +20,8 @@ namespace W
 		GetComponent<Transform>()->SetScale(18.f, 18.f, 0.f);
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"start", Vector2(0.0f, 0.0f), Vector2(614.f, 557.0f), 3, Vector2(2000.f, 2000.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"explode", Vector2(0.0f, 557.0f), Vector2(614.f, 557.0f), 23, Vector2(2000.f, 2000.f), Vector2::Zero, 0.1f);
+		pAnim->Create(L"start", Vector2(0.0f, 0.0f), Vector2(614.f, 557.0f), 3, Vector2(2000.f, 2000.f), Vector2::Zero, 0.07f);
+		pAnim->Create(L"explode", Vector2(0.0f, 557.0f), Vector2(614.f, 557.0f), 23, Vector2(2000.f, 2000.f), Vector2::Zero, 0.05f);
 
 		pAnim->CompleteEvent(L"explode") = std::bind(&SwordExplode::check, this);
 		pAnim->CompleteEvent(L"start") = std::bind(&SwordExplode::start, this);
@@ -72,6 +72,11 @@ namespace W
 		}
 
 		GameObject::LateUpdate();
+	}
+
+	void SwordExplode::UpdatePacket()
+	{
+		MonsterAttackObject::UpdatePacket();
 	}
 
 	void SwordExplode::off()

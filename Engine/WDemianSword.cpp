@@ -15,6 +15,7 @@ namespace W
 	UINT DemianSword::CREATE_ID = 0;
 
 	DemianSword::DemianSword() :
+		m_bRenderPacket(true),
 		m_bEnd(false),
 		m_bMove(false),
 		m_bTargetOn(false),
@@ -197,7 +198,29 @@ namespace W
 
 	void DemianSword::UpdatePacket()
 	{
-		MonsterAttackObject::UpdatePacket();
+		GetComponent<Transform>()->SendTransform();
+
+		Protocol::S_STATE pkt;
+
+		UCHAR cLayer = (UCHAR)eLayerType::MonsterAttack;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animator* pAnimator = GetComponent<Animator>();
+
+	
+		if (m_bAttackOn == m_bRenderPacket && !pAnimator->TrySendPacket())
+			return;
+
+		m_bRenderPacket = m_bAttackOn;
+
+		Animation* pAnim = pAnimator->GetActiveAnimation();
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+		pkt.set_state_value((!m_bRenderPacket << 8) | cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
 	}
 
 	void DemianSword::set_target()

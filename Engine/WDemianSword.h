@@ -32,6 +32,8 @@ namespace W
 
 		void check_HP();
 	private:
+		bool m_bRenderPacket;
+
 		bool m_bEnd;
 		bool m_bMove;
 		bool m_bWait;

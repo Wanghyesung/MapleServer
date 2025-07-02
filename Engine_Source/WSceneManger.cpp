@@ -313,6 +313,7 @@ namespace W
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.GetPersonByID(_iPlayerID)->Send(pSendBuffer);
+
 	}
 
 	

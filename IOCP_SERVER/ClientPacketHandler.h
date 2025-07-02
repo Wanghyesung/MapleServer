@@ -14,6 +14,15 @@
 using PacketHandlerFunc = std::function<bool(shared_ptr<PacketSession>&, BYTE*, INT)>;
 extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
 
+#define LOG_PACKET_SEND(name) \
+    do { \
+        char buf[256]; \
+        std::snprintf(buf, sizeof(buf), \
+            "[Server] Packet sent: %s (%s:%d)\n", \
+            #name, __FILE__, __LINE__); \
+        OutputDebugStringA(buf); \
+    } while(0)
+
 //±âº» : ID, LAYER, SCENE
 
 enum PACKET_TYPE

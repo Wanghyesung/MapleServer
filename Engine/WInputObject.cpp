@@ -11,17 +11,19 @@ namespace W
 		m_eKeyCode(_eKeyCode),
 		m_pOwner(nullptr),
 		m_bRender(true),
-		m_bActive(true)
+		m_bActive(true),
+		m_bPrevRender(true)
 	{
+		std::wstring strDir = GetWDir(_eKeyCode);
+
+		SetName(L"Input" + strDir);
+
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"clear", Vector2(0.0f, 0.0f), Vector2(80.f, 79.0f), 7, Vector2(100.f, 100.f), Vector2::Zero, 0.15f);
-		pAnim->Create(L"failed", Vector2(0.0f, 79.0f), Vector2(89.f, 77.0f), 4, Vector2(100.f, 100.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"clear", Vector2(0.0f, 0.0f), Vector2(80.f, 79.0f), 7, Vector2(100.f, 100.f), Vector2::Zero, 0.07f);
+		pAnim->Create(L"failed", Vector2(0.0f, 79.0f), Vector2(89.f, 77.0f), 4, Vector2(100.f, 100.f), Vector2::Zero, 0.07f);
 
 		pAnim->CompleteEvent(L"failed") = std::bind(&InputObject::failed, this);
 		pAnim->CompleteEvent(L"clear") = std::bind(&InputObject::clear, this);
-
-		pAnim->Play(L"clear", true);
-		pAnim->Stop(true);
 	}
 
 	InputObject::~InputObject()
@@ -31,7 +33,14 @@ namespace W
 
 	void InputObject::Initialize()
 	{
+		m_bRender = true;
+		
+		
+		ClearExclusiveClients();
 
+		Animator* pAnim = GetComponent<Animator>();
+		pAnim->Play(L"clear", true);
+		pAnim->Stop(true);	
 	}
 
 	void InputObject::Update()
@@ -55,10 +64,10 @@ namespace W
 
 	void InputObject::UpdatePacket()
 	{
-		GetComponent<Transform>()->SendTransform();
-
 		Animator* pAnimator = GetComponent<Animator>();
 		if (!pAnimator || pAnimator->TrySendPacket())
+			return;
+		else if (m_bRender == false && m_bRender == m_bPrevRender)
 			return;
 
 		Protocol::S_STATE pkt;
@@ -69,12 +78,15 @@ namespace W
 
 		Animation* pAnim = pAnimator->GetActiveAnimation();
 		UCHAR cAnimIdx = pAnim->GetCurIndex();
+		bool bRender = m_bRender;
 
-		pkt.set_state_value(cAnimIdx);
+		pkt.set_state_value((bRender<<8) | cAnimIdx);
 		pkt.set_state(WstringToString(pAnim->GetKey()));
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.Unicast(pSendBuffer, GetExclusiveClients());
+
+		m_bPrevRender = m_bRender;
 	}
 
 	void InputObject::SetClear(bool _bClear)
@@ -89,6 +101,21 @@ namespace W
 	{
 		m_pTarget = _pPlayer;
 		AddExclusiveClient(_pPlayer->GetPlayerID());
+	}
+
+	wstring InputObject::GetWDir(eKeyCode _eKeyCode)
+	{
+		switch (_eKeyCode)
+		{
+		case W::eKeyCode::UP:
+			return L"up";
+		case W::eKeyCode::DOWN:
+			return L"down";
+		case W::eKeyCode::LEFT:
+			return L"left";
+		case W::eKeyCode::RIGHT:
+			return L"right";
+		}
 	}
 
 	void InputObject::check()

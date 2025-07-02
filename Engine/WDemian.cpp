@@ -20,6 +20,7 @@
 #include "WSwordExplode.h"
 #include "WMonsterAttackScript.h"
 #include "WTime.h"
+#include "WInputObject.h"
 namespace W
 {
 	UINT Demian::CREATE_ID = 0;
@@ -171,7 +172,7 @@ namespace W
 		MonsterScript* Pscript = AddComponent<MonsterScript>();
 		Pscript->SetBoss();
 		Pscript->Initialize();
-		Pscript->SetHP(300.f);
+		Pscript->SetHP(100.f);
 		//Pscript->CreateHP();
 
 		setattack();
@@ -235,6 +236,16 @@ namespace W
 	
 	void Demian::add_skill()
 	{
+		for (int i = 0; i < 25; ++i)
+		{
+			for (int j = (int)eKeyCode::UP; j <= (int)eKeyCode::RIGHT; ++j)
+			{
+				InputObject* pInputObj = new InputObject((eKeyCode)j);
+				ObjectPoolManager::AddObjectPool(pInputObj->GetName(), pInputObj);
+			}
+		}
+
+
 		DemianSword* pSword = new DemianSword();
 		pSword->SetSceneName(GetSceneName());
 		pSword->SetOnwer(this);
@@ -430,7 +441,7 @@ namespace W
 		Vector2 vLook[5] = { Vector2{0.7f,-0.7f}, Vector2{0.5f,-0.5f} , Vector2{0,-1.f},
 			Vector2{-0.5f,-0.5f},Vector2{-0.7f,-0.7f} };
 		for (int i = 0; i < 5; ++i)
-			pSpawn->SetVelocity(vLook[i]);
+			pSpawn->SetVelocity(vLook[i] * 2.f);
 
 		//spawn 객체에서 몬스터 기술 가져오기
 		pSpawn->SetTime(2.f);

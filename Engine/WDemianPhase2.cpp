@@ -204,7 +204,7 @@ namespace W
 		MonsterScript* Pscript = AddComponent<MonsterScript>();
 		Pscript->SetBoss();
 		Pscript->Initialize();
-		Pscript->SetHP(300.f);
+		Pscript->SetHP(100.f);
 		//Pscript->CreateHP();
 
 		setattack();
@@ -524,7 +524,7 @@ namespace W
 		Vector2 vLook[5] = { Vector2{0.8f,-0.8f}, Vector2{0.45f,-0.45f} , Vector2{0,-1.f},
 			Vector2{-0.5f,-0.5f},Vector2{-0.8f,-0.8f} };
 		for (int i = 0; i < 5; ++i)
-			pSpawn->SetVelocity(vLook[i]);
+			pSpawn->SetVelocity(vLook[i] * 2.f);
 
 		//spawn 객체에서 몬스터 기술 가져오기
 		pSpawn->SetTime(1.7f);

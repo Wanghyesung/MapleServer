@@ -16,15 +16,13 @@ namespace W
 		m_tMonsterAttack{}
 
 	{
-		
-
 		Collider2D* pCollider = GetComponent<Collider2D>();
 		pCollider->SetActive(false);
 
 		GetComponent<Transform>()->SetScale(4.f, 4.f, 0.f);
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"Explode", Vector2(0.0f, 0.0f), Vector2(439.f, 432.0f), 36, Vector2(440.f, 440.f), Vector2::Zero, 0.15f);
+		pAnim->Create(L"Explode", Vector2(0.0f, 0.0f), Vector2(439.f, 432.0f), 36, Vector2(440.f, 440.f), Vector2::Zero, 0.07f);
 
 		pAnim->CompleteEvent(L"Explode") = std::bind(&DemianExplode::off, this);
 		pAnim->Play(L"Explode", true);

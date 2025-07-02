@@ -21,7 +21,7 @@ namespace W
 
 		DECLARE_CREATE_ID;
 	private:
-		//void off();
+		void check_time();
 		void check_enter();
 		void move();
 
@@ -30,8 +30,7 @@ namespace W
 		std::vector<Vector2> m_vecColliderSize;
 
 		tMonsterAttack m_tMonsterAttack;
-		GameObject* m_pTarget;
-
+	
 		bool m_bActive;
 		bool m_bEnter;
 
@@ -39,6 +38,9 @@ namespace W
 		float m_fCurAttackTime;
 
 		float m_fSpeed;
+
+		float m_fCurTime;
+		float m_fTime;
 	};
 }
 

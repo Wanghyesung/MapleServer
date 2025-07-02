@@ -181,13 +181,13 @@ namespace W
 		Effect* pAttack_hit1 = new Effect();
 		pAttack_hit1->SetSceneName(GetName());
 		pAttack_hit1->SetName(L"Demian2_attack1_hit");
-		pAttack_hit1->CreateAnimation(Vector2(0.f, 0.f), Vector2(227.f, 228.f), 5, 1, Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.2f);
+		pAttack_hit1->CreateAnimation(Vector2(0.f, 0.f), Vector2(227.f, 228.f), 5, 1, Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.1f);
 
 		Effect* pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
 		pEffect->GetComponent<Transform>()->SetScale(Vector3(18.f, 18.f, 0.f));
 		pEffect->SetName(L"DemianAttack0Effect_hit");
-		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(1122.f, 382.f), 9, 1, Vector2(2000.f, 2000.f), Vector2(0.f, 0.f), 0.1f);
+		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(1122.f, 382.f), 9, 1, Vector2(2000.f, 2000.f), Vector2(0.f, 0.f), 0.05f);
 
 
 		for (int i = 0; i < 2; ++i)
@@ -197,7 +197,7 @@ namespace W
 			pClone1->GetComponent<Transform>()->SetScale(Vector3(18.f, 18.f, 0.f));
 			pClone1->SetName(L"DemianClone0");
 			
-			pClone1->CreateAnimation(Vector2(0.f, 0.f), Vector2(515.f, 318.f), 8, 1, Vector2(2000.f, 2000.f), Vector2(0.f, 0.f), 0.1f);
+			pClone1->CreateAnimation(Vector2(0.f, 0.f), Vector2(515.f, 318.f), 8, 1, Vector2(2000.f, 2000.f), Vector2(0.f, 0.f), 0.05f);
 		}
 		
 		Effect* pClone2 = new Effect();
@@ -205,15 +205,15 @@ namespace W
 		pClone2->GetComponent<Transform>()->SetScale(Vector3(18.f, 18.f, 0.f));
 		pClone2->SetName(L"DemianClone1");
 	
-		pClone2->CreateAnimation(Vector2(0.f, 0.f), Vector2(679.f, 542.f), 8, 1, Vector2(1800.f, 1800.f), Vector2(0.f, 0.f), 0.1f);
+		pClone2->CreateAnimation(Vector2(0.f, 0.f), Vector2(679.f, 542.f), 8, 1, Vector2(1800.f, 1800.f), Vector2(0.f, 0.f), 0.05f);
 	
 		for (int i = 0; i < 3; ++i)
 		{
 			Effect* pEffect = new Effect();
 			pEffect->SetSceneName(GetName());
 			pEffect->GetComponent<Transform>()->SetScale(3.5f, 3.5f, 0.f);
-			pEffect->SetName(L"DemianTarget_hit");
-			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(286.f, 288.f), 14, 1, Vector2(300.f, 300.f), Vector2::Zero, 0.1f);
+			pEffect->SetName(L"DemianTarget");
+			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(286.f, 288.f), 14, 1, Vector2(300.f, 300.f), Vector2::Zero, 0.05f);
 		}
 	}
 }

@@ -23,6 +23,8 @@ namespace W
 		UINT GetIndex() { return m_iIndex; }
 
 		void SetTarget(Player* _pPlayer);
+
+		static wstring GetWDir(eKeyCode _eKeyCode);
 	private:
 		void check();
 		void failed();
@@ -37,6 +39,7 @@ namespace W
 
 		bool m_bActive;
 		bool m_bRender;
+		bool m_bPrevRender;
 	};
 }
 

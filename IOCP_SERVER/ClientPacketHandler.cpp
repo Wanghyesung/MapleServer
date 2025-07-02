@@ -83,8 +83,12 @@ bool Handle_C_MAP(shared_ptr<Session> _pSession, Protocol::C_MAP& _pkt)
 
 	const wstring& strScene = StringToWString(_pkt.scene());
 	
+	LOG_PACKET_SEND(EnterScene);
+
 	W::EventManager::ChanageScene(iPlayerID, strScene);
 	
+	LOG_PACKET_SEND(EnterEndScene);
+
 	return true;
 }
 
