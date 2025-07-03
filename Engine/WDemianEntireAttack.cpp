@@ -49,9 +49,15 @@ namespace W
 
 		GameObject::Update();
 	}
+
 	void DemianEntireAttack::LateUpdate()
 	{
 		GameObject::LateUpdate();
+	}
+
+	void DemianEntireAttack::UpdatePacket()
+	{
+
 	}
 	
 	void DemianEntireAttack::Restore()
@@ -59,4 +65,6 @@ namespace W
 		EventManager::Restore(m_pTarget, BattleManager::eAbnormalType::DemianStop);
 		EventManager::DeleteObject(this);
 	}
+
+
 }

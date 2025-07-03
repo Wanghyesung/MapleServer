@@ -27,21 +27,18 @@ namespace W
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"vine", Vector2(0.0f, 0.0f), Vector2(244.f, 150.f), 9, Vector2(250.f, 250.f), Vector2::Zero, 0.07f);
 
-
-	
 		GetComponent<Transform>()->SetScale(18.f,18.f,0.f);
 
 		m_pWhite = new White();
-		m_pWhite->SetEndTime(2.f);
+		m_pWhite->SetEndTime(1.f);
 		Vector3 vPos = m_pWhite->GetComponent<Transform>()->GetPosition();
 		vPos.z = -3.1f;
 		m_pWhite->GetComponent<Transform>()->SetPosition(vPos);
 
 		m_pWhite->SetFunction(std::bind(&DemianVine::attack, this));
 
-
 		m_tAttackInfo.fAttackDamage = BattleManager::GetMaxDamage();
-		m_tAttackInfo.fAttRcnt = 0.f;//¸ÂÀ¸
+		m_tAttackInfo.fAttRcnt = 0.f;
 		m_tAttackInfo.fAttUpperRcnt = 0.f;
 	}
 
@@ -110,12 +107,13 @@ namespace W
 	{
 		m_bActive = true;
 		m_pWhite->Initialize();
+		m_pWhite->SetSceneName(GetSceneName());
 		EventManager::CreateObject(m_pWhite,eLayerType::Object);
 	}
 
 	void DemianVine::off()
 	{
-		m_fDeleteTime = 6.f;
+		m_fDeleteTime = 3.f;
 		m_bStart = false;
 		m_bActive = false;
 		m_bClear = false;

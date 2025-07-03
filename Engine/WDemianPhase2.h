@@ -44,6 +44,7 @@ namespace W
 
 		//±¸ ·¹º§
 		int m_iCircleLevel;
+		int m_iCallStack;
 
 		std::vector<class DemianCircle*> m_vecCircle;
 	};

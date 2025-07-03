@@ -28,13 +28,13 @@ extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
 enum PACKET_TYPE
 {
 	S_ENTER = 1000,
-	C_ENTER = 1001, //클라가 서버에게
+	C_ENTER = 1001, 
 	S_NEW_ENTER = 1002,
 
 	S_COLLISION = 1003,
 
 	S_EQUIP = 1004,
-	C_EQUIP = 1005, //클라가 서버에게
+	C_EQUIP = 1005, 
 
 	C_INPUT = 1006,
 

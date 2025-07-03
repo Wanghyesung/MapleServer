@@ -422,7 +422,7 @@ namespace W
 	}
 	void BattleManager::demianstop(GameObject* _pGameObject, float _fAccValue)
 	{
-		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
+		Player* pPlayer = static_cast<Player*>(_pGameObject);
 		if (!pPlayer)
 			return;
 

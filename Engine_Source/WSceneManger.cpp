@@ -11,6 +11,7 @@
 #include "..\Engine\WObjectPoolManager.h"
 #include "..\Engine\WMonsterManager.h"
 #include "..\Engine\WPlayerScript.h"
+#include "..\Engine\WEventManager.h"
 namespace W
 {
 	UINT SceneManger::SCENE_IDX = 0;
@@ -82,11 +83,13 @@ namespace W
 		Protocol::S_DELETE pkt;
 		UINT iObjectID = _pGameObject->GetObjectID();
 
+		pkt.set_scene(WstringToString(strSceneName));
 		pkt.set_pool_object(_pGameObject->IsPoolObject());
 		pkt.set_layer_deleteid((((UCHAR)eLayer) << 24) | iObjectID);
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(strSceneName));
+
 	}
 
 	Scene* SceneManger::FindScene(const std::wstring& _strSceneName)
@@ -227,6 +230,8 @@ namespace W
 
 		// 다음 씬에 플레이어 ID 추가
 		m_hashPlayerScene[_strNextScene].push_back(iPlayerID);
+
+		//SceneManger::RetrieveAttackObject(iPlayerID, _strPrevScene);
 	}
 
 
@@ -243,6 +248,22 @@ namespace W
 				pAttackObj->Off();
 
 		}
+	}
+
+	void SceneManger::RetrieveAttackObject(UINT _iPlayerID, const wstring& _strPrevSceneName)
+	{
+	 	Scene* pPrevScene = FindScene(_strPrevSceneName);
+		const std::unordered_map<UINT, GameObject*>& hashObjs
+			= pPrevScene->GetLayer(eLayerType::AttackObject)->GetGameObjects();
+
+		auto iter = hashObjs.begin();
+		for (iter; iter != hashObjs.end(); ++iter)
+		{
+			UINT iPlayerId = static_cast<PlayerAttackObject*>(iter->second)->GetPlayer()->GetPlayerID();
+			if(iPlayerId == _iPlayerID)
+				EventManager::AddPlayerPool(iter->second);
+		}
+			
 	}
 
 	void SceneManger::AddPlayerScene(Player* pPlayer, const std::wstring& _strScene)

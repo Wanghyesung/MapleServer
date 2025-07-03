@@ -64,7 +64,7 @@ namespace W
 		tObjectInfo tObjInfo = {};
 		tObjInfo.fDefense = 10.f;
 
-		m_pPlayer = dynamic_cast<Player*>(GetOwner());
+		m_pPlayer = static_cast<Player*>(GetOwner());
 		
 		m_pFSM = new PlayerFSM();
 		m_pFSM->SetPlayer(m_pPlayer);

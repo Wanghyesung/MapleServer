@@ -63,7 +63,6 @@ namespace W
 			m_iActiveIdx = 1 - m_iActiveIdx;
 		}
 
-
 		std::vector<tEvent>& vecActiveEvent = m_vecEvent[m_iActiveIdx];
 		for (int i = 0; i < vecActiveEvent.size(); ++i)
 		{
@@ -87,7 +86,7 @@ namespace W
 			ObjectPoolManager::AddObjectPool(m_vecPlayer_Pool[i]->GetName(), m_vecPlayer_Pool[i]);
 			SceneManger::Erase(m_vecPlayer_Pool[i]);
 
-			dynamic_cast<PlayerAttackObject*>(m_vecPlayer_Pool[i])->Off();
+			static_cast<PlayerAttackObject*>(m_vecPlayer_Pool[i])->Off();
 		}
 		
 		for (int i = 0; i < m_vecMonster_Pool.size(); ++i)
@@ -122,8 +121,8 @@ namespace W
 		
 		if (pObj->IsPoolObject())
 			tInfo->set_object_name(WstringToString(pObj->GetName()));
-		
-		
+	
+		tInfo->set_scene(WstringToString(pObj->GetSceneName()));
 		tInfo->set_layer_createid_id((UCHAR)eLayer << 24 | iCreateID << 16 | iObjectID);
 		
 		Transform* pTr = pObj->GetComponent<Transform>();
@@ -163,7 +162,8 @@ namespace W
 
 		UINT iObjectID = pObj->GetObjectID();
 		Protocol::S_DELETE pkt;
-	
+
+		pkt.set_scene(WstringToString(pObj->GetSceneName()));
 		pkt.set_layer_deleteid((UINT)pObj->GetLayerType() << 24 | iObjectID & 0x00FFFFFF);
 		pkt.set_pool_object(pObj->IsPoolObject());
 
@@ -185,6 +185,8 @@ namespace W
 
 		UINT iObjectID = pObj->GetObjectID();
 		Protocol::S_DELETE pkt;
+
+		pkt.set_scene(WstringToString(pObj->GetSceneName()));
 		pkt.set_layer_deleteid((UCHAR)pObj->GetLayerType() << 24 | iObjectID);
 		pkt.set_pool_object(pObj->IsPoolObject());
 
@@ -247,9 +249,10 @@ namespace W
 
 		SceneManger::SwapPlayer(pPlayer, strPrevScene, strNextScene);
 		SceneManger::SendEnterScene(iPlayerID, strNextScene);
-
+	
 		//이전 맵에 플레이어 삭제됐다고 알리기
 		Protocol::S_DELETE pkt;
+		pkt.set_scene(WstringToString(pPlayer->GetSceneName()));
 		pkt.set_layer_deleteid((UCHAR)eLayerType::Player << 24 | iPlayerID);
 		pkt.set_pool_object(pPlayer->IsPoolObject());
 

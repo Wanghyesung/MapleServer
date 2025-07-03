@@ -106,7 +106,6 @@ namespace W
 	}
 	void DemianScene::CreateBackground()
 	{
-		
 		Ground* pGround = new Ground(true);
 		pGround->SetSceneName(GetName());
 		pGround->GetComponent<Transform>()->SetPosition(0.f, -2.95f, -0.1f);
@@ -161,7 +160,7 @@ namespace W
 	{
 		m_pWhite = new White();
 		m_pWhite->SetSceneName(GetName());
-		m_pWhite->SetEndTime(1.f);
+		m_pWhite->SetEndTime(0.5f);
 		m_pWhite->SetFunction(std::bind(&DemianScene::phase2, this));
 
 		m_pSharHP = new SharHP();
@@ -186,7 +185,7 @@ namespace W
 		Effect* pEffect = new Effect();
 		pEffect->SetSceneName(GetName());
 		pEffect->GetComponent<Transform>()->SetScale(Vector3(18.f, 18.f, 0.f));
-		pEffect->SetName(L"DemianAttack0Effect_hit");
+		pEffect->SetName(L"DemianAttack0Effect");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(1122.f, 382.f), 9, 1, Vector2(2000.f, 2000.f), Vector2(0.f, 0.f), 0.05f);
 
 
@@ -215,5 +214,6 @@ namespace W
 			pEffect->SetName(L"DemianTarget");
 			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(286.f, 288.f), 14, 1, Vector2(300.f, 300.f), Vector2::Zero, 0.05f);
 		}
+
 	}
 }

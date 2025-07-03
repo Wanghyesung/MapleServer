@@ -14,8 +14,9 @@ namespace W
 	DemianCircle::DemianCircle():
 		m_bEnter(false),
 		m_bActive(false),
-		m_fCurTime(0.f),
-		m_fTime(2.f),
+		m_fCurMoveTime(0.f),
+		m_fMoveTime(2.f),
+		m_iDir(1),
 		m_iCurIndex(0),
 		m_fCurAttackTime(0.f),
 		m_fAttackTime(1.4f)
@@ -52,6 +53,7 @@ namespace W
 	}
 	void DemianCircle::Update()
 	{
+		check_time();
 		move();
 
 		check_enter();
@@ -73,7 +75,7 @@ namespace W
 
 		Protocol::S_STATE pkt;
 
-		UCHAR cLayer = (UCHAR)eLayerType::Object;
+		UCHAR cLayer = (UCHAR)GetLayerType();
 		UINT iObjectID = GetObjectID();
 		pkt.set_layer_id((cLayer << 24) | iObjectID);
 
@@ -94,6 +96,22 @@ namespace W
 		GetComponent<Animator>()->Play(L"level"+ strNum, true);
 	}
 	
+	void DemianCircle::check_time()
+	{
+		m_fCurMoveTime += Time::DeltaTime();
+		if (m_fCurMoveTime >= m_fMoveTime)
+		{
+			m_fCurMoveTime = 0.f;
+
+			std::random_device rDiv;
+			std::mt19937 en(rDiv());
+			std::uniform_int_distribution<int> num(0, 1);
+			int iNum = (int)num(en);
+
+			m_iDir = iNum > 0.f ? 1 : -1;
+		}
+	}
+
 	void DemianCircle::check_enter()
 	{
 		m_fCurAttackTime += Time::DeltaTime();
@@ -121,13 +139,6 @@ namespace W
 	}
 	void DemianCircle::move()
 	{
-		std::random_device rDiv;
-		std::mt19937 en(rDiv());
-		std::uniform_int_distribution<int> num(0, 1);
-		int iNum = (int)num(en);
-
-		int iDir = iNum > 0.f ? 1 : -1;
-
-		GetComponent<Rigidbody>()->AddForce(Vector2(iDir * m_fSpeed, 0.f));
+		GetComponent<Rigidbody>()->AddForce(Vector2(m_iDir * m_fSpeed, 0.f));
 	}
 }

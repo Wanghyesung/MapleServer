@@ -53,6 +53,7 @@ namespace W
 		static void SwapObject(Scene* _pPrevScene, Scene* _pNextScene, GameObject* _pGameObject);
 		static void SwapPlayer(GameObject* _pPlayer, const wstring& _strPrevScene, const wstring& _strNextScene);
 		static void PushObjectPool(UINT _iPlayerID, Scene* _pPrevScene);
+		static void RetrieveAttackObject(UINT _iPlayerID, const wstring& _strPrevSceneName);
 		static void AddPlayerScene(Player* pPlayer, const std::wstring& _strScene);
 
 		static void SendEnterScene(UINT _iPlayerID, const std::wstring& _strNextScene);

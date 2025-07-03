@@ -33,27 +33,9 @@ namespace W
 	{
 		SetName(L"Demian2");
 
-		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//
-		//
-		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetRenderinMode(eRenderingMode::Transparent);
-		//pMater->SetShader(Resources::Find<Shader>(L"MonsterShader"));
-		//Resources::Insert(L"DemianMater", pMater);
-		//
-		//pRenderer->SetMaterial(pMater);
 		AddComponent<Rigidbody>();
 
-		//std::shared_ptr<Texture> pNormal2 = Resources::Find<Texture>(L"Demian2Normal");
-		//std::shared_ptr<Texture> pDead2 = Resources::Find<Texture>(L"Demian2Dead");
-		//std::shared_ptr<Texture> pAttack20 = Resources::Find<Texture>(L"Demian2_attack0");
-		//std::shared_ptr<Texture> pAttack21 = Resources::Find<Texture>(L"Demian2_attack1");
-		//std::shared_ptr<Texture> pAttack22 = Resources::Find<Texture>(L"Demian2_attack2");
-		//std::shared_ptr<Texture> pAttack23 = Resources::Find<Texture>(L"Demian2_attack3");
-		//std::shared_ptr<Texture> pAttack24 = Resources::Find<Texture>(L"Demian2_attack4");
-		//std::shared_ptr<Texture> pAttack25 = Resources::Find<Texture>(L"Demian2_attack5");
-
+	
 		Animator* pAnim = AddComponent<Animator>();
 		//////////////////페이즈 2///////////////////////
 		pAnim->Create(L"Demian2_stand_left", Vector2(0.f, 0.f), Vector2(2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.07f);
@@ -157,15 +139,6 @@ namespace W
 		pAnim->FindAnimation(L"Demian2_attack5_right")->Create(L"Demian2_attack5_right", Vector2(12000.f, 6500.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.07f);
 		pAnim->FindAnimation(L"Demian2_attack5_right")->Create(L"Demian2_attack5_right", Vector2(12000.f, 7800.f), Vector2(-2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.07f);
 
-		/*pAttack20->BindShaderResource(eShaderStage::PS, 12);
-		pAttack21->BindShaderResource(eShaderStage::PS, 12);
-		pAttack22->BindShaderResource(eShaderStage::PS, 12);
-		pAttack23->BindShaderResource(eShaderStage::PS, 12);
-		pAttack24->BindShaderResource(eShaderStage::PS, 12);
-		pAttack25->BindShaderResource(eShaderStage::PS, 12);
-		pDead2->BindShaderResource(eShaderStage::PS, 12);*/
-
-		//데미안 창 공격
 		set_effect();
 	
 		//공격 후 이동
@@ -181,7 +154,7 @@ namespace W
 			if (m_vecCircle[i]->IsActive())
 				continue;
 
-			delete m_vecCircle[i];;
+			delete m_vecCircle[i];
 			m_vecCircle[i] = nullptr;
 		}
 
@@ -223,6 +196,9 @@ namespace W
 		pFSM->AddState(new MonsterAttack());
 		pFSM->AddState(new MonsterDead());
 		pFSM->SetActiveState(eMonsterState::stand);
+
+		m_iCallStack = 0;
+		m_iCircleLevel = -1;
 	}
 	void DemianPhase2::Update()
 	{
@@ -260,10 +236,7 @@ namespace W
 
 		Monster::LateUpdate();
 	}
-	//void DemianPhase2::Render()
-	//{
-	//	Monster::Render();
-	//}
+
 	void DemianPhase2::add_skill()
 	{
 		for (int i = 0; i < 2; ++i)
@@ -582,7 +555,7 @@ namespace W
 				{
 					EventManager::CreateObject(m_vecCircle[m_iCircleLevel], eLayerType::MonsterAttack);
 					m_vecCircle[m_iCircleLevel]->SetActive(true);
-					m_vecCircle[m_iCircleLevel]->SetSpeed((m_iCircleLevel + 1.f)/2.f);
+					m_vecCircle[m_iCircleLevel]->SetSpeed((m_iCircleLevel + 2.f)/2.f);
 				}
 
 				for (int i = 0; i < m_vecCircle.size(); ++i)
@@ -593,8 +566,9 @@ namespace W
 		}
 			
 
-		if (tInfo.fHP / tInfo.fMaxHP <= 0.f)
+		if (m_iCallStack == 0 && tInfo.fHP / tInfo.fMaxHP <= 0.f)
 		{
+			++m_iCallStack;
 			for (int i = 0; i < 2; ++i)
 			{
 				EventManager::EraseObject(m_vecCircle[i]);

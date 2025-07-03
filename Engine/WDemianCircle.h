@@ -37,10 +37,11 @@ namespace W
 		float m_fAttackTime;
 		float m_fCurAttackTime;
 
+		int m_iDir;
 		float m_fSpeed;
 
-		float m_fCurTime;
-		float m_fTime;
+		float m_fCurMoveTime;
+		float m_fMoveTime;
 	};
 }
 

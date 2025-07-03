@@ -47,8 +47,7 @@ namespace W
 				m_bPlayerEnter = true;
 
 			m_bEnter = true;
-		}
-			
+		}		
 	}
 
 	void MonsterAttackScript::OnCollisionStay(Collider2D* other)
