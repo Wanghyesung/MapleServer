@@ -240,13 +240,14 @@ namespace W
 		UINT iPlayerID = (UINT)(_lParm);
 		const wstring& strNextScene = *reinterpret_cast<wstring*>(_accParm);
 		GameObject* pPlayer = SceneManger::FindPlayer(iPlayerID);
-		
+
+		if (pPlayer == nullptr)
+			assert(nullptr);
+
 		change_player_fsmstate((DWORD_PTR)pPlayer->GetScript<PlayerScript>()->m_pFSM, (DWORD_PTR)Player::ePlayerState::jump, 0);
 
 		wstring strPrevScene = pPlayer->GetSceneName(); //swap 후 이름이 변경되지 않게 복사
 	
-		LOG_PACKET_SEND(ExcuteScene);
-
 		SceneManger::SwapPlayer(pPlayer, strPrevScene, strNextScene);
 		SceneManger::SendEnterScene(iPlayerID, strNextScene);
 	
@@ -258,6 +259,7 @@ namespace W
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(strPrevScene));
+
 
 		delete &strNextScene;
 	}

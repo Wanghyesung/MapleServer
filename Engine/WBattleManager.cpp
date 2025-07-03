@@ -41,7 +41,7 @@ namespace W
 	bool BattleManager::m_bOnUndead = false;
 	float BattleManager::m_fPotionTime = 0.1f;
 	float BattleManager::m_fCurPotionTime = 0.f;
-	UINT BattleManager::m_iStigmaCount = 6;
+	UINT  BattleManager::m_arrStigmaCount[6] = { 0,6,6,6,6,6 };
 
 		
 	void BattleManager::Initialize()
@@ -323,7 +323,8 @@ namespace W
 			pScript->m_bAbnormal = false;
 			break;
 		case W::BattleManager::eAbnormalType::Stigma:
-			m_iStigmaCount = 0;
+			UINT iObjectID = _pTarget->GetObjectID();
+			m_arrStigmaCount[iObjectID] = 0;
 			break;
 		}
 
@@ -472,14 +473,16 @@ namespace W
 
 	void BattleManager::stigma(GameObject* _pGameObject, float _fAccValue)
 	{
-		++m_iStigmaCount;
-		if (m_iStigmaCount >= 7)
+		UINT iObjID = _pGameObject->GetObjectID();
+		++m_arrStigmaCount[iObjID];
+
+		if (m_arrStigmaCount[iObjID] >= 7)
 		{
 			tAttackInfo tAttackInfo = {};
 			tAttackInfo.fAttack = m_iMaxDamage;
 			tAttackInfo.fAttRcnt = 0.f;
 			tAttackInfo.fAttUpperRcnt = 0.f;
-			Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
+			Player* pPlayer = static_cast<Player*>(_pGameObject);
 
 			pPlayer->GetScript<PlayerScript>()->Hit(tAttackInfo, L"stigma");
 			

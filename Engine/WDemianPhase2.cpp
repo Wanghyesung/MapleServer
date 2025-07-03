@@ -177,7 +177,7 @@ namespace W
 		MonsterScript* Pscript = AddComponent<MonsterScript>();
 		Pscript->SetBoss();
 		Pscript->Initialize();
-		Pscript->SetHP(100.f);
+		Pscript->SetHP(250.f);
 		//Pscript->CreateHP();
 
 		setattack();

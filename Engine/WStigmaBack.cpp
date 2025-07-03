@@ -31,8 +31,6 @@ namespace W
 		m_pCount->m_pOwner = this;
 
 		EventManager::CreateObject(m_pCount, eLayerType::Object);
-		
-		m_pTarget = SceneManger::FindPlayer(GetSceneName());
 	}
 	void StigmaBack::Update()
 	{
@@ -51,10 +49,37 @@ namespace W
 			return;
 		GameObject::LateUpdate();
 	}
+
+	void StigmaBack::UpdatePacket()
+	{
+		GetComponent<Transform>()->SendTransform();
+		
+		Animator* pAnimator = GetComponent<Animator>();
+		if (!pAnimator || pAnimator->TrySendPacket())
+			return;
+
+		Protocol::S_STATE pkt;
+		UCHAR cLayer = (UCHAR)GetLayerType();
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = pAnimator->GetActiveAnimation();
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+
+		pkt.set_state_value(cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+	}
 	
 	void StigmaBack::set_count()
 	{
-		UINT iCount = BattleManager::GetStigmaCount();
+		if (m_pTarget == nullptr)
+			return;
+
+		UINT iObjID = m_pTarget->GetObjectID();
+		UINT iCount = BattleManager::GetStigmaCount(iObjID);
 		if (m_iCount != iCount)
 		{
 			m_iCount = iCount;

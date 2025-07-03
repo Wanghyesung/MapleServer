@@ -13,9 +13,11 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
+		virtual void UpdatePacket()override;
 
 		DECLARE_CREATE_ID;
 
+		void SetTarget(GameObject* _pObj) { m_pTarget = _pObj; }
 	private:
 		void set_count();
 

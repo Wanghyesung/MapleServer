@@ -31,8 +31,11 @@ namespace W
 		virtual void LateUpdate();
 		virtual void UpdatePacket();
 
+		virtual void OnEnterPlayer(UINT _iPlayerID) {};
+		virtual void OnExitPlayer(UINT _iPlayerID) {};
 		virtual void OnEnter();
 		virtual void OnExit();
+
 
 		virtual void CreateBackground() {};
 

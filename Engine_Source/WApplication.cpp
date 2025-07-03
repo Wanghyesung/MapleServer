@@ -43,7 +43,7 @@ namespace W
 
 	void Application::Initialize()
 	{
-		ThreadPool::Initiailize(4);
+		//ThreadPool::Initiailize(4);
 		Time::Initiailize();
 		Input::Initialize();
 		

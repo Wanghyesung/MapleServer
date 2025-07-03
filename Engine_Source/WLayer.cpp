@@ -78,6 +78,15 @@ namespace W
 		}
 	}
 
+	GameObject* Layer::FindObject(UINT _iObjectID)
+	{
+		auto iter = m_hashGameObject.find(_iObjectID);
+		if (iter == m_hashGameObject.end())
+			return nullptr;
+
+		return iter->second;
+	}
+
 	void Layer::AddGameObject(GameObject* _pGameObj)
 	{
 		if (_pGameObj->GetObjectID() == 0)

@@ -275,11 +275,12 @@ namespace W
 
 	void SceneManger::SendEnterScene(UINT _iPlayerID, const std::wstring& _strNextScene)
 	{
-		Protocol::S_MAP pkt;
-
 		// monster, monsterattack, player, , playerattack
 			vector<unordered_map<UINT, W::GameObject*>> vecObjects;
 		W::Scene* pScene = W::SceneManger::FindScene(_strNextScene);
+		pScene->OnEnterPlayer(_iPlayerID);
+
+		Protocol::S_MAP pkt;
 		auto pMonster = pScene->GetLayer(W::eLayerType::Monster)->GetGameObjects();
 		auto pMonsterAttack = pScene->GetLayer(W::eLayerType::MonsterAttack)->GetGameObjects();
 		auto pPlayer = pScene->GetLayer(W::eLayerType::Player)->GetGameObjects();

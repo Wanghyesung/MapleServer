@@ -60,8 +60,8 @@ namespace W
 		static void CheckDamage(tObjectInfo& _tObjectInfo, const tAttackInfo& _tAttackInfo, const std::wstring _strName, Vector3 _vPosition);
 		
 		static UINT GetMaxDamage() { return m_iMaxDamage; }
-		static UINT GetStigmaCount() { return m_iStigmaCount; }
-		static void SetStigmaCount(UINT _iCount) { m_iStigmaCount = _iCount; }
+		static UINT GetStigmaCount(UINT _iPlayerID) { return m_arrStigmaCount[_iPlayerID]; }
+		static void SetStigmaCount(UINT _iPlayerID, UINT _iCount) { m_arrStigmaCount[_iPlayerID] = _iCount; }
 
 		static bool IsAblePotion();
 
@@ -118,7 +118,7 @@ namespace W
 		static float m_fPotionTime;
 		static float m_fCurPotionTime;
 
-		static UINT m_iStigmaCount;
+		static UINT m_arrStigmaCount[6];
 
 		friend class EventManager;
 		friend class Abnormal;

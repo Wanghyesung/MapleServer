@@ -1,6 +1,7 @@
 #include "WDemianScene.h"
 #include "WResources.h"
 
+#include "WPlayer.h"
 #include "WGround.h"
 #include "WDemian.h"
 #include "WCollisionManager.h"
@@ -19,7 +20,6 @@ namespace W
 	DemianScene::DemianScene():
 		m_pWhite(nullptr),
 		m_bEnd(false),
-		m_pStigmaBack(nullptr),
 		m_iFadeCallStack(1),
 		m_fStigmaTime(30.f),
 		m_fCurStigmaTime(0.f)
@@ -91,6 +91,26 @@ namespace W
 		Scene::LateUpdate();
 
 	}
+
+	void DemianScene::OnEnterPlayer(UINT _iPlayerID)
+	{
+		GameObject* pPlayer = GetLayer(eLayerType::Player)->FindObject(_iPlayerID);
+		if (pPlayer)
+		{
+			StigmaBack* pStigmaBack = new StigmaBack();
+			pStigmaBack->SetSceneName(GetName());
+			pStigmaBack->SetTarget(pPlayer);
+			pStigmaBack->Initialize();
+			EventManager::CreateObject(pStigmaBack, eLayerType::Object);
+		}
+	}
+
+	void DemianScene::OnExitPlayer(UINT _iPlayerID)
+	{
+		//여기서 필요 없어진 오브젝트 전부 제거
+
+	}
+
 	
 	void DemianScene::OnEnter()
 	{
@@ -167,11 +187,6 @@ namespace W
 		m_pSharHP->SetSceneName(GetName());
 		m_pSharHP->Initialize();
 		AddGameObject(eLayerType::UI, m_pSharHP);
-
-		//m_pStigmaBack = new StigmaBack();
-		//m_pStigmaBack->SetSceneName(GetName());
-		//m_pStigmaBack->Initialize();
-		//AddGameObject(eLayerType::Object, m_pStigmaBack);
 	}
 
 	void DemianScene::create_effect()

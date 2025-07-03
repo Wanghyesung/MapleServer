@@ -13,6 +13,9 @@ namespace W
 		virtual void Update()override;
 		virtual void LateUpdate()override;
 
+		virtual void OnEnterPlayer(UINT _iPlayerID)override;
+		virtual void OnExitPlayer(UINT _iPlayerID)override;
+
 		virtual void OnEnter()override;
 		virtual void OnExit()override;
 
@@ -31,8 +34,7 @@ namespace W
 		class SharHP* m_pSharHP;
 
 		class White* m_pWhite;
-		class StigmaBack* m_pStigmaBack;
-
+	
 		float m_fStigmaTime;
 		float m_fCurStigmaTime;
 		

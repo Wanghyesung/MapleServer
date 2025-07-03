@@ -24,12 +24,12 @@ namespace W
 
 		virtual void DestroyAll(Scene* _pScene);
 
+		GameObject* FindObject(UINT _iObjectID);
 		void AddGameObject(GameObject* _pGameObj);
 		const unordered_map<UINT, GameObject*>& GetGameObjects();
 		std::unordered_map<UINT, GameObject*> GetCopyGameObjects();
 
 		void EraseOnVector(GameObject* _pGameObject);
-
 		
 	private:
 		
