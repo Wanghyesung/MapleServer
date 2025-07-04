@@ -46,7 +46,6 @@ namespace W
 
 		static void SwapObject(Scene* _pPrevScene, Scene* _pNextScene, GameObject* _pGameObject);
 		static void SwapPlayer(GameObject* _pPlayer, UINT _iPrevSceneID, UINT _iNextSceneID);
-		static void PushObjectPool(UINT _iPlayerID, Scene* _pPrevScene);
 		static void RetrieveAttackObject(UINT _iPlayerID, UINT _iPrevSceneID);
 		static void AddPlayerScene(Player* pPlayer, UINT _iSceneID);
 

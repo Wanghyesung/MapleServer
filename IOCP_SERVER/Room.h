@@ -19,6 +19,9 @@ public:
 	void Unicast(shared_ptr<SendBuffer> _pBuffer, const vector<UINT>& _vecTarget);
 	void Unicast(shared_ptr<SendBuffer> _pBuffer, const unordered_set<UINT>& _setTarget);
 
+	void LockSendBask(UINT _iSessionID) { m_hashSendMask[_iSessionID] = false; }
+	void UnLockSendBask(UINT _iSessionID) { m_hashSendMask[_iSessionID] = true; }
+
 	vector<UINT> GetPersons();
 	shared_ptr<Session> GetPersonByID(UINT _ID);
 private:
@@ -30,6 +33,7 @@ private:
 
 	unordered_map<string, shared_ptr<Session>> m_hashPerson;
 	unordered_map<UINT, shared_ptr<Session>> m_hashPersonID;
+	std::unordered_map<UINT, bool> m_hashSendMask;
 
 	atomic<UINT> m_iMaxCount;
 	atomic<UINT> m_iCurCount;

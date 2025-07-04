@@ -14,6 +14,7 @@ enum
 	BUFFER_SIZE = 0x10000
 };
 
+
 class Session : public enable_shared_from_this<Session>
 {
 	friend class Listener;

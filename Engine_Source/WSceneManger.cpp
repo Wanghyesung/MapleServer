@@ -265,21 +265,6 @@ namespace W
 	}
 
 
-	void SceneManger::PushObjectPool(UINT _iPlayerID, Scene* _pPrevScene)
-	{
-		const std::unordered_map<UINT, GameObject*>& hashObjs
-			= _pPrevScene->GetLayer(eLayerType::AttackObject)->GetGameObjects();
-
-		auto iter = hashObjs.begin();
-		for (iter; iter != hashObjs.end(); ++iter)
-		{
-			PlayerAttackObject* pAttackObj = static_cast<PlayerAttackObject*>(iter->second);
-			if (pAttackObj->GetPlayer()->GetPlayerID() == _iPlayerID)
-				pAttackObj->Off();
-
-		}
-	}
-
 	void SceneManger::RetrieveAttackObject(UINT _iPlayerID, UINT _iPrevSceneID)
 	{
 	 	Scene* pPrevScene = FindScene(_iPrevSceneID);

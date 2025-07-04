@@ -173,26 +173,11 @@ class S_STATE final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kSceneFieldNumber = 1,
-    kStateFieldNumber = 3,
-    kLayerIdFieldNumber = 2,
-    kStateValueFieldNumber = 4,
+    kStateFieldNumber = 2,
+    kSceneLayerIdFieldNumber = 1,
+    kStateValueFieldNumber = 3,
   };
-  // string scene = 1;
-  void clear_scene();
-  const std::string& scene() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_scene(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_scene();
-  PROTOBUF_FUTURE_MUST_USE_RESULT std::string* release_scene();
-  void set_allocated_scene(std::string* scene);
-  private:
-  const std::string& _internal_scene() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_scene(const std::string& value);
-  std::string* _internal_mutable_scene();
-  public:
-
-  // string state = 3;
+  // string state = 2;
   void clear_state();
   const std::string& state() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -206,16 +191,16 @@ class S_STATE final :
   std::string* _internal_mutable_state();
   public:
 
-  // uint32 layer_id = 2;
-  void clear_layer_id();
-  ::PROTOBUF_NAMESPACE_ID::uint32 layer_id() const;
-  void set_layer_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  // uint32 scene_layer_id = 1;
+  void clear_scene_layer_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 scene_layer_id() const;
+  void set_scene_layer_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_layer_id() const;
-  void _internal_set_layer_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_scene_layer_id() const;
+  void _internal_set_scene_layer_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // int32 state_value = 4;
+  // int32 state_value = 3;
   void clear_state_value();
   ::PROTOBUF_NAMESPACE_ID::int32 state_value() const;
   void set_state_value(::PROTOBUF_NAMESPACE_ID::int32 value);
@@ -231,9 +216,8 @@ class S_STATE final :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr scene_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr state_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 layer_id_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 scene_layer_id_;
   ::PROTOBUF_NAMESPACE_ID::int32 state_value_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_ObjectState_2eproto;
@@ -249,72 +233,27 @@ class S_STATE final :
 #endif  // __GNUC__
 // S_STATE
 
-// string scene = 1;
-inline void S_STATE::clear_scene() {
-  scene_.ClearToEmpty();
+// uint32 scene_layer_id = 1;
+inline void S_STATE::clear_scene_layer_id() {
+  scene_layer_id_ = 0u;
 }
-inline const std::string& S_STATE::scene() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_STATE.scene)
-  return _internal_scene();
+inline ::PROTOBUF_NAMESPACE_ID::uint32 S_STATE::_internal_scene_layer_id() const {
+  return scene_layer_id_;
 }
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void S_STATE::set_scene(ArgT0&& arg0, ArgT... args) {
- 
- scene_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:Protocol.S_STATE.scene)
+inline ::PROTOBUF_NAMESPACE_ID::uint32 S_STATE::scene_layer_id() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_STATE.scene_layer_id)
+  return _internal_scene_layer_id();
 }
-inline std::string* S_STATE::mutable_scene() {
-  // @@protoc_insertion_point(field_mutable:Protocol.S_STATE.scene)
-  return _internal_mutable_scene();
-}
-inline const std::string& S_STATE::_internal_scene() const {
-  return scene_.Get();
-}
-inline void S_STATE::_internal_set_scene(const std::string& value) {
+inline void S_STATE::_internal_set_scene_layer_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   
-  scene_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
+  scene_layer_id_ = value;
 }
-inline std::string* S_STATE::_internal_mutable_scene() {
-  
-  return scene_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
-}
-inline std::string* S_STATE::release_scene() {
-  // @@protoc_insertion_point(field_release:Protocol.S_STATE.scene)
-  return scene_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
-}
-inline void S_STATE::set_allocated_scene(std::string* scene) {
-  if (scene != nullptr) {
-    
-  } else {
-    
-  }
-  scene_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), scene,
-      GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set_allocated:Protocol.S_STATE.scene)
+inline void S_STATE::set_scene_layer_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_scene_layer_id(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_STATE.scene_layer_id)
 }
 
-// uint32 layer_id = 2;
-inline void S_STATE::clear_layer_id() {
-  layer_id_ = 0u;
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint32 S_STATE::_internal_layer_id() const {
-  return layer_id_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::uint32 S_STATE::layer_id() const {
-  // @@protoc_insertion_point(field_get:Protocol.S_STATE.layer_id)
-  return _internal_layer_id();
-}
-inline void S_STATE::_internal_set_layer_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  
-  layer_id_ = value;
-}
-inline void S_STATE::set_layer_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _internal_set_layer_id(value);
-  // @@protoc_insertion_point(field_set:Protocol.S_STATE.layer_id)
-}
-
-// string state = 3;
+// string state = 2;
 inline void S_STATE::clear_state() {
   state_.ClearToEmpty();
 }
@@ -359,7 +298,7 @@ inline void S_STATE::set_allocated_state(std::string* state) {
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_STATE.state)
 }
 
-// int32 state_value = 4;
+// int32 state_value = 3;
 inline void S_STATE::clear_state_value() {
   state_value_ = 0;
 }

@@ -471,7 +471,6 @@ namespace W
 		
 		eve.lParm = (DWORD_PTR)_iPlayerID;
 		eve.wParm = (DWORD_PTR)_ePlayerSkill;
-		//eve.wParm = (DWORD_PTR)_ePlayerSkill;
 		eve.eEventType = EVENT_TYPE::CHANGE_PLAYER_SKILL;
 		AddEvent(eve);
 	}

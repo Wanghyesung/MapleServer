@@ -24,7 +24,7 @@ bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 	if (iUserID == -1)
 		return false;
 
-	//다른 클라들에게 전송
+	//다른 클라들에게 전송 valley씬에 있는 얘들만
 	Protocol::S_NEW_ENTER other_pkt;
 	other_pkt.set_playerid(iUserID);
 	shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(other_pkt);
@@ -47,7 +47,6 @@ bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 
 	W::EventManager::CreatePlayer(iUserID);
 	return true;
-
 }
 
 bool Handle_C_EQUIP(shared_ptr<Session> _pSession, Protocol::C_EQUIP& _pkt)
@@ -81,9 +80,17 @@ bool Handle_C_MAP(shared_ptr<Session> _pSession, Protocol::C_MAP& _pkt)
 	UINT iScene_playerID = _pkt.scene_player_id();	
 	USHORT iSceneID = (iScene_playerID >> 16) & 0xFFFF;
 	USHORT iPlayerID = iScene_playerID & 0xFFFF;
-	//const wstring& strScene = StringToWString(_pkt.scene());
-	
+	GRoom.UnLockSendBask(iPlayerID);
+
 	W::EventManager::ChanageScene(iPlayerID, iSceneID);
+
+	return true;
+}
+
+bool Handle_C_MAP_LOADING(shared_ptr<Session> _pSession, Protocol::C_MAP_LOADING& _pkt)
+{
+	UINT iPlayerID = _pkt.player_id();
+	GRoom.LockSendBask(iPlayerID);
 
 	return true;
 }
@@ -104,8 +111,6 @@ bool Handle_C_SKILL(shared_ptr<Session> _pSession, Protocol::C_Skill& _pkt)
 {
 	W::Player::ePlayerSkill eSkillID = (W::Player::ePlayerSkill)_pkt.skill_id();
 	UINT iPlayerID = _pkt.player_id();
-
-	const wstring& strScene = StringToWString(_pkt.scene());
 
 	W::EventManager::ChangePlayerSkillState(iPlayerID, eSkillID);
 	

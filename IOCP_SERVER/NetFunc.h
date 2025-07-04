@@ -1,3 +1,3 @@
 #pragma once
-wstring StringToWString(const string& str);
-string WstringToString(const wstring& _str);
+const wstring& StringToWString(const string& str);
+const string& WstringToString(const wstring& _str);

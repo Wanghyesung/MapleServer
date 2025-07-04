@@ -43,6 +43,7 @@ UINT Room::Enter(const string& _strName, shared_ptr<Session> _pSession)
 
 	m_hashPerson.insert(make_pair(_strName, _pSession));
 	m_hashPersonID.insert(make_pair(iUserID, _pSession));
+	m_hashSendMask[iUserID] = true;
 
 	return iUserID;
 }
@@ -62,41 +63,80 @@ void Room::Exit(const string& _strName)
 
 void Room::Broadcast(shared_ptr<SendBuffer> _pBuffer)
 {
-	WLock lock(m_lock);
-	for (auto& iter : m_hashPerson)
+	std::vector<std::shared_ptr<Session>> vecTarget;
 	{
-		iter.second->Send(_pBuffer);
+		RLock lock(m_lock);
+		vecTarget.reserve(m_hashPersonID.size());
+		for (auto& iter : m_hashPersonID)
+		{
+			if (m_hashSendMask[iter.first])
+				vecTarget.push_back(iter.second);
+		}
+	}
+
+	for (auto& iter : vecTarget)
+	{
+		iter->Send(_pBuffer);
 	}
 }
 
 void Room::BroadcastExcept(shared_ptr<SendBuffer> _pBuffer, shared_ptr<Session> _pExceptSession)
 {
-	WLock lock(m_lock);
-	for (auto& iter : m_hashPerson)
+	std::vector<std::shared_ptr<Session>> vecTarget;
 	{
-		if (iter.second == _pExceptSession)
-			continue;
+		RLock lock(m_lock);
+		vecTarget.reserve(m_hashPersonID.size());
+		for (auto& iter : m_hashPersonID)
+		{
+			if (iter.second == _pExceptSession)
+				continue;
 
-		iter.second->Send(_pBuffer);
+			if (m_hashSendMask[iter.first])
+				vecTarget.push_back(iter.second);
+		}
+	}
+
+	for (auto& iter : vecTarget)
+	{
+		iter->Send(_pBuffer);
 	}
 }
 
 void Room::Unicast(shared_ptr<SendBuffer> _pBuffer, const vector<UINT>& _vecTarget)
 {
-	WLock lock(m_lock);
-	for (int i = 0; i < _vecTarget.size(); ++i)
+	std::vector<UINT> vecTarget;
 	{
-		m_hashPersonID[_vecTarget[i]]->Send(_pBuffer);
+		RLock lock(m_lock);
+		vecTarget.reserve(_vecTarget.size());
+		for (auto iter : _vecTarget)
+		{
+			if (m_hashSendMask[iter])
+				vecTarget.push_back(iter);
+		}
+	}
+
+	for (auto& iter : vecTarget)
+	{
+		m_hashPersonID[iter]->Send(_pBuffer);
 	}
 }
 
 void Room::Unicast(shared_ptr<SendBuffer> _pBuffer, const unordered_set<UINT>& _setTarget)
 {
-	WLock lock(m_lock);
-	auto iter = _setTarget.begin();
-	for(iter; iter!= _setTarget.end(); ++iter)
+	std::vector<UINT> vecTarget;
 	{
-		m_hashPersonID[*iter]->Send(_pBuffer);
+		RLock lock(m_lock);
+		vecTarget.reserve(_setTarget.size());
+		for (auto iter : _setTarget)
+		{
+			if (m_hashSendMask[iter])
+				vecTarget.push_back(iter);
+		}
+	}
+
+	for (auto& iter : vecTarget)
+	{
+		m_hashPersonID[iter]->Send(_pBuffer);
 	}
 }
 
@@ -105,6 +145,7 @@ vector<UINT> Room::GetPersons()
 	std::vector<UINT> vecID = {};
 	{
 		RLock ReadLock(m_lock);
+		vecID.reserve(m_hashPerson.size());
 		for (auto iter : m_hashPerson)
 		{
 			UINT ID = static_pointer_cast<ClientSession>(iter.second)->GetPersonID();

@@ -28,38 +28,39 @@ extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
 enum PACKET_TYPE
 {
 	S_ENTER = 1000,
-	C_ENTER = 1001, 
+	C_ENTER = 1001,
 	S_NEW_ENTER = 1002,
 
 	S_COLLISION = 1003,
 
 	S_EQUIP = 1004,
-	C_EQUIP = 1005, 
+	C_EQUIP = 1005,
 
 	C_INPUT = 1006,
 
 	S_MAP = 1007,
 	C_MAP = 1008,
+	C_MAP_LOADING = 1009,
 
-	S_START_MAP = 1009,
-	C_START_MAP = 1010,
+	S_START_MAP = 1010,
+	C_START_MAP = 1011,
 
-	S_CREATE = 1011,
-	C_CREATE = 1012,
-	S_DELETE = 1013,
+	S_CREATE = 1012,
+	C_CREATE = 1013,
+	S_DELETE = 1014,
 
 		
 	//물체 위치
-	S_STATE = 1014,
+	S_STATE = 1015,
 
-	S_TRANSFORM = 1015,
+	S_TRANSFORM = 1016,
 
-	S_SKILL = 1016,
-	C_SKILL = 1017,
+	S_SKILL = 1017,
+	C_SKILL = 1018,
 
-	S_EXIT = 1018,
-	C_EXIT = 1019,
-	S_NEW_EXIT = 1020,
+	S_EXIT = 1019,
+	C_EXIT = 1020,
+	S_NEW_EXIT = 1021,
 };
 
 
@@ -72,6 +73,7 @@ bool Handle_C_EQUIP(shared_ptr<Session> _pSession, Protocol::C_EQUIP& _pkt);
 bool Handle_C_INPUT(shared_ptr<Session> _pSession, Protocol::C_INPUT& _pkt);
 bool Handle_C_CREATE(shared_ptr<Session> _pSession, Protocol::C_CREATE& _pkt);
 bool Handle_C_MAP(shared_ptr<Session> _pSession, Protocol::C_MAP& _pkt);
+bool Handle_C_MAP_LOADING(shared_ptr<Session> _pSession, Protocol::C_MAP_LOADING& _pkt);
 bool Handle_C_EXIT(shared_ptr<Session> _pSession, Protocol::C_EXIT& _pkt);
 bool Handle_C_START_MAP(shared_ptr<Session> _pSession, Protocol::C_START_MAP& _pkt);
 bool Handle_C_SKILL(shared_ptr<Session> _pSession, Protocol::C_Skill& _pkt);
@@ -84,6 +86,7 @@ public:
 	{
 		PacketHeader* pHeader = reinterpret_cast<PacketHeader*>(_pBuffer);
 		return GPacketHandler[pHeader->id](_pSession, _pBuffer, _iLen);
+
 	}
 
 	static void Initialize()
@@ -98,6 +101,8 @@ public:
 			{return  HandlePacket<Protocol::C_CREATE>(Handle_C_CREATE, _pSession, _pBuffer, _iLen); };
 		GPacketHandler[C_MAP] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
 			{return  HandlePacket<Protocol::C_MAP>(Handle_C_MAP, _pSession, _pBuffer, _iLen); };
+		GPacketHandler[C_MAP_LOADING] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
+			{return  HandlePacket<Protocol::C_MAP_LOADING>(Handle_C_MAP_LOADING, _pSession, _pBuffer, _iLen); };
 		GPacketHandler[C_SKILL] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
 			{return  HandlePacket<Protocol::C_Skill>(Handle_C_SKILL, _pSession, _pBuffer, _iLen); };
 		GPacketHandler[C_START_MAP] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
