@@ -37,17 +37,17 @@ namespace W
 	{
 		//1
 		MonsterAttackObject* attack1 = new MonsterAttackObject();
-		attack1->SetSceneName(GetSceneName());
+		attack1->SetSceneID(GetSceneID());
 		attack1->SetName(L"Solomon_attack0");
 		AddMonsterSkill(attack1);
 		//2
 		SolThunder* pThunder = new SolThunder();
-		pThunder->SetSceneName(GetSceneName());
+		pThunder->SetSceneID(GetSceneID());
 		pThunder->SetName(L"Solomon_attack1");
 		AddMonsterSkill(pThunder);
 		//3
 		MonsterAttackObject* attack3 = new MonsterAttackObject();
-		attack3->SetSceneName(GetSceneName());
+		attack3->SetSceneID(GetSceneID());
 		attack3->SetName(L"Solomon_attack2");
 		AddMonsterSkill(attack3);
 	}
@@ -181,7 +181,7 @@ namespace W
 	}
 	void Solomon::attack2()
 	{
-		GameObject* pGameObj = SceneManger::FindPlayer(GetSceneName());
+		GameObject* pGameObj = SceneManger::FindPlayerRandom(GetSceneID());
 
 		if (pGameObj != nullptr)
 		{

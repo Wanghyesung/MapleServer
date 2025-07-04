@@ -57,66 +57,66 @@ namespace W
 
 	void Horntail::Initialize()
 	{
-		const std::wstring& strScene = GetSceneName();
+		UINT iSceneID = GetSceneID();
 
 		HorntailHeadA* pHeadA = new HorntailHeadA(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailHeadA] = pHeadA;
 		pHeadA->SetPoolObject(true);
-		pHeadA->SetSceneName(strScene);
+		pHeadA->SetSceneID(iSceneID);
 		pHeadA->Initialize();
-		SceneManger::AddGameObject(strScene, eLayerType::Monster, pHeadA);
+		SceneManger::AddGameObject(iSceneID, eLayerType::Monster, pHeadA);
 		
 		HorntailHeadB* pHeadB = new HorntailHeadB(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailHeadB] = pHeadB;
 		pHeadB->SetPoolObject(true);
-		pHeadB->SetSceneName(strScene);
+		pHeadB->SetSceneID(iSceneID);
 		pHeadB->Initialize();
-		SceneManger::AddGameObject(strScene, eLayerType::Monster, pHeadB);
+		SceneManger::AddGameObject(iSceneID, eLayerType::Monster, pHeadB);
 		
 		HorntailHeadC* pHeadC = new HorntailHeadC(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailHeadC] = pHeadC;
 		pHeadC->SetPoolObject(true);
-		pHeadC->SetSceneName(strScene);
+		pHeadC->SetSceneID(iSceneID);
 		pHeadC->Initialize();
-		SceneManger::AddGameObject(strScene, eLayerType::Monster, pHeadC);
+		SceneManger::AddGameObject(iSceneID, eLayerType::Monster, pHeadC);
 		
 		HorntailLeftHand* pLeftHand = new HorntailLeftHand(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailLeftHand] = pLeftHand;
 		pLeftHand->SetPoolObject(true);
-		pLeftHand->SetSceneName(strScene);
+		pLeftHand->SetSceneID(iSceneID);
 		pLeftHand->Initialize();
 		pLeftHand->SetBuff(std::bind(&Horntail::up_defense, this));
-		SceneManger::AddGameObject(strScene, eLayerType::Monster, pLeftHand);
+		SceneManger::AddGameObject(iSceneID, eLayerType::Monster, pLeftHand);
 		//
 		HorntailRightHand* pRightHand = new HorntailRightHand(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailRightHand] = pRightHand;
 		pRightHand->SetPoolObject(true);
-		pRightHand->SetSceneName(strScene);
+		pRightHand->SetSceneID(iSceneID);
 		pRightHand->Initialize();
 		pRightHand->SetBuff(std::bind(&Horntail::up_attack, this));
-		SceneManger::AddGameObject(strScene, eLayerType::Monster, pRightHand);
+		SceneManger::AddGameObject(iSceneID, eLayerType::Monster, pRightHand);
 
 		HorntailLeg* pLegs = new HorntailLeg(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailLeg] = pLegs;
 		pLegs->SetPoolObject(true);
-		pLegs->SetSceneName(strScene);
+		pLegs->SetSceneID(iSceneID);
 		pLegs->Initialize();
-		SceneManger::AddGameObject(strScene, eLayerType::Monster, pLegs);
+		SceneManger::AddGameObject(iSceneID, eLayerType::Monster, pLegs);
 
 		HorntailWing* pWing = new HorntailWing(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailWing] = pWing;
 		pWing->SetPoolObject(true);
-		pWing->SetSceneName(GetSceneName());
+		pWing->SetSceneID(iSceneID);
 		pWing->Initialize();
 		pWing->SetHeal(std::bind(&Horntail::heal, this));
-		SceneManger::AddGameObject(strScene, eLayerType::Monster, pWing);
+		SceneManger::AddGameObject(iSceneID, eLayerType::Monster, pWing);
 		
 		HorntailTail* pTail = new HorntailTail(this);
 		m_vecMonster[(UINT)eHorntailChild::HorntailTail] = pTail;
 		pTail->SetPoolObject(true);
-		pTail->SetSceneName(GetSceneName());
+		pTail->SetSceneID(iSceneID);
 		pTail->Initialize();
-		SceneManger::AddGameObject(strScene, eLayerType::Monster, pTail);
+		SceneManger::AddGameObject(iSceneID, eLayerType::Monster, pTail);
 
 		//Á¤Áö
 		SetRender(false);
@@ -233,7 +233,7 @@ namespace W
 		pkt.set_state(WstringToString(pAnim->GetKey()));
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneID()));
 	}
 
 	void Horntail::create_child()

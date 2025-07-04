@@ -14,6 +14,9 @@ namespace W
 		virtual void Update();
 		virtual void LateUpdate();
 	
+		virtual void OnEnterPlayer(UINT _iPlayerID)override;
+		virtual void OnExitPlayer(UINT _iPlayerID)override;
+
 		virtual void OnEnter();
 		virtual void OnExit();
 

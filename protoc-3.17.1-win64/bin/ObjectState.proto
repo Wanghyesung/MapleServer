@@ -6,11 +6,10 @@ package Protocol;
 //서버가 클라에게
 message S_STATE
 {
-	string scene = 1;
-	uint32 layer_id = 2;
+	uint32 scene_layer_id = 1;
 	
 	//텍스쳐
-	string state = 3;
-	int32 state_value = 4; //상위 8비트 방향, 하위 애님 인덱스
+	string state = 2;
+	int32 state_value = 3; //상위 8비트 방향, 하위 애님 인덱스
 }
 

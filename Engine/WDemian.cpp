@@ -247,7 +247,7 @@ namespace W
 
 
 		DemianSword* pSword = new DemianSword();
-		pSword->SetSceneName(GetSceneName());
+		pSword->SetSceneID(GetSceneID());
 		pSword->SetOnwer(this);
 		pSword->Initialize();
 		pSword->SetName(L"demianSword");
@@ -255,7 +255,7 @@ namespace W
 		EventManager::CreateObject(GetMonsterSkill(L"demianSword"), eLayerType::MonsterAttack);
 		
 		SwordExplode* pExplode = new SwordExplode();
-		pExplode->SetSceneName(GetSceneName());
+		pExplode->SetSceneID(GetSceneID());
 		pExplode->SetSword(pSword);
 		pExplode->SetOnwer(this);
 		pExplode->Initialize();
@@ -267,7 +267,7 @@ namespace W
 		for (int i = 0; i < 5; ++i)
 		{
 			DemianKeyAttack* pKeyAttack = new DemianKeyAttack();
-			pKeyAttack->SetSceneName(GetSceneName());
+			pKeyAttack->SetSceneID(GetSceneID());
 			pKeyAttack->SetName(L"KeyAttackObj");
 			pKeyAttack->SetOnwer(this);
 			AddMonsterSkill(pKeyAttack);
@@ -275,7 +275,7 @@ namespace W
 
 		//데미안 불덩이들 소환 오브젝트
 		SpawnMonsterAttack* pSpawnObj = new SpawnMonsterAttack();
-		pSpawnObj->SetSceneName(GetSceneName());
+		pSpawnObj->SetSceneID(GetSceneID());
 		pSpawnObj->SetName(L"SpawnObj");
 		pSpawnObj->SetOnwer(this);
 		AddMonsterSkill(pSpawnObj);
@@ -283,7 +283,7 @@ namespace W
 		for (int i = 0; i < 4; ++i)
 		{
 			DemianExplode* pAttack0 = new DemianExplode();
-			pAttack0->SetSceneName(GetSceneName());
+			pAttack0->SetSceneID(GetSceneID());
 			pAttack0->SetName(L"Demian_attack0");
 			pAttack0->GetScript<MonsterAttackScript>()->SeteAbnormalType(BattleManager::eAbnormalType::Stigma);
 			pAttack0->SetOnwer(this);
@@ -291,14 +291,14 @@ namespace W
 		}
 
 		MonsterAttackObject* pAttack1 = new MonsterAttackObject();
-		pAttack1->SetSceneName(GetSceneName());
+		pAttack1->SetSceneID(GetSceneID());
 		pAttack1->GetScript<MonsterAttackScript>()->SeteAbnormalType(BattleManager::eAbnormalType::Stigma);
 		pAttack1->SetName(L"Demian_attack1");
 		pAttack1->SetOnwer(this);
 		AddMonsterSkill(pAttack1);
 
 		MonsterAttackObject* pAttack2 = new MonsterAttackObject();
-		pAttack2->SetSceneName(GetSceneName());
+		pAttack2->SetSceneID(GetSceneID());
 		pAttack2->GetScript<MonsterAttackScript>()->SeteAbnormalType(BattleManager::eAbnormalType::Stigma);
 		pAttack2->SetName(L"Demian_attack2");
 		pAttack2->SetOnwer(this);
@@ -307,7 +307,7 @@ namespace W
 		for (int i = 0; i < 20; ++i)
 		{
 			DemianFire0* pAttack3 = new DemianFire0();
-			pAttack3->SetSceneName(GetSceneName());
+			pAttack3->SetSceneID(GetSceneID());
 			pAttack3->SetName(L"Demian_attack3");
 			pAttack3->SetOnwer(this);
 			AddMonsterSkill(pAttack3);

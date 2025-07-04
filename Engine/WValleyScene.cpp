@@ -53,6 +53,16 @@ namespace W
 		Scene::LateUpdate();
 	}
 
+	void ValleyScene::OnEnterPlayer(UINT _iPlayerID)
+	{
+
+	}
+
+	void ValleyScene::OnExitPlayer(UINT _iPlayerID)
+	{
+		SceneManger::RetrieveAttackObject(_iPlayerID, GetSceneID());
+	}
+
 	void ValleyScene::OnEnter()
 	{
 		
@@ -76,7 +86,7 @@ namespace W
 	void ValleyScene::setobject()
 	{
 		Ladder* pLadder0 = new Ladder();
-		pLadder0->SetSceneName(GetName());
+		pLadder0->SetSceneID(GetSceneID());
 	
 		pLadder0->GetComponent<Transform>()->SetPosition(0.f, -4.4f, -0.1f);
 		pLadder0->GetComponent<Transform>()->SetScale(1.f * 0.6f, 5.5f * 0.6f, 0.f);
@@ -85,7 +95,7 @@ namespace W
 		AddGameObject(eLayerType::Ladder, pLadder0);
 
 		Ladder* pLadder1 = new Ladder();
-		pLadder1->SetSceneName(GetName());
+		pLadder1->SetSceneID(GetSceneID());
 		
 		pLadder1->GetComponent<Transform>()->SetPosition(2.f, 4.2f, -0.1f);
 		pLadder1->GetComponent<Transform>()->SetScale(1.f * 0.6f, 5.6f * 0.6f, 0.f);
@@ -93,7 +103,7 @@ namespace W
 		AddGameObject(eLayerType::Ladder, pLadder1);
 
 		Ladder* pLadder2 = new Ladder();
-		pLadder2->SetSceneName(GetName());
+		pLadder2->SetSceneID(GetSceneID());
 		
 		pLadder2->GetComponent<Transform>()->SetPosition(-1.f, -0.7f, -0.1f);
 		pLadder2->GetComponent<Transform>()->SetScale(1.f * 0.6f, 4.5f * 0.6f, 0.f);
@@ -102,7 +112,7 @@ namespace W
 		AddGameObject(eLayerType::Ladder, pLadder2);
 
 		Ground* pGround1 = new Ground();
-		pGround1->SetSceneName(GetName());
+		pGround1->SetSceneID(GetSceneID());
 		pGround1->GetComponent<Transform>()->SetPosition(0.f, 0.48f, -0.1f);
 		pGround1->GetComponent<Transform>()->SetScale(2.7f * 5.f, 1.f * 0.3f, 0.f);
 
@@ -110,14 +120,14 @@ namespace W
 
 
 		Ground* pGround2 = new Ground();
-		pGround2->SetSceneName(GetName());
+		pGround2->SetSceneID(GetSceneID());
 		pGround2->GetComponent<Transform>()->SetPosition(-0.6f, -3.f, -0.1f);
 		pGround2->GetComponent<Transform>()->SetScale(2.7f * 1.5f, 1.f * 0.3f, 0.f);
 
 		AddGameObject(eLayerType::Ground, pGround2);
 
 		Ground* pGround3 = new Ground(true);
-		pGround3->SetSceneName(GetName());
+		pGround3->SetSceneID(GetSceneID());
 		pGround3->GetComponent<Transform>()->SetPosition(0.f, -7.6f, -0.1f);
 		pGround3->GetComponent<Transform>()->SetScale(2.7f * 5.f, 1.f * 0.3f, 0.f);
 
@@ -127,7 +137,7 @@ namespace W
 	void ValleyScene::setmonster()
 	{
 		Skelegon* pSkelegon = new Skelegon();
-		pSkelegon->SetSceneName(GetName());
+		pSkelegon->SetSceneID(GetSceneID());
 		pSkelegon->Initialize();
 		
 		AddGameObject(eLayerType::Monster, pSkelegon);

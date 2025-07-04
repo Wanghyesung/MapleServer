@@ -38,7 +38,7 @@ namespace W
 	}
 	void ArielLaser::Initialize()
 	{
-		const tObjectInfo& tInfo = SceneManger::FindPlayer(GetSceneName())->GetScript<PlayerScript>()->GetObjectInfo();
+		const tObjectInfo& tInfo = SceneManger::FindPlayerRandom(GetSceneID())->GetScript<PlayerScript>()->GetObjectInfo();
 		//float faccAttack = GetOwner()->GetAttackInfo().fAttack;
 		m_tMonsterAttack.tAttackInfo.fAttackDamage = (tInfo.fMaxHP * (10.f/4.f));
 

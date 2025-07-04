@@ -44,7 +44,7 @@ namespace W
 		for (int i = 0; i < 10; ++i)
 		{
 			ArielLaser* pLaser = new ArielLaser();
-			pLaser->SetSceneName(GetSceneName());
+			pLaser->SetSceneID(GetSceneID());
 			pLaser->SetName(L"Ariel_attack0");
 			AddMonsterSkill(pLaser);
 		}
@@ -52,7 +52,7 @@ namespace W
 		for (int i = 0; i < 4; ++i)
 		{
 			ArielStone* pStone = new ArielStone();
-			pStone->SetSceneName(GetSceneName());
+			pStone->SetSceneID(GetSceneID());
 			pStone->SetName(L"Ariel_attack1");
 			AddMonsterSkill(pStone);
 		}
@@ -248,11 +248,11 @@ namespace W
 
 	void Ariel::pull()
 	{
-		GameObject* pPlayer = SceneManger::FindPlayer(GetSceneName());
+		GameObject* pPlayer = SceneManger::FindPlayerRandom(GetSceneID());
 		Vector3 vTargetPosition = GetComponent<Transform>()->GetPosition();
 
 		PullObject* pPullObj = new PullObject();
-		pPullObj->SetSceneName(GetSceneName());
+		pPullObj->SetSceneID(GetSceneID());
 		pPullObj->SetTarget(pPlayer);
 		pPullObj->SetPosition(Vector2(vTargetPosition.x, 0.f));
 		pPullObj->SetDeleteTime(1.5f);

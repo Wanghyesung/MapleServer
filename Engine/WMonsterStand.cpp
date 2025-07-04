@@ -56,7 +56,7 @@ namespace W
 		if (!pCollider->IsActive())
 			pCollider->SetActive(true);
 
-		m_pTarget = SceneManger::FindPlayer(GetMonster()->GetSceneName());
+		m_pTarget = SceneManger::FindPlayerRandom(GetMonster()->GetSceneID());
 	}
 	void MonsterStand::Exit()
 	{

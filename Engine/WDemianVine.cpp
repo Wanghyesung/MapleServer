@@ -107,7 +107,7 @@ namespace W
 	{
 		m_bActive = true;
 		m_pWhite->Initialize();
-		m_pWhite->SetSceneName(GetSceneName());
+		m_pWhite->SetSceneID(GetSceneID());
 		EventManager::CreateObject(m_pWhite,eLayerType::Object);
 	}
 
@@ -136,7 +136,7 @@ namespace W
 
 	void DemianVine::attack()
 	{
-		for (GameObject* pPlayer : SceneManger::GetPlayers(GetSceneName()))
+		for (GameObject* pPlayer : SceneManger::GetPlayers(GetSceneID()))
 		{
 			if (!m_bClear)
 				pPlayer->GetScript<PlayerScript>()->Hit(m_tAttackInfo, L"DemianVine");

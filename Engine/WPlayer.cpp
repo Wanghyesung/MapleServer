@@ -243,7 +243,7 @@ namespace W
 		pkt.set_state_value((cShadow<<24) | (cAlert<<16) | (cDir << 8) | cAnimIdx);
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneID()));
 	}
 	void Player::update_shadow()
 	{

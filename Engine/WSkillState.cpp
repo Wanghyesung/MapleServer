@@ -81,7 +81,7 @@ namespace W
 		_pEffect->SetActive(true);
 
 		_pEffect->StartEffect(pPlayer->GetDir());
-		_pEffect->SetSceneName(pPlayer->GetSceneName());
+		_pEffect->SetSceneID(pPlayer->GetSceneID());
 
 		EventManager::CreateObject(_pEffect, eLayerType::Effect);
 	}

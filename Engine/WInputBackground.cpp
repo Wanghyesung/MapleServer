@@ -45,7 +45,7 @@ namespace W
 
 			pObj->Initialize();
 			pInputObj->SetOwner(this);
-			pInputObj->SetSceneName(GetSceneName());
+			pInputObj->SetSceneID(GetSceneID());
 			pInputObj->SetTarget(m_pTarget);
 			pInputObj->SetIndex(iIndex);
 

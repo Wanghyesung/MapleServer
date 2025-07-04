@@ -64,7 +64,7 @@ namespace W
 	{
 		//1
 		MonsterAttackObject* attack1 = new MonsterAttackObject();
-		attack1->SetSceneName(GetSceneName());
+		attack1->SetSceneID(GetSceneID());
 		attack1->SetName(L"tailattack");
 		AddMonsterSkill(attack1);
 	}

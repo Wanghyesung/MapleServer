@@ -57,8 +57,8 @@ namespace W
 		static void AddPlayerPool (GameObject* _pObj);
 		static void AddMonsterPool(GameObject* _pObj);
 
-		static void StartScene(UINT _iPlayerID, const wstring& _strSceneName);
-		static void ChanageScene(UINT _iPlayerID, const wstring& _strNextSceneName);
+		static void StartScene(UINT _iPlayerID, UINT _iSceneID);
+		static void ChanageScene(UINT _iPlayerID, UINT _iSceneID);
 		static void ChanageState(GameObject* _pObj, GameObject::eState _eState);
 
 		static void ChangePlayerFSMState(PlayerFSM* _pFSM, Player::ePlayerState _ePlayerState);

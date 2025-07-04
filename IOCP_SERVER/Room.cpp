@@ -90,6 +90,16 @@ void Room::Unicast(shared_ptr<SendBuffer> _pBuffer, const vector<UINT>& _vecTarg
 	}
 }
 
+void Room::Unicast(shared_ptr<SendBuffer> _pBuffer, const unordered_set<UINT>& _setTarget)
+{
+	WLock lock(m_lock);
+	auto iter = _setTarget.begin();
+	for(iter; iter!= _setTarget.end(); ++iter)
+	{
+		m_hashPersonID[*iter]->Send(_pBuffer);
+	}
+}
+
 vector<UINT> Room::GetPersons()
 {
 	std::vector<UINT> vecID = {};

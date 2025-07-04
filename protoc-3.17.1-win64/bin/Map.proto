@@ -8,16 +8,15 @@ import "Transform.proto";
 
 message ObjectInfo 
 {	
-	string scene = 1;
-	uint32 layer_createid_id = 2;
+	uint32 scene_layer_createid_id = 1;
 	
-	TransformInfo transform =3;
+	TransformInfo transform =2;
 	
 	//현재 애니메이션 이름, 애니메이션 인덱스, 만약 iDX가 -1이면 Textrue이름
-	string state = 4;
-	int32 state_value = 5;
+	string state = 3;
+	int32 state_value = 4;
 
-	string object_name = 6;
+	string object_name = 5;
 }
 
 message S_MAP
@@ -27,8 +26,7 @@ message S_MAP
 
 message C_MAP
 {
-	string scene = 1;
-	uint32 player_id = 2;
+	uint32 scene_player_id = 1;
 }
 
 message S_START_MAP
@@ -38,7 +36,6 @@ message S_START_MAP
 
 message C_START_MAP
 {
-	string scene = 1;
-	uint32 player_id = 2;
+	uint32 scene_player_id = 1;
 }
 

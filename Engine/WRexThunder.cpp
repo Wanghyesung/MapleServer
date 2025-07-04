@@ -39,7 +39,7 @@ namespace W
 		m_tMonsterAttack.iStartFrame = 0;
 		m_tMonsterAttack.iEndFrame = 4;
 
-		m_pTarget = SceneManger::FindPlayer(GetSceneName());
+		m_pTarget = SceneManger::FindPlayerRandom(GetSceneID());
 	}
 	void RexThunder::Update()
 	{

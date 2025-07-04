@@ -242,20 +242,20 @@ namespace W
 		for (int i = 0; i < 2; ++i)
 		{
 			DemianCircle* pDemianCircle = new DemianCircle();
-			pDemianCircle->SetSceneName(GetSceneName());
+			pDemianCircle->SetSceneID(GetSceneID());
 			pDemianCircle->SetName(L"DemianCircle");
 			pDemianCircle->Initialize();
 			m_vecCircle.push_back(pDemianCircle);
 		}
 
 		SpawnMonsterAttack* pSpawnObj = new SpawnMonsterAttack();
-		pSpawnObj->SetSceneName(GetSceneName());
+		pSpawnObj->SetSceneID(GetSceneID());
 		pSpawnObj->SetName(L"SpawnObj");
 		pSpawnObj->SetOnwer(this);
 		AddMonsterSkill(pSpawnObj);
 
 		MonsterMoveAttack* pAttack0 = new MonsterMoveAttack();
-		pAttack0->SetSceneName(GetSceneName());
+		pAttack0->SetSceneID(GetSceneID());
 		pAttack0->SetName(L"Demian2_attack0");
 		pAttack0->GetScript<MonsterAttackScript>()->SeteAbnormalType(BattleManager::eAbnormalType::Stigma);
 		pAttack0->SetOnwer(this);
@@ -264,35 +264,35 @@ namespace W
 		for (int i = 0; i < 20; ++i)
 		{
 			DemianFire1* pAttack1 = new DemianFire1();
-			pAttack1->SetSceneName(GetSceneName());
+			pAttack1->SetSceneID(GetSceneID());
 			pAttack1->SetName(L"Demian2_attack1");
 			pAttack1->SetOnwer(this);
 			AddMonsterSkill(pAttack1);
 		}
 		
 		DemianSpear0* pAttack2 = new DemianSpear0();
-		pAttack2->SetSceneName(GetSceneName());
+		pAttack2->SetSceneID(GetSceneID());
 		pAttack2->SetName(L"Demian2_attack2");
 		pAttack2->GetScript<MonsterAttackScript>()->SeteAbnormalType(BattleManager::eAbnormalType::Stigma);
 		pAttack2->SetOnwer(this);
 		AddMonsterSkill(pAttack2);
 
 		DemianSpear1* pAttack2_1 = new DemianSpear1();
-		pAttack2_1->SetSceneName(GetSceneName());
+		pAttack2_1->SetSceneID(GetSceneID());
 		pAttack2_1->SetName(L"Demian2_attack2");
 		pAttack2_1->GetScript<MonsterAttackScript>()->SeteAbnormalType(BattleManager::eAbnormalType::Stigma);
 		pAttack2_1->SetOnwer(this);
 		AddMonsterSkill(pAttack2_1);
 
 		pAttack2 = new DemianSpear0();
-		pAttack2->SetSceneName(GetSceneName());
+		pAttack2->SetSceneID(GetSceneID());
 		pAttack2->SetName(L"Demian2_attack2");
 		pAttack2->GetScript<MonsterAttackScript>()->SeteAbnormalType(BattleManager::eAbnormalType::Stigma);
 		pAttack2->SetOnwer(this);
 		AddMonsterSkill(pAttack2);
 
 		MonsterAttackObject* pAttack3 = new MonsterAttackObject();
-		pAttack3->SetSceneName(GetSceneName());
+		pAttack3->SetSceneID(GetSceneID());
 		pAttack3->SetName(L"Demian2_attack3");
 		pAttack3->GetScript<MonsterAttackScript>()->SeteAbnormalType(BattleManager::eAbnormalType::Stigma);
 		pAttack3->SetOnwer(this);
@@ -302,14 +302,14 @@ namespace W
 		for (int i = 0; i < 30; ++i)
 		{
 			DemianFire2* pAttack4 = new DemianFire2();
-			pAttack4->SetSceneName(GetSceneName());
+			pAttack4->SetSceneID(GetSceneID());
 			pAttack4->SetName(L"Demian2_attack4");
 			pAttack4->SetOnwer(this);
 			AddMonsterSkill(pAttack4);
 		}
 
 		DemianVine* pDemianVine = new DemianVine();
-		pDemianVine->SetSceneName(GetSceneName());
+		pDemianVine->SetSceneID(GetSceneID());
 		pDemianVine->SetName(L"Demian2_attack5");
 		pDemianVine->SetOnwer(this);
 		AddMonsterSkill(pDemianVine);
@@ -510,7 +510,8 @@ namespace W
 	void DemianPhase2::attack5()
 	{
 		m_iAttackCallCount = 0;
-		GameObject* pPlayer = SceneManger::FindPlayer(GetSceneName());
+		//모든 플레이어들에게
+		GameObject* pPlayer = SceneManger::FindPlayerRandom(GetSceneID());
 
 		BattleManager::HitchAbnormal(pPlayer, BattleManager::eAbnormalType::DemianStop);
 

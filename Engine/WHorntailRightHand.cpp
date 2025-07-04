@@ -39,7 +39,7 @@ namespace W
 		//1
 		Spear* pSpear = new Spear();
 		pSpear->SetName(L"spear");
-		pSpear->SetName(GetSceneName());
+		pSpear->SetSceneID(GetSceneID());
 		AddMonsterSkill(pSpear);
 	}
 
@@ -149,7 +149,7 @@ namespace W
 	}
 	void HorntailRightHand::create_spear()
 	{
-		GameObject* pGameObj = SceneManger::FindPlayer(GetSceneName());
+		GameObject* pGameObj = SceneManger::FindPlayerRandom(GetSceneID());
 
 		if (pGameObj != nullptr)
 		{
@@ -177,7 +177,7 @@ namespace W
 	void HorntailRightHand::seal_skill()
 	{
 		
-		BattleManager::HitchAbnormal(SceneManger::FindPlayer(GetSceneName()), BattleManager::eAbnormalType::SealSkill);
+		BattleManager::HitchAbnormal(SceneManger::FindPlayerRandom(GetSceneID()), BattleManager::eAbnormalType::SealSkill);
 	}
 
 	void HorntailRightHand::buff_attack()

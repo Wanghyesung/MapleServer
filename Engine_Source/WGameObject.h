@@ -88,8 +88,8 @@ namespace W
 		void SetLayerType(eLayerType _eLayerType) { m_eLayerType = _eLayerType; }
 		eLayerType GetLayerType() { return m_eLayerType; }
 
-		void SetSceneName(const std::wstring& _strName) { m_strSceneName = _strName; }
-		const std::wstring& GetSceneName() { return m_strSceneName; }
+		void SetSceneID(UINT _iSceneID) { m_iSceneID = _iSceneID; }
+		UINT GetSceneID() { return m_iSceneID; }
 		
 
 		void AddExclusiveClient(UINT _iPlayerID) { m_vecExclusiveClients.push_back(_iPlayerID);}
@@ -112,7 +112,7 @@ namespace W
 		std::vector<Component*> m_vecComponent;
 		std::vector<Script*> m_vecScript;
 		eLayerType m_eLayerType;
-		std::wstring m_strSceneName;
+		UINT m_iSceneID;
 
 		//network
 		std::vector<UINT> m_vecExclusiveClients;

@@ -39,14 +39,14 @@ namespace W
 	void HorntailHeadA::add_skill()
 	{
 		MonsterAttackObject* breath = new MonsterAttackObject();
-		breath->SetSceneName(GetSceneName());
+		breath->SetSceneID(GetSceneID());
 		breath->SetName(L"icebreath");
 		AddMonsterSkill(breath);
 		//2
 		for (int i = 0; i < 5; ++i)
 		{
 			Ice* pIce = new Ice();
-			pIce->SetSceneName(GetSceneName());
+			pIce->SetSceneID(GetSceneID());
 			pIce->SetName(L"ice");
 			AddMonsterSkill(pIce);
 		}

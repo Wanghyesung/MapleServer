@@ -190,7 +190,7 @@ namespace W
 		Effect* pEffect = BattleManager::GetEffect(pAttackObject->GetName() + L"_hit");
 		if (pEffect)
 		{
-			pEffect->SetSceneName(pOther->GetSceneName());
+			pEffect->SetSceneID(pOther->GetSceneID());
 			pEffect->SetPosition(other);
 			EventManager::CreateObject(pEffect, eLayerType::Effect);
 			pEffect->SetActive(true);

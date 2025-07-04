@@ -7,9 +7,8 @@ import "Map.proto";
 //클라가 서버에게 (이건 UI전용 요청 ex: 스킬 오브젝트, 아이템 떨구기)
 message C_CREATE
 {
-	string scene = 1;
-	uint32 layer_createid = 2;
-	string object_name = 3;
+	uint32 scene_layer_createid = 1;
+	string object_name = 2;
 }
 
 //서버가 클라에게 
@@ -21,8 +20,7 @@ message S_CREATE
 //서버가 클라에게 (브로드캐스팅으로 던질거)
 message S_DELETE
 {
-	string scene = 1;
-	uint32 layer_deleteid = 2;
+	uint32 scene_layer_deleteid = 2;
 	bool pool_object = 3;
 }
 

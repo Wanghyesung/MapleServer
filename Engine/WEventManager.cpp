@@ -83,10 +83,14 @@ namespace W
 	{
 		for (int i = 0; i < m_vecPlayer_Pool.size(); ++i)
 		{
-			ObjectPoolManager::AddObjectPool(m_vecPlayer_Pool[i]->GetName(), m_vecPlayer_Pool[i]);
-			SceneManger::Erase(m_vecPlayer_Pool[i]);
+			PlayerAttackObject* pAttackObj = static_cast<PlayerAttackObject*>(m_vecPlayer_Pool[i]);
+			if (pAttackObj->IsPool())//이미 들어왔다면
+				continue;
 
-			static_cast<PlayerAttackObject*>(m_vecPlayer_Pool[i])->Off();
+			ObjectPoolManager::AddObjectPool(pAttackObj->GetName(), pAttackObj);
+			SceneManger::Erase(m_vecPlayer_Pool[i], pAttackObj->GetPlayer()->GetPlayerID());
+
+			pAttackObj->Off();
 		}
 		
 		for (int i = 0; i < m_vecMonster_Pool.size(); ++i)
@@ -111,7 +115,7 @@ namespace W
 		GameObject* pObj = (GameObject*)_lParm;
 		eLayerType eLayer = (eLayerType)_wParm;
 
-		SceneManger::AddGameObject(pObj->GetSceneName(), eLayer, pObj);
+		SceneManger::AddGameObject(pObj->GetSceneID(), eLayer, pObj);
 
 		UINT iCreateID = pObj->GetCreateID();
 		UINT iObjectID = pObj->GetObjectID();
@@ -122,8 +126,7 @@ namespace W
 		if (pObj->IsPoolObject())
 			tInfo->set_object_name(WstringToString(pObj->GetName()));
 	
-		tInfo->set_scene(WstringToString(pObj->GetSceneName()));
-		tInfo->set_layer_createid_id((UCHAR)eLayer << 24 | iCreateID << 16 | iObjectID);
+		tInfo->set_scene_layer_createid_id((UCHAR)pObj->GetSceneID() << 24 | (UCHAR)eLayer << 16 | iCreateID << 8 | iObjectID);
 		
 		Transform* pTr = pObj->GetComponent<Transform>();
 		const Vector3 vPosition = pTr->GetPosition();
@@ -148,7 +151,7 @@ namespace W
 
 		//전용으로 보낼 클라가 있다면
 		if(vecTarget.empty())
-			GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));
+			GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneID()));
 		else
 			GRoom.Unicast(pSendBuffer, vecTarget);
 	}
@@ -157,20 +160,19 @@ namespace W
 	{
 		GameObject* pObj = (GameObject*)_lParm;
 
-		Scene* pScene = SceneManger::FindScene(pObj->GetSceneName());
+		Scene* pScene = SceneManger::FindScene(pObj->GetSceneID());
 		pScene->EraseObject(pObj->GetLayerType(), pObj);
 
 		UINT iObjectID = pObj->GetObjectID();
 		Protocol::S_DELETE pkt;
 
-		pkt.set_scene(WstringToString(pObj->GetSceneName()));
-		pkt.set_layer_deleteid((UINT)pObj->GetLayerType() << 24 | iObjectID & 0x00FFFFFF);
+		pkt.set_scene_layer_deleteid((UCHAR)pObj->GetSceneID() << 24 | (UINT)pObj->GetLayerType() << 16 | iObjectID & 0xFFFF);
 		pkt.set_pool_object(pObj->IsPoolObject());
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		const vector<UINT>& vecTarget = pObj->GetExclusiveClients();
 		if (vecTarget.empty())
-			GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));
+			GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneID()));
 		else
 			GRoom.Unicast(pSendBuffer, vecTarget);
 		delete pObj;
@@ -180,20 +182,20 @@ namespace W
 	{
 		GameObject* pObj = (GameObject*)_lParm;
 
-		Scene* pScene = SceneManger::FindScene(pObj->GetSceneName());
+		Scene* pScene = SceneManger::FindScene(pObj->GetSceneID());
 		pScene->EraseObject(pObj->GetLayerType(), pObj);
 
 		UINT iObjectID = pObj->GetObjectID();
 		Protocol::S_DELETE pkt;
 
-		pkt.set_scene(WstringToString(pObj->GetSceneName()));
-		pkt.set_layer_deleteid((UCHAR)pObj->GetLayerType() << 24 | iObjectID);
+		pkt.set_scene_layer_deleteid((UCHAR)pObj->GetSceneID() << 24 | (UINT)pObj->GetLayerType() << 16 | iObjectID & 0xFFFF);
+
 		pkt.set_pool_object(pObj->IsPoolObject());
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		const vector<UINT>& vecTarget = pObj->GetExclusiveClients();
 		if (vecTarget.empty())
-			GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneName()));
+			GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneID()));
 		else
 			GRoom.Unicast(pSendBuffer, vecTarget);
 	}
@@ -218,7 +220,7 @@ namespace W
 		pPlayer->m_iPlayerID = iPlayerID;
 		pPlayer->SetObjectID(iPlayerID);
 		pPlayer->Initialize();
-		SceneManger::AddPlayerScene(pPlayer, L"Valley");
+		SceneManger::AddPlayerScene(pPlayer, 4);//valleyscne = 4
 	}
 
 	void EventManager::add_player_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
@@ -238,40 +240,35 @@ namespace W
 	void EventManager::change_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
 	{
 		UINT iPlayerID = (UINT)(_lParm);
-		const wstring& strNextScene = *reinterpret_cast<wstring*>(_accParm);
 		GameObject* pPlayer = SceneManger::FindPlayer(iPlayerID);
-
+		
 		if (pPlayer == nullptr)
 			assert(nullptr);
 
 		change_player_fsmstate((DWORD_PTR)pPlayer->GetScript<PlayerScript>()->m_pFSM, (DWORD_PTR)Player::ePlayerState::jump, 0);
 
-		wstring strPrevScene = pPlayer->GetSceneName(); //swap 후 이름이 변경되지 않게 복사
+		UINT iNextSceneID = (UINT)(_wParm);
+		UINT iPrevScene = pPlayer->GetSceneID(); //swap 후 이름이 변경되지 않게 복사
 	
-		SceneManger::SwapPlayer(pPlayer, strPrevScene, strNextScene);
-		SceneManger::SendEnterScene(iPlayerID, strNextScene);
+		SceneManger::SwapPlayer(pPlayer, iPrevScene, iNextSceneID);
+		SceneManger::SendEnterScene(iPlayerID, iNextSceneID);
 	
 		//이전 맵에 플레이어 삭제됐다고 알리기
 		Protocol::S_DELETE pkt;
-		pkt.set_scene(WstringToString(pPlayer->GetSceneName()));
-		pkt.set_layer_deleteid((UCHAR)eLayerType::Player << 24 | iPlayerID);
+		pkt.set_scene_layer_deleteid((UCHAR)eLayerType::Player << 24 | (UCHAR)eLayerType::Player << 16 | iPlayerID);
 		pkt.set_pool_object(pPlayer->IsPoolObject());
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(strPrevScene));
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(iPrevScene));
 
-
-		delete &strNextScene;
 	}
 
 	void EventManager::start_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
 	{
 		UINT iPlayerID = (UINT)(_lParm);
-		const wstring& strScene = *reinterpret_cast<wstring*>(_accParm);
+		UINT iSceneID = (UINT)(_wParm);
 
-		SceneManger::SendEnterScene(iPlayerID, strScene);
-
-		delete& strScene;
+		SceneManger::SendEnterScene(iPlayerID, iSceneID);
 	}
 
 
@@ -428,21 +425,21 @@ namespace W
 		AddEvent(eve);
 	}
 
-	void EventManager::StartScene(UINT _iPlayerID, const wstring& _strSceneName)
+	void EventManager::StartScene(UINT _iPlayerID, UINT _iSceneID)
 	{
 		tEvent eve = {};
 		eve.lParm = (DWORD_PTR)_iPlayerID;
-		eve.accParm = (LONG_PTR)new wstring(_strSceneName);
+		eve.wParm = (DWORD_PTR)_iSceneID;
 
 		eve.eEventType = EVENT_TYPE::START_SCENE;
 		AddEvent(eve);
 	}
 
-	void EventManager::ChanageScene(UINT _iPlayerID, const wstring& _strNextSceneName)
+	void EventManager::ChanageScene(UINT _iPlayerID, UINT _iSceneID)
 	{
 		tEvent eve = {};
 		eve.lParm = (DWORD_PTR)_iPlayerID;
-		eve.accParm = (LONG_PTR)new wstring(_strNextSceneName);
+		eve.wParm = (LONG_PTR)_iSceneID;
 
 		eve.eEventType = EVENT_TYPE::CHANGE_SCENE;
 		AddEvent(eve);

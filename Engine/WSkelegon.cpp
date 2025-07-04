@@ -92,7 +92,7 @@ namespace W
 
 
 		Effect* pEffect = new Effect();
-		pEffect->SetSceneName(GetSceneName());
+		pEffect->SetSceneID(GetSceneID());
 		pEffect->SetName(L"sklaser_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(134.f, 97.f), 1, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
@@ -145,7 +145,7 @@ namespace W
 	void Skelegon::add_skill()
 	{
 		MonsterAttackObject* pLaser = new MonsterAttackObject();
-		pLaser->SetSceneName(GetSceneName());
+		pLaser->SetSceneID(GetSceneID());
 		pLaser->SetName(L"sklaser");
 		AddMonsterSkill(pLaser);
 	}

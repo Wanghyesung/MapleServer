@@ -21,7 +21,7 @@ namespace W
 
 		for (Scene* pScene : vecPlayerScene)
 		{
-			UINT iSceneIdx = pScene->GetSceneIdx();
+			UINT iSceneIdx = pScene->GetSceneID();
 			for (UINT column = 0; column < (UINT)eLayerType::End; ++column)
 			{
 				for (UINT row = 0; row < (UINT)eLayerType::End; ++row)
@@ -254,7 +254,7 @@ namespace W
 
 	void CollisionManager::SetLayer(Scene* _pScene, eLayerType _eLeft, eLayerType _eRight, bool _bEnable)
 	{
-		UINT iSceneIdx = _pScene->GetSceneIdx();
+		UINT iSceneIdx = _pScene->GetSceneID();
 
 		UINT row = -1;
 		UINT col = -1;

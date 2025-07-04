@@ -66,7 +66,7 @@ namespace W
 
 		MiniBeanAttack* attack1 = new MiniBeanAttack();
 		attack1->SetName(L"MiniBean_attack0");
-		attack1->SetSceneName(GetSceneName());
+		attack1->SetSceneID(GetSceneID());
 		AddMonsterSkill(attack1);
 		
 		setattack();
@@ -171,7 +171,7 @@ namespace W
 	}
 	void MiniBean::attack0()
 	{
-		GameObject* pGameObj = SceneManger::FindPlayer(GetSceneName());
+		GameObject* pGameObj = SceneManger::FindPlayerRandom(GetSceneID());
 
 		if (pGameObj != nullptr)
 		{

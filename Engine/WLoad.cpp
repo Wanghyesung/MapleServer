@@ -95,7 +95,7 @@ namespace W
 		pkt.set_state(WstringToString(pAnim->GetKey()));
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneID()));
 	}
 
 
@@ -135,7 +135,7 @@ namespace W
 		for (int i = 0; i < 5; ++i)
 		{
 			PlayerAttackObject* pAttackObj = pScript->GetPlayerSkill(L"autoSuriken");
-			AutoShuriken* pShuriken = dynamic_cast<AutoShuriken*>(pAttackObj);
+			AutoShuriken* pShuriken = static_cast<AutoShuriken*>(pAttackObj);
 
 			pShuriken->SetDir(Vector2(vLook[i].x, vLook[i].y));
 

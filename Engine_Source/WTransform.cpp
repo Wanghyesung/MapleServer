@@ -90,12 +90,12 @@ namespace W
 		UCHAR cLayer = (UINT)pOwner->GetLayerType();
 		UINT iObjectID = pOwner->GetObjectID();
 
-		pkt.set_layer_id((cLayer<<24) | iObjectID);
+		pkt.set_scene_layer_id((cLayer<<24) | iObjectID);
 	
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		const vector<UINT>& vecTarget = pOwner->GetExclusiveClients();
 		if (vecTarget.empty())
-			GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pOwner->GetSceneName()));
+			GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pOwner->GetSceneID()));
 		else
 			GRoom.Unicast(pSendBuffer, vecTarget);
 	}

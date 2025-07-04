@@ -220,12 +220,12 @@ namespace W
 		pkt.set_state(WstringToString(pAnim->GetKey()));
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneID()));
 	}
 
 	void DemianSword::set_target()
 	{
-		GameObject* pObj = SceneManger::FindPlayer(GetSceneName());
+		GameObject* pObj = SceneManger::FindPlayerRandom(GetSceneID());
 		Vector3 vTargetPosition = pObj->GetComponent<Collider2D>()->GetPosition();
 		m_vTargetPos = Vector2(vTargetPosition.x, vTargetPosition.y);
 		

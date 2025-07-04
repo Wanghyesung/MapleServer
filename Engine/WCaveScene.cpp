@@ -48,6 +48,15 @@ namespace W
 	{
 		Scene::LateUpdate();
 	}
+
+	void CaveScene::OnEnterPlayer(UINT _iPlayerID)
+	{
+	}
+
+	void CaveScene::OnExitPlayer(UINT _iPlayerID)
+	{
+		SceneManger::RetrieveAttackObject(_iPlayerID, GetSceneID());
+	}
 	
 	void CaveScene::OnEnter()
 	{
@@ -66,31 +75,31 @@ namespace W
 	void CaveScene::create_object()
 	{	
 		Ground* pGround = new Ground(true);
-		pGround->SetSceneName(GetName());
+		pGround->SetSceneID(GetSceneID());
 		pGround->GetComponent<Transform>()->SetPosition(0.f, -3.8f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(2.7f * 5.f, 1.f * 0.3f, 0.f);
 		AddGameObject(eLayerType::Ground, pGround);
 
 		pGround = new Ground();
-		pGround->SetSceneName(GetName());
+		pGround->SetSceneID(GetSceneID());
 		pGround->GetComponent<Transform>()->SetPosition(2.71f, -1.7f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(1.f * 0.6f, 1.f * 0.2f, 0.f);
 		AddGameObject(eLayerType::Ground, pGround);
 
 		pGround = new Ground();
-		pGround->SetSceneName(GetName());
+		pGround->SetSceneID(GetSceneID());
 		pGround->GetComponent<Transform>()->SetPosition(2.8f, -0.7f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(1.f * 0.6f, 1.f * 0.2f, 0.f);
 		AddGameObject(eLayerType::Ground, pGround);
 		
 		pGround = new Ground();
-		pGround->SetSceneName(GetName());
+		pGround->SetSceneID(GetSceneID());
 		pGround->GetComponent<Transform>()->SetPosition(4.3f, -1.18f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(1.f * 2.f, 1.f * 0.2f, 0.f);
 		AddGameObject(eLayerType::Ground, pGround);
 
 		Ladder* pLadder2 = new Ladder();
-		pGround->SetSceneName(GetName());
+		pGround->SetSceneID(GetSceneID());
 		pLadder2->GetComponent<Transform>()->SetPosition(3.5f, -2.4f, -0.1f);
 		pLadder2->GetComponent<Transform>()->SetScale(1.f * 0.6f, 4.5f * 0.6f, 0.f);
 		pLadder2->Initialize();
@@ -100,50 +109,50 @@ namespace W
 	}
 	void CaveScene::create_effect()
 	{	
-		const std::wstring& strSceneName = GetName();
+		UINT iSceneID = GetSceneID();
 		Effect* pEffect = new Effect();
-		pEffect->SetSceneName(strSceneName);
+		pEffect->SetSceneID(iSceneID);
 		pEffect->SetName(L"icebreath_hit");
 		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(110.f, 113.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
 		pEffect = new Effect();
-		pEffect->SetSceneName(strSceneName);
+		pEffect->SetSceneID(iSceneID);
 		pEffect->SetName(L"ice_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(118.f, 87.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
 	
 		pEffect = new Effect();
-		pEffect->SetSceneName(strSceneName);
+		pEffect->SetSceneID(iSceneID);
 		pEffect->SetName(L"firebreath_hit");	
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(99.f, 107.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
 		pEffect = new Effect();
 		pEffect->SetName(L"fire_hit");
-		pEffect->SetSceneName(strSceneName);
+		pEffect->SetSceneID(iSceneID);
 		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(92.f, 91.f), 4, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
 		pEffect = new Effect();
-		pEffect->SetSceneName(strSceneName);
+		pEffect->SetSceneID(iSceneID);
 		pEffect->SetName(L"thunderbreath_hit");
 		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(72.f, 82.f), 4, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
 		pEffect = new Effect();
-		pEffect->SetSceneName(strSceneName);
+		pEffect->SetSceneID(iSceneID);
 		pEffect->SetName(L"thunder_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(78.f, 75.f), 5, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
 		pEffect = new Effect();
-		pEffect->SetSceneName(strSceneName);
+		pEffect->SetSceneID(iSceneID);
 		pEffect->SetName(L"legattack1_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(126.f, 107.f), 5, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 
 		pEffect = new Effect();
-		pEffect->SetSceneName(strSceneName);
+		pEffect->SetSceneID(iSceneID);
 		pEffect->SetName(L"legattack2_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(197, 119.f), 6, 1, Vector2(100.f, 100.f), Vector2(0.f, 0.3f), 0.1f);
 	
 		pEffect = new Effect();
-		pEffect->SetSceneName(strSceneName);
+		pEffect->SetSceneID(iSceneID);
 		pEffect->SetName(L"tailattack_hit");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(132.f, 120.f), 5, 1, Vector2(100.f, 100.f), Vector2(0.f, 0.3f), 0.2f);
 	}
@@ -151,12 +160,12 @@ namespace W
 	void CaveScene::create_monster()
 	{
 		Stone* pStone = new Stone();
-		pStone->SetSceneName(GetName());
+		pStone->SetSceneID(GetSceneID());
 		pStone->GetComponent<Transform>()->SetPosition(4.45f, 0.f, -0.1f);
 		AddGameObject(eLayerType::Object, pStone);
 
 		Horntail* pHorntail = new Horntail();
-		pHorntail->SetSceneName(GetName());
+		pHorntail->SetSceneID(GetSceneID());
 		pHorntail->Initialize();
 		pHorntail->GetComponent<Transform>()->SetPosition(-1.2f, 0.73f, -1.5f);
 		AddGameObject(eLayerType::Monster, pHorntail);

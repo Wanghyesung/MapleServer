@@ -98,7 +98,7 @@ namespace W
 		if (pPlayer)
 		{
 			StigmaBack* pStigmaBack = new StigmaBack();
-			pStigmaBack->SetSceneName(GetName());
+			pStigmaBack->SetSceneID(GetSceneID());
 			pStigmaBack->SetTarget(pPlayer);
 			pStigmaBack->Initialize();
 			EventManager::CreateObject(pStigmaBack, eLayerType::Object);
@@ -108,7 +108,7 @@ namespace W
 	void DemianScene::OnExitPlayer(UINT _iPlayerID)
 	{
 		//여기서 필요 없어진 오브젝트 전부 제거
-
+		SceneManger::RetrieveAttackObject(_iPlayerID, GetSceneID());
 	}
 
 	
@@ -127,7 +127,7 @@ namespace W
 	void DemianScene::CreateBackground()
 	{
 		Ground* pGround = new Ground(true);
-		pGround->SetSceneName(GetName());
+		pGround->SetSceneID(GetSceneID());
 		pGround->GetComponent<Transform>()->SetPosition(0.f, -2.95f, -0.1f);
 		pGround->GetComponent<Transform>()->SetScale(4.3f * 7.f, 1.f * 0.3f, 0.f);
 		AddGameObject(eLayerType::Ground, pGround);
@@ -152,24 +152,24 @@ namespace W
 
 	void DemianScene::check_stigma()
 	{
-		m_fCurStigmaTime += Time::DeltaTime();
-		if (m_fCurStigmaTime >= m_fStigmaTime)
-		{
-			m_fCurStigmaTime = 0.f;
-			GameObject* pPlayer = SceneManger::FindPlayer(GetName());
-			BattleManager::HitchAbnormal(pPlayer,BattleManager::eAbnormalType::Stigma);
-		}
+		//m_fCurStigmaTime += Time::DeltaTime();
+		//if (m_fCurStigmaTime >= m_fStigmaTime)
+		//{
+		//	m_fCurStigmaTime = 0.f;
+		//	GameObject* pPlayer = SceneManger::FindPlayer(GetName());
+		//	BattleManager::HitchAbnormal(pPlayer,BattleManager::eAbnormalType::Stigma);
+		//}
 	}
 
 	void DemianScene::create_monster()
 	{
 		Demian* pDemian = new Demian();
-		pDemian->SetSceneName(GetName());
+		pDemian->SetSceneID(GetSceneID());
 		pDemian->Initialize();
 		AddGameObject(eLayerType::Monster, pDemian);
 
 		DemianPhase2* pDemian2 = new DemianPhase2();
-		pDemian2->SetSceneName(GetName());
+		pDemian2->SetSceneID(GetSceneID());
 		pDemian2->Initialize();
 		pDemian2->GetComponent<Collider2D>()->SetActive(false);
 		pDemian2->SetState(GameObject::eState::Paused);
@@ -179,12 +179,12 @@ namespace W
 	void DemianScene::create_event()
 	{
 		m_pWhite = new White();
-		m_pWhite->SetSceneName(GetName());
+		m_pWhite->SetSceneID(GetSceneID());
 		m_pWhite->SetEndTime(0.5f);
 		m_pWhite->SetFunction(std::bind(&DemianScene::phase2, this));
 
 		m_pSharHP = new SharHP();
-		m_pSharHP->SetSceneName(GetName());
+		m_pSharHP->SetSceneID(GetSceneID());
 		m_pSharHP->Initialize();
 		AddGameObject(eLayerType::UI, m_pSharHP);
 	}
@@ -193,12 +193,12 @@ namespace W
 	{
 		
 		Effect* pAttack_hit1 = new Effect();
-		pAttack_hit1->SetSceneName(GetName());
+		pAttack_hit1->SetSceneID(GetSceneID());
 		pAttack_hit1->SetName(L"Demian2_attack1_hit");
 		pAttack_hit1->CreateAnimation(Vector2(0.f, 0.f), Vector2(227.f, 228.f), 5, 1, Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.1f);
 
 		Effect* pEffect = new Effect();
-		pEffect->SetSceneName(GetName());
+		pEffect->SetSceneID(GetSceneID());
 		pEffect->GetComponent<Transform>()->SetScale(Vector3(18.f, 18.f, 0.f));
 		pEffect->SetName(L"DemianAttack0Effect");
 		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(1122.f, 382.f), 9, 1, Vector2(2000.f, 2000.f), Vector2(0.f, 0.f), 0.05f);
@@ -207,7 +207,7 @@ namespace W
 		for (int i = 0; i < 2; ++i)
 		{
 			Effect* pClone1 = new Effect();
-			pClone1->SetSceneName(GetName());
+			pClone1->SetSceneID(GetSceneID());
 			pClone1->GetComponent<Transform>()->SetScale(Vector3(18.f, 18.f, 0.f));
 			pClone1->SetName(L"DemianClone0");
 			
@@ -215,7 +215,7 @@ namespace W
 		}
 		
 		Effect* pClone2 = new Effect();
-		pClone2->SetSceneName(GetName());
+		pClone2->SetSceneID(GetSceneID());
 		pClone2->GetComponent<Transform>()->SetScale(Vector3(18.f, 18.f, 0.f));
 		pClone2->SetName(L"DemianClone1");
 	
@@ -224,7 +224,7 @@ namespace W
 		for (int i = 0; i < 3; ++i)
 		{
 			Effect* pEffect = new Effect();
-			pEffect->SetSceneName(GetName());
+			pEffect->SetSceneID(GetSceneID());
 			pEffect->GetComponent<Transform>()->SetScale(3.5f, 3.5f, 0.f);
 			pEffect->SetName(L"DemianTarget");
 			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(286.f, 288.f), 14, 1, Vector2(300.f, 300.f), Vector2::Zero, 0.05f);

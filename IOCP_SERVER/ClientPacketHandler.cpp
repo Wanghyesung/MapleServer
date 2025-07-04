@@ -78,23 +78,23 @@ bool Handle_C_CREATE(shared_ptr<Session> _pSession, Protocol::C_CREATE& _pkt)
 
 bool Handle_C_MAP(shared_ptr<Session> _pSession, Protocol::C_MAP& _pkt)
 {
+	UINT iScene_playerID = _pkt.scene_player_id();	
+	USHORT iSceneID = (iScene_playerID >> 16) & 0xFFFF;
+	USHORT iPlayerID = iScene_playerID & 0xFFFF;
+	//const wstring& strScene = StringToWString(_pkt.scene());
 	
-	UINT iPlayerID = _pkt.player_id();	
-
-	const wstring& strScene = StringToWString(_pkt.scene());
-	
-	W::EventManager::ChanageScene(iPlayerID, strScene);
+	W::EventManager::ChanageScene(iPlayerID, iSceneID);
 
 	return true;
 }
 
 bool Handle_C_START_MAP(shared_ptr<Session> _pSession, Protocol::C_START_MAP& _pkt)
 {
-	UINT iPlayerID = _pkt.player_id();
+	UINT iScene_playerID = _pkt.scene_player_id();
+	USHORT iSceneID = (iScene_playerID >> 16) & 0xFFFF;
+	USHORT iPlayerID = iScene_playerID & 0xFFFF;
 
-	const wstring& strScene = StringToWString(_pkt.scene());
-	
-	W::EventManager::StartScene(iPlayerID, strScene);
+	W::EventManager::StartScene(iPlayerID, iSceneID);
 
 	return true;
 }

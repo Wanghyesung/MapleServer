@@ -16,51 +16,45 @@ namespace W
 
 		static void Release();
 		static void Erase(GameObject* _pGameObject);
+		static void Erase(GameObject* _pGameObject, UINT _iPlayerID);
 
 		template <typename T>
 		static bool CreateScene(const std::wstring& name)
 		{
 			T* scene = new T();
 
-			std::unordered_map<std::wstring, Scene*>::iterator iter
-				= m_hashScene.find(name);
+			m_hashSceneID.insert(std::make_pair(scene->GetSceneID(), scene));
 
-			if (iter != m_hashScene.end())
-				return false;
-
-			m_hashScene.insert(std::make_pair(name, scene));
-
-			scene->SetSceneIdx(SCENE_IDX++);
 			scene->SetName(name);
 			scene->Initialize();
 
 			return true;
 		}
 
-		static Scene* FindScene(const std::wstring& _strSceneName);
+		static Scene* FindScene(UINT _iSceneID);
 		static Scene* GetActiveScene(GameObject* _pGameObj);
 		static std::vector<Scene*> GetPlayerScene();
 		
 		//여기서 서버가 클라에게 패킷 전달
-		static void AddGameObject(const std::wstring& _strSceneName, eLayerType _eType, GameObject* _pGameObj);
+		static void AddGameObject(UINT _iSceneID, eLayerType _eType, GameObject* _pGameObj);
 
 		static GameObject* FindPlayer(UINT _iPlayerID);
-		static GameObject* FindPlayer(const std::wstring& strSceneName, UINT _iPlayerID);
-		static GameObject* FindPlayer(const std::wstring& strSceneName);
-		static std::vector<GameObject*> GetPlayers(const std::wstring& _strSceneName);
-		static std::vector<UINT> GetPlayerIDs(const std::wstring& _strSceneName);
+		static GameObject* FindPlayerRandom(UINT _iSceneID);
+		static GameObject* FindPlayer(UINT _iSceneID, UINT _iPlayerID);
+		static std::vector<GameObject*> GetPlayers(UINT _iSceneID);
+		static std::vector<UINT> GetPlayerIDs(UINT _iSceneID);
 
 		static void SwapObject(Scene* _pPrevScene, Scene* _pNextScene, GameObject* _pGameObject);
-		static void SwapPlayer(GameObject* _pPlayer, const wstring& _strPrevScene, const wstring& _strNextScene);
+		static void SwapPlayer(GameObject* _pPlayer, UINT _iPrevSceneID, UINT _iNextSceneID);
 		static void PushObjectPool(UINT _iPlayerID, Scene* _pPrevScene);
-		static void RetrieveAttackObject(UINT _iPlayerID, const wstring& _strPrevSceneName);
-		static void AddPlayerScene(Player* pPlayer, const std::wstring& _strScene);
+		static void RetrieveAttackObject(UINT _iPlayerID, UINT _iPrevSceneID);
+		static void AddPlayerScene(Player* pPlayer, UINT _iSceneID);
 
-		static void SendEnterScene(UINT _iPlayerID, const std::wstring& _strNextScene);
+		static void SendEnterScene(UINT _iPlayerID, UINT _iSceneID);
 	private:
 		static UINT SCENE_IDX;
-		static std::unordered_map<std::wstring, Scene*> m_hashScene;
-		static std::unordered_map<std::wstring, std::vector<UINT>> m_hashPlayerScene;//플레이어가 있는 구간만 업데이트
+		static std::unordered_map<UINT, Scene*> m_hashSceneID;
+		static std::unordered_map<UINT, std::vector<UINT>> m_hashPlayerScene;//플레이어가 있는 구간만 업데이트
 	};
 }
 

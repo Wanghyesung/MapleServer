@@ -144,7 +144,7 @@ namespace W
 	void PlayerFSM::near_attack()
 	{
 		PlayerAttackObject* pAttackObject = m_pOwner->GetScript<PlayerScript>()->CreateAttackObject();
-		pAttackObject->SetSceneName(m_pOwner->GetSceneName());
+		pAttackObject->SetSceneID(m_pOwner->GetSceneID());
 		EventManager::CreateObject(pAttackObject, eLayerType::AttackObject);
 	}
 

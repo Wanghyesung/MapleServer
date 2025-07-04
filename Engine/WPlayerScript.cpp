@@ -260,16 +260,18 @@ namespace W
 
 	void PlayerScript::AddPlayerSkill(PlayerAttackObject* _pObj)
 	{
+		_pObj->SetPool(true);
 		ObjectPoolManager::AddObjectPool(_pObj->GetName(), _pObj);
 	}
 
 	PlayerAttackObject* PlayerScript::GetPlayerSkill(const std::wstring& _strName)
 	{
 		GameObject* pGameObj = ObjectPoolManager::PopObject(_strName);
-		pGameObj->SetSceneName(m_pPlayer->GetSceneName());
+		pGameObj->SetSceneID(m_pPlayer->GetSceneID());
 		pGameObj->GetComponent<Collider2D>()->SetActive(true);
 		
 		PlayerAttackObject* pAttackObj = static_cast<PlayerAttackObject*>(pGameObj);
+		pAttackObj->SetPool(false);
 		pAttackObj->SetPlayer(m_pPlayer);
 
 		return pAttackObj;

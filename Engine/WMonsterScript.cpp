@@ -167,7 +167,7 @@ namespace W
 	{
 		m_pHP = new MonsterHP(m_bBoss);
 		m_pHP->SetOwner(m_pMonster);
-		m_pHP->SetSceneName(m_pMonster->GetSceneName());
+		m_pHP->SetSceneID(m_pMonster->GetSceneID());
 		m_pHP->Initialize();
 
 		if (!m_bBoss)

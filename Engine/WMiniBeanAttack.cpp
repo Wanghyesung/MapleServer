@@ -38,7 +38,7 @@ namespace W
 
 		SetMonsterAttack(m_tMonsterAttack);
 
-		m_pTarget = SceneManger::FindPlayer(GetSceneName());
+		m_pTarget = SceneManger::FindPlayerRandom(GetSceneID());
 	}
 
 	void MiniBeanAttack::Update()

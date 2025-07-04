@@ -11,6 +11,7 @@ namespace W
 	UINT PlayerAttackObject::CREATE_ID = 0;
 
 	PlayerAttackObject::PlayerAttackObject():
+		m_bPool(false),
 		m_iDir(1),
 		m_pPlayer(nullptr)
 	{
@@ -45,8 +46,8 @@ namespace W
 
 	void PlayerAttackObject::Off()
 	{
+		m_bPool = true;
 		GetScript<AttackScript>()->off();
-
 		GetComponent<Collider2D>()->SetActive(false);
 	}
 
@@ -75,7 +76,7 @@ namespace W
 		pkt.set_state(WstringToString(pAnim->GetKey()));
 		
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneID()));
 	}
 	
 }

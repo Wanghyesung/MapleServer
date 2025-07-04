@@ -86,7 +86,7 @@ namespace W
 		pkt.set_state(WstringToString(pAnim->GetKey()));
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneID()));
 	}
 	
 	void DemianCircle::LevelUp(UINT _iLevel)
@@ -116,7 +116,7 @@ namespace W
 	{
 		m_fCurAttackTime += Time::DeltaTime();
 
-		for (GameObject* pPlayer : SceneManger::GetPlayers(GetSceneName()))
+		for (GameObject* pPlayer : SceneManger::GetPlayers(GetSceneID()))
 		{
 			Vector3 vPos = pPlayer->GetComponent<Transform>()->GetPosition();
 			Vector2 vTargerPos = Vector2(vPos.x, vPos.y);

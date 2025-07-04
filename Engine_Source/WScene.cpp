@@ -4,9 +4,9 @@
 #include "..\Engine\WMonsterManager.h"
 namespace W
 {
-	UINT Scene::SCENECOUNT = 0;
+	UINT Scene::SCENE_ID = 0;
 	Scene::Scene():
-		m_iSceneIdx(SCENECOUNT++)
+		m_iSceneID(SCENE_ID++)
 	{
 		for (UINT i = 0; i < (UINT)eLayerType::End; ++i)
 		{
@@ -61,7 +61,7 @@ namespace W
 		m_vecLayer[(UINT)_eType]->AddGameObject(_pGameObj);
 		
 		_pGameObj->SetLayerType(_eType);
-		_pGameObj->SetSceneName(GetName());
+		_pGameObj->SetSceneID(GetSceneID());
 	}
 
 	

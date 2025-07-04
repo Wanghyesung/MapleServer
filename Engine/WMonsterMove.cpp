@@ -46,7 +46,7 @@ namespace W
 		m_fTargetDistance =  dynamic_cast<MonsterStand*>(pState)->GetTargetDistance();
 		m_fTime = 1.f;
 
-		m_pTarget = SceneManger::FindPlayer(GetMonster()->GetSceneName());
+		m_pTarget = SceneManger::FindPlayerRandom(GetMonster()->GetSceneID());
 	}
 	void MonsterMove::Exit()
 	{

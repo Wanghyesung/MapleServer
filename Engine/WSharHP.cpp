@@ -20,7 +20,7 @@ namespace W
 	{
 		//보스용으로 만들기
 		m_pHPBack = new MonsterBackHP(true);
-		m_pHPBack->SetSceneName(GetSceneName());
+		m_pHPBack->SetSceneID(GetSceneID());
 		m_pHPBack->SetHP(this);
 		EventManager::CreateObject(m_pHPBack, eLayerType::UI);
 	}

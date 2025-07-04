@@ -34,12 +34,12 @@ namespace W
 	{
 		//1
 		MonsterAttackObject* attack1 = new MonsterAttackObject();
-		attack1->SetSceneName(GetSceneName());
+		attack1->SetSceneID(GetSceneID());
 		attack1->SetName(L"Whiggin_attack0");
 		AddMonsterSkill(attack1);
 		//2
 		MuninStone* pStone = new MuninStone();
-		pStone->SetSceneName(GetSceneName());
+		pStone->SetSceneID(GetSceneID());
 		pStone->SetName(L"Whiggin_attack1");
 		pStone->SetOnwer(this);
 		AddMonsterSkill(pStone);
@@ -182,7 +182,7 @@ namespace W
 	}
 	void Whiggin::attack2()
 	{
-		GameObject* pPlayer = SceneManger::FindPlayer(GetSceneName());
+		GameObject* pPlayer = SceneManger::FindPlayerRandom(GetSceneID());
 		Vector3 vPosisiton = pPlayer->GetComponent<Transform>()->GetPosition();
 		vPosisiton.z -= 0.1f;
 		vPosisiton.y += 2.5f;

@@ -65,7 +65,7 @@ namespace W
 	void Abnormal::SetTarget(Player* _pTarget)
 	{
 		m_pTarget = _pTarget;
-		SetSceneName(_pTarget->GetSceneName());
+		SetSceneID(_pTarget->GetSceneID());
 	}
 
 	void Abnormal::update_packet()
@@ -88,7 +88,7 @@ namespace W
 		pkt.set_state(WstringToString(pAnim->GetKey()));
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneID()));
 	}
 	
 

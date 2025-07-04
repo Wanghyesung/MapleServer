@@ -15,9 +15,8 @@ message TransformInfo
 
 message S_TRANSFORM
 {	
-	string scene = 1;
-	uint32 layer_id = 2;
+	uint32 scene_layer_id = 1;
 	
-	TransformInfo transform =3;
+	TransformInfo transform =2;
 }
 

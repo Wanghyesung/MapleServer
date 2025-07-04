@@ -127,7 +127,7 @@ namespace W
 		Pscript->Initialize();
 
 		m_pSharHP = new SharHP();
-		m_pSharHP->SetSceneName(GetSceneName());
+		m_pSharHP->SetSceneID(GetSceneID());
 		m_pSharHP->Initialize();
 		EventManager::CreateObject(m_pSharHP, eLayerType::UI);
 
@@ -235,27 +235,27 @@ namespace W
 		m_vecMonster.resize(5);
 
 		m_vecMonster[(UINT)ePinkBeanChild::Solomon] = new Solomon();
-		m_vecMonster[(UINT)ePinkBeanChild::Solomon]->SetSceneName(GetSceneName());
+		m_vecMonster[(UINT)ePinkBeanChild::Solomon]->SetSceneID(GetSceneID());
 		m_vecMonster[(UINT)ePinkBeanChild::Solomon]->Initialize();
 		EventManager::CreateObject(m_vecMonster[(UINT)ePinkBeanChild::Solomon], eLayerType::Monster);
 		
 		m_vecMonster[(UINT)ePinkBeanChild::Rex] = new Rex();
-		m_vecMonster[(UINT)ePinkBeanChild::Rex]->SetSceneName(GetSceneName());
+		m_vecMonster[(UINT)ePinkBeanChild::Rex]->SetSceneID(GetSceneID());
 		m_vecMonster[(UINT)ePinkBeanChild::Rex]->Initialize();
 		EventManager::CreateObject(m_vecMonster[(UINT)ePinkBeanChild::Rex], eLayerType::Monster);
 		
 		m_vecMonster[(UINT)ePinkBeanChild::Munin] = new Munin();
-		m_vecMonster[(UINT)ePinkBeanChild::Munin]->SetSceneName(GetSceneName());
+		m_vecMonster[(UINT)ePinkBeanChild::Munin]->SetSceneID(GetSceneID());
 		m_vecMonster[(UINT)ePinkBeanChild::Munin]->Initialize();
 		EventManager::CreateObject(m_vecMonster[(UINT)ePinkBeanChild::Munin], eLayerType::Monster);
 
 		m_vecMonster[(UINT)ePinkBeanChild::Whiggin] = new Whiggin();
-		m_vecMonster[(UINT)ePinkBeanChild::Whiggin]->SetSceneName(GetSceneName());
+		m_vecMonster[(UINT)ePinkBeanChild::Whiggin]->SetSceneID(GetSceneID());
 		m_vecMonster[(UINT)ePinkBeanChild::Whiggin]->Initialize();
 		EventManager::CreateObject(m_vecMonster[(UINT)ePinkBeanChild::Whiggin], eLayerType::Monster);
 
 		m_vecMonster[(UINT)ePinkBeanChild::Ariel] = new Ariel();
-		m_vecMonster[(UINT)ePinkBeanChild::Ariel]->SetSceneName(GetSceneName());
+		m_vecMonster[(UINT)ePinkBeanChild::Ariel]->SetSceneID(GetSceneID());
 		m_vecMonster[(UINT)ePinkBeanChild::Ariel]->Initialize();
 		EventManager::CreateObject(m_vecMonster[(UINT)ePinkBeanChild::Ariel], eLayerType::Monster);
 	}
@@ -266,14 +266,14 @@ namespace W
 		for (int i = 0; i < 4; ++i)
 		{
 			Jenesis* pJenesis = new Jenesis();
-			pJenesis->SetSceneName(GetSceneName());
+			pJenesis->SetSceneID(GetSceneID());
 			pJenesis->SetName(L"PinkBean_attack0");
 			AddMonsterSkill(pJenesis);
 		}
 		
 		//2
 		MonsterAttackObject* attack1 = new MonsterAttackObject();
-		attack1->SetSceneName(GetSceneName());
+		attack1->SetSceneID(GetSceneID());
 		attack1->SetName(L"PinkBean_attack1");
 		AddMonsterSkill(attack1);
 
@@ -281,7 +281,7 @@ namespace W
 		for (int i = 0; i < 4; ++i)
 		{
 			PinkBeanStone* pStone = new PinkBeanStone();
-			pStone->SetSceneName(GetSceneName());
+			pStone->SetSceneID(GetSceneID());
 			pStone->SetName(L"PinkBean_attack2");
 			AddMonsterSkill(pStone);
 		}
@@ -290,7 +290,7 @@ namespace W
 		for (int i = 0; i < 4; ++i)
 		{
 			RoccatBean* pRoccat = new RoccatBean();
-			pRoccat->SetSceneName(GetSceneName());
+			pRoccat->SetSceneID(GetSceneID());
 			pRoccat->SetName(L"PinkBean_attack3");
 			AddMonsterSkill(pRoccat);
 		}
@@ -301,7 +301,7 @@ namespace W
 		for (int i = 0; i < 4; ++i)
 		{
 			MiniBean* pMiniBean = new MiniBean();
-			pMiniBean->SetSceneName(GetSceneName());
+			pMiniBean->SetSceneID(GetSceneID());
 			pMiniBean->SetOwner(this);
 			pMiniBean->Initialize();
 			m_queueMiniBean.push(pMiniBean);
@@ -547,37 +547,37 @@ namespace W
 
 	void PinkBean::attack6()
 	{
-		GameObject* pObj = SceneManger::FindPlayer(GetSceneName());
+		GameObject* pObj = SceneManger::FindPlayerRandom(GetSceneID());
 		//공반
 		BattleManager::Buff_Stat(this,BattleManager::eUpStatType::ReflexAttack,1.f);
 	}
 	void PinkBean::attack7()
 	{
-		GameObject* pObj = SceneManger::FindPlayer(GetSceneName());
+		GameObject* pObj = SceneManger::FindPlayerRandom(GetSceneID());
 		//언데드
 		BattleManager::HitchAbnormal(pObj, BattleManager::eAbnormalType::Undead);
 	}
 	void PinkBean::attack8()
 	{
-		GameObject* pObj = SceneManger::FindPlayer(GetSceneName());
+		GameObject* pObj = SceneManger::FindPlayerRandom(GetSceneID());
 		//유혹
 		BattleManager::HitchAbnormal(pObj, BattleManager::eAbnormalType::temptation);
 	}
 	void PinkBean::attack9()
 	{
-		GameObject* pObj = SceneManger::FindPlayer(GetSceneName());
+		GameObject* pObj = SceneManger::FindPlayerRandom(GetSceneID());
 		//혼란
 		BattleManager::HitchAbnormal(pObj, BattleManager::eAbnormalType::Confusion);
 	}
 	void PinkBean::attack10()
 	{
-		GameObject* pObj = SceneManger::FindPlayer(GetSceneName());
+		GameObject* pObj = SceneManger::FindPlayerRandom(GetSceneID());
 		//변신
 		//BattleManager::HitchAbnormal(pObj, BattleManager::eAbnormalType::Variation);
 	}
 	void PinkBean::attack11()
 	{
-		GameObject* pObj = SceneManger::FindPlayer(GetSceneName());
+		GameObject* pObj = SceneManger::FindPlayerRandom(GetSceneID());
 		Vector3 vTargetPos = pObj->GetComponent<Transform>()->GetPosition();
 		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
 

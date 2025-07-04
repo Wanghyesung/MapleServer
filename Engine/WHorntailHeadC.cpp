@@ -40,7 +40,7 @@ namespace W
 		//1
 		MonsterAttackObject* breath = new MonsterAttackObject();
 		breath->SetName(L"thunderbreath");
-		breath->SetSceneName(GetSceneName());
+		breath->SetSceneID(GetSceneID());
 		AddMonsterSkill(breath);
 
 		//2
@@ -48,7 +48,7 @@ namespace W
 		{
 			Thunder* pThunder = new Thunder();
 			pThunder->SetName(L"thunder");
-			pThunder->SetSceneName(GetSceneName());
+			pThunder->SetSceneID(GetSceneID());
 			AddMonsterSkill(pThunder);
 		}
 	}

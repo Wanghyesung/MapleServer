@@ -27,8 +27,12 @@ namespace W
 		int GetDir() { return m_iDir; }
 		void SetDir(int _iDir) { m_iDir = _iDir; }
 
+		bool IsPool() { return m_bPool; }
+		void SetPool(bool _bPool) { m_bPool = _bPool; }
+
 	protected:
 		int m_iDir;
+		bool m_bPool;
 
 	private:
 		void update_state();

@@ -60,7 +60,7 @@ namespace W
 		pkt.set_state_value(m_iNumber);
 	
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneID()));
 	}
 	
 	void StigmaCount::set_count(UINT _iCount)

@@ -17,6 +17,7 @@ public:
 	void Broadcast(shared_ptr<SendBuffer> _pBuffer);
 	void BroadcastExcept(shared_ptr<SendBuffer> _pBuffer, shared_ptr<Session> _pExceptSession);
 	void Unicast(shared_ptr<SendBuffer> _pBuffer, const vector<UINT>& _vecTarget);
+	void Unicast(shared_ptr<SendBuffer> _pBuffer, const unordered_set<UINT>& _setTarget);
 
 	vector<UINT> GetPersons();
 	shared_ptr<Session> GetPersonByID(UINT _ID);

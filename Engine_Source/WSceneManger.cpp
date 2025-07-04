@@ -15,8 +15,9 @@
 namespace W
 {
 	UINT SceneManger::SCENE_IDX = 0;
-	std::unordered_map<std::wstring, Scene*> SceneManger::m_hashScene = {};
-	std::unordered_map<std::wstring, std::vector<UINT>> SceneManger::m_hashPlayerScene = {};
+
+	std::unordered_map<UINT, Scene*> SceneManger::m_hashSceneID = {};
+	std::unordered_map<UINT, std::vector<UINT>> SceneManger::m_hashPlayerScene = {};
 
 	void SceneManger::Initialize()
 	{
@@ -30,7 +31,7 @@ namespace W
 		{
 			if (iter->second.size() > 0)
 			{
-				m_hashScene.find(iter->first)->second->Update();
+				m_hashSceneID.find(iter->first)->second->Update();
 			}
 		}
 	}
@@ -42,10 +43,9 @@ namespace W
 		{
 			if (iter->second.size() > 0)
 			{
-				m_hashScene.find(iter->first)->second->LateUpdate();
+				m_hashSceneID.find(iter->first)->second->LateUpdate();
 			}
 		}
-
 	}
 
 	void SceneManger::UpdatePacket()
@@ -55,14 +55,14 @@ namespace W
 		{
 			if (iter->second.size() > 0)
 			{
-				m_hashScene.find(iter->first)->second->UpdatePacket();
+				m_hashSceneID.find(iter->first)->second->UpdatePacket();
 			}
 		}
 	}
 
 	void SceneManger::Release()
 	{
-		for (auto &iter : m_hashScene)
+		for (auto &iter : m_hashSceneID)
 		{
 			delete iter.second;
 			iter.second = nullptr;
@@ -75,27 +75,50 @@ namespace W
 	void SceneManger::Erase(GameObject* _pGameObject)
 	{
 		eLayerType eLayer = _pGameObject->GetLayerType();
-		const wstring& strSceneName = _pGameObject->GetSceneName();
+		UINT iSceneID = _pGameObject->GetSceneID();
 
-		Scene* pScene = FindScene(strSceneName);
+		Scene* pScene = FindScene(iSceneID);
 		pScene->EraseObject(eLayer, _pGameObject);
 
 		Protocol::S_DELETE pkt;
 		UINT iObjectID = _pGameObject->GetObjectID();
 
-		pkt.set_scene(WstringToString(strSceneName));
 		pkt.set_pool_object(_pGameObject->IsPoolObject());
-		pkt.set_layer_deleteid((((UCHAR)eLayer) << 24) | iObjectID);
+		pkt.set_scene_layer_deleteid( ((UCHAR)iSceneID << 24) | (((UCHAR)eLayer) << 16) | iObjectID);
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(strSceneName));
-
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(iSceneID));
 	}
 
-	Scene* SceneManger::FindScene(const std::wstring& _strSceneName)
+	void SceneManger::Erase(GameObject* _pGameObject, UINT _iPlayerID)
 	{
-		const auto& iter = m_hashScene.find(_strSceneName);
-		if(iter == m_hashScene.end())
+		eLayerType eLayer = _pGameObject->GetLayerType();
+		UINT iSceneID = _pGameObject->GetSceneID();
+
+		Scene* pScene = FindScene(iSceneID);
+		pScene->EraseObject(eLayer, _pGameObject);
+
+		Protocol::S_DELETE pkt;
+		UINT iObjectID = _pGameObject->GetObjectID();
+
+		pkt.set_pool_object(_pGameObject->IsPoolObject());
+		pkt.set_scene_layer_deleteid(((UCHAR)iSceneID << 24) | (((UCHAR)eLayer) << 16) | iObjectID);
+
+		auto& vecClient = _pGameObject->GetExclusiveClients();
+		unordered_set<UINT> setTarget;
+		for (int i = 0; i < vecClient.size(); ++i)
+			setTarget.insert(vecClient[i]);
+		setTarget.insert(_iPlayerID);
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, setTarget);
+	}
+
+
+	Scene* SceneManger::FindScene(UINT _iSceneID)
+	{
+		const auto& iter = m_hashSceneID.find(_iSceneID);
+		if (iter == m_hashSceneID.end())
 			return nullptr;
 
 		return iter->second;
@@ -103,8 +126,8 @@ namespace W
 
 	Scene* SceneManger::GetActiveScene(GameObject* _pGameObj)
 	{
-		const std::wstring& strSceneName = _pGameObj->GetSceneName();
-		Scene* pScene = FindScene(strSceneName);
+		UINT iSceneID = _pGameObj->GetSceneID();
+		Scene* pScene = FindScene(iSceneID);
 
 		if(!pScene)
 			return nullptr;
@@ -121,15 +144,15 @@ namespace W
 		{
 			if (iter->second.size() > 0)
 			{
-				vecPlayerScene.push_back(m_hashScene.find(iter->first)->second);
+				vecPlayerScene.push_back(m_hashSceneID.find(iter->first)->second);
 			}
 		}
 		return vecPlayerScene;
 	}
 
-	void SceneManger::AddGameObject(const std::wstring& _strSceneName, eLayerType _eType, GameObject* _pGameObj)
+	void SceneManger::AddGameObject(UINT _iSceneID, eLayerType _eType, GameObject* _pGameObj)
 	{
-		Scene* pScene = FindScene(_strSceneName);
+		Scene* pScene = FindScene(_iSceneID);
 		//다음 프레임에 넣기, 후처리에 넣기
 		pScene->AddGameObject(_eType, _pGameObj);
 	}
@@ -146,48 +169,53 @@ namespace W
 				return iter->second;
 
 		}
+
 		return nullptr;
 	}
 
-	GameObject* SceneManger::FindPlayer(const std::wstring& strSceneName, UINT _iPlayerID)
+	GameObject* SceneManger::FindPlayer(UINT _iSceneID, UINT _iPlayerID)
 	{
-		Scene* pScene = FindScene(strSceneName);
-		if(pScene == nullptr)
-			return nullptr;
-		
-		GameObject* pGameObj = 
-			pScene->GetLayer(eLayerType::Player)->GetGameObjects().find(_iPlayerID)->second;
+		Scene* pScene = m_hashSceneID.find(_iSceneID)->second;
 
-		return pGameObj;
+		const std::unordered_map<UINT, GameObject*>& hashObjs
+			= pScene->GetLayer(eLayerType::Player)->GetGameObjects();
+
+		auto iter = hashObjs.find(_iPlayerID);
+		if (iter != hashObjs.end())
+			return iter->second;
+
+		return nullptr;
 	}
 
-	GameObject* SceneManger::FindPlayer(const std::wstring& _strSceneName)
+	GameObject* SceneManger::FindPlayerRandom(UINT _iSceneID)
 	{
-		Scene* pScene = m_hashScene[_strSceneName];
-		std::unordered_map<UINT, GameObject*> hashPlayer = 
-			pScene->GetLayer(eLayerType::Player)->GetGameObjects();
+		Scene* pScene = m_hashSceneID.find(_iSceneID)->second;
 
-		if(hashPlayer.empty())
+		const std::unordered_map<UINT, GameObject*>& hashObjs
+			= pScene->GetLayer(eLayerType::Player)->GetGameObjects();
+
+		if(hashObjs.size() <= 0)
 			return nullptr;
-		
-		srand(time(nullptr));
 
-		int iPlayerCount = hashPlayer.size();
-		int iNumber = rand() % iPlayerCount;
+		std::random_device rDiv;
+		static std::mt19937 gen(rDiv());
+		std::uniform_int_distribution<int> rand(0, hashObjs.size());
+		int seq = rand(gen);
 
-		auto iter = hashPlayer.begin();
-		for (int i = 0; i < iNumber; ++i)
+		auto iter = hashObjs.begin();
+		for (int i = 0; i < seq -1; ++i)
 			++iter;
 
 		return iter->second;
 	}
 
-	std::vector<GameObject*> SceneManger::GetPlayers(const std::wstring& _strSceneName)
+
+	std::vector<GameObject*> SceneManger::GetPlayers(UINT _iSceneID)
 	{
 		std::vector<GameObject*> vecPlayer;
 
 		const std::unordered_map<UINT, GameObject*>& hashObjs
-			= m_hashScene[_strSceneName]->GetLayer(eLayerType::Player)->GetGameObjects();
+			= m_hashSceneID[_iSceneID]->GetLayer(eLayerType::Player)->GetGameObjects();
 
 		auto iter = hashObjs.begin();
 		for (iter; iter != hashObjs.end(); ++iter)
@@ -197,9 +225,9 @@ namespace W
 		return vecPlayer;
 	}
 
-	std::vector<UINT> SceneManger::GetPlayerIDs(const std::wstring& _strSceneName)
+	std::vector<UINT> SceneManger::GetPlayerIDs(UINT _iSceneID)
 	{
-		return m_hashPlayerScene[_strSceneName];
+		return m_hashPlayerScene[_iSceneID];
 	}
 
 	void SceneManger::SwapObject(Scene* _pPrevScene, Scene* _pNextScene, GameObject* _pGameObject)
@@ -211,27 +239,29 @@ namespace W
 	}
 
 
-	void SceneManger::SwapPlayer(GameObject* _pPlayer, const wstring& _strPrevScene, const wstring& _strNextScene)
+	void SceneManger::SwapPlayer(GameObject* _pPlayer, UINT _iPrevSceneID, UINT _iNextSceneID)
 	{
 		Vector3 vPos = _pPlayer->GetComponent<Transform>()->GetPosition();
 		vPos.x = 0.f; vPos.y = 0.f;
 		_pPlayer->GetComponent<Transform>()->SetPosition(vPos);
 		_pPlayer->GetComponent<Rigidbody>()->SetGround(false);
 		
-		Scene* pNextScene = FindScene(_strNextScene);
+		Scene* pPrevScene = FindScene(_iPrevSceneID);
+		Scene* pNextScene = FindScene(_iNextSceneID);
 		pNextScene->AddGameObject(eLayerType::Player, _pPlayer);
 
 		UINT iPlayerID = _pPlayer->GetObjectID(); //obj == playerid
-		auto& iterPrev = m_hashPlayerScene[_strPrevScene];
+		auto& iterPrev = m_hashPlayerScene[_iPrevSceneID];
 		iterPrev.erase(
 			std::remove(iterPrev.begin(), iterPrev.end(), iPlayerID),
 			iterPrev.end()
 		);
 
 		// 다음 씬에 플레이어 ID 추가
-		m_hashPlayerScene[_strNextScene].push_back(iPlayerID);
+		m_hashPlayerScene[_iNextSceneID].push_back(iPlayerID);
 
-		//SceneManger::RetrieveAttackObject(iPlayerID, _strPrevScene);
+		pPrevScene->OnExitPlayer(iPlayerID);
+		pNextScene->OnEnterPlayer(iPlayerID);
 	}
 
 
@@ -250,9 +280,9 @@ namespace W
 		}
 	}
 
-	void SceneManger::RetrieveAttackObject(UINT _iPlayerID, const wstring& _strPrevSceneName)
+	void SceneManger::RetrieveAttackObject(UINT _iPlayerID, UINT _iPrevSceneID)
 	{
-	 	Scene* pPrevScene = FindScene(_strPrevSceneName);
+	 	Scene* pPrevScene = FindScene(_iPrevSceneID);
 		const std::unordered_map<UINT, GameObject*>& hashObjs
 			= pPrevScene->GetLayer(eLayerType::AttackObject)->GetGameObjects();
 
@@ -266,19 +296,18 @@ namespace W
 			
 	}
 
-	void SceneManger::AddPlayerScene(Player* pPlayer, const std::wstring& _strScene)
+	void SceneManger::AddPlayerScene(Player* pPlayer, UINT _iSceneID)
 	{
-		AddGameObject(_strScene, eLayerType::Player, pPlayer);
+		AddGameObject(_iSceneID, eLayerType::Player, pPlayer);
 
-		m_hashPlayerScene[_strScene].push_back(pPlayer->GetPlayerID());
+		m_hashPlayerScene[_iSceneID].push_back(pPlayer->GetPlayerID());
 	}
 
-	void SceneManger::SendEnterScene(UINT _iPlayerID, const std::wstring& _strNextScene)
+	void SceneManger::SendEnterScene(UINT _iPlayerID, UINT _iSceneID)
 	{
 		// monster, monsterattack, player, , playerattack
 			vector<unordered_map<UINT, W::GameObject*>> vecObjects;
-		W::Scene* pScene = W::SceneManger::FindScene(_strNextScene);
-		pScene->OnEnterPlayer(_iPlayerID);
+		W::Scene* pScene = W::SceneManger::FindScene(_iSceneID);
 
 		Protocol::S_MAP pkt;
 		auto pMonster = pScene->GetLayer(W::eLayerType::Monster)->GetGameObjects();
@@ -307,7 +336,7 @@ namespace W
 				W::eLayerType eLayer = pGameObj->GetLayerType();
 				UINT iCreateID = pGameObj->GetCreateID();
 				UINT iObjectID = pGameObj->GetObjectID();
-				tInfo.set_layer_createid_id((UCHAR)eLayer << 24 | iCreateID << 16 | iObjectID);
+				tInfo.set_scene_layer_createid_id((UCHAR)_iSceneID << 24 | (UCHAR)eLayer << 16 | iCreateID << 8 | iObjectID);
 
 				Transform* pTr = pGameObj->GetComponent<Transform>();
 				const Vector3 vPosition = pTr->GetPosition();

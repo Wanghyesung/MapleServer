@@ -12,7 +12,6 @@ namespace W
 		m_iCallCount(0),
 		m_tMonsterAttack{}
 	{
-		
 
 		Collider2D* pCollider = GetComponent<Collider2D>();
 		pCollider->SetActive(false);

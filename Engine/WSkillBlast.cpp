@@ -95,7 +95,7 @@ namespace W
 	{
 		int iDir = GetPlayer()->GetDir();
 		PlayerAttackObject* pAttackObj = GetPlayer()->GetScript<PlayerScript>()->GetPlayerSkill(L"blast");
-		Blast* pBlast = dynamic_cast<Blast*>(pAttackObj);
+		Blast* pBlast = static_cast<Blast*>(pAttackObj);
 		pBlast->SetDir(iDir);
 
 		pBlast->GetScript<AttackScript>()->SetDeleteObject(false);

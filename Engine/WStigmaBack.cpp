@@ -26,7 +26,7 @@ namespace W
 	void StigmaBack::Initialize()
 	{
 		m_pCount = new StigmaCount();
-		m_pCount->SetSceneName(GetSceneName());
+		m_pCount->SetSceneID(GetSceneID());
 		m_pCount->set_count(0);
 		m_pCount->m_pOwner = this;
 
@@ -70,7 +70,7 @@ namespace W
 		pkt.set_state(WstringToString(pAnim->GetKey()));
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneID()));
 	}
 	
 	void StigmaBack::set_count()

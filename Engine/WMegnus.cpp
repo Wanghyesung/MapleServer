@@ -150,7 +150,6 @@ namespace W
 		}
 		int iDir = GetDir();
 
-
 		if (iDir > 0)
 			strDir = L"_right";
 		else
@@ -179,14 +178,14 @@ namespace W
 		for (int i = 0; i < 30; ++i)
 		{
 			MegnusStone* pStone = new MegnusStone();
-			pStone->SetSceneName(GetSceneName());
+			pStone->SetSceneID(GetSceneID());
 			pStone->SetName(L"Megnus_Stone");
 			AddMonsterSkill(pStone);
 		}
 
 		//mobzone
 		m_pZone = new MobZone();
-		m_pZone->SetSceneName(GetSceneName());
+		m_pZone->SetSceneID(GetSceneID());
 		m_pZone->SetOwner(this);
 		m_pZone->Initialize();
 		EventManager::CreateObject(m_pZone, eLayerType::Object);
@@ -194,7 +193,7 @@ namespace W
 
 		//attack0
 		MonsterAttackObject* pAttack0 = new MonsterAttackObject();
-		pAttack0->SetSceneName(GetSceneName());
+		pAttack0->SetSceneID(GetSceneID());
 		pAttack0->SetName(L"Megnus_attack0");
 		AddMonsterSkill(pAttack0);
 
@@ -202,14 +201,14 @@ namespace W
 		for (int i = 0; i < 7; ++i)
 		{
 			CloneMegnus* pMegnusClone = new CloneMegnus();
-			pMegnusClone->SetSceneName(GetSceneName());
+			pMegnusClone->SetSceneID(GetSceneID());
 			pMegnusClone->SetName(L"Megnus_attack1");
 			AddMonsterSkill(pMegnusClone);
 		}
 
 		//attack2
 		MonsterMoveAttack* attack2 = new MonsterMoveAttack();
-		attack2->SetSceneName(GetSceneName());
+		attack2->SetSceneID(GetSceneID());
 		attack2->SetName(L"Megnus_attack2");
 		AddMonsterSkill(attack2);
 
@@ -217,7 +216,7 @@ namespace W
 		for (int i = -1; i <= 1; i += 2)
 		{
 			MegnusAttack* attack3 = new MegnusAttack();
-			attack3->SetSceneName(GetSceneName());
+			attack3->SetSceneID(GetSceneID());
 			attack3->SetDir(i);
 			//애니메이션 공격 끝나는 프레임
 			attack3->SetName(L"Megnus_attack3");
@@ -225,13 +224,13 @@ namespace W
 		}
 
 		MonsterAttackObject* attack4 = new MonsterAttackObject();
-		attack4->SetSceneName(GetSceneName());
+		attack4->SetSceneID(GetSceneID());
 		attack4->SetName(L"Megnus_attack4");
 		AddMonsterSkill(attack4);
 
 		//가스
 		m_pGas = new SleepGas();
-		m_pGas->SetSceneName(GetSceneName());
+		m_pGas->SetSceneID(GetSceneID());
 		m_pGas->SetOnwer(this);
 		m_pGas->GetComponent<Transform>()->SetPosition(10.f, -1.95f, -1.5f);
 		EventManager::CreateObject(m_pGas, eLayerType::MonsterAttack);
@@ -407,12 +406,12 @@ namespace W
 	void Megnus::attack5()
 	{
 		//슬로우
-		BattleManager::HitchAbnormal(SceneManger::FindPlayer(GetSceneName()), BattleManager::eAbnormalType::Slow, -1.2f);
+		BattleManager::HitchAbnormal(SceneManger::FindPlayerRandom(GetSceneID()), BattleManager::eAbnormalType::Slow, -1.2f);
 	}
 	void Megnus::attack6()
 	{
 		//언데드화
-		BattleManager::HitchAbnormal(SceneManger::FindPlayer(GetSceneName()), BattleManager::eAbnormalType::Undead);
+		BattleManager::HitchAbnormal(SceneManger::FindPlayerRandom(GetSceneID()), BattleManager::eAbnormalType::Undead);
 	}
 	void Megnus::create_stone()
 	{

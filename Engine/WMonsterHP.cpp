@@ -38,7 +38,7 @@ namespace W
 	void MonsterHP::Initialize()
 	{
 		m_pHPBack = new MonsterBackHP(m_bBoss);
-		m_pHPBack->SetSceneName(GetSceneName());
+		m_pHPBack->SetSceneID(GetSceneID());
 		m_pHPBack->SetHP(this);
 		if (!m_bBoss)
 			EventManager::CreateObject(m_pHPBack, eLayerType::Object);
@@ -103,6 +103,6 @@ namespace W
 		pkt.set_state_value(m_fHP);
 		
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneName()));
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneID()));
 	}
 }

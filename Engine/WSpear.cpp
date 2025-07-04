@@ -40,7 +40,7 @@ namespace W
 		m_tMonsterAttack.iStartFrame = 11;
 		m_tMonsterAttack.iEndFrame = 12;
 
-		m_pTarget = SceneManger::FindPlayer(GetSceneName());
+		m_pTarget = SceneManger::FindPlayerRandom(GetSceneID());
 	}
 
 	void Spear::Update()
