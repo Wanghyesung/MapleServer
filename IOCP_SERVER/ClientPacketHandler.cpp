@@ -109,9 +109,12 @@ bool Handle_C_START_MAP(shared_ptr<Session> _pSession, Protocol::C_START_MAP& _p
 
 bool Handle_C_SKILL(shared_ptr<Session> _pSession, Protocol::C_Skill& _pkt)
 {
-	W::Player::ePlayerSkill eSkillID = (W::Player::ePlayerSkill)_pkt.skill_id();
-	UINT iPlayerID = _pkt.player_id();
+	UINT iScenePlayerIDSkillID = _pkt.scene_playerid_skill_id();
 
+	
+	UINT iPlayerID = (iScenePlayerIDSkillID >> 8);
+	W::Player::ePlayerSkill eSkillID = (W::Player::ePlayerSkill)(iScenePlayerIDSkillID & 0xFF);
+	
 	W::EventManager::ChangePlayerSkillState(iPlayerID, eSkillID);
 	
 	return true;

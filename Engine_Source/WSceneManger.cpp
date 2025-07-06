@@ -293,6 +293,7 @@ namespace W
 		// monster, monsterattack, player, , playerattack
 			vector<unordered_map<UINT, W::GameObject*>> vecObjects;
 		W::Scene* pScene = W::SceneManger::FindScene(_iSceneID);
+		vecObjects.reserve(6);
 
 		Protocol::S_MAP pkt;
 		auto pMonster = pScene->GetLayer(W::eLayerType::Monster)->GetGameObjects();
@@ -322,6 +323,7 @@ namespace W
 				UINT iCreateID = pGameObj->GetCreateID();
 				UINT iObjectID = pGameObj->GetObjectID();
 				tInfo.set_scene_layer_createid_id((UCHAR)_iSceneID << 24 | (UCHAR)eLayer << 16 | iCreateID << 8 | iObjectID);
+				//tInfo.set_state();
 
 				Transform* pTr = pGameObj->GetComponent<Transform>();
 				const Vector3 vPosition = pTr->GetPosition();

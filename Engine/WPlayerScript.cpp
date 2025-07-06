@@ -158,7 +158,7 @@ namespace W
 	{
 		GameObject* pGameObj = other->GetOwner();
 		if (pGameObj->GetLayerType() == eLayerType::Monster || 
-			pGameObj->GetLayerType() == eLayerType::Box)
+			pGameObj->GetLayerType() == eLayerType::Object)
 			m_bStab = false;
 	}
 
