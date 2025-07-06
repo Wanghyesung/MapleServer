@@ -7,16 +7,11 @@ namespace W
 	{
 		None,
 		Transform,
-		Mesh,
 		Collider2D,
 		Rigidbody,
-		Particle,
-		MeshRenderer,
 		Animator,
 		Script,
 		Light,
-		AudioListener,
-		AudioSource,
 		End,
 	};
 

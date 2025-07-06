@@ -5,6 +5,7 @@ namespace W
 {
 	class Collider2D : public Component
 	{
+		DECLARE_COMPONENT_ID;
 	public:
 		Collider2D();
 		virtual ~Collider2D();

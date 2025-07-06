@@ -8,6 +8,8 @@
 
 namespace W
 {
+	UINT Rigidbody::COMPONENT_ID = 0;
+
 	Rigidbody::Rigidbody() :
 		Component(eComponentType::Rigidbody),
 		m_vForce(Vector2::Zero),

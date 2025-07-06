@@ -4,6 +4,8 @@
 
 namespace W
 {
+	UINT Light::COMPONENT_ID = 0;
+
 	Light::Light() :
 		Component(eComponentType::Light)
 	{

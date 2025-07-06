@@ -4,6 +4,7 @@
 
 namespace W
 {
+	UINT Collider2D::COMPONENT_ID = 0;
 	UINT Collider2D::ColliderNumber = 0;
 	Collider2D::Collider2D():
 		Component(eComponentType::Collider2D),

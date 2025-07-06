@@ -17,7 +17,7 @@ namespace W
 		m_fDeleteTime(3.f)
 	{
 		AddComponent<Rigidbody>();
-		AddComponent<Collider2D>()->SetActive(false);
+		GetComponent<Collider2D>()->SetActive(false);
 
 		
 		GetComponent<Transform>()->SetScale(18.f, 18.f, 0.f);

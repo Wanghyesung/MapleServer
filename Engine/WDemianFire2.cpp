@@ -17,7 +17,7 @@ namespace W
 		m_vVelocity(Vector2::Zero)
 	{
 		AddComponent<Rigidbody>();
-		AddComponent<Collider2D>()->SetActive(false);
+		GetComponent<Collider2D>()->SetActive(false);
 
 		//기본적으로 제공하는 script를 제거하고 전용 script로
 

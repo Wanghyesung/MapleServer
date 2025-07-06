@@ -6,6 +6,7 @@ namespace W
 {
 	class Animator : public Component
 	{
+		DECLARE_COMPONENT_ID;
 	public:
 		struct Event
 		{

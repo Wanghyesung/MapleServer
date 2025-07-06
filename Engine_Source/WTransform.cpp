@@ -6,6 +6,7 @@
 
 namespace W
 {
+	UINT Transform::COMPONENT_ID = 0;
 
 	Transform::Transform():
 		Component(eComponentType::Transform),

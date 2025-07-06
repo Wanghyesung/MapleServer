@@ -11,6 +11,7 @@ namespace W
 		m_bPoolObject(false),
 		m_bRender(true)
 	{
+		m_vecComponent.resize((UINT)eComponentType::End);
 		AddComponent<Transform>();
 	}
 
@@ -19,13 +20,19 @@ namespace W
 		m_eState(_pOrigin.m_eState),
 		m_eLayerType(_pOrigin.m_eLayerType)
 	{
+		m_vecComponent.resize((UINT)eComponentType::End);
+
 		for (Component* pCom : _pOrigin.m_vecComponent)
 		{
+			if (pCom == nullptr)
+				continue;
+
 			Component* pComponent = pCom->CreateClone();
 			if (!pComponent)
 				continue;
 
-			m_vecComponent.push_back(pComponent);
+			UINT iComponentID = (UINT)pComponent->GetComponentType();
+			m_vecComponent[iComponentID] = pComponent;
 			pComponent->SetOwner(this);
 		}
 	}
@@ -38,16 +45,14 @@ namespace W
 				continue;
 
 			delete comp;
-			comp = nullptr;
 		}
 
-		for (Script* script : m_vecScript)
+		for (Component* script : m_vecScript)
 		{
 			if (script == nullptr)
 				continue;
 
 			delete script;
-			script = nullptr;
 		}
 	}
 	void GameObject::Initialize()
@@ -60,10 +65,11 @@ namespace W
 
 		for (Component* comp : m_vecComponent)
 		{
-			comp->Update();
+			if(comp)
+				comp->Update();
 		}
 
-		for (Script* script : m_vecScript)
+		for (Component* script : m_vecScript)
 		{
 			script->Update();
 		}
@@ -73,10 +79,11 @@ namespace W
 	{
 		for (Component* comp : m_vecComponent)
 		{
-			comp->LateUpdate();
+			if(comp)
+				comp->LateUpdate();
 		}
 
-		for (Script* script : m_vecScript)
+		for (Component* script : m_vecScript)
 		{
 			script->LateUpdate();
 		}

@@ -2,13 +2,28 @@
 #include "WGameObject.h"
 #include "ObjectHeader.h"
 
+#include "WRigidbody.h"
+#include "WLight.h"
 #define REGISTER_OBJECT_ID(name, id)\
 { name::SET_CREATE_ID(id); };
+
+#define REGISTER_COMPONENT_ID(name, id)	                \
+{                                                       \
+    name::SetComponentID(id);}                          
 
 namespace W
 {
 	void GameObjectManager::Initialize()
 	{
+		REGISTER_COMPONENT_ID(Component, (UINT)eComponentType::None)
+		REGISTER_COMPONENT_ID(Collider2D, (UINT)eComponentType::Collider2D)
+		REGISTER_COMPONENT_ID(Transform, (UINT)eComponentType::Transform)
+		REGISTER_COMPONENT_ID(Rigidbody, (UINT)eComponentType::Rigidbody)
+		REGISTER_COMPONENT_ID(Animator, (UINT)eComponentType::Animator)
+		REGISTER_COMPONENT_ID(Script, (UINT)eComponentType::Script)
+		REGISTER_COMPONENT_ID(Light, (UINT)eComponentType::Light)
+
+
 		REGISTER_OBJECT_ID	(GameObject			 , 0  )
 		REGISTER_OBJECT_ID	(Abnormal			 , 1  )
 		REGISTER_OBJECT_ID	(Ariel				 , 2  )

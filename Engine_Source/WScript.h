@@ -6,6 +6,7 @@ namespace W
 {
 	class Script : public Component
 	{
+		DECLARE_COMPONENT_ID;
 	public:
 		Script();
 		~Script();

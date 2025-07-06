@@ -17,6 +17,21 @@ public:                                                    \
 		return m_iCreateID = CREATE_ID;					   \
 	}													   \
 	
+#define DECLARE_COMPONENT_ID                        \
+public:                                             \
+    static void SetComponentID(UINT _iID)           \
+    {                                               \
+        if (COMPONENT_ID != 0)                      \
+            assert(nullptr);                        \
+        COMPONENT_ID = _iID;                        \
+    }                                               \
+                                                    \
+    static UINT COMPONENT_ID;                       \
+                                                    \
+    static UINT GetComponentID()                    \
+    {                                               \
+        return COMPONENT_ID;                        \
+    }
 
 #define arraysize(a) (sizeof(a) / sizeof(a[0]))
 

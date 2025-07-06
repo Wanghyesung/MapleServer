@@ -6,6 +6,8 @@ namespace W
 {
 	class Rigidbody : public Component
 	{
+		DECLARE_COMPONENT_ID;
+
 	public:
 		Rigidbody();
 		virtual ~Rigidbody();

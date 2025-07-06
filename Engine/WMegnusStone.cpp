@@ -17,7 +17,7 @@ namespace W
 		m_strCurAnim{}
 	{
 		AddComponent<Rigidbody>();
-		AddComponent<Collider2D>()->SetActive(false);
+		GetComponent<Collider2D>()->SetActive(false);
 
 		
 		GetComponent<Transform>()->SetScale(10.f, 10.f, 0.f);

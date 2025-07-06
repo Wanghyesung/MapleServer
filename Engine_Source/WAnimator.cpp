@@ -2,6 +2,8 @@
 
 namespace W
 {
+	UINT Animator::COMPONENT_ID = 0;
+
 	Animator::Animator() :
 		Component(eComponentType::Animator),
 		m_bStop(false),
