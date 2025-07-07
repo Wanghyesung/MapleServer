@@ -6,19 +6,17 @@ package Protocol;
 //클라가 서버에게 
 message C_EQUIP
 {
-	uint32 scene_layer_playerid = 1;
+	uint32 scene_layer_playerid_equipid = 1;
 	
 	string item_name = 2;
-	uint32 equip_type = 3;
 }
 
 //서버가 다른 클라에게
 message S_EQUIP
 {
-	uint32 scene_layer_playerid = 1;
+	uint32 scene_layer_playerid_equipid = 1;
 
 	string item_name = 2;
-	uint32 equip_type = 3;
 }
 
 

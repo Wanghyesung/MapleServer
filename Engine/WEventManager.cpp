@@ -40,6 +40,7 @@ namespace W
 		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_STATE] = chanage_state;
 		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_PLAYER_STATE] = change_player_fsmstate;
 		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_PLAYER_SKILL] = change_player_skillstate;
+		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_PLAYER_EQUIP] = change_player_equip;
 		m_arrFunction[(UINT)EVENT_TYPE::ADD_PLAYER_SKILL] = add_player_skillstate;
 		m_arrFunction[(UINT)EVENT_TYPE::INIT_PLAYER_SKILL] = init_player_skill;
 		m_arrFunction[(UINT)EVENT_TYPE::RELEASE_PLAYER_SKILL] = release_player_skill;
@@ -295,6 +296,36 @@ namespace W
 		SkillManager::SetActiveSkill(iPlayerID, _ePlayerSkill);
 	}
 
+	void EventManager::change_player_equip(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	{
+		UINT iPlayerInfo = (UINT)_lParm;
+
+		UCHAR cSceneID = (iPlayerInfo >> 24) & 0xFF;
+		UCHAR cLayer = (iPlayerInfo >> 16) & 0xFF;
+		UCHAR cPlayerID = (iPlayerInfo >> 8) & 0xFF;
+		UCHAR cEquipID = iPlayerInfo & 0xFF;
+
+		wstring& strEquipName = *reinterpret_cast<wstring*>(_accParm);
+
+		GameObject* pObj = SceneManger::FindPlayer(cSceneID, cPlayerID);
+		if (pObj)
+		{
+			Player* pPlayer = static_cast<Player*>(pObj);
+			pPlayer->SetEquip((Player::eEquipType)cEquipID, strEquipName);
+		}
+		
+
+		Protocol::S_EQUIP pkt;
+		pkt.set_scene_layer_playerid_equipid(iPlayerInfo);
+		pkt.set_item_name(WstringToString(strEquipName));
+
+		shared_ptr<SendBuffer> pBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		const vector<UINT>& vecIDs = SceneManger::GetPlayerIDs(cSceneID);
+		GRoom.UnicastExcept(pBuffer, vecIDs, cPlayerID);
+
+		delete& strEquipName;
+	}
+
 	void EventManager::add_player_skillstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
 	{
 		SkillState* pSkillState = (SkillState*)_lParm;
@@ -453,6 +484,16 @@ namespace W
 
 		eve.eEventType = EVENT_TYPE::CHANGE_STATE;
 		
+		AddEvent(eve);
+	}
+	void EventManager::ChanagePlayerEquip(UINT _iPlayerInfo, const wstring& _strEquipName)
+	{
+		tEvent eve = {};
+		eve.lParm = (DWORD_PTR)_iPlayerInfo;
+		eve.accParm = (LONG_PTR)new wstring(_strEquipName);
+
+		eve.eEventType = EVENT_TYPE::CHANGE_PLAYER_EQUIP;
+
 		AddEvent(eve);
 	}
 

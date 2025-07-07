@@ -18,6 +18,7 @@ public:
 	void BroadcastExcept(shared_ptr<SendBuffer> _pBuffer, shared_ptr<Session> _pExceptSession);
 	void Unicast(shared_ptr<SendBuffer> _pBuffer, const vector<UINT>& _vecTarget);
 	void Unicast(shared_ptr<SendBuffer> _pBuffer, const unordered_set<UINT>& _setTarget);
+	void UnicastExcept(shared_ptr<SendBuffer> _pBuffer, const vector<UINT>& _setTarget, UINT _iExceptID);
 
 	void LockSendBask(UINT _iSessionID) { m_hashSendMask[_iSessionID] = false; }
 	void UnLockSendBask(UINT _iSessionID) { m_hashSendMask[_iSessionID] = true; }

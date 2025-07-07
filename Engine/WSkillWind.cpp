@@ -87,6 +87,7 @@ namespace W
 	{
 		SkillState::Exit();
 	}
+
 	void SkillWind::activeskill_wind()
 	{
 		Effect* pEffect = BattleManager::GetEffect(L"windffect1");

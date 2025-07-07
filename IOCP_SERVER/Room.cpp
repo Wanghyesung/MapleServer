@@ -140,6 +140,24 @@ void Room::Unicast(shared_ptr<SendBuffer> _pBuffer, const unordered_set<UINT>& _
 	}
 }
 
+void Room::UnicastExcept(shared_ptr<SendBuffer> _pBuffer, const vector<UINT>& _setTarget, UINT _iExceptID)
+{
+	std::vector<UINT> vecTarget;
+	{
+		RLock lock(m_lock);
+		vecTarget.reserve(_setTarget.size());
+		for (auto iter : _setTarget)
+		{
+			if (m_hashSendMask[iter] && iter !=_iExceptID)
+				vecTarget.push_back(iter);
+		}
+	}
+	for (auto& iter : vecTarget)
+	{
+		m_hashPersonID[iter]->Send(_pBuffer);
+	}
+}
+
 vector<UINT> Room::GetPersons()
 {
 	std::vector<UINT> vecID = {};

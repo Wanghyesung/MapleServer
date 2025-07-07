@@ -51,8 +51,12 @@ bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 
 bool Handle_C_EQUIP(shared_ptr<Session> _pSession, Protocol::C_EQUIP& _pkt)
 {
+	//eventManager로 보내기
+	UINT iSceneLayerPlayerIDEquipID = _pkt.scene_layer_playerid_equipid();
 
-	return false;
+	W::EventManager::ChanagePlayerEquip(iSceneLayerPlayerIDEquipID, StringToWString(_pkt.item_name()));
+
+	return true;
 }
 
 bool Handle_C_INPUT(shared_ptr<Session> _pSession, Protocol::C_INPUT& _pkt)
