@@ -14,7 +14,7 @@
 
 namespace W
 {
-	std::function<void(DWORD_PTR, DWORD_PTR, LONG_PTR)> EventManager::m_arrFunction[(UINT)EVENT_TYPE::END] = {};
+	std::function<void(DWORD_PTR, DWORD_PTR, LONG_PTR, OBJECT_DATA)> EventManager::m_arrFunction[(UINT)EVENT_TYPE::END] = {};
 
 	std::vector<tEvent> EventManager::m_vecEvent[2] = {};
 	std::vector<GameObject*> EventManager::m_vecPlayer_Pool = {};
@@ -76,7 +76,7 @@ namespace W
 	void EventManager::AddEvent(const tEvent& _tEve)
 	{
 		WLock lock_guard(m_lock);
-		m_vecEvent[1 - m_iActiveIdx].push_back(_tEve);
+		m_vecEvent[1 - m_iActiveIdx].emplace_back(_tEve);
 	}
 	
 
@@ -108,10 +108,10 @@ namespace W
 
 	void EventManager::excute(const tEvent& _tEve)
 	{
-		m_arrFunction[(UINT)_tEve.eEventType](_tEve.lParm,_tEve.wParm, _tEve.accParm);
+		m_arrFunction[(UINT)_tEve.eEventType](_tEve.lParm,_tEve.wParm, _tEve.accParm, _tEve.tObjectData);
 	}
 
-	void EventManager::create_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::create_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		GameObject* pObj = (GameObject*)_lParm;
 		eLayerType eLayer = (eLayerType)_wParm;
@@ -157,7 +157,7 @@ namespace W
 			GRoom.Unicast(pSendBuffer, vecTarget);
 	}
 
-	void EventManager::delete_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::delete_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		GameObject* pObj = (GameObject*)_lParm;
 
@@ -179,7 +179,7 @@ namespace W
 		delete pObj;
 	}
 
-	void EventManager::erase_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::erase_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		GameObject* pObj = (GameObject*)_lParm;
 
@@ -201,7 +201,7 @@ namespace W
 			GRoom.Unicast(pSendBuffer, vecTarget);
 	}
 
-	void EventManager::update_input(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::update_input(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		UINT iPlayerID = (UINT)_lParm;
 		{
@@ -213,7 +213,7 @@ namespace W
 		}
 	}
 
-	void EventManager::create_player(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::create_player(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		UINT iPlayerID = (UINT)_lParm;
 
@@ -224,21 +224,21 @@ namespace W
 		SceneManger::AddPlayerScene(pPlayer, 4);//valleyscne = 4
 	}
 
-	void EventManager::add_player_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::add_player_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		GameObject* pObj = (GameObject*)_lParm;
 
 		m_vecPlayer_Pool.push_back(pObj);
 	}
 
-	void EventManager::add_monster_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::add_monster_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		GameObject* pObj = (GameObject*)_lParm;
 
 		m_vecMonster_Pool.push_back(pObj);
 	}
 
-	void EventManager::change_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::change_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		UINT iPlayerID = (UINT)(_lParm);
 		GameObject* pPlayer = SceneManger::FindPlayer(iPlayerID);
@@ -246,7 +246,7 @@ namespace W
 		if (pPlayer == nullptr)
 			assert(nullptr);
 
-		change_player_fsmstate((DWORD_PTR)pPlayer->GetScript<PlayerScript>()->m_pFSM, (DWORD_PTR)Player::ePlayerState::jump, 0);
+		change_player_fsmstate((DWORD_PTR)pPlayer->GetScript<PlayerScript>()->m_pFSM, (DWORD_PTR)Player::ePlayerState::jump, 0, {});
 
 		UINT iNextSceneID = (UINT)(_wParm);
 		UINT iPrevScene = pPlayer->GetSceneID(); //swap 후 이름이 변경되지 않게 복사
@@ -264,7 +264,7 @@ namespace W
 
 	}
 
-	void EventManager::start_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::start_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		UINT iPlayerID = (UINT)(_lParm);
 		UINT iSceneID = (UINT)(_wParm);
@@ -273,7 +273,7 @@ namespace W
 	}
 
 
-	void EventManager::chanage_state(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::chanage_state(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		GameObject* pObj = (GameObject*)_lParm;
 		GameObject::eState eState = (GameObject::eState)_wParm;
@@ -281,14 +281,14 @@ namespace W
 		pObj->SetState(eState);
 	}
 
-	void EventManager::change_player_fsmstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::change_player_fsmstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		PlayerFSM* pFSM = (PlayerFSM*)_lParm;
 		Player::ePlayerState eState = (Player::ePlayerState)_wParm;
 		pFSM->ChangeState(eState);
 	}
 
-	void EventManager::change_player_skillstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::change_player_skillstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		UINT iPlayerID = (UINT)_lParm;
 		Player::ePlayerSkill _ePlayerSkill = (Player::ePlayerSkill)_wParm;
@@ -296,7 +296,7 @@ namespace W
 		SkillManager::SetActiveSkill(iPlayerID, _ePlayerSkill);
 	}
 
-	void EventManager::change_player_equip(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::change_player_equip(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		UINT iPlayerInfo = (UINT)_lParm;
 
@@ -305,35 +305,33 @@ namespace W
 		UCHAR cPlayerID = (iPlayerInfo >> 8) & 0xFF;
 		UCHAR cEquipID = iPlayerInfo & 0xFF;
 
-		wstring& strEquipName = *reinterpret_cast<wstring*>(_accParm);
-
+	
 		GameObject* pObj = SceneManger::FindPlayer(cSceneID, cPlayerID);
 		if (pObj)
 		{
 			Player* pPlayer = static_cast<Player*>(pObj);
-			pPlayer->SetEquip((Player::eEquipType)cEquipID, strEquipName);
+			pPlayer->SetEquip((Player::eEquipType)cEquipID, _tObjData.stringData);
 		}
 		
 
 		Protocol::S_EQUIP pkt;
 		pkt.set_scene_layer_playerid_equipid(iPlayerInfo);
-		pkt.set_item_name(WstringToString(strEquipName));
+		pkt.set_item_name(WstringToString(_tObjData.stringData));
 
 		shared_ptr<SendBuffer> pBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		const vector<UINT>& vecIDs = SceneManger::GetPlayerIDs(cSceneID);
 		GRoom.UnicastExcept(pBuffer, vecIDs, cPlayerID);
 
-		delete& strEquipName;
 	}
 
-	void EventManager::add_player_skillstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::add_player_skillstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		SkillState* pSkillState = (SkillState*)_lParm;
 		UINT iPlayerID = pSkillState->GetPlayer()->GetPlayerID();
 		SkillManager::AddSkill(iPlayerID, pSkillState);
 	}
 
-	void EventManager::init_player_skill(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::init_player_skill(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		UINT iPlayerID = (UINT)_lParm;
 		PlayerSkill* pPlayerSkill = (PlayerSkill*)_wParm;
@@ -341,21 +339,21 @@ namespace W
 		SkillManager::InitSkill(iPlayerID, pPlayerSkill);
 	}
 
-	void EventManager::release_player_skill(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::release_player_skill(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		UINT iPlayerID = (UINT)_lParm;
 
 		SkillManager::ReleaseSkill(iPlayerID);
 	}
 
-	void EventManager::change_monster_fsmstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::change_monster_fsmstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		MonsterFSM* pFSM = (MonsterFSM*)_lParm;
 		Monster::eMonsterState eState = (Monster::eMonsterState)_wParm;
 		pFSM->ChangeState(eState);
 	}
 
-	void EventManager::hitch_abnormal(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::hitch_abnormal(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		GameObject* pObj = (GameObject*)_lParm;
 		BattleManager::eAbnormalType eType = (BattleManager::eAbnormalType)_wParm;
@@ -364,7 +362,7 @@ namespace W
 		BattleManager::excute_abnormal(eType, pObj, fAccValue);
 	}
 
-	void EventManager::restore(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::restore(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		GameObject* pObj = (GameObject*)_lParm;
 		BattleManager::eAbnormalType eType = (BattleManager::eAbnormalType)_wParm;
@@ -373,7 +371,7 @@ namespace W
 		BattleManager::restore(pObj, eType, fAccStat);
 	}
 
-	void EventManager::up_stat(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm)
+	void EventManager::up_stat(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		GameObject* pObj = (GameObject*)_lParm;
 		BattleManager::eUpStatType eType = (BattleManager::eUpStatType)_wParm;
@@ -490,7 +488,7 @@ namespace W
 	{
 		tEvent eve = {};
 		eve.lParm = (DWORD_PTR)_iPlayerInfo;
-		eve.accParm = (LONG_PTR)new wstring(_strEquipName);
+		eve.tObjectData.stringData = _strEquipName;
 
 		eve.eEventType = EVENT_TYPE::CHANGE_PLAYER_EQUIP;
 

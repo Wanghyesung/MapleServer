@@ -31,11 +31,19 @@ namespace W
 		END,
 	};
 
+	struct OBJECT_DATA
+	{
+		wstring stringData;
+	};
+
 	struct tEvent
 	{
 		DWORD_PTR wParm;
 		DWORD_PTR lParm;
 		LONG_PTR accParm;//추가 인자
+
+		OBJECT_DATA tObjectData;
+
 		EVENT_TYPE eEventType;
 	};
 
@@ -80,35 +88,35 @@ namespace W
 		static void excute(const tEvent& _tEve);
 		static void pool_excute();
 
-		static void create_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
-		static void delete_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
-		static void erase_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
+		static void create_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
+		static void delete_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
+		static void erase_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
 
-		static void update_input(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
-		static void create_player(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
+		static void update_input(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
+		static void create_player(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
 
-		static void add_player_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
-		static void add_monster_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
+		static void add_player_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
+		static void add_monster_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
 
-		static void change_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
-		static void start_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
+		static void change_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
+		static void start_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
 
-		static void chanage_state(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
+		static void chanage_state(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
 
-		static void change_player_fsmstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
-		static void change_player_skillstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
-		static void	change_player_equip(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
-		static void add_player_skillstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
-		static void init_player_skill(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
-		static void release_player_skill(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
+		static void change_player_fsmstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
+		static void change_player_skillstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
+		static void	change_player_equip(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
+		static void add_player_skillstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
+		static void init_player_skill(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
+		static void release_player_skill(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
 
-		static void change_monster_fsmstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
-		static void hitch_abnormal(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
-		static void restore(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
-		static void up_stat(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm);
+		static void change_monster_fsmstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
+		static void hitch_abnormal(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
+		static void restore(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
+		static void up_stat(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
 
 	private:
-		static std::function<void(DWORD_PTR, DWORD_PTR, LONG_PTR)> m_arrFunction[(UINT)EVENT_TYPE::END];
+		static std::function<void(DWORD_PTR, DWORD_PTR, LONG_PTR , OBJECT_DATA)> m_arrFunction[(UINT)EVENT_TYPE::END];
 
 		//만약 이벤트처리 벡터에서 lock을 걸면 새로들어오는 이벤트(패킷), 내가지금 처리해야할 이벤트 등 처리할 일이 많아짐
 		//때문에 더블버퍼링으로 지금들어온 패킷은 다음 이벤트배열에 넣고 현재 이벤트들만 Engine에서 처리할 수 있게 만듬
