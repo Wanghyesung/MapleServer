@@ -191,10 +191,11 @@ namespace W
 
 			if (fLen <= 5.f)
 			{
-				MonsterAttackObject* pThunder = GetMonsterSkill(L"Rex_attack1");
+				RexThunder* pThunder = static_cast<RexThunder*>(GetMonsterSkill(L"Rex_attack1"));
 				if (pThunder == nullptr)
 					return;;
 
+				pThunder->SetTarget(pGameObj);
 				pThunder->SetOnwer(this);
 				pThunder->Initialize();
 				EventManager::CreateObject(pThunder, eLayerType::MonsterAttack);

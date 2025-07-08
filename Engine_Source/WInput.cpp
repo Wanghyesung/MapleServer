@@ -71,8 +71,6 @@ namespace W
 					UCHAR eState = m_queueKeys[i][j].front();
 					m_queueKeys[i][j].pop();
 					m_vecKeys[i][j] = (eKeyState)eState;
-					if ((eKeyState)eState == eKeyState::Up)
-						int a = 10;
 				}
 			}
 		}

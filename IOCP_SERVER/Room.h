@@ -12,7 +12,7 @@ public:
 	bool Check(const string& _strName);
 	UINT Enter(const string& _strName, shared_ptr<Session> _pSession);
 
-	void Exit(const string& _strName);
+	void Exit(const string& _strName, UINT _ID);
 
 	void Broadcast(shared_ptr<SendBuffer> _pBuffer);
 	void BroadcastExcept(shared_ptr<SendBuffer> _pBuffer, shared_ptr<Session> _pExceptSession);

@@ -70,6 +70,7 @@ namespace W
 		void AddPlayerSkill(PlayerAttackObject* _pObj);
 		PlayerAttackObject* GetPlayerSkill(const std::wstring& _strName);
 
+		void RegisterSkill();
 	private:
 		void add_skill();
 		void check_time();

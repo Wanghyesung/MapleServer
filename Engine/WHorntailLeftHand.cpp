@@ -160,9 +160,10 @@ namespace W
 
 			if (fLen <= 3.f)
 			{
-				MonsterAttackObject* pSpear = GetMonsterSkill(L"spear");
+				Spear* pSpear = static_cast<Spear*>(GetMonsterSkill(L"spear"));
 				if (pSpear == nullptr)
 					return;
+				pSpear->SetTarget(pGameObj);
 				pSpear->SetOnwer(this);
 
 				pSpear->Initialize();

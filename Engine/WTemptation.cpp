@@ -28,6 +28,11 @@ namespace W
 	}
 	void Temptation::Update()
 	{
+		Abnormal::Update();
+
+		if (m_pTarget == nullptr)
+			return;
+
 		Rigidbody* pRigidbody = m_pTarget->GetComponent<Rigidbody>();
 		int iDir = m_pTarget->GetDir();
 
@@ -39,8 +44,6 @@ namespace W
 		}
 		else
 			pRigidbody->AddForce(Vector2(1.5f * iDir, 0.f));
-
-		Abnormal::Update();
 	}
 	void Temptation::LateUpdate()
 	{

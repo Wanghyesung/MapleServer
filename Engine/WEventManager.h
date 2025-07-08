@@ -62,6 +62,7 @@ namespace W
 
 		static void Update_Input(UINT _iPlayerID, const vector<USHORT>& _vecInput);
 		static void CreatePlayer(UINT _ID);
+		static void DeletePlayer(UINT _ID);
 
 		static void AddPlayerPool (GameObject* _pObj);
 		static void AddMonsterPool(GameObject* _pObj);
@@ -94,6 +95,7 @@ namespace W
 
 		static void update_input(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
 		static void create_player(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
+		static void delete_player(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
 
 		static void add_player_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
 		static void add_monster_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);

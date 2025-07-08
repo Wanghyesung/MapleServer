@@ -23,7 +23,7 @@ namespace W
 
 	void PullObject::Initialize()
 	{
-		if (m_pTarget)
+		if (m_pTarget->GetState() == eState::Active)
 		{
 			Rigidbody* pRigidbody = m_pTarget->GetComponent<Rigidbody>();
 			Vector2 vVel = pRigidbody->GetVelocity();
@@ -41,6 +41,8 @@ namespace W
 				pRigidbody->SetVelocity(Vector2(iDir * 10.f, vVel.y));
 			}
 		}
+		else
+			m_pTarget = nullptr;
 	}
 	void PullObject::Update()
 	{
@@ -48,21 +50,23 @@ namespace W
 
 		if (m_fCurTime >= m_fDeleteTime)
 		{
-			m_pTarget->GetComponent<Rigidbody>()->SetAccumulation(false);
+			if(m_pTarget)
+				m_pTarget->GetComponent<Rigidbody>()->SetAccumulation(false);
+
 			EventManager::DeleteObject(this);
 			return;
 		}
-
-		Vector3 vTargetPos = m_pTarget->GetComponent<Transform>()->GetPosition();
-
-		Vector2 vDiff = Vector2(m_vPullPosition.x - vTargetPos.x, 0.f);
-		float fLen = vDiff.Length();
-		Rigidbody* pRigidbody = m_pTarget->GetComponent<Rigidbody>();
-		Vector2 vVel = pRigidbody->GetVelocity();
-
-		if (fLen <= 0.5f)
+		if (m_pTarget)
 		{
-			m_pTarget->GetComponent<Rigidbody>()->SetVelocity(Vector2(0.f, vVel.y));
+			Vector3 vTargetPos = m_pTarget->GetComponent<Transform>()->GetPosition();
+
+			Vector2 vDiff = Vector2(m_vPullPosition.x - vTargetPos.x, 0.f);
+			float fLen = vDiff.Length();
+			Rigidbody* pRigidbody = m_pTarget->GetComponent<Rigidbody>();
+			Vector2 vVel = pRigidbody->GetVelocity();
+
+			if (fLen <= 0.5f)
+				m_pTarget->GetComponent<Rigidbody>()->SetVelocity(Vector2(0.f, vVel.y));
 		}
 
 		GameObject::Update();
@@ -71,9 +75,5 @@ namespace W
 	{
 		GameObject::LateUpdate();
 	}
-	//void PullObject::Render()
-	//{
-	//	GameObject::Render();
-	//
-	//}
+	
 }

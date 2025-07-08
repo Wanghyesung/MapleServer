@@ -30,6 +30,11 @@ namespace W
 	}
 	void DemianEntireAttack::Update()
 	{
+		GameObject::Update();
+
+		if (m_pTarget == nullptr)
+			return;
+
 		m_fCurTime += Time::DeltaTime();
 
 		if (Input::GetKeyDown(m_pTarget->GetPlayerID(),eKeyCode::LEFT))
@@ -37,7 +42,7 @@ namespace W
 		else if(Input::GetKeyDown(m_pTarget->GetPlayerID(),eKeyCode::RIGHT))
 			--m_iKeyDonwCount;
 		
-		if (m_iKeyDonwCount <= 0.f)
+		if (m_iKeyDonwCount <= 0)
 		{
 			Restore();
 		}
@@ -46,8 +51,6 @@ namespace W
 			if (m_fCurTime >= m_fDeleteTime)
 				Restore();
 		}
-
-		GameObject::Update();
 	}
 
 	void DemianEntireAttack::LateUpdate()

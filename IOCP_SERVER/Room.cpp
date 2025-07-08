@@ -45,11 +45,13 @@ UINT Room::Enter(const string& _strName, shared_ptr<Session> _pSession)
 	m_hashPersonID.insert(make_pair(iUserID, _pSession));
 	m_hashSendMask[iUserID] = true;
 
+	m_iCurCount.fetch_add(1);
+
 	return iUserID;
 }
 
 
-void Room::Exit(const string& _strName)
+void Room::Exit(const string& _strName, UINT _ID)
 {
 	WLock lock(m_lock);
 
@@ -57,7 +59,12 @@ void Room::Exit(const string& _strName)
 		return;
 
 	m_hashPerson.erase(_strName);
+	m_hashPersonID.erase(_ID);
 
+	m_vecUserID[_ID] = false;
+	m_hashSendMask[_ID] = true;
+
+	//m_hashPersonID.erase()
 	m_iCurCount.fetch_sub(1);
 }
 

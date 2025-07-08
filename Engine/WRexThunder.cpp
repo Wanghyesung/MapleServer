@@ -39,10 +39,12 @@ namespace W
 		m_tMonsterAttack.iStartFrame = 0;
 		m_tMonsterAttack.iEndFrame = 4;
 
-		m_pTarget = SceneManger::FindPlayerRandom(GetSceneID());
 	}
 	void RexThunder::Update()
 	{
+		if (m_pTarget->GetState() != eState::Active)
+			m_pTarget = nullptr;
+
 		if (m_pTarget != nullptr)
 		{
 			Vector3 vPos = GetComponent<Transform>()->GetPosition();

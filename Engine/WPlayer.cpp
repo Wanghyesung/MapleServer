@@ -35,24 +35,7 @@ namespace W
 		m_strCurStateName(L"_jump")
 	{
 		SetName(L"Player");
-	}
-	Player::~Player()
-	{
-		for (GameObject* pChildObj : m_vecChildObj)
-		{
-			delete pChildObj;
-			pChildObj = nullptr;
-		}
 
-		if (m_pShadow)
-		{
-			delete m_pShadow;
-			m_pShadow = nullptr;
-		}
-	}
-	void Player::Initialize()
-	{
-		PlayerScript* pPlayerScript = AddComponent<PlayerScript>();
 		Collider2D* pCollider = AddComponent<Collider2D>();
 		AddComponent<Rigidbody>()->SetGround(false);
 
@@ -84,9 +67,27 @@ namespace W
 		pPlayerArm->SetEquipWeapon(L"10_weapon");
 		m_vecChildObj[2] = pPlayerArm;
 
-		pPlayerScript->Initialize();
+		AddComponent<PlayerScript>()->Initialize();
 
 		m_pShadow = new Shadow();
+	}
+	Player::~Player()
+	{
+		for (GameObject* pChildObj : m_vecChildObj)
+		{
+			delete pChildObj;
+			pChildObj = nullptr;
+		}
+
+		if (m_pShadow)
+		{
+			delete m_pShadow;
+			m_pShadow = nullptr;
+		}
+	}
+	void Player::Initialize()
+	{
+		GetScript<PlayerScript>()->RegisterSkill();
 	}
 
 	void Player::Update()

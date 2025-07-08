@@ -511,9 +511,9 @@ namespace W
 	{
 		m_iAttackCallCount = 0;
 		//모든 플레이어들에게
-		GameObject* pPlayer = SceneManger::FindPlayerRandom(GetSceneID());
-
-		BattleManager::HitchAbnormal(pPlayer, BattleManager::eAbnormalType::DemianStop);
+		vector<GameObject*> pPlayers = SceneManger::FindAllPlayer(GetSceneID());
+		for(GameObject* pTarget : pPlayers)
+			BattleManager::HitchAbnormal(pTarget, BattleManager::eAbnormalType::DemianStop);
 
 		MonsterAttackObject* attack5 = GetMonsterSkill(L"Demian2_attack5");
 		if (attack5 == nullptr)

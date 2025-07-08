@@ -44,10 +44,6 @@ namespace W
 		GetComponent<Transform>()->SetPosition(vTargetPos);
 	}
 
-	//void Stigma::Render()
-	//{
-	//	GameObject::Render();
-	//}
 	void Stigma::Restore()
 	{
 		

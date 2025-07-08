@@ -29,8 +29,5 @@ namespace W
 	{
 		UpStat::LateUpdate();
 	}
-	//void Ignore::Render()
-	//{
-	//	UpStat::Render();
-	//}
+
 }

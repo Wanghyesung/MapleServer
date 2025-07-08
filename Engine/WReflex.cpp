@@ -30,8 +30,5 @@ namespace W
 	{
 		UpStat::LateUpdate();
 	}
-	//void Reflex::Render()
-	//{
-	//	UpStat::Render();
-	//}
+
 }

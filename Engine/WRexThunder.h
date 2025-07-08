@@ -17,6 +17,7 @@ namespace W
 
 		DECLARE_CREATE_ID;
 
+		void SetTarget(GameObject* _pTarget) { m_pTarget = _pTarget; }
 	private:
 		void off();
 

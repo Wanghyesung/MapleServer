@@ -40,7 +40,10 @@ namespace W
 
 		static GameObject* FindPlayer(UINT _iPlayerID);
 		static GameObject* FindPlayerRandom(UINT _iSceneID);
+		static vector<GameObject*> FindAllPlayer(UINT _iSceneID);
+
 		static GameObject* FindPlayer(UINT _iSceneID, UINT _iPlayerID);
+		static void DeletePlayer(UINT _iPlayerID);
 		static std::vector<GameObject*> GetPlayers(UINT _iSceneID);
 		static std::vector<UINT> GetPlayerIDs(UINT _iSceneID);
 

@@ -32,7 +32,7 @@ namespace W
 	void EventManager::Initialize()
 	{
 		m_arrFunction[(UINT)EVENT_TYPE::CREATE_PLAYER] = create_player;
-		//m_arrFunction[(UINT)EVENT_TYPE::DELETE_PLAYER] = delete_;
+		m_arrFunction[(UINT)EVENT_TYPE::DELETE_PLAYER] = delete_player;
 		m_arrFunction[(UINT)EVENT_TYPE::UPDATE_INPUT] = update_input;
 		m_arrFunction[(UINT)EVENT_TYPE::CREATE_OBJECT] = create_object;
 		m_arrFunction[(UINT)EVENT_TYPE::DELET_OBJECT] = delete_object;
@@ -176,6 +176,7 @@ namespace W
 			GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneID()));
 		else
 			GRoom.Unicast(pSendBuffer, vecTarget);
+
 		delete pObj;
 	}
 
@@ -217,11 +218,24 @@ namespace W
 	{
 		UINT iPlayerID = (UINT)_lParm;
 
-		Player* pPlayer = new Player();
+		Player* pPlayer = static_cast<Player*>(ObjectPoolManager::PopObject(L"Player"));// new Player();
 		pPlayer->m_iPlayerID = iPlayerID;
 		pPlayer->SetObjectID(iPlayerID);
 		pPlayer->Initialize();
 		SceneManger::AddPlayerScene(pPlayer, 4);//valleyscne = 4
+	}
+
+	void EventManager::delete_player(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
+	{
+		UINT iPlayerID = (UINT)_lParm;
+		SceneManger::DeletePlayer(iPlayerID);
+		SkillManager::ReleaseSkill(iPlayerID);
+
+		//Protocol::S_NEW_EXIT other_pkt;
+		//other_pkt.set_playerid(iPlayerID);
+
+		//shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(other_pkt);
+		//GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(iPlayerID));
 	}
 
 	void EventManager::add_player_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
@@ -421,6 +435,15 @@ namespace W
 		eve.lParm = (DWORD_PTR)_ID;
 
 		eve.eEventType = EVENT_TYPE::CREATE_PLAYER;
+		AddEvent(eve);
+	}
+
+	void EventManager::DeletePlayer(UINT _ID)
+	{
+		tEvent eve = {};
+		eve.lParm = (DWORD_PTR)_ID;
+
+		eve.eEventType = EVENT_TYPE::DELETE_PLAYER;
 		AddEvent(eve);
 	}
 

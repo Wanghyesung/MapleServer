@@ -52,6 +52,8 @@ namespace W
 		EventManager::Initialize();
 
 		GameObjectManager::Initialize();
+
+		SceneManger::Initialize();
 	}
 
 	void Application::Update()

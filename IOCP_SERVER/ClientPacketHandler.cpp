@@ -24,11 +24,13 @@ bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 	if (iUserID == -1)
 		return false;
 
+	pSession->SetPersonID(iUserID);
+
 	//다른 클라들에게 전송 valley씬에 있는 얘들만
-	Protocol::S_NEW_ENTER other_pkt;
-	other_pkt.set_playerid(iUserID);
-	shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(other_pkt);
-	GRoom.BroadcastExcept(pSendBuffer,_pSession);
+	//Protocol::S_NEW_ENTER other_pkt;
+	//other_pkt.set_playerid(iUserID);
+	//shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(other_pkt);
+	//GRoom.BroadcastExcept(pSendBuffer,_pSession);
 	
 	//연결된 클라에게 전송
 	Protocol::S_ENTER pkt;
@@ -36,11 +38,11 @@ bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 	
 	pkt.set_success(true);
 	
-	for (int i = 0; i < vecUserID.size(); ++i)
-	{
-		pkt.add_player_ids(vecUserID[i]);
-	}
-	pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+	//for (int i = 0; i < vecUserID.size(); ++i)
+	//{
+	//	pkt.add_player_ids(vecUserID[i]);
+	//}
+	shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 	_pSession->Send(pSendBuffer);
 
 	GRoom.Enter(_strPersonName, _pSession);
@@ -126,7 +128,7 @@ bool Handle_C_SKILL(shared_ptr<Session> _pSession, Protocol::C_Skill& _pkt)
 
 bool Handle_C_EXIT(shared_ptr<Session> _pSession, Protocol::C_EXIT& _pkt)
 {
-
+	
 	return false;
 }
 

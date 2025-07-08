@@ -127,6 +127,7 @@ namespace W
 
 		void update_state();
 		void update_shadow();
+
 	private:
 		Shadow* m_pShadow;
 

@@ -547,7 +547,6 @@ namespace W
 
 	void PinkBean::attack6()
 	{
-		GameObject* pObj = SceneManger::FindPlayerRandom(GetSceneID());
 		//°ø¹Ý
 		BattleManager::Buff_Stat(this,BattleManager::eUpStatType::ReflexAttack,1.f);
 	}

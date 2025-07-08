@@ -39,12 +39,13 @@ namespace W
 
 		m_tMonsterAttack.iStartFrame = 11;
 		m_tMonsterAttack.iEndFrame = 12;
-
-		m_pTarget = SceneManger::FindPlayerRandom(GetSceneID());
 	}
 
 	void Spear::Update()
 	{
+		if (m_pTarget->GetState() != eState::Active)
+			m_pTarget = nullptr;
+
 		if (m_pTarget != nullptr)
 		{
 			Vector3 vPos = GetComponent<Transform>()->GetPosition();

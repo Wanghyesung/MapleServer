@@ -29,7 +29,7 @@ namespace W
 	void SkillManager::ReleaseSkill(UINT _iPlayerID)
 	{
 		m_vecSkill.erase(m_vecSkill.begin() + _iPlayerID);
-		m_vecSkillTime.erase(m_vecSkillTime.begin() + _iPlayerID);
+		m_vecSkillTime[_iPlayerID].clear();
 	}
 
 

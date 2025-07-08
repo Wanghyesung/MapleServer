@@ -195,11 +195,12 @@ namespace W
 
 			if (fLen <= 5.f)
 			{
-				MonsterAttackObject* pThunder = GetMonsterSkill(L"Solomon_attack1");
+				SolThunder* pThunder = static_cast<SolThunder*>(GetMonsterSkill(L"Solomon_attack1"));
 				if (pThunder == nullptr)
 					return;
+
 				pThunder->SetOnwer(this);
-				
+				pThunder->SetTarget(pGameObj);
 				pThunder->Initialize();
 				EventManager::CreateObject(pThunder, eLayerType::MonsterAttack);
 			}

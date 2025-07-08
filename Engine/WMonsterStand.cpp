@@ -36,6 +36,9 @@ namespace W
 			if (m_pTarget == nullptr)
 				return;
 
+			if (m_pTarget->GetState() != GameObject::eState::Active)
+				m_pTarget = nullptr;
+
 			Vector3 vTargetPosition = m_pTarget->GetComponent<Collider2D>()->GetPosition();
 			Vector3 vPosition = GetMonster()->GetComponent<Collider2D>()->GetPosition();
 

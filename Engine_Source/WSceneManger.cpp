@@ -21,8 +21,13 @@ namespace W
 
 	void SceneManger::Initialize()
 	{
-		
-
+		//최대 동접자 3/5만 미리 할당
+		for (int i = 0; i < 3; ++i)
+		{
+			Player* pPlayer = new Player();
+			pPlayer->SetName(L"Player");
+			ObjectPoolManager::AddObjectPool(L"Player", pPlayer);
+		}
 	}
 	void SceneManger::Update()
 	{
@@ -187,6 +192,30 @@ namespace W
 		return nullptr;
 	}
 
+	void SceneManger::DeletePlayer(UINT _iPlayerID)
+	{
+		GameObject* pPlayer = FindPlayer(_iPlayerID);
+		if (pPlayer)
+		{
+			//player를 들고있는 오브젝트들이 안전하게 반환할 수 있게 다음 프레임에 삭제
+			pPlayer->SetState(GameObject::eState::Dead);
+
+			EventManager::DeleteObject(pPlayer);
+			UINT iSceneID = pPlayer->GetSceneID();
+			UINT iPlayerID = pPlayer->GetObjectID();
+
+			auto& vecIDs = m_hashPlayerScene[iSceneID];
+			auto  iter = std::find(vecIDs.begin(), vecIDs.end(), iPlayerID);
+			if (iter != vecIDs.end()) 
+			{
+				int idx = iter - vecIDs.begin();   
+				int lastIdx = vecIDs.size() - 1;
+				std::swap(vecIDs[idx], vecIDs[lastIdx]);
+				vecIDs.pop_back();
+			}
+		}
+	}
+
 	GameObject* SceneManger::FindPlayerRandom(UINT _iSceneID)
 	{
 		Scene* pScene = m_hashSceneID.find(_iSceneID)->second;
@@ -207,6 +236,18 @@ namespace W
 			++iter;
 
 		return iter->second;
+	}
+
+	vector<GameObject*> SceneManger::FindAllPlayer(UINT _iSceneID)
+	{
+		vector<GameObject*> vecTarget = {};
+		vecTarget.reserve(m_hashPlayerScene[_iSceneID].size());
+
+		auto& iter = m_hashSceneID[_iSceneID]->GetLayer(eLayerType::Player)->GetGameObjects();
+		for (auto& pPair : iter)
+			vecTarget.push_back(pPair.second);
+		
+		return vecTarget;
 	}
 
 

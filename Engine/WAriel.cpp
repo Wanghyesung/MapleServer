@@ -249,6 +249,7 @@ namespace W
 	void Ariel::pull()
 	{
 		GameObject* pPlayer = SceneManger::FindPlayerRandom(GetSceneID());
+		
 		Vector3 vTargetPosition = GetComponent<Transform>()->GetPosition();
 
 		PullObject* pPullObj = new PullObject();

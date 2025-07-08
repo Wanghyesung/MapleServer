@@ -23,26 +23,33 @@ namespace W
 	}
 	void UpStat::Update()
 	{
+		m_fCurTime += Time::DeltaTime();
+
+		if (m_pTarget->GetState() != GameObject::Active)
+			m_pTarget = nullptr;
+
+		if (m_fCurTime >= m_fDeleteTime)
+		{
+			EventManager::DeleteObject(this);
+			if(m_pTarget)
+				BattleManager::Buff_Stat(m_pTarget, m_eType, -m_fAccStat);
+
+			return;
+		}
+
+		else if (m_pTarget)
+		{
+			Vector3 vPosition = m_pTarget->GetComponent<Collider2D>()->GetPosition();
+			vPosition.y += 0.5f;
+			vPosition.z -= 0.2f;
+
+			GetComponent<Transform>()->SetPosition(vPosition);
+		}
+
 		GameObject::Update();
 	}
 	void UpStat::LateUpdate()
 	{
-		m_fCurTime += Time::DeltaTime();
-
-		if (m_fCurTime >= m_fDeleteTime ||
-			m_pTarget->GetState() == GameObject::Paused)
-		{
-			EventManager::DeleteObject(this);
-			BattleManager::Buff_Stat(m_pTarget, m_eType, -m_fAccStat);
-			return;
-		}
-
-		Vector3 vPosition = m_pTarget->GetComponent<Collider2D>()->GetPosition();
-		vPosition.y += 0.5f;
-		vPosition.z -= 0.2f;
-
-		GetComponent<Transform>()->SetPosition(vPosition);
-
 		GameObject::LateUpdate();
 	}
 

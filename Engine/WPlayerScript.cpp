@@ -277,6 +277,11 @@ namespace W
 		return pAttackObj;
 	}
 
+	void PlayerScript::RegisterSkill()
+	{
+		m_pSkill->RegisterSkill();
+	}
+
 	void PlayerScript::add_skill()
 	{
 		for (int i = 0; i < 5; ++i)

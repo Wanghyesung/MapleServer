@@ -11,7 +11,8 @@ namespace W
 
 		void Update();
 		void Initialize();
-
+		void RegisterSkill();
+		
 		void SetPlayer(Player* _pPlayer) { m_pPlayer = _pPlayer; }
 		Player* GetPlayer() { return m_pPlayer; }
 

@@ -191,11 +191,13 @@ namespace W
 
 	void DemianScene::create_effect()
 	{
-		
-		Effect* pAttack_hit1 = new Effect();
-		pAttack_hit1->SetSceneID(GetSceneID());
-		pAttack_hit1->SetName(L"Demian2_attack1_hit");
-		pAttack_hit1->CreateAnimation(Vector2(0.f, 0.f), Vector2(227.f, 228.f), 5, 1, Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.1f);
+		for (int i = 0; i < 5; ++i)
+		{
+			Effect* pAttack_hit1 = new Effect();
+			pAttack_hit1->SetSceneID(GetSceneID());
+			pAttack_hit1->SetName(L"Demian2_attack1_hit");
+			pAttack_hit1->CreateAnimation(Vector2(0.f, 0.f), Vector2(227.f, 228.f), 5, 1, Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.1f);
+		}
 
 		Effect* pEffect = new Effect();
 		pEffect->SetSceneID(GetSceneID());

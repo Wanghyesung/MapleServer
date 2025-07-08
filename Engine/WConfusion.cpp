@@ -30,6 +30,11 @@ namespace W
 	}
 	void Confusion::Update()
 	{
+		Abnormal::Update();
+
+		if (m_pTarget == nullptr)
+			return;
+
 		Rigidbody* pRigidbody = m_pTarget->GetComponent<Rigidbody>();
 		const tObjectInfo& tInfo = m_pTarget->GetScript<PlayerScript>()->GetObjectInfo();
 
@@ -70,8 +75,6 @@ namespace W
 		}
 
 		m_pTarget->SetDir(iDir);
-		
-		Abnormal::Update();
 	}
 	void Confusion::LateUpdate()
 	{

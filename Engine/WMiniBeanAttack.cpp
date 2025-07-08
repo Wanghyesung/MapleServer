@@ -13,13 +13,10 @@ namespace W
 		m_fDeleteTIme(0.1f),
 		m_fCurTime(0.f)
 	{
-	
-
 		Collider2D* pCollider = GetComponent<Collider2D>();
 		pCollider->SetActive(true);
 
 		GetComponent<Transform>()->SetScale(2.1f, 2.1f, 0.f);
-
 	}
 
 	MiniBeanAttack::~MiniBeanAttack()
@@ -29,7 +26,6 @@ namespace W
 
 	void MiniBeanAttack::Initialize()
 	{
-		
 		m_tMonsterAttack.tAttackInfo.fAttackDamage = 10.f;
 
 		m_tMonsterAttack.vPosition = GetComponent<Transform>()->GetPosition();
@@ -37,8 +33,6 @@ namespace W
 		m_tMonsterAttack.vOffset = Vector2(0.f, 0.f);
 
 		SetMonsterAttack(m_tMonsterAttack);
-
-		m_pTarget = SceneManger::FindPlayerRandom(GetSceneID());
 	}
 
 	void MiniBeanAttack::Update()
@@ -46,6 +40,9 @@ namespace W
 		m_fCurTime += Time::DeltaTime();
 		if (m_fCurTime >= m_fDeleteTIme)
 			off();
+
+		if (m_pTarget->GetState() != eState::Active)
+			m_pTarget = nullptr;
 
 		if (m_pTarget != nullptr)
 		{

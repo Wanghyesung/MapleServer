@@ -48,10 +48,6 @@ namespace W
 
 	void PlayerSkill::Initialize()
 	{
-		//
-		UINT iPlayerID = m_pPlayer->GetPlayerID();
-		EventManager::InitPlayerSkill(iPlayerID, this);
-	
 		AddSkill(new SkillLuck());
 		AddSkill(new SkillDark());
 		AddSkill(new SkillJump());
@@ -64,6 +60,16 @@ namespace W
 		AddSkill(new SkillBlast());
 		AddSkill(new SkillLoad());
 		AddSkill(new SkillUltimate());
+	}
+
+	void PlayerSkill::RegisterSkill()
+	{
+		UINT iPlayerID = m_pPlayer->GetPlayerID();
+		EventManager::InitPlayerSkill(iPlayerID, this);
+
+		auto iter = m_mapSkills.begin();
+		for(iter; iter!=m_mapSkills.end(); ++iter)
+			EventManager::AddPlayerSkillState(iter->second);
 	}
 
 	SkillState* PlayerSkill::FindSkillState(Player::ePlayerSkill _eSkill)
@@ -101,7 +107,6 @@ namespace W
 		_pSkill->SetOnwer(this);
 		_pSkill->Initialize();
 		m_mapSkills.insert(std::make_pair(eSkill, _pSkill));
-		EventManager::AddPlayerSkillState(_pSkill);
 	}
 
 	const wstring& PlayerSkill::GetCurSkillName()

@@ -9,7 +9,6 @@ message C_EXIT
 	string name = 1;
 }
 
-//서버가 클라에게
 message S_EXIT
 {
 	bool success = 1;
@@ -20,6 +19,3 @@ message S_NEW_EXIT
 	uint32 playerid = 1;
 }
 
-//로그인
-//채팅 던지기
-//나가기

@@ -90,12 +90,6 @@ namespace W
 		pSkelegonScript->SetFSM(pFSM);
 		pFSM->Initialize();
 
-
-		Effect* pEffect = new Effect();
-		pEffect->SetSceneID(GetSceneID());
-		pEffect->SetName(L"sklaser_hit");
-		pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(134.f, 97.f), 1, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
-
 		//생성될 아이템
 		std::vector<std::wstring> vecItems = { L"alixir",L"10_weapon"};
 		SetCreateCount(2);

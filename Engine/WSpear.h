@@ -14,6 +14,7 @@ namespace W
 		virtual void LateUpdate()override;
 		virtual void UpdatePacket()override;
 		
+		void SetTarget(GameObject* _pTarget) { m_pTarget = _pTarget; }
 		DECLARE_CREATE_ID;
 
 	private:

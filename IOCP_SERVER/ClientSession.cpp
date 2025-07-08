@@ -2,7 +2,7 @@
 #include "ClientSession.h"
 #include "Room.h"
 #include "ClientPacketHandler.h"
-
+#include "..\Engine\WEventManager.h"
 ClientSession::ClientSession()
 {
 
@@ -34,5 +34,7 @@ void ClientSession::OnSend(int len)
 
 void ClientSession::OnDisConnected()
 {
-    //GRoom.Exit(m_iName)
+    GRoom.Exit(m_strName, m_iUserID);
+
+    W::EventManager::DeletePlayer(m_iUserID);
 }

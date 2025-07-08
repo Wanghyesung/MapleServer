@@ -119,7 +119,6 @@ namespace W
 
 		if (_eType == eAbnormalType::Stigma)
 		{
-			//씬에서 관리하는 게 더 좋음
 			EventManager::HitchAbnormal(_pPlayer, _eType, _fAccStat);
 			return;
 		}
@@ -133,6 +132,9 @@ namespace W
 
 	void BattleManager::excute_abnormal(eAbnormalType _eType, GameObject* _pTarget, float _fAccValue)
 	{
+		if (_pTarget == nullptr)
+			return;
+
 		m_arrAbnormalFunc[(UINT)_eType](_pTarget, _fAccValue);
 	}
 
@@ -160,10 +162,8 @@ namespace W
 	}
 	void BattleManager::faint(GameObject* _pGameObject, float _fAccValue)
 	{
-		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
-		if (!pPlayer)
-			return;
-
+		Player* pPlayer = static_cast<Player*>(_pGameObject);
+		
 		Faint* pFaint = new Faint();
 		pFaint->SetTarget(pPlayer);
 		pFaint->SetTime(5.f);
@@ -180,11 +180,9 @@ namespace W
 	//음수로 넣어야함
 	void BattleManager::debuff_slow(GameObject* _pGameObject, float _fAccSpeed)
 	{
-		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
+		Player* pPlayer = static_cast<Player*>(_pGameObject);
 		tObjectInfo& tInfo = pPlayer->GetScript<PlayerScript>()->m_tObjectInfo;
-		if (!pPlayer)
-			return;
-
+	
 		if (_fAccSpeed < 0)
 		{
 			Slow* pSlow = new Slow(_fAccSpeed);
@@ -198,10 +196,8 @@ namespace W
 
 	void BattleManager::seal_skill(GameObject* _pGameObject, float _fAccValue)
 	{
-		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
-		if (!pPlayer)
-			return;
-
+		Player* pPlayer = static_cast<Player*>(_pGameObject);
+	
 		SealSkill* pSeal = new SealSkill();
 		pSeal->SetTarget(pPlayer);
 		pSeal->SetTime(7.f);
@@ -216,9 +212,7 @@ namespace W
 
 	void BattleManager::temptation(GameObject* _pGameObject, float _fAccValue)
 	{
-		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
-		if (!pPlayer)
-			return;
+		Player* pPlayer = static_cast<Player*>(_pGameObject);
 
 		Temptation* pTemptation = new Temptation();
 		pTemptation->SetTarget(pPlayer);
@@ -247,9 +241,7 @@ namespace W
 
 	void BattleManager::undead(GameObject* _pGameObject, float _fAccValue)
 	{
-		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
-		if (!pPlayer)
-			return;
+		Player* pPlayer = static_cast<Player*>(_pGameObject);
 
 		Undead* pUndead = new Undead();
 		pUndead->SetTarget(pPlayer);
@@ -341,7 +333,7 @@ namespace W
 
 	void BattleManager::buff_attack(GameObject* _pTarget, float _fAccDamage)
 	{
-		Monster* pTarget=  dynamic_cast<Monster*>(_pTarget);
+		Monster* pTarget= static_cast<Monster*>(_pTarget);
 		MonsterScript* pScript = pTarget->GetScript<MonsterScript>();
 
 		if (_fAccDamage > 0.f)
@@ -368,7 +360,7 @@ namespace W
 
 	void BattleManager::buff_defense(GameObject* _pTarget, float _fDefense)
 	{
-		Monster* pTarget = dynamic_cast<Monster*>(_pTarget);
+		Monster* pTarget = static_cast<Monster*>(_pTarget);
 		MonsterScript* pScript = pTarget->GetScript<MonsterScript>();
 
 		if (_fDefense > 0.f)
@@ -387,7 +379,7 @@ namespace W
 
 	void BattleManager::buff_ignore(GameObject* _pTarget, float _fsign)
 	{
-		Monster* pTarget = dynamic_cast<Monster*>(_pTarget);
+		Monster* pTarget = static_cast<Monster*>(_pTarget);
 		MonsterScript* pScript = pTarget->GetScript<MonsterScript>();
 
 		if (_fsign >=0.f)
@@ -410,9 +402,7 @@ namespace W
 
 	void BattleManager::confusion(GameObject* _pGameObject, float _fAccValue)
 	{
-		Player* pPlayer = dynamic_cast<Player*>(_pGameObject);
-		if (!pPlayer)
-			return;
+		Player* pPlayer = static_cast<Player*>(_pGameObject);
 
 		Confusion* pConfusion = new Confusion();
 		pConfusion->SetSceneID(pPlayer->GetSceneID());
@@ -496,7 +486,7 @@ namespace W
 
 	void BattleManager::buff_heal(GameObject* _pTarget, float _fAccHeal)
 	{
-		Monster* pTarget = dynamic_cast<Monster*>(_pTarget);
+		Monster* pTarget = static_cast<Monster*>(_pTarget);
 		MonsterScript* pScript = pTarget->GetScript<MonsterScript>();
 
 		pScript->m_tObjectInfo.fHP += _fAccHeal;
@@ -504,7 +494,7 @@ namespace W
 	
 	void BattleManager::buff_speed(GameObject* _pTarget, float _fAccSpeed)
 	{
-		Player* pTarget = dynamic_cast<Player*>(_pTarget);
+		Player* pTarget = static_cast<Player*>(_pTarget);
 		PlayerScript* pScript = pTarget->GetScript<PlayerScript>();
 
 		if (_fAccSpeed >= 0.f)
@@ -545,7 +535,7 @@ namespace W
 
 	void BattleManager::buff_reflex(GameObject* _pTarget, float _fsign)
 	{
-		Monster* pTarget = dynamic_cast<Monster*>(_pTarget);
+		Monster* pTarget = static_cast<Monster*>(_pTarget);
 		MonsterScript* pScript = pTarget->GetScript<MonsterScript>();
 
 		if (_fsign >= 0.f)

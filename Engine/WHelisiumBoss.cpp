@@ -78,31 +78,32 @@ namespace W
 
 	void HelisiumBoss::create_effect()
 	{
-		
-		Effect* pEffect = new Effect();
-		pEffect->SetSceneID(GetSceneID());
-		pEffect->SetName(L"Megnus_attack0_hit");
-		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(320.f, 244.f), 5, 1, Vector2(320.f, 320.f), Vector2(0.f, 0.f), 0.1f);
+		for (int i = 0; i < 5; ++i)
+		{
+			Effect* pEffect = new Effect();
+			pEffect->SetSceneID(GetSceneID());
+			pEffect->SetName(L"Megnus_attack0_hit");
+			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(320.f, 244.f), 5, 1, Vector2(320.f, 320.f), Vector2(0.f, 0.f), 0.1f);
 
-		pEffect = new Effect();
-		pEffect->SetSceneID(GetSceneID());
-		pEffect->SetName(L"Megnus_attack1_hit");
-		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(256.f, 196.f), 5, 1, Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.1f);
+			pEffect = new Effect();
+			pEffect->SetSceneID(GetSceneID());
+			pEffect->SetName(L"Megnus_attack1_hit");
+			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(256.f, 196.f), 5, 1, Vector2(250.f, 250.f), Vector2(0.f, 0.f), 0.1f);
 
-		pEffect = new Effect();
-		pEffect->SetSceneID(GetSceneID());
-		pEffect->SetName(L"Megnus_attack2_hit");
-		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(236.f, 229.f), 7, 1, Vector2(240.f, 240.f), Vector2(0.f, 0.f), 0.1f);
+			pEffect = new Effect();
+			pEffect->SetSceneID(GetSceneID());
+			pEffect->SetName(L"Megnus_attack2_hit");
+			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(236.f, 229.f), 7, 1, Vector2(240.f, 240.f), Vector2(0.f, 0.f), 0.1f);
 
-		pEffect = new Effect();
-		pEffect->SetSceneID(GetSceneID());
-		pEffect->SetName(L"Megnus_attack3_hit");
-		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(228.f, 231.f), 7, 1, Vector2(230.f, 230.f), Vector2(0.f, 0.f), 0.1f);
+			pEffect = new Effect();
+			pEffect->SetSceneID(GetSceneID());
+			pEffect->SetName(L"Megnus_attack3_hit");
+			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(228.f, 231.f), 7, 1, Vector2(230.f, 230.f), Vector2(0.f, 0.f), 0.1f);
 
-		pEffect = new Effect();
-		pEffect->SetSceneID(GetSceneID());
-		pEffect->SetName(L"Megnus_attack4_hit");
-		pEffect->CreateAnimation( Vector2(0.f, 0.f), Vector2(165.f, 168.f), 7, 1, Vector2(170.f, 170.f), Vector2(0.f, 0.f), 0.1f);
-
+			pEffect = new Effect();
+			pEffect->SetSceneID(GetSceneID());
+			pEffect->SetName(L"Megnus_attack4_hit");
+			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(165.f, 168.f), 7, 1, Vector2(170.f, 170.f), Vector2(0.f, 0.f), 0.1f);
+		}
 	}
 }

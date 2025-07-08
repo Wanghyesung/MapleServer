@@ -185,9 +185,10 @@ namespace W
 
 			if (fLen <= 4.f)
 			{
-				MonsterAttackObject* pAttack = GetMonsterSkill(L"MiniBean_attack0");
+				MiniBeanAttack* pAttack = static_cast<MiniBeanAttack*>(GetMonsterSkill(L"MiniBean_attack0"));
 				if (pAttack == nullptr)
 					return;
+				pAttack->SetTarget(pGameObj);
 				pAttack->SetOnwer(this);
 				pAttack->Initialize();
 
