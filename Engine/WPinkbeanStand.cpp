@@ -15,7 +15,7 @@ namespace W
 	void PinkbeanStand::Update()
 	{
 		//srand(time(nullptr));
-		bool bStart = dynamic_cast<PinkBean*>(GetMonster())->IsStart();
+		bool bStart = static_cast<PinkBean*>(GetMonster())->IsStart();
 		if(bStart)
 			EventManager::ChangeMonsterFSMState(GetFSM(), Monster::eMonsterState::start);
 	}

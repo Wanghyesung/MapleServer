@@ -23,6 +23,9 @@ namespace W
 	}
 	void MonsterStand::Update()
 	{
+		if (m_pTarget == nullptr)
+			return;
+			
 		m_fCurTime += Time::DeltaTime();
 		
 		if (m_fCurTime >= m_fTime)
@@ -33,11 +36,13 @@ namespace W
 
 		else
 		{
-			if (m_pTarget == nullptr)
-				return;
-
 			if (m_pTarget->GetState() != GameObject::eState::Active)
+			{
+				EventManager::ChangeMonsterFSMState(GetFSM(), Monster::eMonsterState::stand);
 				m_pTarget = nullptr;
+				return;
+			}
+		
 
 			Vector3 vTargetPosition = m_pTarget->GetComponent<Collider2D>()->GetPosition();
 			Vector3 vPosition = GetMonster()->GetComponent<Collider2D>()->GetPosition();

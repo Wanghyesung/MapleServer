@@ -46,6 +46,7 @@ namespace W
 
 		if (m_iFuncCount == 1 && m_pFunction)
 		{
+			
 			UINT iCurIndex = GetComponent<Animator>()->GetActiveAnimation()->GetCurIndex();
 			if (iCurIndex == m_iStartIndex)
 			{

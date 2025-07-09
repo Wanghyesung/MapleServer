@@ -31,8 +31,7 @@ namespace W
 
 		Effect* pEffect2 = CreateEffet( L"raideffect2", Vector2(0.f, 0.f), Vector2(880.f, 637.f), 10, 3,
 			Vector2(1000.f, 1000.f), Vector2(0.2f, 2.f), 0.05f);
-		pEffect2->SetFunction(std::bind(&SkillRaid::activeskill_raid, this), 11);
-
+		
 		pEffect->GetComponent<Transform>()->SetScale(10.f, 10.f, 0.f);
 		pEffect2->GetComponent<Transform>()->SetScale(10.f, 10.f, 0.f);
 
@@ -74,6 +73,8 @@ namespace W
 		
 		m_pFadeEffect = BattleManager::GetEffect(L"raideffect1");
 		Effect* pEffect2 = BattleManager::GetEffect(L"raideffect2");
+		pEffect2->SetFunction(std::bind(&SkillRaid::activeskill_raid, this), 11);
+
 		StartEffect(m_pFadeEffect);
 		StartEffect(pEffect2);
 

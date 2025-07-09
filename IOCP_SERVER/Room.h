@@ -32,8 +32,8 @@ private:
 	RWLock m_lock;
 
 
-	unordered_map<string, shared_ptr<Session>> m_hashPerson;
-	unordered_map<UINT, shared_ptr<Session>> m_hashPersonID;
+	unordered_map<string, weak_ptr<Session>> m_hashPerson;
+	unordered_map<UINT, weak_ptr<Session>> m_hashPersonID;
 	std::unordered_map<UINT, bool> m_hashSendMask;
 
 	atomic<UINT> m_iMaxCount;

@@ -25,7 +25,7 @@ namespace W
 		//Resources::Load<Texture>(L"windffect2", L"..\\Resources\\Texture\\Player\\skill\\shuriken\\effect_1.png");
 		pEffect = CreateEffet(L"windffect2", Vector2(0.f, 0.f), 
 			Vector2(572.f, 413.f), 11, 1, Vector2(580.f, 580.f), Vector2(0.5f, 0.5f), 0.03f);
-		pEffect->SetFunction(std::bind(&SkillWind::activeskill_wind, this), 6);
+		
 
 
 		//m_pHitEffectAtlas = Resources::Load<Texture>(L"wind", L"..\\Resources\\Texture\\Player\\skill\\shuriken\\hit.png");
@@ -80,6 +80,7 @@ namespace W
 		m_bStart = false;
 
 		Effect* pEffect = BattleManager::GetEffect(L"windffect2");
+		pEffect->SetFunction(std::bind(&SkillWind::activeskill_wind, this), 6);
 		pEffect->GetComponent<Transform>()->SetScale(6.f, 6.f, 0.f);
 		StartEffect(pEffect);
 	}

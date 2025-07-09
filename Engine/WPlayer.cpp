@@ -67,9 +67,9 @@ namespace W
 		pPlayerArm->SetEquipWeapon(L"10_weapon");
 		m_vecChildObj[2] = pPlayerArm;
 
-		AddComponent<PlayerScript>()->Initialize();
-
 		m_pShadow = new Shadow();
+
+		AddComponent<PlayerScript>()->Initialize();
 	}
 	Player::~Player()
 	{
@@ -87,6 +87,8 @@ namespace W
 	}
 	void Player::Initialize()
 	{
+		//AddComponent<PlayerScript>()->Initialize();
+		SetState(eState::Active);
 		GetScript<PlayerScript>()->RegisterSkill();
 	}
 

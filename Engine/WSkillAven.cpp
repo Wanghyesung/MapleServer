@@ -26,7 +26,7 @@ namespace W
 		//m_pEffectAtlas = Resources::Load<Texture>(L"aveneffect", L"..\\Resources\\Texture\\Player\\skill\\effect4.png");
 		Effect* pEffect = CreateEffet(L"aveneffect", Vector2(0.f, 0.f), Vector2(121.f, 71.f), 14, 1,
 			Vector2(110.f, 110.f), Vector2(0.f, 0.f), 0.03f);
-		pEffect->SetFunction(std::bind(&SkillAven::activeskill_aven, this), 12);
+	
 		//m_pHitEffectAtlas = Resources::Load<Texture>(L"kuckhit", L"..\\Resources\\Texture\\Player\\skill\\hit.png");
 
 		//SetSound(Resources::Load<AudioClip>(L"avensound", L"..\\Resources\\sound\\skill\\aven.mp3"), false);
@@ -79,6 +79,7 @@ namespace W
 		GetPlayer()->SetCurStateName(L"_swing2");
 
 		Effect* pEffect=  BattleManager::GetEffect(L"aveneffect");
+		pEffect->SetFunction(std::bind(&SkillAven::activeskill_aven, this), 12);
 		StartEffect(pEffect);
 	}
 
@@ -109,7 +110,7 @@ namespace W
 		int iDir = pPlayer->GetDir();
 		PlayerAttackObject* pAttackObj = pPlayer->GetScript<PlayerScript>()->GetPlayerSkill(L"Aven");
 
-		Aven* pAven = dynamic_cast<Aven*>(pAttackObj);
+		Aven* pAven = static_cast<Aven*>(pAttackObj);
 		//pAven->GetComponent<Collider2D>()->SetActive(true);
 		pAven->SetDir(iDir);
 		//추가 데미지

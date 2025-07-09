@@ -57,12 +57,18 @@ namespace W
 		Monster* pMonster = GetMonster();
 
 		if (m_pTarget == nullptr)
+		{
+			EventManager::ChangeMonsterFSMState(GetFSM(), Monster::eMonsterState::stand);
 			return;
+		}
 
 		if (m_pTarget->GetState() != GameObject::eState::Active)
+		{
 			m_pTarget = nullptr;
-
-		Player* pPlayer = dynamic_cast<Player*>(m_pTarget);
+			return;
+		}
+		
+		Player* pPlayer = static_cast<Player*>(m_pTarget);
 		Vector3 vTargetPosition = m_pTarget->GetComponent<Collider2D>()->GetPosition();
 		Vector3 vPosition = GetMonster()->GetComponent<Collider2D>()->GetPosition();
 		vTargetPosition.z = 0.f;

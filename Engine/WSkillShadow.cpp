@@ -21,13 +21,11 @@ namespace W
 		//Resources::Load<Texture>(L"shadowe1ffect", L"..\\Resources\\Texture\\Player\\skill\\effect5.png");
 		Effect* pEffect = CreateEffet( L"shadowe1ffect", Vector2(0.f, 0.f), Vector2(158.f, 131.f), 11, 1,
 			Vector2(150.f, 150.f), Vector2(-0.6f, 0.2f), 0.05f);
-		pEffect->SetFunction(std::bind(&SkillShadow::activeskill_shadow, this), 10);
-
+		
 
 		//m_pEffectAtlas = Resources::Load<Texture>(L"shadowe2ffect", L"..\\Resources\\Texture\\Player\\skill\\effect6.png");
 		pEffect = CreateEffet(L"shadowe2ffect",Vector2(0.f, 0.f), Vector2(195.f, 180.f), 16, 1,
 			Vector2(200.f, 200.f), Vector2(-0.4f, 0.2f), 0.05f);
-		pEffect->SetFunction(std::bind(&SkillShadow::create_shadow, this), 4);
 		pEffect->GetComponent<Transform>()->SetScale(2.2f, 2.2f, 0.f);
 
 		//SetSound(Resources::Load<AudioClip>(L"shadowsound", L"..\\Resources\\sound\\skill\\shadow.mp3"), false);
@@ -50,6 +48,7 @@ namespace W
 		m_bCreate = false;
 
 		Effect* pEffect = BattleManager::GetEffect(L"shadowe2ffect");
+		pEffect->SetFunction(std::bind(&SkillShadow::create_shadow, this), 4);
 		StartEffect(pEffect);
 	}
 
@@ -84,6 +83,7 @@ namespace W
 	void SkillShadow::create_shadow()
 	{
 		Effect* pEffect = BattleManager::GetEffect(L"shadowe1ffect");
+		pEffect->SetFunction(std::bind(&SkillShadow::activeskill_shadow, this), 10);
 		StartEffect(pEffect);
 
 		Vector3 vPos = pEffect->GetComponent<Transform>()->GetPosition();

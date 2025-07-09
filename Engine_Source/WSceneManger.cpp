@@ -200,7 +200,7 @@ namespace W
 			//player를 들고있는 오브젝트들이 안전하게 반환할 수 있게 다음 프레임에 삭제
 			pPlayer->SetState(GameObject::eState::Dead);
 
-			EventManager::DeleteObject(pPlayer);
+			EventManager::EraseObject(pPlayer);
 			UINT iSceneID = pPlayer->GetSceneID();
 			UINT iPlayerID = pPlayer->GetObjectID();
 

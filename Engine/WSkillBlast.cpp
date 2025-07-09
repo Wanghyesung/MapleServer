@@ -22,13 +22,13 @@ namespace W
 		Effect* pEffect = CreateEffet(L"blastffect1", Vector2(0.f, 0.f),
 			Vector2(752.f, 358.f), 13, 1, Vector2(750.f, 750.f), Vector2(0.f, 0.f), 0.05f);
 		pEffect->GetComponent<Transform>()->SetScale(5.f, 5.f, 0.f);
-		pEffect->SetFunction(std::bind(&SkillBlast::activeskill_blast, this), 7);
+		
 
 		//Resources::Load<Texture>(L"blastffect2", L"..\\Resources\\Texture\\Player\\skill\\blast\\effect_1.png");
 		pEffect = CreateEffet(L"blastffect2", Vector2(0.f, 0.f),
 			Vector2(735.f, 673.f), 9, 1, Vector2(750.f, 750.f), Vector2(0.f, 0.f), 0.05f);
 		pEffect->GetComponent<Transform>()->SetScale(5.f, 5.f, 0.f);
-		pEffect->SetFunction(std::bind(&SkillBlast::exit, this), 8);
+		
 
 		for (int i = 0; i < 25; ++i)
 		{
@@ -78,6 +78,7 @@ namespace W
 		m_bCreate = false;
 
 		Effect* pEffect = BattleManager::GetEffect(L"blastffect1");
+		pEffect->SetFunction(std::bind(&SkillBlast::activeskill_blast, this), 7);
 		StartEffect(pEffect);
 	}
 	void SkillBlast::Exit()
@@ -88,6 +89,7 @@ namespace W
 	void SkillBlast::activeskill_blast()
 	{
 		Effect* pEffect = BattleManager::GetEffect(L"blastffect2");
+		pEffect->SetFunction(std::bind(&SkillBlast::exit, this), 8);
 		StartEffect(pEffect);
 	}
 

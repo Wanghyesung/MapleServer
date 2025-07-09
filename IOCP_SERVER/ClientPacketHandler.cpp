@@ -45,8 +45,6 @@ bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 	shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 	_pSession->Send(pSendBuffer);
 
-	GRoom.Enter(_strPersonName, _pSession);
-
 	W::EventManager::CreatePlayer(iUserID);
 	return true;
 }

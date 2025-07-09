@@ -28,7 +28,7 @@ namespace W
 
 	PlayerSkill::~PlayerSkill()
 	{
-		EventManager::ReleasePlayerSkill(m_pPlayer->GetPlayerID());
+		//EventManager::ReleasePlayerSkill(m_pPlayer->GetPlayerID());
 
 		std::map<Player::ePlayerSkill, SkillState*>::iterator iter =
 			m_mapSkills.begin();
@@ -68,8 +68,10 @@ namespace W
 		EventManager::InitPlayerSkill(iPlayerID, this);
 
 		auto iter = m_mapSkills.begin();
-		for(iter; iter!=m_mapSkills.end(); ++iter)
+		for (iter; iter != m_mapSkills.end(); ++iter)
+		{
 			EventManager::AddPlayerSkillState(iter->second);
+		}
 	}
 
 	SkillState* PlayerSkill::FindSkillState(Player::ePlayerSkill _eSkill)

@@ -41,8 +41,8 @@ UINT Room::Enter(const string& _strName, shared_ptr<Session> _pSession)
 
 	static_pointer_cast<ClientSession>(_pSession)->SetPersonID(iUserID);
 
-	m_hashPerson.insert(make_pair(_strName, _pSession));
-	m_hashPersonID.insert(make_pair(iUserID, _pSession));
+	m_hashPerson.emplace(_strName, _pSession);
+	m_hashPersonID[iUserID] = _pSession;  
 	m_hashSendMask[iUserID] = true;
 
 	m_iCurCount.fetch_add(1);
@@ -70,7 +70,7 @@ void Room::Exit(const string& _strName, UINT _ID)
 
 void Room::Broadcast(shared_ptr<SendBuffer> _pBuffer)
 {
-	std::vector<std::shared_ptr<Session>> vecTarget;
+	std::vector<std::weak_ptr<Session>> vecTarget;
 	{
 		RLock lock(m_lock);
 		vecTarget.reserve(m_hashPersonID.size());
@@ -83,30 +83,33 @@ void Room::Broadcast(shared_ptr<SendBuffer> _pBuffer)
 
 	for (auto& iter : vecTarget)
 	{
-		iter->Send(_pBuffer);
+		auto session = iter.lock();
+		if(session)
+			session->Send(_pBuffer);
 	}
 }
 
 void Room::BroadcastExcept(shared_ptr<SendBuffer> _pBuffer, shared_ptr<Session> _pExceptSession)
 {
-	std::vector<std::shared_ptr<Session>> vecTarget;
-	{
-		RLock lock(m_lock);
-		vecTarget.reserve(m_hashPersonID.size());
-		for (auto& iter : m_hashPersonID)
-		{
-			if (iter.second == _pExceptSession)
-				continue;
-
-			if (m_hashSendMask[iter.first])
-				vecTarget.push_back(iter.second);
-		}
-	}
-
-	for (auto& iter : vecTarget)
-	{
-		iter->Send(_pBuffer);
-	}
+	assert(nullptr);
+	//std::vector<std::shared_ptr<Session>> vecTarget;
+	//{
+	//	RLock lock(m_lock);
+	//	vecTarget.reserve(m_hashPersonID.size());
+	//	for (auto& iter : m_hashPersonID)
+	//	{
+	//		if (iter.second == _pExceptSession)
+	//			continue;
+	//
+	//		if (m_hashSendMask[iter.first])
+	//			vecTarget.push_back(iter.second);
+	//	}
+	//}
+	//
+	//for (auto& iter : vecTarget)
+	//{
+	//	iter->Send(_pBuffer);
+	//}
 }
 
 void Room::Unicast(shared_ptr<SendBuffer> _pBuffer, const vector<UINT>& _vecTarget)
@@ -124,7 +127,9 @@ void Room::Unicast(shared_ptr<SendBuffer> _pBuffer, const vector<UINT>& _vecTarg
 
 	for (auto& iter : vecTarget)
 	{
-		m_hashPersonID[iter]->Send(_pBuffer);
+		auto session = m_hashPersonID[iter].lock();
+		if (session)
+			session->Send(_pBuffer);
 	}
 }
 
@@ -143,7 +148,9 @@ void Room::Unicast(shared_ptr<SendBuffer> _pBuffer, const unordered_set<UINT>& _
 
 	for (auto& iter : vecTarget)
 	{
-		m_hashPersonID[iter]->Send(_pBuffer);
+		auto session = m_hashPersonID[iter].lock();
+		if (session)
+			session->Send(_pBuffer);
 	}
 }
 
@@ -161,7 +168,9 @@ void Room::UnicastExcept(shared_ptr<SendBuffer> _pBuffer, const vector<UINT>& _s
 	}
 	for (auto& iter : vecTarget)
 	{
-		m_hashPersonID[iter]->Send(_pBuffer);
+		auto session = m_hashPersonID[iter].lock();
+		if (session)
+			session->Send(_pBuffer);
 	}
 }
 
@@ -173,7 +182,9 @@ vector<UINT> Room::GetPersons()
 		vecID.reserve(m_hashPerson.size());
 		for (auto iter : m_hashPerson)
 		{
-			UINT ID = static_pointer_cast<ClientSession>(iter.second)->GetPersonID();
+			auto session = iter.second.lock();
+			
+			UINT ID = static_pointer_cast<ClientSession>(session)->GetPersonID();
 			vecID.push_back(ID);
 		}
 	}
@@ -186,7 +197,7 @@ shared_ptr<Session> Room::GetPersonByID(UINT _ID)
 	if(m_hashPersonID.find(_ID) == m_hashPersonID.end())
 		return nullptr;
 	
-	return m_hashPersonID[_ID];
+	return m_hashPersonID[_ID].lock();
 }
 
 UINT Room::GetUserID()
