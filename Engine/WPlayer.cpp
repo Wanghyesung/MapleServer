@@ -90,6 +90,8 @@ namespace W
 		//AddComponent<PlayerScript>()->Initialize();
 		SetState(eState::Active);
 		GetScript<PlayerScript>()->RegisterSkill();
+
+		m_strCurStateName = L"_jump";
 	}
 
 	void Player::Update()
@@ -141,7 +143,7 @@ namespace W
 
 	void Player::SetAlert(bool _bAlert)
 	{
-		dynamic_cast<PlayerHead*>(m_vecChildObj[1])->SetAlert(_bAlert);
+		static_cast<PlayerHead*>(m_vecChildObj[1])->SetAlert(_bAlert);
 		m_bAlert = _bAlert;
 
 		if (m_bAlert)
@@ -200,9 +202,9 @@ namespace W
 	{
 		m_bAnimStop = _bStop;
 
-		dynamic_cast<PlayerBody*>(m_vecChildObj[0])->SetStop(_bStop);
-		dynamic_cast<PlayerHead*>(m_vecChildObj[1])->SetStop(_bStop);
-		dynamic_cast<PlayerArm*>(m_vecChildObj[2])->SetStop(_bStop);
+		static_cast<PlayerBody*>(m_vecChildObj[0])->SetStop(_bStop);
+		static_cast<PlayerHead*>(m_vecChildObj[1])->SetStop(_bStop);
+		static_cast<PlayerArm*>(m_vecChildObj[2])->SetStop(_bStop);
 	}
 
 	void Player::child_update()
@@ -236,8 +238,8 @@ namespace W
 			pkt.set_state(WstringToString(m_strCurStateName));
 
 		UCHAR cLayer = (UCHAR)eLayerType::Player;
-		UINT iObjectID = m_iPlayerID;
-		pkt.set_layer_id((cLayer << 24) | m_iPlayerID);
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
 
 		UCHAR cDir = m_iDir > 0 ? 1 : 0; 
 		UCHAR cAnimIdx = pAnim->GetActiveAnimation()->GetCurIndex();
@@ -254,19 +256,19 @@ namespace W
 	}
 	void Player::Reset_Animation()
 	{
-		dynamic_cast<PlayerBody*>(m_vecChildObj[0])->SetAnimationIndex();
-		dynamic_cast<PlayerHead*>(m_vecChildObj[1])->SetAnimationIndex();
-		dynamic_cast<PlayerArm*>(m_vecChildObj[2])->SetAnimationIndex();
+		static_cast<PlayerBody*>(m_vecChildObj[0])->SetAnimationIndex();
+		static_cast<PlayerHead*>(m_vecChildObj[1])->SetAnimationIndex();
+		static_cast<PlayerArm*>(m_vecChildObj[2])->SetAnimationIndex();
 	}
 
 	void Player::SetHair(UINT _iHairNum)
 	{
-		dynamic_cast<PlayerHead*>(m_vecChildObj[1])->SetHair(_iHairNum);
+		static_cast<PlayerHead*>(m_vecChildObj[1])->SetHair(_iHairNum);
 		Reset_Animation();
 	}
 	void Player::SetEye(UINT _iEyeNum)
 	{
-		dynamic_cast<PlayerHead*>(m_vecChildObj[1])->SetEye(_iEyeNum);
+		static_cast<PlayerHead*>(m_vecChildObj[1])->SetEye(_iEyeNum);
 		Reset_Animation();
 	}
 }

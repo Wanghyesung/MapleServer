@@ -123,7 +123,7 @@ namespace W
 			iCall *= 2;
 		
 		PlayerAttackObject* pAttackObj = m_pOwner->GetScript<PlayerScript>()->GetPlayerSkill(L"shuriken");
-		Shuriken* pShuriken = dynamic_cast<Shuriken*>(pAttackObj);
+		Shuriken* pShuriken = static_cast<Shuriken*>(pAttackObj);
 		//pShuriken->GetComponent<Collider2D>()->SetActive(true);
 		pShuriken->SetDir(m_pOwner->GetDir());
 

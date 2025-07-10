@@ -87,40 +87,40 @@ namespace W
 
 	void PlayerHead::Update()
 	{
-		GameObject::Update();
-
-		m_pPlayerHair->Update();
-		m_pPlayerEyes->Update();
-		m_pPlayerHat->Update();
+		//GameObject::Update();
+		//
+		//m_pPlayerHair->Update();
+		//m_pPlayerEyes->Update();
+		//m_pPlayerHat->Update();
 	}
 	void PlayerHead::LateUpdate()
 	{
-		Animator* pAnimator = GetComponent<Animator>();
-		Vector3 vPlayerPos = m_pPlayer->GetComponent<Transform>()->GetPosition();
-		GetComponent<Transform>()->SetPosition(vPlayerPos);
-
-		int iDir = m_pPlayer->GetDir();
-		std::wstring strDir;
-		std::wstring strState;
-		strDir = iDir > 0 ? L"_right" : L"_left";
-
-		strState = m_pPlayer->GetCurStateName();
-
-		std::wstring strAnim = L"head" + strState + strDir;
-
-		if (m_strCurAnim != strAnim)
-		{
-			m_strCurAnim = strAnim;
-			bool bLoop = m_pPlayer->IsLoop();
-			pAnimator->Play(strAnim, bLoop);
-		}
-
-		GameObject::LateUpdate();
-
-		m_pPlayerHair->LateUpdate();
-		m_pPlayerEyes->LateUpdate();
-		m_pPlayerHat->LateUpdate();
-	}
+		//Animator* pAnimator = GetComponent<Animator>();
+		//Vector3 vPlayerPos = m_pPlayer->GetComponent<Transform>()->GetPosition();
+		//GetComponent<Transform>()->SetPosition(vPlayerPos);
+		//
+		//int iDir = m_pPlayer->GetDir();
+		//std::wstring strDir;
+		//std::wstring strState;
+		//strDir = iDir > 0 ? L"_right" : L"_left";
+		//
+		//strState = m_pPlayer->GetCurStateName();
+		//
+		//std::wstring strAnim = L"head" + strState + strDir;
+		//
+		//if (m_strCurAnim != strAnim)
+		//{
+		//	m_strCurAnim = strAnim;
+		//	bool bLoop = m_pPlayer->IsLoop();
+		//	pAnimator->Play(strAnim, bLoop);
+		//}
+		//
+		//GameObject::LateUpdate();
+		//
+		//m_pPlayerHair->LateUpdate();
+		//m_pPlayerEyes->LateUpdate();
+		//m_pPlayerHat->LateUpdate();
+	}	//
 
 	void PlayerHead::SetAlert(bool _bAlert)
 	{

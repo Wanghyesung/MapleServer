@@ -89,7 +89,7 @@ namespace W
 				continue;
 
 			ObjectPoolManager::AddObjectPool(pAttackObj->GetName(), pAttackObj);
-			SceneManger::Erase(m_vecPlayer_Pool[i], pAttackObj->GetPlayer()->GetPlayerID());
+			SceneManger::Erase(m_vecPlayer_Pool[i], pAttackObj->GetPlayer()->GetObjectID());
 
 			pAttackObj->Off();
 		}

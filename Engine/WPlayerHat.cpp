@@ -75,7 +75,7 @@ namespace W
 
 		Animator* pAnimator = GetComponent<Animator>();
 		Vector3 vPlayerPos = m_pPlayerHead->GetComponent<Transform>()->GetPosition();
-		vPlayerPos.z -= 0.02f;
+		vPlayerPos.z -= 0.1f;
 		GetComponent<Transform>()->SetPosition(vPlayerPos);
 
 		Player* pPlayer = m_pPlayerHead->GetPlayer();

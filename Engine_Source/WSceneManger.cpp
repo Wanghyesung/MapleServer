@@ -109,11 +109,16 @@ namespace W
 		pkt.set_pool_object(_pGameObject->IsPoolObject());
 		pkt.set_scene_layer_deleteid(((UCHAR)iSceneID << 24) | (((UCHAR)eLayer) << 16) | iObjectID);
 
+		//무조건 패킷을 전송해야하는 클라
 		auto& vecClient = _pGameObject->GetExclusiveClients();
 		unordered_set<UINT> setTarget;
 		for (int i = 0; i < vecClient.size(); ++i)
 			setTarget.insert(vecClient[i]);
+
 		setTarget.insert(_iPlayerID);
+
+		for (UINT ID : SceneManger::GetPlayerIDs(iSceneID))
+			setTarget.insert(ID);
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.Unicast(pSendBuffer, setTarget);
