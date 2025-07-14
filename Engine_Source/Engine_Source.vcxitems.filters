@@ -159,6 +159,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)WLight.cpp">
       <Filter>GameObject\Component</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)WPathManager.cpp">
+      <Filter>Scene\Manger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)WEntity.h">
@@ -250,6 +253,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)WLight.h">
       <Filter>GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)WPathManager.h">
+      <Filter>Scene\Manger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

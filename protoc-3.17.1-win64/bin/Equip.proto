@@ -1,14 +1,13 @@
 syntax = "proto3";
 package Protocol;
 
-//repeated uint64 victims = 3;
 
 //클라가 서버에게 
 message C_EQUIP
 {
 	uint32 scene_layer_playerid_equipid = 1;
 	
-	string item_name = 2;
+	int32 item_id = 2;
 }
 
 //서버가 다른 클라에게
@@ -16,10 +15,6 @@ message S_EQUIP
 {
 	uint32 scene_layer_playerid_equipid = 1;
 
-	string item_name = 2;
+	int32 item_id = 2;
 }
 
-
-//로그인
-//채팅 던지기
-//나가기

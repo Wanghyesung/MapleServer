@@ -44,28 +44,22 @@ namespace W
 
 		pCollider->SetSize(Vector2(0.5f, 0.5f));
 
-		m_vecChildObj.resize(3);
-
+		m_vecChildObj.resize(ePlayerPart::End);
 
 		PlayerBody* pPlayerBody = new PlayerBody();
 		pPlayerBody->SetPlayer(this);
 		pPlayerBody->Initialize();
-		pPlayerBody->SetEquipBottom(L"10_bottom");
-		pPlayerBody->SetEquipTop(L"10_top");
-		pPlayerBody->SetEquipShoes(L"10_shoes");
-		m_vecChildObj[0] = pPlayerBody;
+		m_vecChildObj[ePlayerPart::Body] = pPlayerBody;
 
 		PlayerHead* pPlayerHead = new PlayerHead();
 		pPlayerHead->SetPlayer(this);
 		pPlayerHead->Initialize();
-		pPlayerHead->SetEquipHat(L"10_hat");
-		m_vecChildObj[1] = pPlayerHead;
+		m_vecChildObj[ePlayerPart::Head] = pPlayerHead;
 
 		PlayerArm* pPlayerArm = new PlayerArm();
 		pPlayerArm->SetPlayer(this);
 		pPlayerArm->Initialize();
-		pPlayerArm->SetEquipWeapon(L"10_weapon");
-		m_vecChildObj[2] = pPlayerArm;
+		m_vecChildObj[ePlayerPart::Arm] = pPlayerArm;
 
 		m_pShadow = new Shadow();
 
@@ -87,7 +81,6 @@ namespace W
 	}
 	void Player::Initialize()
 	{
-		//AddComponent<PlayerScript>()->Initialize();
 		SetState(eState::Active);
 		GetScript<PlayerScript>()->RegisterSkill();
 
@@ -131,6 +124,25 @@ namespace W
 		update_state();
 	}
 
+	UINT Player::GetPlayerEquipID(eEquipType _eEquipType)
+	{
+		switch (_eEquipType)
+		{
+		case eEquipType::Hat:
+			return GetPlayerChild<PlayerHead>(ePlayerPart::Head)->GetHatEquipID();
+		case eEquipType::Top:
+			return GetPlayerChild<PlayerBody>(ePlayerPart::Body)->GetTopEquipID();
+		case eEquipType::Bottom:
+			return GetPlayerChild<PlayerBody>(ePlayerPart::Body)->GetBottomEquipID();
+		case eEquipType::Shoes:
+			return GetPlayerChild<PlayerBody>(ePlayerPart::Body)->GetShoesEquipID();
+		case eEquipType::Weapon:
+			return GetPlayerChild<PlayerArm>(ePlayerPart::Arm)->GetWeaponEquipID();
+		}
+		return {};
+	}
+
+
 	void Player::ActiveShadow()
 	{
 		m_bActiveShadow = true;
@@ -143,68 +155,91 @@ namespace W
 
 	void Player::SetAlert(bool _bAlert)
 	{
-		static_cast<PlayerHead*>(m_vecChildObj[1])->SetAlert(_bAlert);
+		static_cast<PlayerHead*>(m_vecChildObj[ePlayerPart::Head])->SetAlert(_bAlert);
 		m_bAlert = _bAlert;
 
 		if (m_bAlert)
 			m_bAlertTime = 2.f;
 	}
 
-	void Player::SetEquip(eEquipType _eType, const std::wstring _strEquipName)
+	void Player::SetEquip(eEquipType _eType, UINT _iItemID)
+	{
+		auto wpItem = ItemManager::GetItemInfo(_iItemID);
+		if (auto spItem = wpItem.lock())
+		{
+			const wstring& strItemName = StringToWString(spItem->strItemName);
+			switch (_eType)
+			{
+			case eEquipType::Hat:
+				GetPlayerChild<PlayerHead>(ePlayerPart::Head)->SetEquipHat(strItemName);
+				break;
+			case eEquipType::Top:
+				GetPlayerChild<PlayerBody>(ePlayerPart::Body)->SetEquipTop(strItemName);
+				break;
+			case eEquipType::Bottom:
+				GetPlayerChild<PlayerBody>(ePlayerPart::Body)->SetEquipBottom(strItemName);
+				break;
+			case eEquipType::Shoes:
+				GetPlayerChild<PlayerBody>(ePlayerPart::Body)->SetEquipShoes(strItemName);
+				break;
+			case eEquipType::Weapon:
+				GetPlayerChild<PlayerArm>(ePlayerPart::Arm)->SetEquipWeapon(strItemName);
+				break;
+			}
+
+			Reset_Animation();
+		}
+	}
+
+	void Player::DisableEquip(eEquipType _eType)
 	{
 		switch (_eType)
 		{
 		case eEquipType::Hat:
-			GetPlayerChild<PlayerHead>()->SetEquipHat(_strEquipName);
+			GetPlayerChild<PlayerHead>(ePlayerPart::Head)->SetEquipHat(L"");
 			break;
 		case eEquipType::Top:
-			GetPlayerChild<PlayerBody>()->SetEquipTop(_strEquipName);
+			GetPlayerChild<PlayerBody>(ePlayerPart::Body)->SetEquipTop(L"");
 			break;
 		case eEquipType::Bottom:
-			GetPlayerChild<PlayerBody>()->SetEquipBottom(_strEquipName);
+			GetPlayerChild<PlayerBody>(ePlayerPart::Body)->SetEquipBottom(L"");
 			break;
 		case eEquipType::Shoes:
-			GetPlayerChild<PlayerBody>()->SetEquipShoes(_strEquipName);
+			GetPlayerChild<PlayerBody>(ePlayerPart::Body)->SetEquipShoes(L"");
 			break;
 		case eEquipType::Weapon:
-			GetPlayerChild<PlayerArm>()->SetEquipWeapon(_strEquipName);
+			GetPlayerChild<PlayerArm>(ePlayerPart::Arm)->SetEquipWeapon(L"");
 			break;
 		}
 
 		Reset_Animation();
 	}
 
-	void Player::DisableEquip(eEquipType _eType, const std::wstring _strEquipName)
+	UINT64 Player::GetPlayerEquips()
 	{
-		switch (_eType)
-		{
-		case eEquipType::Hat:
-			GetPlayerChild<PlayerHead>()->SetEquipHat(L"");
-			break;
-		case eEquipType::Top:
-			GetPlayerChild<PlayerBody>()->SetEquipTop(L"");
-			break;
-		case eEquipType::Bottom:
-			GetPlayerChild<PlayerBody>()->SetEquipBottom(L"");
-			break;
-		case eEquipType::Shoes:
-			GetPlayerChild<PlayerBody>()->SetEquipShoes(L"");
-			break;
-		case eEquipType::Weapon:
-			GetPlayerChild<PlayerArm>()->SetEquipWeapon(L"");
-			break;
-		}
+		UINT iHairID = GetPlayerChild<PlayerHead>(ePlayerPart::Head)->GetHairID();
+		UINT iEyeID = GetPlayerChild<PlayerHead>(ePlayerPart::Head)->GetEyeID();
+		UINT iHatID = GetPlayerChild<PlayerHead>(ePlayerPart::Head)->GetHatEquipID();
+		UINT iTopID = GetPlayerChild<PlayerBody>(ePlayerPart::Body)->GetTopEquipID();
+		UINT iBottomID = GetPlayerChild<PlayerBody>(ePlayerPart::Body)->GetBottomEquipID();
+		UINT iShoesID = GetPlayerChild<PlayerBody>(ePlayerPart::Body)->GetShoesEquipID();
+		UINT iWeaponID = GetPlayerChild<PlayerArm>(ePlayerPart::Arm)->GetWeaponEquipID();
 
-		Reset_Animation();
+		UINT64 iEquipIDs =
+			(UINT64)iHairID | ((UINT64)iEyeID << 8) | ((UINT64)iHatID << 16)
+			| ((UINT64)iTopID << 24) | ((UINT64)iBottomID << 32) | ((UINT64)iShoesID << 40)
+			| ((UINT64)iWeaponID << 48);
+
+		return iEquipIDs;
 	}
 
 	void Player::SetAnimStop(bool _bStop)
 	{
 		m_bAnimStop = _bStop;
 
-		static_cast<PlayerBody*>(m_vecChildObj[0])->SetStop(_bStop);
-		static_cast<PlayerHead*>(m_vecChildObj[1])->SetStop(_bStop);
-		static_cast<PlayerArm*>(m_vecChildObj[2])->SetStop(_bStop);
+		GetPlayerChild<PlayerBody>(ePlayerPart::Body)->SetStop(_bStop);
+		GetPlayerChild<PlayerBody>(ePlayerPart::Head)->SetStop(_bStop);
+		GetPlayerChild<PlayerBody>(ePlayerPart::Arm)->SetStop(_bStop);
 	}
 
 	void Player::child_update()
@@ -256,19 +291,19 @@ namespace W
 	}
 	void Player::Reset_Animation()
 	{
-		static_cast<PlayerBody*>(m_vecChildObj[0])->SetAnimationIndex();
-		static_cast<PlayerHead*>(m_vecChildObj[1])->SetAnimationIndex();
-		static_cast<PlayerArm*>(m_vecChildObj[2])->SetAnimationIndex();
+		GetPlayerChild<PlayerBody>(ePlayerPart::Body)->SetAnimationIndex();
+		GetPlayerChild<PlayerBody>(ePlayerPart::Head)->SetAnimationIndex();
+		GetPlayerChild<PlayerBody>(ePlayerPart::Arm)->SetAnimationIndex();
 	}
 
 	void Player::SetHair(UINT _iHairNum)
 	{
-		static_cast<PlayerHead*>(m_vecChildObj[1])->SetHair(_iHairNum);
+		static_cast<PlayerHead*>(m_vecChildObj[ePlayerPart::Head])->SetHair(_iHairNum);
 		Reset_Animation();
 	}
 	void Player::SetEye(UINT _iEyeNum)
 	{
-		static_cast<PlayerHead*>(m_vecChildObj[1])->SetEye(_iEyeNum);
+		static_cast<PlayerHead*>(m_vecChildObj[ePlayerPart::Head])->SetEye(_iEyeNum);
 		Reset_Animation();
 	}
 }

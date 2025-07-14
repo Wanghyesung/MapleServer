@@ -12,7 +12,7 @@ namespace W
 #define ATTACK1_FRAME 2
 
 	PlayerSwing1::PlayerSwing1():
-		m_iSwingCount(1)
+		m_iSwingCount(0)
 	{
 		SetType(Player::ePlayerState::swing1);
 		SetStateName(L"_swing1");
@@ -26,7 +26,7 @@ namespace W
 	void PlayerSwing1::Update()
 	{
 		Player* pPlayer = GetPlayer();
-		PlayerBody* pBody = pPlayer->GetPlayerChild<PlayerBody>();
+		PlayerBody* pBody = pPlayer->GetPlayerChild<PlayerBody>(Player::ePlayerPart::Body);
 		Animation* pBodyAnim = pBody->GetComponent<Animator>()->GetActiveAnimation();
 
 		if (pBodyAnim == nullptr)

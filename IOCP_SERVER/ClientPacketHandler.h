@@ -47,20 +47,21 @@ enum PACKET_TYPE
 
 	S_CREATE = 1012,
 	C_CREATE = 1013,
-	S_DELETE = 1014,
+	S_PLAYER_CREATE = 1014,
+	S_DELETE = 1015,
 
 		
 	//물체 위치
-	S_STATE = 1015,
+	S_STATE = 1016,
 
-	S_TRANSFORM = 1016,
+	S_TRANSFORM = 1017,
 
-	S_SKILL = 1017,
-	C_SKILL = 1018,
+	S_SKILL = 1018,
+	C_SKILL = 1019,
 
-	S_EXIT = 1019,
-	C_EXIT = 1020,
-	S_NEW_EXIT = 1021,
+	S_EXIT = 1020,
+	C_EXIT = 1021,
+	S_NEW_EXIT = 1022,
 };
 
 
@@ -126,6 +127,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_NEW_EXIT _pkt) { return _MakeSendBuffer(_pkt, S_NEW_EXIT); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_EQUIP _pkt) { return _MakeSendBuffer(_pkt, S_EQUIP); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_CREATE _pkt) { return _MakeSendBuffer(_pkt, S_CREATE); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_PLAYER_CREATE _pkt) { return _MakeSendBuffer(_pkt, S_PLAYER_CREATE); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_DELETE _pkt) { return _MakeSendBuffer(_pkt, S_DELETE); }
 	
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_MAP _pkt) { return _MakeSendBuffer(_pkt, S_MAP); }

@@ -51,7 +51,7 @@ namespace W
 	void SkillLuck::Update()
 	{
 		Player* pPlayer = GetPlayer();
-		PlayerBody* pBody = pPlayer->GetPlayerChild<PlayerBody>();
+		PlayerBody* pBody = pPlayer->GetPlayerChild<PlayerBody>(Player::ePlayerPart::Body);
 		Animation* pBodyAnim = pBody->GetComponent<Animator>()->GetActiveAnimation();
 
 		int iAnimIndex = pBodyAnim->GetCurIndex();

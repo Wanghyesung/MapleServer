@@ -2,7 +2,19 @@ syntax = "proto3";
 package Protocol;
 
 import "Map.proto";
-//repeated uint64 victims = 3;
+import "Transform.proto";
+
+message PlayerInfo 
+{	
+	uint32 scene_layer_createid_id = 1;
+	
+	TransformInfo transform =2;
+	
+	string state = 3;
+	int32 state_value = 4;
+	 
+	int64 player_equip_ids = 5;
+}
 
 //클라가 서버에게 (이건 UI전용 요청 ex: 스킬 오브젝트, 아이템 떨구기)
 message C_CREATE
@@ -15,6 +27,12 @@ message C_CREATE
 message S_CREATE
 {
 	ObjectInfo object_info =1;
+}
+
+//기존 오브젝트보다 던질 정보들이 많기 때문에 따로 패킷으로 생성
+message S_PLAYER_CREATE
+{
+	repeated PlayerInfo player_info = 1;
 }
 
 //서버가 클라에게 (브로드캐스팅으로 던질거)

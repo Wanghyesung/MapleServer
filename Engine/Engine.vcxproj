@@ -233,6 +233,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WDemianSpear1.h" />
     <ClInclude Include="WDemianVine.h" />
     <ClInclude Include="WGameObjectManager.h" />
+    <ClInclude Include="WItemManager.h" />
     <ClInclude Include="WObjectPoolManager.h" />
     <ClInclude Include="WPacket.h" />
     <ClInclude Include="WPacketManager.h" />
@@ -401,6 +402,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WDemianSpear1.cpp" />
     <ClCompile Include="WDemianVine.cpp" />
     <ClCompile Include="WGameObjectManager.cpp" />
+    <ClCompile Include="WItemManager.cpp" />
     <ClCompile Include="WObjectPoolManager.cpp" />
     <ClCompile Include="WPacket.cpp" />
     <ClCompile Include="WPacketManager.cpp" />

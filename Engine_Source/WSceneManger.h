@@ -52,7 +52,11 @@ namespace W
 		static void RetrieveAttackObject(UINT _iPlayerID, UINT _iPrevSceneID);
 		static void AddPlayerScene(Player* pPlayer, UINT _iSceneID);
 
+
+		static void SendPlayersInfo(UINT _iPlayerID, UINT _iSceneID);
 		static void SendEnterScene(UINT _iPlayerID, UINT _iSceneID);
+
+		static void MakePlayerInfo(GameObject* _pPlayer, Protocol::PlayerInfo& _info);
 	private:
 		static UINT SCENE_IDX;
 		static std::unordered_map<UINT, Scene*> m_hashSceneID;

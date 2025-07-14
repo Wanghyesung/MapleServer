@@ -4,7 +4,7 @@
 #include "WPlayerHat.h"
 #include "WEyes.h"
 #include "WPlayerHair.h"
-
+#include "WItemManager.h"
 namespace W
 {
 	UINT PlayerHead::CREATE_ID = 0;
@@ -87,40 +87,12 @@ namespace W
 
 	void PlayerHead::Update()
 	{
-		//GameObject::Update();
-		//
-		//m_pPlayerHair->Update();
-		//m_pPlayerEyes->Update();
-		//m_pPlayerHat->Update();
+		
 	}
 	void PlayerHead::LateUpdate()
 	{
-		//Animator* pAnimator = GetComponent<Animator>();
-		//Vector3 vPlayerPos = m_pPlayer->GetComponent<Transform>()->GetPosition();
-		//GetComponent<Transform>()->SetPosition(vPlayerPos);
-		//
-		//int iDir = m_pPlayer->GetDir();
-		//std::wstring strDir;
-		//std::wstring strState;
-		//strDir = iDir > 0 ? L"_right" : L"_left";
-		//
-		//strState = m_pPlayer->GetCurStateName();
-		//
-		//std::wstring strAnim = L"head" + strState + strDir;
-		//
-		//if (m_strCurAnim != strAnim)
-		//{
-		//	m_strCurAnim = strAnim;
-		//	bool bLoop = m_pPlayer->IsLoop();
-		//	pAnimator->Play(strAnim, bLoop);
-		//}
-		//
-		//GameObject::LateUpdate();
-		//
-		//m_pPlayerHair->LateUpdate();
-		//m_pPlayerEyes->LateUpdate();
-		//m_pPlayerHat->LateUpdate();
-	}	//
+
+	}	
 
 	void PlayerHead::SetAlert(bool _bAlert)
 	{
@@ -137,23 +109,21 @@ namespace W
 		m_pPlayerHat->SetPlayerEquip(_strEquipName);
 	}
 
+
+	const wstring& PlayerHead::GetHatEquipName()
+	{
+		return m_pPlayerHat->GetEquipName();
+	}
+
+
 	void PlayerHead::SetAnimationIndex()
 	{
 		if (m_strCurAnim.size() != 0)
 			GetComponent<Animator>()->GetActiveAnimation()->SetIndex(0);
-		if (m_pPlayerHair->GetCurAnimName().size() != 0)
-			m_pPlayerHair->GetComponent<Animator>()->GetActiveAnimation()->SetIndex(0);
-		if (m_pPlayerEyes->GetCurAnimName().size() != 0)
-			m_pPlayerEyes->GetComponent<Animator>()->GetActiveAnimation()->SetIndex(0);
-		if (m_pPlayerHat->GetCurAnimName().size() != 0)
-			m_pPlayerHat->GetComponent<Animator>()->GetActiveAnimation()->SetIndex(0);
 	}
 	void PlayerHead::SetStop(bool _bStop)
 	{
 		GetComponent<Animator>()->Stop(_bStop);
-		m_pPlayerHair->GetComponent<Animator>()->Stop(_bStop);
-		m_pPlayerEyes->GetComponent<Animator>()->Stop(_bStop);
-		m_pPlayerHat->GetComponent<Animator>()->Stop(_bStop);
 	}
 
 	void PlayerHead::SetHair(UINT _iHairNum)

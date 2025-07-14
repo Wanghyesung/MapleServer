@@ -100,39 +100,7 @@ namespace W
 	}
 	void Eyes::LateUpdate()
 	{
-		Animator* pAnimator = GetComponent<Animator>();
-		Vector3 vPlayerPos = m_pPlayerHead->GetComponent<Transform>()->GetPosition();
-		GetComponent<Transform>()->SetPosition(vPlayerPos);
-
-		Player* pPlayer = m_pPlayerHead->GetPlayer();
-
-		int iDir = pPlayer->GetDir();
-		std::wstring strDir;
-		std::wstring strState;
-		std::wstring strEye = L"eye";
-		strDir = iDir > 0 ? L"_right" : L"_left";
-
-		strState = pPlayer->GetCurStateName();
-
-		if (m_bAlert)
-			strEye += L"alert";
-
-		std::wstring strNum = std::to_wstring(m_iEyeNumber);
-
-		std::wstring strAnim = strEye + strState + strDir + strNum;
-
-		if (m_strCurAnim != strAnim)
-		{
-			Animation* pAnim = m_pPlayerHead->GetComponent<Animator>()->GetActiveAnimation();
-
-			m_strCurAnim = strAnim;
-			bool bLoop = pPlayer->IsLoop();
-			pAnimator->Play(strAnim, bLoop);
-
-			pAnimator->GetActiveAnimation()->SetIndex(pAnim->GetCurIndex(), pAnim->GetCurTime());
-		}
-
-		GameObject::LateUpdate();
+		
 	}
 
 

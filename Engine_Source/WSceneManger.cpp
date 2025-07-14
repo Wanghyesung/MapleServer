@@ -204,8 +204,9 @@ namespace W
 		{
 			//player를 들고있는 오브젝트들이 안전하게 반환할 수 있게 다음 프레임에 삭제
 			pPlayer->SetState(GameObject::eState::Dead);
-
+			ObjectPoolManager::AddObjectPool(pPlayer->GetName(), pPlayer);
 			EventManager::EraseObject(pPlayer);
+
 			UINT iSceneID = pPlayer->GetSceneID();
 			UINT iPlayerID = pPlayer->GetObjectID();
 
@@ -308,6 +309,17 @@ namespace W
 
 		pPrevScene->OnExitPlayer(iPlayerID);
 		pNextScene->OnEnterPlayer(iPlayerID);
+
+
+		// 다음 씬에 기존의 플레이어들에게 전달
+		Protocol::S_PLAYER_CREATE pkt;
+		Protocol::PlayerInfo tInfo = {};
+		
+		MakePlayerInfo(_pPlayer, tInfo);
+		*pkt.add_player_info() = tInfo;
+		
+		shared_ptr<SendBuffer> pBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pBuffer,GetPlayerIDs(_iNextSceneID));
 	}
 
 
@@ -334,6 +346,22 @@ namespace W
 		m_hashPlayerScene[_iSceneID].push_back(pPlayer->GetPlayerID());
 	}
 
+	void SceneManger::SendPlayersInfo(UINT _iPlayerID, UINT _iSceneID)
+	{
+		Protocol::S_PLAYER_CREATE pkt;
+		vector<GameObject*> vecPlayer = SceneManger::FindAllPlayer(_iSceneID);
+		for (GameObject* pGameObj : vecPlayer)
+		{
+			Protocol::PlayerInfo tInfo = {};
+			MakePlayerInfo(pGameObj, tInfo);
+
+			*pkt.add_player_info() = tInfo;		
+		}
+
+		shared_ptr<SendBuffer> pBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.GetPersonByID(_iPlayerID)->Send(pBuffer);
+	}
+
 	void SceneManger::SendEnterScene(UINT _iPlayerID, UINT _iSceneID)
 	{
 		// monster, monsterattack, player, , playerattack
@@ -344,15 +372,12 @@ namespace W
 		Protocol::S_MAP pkt;
 		auto pMonster = pScene->GetLayer(W::eLayerType::Monster)->GetGameObjects();
 		auto pMonsterAttack = pScene->GetLayer(W::eLayerType::MonsterAttack)->GetGameObjects();
-		auto pPlayer = pScene->GetLayer(W::eLayerType::Player)->GetGameObjects();
-		pPlayer.erase(_iPlayerID);
 		auto pPlayerAttack = pScene->GetLayer(W::eLayerType::AttackObject)->GetGameObjects();
 		auto pObject = pScene->GetLayer(W::eLayerType::Object)->GetGameObjects();
 		auto pUI = pScene->GetLayer(W::eLayerType::UI)->GetGameObjects();
 
 		vecObjects.push_back(move(pMonster));
 		vecObjects.push_back(move(pMonsterAttack));
-		vecObjects.push_back(move(pPlayer));
 		vecObjects.push_back(move(pPlayerAttack));
 		vecObjects.push_back(move(pObject));
 		vecObjects.push_back(move(pUI));
@@ -369,7 +394,6 @@ namespace W
 				UINT iCreateID = pGameObj->GetCreateID();
 				UINT iObjectID = pGameObj->GetObjectID();
 				tInfo.set_scene_layer_createid_id((UCHAR)_iSceneID << 24 | (UCHAR)eLayer << 16 | iCreateID << 8 | iObjectID);
-				//tInfo.set_state();
 
 				Transform* pTr = pGameObj->GetComponent<Transform>();
 				const Vector3 vPosition = pTr->GetPosition();
@@ -398,6 +422,37 @@ namespace W
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.GetPersonByID(_iPlayerID)->Send(pSendBuffer);
 
+	}
+
+	void SceneManger::MakePlayerInfo(GameObject* _pPlayer, Protocol::PlayerInfo& _info)
+	{
+		Player* pPlayer = static_cast<Player*>(_pPlayer);
+
+		W::eLayerType eLayer = _pPlayer->GetLayerType();
+		UINT iCreateID = pPlayer->GetCreateID();
+		UINT iObjectID = pPlayer->GetObjectID();
+		_info.set_scene_layer_createid_id((UCHAR)pPlayer->GetSceneID() << 24 | (UCHAR)eLayer << 16 | iCreateID << 8 | iObjectID);
+
+		Transform* pTr = pPlayer->GetComponent<Transform>();
+		const Vector3 vPosition = pTr->GetPosition();
+		const Vector3 vRotation = pTr->GetRotation();
+		Protocol::TransformInfo* tTrInfo = _info.mutable_transform();
+
+		tTrInfo->set_p_x(vPosition.x);	tTrInfo->set_p_y(vPosition.y);	tTrInfo->set_p_z(vPosition.z);
+		tTrInfo->set_r_x(vRotation.x);	tTrInfo->set_r_y(vRotation.y);	tTrInfo->set_r_z(vRotation.z);
+
+		UCHAR cDir = pPlayer->GetDir();
+		CHAR cAnimIdx = 0;
+		Animation* pAnim = pPlayer->GetPlayerChild<GameObject>(Player::ePlayerPart::Body)->
+			GetComponent<Animator>()->GetActiveAnimation();
+		if (pAnim)
+			cAnimIdx = pAnim->GetCurIndex();
+		UCHAR cAlert = pPlayer->IsAlert() ? 1 : 0;
+		UCHAR cShadow = pPlayer->IsShadow() ? 1 : 0;
+		_info.set_state_value((cShadow << 24) | (cAlert << 16) | (cDir << 8) | cAnimIdx);
+		_info.set_state(WstringToString(pPlayer->GetCurStateName()));
+		
+		_info.set_player_equip_ids(pPlayer->GetPlayerEquips());
 	}
 
 	

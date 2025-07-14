@@ -70,7 +70,7 @@ namespace W
 		static void StartScene(UINT _iPlayerID, UINT _iSceneID);
 		static void ChanageScene(UINT _iPlayerID, UINT _iSceneID);
 		static void ChanageState(GameObject* _pObj, GameObject::eState _eState);
-		static void ChanagePlayerEquip(UINT _iPlayerInfo, const wstring& _strEquipName);
+		static void ChanagePlayerEquip(UINT _iPlayerInfo, UINT _iItemID);
 
 		static void ChangePlayerFSMState(PlayerFSM* _pFSM, Player::ePlayerState _ePlayerState);
 		static void ChangePlayerSkillState(UINT _iPlayerID, Player::ePlayerSkill _ePlayerSkill);

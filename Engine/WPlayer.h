@@ -1,22 +1,14 @@
 #pragma once
 #include "..\Engine_Source\WGameObject.h"
 #include "..\Engine_Source\WInfo.h"
+#include "..\Engine\WItemManager.h"
 namespace W
 {
-	class Equip;
 	class Shadow;
 	class Player : public GameObject
 	{
 	public:
-		enum class eEquipType
-		{
-			Hat,
-			Top,
-			Bottom,
-			Shoes,
-			Weapon,
-		};
-
+		
 		enum class ePlayerState
 		{
 			alert,
@@ -51,6 +43,14 @@ namespace W
 			end
 		};
 
+		enum ePlayerPart
+		{
+			Body,
+			Head,
+			Arm,
+			End,
+		};
+
 		Player();
 		virtual ~Player();
 
@@ -78,6 +78,7 @@ namespace W
 
 		const std::wstring& GetCurStateName() { return m_strCurStateName; }
 		void SetCurStateName(const std::wstring& _strName) { m_strCurStateName = _strName; }
+		UINT GetPlayerEquipID(eEquipType _eEquipType);
 
 		bool IsShadow() { return m_bActiveShadow; }
 		void ActiveShadow();
@@ -92,18 +93,14 @@ namespace W
 		virtual void SetAlert(bool _bAlert);
 		virtual bool IsAlert() { return m_bAlert; }
 
-		void SetEquip(eEquipType _eType, const std::wstring _strEquipName);
-		void DisableEquip(eEquipType _eType, const std::wstring _strEquipName);
+		void SetEquip(eEquipType _eType, UINT _iItemID);
+		void DisableEquip(eEquipType _eType);
+		UINT64 GetPlayerEquips();
 
 		template <typename T>
-		T* GetPlayerChild()
+		T* GetPlayerChild(ePlayerPart _ePart)
 		{
-			for (GameObject* pObj : m_vecChildObj)
-			{
-				T* pTarget= dynamic_cast<T*>(pObj);
-				if (pTarget != nullptr)
-					return pTarget;
-			}
+			return static_cast<T*>(m_vecChildObj[_ePart]);
 		}
 
 		void SetAnimLoop(bool _bLoop) { m_bAnimLoop = _bLoop; }
@@ -144,10 +141,9 @@ namespace W
 		std::vector<GameObject*> m_vecChildObj;
 		ePlayerState m_ePlayerState;
 		ePlayerState m_ePrevPlayerState;
+		std::wstring m_strCurStateName;
 
 		ePlayerSkill m_ePlayerSkill;
-
-		std::wstring m_strCurStateName;
 	
 		UINT m_iPlayerID;
 

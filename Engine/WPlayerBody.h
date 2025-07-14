@@ -1,6 +1,9 @@
 #pragma once
 #include "WGameObject.h"
 #include "WPlayer.h"
+#include "WPlayerTop.h"
+#include "WPlayerBottom.h"
+#include "WPlayerShoes.h"
 namespace W
 {	
 	class PlayerTop;
@@ -25,6 +28,14 @@ namespace W
 		void SetEquipTop(const std::wstring& _strEquipName);
 		void SetEquipBottom(const std::wstring& _strEquipName);
 		void SetEquipShoes(const std::wstring& _strEquipName);
+
+		const wstring& GetEquipTopName();
+		const wstring& GetEquipBottomName();
+		const wstring& GetEquipShoesName();
+
+		UINT GetTopEquipID() { return m_pPlayerTop->GetItemID(); }
+		UINT GetBottomEquipID() { return m_pPlayerBottom->GetItemID(); }
+		UINT GetShoesEquipID() { return m_pPlayerShoes->GetItemID(); }
 
 		void SetAnimationIndex();
 

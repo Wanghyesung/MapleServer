@@ -10,6 +10,8 @@
 #include "..\Engine\WEventManager.h"
 #include "..\Engine\WMonsterManager.h"
 #include "..\Engine\WGameObjectManager.h"
+#include "..\Engine\WItemManager.h"
+#include "WPathManager.h"
 #include "WThreadPool.h"
 #include "WFmod.h"
 #include "WFontWrapper.h"
@@ -44,6 +46,7 @@ namespace W
 	void Application::Initialize()
 	{
 		//ThreadPool::Initiailize(4);
+		PathManager::Initialize();
 		Time::Initiailize();
 		Input::Initialize();
 		
@@ -51,6 +54,7 @@ namespace W
 		BattleManager::Initialize();
 		EventManager::Initialize();
 
+		ItemManager::Initialize();
 		GameObjectManager::Initialize();
 
 		SceneManger::Initialize();

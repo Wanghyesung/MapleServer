@@ -9,7 +9,7 @@ namespace W
 
 	PlayerWeapon::PlayerWeapon():
 		m_pPlayerArm(nullptr),
-		m_strCurEquip{},
+		m_strCurEquip(L"10_weapon"),
 		m_strCurAnim{}
 	{
 		
@@ -71,38 +71,18 @@ namespace W
 	}
 	void PlayerWeapon::LateUpdate()
 	{
-		if (m_strCurEquip.size() == 0)
-			return;
-
-		Animator* pAnimator = GetComponent<Animator>();
-		Vector3 vPlayerPos = m_pPlayerArm->GetComponent<Transform>()->GetPosition();
-		vPlayerPos.z -= 0.1f;
-		GetComponent<Transform>()->SetPosition(vPlayerPos);
-
-		Player* pPlayer = m_pPlayerArm->GetPlayer();
-		int iDir = pPlayer->GetDir();
-		std::wstring strDir;
-		std::wstring strState;
-		strDir = iDir > 0 ? L"_right" : L"_left";
-
-		strState = pPlayer->GetCurStateName();
-
-		std::wstring strAnim = m_strCurEquip + strState + strDir;
-
-		if (m_strCurAnim != strAnim)
-		{
-			m_strCurAnim = strAnim;
-			bool bLoop = pPlayer->IsLoop();
-			pAnimator->Play(strAnim, bLoop);
-		}
-
-		GameObject::LateUpdate();
+		
 	}
 
 	void PlayerWeapon::SetPlayerEquip(const std::wstring& _strEquipName)
 	{
-		m_strCurEquip = _strEquipName;
-		Initialize();
+		auto wpItem = ItemManager::GetItemInfo(_strEquipName);
+		if (auto spItem = wpItem.lock())
+		{
+			m_strCurEquip = StringToWString(spItem->strItemName);
+			m_iItemID = spItem->iItemID;
+			Initialize();
+		}
 	}
 
 }

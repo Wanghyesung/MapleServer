@@ -26,26 +26,8 @@ bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 
 	pSession->SetPersonID(iUserID);
 
-	//다른 클라들에게 전송 valley씬에 있는 얘들만
-	//Protocol::S_NEW_ENTER other_pkt;
-	//other_pkt.set_playerid(iUserID);
-	//shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(other_pkt);
-	//GRoom.BroadcastExcept(pSendBuffer,_pSession);
-	
-	//연결된 클라에게 전송
-	Protocol::S_ENTER pkt;
-	pkt.set_player_id(iUserID);
-	
-	pkt.set_success(true);
-	
-	//for (int i = 0; i < vecUserID.size(); ++i)
-	//{
-	//	pkt.add_player_ids(vecUserID[i]);
-	//}
-	shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-	_pSession->Send(pSendBuffer);
-
 	W::EventManager::CreatePlayer(iUserID);
+
 	return true;
 }
 
@@ -53,8 +35,8 @@ bool Handle_C_EQUIP(shared_ptr<Session> _pSession, Protocol::C_EQUIP& _pkt)
 {
 	//eventManager로 보내기
 	UINT iSceneLayerPlayerIDEquipID = _pkt.scene_layer_playerid_equipid();
-
-	W::EventManager::ChanagePlayerEquip(iSceneLayerPlayerIDEquipID, StringToWString(_pkt.item_name()));
+	UINT iItemID = _pkt.item_id();
+	W::EventManager::ChanagePlayerEquip(iSceneLayerPlayerIDEquipID, iItemID);
 
 	return true;
 }

@@ -2,6 +2,7 @@
 #include "WAnimator.h"
 #include "WResources.h"
 #include "WPlayerBody.h"
+#include "WItemManager.h"
 
 namespace W
 {
@@ -10,7 +11,7 @@ namespace W
 	PlayerBottom::PlayerBottom():
 		m_pPlayerBody(nullptr),
 		m_strCurAnim{},
-		m_strCurEquip{}
+		m_strCurEquip(L"10_bottom")
 	{
 		
 		Animator* pAnimator = AddComponent<Animator>();
@@ -64,45 +65,22 @@ namespace W
 
 	void PlayerBottom::Update()
 	{
-		if (m_strCurEquip.size() == 0)
-			return;
-
-		GameObject::Update();
+		
 	}
 	void PlayerBottom::LateUpdate()
 	{
-		if (m_strCurEquip.size() == 0)
-			return;
-
-		Animator* pAnimator = GetComponent<Animator>();
-		Vector3 vPlayerPos = m_pPlayerBody->GetComponent<Transform>()->GetPosition();
-		vPlayerPos.z -= 0.1f;
-		GetComponent<Transform>()->SetPosition(vPlayerPos);
-
-		Player* pPlayer = m_pPlayerBody->GetPlayer();
-		int iDir = pPlayer->GetDir();
-		std::wstring strDir;
-		std::wstring strState;
-		strDir = iDir > 0 ? L"_right" : L"_left";
-
-		strState = pPlayer->GetCurStateName();
-
-		std::wstring strAnim = m_strCurEquip + strState + strDir;
-
-		if (m_strCurAnim != strAnim)
-		{
-			m_strCurAnim = strAnim;
-			bool bLoop = pPlayer->IsLoop();
-			pAnimator->Play(strAnim, bLoop);
-		}
-
-		GameObject::LateUpdate();
+		
 	}
 
 	void PlayerBottom::SetPlayerEquip(const std::wstring& _strEquipName)
 	{
-		m_strCurEquip = _strEquipName;
-		Initialize();
+		auto wpItem = ItemManager::GetItemInfo(_strEquipName);
+		if (auto spItem = wpItem.lock())
+		{
+			m_strCurEquip = StringToWString(spItem->strItemName);
+			m_iItemID = spItem->iItemID;
+			Initialize();
+		}
 	}
 	
 }

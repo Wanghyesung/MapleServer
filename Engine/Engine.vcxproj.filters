@@ -503,6 +503,9 @@
     <ClInclude Include="WPacket.h">
       <Filter>Contents\Packet</Filter>
     </ClInclude>
+    <ClInclude Include="WItemManager.h">
+      <Filter>Contents\Manager\ItemManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -1000,6 +1003,9 @@
     </ClCompile>
     <ClCompile Include="WPacket.cpp">
       <Filter>Contents\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="WItemManager.cpp">
+      <Filter>Contents\Manager\ItemManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

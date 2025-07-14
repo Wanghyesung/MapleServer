@@ -90,39 +90,11 @@ namespace W
 	}
 	void PlayerHair::Update()
 	{
-		GameObject::Update();
+		
 	}
 	void PlayerHair::LateUpdate()
 	{
-		Animator* pAnimator = GetComponent<Animator>();
-		Vector3 vPlayerPos = m_pPlayerHead->GetComponent<Transform>()->GetPosition();
-		GetComponent<Transform>()->SetPosition(vPlayerPos);
-
-		Player* pPlayer = m_pPlayerHead->GetPlayer();
-
-		int iDir = pPlayer->GetDir();
-		std::wstring strHair = L"hair";
-		std::wstring strDir;
-		std::wstring strState;
-		strDir = iDir > 0 ? L"_right" : L"_left";
-
-		strState = pPlayer->GetCurStateName();
-
-		if (m_bHairDown)
-			strHair += L"down";
-
-		std::wstring strNum = std::to_wstring(m_iHairNum);
-
-		std::wstring strAnim = strHair + strState + strDir + strNum;
-
-		if (m_strCurAnim != strAnim)
-		{
-			m_strCurAnim = strAnim;
-			bool bLoop = pPlayer->IsLoop();
-			pAnimator->Play(strAnim, bLoop);
-		}
-
-		GameObject::LateUpdate();
+		
 	}
 	
 	void PlayerHair::SetHair(UINT _iNum)

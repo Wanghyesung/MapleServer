@@ -1,6 +1,7 @@
 #include "WEventManager.h"
 #include "WSceneManger.h"
 #include "WSkillManager.h"
+#include "WItemManager.h"
 #include "WObjectPoolManager.h"
 #include "..\Engine\WPlayerAttackObject.h"
 #include "..\Engine\WMonsterAttackObject.h"
@@ -217,12 +218,50 @@ namespace W
 	void EventManager::create_player(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		UINT iPlayerID = (UINT)_lParm;
-
+		const UINT ValleySceneID = 4;
+		
 		Player* pPlayer = static_cast<Player*>(ObjectPoolManager::PopObject(L"Player"));// new Player();
 		pPlayer->m_iPlayerID = iPlayerID;
 		pPlayer->SetObjectID(iPlayerID);
 		pPlayer->Initialize();
-		SceneManger::AddPlayerScene(pPlayer, 4);//valleyscne = 4
+		
+		//DB에서 가져오기 플레이어 장비들
+		UCHAR cBottom = ItemManager::GetItemID(L"10_bottom");
+		UCHAR cTop = ItemManager::GetItemID(L"10_top");
+		UCHAR cShoes = ItemManager::GetItemID(L"10_shoes");
+		UCHAR cHat = ItemManager::GetItemID(L"10_hat");
+		UCHAR cWeapon = ItemManager::GetItemID(L"10_weapon");
+
+		pPlayer->SetEquip(eEquipType::Bottom, cBottom);
+		pPlayer->SetEquip(eEquipType::Top, cTop);
+		pPlayer->SetEquip(eEquipType::Shoes, cShoes);
+		pPlayer->SetEquip(eEquipType::Hat, cHat);
+		pPlayer->SetEquip(eEquipType::Weapon, cWeapon);
+
+		//기존의 플레이어들 알리기
+		SceneManger::SendPlayersInfo(iPlayerID, ValleySceneID);
+		SceneManger::AddPlayerScene(pPlayer, ValleySceneID);
+
+		Protocol::S_ENTER pkt;
+		pkt.set_player_id(iPlayerID);
+		UINT64 iEquipIDs =
+			(UINT64)0 | ((UINT64)0 << 8) | ((UINT64)cHat << 16)
+			| ((UINT64)cTop << 24) | ((UINT64)cBottom << 32) | ((UINT64)cShoes << 40)
+			| ((UINT64)cWeapon << 48);
+
+		pkt.set_player_equip_ids(iEquipIDs);
+		pkt.set_success(true);
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.GetPersonByID(iPlayerID)->Send(pSendBuffer);
+
+		Protocol::S_PLAYER_CREATE otherPkt;
+		Protocol::PlayerInfo tInfo = {};
+		SceneManger::MakePlayerInfo(pPlayer, tInfo);
+		*otherPkt.add_player_info() = tInfo;
+		shared_ptr<SendBuffer> pSendOtherBuffer = ClientPacketHandler::MakeSendBuffer(otherPkt);
+
+		GRoom.UnicastExcept(pSendOtherBuffer, SceneManger::GetPlayerIDs(ValleySceneID), iPlayerID);
 	}
 
 	void EventManager::delete_player(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
@@ -231,11 +270,10 @@ namespace W
 		SceneManger::DeletePlayer(iPlayerID);
 		SkillManager::ReleaseSkill(iPlayerID);
 
-		//Protocol::S_NEW_EXIT other_pkt;
-		//other_pkt.set_playerid(iPlayerID);
-
-		//shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(other_pkt);
-		//GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(iPlayerID));
+		Protocol::S_NEW_EXIT other_pkt;
+		other_pkt.set_playerid(iPlayerID);
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(other_pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(iPlayerID));
 	}
 
 	void EventManager::add_player_pool(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
@@ -256,21 +294,26 @@ namespace W
 	{
 		UINT iPlayerID = (UINT)(_lParm);
 		GameObject* pPlayer = SceneManger::FindPlayer(iPlayerID);
-		
 		if (pPlayer == nullptr)
 			assert(nullptr);
-
+	
 		change_player_fsmstate((DWORD_PTR)pPlayer->GetScript<PlayerScript>()->m_pFSM, (DWORD_PTR)Player::ePlayerState::jump, 0, {});
 
 		UINT iNextSceneID = (UINT)(_wParm);
 		UINT iPrevScene = pPlayer->GetSceneID(); //swap 후 이름이 변경되지 않게 복사
-	
+
+		//다음씬 플레이어들 정보 보내기
+		SceneManger::SendPlayersInfo(iPlayerID, iNextSceneID);
+
+		//플레이어 옮기기
 		SceneManger::SwapPlayer(pPlayer, iPrevScene, iNextSceneID);
 		SceneManger::SendEnterScene(iPlayerID, iNextSceneID);
-	
+		
+
+
 		//이전 맵에 플레이어 삭제됐다고 알리기
 		Protocol::S_DELETE pkt;
-		pkt.set_scene_layer_deleteid((UCHAR)eLayerType::Player << 24 | (UCHAR)eLayerType::Player << 16 | iPlayerID);
+		pkt.set_scene_layer_deleteid((UCHAR)iNextSceneID << 24 | (UCHAR)eLayerType::Player << 16 | iPlayerID);
 		pkt.set_pool_object(pPlayer->IsPoolObject());
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
@@ -317,25 +360,32 @@ namespace W
 		UCHAR cSceneID = (iPlayerInfo >> 24) & 0xFF;
 		UCHAR cLayer = (iPlayerInfo >> 16) & 0xFF;
 		UCHAR cPlayerID = (iPlayerInfo >> 8) & 0xFF;
-		UCHAR cEquipID = iPlayerInfo & 0xFF;
+		//UCHAR cEquipID = iPlayerInfo & 0xFF;
 
 	
 		GameObject* pObj = SceneManger::FindPlayer(cSceneID, cPlayerID);
 		if (pObj)
 		{
 			Player* pPlayer = static_cast<Player*>(pObj);
-			pPlayer->SetEquip((Player::eEquipType)cEquipID, _tObjData.stringData);
+
+			UINT iItemID = (_wParm & 0xFF);
+			bool bClearEquip = ((_wParm << 8) & 0xFF);
+			UINT iPlayerPartID = (_wParm << 16) & 0xFF;
+			//UINT iItemEquipID = (_wParm << 24) & 0xFF;
+
+			if(bClearEquip)
+				pPlayer->DisableEquip((eEquipType)iPlayerPartID);
+			else
+				pPlayer->SetEquip((eEquipType)iPlayerPartID, iItemID);
+
+			Protocol::S_EQUIP pkt;
+			pkt.set_scene_layer_playerid_equipid(iPlayerInfo);
+			pkt.set_item_id(_wParm);
+
+			shared_ptr<SendBuffer> pBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+			const vector<UINT>& vecIDs = SceneManger::GetPlayerIDs(cSceneID);
+			GRoom.UnicastExcept(pBuffer, vecIDs, cPlayerID);
 		}
-		
-
-		Protocol::S_EQUIP pkt;
-		pkt.set_scene_layer_playerid_equipid(iPlayerInfo);
-		pkt.set_item_name(WstringToString(_tObjData.stringData));
-
-		shared_ptr<SendBuffer> pBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		const vector<UINT>& vecIDs = SceneManger::GetPlayerIDs(cSceneID);
-		GRoom.UnicastExcept(pBuffer, vecIDs, cPlayerID);
-
 	}
 
 	void EventManager::add_player_skillstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
@@ -433,7 +483,7 @@ namespace W
 	{
 		tEvent eve = {};
 		eve.lParm = (DWORD_PTR)_ID;
-
+		
 		eve.eEventType = EVENT_TYPE::CREATE_PLAYER;
 		AddEvent(eve);
 	}
@@ -507,11 +557,11 @@ namespace W
 		
 		AddEvent(eve);
 	}
-	void EventManager::ChanagePlayerEquip(UINT _iPlayerInfo, const wstring& _strEquipName)
+	void EventManager::ChanagePlayerEquip(UINT _iPlayerInfo, UINT _iItemID)
 	{
 		tEvent eve = {};
 		eve.lParm = (DWORD_PTR)_iPlayerInfo;
-		eve.tObjectData.stringData = _strEquipName;
+		eve.wParm = (DWORD_PTR)_iItemID;
 
 		eve.eEventType = EVENT_TYPE::CHANGE_PLAYER_EQUIP;
 

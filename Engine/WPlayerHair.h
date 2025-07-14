@@ -25,13 +25,16 @@ namespace W
 
 		void SetStop(bool _bStop) { GetComponent<Animator>()->Stop(_bStop); }
 		void SetHair(UINT _iNum);
+
+		UINT GetHairID() { return m_iHairNum; }
+
 	private:
 		PlayerHead* m_pPlayerHead;
 
 		std::wstring m_strCurAnim;
 		//헤어 tex 넘버
 		UINT m_iHairNum;
-
+	
 		bool m_bHairDown;
 
 	};

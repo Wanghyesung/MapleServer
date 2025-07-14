@@ -11,7 +11,7 @@ namespace W
 
 	PlayerBody::PlayerBody() :
 		m_pPlayer(nullptr),
-		m_strCurAnim{},
+		m_strCurAnim(L""),
 		m_pPlayerTop(nullptr),
 		m_pPlayerBottom(nullptr),
 		m_pPlayerShoes(nullptr)
@@ -136,23 +136,31 @@ namespace W
 	{
 		m_pPlayerShoes->SetPlayerEquip(_strEquipName);
 	}
+	const wstring& PlayerBody::GetEquipTopName()
+	{
+		return m_pPlayerTop->GetEquipName();
+	}
+	const wstring& PlayerBody::GetEquipBottomName()
+	{
+		return m_pPlayerBottom->GetEquipName();
+	}
+	const wstring& PlayerBody::GetEquipShoesName()
+	{
+		return m_pPlayerShoes->GetEquipName();
+	}
 	void PlayerBody::SetAnimationIndex()
 	{
-		if(m_strCurAnim.size() != 0)
-			GetComponent<Animator>()->GetActiveAnimation()->SetIndex(0);
-		if(m_pPlayerBottom->GetCurAnimName().size() != 0)
-			m_pPlayerBottom->GetComponent<Animator>()->GetActiveAnimation()->SetIndex(0);
-		if (m_pPlayerTop->GetCurAnimName().size() != 0)
-			m_pPlayerTop->GetComponent<Animator>()->GetActiveAnimation()->SetIndex(0);
-		if (m_pPlayerShoes->GetCurAnimName().size() != 0)
-			m_pPlayerShoes->GetComponent<Animator>()->GetActiveAnimation()->SetIndex(0);
+		if (!m_strCurAnim.empty())
+		{
+			Animation* pAnim = GetComponent<Animator>()->GetActiveAnimation();
+			if(pAnim)
+				pAnim->SetIndex(0);
+		}
 
 	}
 	void PlayerBody::SetStop(bool _bStop)
 	{
 		GetComponent<Animator>()->Stop(_bStop);
-		m_pPlayerBottom->GetComponent<Animator>()->Stop(_bStop);
-		m_pPlayerTop->GetComponent<Animator>()->Stop(_bStop);
-		m_pPlayerShoes->GetComponent<Animator>()->Stop(_bStop);
+	
 	}
 }

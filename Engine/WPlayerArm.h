@@ -1,6 +1,7 @@
 #pragma once
 #include "WGameObject.h"
 #include "WPlayer.h"
+#include "WPlayerWeapon.h"
 namespace W
 {
 	class PlayerWeapon;
@@ -20,6 +21,8 @@ namespace W
 		Player* GetPlayer() { return m_pPlayer; }
 
 		void SetEquipWeapon(const std::wstring& _strEquipName);
+		const wstring& GetEquipWeaponName();
+		UINT GetWeaponEquipID() { return m_pPlayerWeapon->GetItemID(); }
 
 		void SetAnimationIndex();
 

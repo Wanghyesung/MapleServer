@@ -64,33 +64,10 @@ namespace W
 	{
 		GameObject::Update();
 
-		//m_pPlayerWeapon->Update();
 	}
 	void PlayerArm::LateUpdate()
 	{
-		//Animator* pAnimator = GetComponent<Animator>();
-		//Vector3 vPlayerPos = m_pPlayer->GetComponent<Transform>()->GetPosition();
-		//GetComponent<Transform>()->SetPosition(vPlayerPos);
-		//
-		//int iDir = m_pPlayer->GetDir();
-		//std::wstring strDir;
-		//std::wstring strState;
-		//strDir = iDir > 0 ? L"_right" : L"_left";
-		//
-		//strState = m_pPlayer->GetCurStateName();
-		//
-		//std::wstring strAnim = L"arm" + strState + strDir;
-		//
-		//if (m_strCurAnim != strAnim)
-		//{
-		//	m_strCurAnim = strAnim;
-		//	bool bLoop = m_pPlayer->IsLoop();
-		//	pAnimator->Play(strAnim, bLoop);
-		//}
-		//
-		//GameObject::LateUpdate();
-		//
-		//m_pPlayerWeapon->LateUpdate();
+		
 	}
 
 	void PlayerArm::SetEquipWeapon(const std::wstring& _strEquipName)
@@ -98,18 +75,20 @@ namespace W
 		m_pPlayerWeapon->SetPlayerEquip(_strEquipName);
 	}
 
+	const wstring& PlayerArm::GetEquipWeaponName()
+	{
+		return m_pPlayerWeapon->GetEquipName();
+	}
+
 	void PlayerArm::SetAnimationIndex()
 	{
 		if (m_strCurAnim.size() != 0)
 			GetComponent<Animator>()->GetActiveAnimation()->SetIndex(0);
-		if(m_pPlayerWeapon->GetCurAnimName().size() !=0)
-			m_pPlayerWeapon->GetComponent<Animator>()->GetActiveAnimation()->SetIndex(0);
 	}
 
 	void PlayerArm::SetStop(bool _bStop)
 	{
 		GetComponent<Animator>()->Stop(_bStop);
-		m_pPlayerWeapon->GetComponent<Animator>()->Stop(_bStop);
 	}
 
 	

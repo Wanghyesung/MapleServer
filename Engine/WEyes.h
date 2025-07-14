@@ -16,7 +16,6 @@ namespace W
 		virtual void Initialize()override;
 		virtual void Update()override;
 		virtual void LateUpdate()override;
-		//virtual void Render()override;
 
 		DECLARE_CREATE_ID;
 
@@ -28,7 +27,7 @@ namespace W
 		void SetAlert(bool _bAlert) { m_bAlert = _bAlert; }
 
 		void SetEye(UINT _iNum);
-		
+		UINT GetEyeID() { return m_iEyeNumber; }
 	private:
 		PlayerHead* m_pPlayerHead;
 
