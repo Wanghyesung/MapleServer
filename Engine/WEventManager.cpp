@@ -300,24 +300,24 @@ namespace W
 		change_player_fsmstate((DWORD_PTR)pPlayer->GetScript<PlayerScript>()->m_pFSM, (DWORD_PTR)Player::ePlayerState::jump, 0, {});
 
 		UINT iNextSceneID = (UINT)(_wParm);
-		UINT iPrevScene = pPlayer->GetSceneID(); //swap 후 이름이 변경되지 않게 복사
+		UINT iPrevSceneID = pPlayer->GetSceneID(); //swap 후 이름이 변경되지 않게 복사
 
 		//다음씬 플레이어들 정보 보내기
 		SceneManger::SendPlayersInfo(iPlayerID, iNextSceneID);
 
 		//플레이어 옮기기
-		SceneManger::SwapPlayer(pPlayer, iPrevScene, iNextSceneID);
+		SceneManger::SwapPlayer(pPlayer, iPrevSceneID, iNextSceneID);
 		SceneManger::SendEnterScene(iPlayerID, iNextSceneID);
 		
 
 
 		//이전 맵에 플레이어 삭제됐다고 알리기
 		Protocol::S_DELETE pkt;
-		pkt.set_scene_layer_deleteid((UCHAR)iNextSceneID << 24 | (UCHAR)eLayerType::Player << 16 | iPlayerID);
+		pkt.set_scene_layer_deleteid((UCHAR)iPrevSceneID << 24 | (UCHAR)eLayerType::Player << 16 | iPlayerID);
 		pkt.set_pool_object(pPlayer->IsPoolObject());
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(iPrevScene));
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(iPrevSceneID));
 
 	}
 
@@ -356,6 +356,7 @@ namespace W
 	void EventManager::change_player_equip(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		UINT iPlayerInfo = (UINT)_lParm;
+		UINT iPlayerItem = (UINT)_wParm;
 
 		UCHAR cSceneID = (iPlayerInfo >> 24) & 0xFF;
 		UCHAR cLayer = (iPlayerInfo >> 16) & 0xFF;
@@ -368,9 +369,9 @@ namespace W
 		{
 			Player* pPlayer = static_cast<Player*>(pObj);
 
-			UINT iItemID = (_wParm & 0xFF);
-			bool bClearEquip = ((_wParm << 8) & 0xFF);
-			UINT iPlayerPartID = (_wParm << 16) & 0xFF;
+			UINT iItemID = (iPlayerItem & 0xFF);
+			bool bClearEquip = ((iPlayerItem >> 8) & 0xFF);
+			UINT iPlayerPartID = (iPlayerItem >> 24) & 0xFF;
 			//UINT iItemEquipID = (_wParm << 24) & 0xFF;
 
 			if(bClearEquip)
@@ -380,7 +381,7 @@ namespace W
 
 			Protocol::S_EQUIP pkt;
 			pkt.set_scene_layer_playerid_equipid(iPlayerInfo);
-			pkt.set_item_id(_wParm);
+			pkt.set_item_id(iPlayerItem);
 
 			shared_ptr<SendBuffer> pBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 			const vector<UINT>& vecIDs = SceneManger::GetPlayerIDs(cSceneID);

@@ -295,6 +295,7 @@ namespace W
 		
 		Scene* pPrevScene = FindScene(_iPrevSceneID);
 		Scene* pNextScene = FindScene(_iNextSceneID);
+		pPrevScene->EraseObject(eLayerType::Player, _pPlayer);//이거 몬스터가 플레이어 포인터 들고있을 수 있음 
 		pNextScene->AddGameObject(eLayerType::Player, _pPlayer);
 
 		UINT iPlayerID = _pPlayer->GetObjectID(); //obj == playerid
@@ -310,16 +311,15 @@ namespace W
 		pPrevScene->OnExitPlayer(iPlayerID);
 		pNextScene->OnEnterPlayer(iPlayerID);
 
-
-		// 다음 씬에 기존의 플레이어들에게 전달
 		Protocol::S_PLAYER_CREATE pkt;
 		Protocol::PlayerInfo tInfo = {};
-		
+
 		MakePlayerInfo(_pPlayer, tInfo);
+		tInfo.set_state_value(tInfo.state_value() & 0xFFFFFF00);
 		*pkt.add_player_info() = tInfo;
-		
+
 		shared_ptr<SendBuffer> pBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
-		GRoom.Unicast(pBuffer,GetPlayerIDs(_iNextSceneID));
+		GRoom.UnicastExcept(pBuffer, GetPlayerIDs(_iNextSceneID),iPlayerID);
 	}
 
 

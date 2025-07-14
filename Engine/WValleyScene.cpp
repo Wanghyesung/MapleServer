@@ -144,10 +144,10 @@ namespace W
 			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(134.f, 97.f), 1, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
 		}
 
-		Skelegon* pSkelegon = new Skelegon();
-		pSkelegon->SetSceneID(GetSceneID());
-		pSkelegon->Initialize();
-		
-		AddGameObject(eLayerType::Monster, pSkelegon);
+		//Skelegon* pSkelegon = new Skelegon();
+		//pSkelegon->SetSceneID(GetSceneID());
+		//pSkelegon->Initialize();
+		//
+		//AddGameObject(eLayerType::Monster, pSkelegon);
 	}
 }
