@@ -1,9 +1,6 @@
 syntax = "proto3";
 package Protocol;
 
-//repeated uint64 victims = 3;
-
-//서버가 클라에게
 message S_STATE
 {
 	uint32 scene_layer_id = 1;

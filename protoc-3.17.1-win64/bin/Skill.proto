@@ -2,7 +2,6 @@ syntax = "proto3";
 package Protocol;
 
 
-//서버가 클라에게
 message S_Skill
 {
 	bool success = 1;
@@ -12,6 +11,3 @@ message C_Skill
 {
 	uint32 scene_playerid_skill_id = 1;
 }
-//로그인
-//채팅 던지기
-//나가기

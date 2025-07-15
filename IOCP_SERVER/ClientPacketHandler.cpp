@@ -106,6 +106,14 @@ bool Handle_C_SKILL(shared_ptr<Session> _pSession, Protocol::C_Skill& _pkt)
 	return true;
 }
 
+bool Handle_C_ITEM(shared_ptr<Session> _pSession, Protocol::C_ITEM& _pkt)
+{	
+	UINT iScenePlayerIDItemID = _pkt.scene_playerid_item_id();
+	W::EventManager::UsingItem(iScenePlayerIDItemID);
+	
+	return true;
+}
+
 bool Handle_C_EXIT(shared_ptr<Session> _pSession, Protocol::C_EXIT& _pkt)
 {
 	

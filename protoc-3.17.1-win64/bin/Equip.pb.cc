@@ -20,7 +20,7 @@ namespace Protocol {
 constexpr C_EQUIP::C_EQUIP(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : scene_layer_playerid_equipid_(0u)
-  , item_id_(0){}
+  , item_id_(0u){}
 struct C_EQUIPDefaultTypeInternal {
   constexpr C_EQUIPDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -33,7 +33,7 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT C_EQUIPDefaultTypeInternal _C_E
 constexpr S_EQUIP::S_EQUIP(
   ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
   : scene_layer_playerid_equipid_(0u)
-  , item_id_(0){}
+  , item_id_(0u){}
 struct S_EQUIPDefaultTypeInternal {
   constexpr S_EQUIPDefaultTypeInternal()
     : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
@@ -77,8 +77,8 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 const char descriptor_table_protodef_Equip_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\013Equip.proto\022\010Protocol\"@\n\007C_EQUIP\022$\n\034sc"
   "ene_layer_playerid_equipid\030\001 \001(\r\022\017\n\007item"
-  "_id\030\002 \001(\005\"@\n\007S_EQUIP\022$\n\034scene_layer_play"
-  "erid_equipid\030\001 \001(\r\022\017\n\007item_id\030\002 \001(\005b\006pro"
+  "_id\030\002 \001(\r\"@\n\007S_EQUIP\022$\n\034scene_layer_play"
+  "erid_equipid\030\001 \001(\r\022\017\n\007item_id\030\002 \001(\rb\006pro"
   "to3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Equip_2eproto_once;
@@ -169,10 +169,10 @@ const char* C_EQUIP::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::in
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int32 item_id = 2;
+      // uint32 item_id = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          item_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          item_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -211,10 +211,10 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->_internal_scene_layer_playerid_equipid(), target);
   }
 
-  // int32 item_id = 2;
+  // uint32 item_id = 2;
   if (this->item_id() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_item_id(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_item_id(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -240,10 +240,10 @@ size_t C_EQUIP::ByteSizeLong() const {
         this->_internal_scene_layer_playerid_equipid());
   }
 
-  // int32 item_id = 2;
+  // uint32 item_id = 2;
   if (this->item_id() != 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
         this->_internal_item_id());
   }
 
@@ -394,10 +394,10 @@ const char* S_EQUIP::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::in
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int32 item_id = 2;
+      // uint32 item_id = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          item_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          item_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -436,10 +436,10 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->_internal_scene_layer_playerid_equipid(), target);
   }
 
-  // int32 item_id = 2;
+  // uint32 item_id = 2;
   if (this->item_id() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_item_id(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_item_id(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -465,10 +465,10 @@ size_t S_EQUIP::ByteSizeLong() const {
         this->_internal_scene_layer_playerid_equipid());
   }
 
-  // int32 item_id = 2;
+  // uint32 item_id = 2;
   if (this->item_id() != 0) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
         this->_internal_item_id());
   }
 

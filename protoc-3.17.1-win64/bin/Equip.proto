@@ -2,19 +2,18 @@ syntax = "proto3";
 package Protocol;
 
 
-//클라가 서버에게 
 message C_EQUIP
 {
 	uint32 scene_layer_playerid_equipid = 1;
 	
-	int32 item_id = 2;
+	uint32 item_id = 2;
 }
 
-//서버가 다른 클라에게
 message S_EQUIP
 {
 	uint32 scene_layer_playerid_equipid = 1;
 
-	int32 item_id = 2;
+	uint32 item_id = 2;
 }
+
 

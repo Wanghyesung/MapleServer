@@ -42,6 +42,7 @@ namespace W
 		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_PLAYER_STATE] = change_player_fsmstate;
 		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_PLAYER_SKILL] = change_player_skillstate;
 		m_arrFunction[(UINT)EVENT_TYPE::CHANGE_PLAYER_EQUIP] = change_player_equip;
+		m_arrFunction[(UINT)EVENT_TYPE::USING_ITEM] = using_item;
 		m_arrFunction[(UINT)EVENT_TYPE::ADD_PLAYER_SKILL] = add_player_skillstate;
 		m_arrFunction[(UINT)EVENT_TYPE::INIT_PLAYER_SKILL] = init_player_skill;
 		m_arrFunction[(UINT)EVENT_TYPE::RELEASE_PLAYER_SKILL] = release_player_skill;
@@ -338,6 +339,13 @@ namespace W
 		pObj->SetState(eState);
 	}
 
+	void EventManager::using_item(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
+	{
+		UINT iItemInfo = (UINT)_lParm;
+	
+		ItemManager::ExcuteItem(iItemInfo);
+	}
+
 	void EventManager::change_player_fsmstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		PlayerFSM* pFSM = (PlayerFSM*)_lParm;
@@ -565,6 +573,16 @@ namespace W
 		eve.wParm = (DWORD_PTR)_iItemID;
 
 		eve.eEventType = EVENT_TYPE::CHANGE_PLAYER_EQUIP;
+
+		AddEvent(eve);
+	}
+
+	void EventManager::UsingItem(UINT _iItemInfo)
+	{
+		tEvent eve = {};
+		eve.lParm = (DWORD_PTR)_iItemInfo;
+
+		eve.eEventType = EVENT_TYPE::USING_ITEM;
 
 		AddEvent(eve);
 	}

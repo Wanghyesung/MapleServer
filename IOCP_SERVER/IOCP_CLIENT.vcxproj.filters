@@ -39,6 +39,9 @@
     <ClInclude Include="ObjectState.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
+    <ClInclude Include="..\protoc-3.17.1-win64\bin\Item.pb.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -73,6 +76,9 @@
     <ClCompile Include="ObjectState.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
+    <ClCompile Include="..\protoc-3.17.1-win64\bin\Item.pb.cc">
+      <Filter>Packet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\protoc-3.17.1-win64\bin\Enter.proto">
@@ -100,6 +106,9 @@
       <Filter>Packet</Filter>
     </None>
     <None Include="..\protoc-3.17.1-win64\bin\Skill.proto">
+      <Filter>Packet</Filter>
+    </None>
+    <None Include="..\protoc-3.17.1-win64\bin\Item.proto">
       <Filter>Packet</Filter>
     </None>
   </ItemGroup>

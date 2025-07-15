@@ -1,7 +1,10 @@
 #include "WItemManager.h"
+#include "WSceneManger.h"
+#include "WPlayer.h"
 #include <nlohmann/json.hpp>
 #include <fstream>
 #include "WPathManager.h"
+
 
 namespace W
 {
@@ -9,10 +12,11 @@ namespace W
 
 	map<UINT, shared_ptr<tItemInfo>> ItemManager::m_mapItems= {};
 	map<wstring, UINT> ItemManager::m_mapItemName = {};
+	vector<std::function<UINT(UINT)>> ItemManager::m_vecItemEvent = {};
 
 	void ItemManager::Initialize()
 	{
-		//이거말고도 function 맵핑하기
+		init_function();
 		unordered_map<string, UINT> hashItem = 
 		{
 			{"Equip", (UINT)eIconType::Equip},
@@ -41,7 +45,9 @@ namespace W
 			pItem->strItemName = jData.at("name").get<std::string>();
 			pItem->eIconType = (eIconType)hashItem[jData.at("iconType").get<std::string>()];
 			pItem->iItemLevel = jData.at("level").get<uint32_t>();
-			
+			UINT iFuncID = jData.value("functionId", -1);
+			if (iFuncID != -1)
+				pItem->iFunctionID = iFuncID;
 			m_mapItems.insert(make_pair(pItem->iItemID, pItem));
 			m_mapItemName.insert(make_pair(StringToWString(pItem->strItemName), pItem->iItemID));
 		}
@@ -70,14 +76,91 @@ namespace W
 		return {};
 	}
 
-	UINT ItemManager::GetItemID(const wstring& _strName)
+	int ItemManager::GetItemID(const wstring& _strName)
 	{
 		auto iter = m_mapItemName.find(_strName);
 		if (iter != m_mapItemName.end())
 			return iter->second;
 
-		return 0;
+		return -1;
 	}
 
+	void ItemManager::ExcuteItem(UINT _iItemInfo)
+	{
+		UCHAR cPlayerID = (_iItemInfo >> 16) & 0xFF;
+		USHORT sItemID = _iItemInfo & 0xFFFF;
+		UINT iSendValue = 0;
+		USHORT iFunctionID = 0;
+		auto wpItem = GetItemInfo(sItemID);
+		if (auto shItem = wpItem.lock())
+		{
+			iFunctionID = shItem->iFunctionID;
+			iSendValue = m_vecItemEvent[iFunctionID](cPlayerID);
+		}
+
+		//함수 아이디로 변경
+		_iItemInfo &= 0xFFFF0000;
+		_iItemInfo |= iFunctionID;
+
+		SendResultItem(_iItemInfo, iSendValue);
+	}
+
+	void ItemManager::SendResultItem(UINT _iItemInfo, UINT _iValue)
+	{
+		UCHAR cSceneID = (_iItemInfo >> 24) & 0xFF;
+		
+		Protocol::S_ITEM pkt;
+		pkt.set_scene_playerid_itemid(_iItemInfo);
+		pkt.set_item_value(_iValue);
+
+		shared_ptr<SendBuffer> pBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pBuffer, SceneManger::GetPlayerIDs(cSceneID));
+	}
+
+	void ItemManager::init_function()
+	{
+		m_vecItemEvent.resize(20);
+
+		//ID = Function;
+		m_vecItemEvent[1] = ChangeHair;
+		m_vecItemEvent[2] = ChangeEye;
+	}
+
+
 	
+	UINT ChangeHair(UINT _iPlayerID)
+	{
+		std::random_device rDiv;
+		std::mt19937 en(rDiv());
+		std::uniform_int_distribution<UINT> disX(0, 1);
+		UINT iHairNum = disX(en);
+		iHairNum = 1;
+
+		GameObject* pObj = SceneManger::FindPlayer(_iPlayerID);
+		if (pObj)
+		{
+			Player* pPlayer = static_cast<Player*>(pObj);
+			pPlayer->SetHair(iHairNum);
+		}
+		return iHairNum;
+	}
+
+	UINT ChangeEye(UINT _iPlayerID)
+	{
+		std::random_device rDiv;
+		std::mt19937 en(rDiv());
+		std::uniform_int_distribution<UINT> disX(0, 2);
+		UINT iEyeNum = disX(en);
+		iEyeNum = 1;
+
+		GameObject* pObj = SceneManger::FindPlayer(_iPlayerID);
+		if (pObj)
+		{
+			Player* pPlayer = static_cast<Player*>(pObj);
+			pPlayer->SetEye(iEyeNum);
+		}
+
+		return iEyeNum;
+	}
+
 }

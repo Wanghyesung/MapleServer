@@ -12,14 +12,16 @@
       "class": "HairItem",
       "name": "hairitem",
       "iconType": "Cash",
-      "level": 0
+      "level": 0,
+      "functionId": 1
     },
     {
       "id": 2,
       "class": "EyeItem",
       "name": "eyeitem",
       "iconType": "Cash",
-      "level": 0
+      "level": 0,
+      "functionId": 2
     },
     {
       "id": 3,

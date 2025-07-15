@@ -10,6 +10,7 @@
 #include "GameObject.pb.h"
 #include "ObjectState.pb.h"
 #include "Skill.pb.h"
+#include "Item.pb.h"
 
 using PacketHandlerFunc = std::function<bool(shared_ptr<PacketSession>&, BYTE*, INT)>;
 extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
@@ -36,32 +37,35 @@ enum PACKET_TYPE
 	S_EQUIP = 1004,
 	C_EQUIP = 1005,
 
-	C_INPUT = 1006,
+	S_ITEM = 1006,
+	C_ITEM = 1007,
 
-	S_MAP = 1007,
-	C_MAP = 1008,
-	C_MAP_LOADING = 1009,
+	C_INPUT = 1008,
 
-	S_START_MAP = 1010,
-	C_START_MAP = 1011,
+	S_MAP = 1009,
+	C_MAP = 1010,
+	C_MAP_LOADING = 1011,
 
-	S_CREATE = 1012,
-	C_CREATE = 1013,
-	S_PLAYER_CREATE = 1014,
-	S_DELETE = 1015,
+	S_START_MAP = 1012,
+	C_START_MAP = 1013,
+
+	S_CREATE = 1014,
+	C_CREATE = 1015,
+	S_PLAYER_CREATE = 1016,
+	S_DELETE = 1017,
 
 		
 	//물체 위치
-	S_STATE = 1016,
+	S_STATE = 1018,
 
-	S_TRANSFORM = 1017,
+	S_TRANSFORM = 1019,
 
-	S_SKILL = 1018,
-	C_SKILL = 1019,
+	S_SKILL = 1020,
+	C_SKILL = 1021,
 
-	S_EXIT = 1020,
-	C_EXIT = 1021,
-	S_NEW_EXIT = 1022,
+	S_EXIT = 1022,
+	C_EXIT = 1023,
+	S_NEW_EXIT = 1024,
 };
 
 
@@ -78,6 +82,7 @@ bool Handle_C_MAP_LOADING(shared_ptr<Session> _pSession, Protocol::C_MAP_LOADING
 bool Handle_C_EXIT(shared_ptr<Session> _pSession, Protocol::C_EXIT& _pkt);
 bool Handle_C_START_MAP(shared_ptr<Session> _pSession, Protocol::C_START_MAP& _pkt);
 bool Handle_C_SKILL(shared_ptr<Session> _pSession, Protocol::C_Skill& _pkt);
+bool Handle_C_ITEM(shared_ptr<Session> _pSession, Protocol::C_ITEM& _pkt);
 
 
 class ClientPacketHandler
@@ -106,6 +111,8 @@ public:
 			{return  HandlePacket<Protocol::C_MAP_LOADING>(Handle_C_MAP_LOADING, _pSession, _pBuffer, _iLen); };
 		GPacketHandler[C_SKILL] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
 			{return  HandlePacket<Protocol::C_Skill>(Handle_C_SKILL, _pSession, _pBuffer, _iLen); };
+		GPacketHandler[C_ITEM] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
+			{return  HandlePacket<Protocol::C_ITEM>(Handle_C_ITEM, _pSession, _pBuffer, _iLen); };
 		GPacketHandler[C_START_MAP] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
 			{return  HandlePacket<Protocol::C_START_MAP>(Handle_C_START_MAP, _pSession, _pBuffer, _iLen); };
 		GPacketHandler[C_EXIT] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
@@ -126,6 +133,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_NEW_ENTER _pkt) { return _MakeSendBuffer(_pkt, S_NEW_ENTER); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_NEW_EXIT _pkt) { return _MakeSendBuffer(_pkt, S_NEW_EXIT); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_EQUIP _pkt) { return _MakeSendBuffer(_pkt, S_EQUIP); }
+	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_ITEM _pkt) { return _MakeSendBuffer(_pkt, S_ITEM); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_CREATE _pkt) { return _MakeSendBuffer(_pkt, S_CREATE); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_PLAYER_CREATE _pkt) { return _MakeSendBuffer(_pkt, S_PLAYER_CREATE); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_DELETE _pkt) { return _MakeSendBuffer(_pkt, S_DELETE); }

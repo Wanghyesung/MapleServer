@@ -19,6 +19,7 @@ namespace W
 		CHANGE_PLAYER_STATE,
 		CHANGE_PLAYER_SKILL,
 		CHANGE_PLAYER_EQUIP,
+		USING_ITEM,
 		ADD_PLAYER_SKILL,
 		INIT_PLAYER_SKILL,
 		RELEASE_PLAYER_SKILL,
@@ -71,6 +72,7 @@ namespace W
 		static void ChanageScene(UINT _iPlayerID, UINT _iSceneID);
 		static void ChanageState(GameObject* _pObj, GameObject::eState _eState);
 		static void ChanagePlayerEquip(UINT _iPlayerInfo, UINT _iItemID);
+		static void UsingItem(UINT _iItemInfo);
 
 		static void ChangePlayerFSMState(PlayerFSM* _pFSM, Player::ePlayerState _ePlayerState);
 		static void ChangePlayerSkillState(UINT _iPlayerID, Player::ePlayerSkill _ePlayerSkill);
@@ -104,6 +106,7 @@ namespace W
 		static void start_scene(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
 
 		static void chanage_state(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
+		static void using_item(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
 
 		static void change_player_fsmstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
 		static void change_player_skillstate(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);

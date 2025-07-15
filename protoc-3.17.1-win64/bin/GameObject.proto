@@ -23,7 +23,6 @@ message C_CREATE
 	string object_name = 2;
 }
 
-//서버가 클라에게 
 message S_CREATE
 {
 	ObjectInfo object_info =1;
@@ -35,7 +34,6 @@ message S_PLAYER_CREATE
 	repeated PlayerInfo player_info = 1;
 }
 
-//서버가 클라에게 (브로드캐스팅으로 던질거)
 message S_DELETE
 {
 	uint32 scene_layer_deleteid = 2;

@@ -1,9 +1,7 @@
 syntax = "proto3";
 package Protocol;
 
-//repeated uint64 victims = 3;
 
-//클라가 서버에게
 message C_INPUT
 {
 	//어떤 클라인지 구분
@@ -16,7 +14,3 @@ message C_INPUT
 }
 
 
-
-//로그인
-//채팅 던지기
-//나가기

@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\protoc-3.17.1-win64\bin\Item.pb.h" />
     <ClInclude Include="..\protoc-3.17.1-win64\bin\Skill.pb.h" />
     <ClInclude Include="Enter.pb.h" />
     <ClInclude Include="Equip.pb.h" />
@@ -169,6 +170,10 @@
     <ClInclude Include="Transform.pb.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\protoc-3.17.1-win64\bin\Item.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="..\protoc-3.17.1-win64\bin\Skill.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
@@ -222,6 +227,7 @@
     <None Include="..\protoc-3.17.1-win64\bin\Exit.proto" />
     <None Include="..\protoc-3.17.1-win64\bin\GameObject.proto" />
     <None Include="..\protoc-3.17.1-win64\bin\Input.proto" />
+    <None Include="..\protoc-3.17.1-win64\bin\Item.proto" />
     <None Include="..\protoc-3.17.1-win64\bin\Map.proto" />
     <None Include="..\protoc-3.17.1-win64\bin\ObjectState.proto" />
     <None Include="..\protoc-3.17.1-win64\bin\Skill.proto" />
