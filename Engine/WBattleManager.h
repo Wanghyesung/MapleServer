@@ -58,7 +58,7 @@ namespace W
 		static void Release();
 		static void Update();
 		static void CheckDamage(tObjectInfo& _tObjectInfo, const tAttackInfo& _tAttackInfo, 
-			const std::wstring _strName, const Vector3& _vPosition, UINT _iSceneID);
+			const std::wstring _strName, const Vector3& _vPosition, UINT _iSceneID, UINT _iPlayerID =0);
 		
 		static UINT GetMaxDamage() { return m_iMaxDamage; }
 		static UINT GetStigmaCount(UINT _iPlayerID) { return m_arrStigmaCount[_iPlayerID]; }
@@ -75,9 +75,10 @@ namespace W
 		static void Player_DeBuff_Attack(GameObject* _pTarget, eUpStatType _eType, float _fAccStat);
 
 	private:
-		static void active_damage(std::queue<class DamageFont*>& _queueFonts, UINT _iDamageCount, const std::wstring& _strName);
-		static void erase_damage(const std::wstring& _strName);
-		static tDamageCount& add_damage(UINT _iDamageCount, const std::wstring& _strName);
+		static void active_damage(std::queue<class DamageFont*>& _queueFonts, UINT _iDamageCount, 
+			const std::wstring& _strName, UINT _iPlayerID = 0);
+		static void erase_damage(const std::wstring& _strName, UINT _iPlayerID = 0);
+		static tDamageCount& add_damage(UINT _iDamageCount, const std::wstring& _strName, UINT _iPlayerID = 0);
 
 
 		static void excute_abnormal(eAbnormalType _eType, GameObject* _pTarget, float _fAccValue);
@@ -117,7 +118,7 @@ namespace W
 		static std::function<void(GameObject* _pTarget, float _fAccValue)> m_arrStatFunc[(UINT)eUpStatType::End];
 
 		static std::map<std::wstring, std::queue<Effect*>> m_mapEffects;
-		static std::map<std::wstring, tDamageCount> m_mapDamage;
+		static std::map<std::wstring, tDamageCount> m_mapDamage[6];
 
 		//상태이상 
 		static bool m_bOnAbnormal;

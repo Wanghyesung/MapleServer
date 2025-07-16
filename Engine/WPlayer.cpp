@@ -85,6 +85,8 @@ namespace W
 		GetScript<PlayerScript>()->RegisterSkill();
 
 		m_strCurStateName = L"_jump";
+
+		GetComponent<Transform>()->SetPosition(Vector3::Zero);
 	}
 
 	void Player::Update()

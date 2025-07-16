@@ -7,8 +7,8 @@ namespace W
 	UINT DamageFont::CREATE_ID = 0;
 
 	DamageFont::DamageFont() :
-		m_fDeleteTime(0.2f),
-		m_fCurTime(0.2f)
+		m_fDeleteTime(1.f),
+		m_fCurTime(0.0f)
 	{
 
 	}

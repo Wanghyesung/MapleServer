@@ -36,7 +36,7 @@ namespace W
 	FuncStatArr BattleManager::m_arrStatFunc[(UINT)eUpStatType::End];
 
 	std::map<std::wstring, std::queue<Effect*>> BattleManager::m_mapEffects = {};
-	std::map<std::wstring, BattleManager::tDamageCount> BattleManager::m_mapDamage = {};
+	std::map<std::wstring, BattleManager::tDamageCount> BattleManager::m_mapDamage[6] = {};
 
 	UINT BattleManager::m_iMaxDamage = 9999999;
 	bool BattleManager::m_bOnAbnormal = false;
@@ -98,19 +98,23 @@ namespace W
 
 	void BattleManager::Update()
 	{
-		for (auto iter = m_mapDamage.begin(); iter != m_mapDamage.end(); )
+		for (int i = 0; i < 6; ++i)
 		{
-			iter->second.m_fCurTime += Time::DeltaTime();
+			for (auto iter = m_mapDamage[i].begin(); iter != m_mapDamage[i].end(); )
+			{
+				iter->second.m_fCurTime += Time::DeltaTime();
 
-			if (iter->second.m_fCurTime >= iter->second.m_fResetTime)
-				iter = m_mapDamage.erase(iter);
-			else
-				++iter;
+				if (iter->second.m_fCurTime >= iter->second.m_fResetTime)
+					iter = m_mapDamage[i].erase(iter);
+				else
+					++iter;
+			}
 		}
+		
 	}
 
 	void BattleManager::CheckDamage(tObjectInfo& _tObjectInfo, const tAttackInfo& _tAttackInfo,
-		const std::wstring _strName, const Vector3& _vPosition, UINT _iSceneID)
+		const std::wstring _strName, const Vector3& _vPosition, UINT _iSceneID, UINT _iPlayerID)
 	{
 		int iFinalDamage = 0;
 
@@ -142,7 +146,7 @@ namespace W
 			queueFinal.push(pFont);
 		}
 	
-		active_damage(queueFinal, _tAttackInfo.iDamageCount, _strName);
+		active_damage(queueFinal, _tAttackInfo.iDamageCount, _strName, _iPlayerID);
 	}
 
 	void BattleManager::HitchAbnormal(GameObject* _pPlayer, eAbnormalType _eType, float _fAccStat)
@@ -605,9 +609,10 @@ namespace W
 			_pTarget->GetScript<PlayerScript>()->m_tObjectInfo.fDefense * fabs(_fAccStat);
 	}
 
-	void BattleManager::active_damage(std::queue<DamageFont*>& _queueFonts, UINT _iDamageCount, const std::wstring& _strName)
+	void BattleManager::active_damage(std::queue<DamageFont*>& _queueFonts, UINT _iDamageCount, 
+		const std::wstring& _strName, UINT _iPlayerID)
 	{
-		BattleManager::tDamageCount& tDamage = add_damage(_iDamageCount, _strName);
+		BattleManager::tDamageCount& tDamage = add_damage(_iDamageCount, _strName, _iPlayerID);
 
 		float fOffsetX = -0.25f;
 		UINT iQueueSize = _queueFonts.size();
@@ -637,18 +642,18 @@ namespace W
 			erase_damage(_strName);
 	}
 
-	void BattleManager::erase_damage(const std::wstring& _strName)
+	void BattleManager::erase_damage(const std::wstring& _strName, UINT _iPlayerID)
 	{
-		auto iter = m_mapDamage.find(_strName);
-		if (iter == m_mapDamage.end())
+		auto iter = m_mapDamage[_iPlayerID].find(_strName);
+		if (iter == m_mapDamage[_iPlayerID].end())
 			return;
 
-		m_mapDamage.erase(iter);
+		m_mapDamage[_iPlayerID].erase(iter);
 	}
 
-	BattleManager::tDamageCount& BattleManager::add_damage(UINT _iDamageCount, const std::wstring& _strName)
+	BattleManager::tDamageCount& BattleManager::add_damage(UINT _iDamageCount, const std::wstring& _strName, UINT _iPlayerID)
 	{
-		auto result = m_mapDamage.emplace(_strName, tDamageCount( 1, _iDamageCount ));
+		auto result = m_mapDamage[_iPlayerID].emplace(_strName, tDamageCount(1, _iDamageCount));
 
 		auto iter = result.first;
 		bool bInsert = result.second; //이미 같은 키가 있다면 실패

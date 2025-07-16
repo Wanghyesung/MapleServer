@@ -118,48 +118,48 @@ namespace W
 			pEffect = new Effect();
 			pEffect->SetSceneID(iSceneID);
 			pEffect->SetName(L"icebreath_hit");
-			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(110.f, 113.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
+			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(110.f, 113.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.1f);
 
 			pEffect = new Effect();
 			pEffect->SetSceneID(iSceneID);
 			pEffect->SetName(L"ice_hit");
-			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(118.f, 87.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
+			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(118.f, 87.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.1f);
 
 
 			pEffect = new Effect();
 			pEffect->SetSceneID(iSceneID);
 			pEffect->SetName(L"firebreath_hit");
-			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(99.f, 107.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
+			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(99.f, 107.f), 2, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.1f);
 
 			pEffect = new Effect();
 			pEffect->SetName(L"fire_hit");
 			pEffect->SetSceneID(iSceneID);
-			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(92.f, 91.f), 4, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
+			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(92.f, 91.f), 4, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.1f);
 
 			pEffect = new Effect();
 			pEffect->SetSceneID(iSceneID);
 			pEffect->SetName(L"thunderbreath_hit");
-			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(72.f, 82.f), 4, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
+			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(72.f, 82.f), 4, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.1f);
 
 			pEffect = new Effect();
 			pEffect->SetSceneID(iSceneID);
 			pEffect->SetName(L"thunder_hit");
-			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(78.f, 75.f), 5, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
+			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(78.f, 75.f), 5, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.1f);
 
 			pEffect = new Effect();
 			pEffect->SetSceneID(iSceneID);
 			pEffect->SetName(L"legattack1_hit");
-			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(126.f, 107.f), 5, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.2f);
+			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(126.f, 107.f), 5, 1, Vector2(100.f, 100.f), Vector2::Zero, 0.1f);
 
 			pEffect = new Effect();
 			pEffect->SetSceneID(iSceneID);
 			pEffect->SetName(L"legattack2_hit");
-			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(197, 119.f), 6, 1, Vector2(100.f, 100.f), Vector2(0.f, 0.3f), 0.1f);
+			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(197, 119.f), 6, 1, Vector2(100.f, 100.f), Vector2(0.f, 0.3f), 0.05f);
 
 			pEffect = new Effect();
 			pEffect->SetSceneID(iSceneID);
 			pEffect->SetName(L"tailattack_hit");
-			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(132.f, 120.f), 5, 1, Vector2(100.f, 100.f), Vector2(0.f, 0.3f), 0.2f);
+			pEffect->CreateAnimation(Vector2(0.f, 0.f), Vector2(132.f, 120.f), 5, 1, Vector2(100.f, 100.f), Vector2(0.f, 0.3f), 0.1f);
 		}
 	}
 

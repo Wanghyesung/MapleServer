@@ -25,9 +25,9 @@ namespace W
 
 		//void BindConstantBuffer();
 
-		void SetPosition(Vector3 _vPosition) { m_vPrevPosition = m_vPosition; m_vPosition = _vPosition; }
-		void SetRotation(Vector3 _vRotation) { m_vPrevRotation = m_vRotation; m_vRotation = _vRotation; }
-		void SetScale(Vector3 _vScale) { m_vScale = _vScale; }
+		void SetPosition(const Vector3& _vPosition) { m_vPrevPosition = m_vPosition; m_vPosition = _vPosition; }
+		void SetRotation(const Vector3& _vRotation) { m_vPrevRotation = m_vRotation; m_vRotation = _vRotation; }
+		void SetScale(const Vector3& _vScale) { m_vScale = _vScale; }
 
 		void SetPosition(float x, float y, float z) { m_vPrevPosition = m_vPosition; m_vPosition = Vector3(x, y, z); }
 		void SetRotation(float x, float y, float z) { m_vPrevRotation = m_vRotation; m_vRotation = Vector3(x, y, z); }
