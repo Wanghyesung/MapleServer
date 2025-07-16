@@ -110,7 +110,7 @@ namespace W
 		UCHAR cSceneID = (_iItemInfo >> 24) & 0xFF;
 		
 		Protocol::S_ITEM pkt;
-		pkt.set_scene_playerid_itemid(_iItemInfo);
+		pkt.set_scene_playerid_funcid(_iItemInfo);
 		pkt.set_item_value(_iValue);
 
 		shared_ptr<SendBuffer> pBuffer = ClientPacketHandler::MakeSendBuffer(pkt);

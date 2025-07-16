@@ -352,7 +352,7 @@ namespace W
 		//m_bAttack = false;
 
 		Vector3 vPosition = m_pPlayer->GetComponent<Transform>()->GetPosition();
-		BattleManager::CheckDamage(m_tObjectInfo, _tAttackInfo, _strAttackName, vPosition);
+		BattleManager::CheckDamage(m_tObjectInfo, _tAttackInfo, _strAttackName, vPosition, m_pPlayer->GetSceneID());
 
 		m_pPlayer->SetAlert(true);
 

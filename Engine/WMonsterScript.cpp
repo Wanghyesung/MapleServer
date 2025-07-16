@@ -186,10 +186,10 @@ namespace W
 		m_tHitInfo.fHitRigidityTime = _tAttackInfo.fAttRigidityTime;
 		m_tHitInfo.fHitUpperRcnt = _tAttackInfo.fAttUpperRcnt;
 
-		std::wstring strAttackName = _pAttackObj->GetName();
+		const std::wstring& strAttackName = _pAttackObj->GetName();
 		Collider2D* pCollider = GetOwner()->GetComponent<Collider2D>();
 		Vector3 vPos = pCollider->GetPosition();
-		BattleManager::CheckDamage(m_tObjectInfo, _tAttackInfo, strAttackName, vPos);
+		BattleManager::CheckDamage(m_tObjectInfo, _tAttackInfo, strAttackName, vPos, _pAttackObj->GetSceneID());
 		
 		if (m_tObjectInfo.fHP <= 0.f)
 		{

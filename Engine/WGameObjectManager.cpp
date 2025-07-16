@@ -133,6 +133,7 @@ namespace W
 		REGISTER_OBJECT_ID	(Whiggin			 , 106)
 		REGISTER_OBJECT_ID	(White				 , 107)
 		REGISTER_OBJECT_ID	(Wind				 , 108)
+		REGISTER_OBJECT_ID	(DamageFont			 , 109)
 
 
 

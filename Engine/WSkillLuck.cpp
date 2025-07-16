@@ -125,15 +125,16 @@ namespace W
 
 			Player* pPlayer = GetPlayer();
 			PlayerAttackObject* pAttackObj = pPlayer->GetScript<PlayerScript>()->GetPlayerSkill(L"luck");
-			Shuriken* pShuriken = dynamic_cast<Shuriken*>(pAttackObj);
+			Shuriken* pShuriken = static_cast<Shuriken*>(pAttackObj);
 			
 			pShuriken->SetDir(pPlayer->GetDir());
-		
-			//추가 데미지
-			AddDamage(pShuriken);
-
+			
 			tAttackInfo& tAttack = pShuriken->GetScript<AttackScript>()->GetAttackInfo();
 			tAttack.iDamageCount = m_iMaxCnt;
+			tAttack.fAttackDamage = 1.f;
+
+			//추가 데미지
+			AddDamage(pShuriken);
 
 			Transform* pTr = pShuriken->GetComponent<Transform>();
 			Vector3 vPosition = pPlayer->GetComponent<Transform>()->GetPosition();

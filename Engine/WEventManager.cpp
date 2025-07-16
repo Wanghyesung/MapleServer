@@ -369,18 +369,16 @@ namespace W
 		UCHAR cSceneID = (iPlayerInfo >> 24) & 0xFF;
 		UCHAR cLayer = (iPlayerInfo >> 16) & 0xFF;
 		UCHAR cPlayerID = (iPlayerInfo >> 8) & 0xFF;
-		//UCHAR cEquipID = iPlayerInfo & 0xFF;
-
+	
 	
 		GameObject* pObj = SceneManger::FindPlayer(cSceneID, cPlayerID);
 		if (pObj)
 		{
 			Player* pPlayer = static_cast<Player*>(pObj);
 
-			UINT iItemID = (iPlayerItem & 0xFFFFF);
-			//bool bClearEquip = ((iPlayerItem >> 8) & 0xFF);
+			UINT iItemID = (iPlayerItem & 0xFFFFF);	
 			UINT iPlayerPartID = (iPlayerItem >> 24) & 0xFF;
-			//UINT iItemEquipID = (_wParm << 24) & 0xFF;
+		
 
 			if(iItemID == 0)
 				pPlayer->DisableEquip((eEquipType)iPlayerPartID);

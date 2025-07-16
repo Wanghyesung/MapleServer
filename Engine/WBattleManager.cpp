@@ -24,7 +24,7 @@
 #include "WInputBackground.h"
 #include "WDemianEntireAttack.h"
 #include "WStop.h"
-
+#include "WDamageFont.h"
 
 namespace W
 {
@@ -34,7 +34,9 @@ namespace W
 
 	FuncAbnormalArr BattleManager::m_arrAbnormalFunc[(UINT)eAbnormalType::End];
 	FuncStatArr BattleManager::m_arrStatFunc[(UINT)eUpStatType::End];
-	EffectMap BattleManager::m_mapEffects = {};
+
+	std::map<std::wstring, std::queue<Effect*>> BattleManager::m_mapEffects = {};
+	std::map<std::wstring, BattleManager::tDamageCount> BattleManager::m_mapDamage = {};
 
 	UINT BattleManager::m_iMaxDamage = 9999999;
 	bool BattleManager::m_bOnAbnormal = false;
@@ -43,9 +45,16 @@ namespace W
 	float BattleManager::m_fCurPotionTime = 0.f;
 	UINT  BattleManager::m_arrStigmaCount[6] = { 0,6,6,6,6,6 };
 
-		
 	void BattleManager::Initialize()
 	{
+		for (int i = 0; i < 300; ++i)
+		{
+			DamageFont* pDamageFont = new DamageFont();
+			pDamageFont->SetName(L"DamageFont");
+			ObjectPoolManager::AddObjectPool(L"DamageFont", pDamageFont);
+		}
+
+
 		m_arrAbnormalFunc[(UINT)eAbnormalType::None] = nullptr;
 		m_arrAbnormalFunc[(UINT)eAbnormalType::SealSkill] = seal_skill;
 		m_arrAbnormalFunc[(UINT)eAbnormalType::temptation] = temptation;
@@ -89,19 +98,27 @@ namespace W
 
 	void BattleManager::Update()
 	{
+		for (auto iter = m_mapDamage.begin(); iter != m_mapDamage.end(); )
+		{
+			iter->second.m_fCurTime += Time::DeltaTime();
 
+			if (iter->second.m_fCurTime >= iter->second.m_fResetTime)
+				iter = m_mapDamage.erase(iter);
+			else
+				++iter;
+		}
 	}
 
 	void BattleManager::CheckDamage(tObjectInfo& _tObjectInfo, const tAttackInfo& _tAttackInfo,
-		const std::wstring _strName, Vector3 _vPosition)
+		const std::wstring _strName, const Vector3& _vPosition, UINT _iSceneID)
 	{
 		int iFinalDamage = 0;
 
 		iFinalDamage = floor(_tAttackInfo.fAttackDamage * 10
-			- _tObjectInfo.fDefense * _tObjectInfo.fDefense);
+			- _tObjectInfo.fDefense * 2);
 
 		if (iFinalDamage <= 0.f)
-			iFinalDamage = 1.f;
+			iFinalDamage = 1;
 
 		else if (iFinalDamage >= m_iMaxDamage)
 			iFinalDamage = m_iMaxDamage;
@@ -110,6 +127,22 @@ namespace W
 		if (_tObjectInfo.fHP <= 0.f)
 			_tObjectInfo.fHP = 0.f;
 
+		queue<DamageFont*> queueFinal = {};
+		std::string strDamage = std::to_string(iFinalDamage);
+		
+		for (char c : strDamage)
+		{
+			UINT iDigit = c - '0';
+			GameObject* pObj = ObjectPoolManager::PopObject(L"DamageFont");
+			DamageFont* pFont = static_cast<DamageFont*>(pObj);
+
+			pFont->SetSceneID(_iSceneID);
+			pFont->CheckDamage(iDigit);
+			pFont->GetComponent<Transform>()->SetPosition(_vPosition);
+			queueFinal.push(pFont);
+		}
+	
+		active_damage(queueFinal, _tAttackInfo.iDamageCount, _strName);
 	}
 
 	void BattleManager::HitchAbnormal(GameObject* _pPlayer, eAbnormalType _eType, float _fAccStat)
@@ -570,6 +603,66 @@ namespace W
 			_pTarget->GetScript<PlayerScript>()->m_tObjectInfo.fDefense / fabs(_fAccStat);
 		else
 			_pTarget->GetScript<PlayerScript>()->m_tObjectInfo.fDefense * fabs(_fAccStat);
+	}
+
+	void BattleManager::active_damage(std::queue<DamageFont*>& _queueFonts, UINT _iDamageCount, const std::wstring& _strName)
+	{
+		BattleManager::tDamageCount& tDamage = add_damage(_iDamageCount, _strName);
+
+		float fOffsetX = -0.25f;
+		UINT iQueueSize = _queueFonts.size();
+		iQueueSize /= 2;
+
+		float X = iQueueSize * fOffsetX;
+
+		while (!_queueFonts.empty())
+		{
+			DamageFont* pDamage = _queueFonts.front();
+			_queueFonts.pop();
+
+			Transform* pTr = pDamage->GetComponent<Transform>();
+			Vector3 vPos = pTr->GetPosition();
+			vPos.x += X;
+			vPos.z = -6.f;
+			vPos.y += (0.3f * tDamage.iCurCount);
+			pTr->SetPosition(vPos);
+
+			pDamage->m_bActive = true;
+			EventManager::CreateObject(pDamage, eLayerType::Object);
+
+			X -= fOffsetX;
+		}
+
+		if (tDamage.iCurCount >= tDamage.iEndCount)
+			erase_damage(_strName);
+	}
+
+	void BattleManager::erase_damage(const std::wstring& _strName)
+	{
+		auto iter = m_mapDamage.find(_strName);
+		if (iter == m_mapDamage.end())
+			return;
+
+		m_mapDamage.erase(iter);
+	}
+
+	BattleManager::tDamageCount& BattleManager::add_damage(UINT _iDamageCount, const std::wstring& _strName)
+	{
+		auto result = m_mapDamage.emplace(_strName, tDamageCount( 1, _iDamageCount ));
+
+		auto iter = result.first;
+		bool bInsert = result.second; //이미 같은 키가 있다면 실패
+
+		if (!bInsert)
+		{
+			auto& tDamage = iter->second;
+			if (tDamage.iCurCount > tDamage.iEndCount)
+				tDamage.iCurCount = 0;
+			++tDamage.iCurCount;
+		}
+
+		return iter->second;
+
 	}
 
 

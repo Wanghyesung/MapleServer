@@ -107,6 +107,7 @@ namespace W
 		Erase(other->GetColliderID());
 	}
 
+	
 	void AttackScript::SetStayObject(UINT _iAttackCount, float _fAttackTime)
 	{
 		m_bDelete = false;
@@ -183,9 +184,8 @@ namespace W
 	{
 		GameObject* pOther = other->GetOwner();
 
-		PlayerAttackObject* pAttackObject
-			= dynamic_cast<PlayerAttackObject*>(GetOwner());
-		Monster* pMon = dynamic_cast<Monster*>(pOther);
+		PlayerAttackObject* pAttackObject = static_cast<PlayerAttackObject*>(GetOwner());
+		Monster* pMon = static_cast<Monster*>(pOther);
 
 		Effect* pEffect = BattleManager::GetEffect(pAttackObject->GetName() + L"_hit");
 		if (pEffect)

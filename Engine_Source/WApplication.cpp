@@ -51,11 +51,11 @@ namespace W
 		Input::Initialize();
 		
 		CollisionManager::Initialize();
-		BattleManager::Initialize();
 		EventManager::Initialize();
 
-		ItemManager::Initialize();
 		GameObjectManager::Initialize();
+		BattleManager::Initialize();
+		ItemManager::Initialize();
 
 		SceneManger::Initialize();
 	}

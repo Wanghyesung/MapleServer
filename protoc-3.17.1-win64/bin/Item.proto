@@ -3,12 +3,12 @@ package Protocol;
 
 message C_ITEM
 {
-	uint32 scene_playerid_item_id = 1;
+	uint32 scene_playerid_itemid = 1;
 }
 
 message S_ITEM
 {
-	uint32 scene_playerid_itemid = 1;
+	uint32 scene_playerid_funcid = 1;
 
 	uint32 item_value = 2;
 }

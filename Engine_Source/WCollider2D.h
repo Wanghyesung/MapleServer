@@ -21,12 +21,12 @@ namespace W
 
 		void SetType(eColliderType _eType) { m_eType = _eType; }
 		void SetSize(Vector2 _vSize) { m_vSize = _vSize; }
-		Vector2 GetSize() { return m_vSize; }
+		const Vector2& GetSize() { return m_vSize; }
 		void SetCenter(Vector2 _Center) { m_vCenter = _Center; }
-		Vector2 GetCenter() { return m_vCenter; }
+		const Vector2& GetCenter() { return m_vCenter; }
 		UINT GetColliderID() { return m_iColliderID; }
 		
-		Vector3 GetPosition() { return m_vPosition; }
+		const Vector3& GetPosition() { return m_vPosition; }
 
 
 		void SetActive(bool _bActive) { m_bActive = _bActive; }

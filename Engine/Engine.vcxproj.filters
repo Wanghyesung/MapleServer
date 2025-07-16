@@ -506,6 +506,9 @@
     <ClInclude Include="WItemManager.h">
       <Filter>Contents\Manager\ItemManager</Filter>
     </ClInclude>
+    <ClInclude Include="WDamageFont.h">
+      <Filter>Contents\Object\DamageFont</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -1007,6 +1010,9 @@
     <ClCompile Include="WItemManager.cpp">
       <Filter>Contents\Manager\ItemManager</Filter>
     </ClCompile>
+    <ClCompile Include="WDamageFont.cpp">
+      <Filter>Contents\Object\DamageFont</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Contents">
@@ -1386,6 +1392,9 @@
     </Filter>
     <Filter Include="Contents\Packet">
       <UniqueIdentifier>{4110f430-7628-4d70-8dde-a95a6106b244}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Object\DamageFont">
+      <UniqueIdentifier>{d4420b2b-12d6-4e70-9b1a-64eb72fe8c6c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

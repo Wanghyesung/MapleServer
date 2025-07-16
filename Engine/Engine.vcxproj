@@ -217,6 +217,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WCage.h" />
     <ClInclude Include="WCloneMegnus.h" />
     <ClInclude Include="WConfusion.h" />
+    <ClInclude Include="WDamageFont.h" />
     <ClInclude Include="WDefenseUp.h" />
     <ClInclude Include="WDemianCircle.h" />
     <ClInclude Include="WDemianEntireAttack.h" />
@@ -386,6 +387,7 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WCage.cpp" />
     <ClCompile Include="WCloneMegnus.cpp" />
     <ClCompile Include="WConfusion.cpp" />
+    <ClCompile Include="WDamageFont.cpp" />
     <ClCompile Include="WDefenseUp.cpp" />
     <ClCompile Include="WDemianCircle.cpp" />
     <ClCompile Include="WDemianEntireAttack.cpp" />
