@@ -377,12 +377,12 @@ namespace W
 		{
 			Player* pPlayer = static_cast<Player*>(pObj);
 
-			UINT iItemID = (iPlayerItem & 0xFF);
-			bool bClearEquip = ((iPlayerItem >> 8) & 0xFF);
+			UINT iItemID = (iPlayerItem & 0xFFFFF);
+			//bool bClearEquip = ((iPlayerItem >> 8) & 0xFF);
 			UINT iPlayerPartID = (iPlayerItem >> 24) & 0xFF;
 			//UINT iItemEquipID = (_wParm << 24) & 0xFF;
 
-			if(bClearEquip)
+			if(iItemID == 0)
 				pPlayer->DisableEquip((eEquipType)iPlayerPartID);
 			else
 				pPlayer->SetEquip((eEquipType)iPlayerPartID, iItemID);

@@ -77,6 +77,8 @@ namespace W
 			m_iItemID = spItem->iItemID;
 			Initialize();
 		}
+		else
+			m_iItemID = 0;
 	}
 	
 }
