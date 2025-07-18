@@ -105,7 +105,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     for (int i = 0; i < 6; ++i)
     {
-        ThreadMgr->Excute(
+        ThreadMgr->Excute
+        (
             [=]()
             {
                 while (bIsRunning)

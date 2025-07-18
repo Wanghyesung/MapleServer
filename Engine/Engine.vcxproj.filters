@@ -497,12 +497,6 @@
     <ClInclude Include="ObjectHeader.h">
       <Filter>Contents\Manager\GameObjectManager</Filter>
     </ClInclude>
-    <ClInclude Include="WPacketManager.h">
-      <Filter>Contents\Packet</Filter>
-    </ClInclude>
-    <ClInclude Include="WPacket.h">
-      <Filter>Contents\Packet</Filter>
-    </ClInclude>
     <ClInclude Include="WItemManager.h">
       <Filter>Contents\Manager\ItemManager</Filter>
     </ClInclude>
@@ -1001,12 +995,6 @@
     <ClCompile Include="WGameObjectManager.cpp">
       <Filter>Contents\Manager\GameObjectManager</Filter>
     </ClCompile>
-    <ClCompile Include="WPacketManager.cpp">
-      <Filter>Contents\Packet</Filter>
-    </ClCompile>
-    <ClCompile Include="WPacket.cpp">
-      <Filter>Contents\Packet</Filter>
-    </ClCompile>
     <ClCompile Include="WItemManager.cpp">
       <Filter>Contents\Manager\ItemManager</Filter>
     </ClCompile>
@@ -1389,9 +1377,6 @@
     </Filter>
     <Filter Include="Contents\Manager\GameObjectManager">
       <UniqueIdentifier>{51ad96ad-dc42-49f1-8712-99c190c4e73a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Contents\Packet">
-      <UniqueIdentifier>{4110f430-7628-4d70-8dde-a95a6106b244}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents\Object\DamageFont">
       <UniqueIdentifier>{d4420b2b-12d6-4e70-9b1a-64eb72fe8c6c}</UniqueIdentifier>

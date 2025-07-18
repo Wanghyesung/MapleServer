@@ -282,7 +282,10 @@ namespace W
 		UCHAR cAnimIdx = pAnim->GetActiveAnimation()->GetCurIndex();
 		UCHAR cAlert = m_bAlert ? 1 : 0;
 		UCHAR cShadow = m_bActiveShadow ? 1 : 0;
-		pkt.set_state_value((cShadow<<24) | (cAlert<<16) | (cDir << 8) | cAnimIdx);
+		UCHAR cDark = m_bActiveDark ? 1 : 0;
+
+		//여기 IsDark() 하나 더 보내야함
+		pkt.set_state_value((cDark << 28) | (cShadow<<24) | (cAlert<<16) | (cDir << 8) | cAnimIdx);
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneID()));

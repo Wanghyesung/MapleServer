@@ -8,6 +8,7 @@ namespace W
 {
 	class GameObject : public Entity
 	{
+		DECLARE_CREATE_ID;
 	public:
 		enum eState
 		{
@@ -91,8 +92,6 @@ namespace W
 
 		void SetObjectID(UINT _ID) { m_iObjectID = _ID; }
 		UINT GetObjectID() { return m_iObjectID; }
-
-		DECLARE_CREATE_ID;
 
 	private:
 		eState m_eState;

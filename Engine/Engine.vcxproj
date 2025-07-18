@@ -173,6 +173,10 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapper.dll" "$(SolutionDir)x64\Debug"
 
 xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -198,6 +202,10 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
       <Command>
       </Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -236,8 +244,6 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClInclude Include="WGameObjectManager.h" />
     <ClInclude Include="WItemManager.h" />
     <ClInclude Include="WObjectPoolManager.h" />
-    <ClInclude Include="WPacket.h" />
-    <ClInclude Include="WPacketManager.h" />
     <ClInclude Include="WPlayerDead.h" />
     <ClInclude Include="WSpawnUltimate.h" />
     <ClInclude Include="WStigma.h" />
@@ -406,8 +412,6 @@ xcopy /R /Y "$(SolutionDir)dll\FW1FontWrapperL.dll"  "$(SolutionDir)x64\Debug"</
     <ClCompile Include="WGameObjectManager.cpp" />
     <ClCompile Include="WItemManager.cpp" />
     <ClCompile Include="WObjectPoolManager.cpp" />
-    <ClCompile Include="WPacket.cpp" />
-    <ClCompile Include="WPacketManager.cpp" />
     <ClCompile Include="WPlayerDead.cpp" />
     <ClCompile Include="WSpawnUltimate.cpp" />
     <ClCompile Include="WStigma.cpp" />
