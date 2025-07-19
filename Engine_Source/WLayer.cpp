@@ -5,7 +5,7 @@ namespace W
 {
 	Layer::Layer()
 	{
-		for (UINT i = LAYER_STARAT_IDX; i < UCHAR_MAX; ++i)
+		for (UINT i = LAYER_STARAT_IDX; i < CHAR_MAX; ++i)
 			m_queueObjectID.push(i);
 	}
 	Layer::~Layer()
@@ -121,7 +121,7 @@ namespace W
 			return iObjectID;
 		}
 
-		return UCHAR_MAX;
+		return CHAR_MAX;
 	}
 
 	void Layer::PushObjectID(UINT _iID)

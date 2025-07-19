@@ -34,6 +34,7 @@ namespace W
 			{
 				GameObject* pGameObj = vec.back();
 				vec.pop_back();
+				pGameObj->SetObjectID(0);
 
 				return pGameObj;
 			}

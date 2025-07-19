@@ -177,9 +177,7 @@ namespace W
 			auto iter = hashObjs.find(_iPlayerID);
 			if (iter != hashObjs.end())
 				return iter->second;
-
 		}
-
 		return nullptr;
 	}
 

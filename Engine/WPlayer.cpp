@@ -86,7 +86,10 @@ namespace W
 
 		m_strCurStateName = L"_jump";
 
-		GetComponent<Transform>()->SetPosition(Vector3::Zero);
+		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
+		vPosition.x = 0.f; vPosition.y = 0.f;
+		GetComponent<Transform>()->SetPosition(vPosition);
+
 		GetComponent<Rigidbody>()->SetGround(false);
 	}
 

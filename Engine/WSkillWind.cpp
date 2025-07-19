@@ -103,7 +103,7 @@ namespace W
 
 		int iDir = GetPlayer()->GetDir();
 		PlayerAttackObject* pAttackObj = GetPlayer()->GetScript<PlayerScript>()->GetPlayerSkill(L"wind");
-		m_pWind = dynamic_cast<Wind*>(pAttackObj);
+		m_pWind = static_cast<Wind*>(pAttackObj);
 		m_pWind->GetScript<AttackScript>()->SetDeleteObject(false);
 		m_pWind->SetDir(iDir);
 		
