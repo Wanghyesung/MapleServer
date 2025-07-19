@@ -511,7 +511,7 @@ namespace W
 			tAttackInfo.fAttUpperRcnt = 0.f;
 			Player* pPlayer = static_cast<Player*>(_pGameObject);
 
-			pPlayer->GetScript<PlayerScript>()->Hit(tAttackInfo, L"stigma");
+			pPlayer->GetScript<PlayerScript>()->Hit(tAttackInfo, L"stigma", pPlayer->GetSceneID());
 			
 			Stigma* pStigma = new Stigma();
 			pStigma->SetSceneID(pPlayer->GetSceneID());

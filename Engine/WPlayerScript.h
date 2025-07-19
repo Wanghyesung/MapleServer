@@ -60,7 +60,7 @@ namespace W
 		const tAttackInfo& GetAttackInfo() { return m_tAttackInfo; }
 		const tObjectInfo& GetObjectInfo() { return m_tObjectInfo; }
 
-		void Hit(const tAttackInfo& _tAttackInfo, std::wstring _strAttackName);
+		void Hit(const tAttackInfo& _tAttackInfo, const std::wstring& _strAttackName, UINT _iSceneID);
 
 		void SetActiveState(Player::ePlayerState _eState);
 

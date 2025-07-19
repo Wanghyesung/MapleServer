@@ -73,6 +73,11 @@ namespace W
 		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneID()));
 	}
 	
+	void StigmaBack::DeleteCount()
+	{
+		EventManager::DeleteObject(m_pCount);
+	}
+
 	void StigmaBack::set_count()
 	{
 		if (m_pTarget == nullptr)

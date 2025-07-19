@@ -131,7 +131,7 @@ namespace W
 				bEnter = true;
 				if (m_fCurAttackTime >= m_fAttackTime)
 				{
-					pPlayer->GetScript<PlayerScript>()->Hit(m_tMonsterAttack.tAttackInfo, L"Circle");
+					pPlayer->GetScript<PlayerScript>()->Hit(m_tMonsterAttack.tAttackInfo, L"Circle", GetSceneID());
 					m_fCurAttackTime = 0.f;
 				}
 			}

@@ -87,6 +87,7 @@ namespace W
 		m_strCurStateName = L"_jump";
 
 		GetComponent<Transform>()->SetPosition(Vector3::Zero);
+		GetComponent<Rigidbody>()->SetGround(false);
 	}
 
 	void Player::Update()

@@ -30,12 +30,14 @@ namespace W
 		std::unordered_map<UINT, GameObject*> GetCopyGameObjects();
 
 		void EraseOnVector(GameObject* _pGameObject);
-		
+
+		UINT GetCurObjectID();
+		void PushObjectID(UINT _iID);
 	private:
 		
-		std::unordered_map<UINT, GameObject*> m_hashGameObject;
+		unordered_map<UINT, GameObject*> m_hashGameObject;
 
-		UINT m_iObjectID;
+		queue<UINT> m_queueObjectID;
 		//RWLock m_lock;
 
 		friend class UIManger;

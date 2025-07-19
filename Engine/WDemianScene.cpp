@@ -97,16 +97,19 @@ namespace W
 		GameObject* pPlayer = GetLayer(eLayerType::Player)->FindObject(_iPlayerID);
 		if (pPlayer)
 		{
-			StigmaBack* pStigmaBack = new StigmaBack();
-			pStigmaBack->SetSceneID(GetSceneID());
-			pStigmaBack->SetTarget(pPlayer);
-			pStigmaBack->Initialize();
-			EventManager::CreateObject(pStigmaBack, eLayerType::Object);
+			m_arrStigma[_iPlayerID] = new StigmaBack();
+			m_arrStigma[_iPlayerID]->SetSceneID(GetSceneID());
+			m_arrStigma[_iPlayerID]->SetTarget(pPlayer);
+			m_arrStigma[_iPlayerID]->Initialize();
+			EventManager::CreateObject(m_arrStigma[_iPlayerID], eLayerType::Object);
 		}
 	}
 
 	void DemianScene::OnExitPlayer(UINT _iPlayerID)
 	{
+		m_arrStigma[_iPlayerID]->DeleteCount();
+		EventManager::DeleteObject(m_arrStigma[_iPlayerID]);
+
 		//여기서 필요 없어진 오브젝트 전부 제거
 		SceneManger::RetrieveAttackObject(_iPlayerID, GetSceneID());
 	}

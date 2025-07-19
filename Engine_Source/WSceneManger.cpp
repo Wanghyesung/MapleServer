@@ -210,6 +210,8 @@ namespace W
 			UINT iSceneID = pPlayer->GetSceneID();
 			UINT iPlayerID = pPlayer->GetObjectID();
 
+			m_hashSceneID[iSceneID]->OnExitPlayer(iPlayerID);
+
 			auto& vecIDs = m_hashPlayerScene[iSceneID];
 			auto  iter = std::find(vecIDs.begin(), vecIDs.end(), iPlayerID);
 			if (iter != vecIDs.end()) 
@@ -219,6 +221,7 @@ namespace W
 				std::swap(vecIDs[idx], vecIDs[lastIdx]);
 				vecIDs.pop_back();
 			}
+
 		}
 	}
 
@@ -410,8 +413,8 @@ namespace W
 				CHAR cAnimIdx = 0;
 				UCHAR bRender = pGameObj->IsRender();
 				W::Animator* pAnim = pGameObj->GetComponent<W::Animator>();
-				if (pAnim)
-					cAnimIdx = 0;
+				if (pAnim && pAnim->GetActiveAnimation())
+					cAnimIdx = pAnim->GetActiveAnimation()->GetCurIndex();
 
 				tInfo.set_state_value((bRender << 16) | (cDir << 8) | cAnimIdx);
 

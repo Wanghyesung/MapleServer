@@ -135,7 +135,7 @@ namespace W
 
 				float fLen = fPlayerX - fX;
 				if (fabs(fLen) >= m_vecLength[m_iCurLevel])
-					pPlayer->GetScript<PlayerScript>()->Hit(m_tAttackInfo, L"MobZone");
+					pPlayer->GetScript<PlayerScript>()->Hit(m_tAttackInfo, L"MobZone", GetSceneID());
 			}
 		}
 		

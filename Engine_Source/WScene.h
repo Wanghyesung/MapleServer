@@ -75,7 +75,7 @@ namespace W
 		tMapSize GetMapSize() { return m_tMapSize; }
 		tMapPossibleSize GetMapPossibleSize() { return m_tPossibleSize; }
 
-		void EraseObject(eLayerType _eType, GameObject* _pGameObj){ m_vecLayer[(UINT)_eType]->EraseOnVector(_pGameObj); }
+		void EraseObject(eLayerType _eType, GameObject* _pGameObj);
 
 		UINT GetSceneID() { return m_iSceneID; }
 	

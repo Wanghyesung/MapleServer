@@ -17,6 +17,7 @@ namespace W
 
 		DECLARE_CREATE_ID;
 
+		void DeleteCount();
 		void SetTarget(GameObject* _pObj) { m_pTarget = _pObj; }
 	private:
 		void set_count();

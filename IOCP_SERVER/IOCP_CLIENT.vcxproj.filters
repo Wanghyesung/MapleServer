@@ -42,6 +42,7 @@
     <ClInclude Include="..\protoc-3.17.1-win64\bin\Item.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
+    <ClInclude Include="sqlite3.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -79,6 +80,7 @@
     <ClCompile Include="..\protoc-3.17.1-win64\bin\Item.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
+    <ClCompile Include="sqlite3.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\protoc-3.17.1-win64\bin\Enter.proto">

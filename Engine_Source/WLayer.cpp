@@ -3,10 +3,10 @@
 #include "WScene.h"
 namespace W
 {
-	Layer::Layer():
-		m_iObjectID(LAYER_STARAT_IDX)
+	Layer::Layer()
 	{
-		
+		for (UINT i = LAYER_STARAT_IDX; i < UCHAR_MAX; ++i)
+			m_queueObjectID.push(i);
 	}
 	Layer::~Layer()
 	{
@@ -91,10 +91,9 @@ namespace W
 	{
 		if (_pGameObj->GetObjectID() == 0)
 		{
-			_pGameObj->SetObjectID(m_iObjectID);
-			m_hashGameObject.insert(std::make_pair(m_iObjectID++, _pGameObj));
-
-			//21억을 넘긴다면 다시 0으로
+			UINT iCurID = GetCurObjectID();
+			_pGameObj->SetObjectID(iCurID);
+			m_hashGameObject.insert(std::make_pair(iCurID, _pGameObj));
 		}
 		else
 			m_hashGameObject.insert(std::make_pair(_pGameObj->GetObjectID(), _pGameObj));
@@ -103,7 +102,7 @@ namespace W
 	void Layer::EraseOnVector(GameObject* _pGameObject)
 	{
 		UINT iGameObjectID = _pGameObject->GetObjectID();
-
+		PushObjectID(iGameObjectID);
 		//WLock lock(m_lock);
 
 		auto iter = m_hashGameObject.find(iGameObjectID);
@@ -111,6 +110,26 @@ namespace W
 
 		if (pGameObject != nullptr)
 			m_hashGameObject.erase(iGameObjectID);
+	}
+
+	UINT Layer::GetCurObjectID()
+	{
+		if (!m_queueObjectID.empty())
+		{
+			UINT iObjectID = m_queueObjectID.front();
+			m_queueObjectID.pop();
+			return iObjectID;
+		}
+
+		return UCHAR_MAX;
+	}
+
+	void Layer::PushObjectID(UINT _iID)
+	{
+		if (_iID <= LAYER_STARAT_IDX)
+			return;
+
+		m_queueObjectID.push(_iID);
 	}
 
 	const unordered_map<UINT, GameObject*>& Layer::GetGameObjects()

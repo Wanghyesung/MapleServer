@@ -32,9 +32,9 @@ namespace W
 
 	private:
 		class SharHP* m_pSharHP;
-
 		class White* m_pWhite;
-	
+		class StigmaBack* m_arrStigma[6];
+
 		float m_fStigmaTime;
 		float m_fCurStigmaTime;
 		

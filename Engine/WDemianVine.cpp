@@ -139,7 +139,7 @@ namespace W
 		for (GameObject* pPlayer : SceneManger::GetPlayers(GetSceneID()))
 		{
 			if (!m_bClear)
-				pPlayer->GetScript<PlayerScript>()->Hit(m_tAttackInfo, L"DemianVine");
+				pPlayer->GetScript<PlayerScript>()->Hit(m_tAttackInfo, L"DemianVine", GetSceneID());
 		}
 
 		off();

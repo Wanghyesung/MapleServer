@@ -232,13 +232,13 @@ namespace W
 	}
 	void MonsterScript::reflex(const tAttackInfo& _tAttackInfo, GameObject* _pAttackObj)
 	{
-		PlayerAttackObject* pAttackObj = dynamic_cast<PlayerAttackObject*>(_pAttackObj);
+		PlayerAttackObject* pAttackObj = static_cast<PlayerAttackObject*>(_pAttackObj);
 		
 		tAttackInfo tAtt = {};
 		tAtt.fAttackDamage = _tAttackInfo.fAttackDamage/2.f;
 		tAtt.fAttUpperRcnt = 0.f;
 		tAtt.fAttRcnt = 0.f;
 
-		pAttackObj->GetPlayer()->GetScript<PlayerScript>()->Hit(tAtt,L"");
+		pAttackObj->GetPlayer()->GetScript<PlayerScript>()->Hit(tAtt,L"", GetOwner()->GetSceneID());
 	}
 }

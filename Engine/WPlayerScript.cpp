@@ -124,7 +124,7 @@ namespace W
 					return;
 				tAttack = pScript->GetAttackInfo();
 				
-				Hit(tAttack, pGameObj->GetName());
+				Hit(tAttack, pGameObj->GetName(), pGameObj->GetSceneID());
 			}
 		}
 
@@ -145,7 +145,7 @@ namespace W
 			if (!bNowHit)
 			{
 				tAttack = pGameObj->GetScript<MonsterScript>()->GetAttackInfo();
-				Hit(tAttack, pGameObj->GetName());
+				Hit(tAttack, pGameObj->GetName(), pGameObj->GetSceneID());
 			}
 		}
 		else if (pGameObj->GetLayerType() == eLayerType::Object)
@@ -346,13 +346,13 @@ namespace W
 		}
 	}
 
-	void PlayerScript::Hit(const tAttackInfo& _tAttackInfo ,std::wstring _strAttackName)
+	void PlayerScript::Hit(const tAttackInfo& _tAttackInfo ,const std::wstring& _strAttackName, UINT _iSceneID)
 	{
 		//m_tObjectInfo.fHP -= _tAttackInfo.fAttackDamage;
 		//m_bAttack = false;
 
 		Vector3 vPosition = m_pPlayer->GetComponent<Transform>()->GetPosition();
-		BattleManager::CheckDamage(m_tObjectInfo, _tAttackInfo, _strAttackName, vPosition, m_pPlayer->GetSceneID());
+		BattleManager::CheckDamage(m_tObjectInfo, _tAttackInfo, _strAttackName, vPosition, _iSceneID);
 
 		m_pPlayer->SetAlert(true);
 
