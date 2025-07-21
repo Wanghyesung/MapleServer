@@ -13,51 +13,25 @@ DBConnectionPool::~DBConnectionPool()
 
 bool DBConnectionPool::Initialize()
 {
-	auto query = L"											   \
-    DROP TABLE IF EXISTS [dbo].[Equip];						   \
-    CREATE TABLE [dbo].[Equip]								   \
-    (                                                          \
-        [Name]    VARCHAR(50) NOT NULL PRIMARY KEY IDENTITY    \
-        [EyeID]   INT         NOT NULL,						   \
-    );";
+	auto query = L"											    \
+    DROP TABLE IF EXISTS [dbo].[Equip];						    \
+    CREATE TABLE [dbo].[Equip] (								\
+    [Name]      NVARCHAR(50) NOT NULL PRIMARY KEY,				\
+    [EyeID]     INT         NOT NULL DEFAULT 0,					\
+    [HairID]    INT         NOT NULL DEFAULT 0,					\
+    [HatID]     INT         NOT NULL DEFAULT 0,					\
+    [TopID]     INT         NOT NULL DEFAULT 0,					\
+    [BottomID]  INT         NOT NULL DEFAULT 0,					\
+    [ShoesID]   INT         NOT NULL DEFAULT 0,					\
+    [WeaponID]  INT         NOT NULL DEFAULT 0					\
+	);";
 
-	/*
-		[HairID]  INT         NOT NULL,                 \
-        [HatID]   INT         NOT NULL,                 \
-        [TopID]   INT         NOT NULL,                 \
-        [BottomID]INT         NOT NULL,                 \
-        [ShoesID] INT         NOT NULL,                 \
-        [WeaponID]INT         NOT NULL                  \
-	*/
 	DBConnection* dbConn = Pop();
 	if (dbConn->Execute(query) == false)
 		return false;
 	Push(dbConn);
 }
 
-bool DBConnectionPool::InsertData(const wstring& _strTableName, const wstring& _strValue , int _iSize, void* _ptr)
-{
-	DBConnection* pDB = Pop();
-	// 기존에 바인딩 된 정보 날림
-	pDB->UnBind();
-
-
-	wstring strResult = L"INSERT INTO " + _strTableName + L"([" + _strValue + L"]) VALUES(?)";
-	
-	// 넘길 인자 바인딩
-	SQLLEN len = 0;
-	// 넘길 인자 바인딩
-	if (pDB->BindParam(1, SQL_C_LONG, SQL_INTEGER, _iSize, _ptr, &len) == false)
-		return false;
-
-	// SQL 실행
-
-	if (pDB->Execute(strResult.c_str()) == false)
-		return false;
-
-	Push(pDB);
-	return true;
-}
 
 //DB사용하는 스레드 수 만큼 카운트
 bool DBConnectionPool::Connection(int _iConnectionCount, const WCHAR* _strConnection)

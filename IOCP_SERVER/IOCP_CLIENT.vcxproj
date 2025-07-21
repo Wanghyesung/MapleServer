@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="..\protoc-3.17.1-win64\bin\Item.pb.h" />
     <ClInclude Include="..\protoc-3.17.1-win64\bin\Skill.pb.h" />
+    <ClInclude Include="BindDB.h" />
     <ClInclude Include="DBConnection.h" />
     <ClInclude Include="DBConnectionPool.h" />
     <ClInclude Include="Enter.pb.h" />
@@ -180,6 +181,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="BindDB.cpp" />
     <ClCompile Include="DBConnection.cpp" />
     <ClCompile Include="DBConnectionPool.cpp" />
     <ClCompile Include="Enter.pb.cc">

@@ -8,7 +8,7 @@ public:
 	~DBConnectionPool();
 
 	bool Initialize();
-	bool InsertData(const wstring& _strTableName, const wstring& _strValue, int _iSize, void* _ptr);
+	//bool InsertData(const wstring& _strTableName, const wstring& _strValue, int _iSize, void* _ptr);
   
 
 

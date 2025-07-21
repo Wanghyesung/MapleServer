@@ -48,6 +48,9 @@
     <ClInclude Include="DBConnection.h">
       <Filter>DB</Filter>
     </ClInclude>
+    <ClInclude Include="BindDB.h">
+      <Filter>DB</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -89,6 +92,9 @@
       <Filter>DB</Filter>
     </ClCompile>
     <ClCompile Include="DBConnectionPool.cpp">
+      <Filter>DB</Filter>
+    </ClCompile>
+    <ClCompile Include="BindDB.cpp">
       <Filter>DB</Filter>
     </ClCompile>
   </ItemGroup>

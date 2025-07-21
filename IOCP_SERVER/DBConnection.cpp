@@ -117,6 +117,123 @@ void DBConnection::UnBind()
     SQLFreeStmt(m_tStatement, SQL_CLOSE);
 }
 
+bool DBConnection::BindParam(int _iParamIndex, bool* _value, SQLLEN* _iIndex)
+{
+    return BindParam(_iParamIndex, SQL_C_TINYINT, SQL_TINYINT, size32(bool), _value, _iIndex);
+}
+
+bool DBConnection::BindParam(int _iParamIndex, float* _value, SQLLEN* _iIndex)
+{
+    return BindParam(_iParamIndex, SQL_C_FLOAT, SQL_REAL, 0, _value, _iIndex);
+}
+
+bool DBConnection::BindParam(int _iParamIndex, double* _value, SQLLEN* _iIndex)
+{
+    return BindParam(_iParamIndex, SQL_C_DOUBLE, SQL_DOUBLE, 0, _value, _iIndex);
+}
+
+bool DBConnection::BindParam(int _iParamIndex, char* _value, SQLLEN* _iIndex)
+{
+    return BindParam(_iParamIndex, SQL_C_TINYINT, SQL_TINYINT, size32(char), _value, _iIndex);
+}
+
+bool DBConnection::BindParam(int _iParamIndex, short* _value, SQLLEN* _iIndex)
+{
+    return BindParam(_iParamIndex, SQL_C_SHORT, SQL_SMALLINT, size32(short), _value, _iIndex);
+}
+
+bool DBConnection::BindParam(int _iParamIndex, int* _value, SQLLEN* _iIndex)
+{
+    return BindParam(_iParamIndex, SQL_C_LONG, SQL_INTEGER, size32(int), _value, _iIndex);
+}
+
+bool DBConnection::BindParam(int _iParamIndex, long long* _value, SQLLEN* _iIndex)
+{
+    return BindParam(_iParamIndex, SQL_C_SBIGINT, SQL_BIGINT, size32(long long), _value, _iIndex);
+}
+
+bool DBConnection::BindParam(int _iParamIndex, TIMESTAMP_STRUCT* _value, SQLLEN* _iIndex)
+{
+    return BindParam(_iParamIndex, SQL_C_TYPE_TIMESTAMP, SQL_TYPE_TIMESTAMP, size32(TIMESTAMP_STRUCT), _value, _iIndex);
+}
+
+bool DBConnection::BindParam(int _iParamIndex, const WCHAR* _str, SQLLEN* _iIndex)
+{
+    SQLULEN size = static_cast<SQLULEN>((::wcslen(_str) + 1) * 2);
+    *_iIndex = SQL_NTSL;
+
+    if (size > WVARCHAR_MAX)
+        return BindParam(_iParamIndex, SQL_C_WCHAR, SQL_WLONGVARCHAR, size, (SQLPOINTER)_str, _iIndex);
+    else
+        return BindParam(_iParamIndex, SQL_C_WCHAR, SQL_WVARCHAR, size, (SQLPOINTER)_str, _iIndex);
+}
+
+bool DBConnection::BindParam(int _iParamIndex, const BYTE* _bin, int iSize, SQLLEN* _iIndex)
+{
+    if (_bin == nullptr)
+    {
+        *_iIndex = SQL_NULL_DATA;
+        iSize = 1;
+    }
+    else
+        *_iIndex = iSize;
+
+    if (iSize > 0)
+        return BindParam(_iParamIndex, SQL_C_BINARY, SQL_LONGVARBINARY, iSize, (BYTE*)_bin, _iIndex);
+    else
+        return BindParam(_iParamIndex, SQL_C_BINARY, SQL_BINARY, iSize, (BYTE*)_bin, _iIndex);
+}
+
+bool DBConnection::BindCol(int columnIndex, bool* _value, SQLLEN* _iIndex)
+{
+    return BindCol(columnIndex, SQL_C_TINYINT, size32(bool), _value, _iIndex);
+}
+
+bool DBConnection::BindCol(int columnIndex, float* _value, SQLLEN* _iIndex)
+{
+    return BindCol(columnIndex, SQL_C_FLOAT, size32(float), _value, _iIndex);
+}
+
+bool DBConnection::BindCol(int columnIndex, double* _value, SQLLEN* _iIndex)
+{
+    return BindCol(columnIndex, SQL_C_DOUBLE, size32(double), _value, _iIndex);
+}
+
+bool DBConnection::BindCol(int columnIndex, char* _value, SQLLEN* _iIndex)
+{
+    return BindCol(columnIndex, SQL_C_TINYINT, size32(char), _value, _iIndex);
+}
+
+bool DBConnection::BindCol(int columnIndex, short* _value, SQLLEN* _iIndex)
+{
+    return BindCol(columnIndex, SQL_C_SHORT, size32(short), _value, _iIndex);
+}
+
+bool DBConnection::BindCol(int columnIndex, int* _value, SQLLEN* _iIndex)
+{
+    return BindCol(columnIndex, SQL_C_LONG, size32(int), _value, _iIndex);
+}
+
+bool DBConnection::BindCol(int columnIndex, long long* _value, SQLLEN* _iIndex)
+{
+    return BindCol(columnIndex, SQL_C_SBIGINT, size32(long long), _value, _iIndex);
+}
+
+bool DBConnection::BindCol(int columnIndex, TIMESTAMP_STRUCT* _value, SQLLEN* _iIndex)
+{
+    return BindCol(columnIndex, SQL_C_TYPE_TIMESTAMP, size32(TIMESTAMP_STRUCT), _value, _iIndex);
+}
+
+bool DBConnection::BindCol(int columnIndex, WCHAR* _str, int iSize, SQLLEN* _iIndex)
+{
+    return BindCol(columnIndex, SQL_C_WCHAR, iSize, _str, _iIndex);
+}
+
+bool DBConnection::BindCol(int columnIndex, BYTE* _bin, int iSize, SQLLEN* _iIndex)
+{
+    return BindCol(columnIndex, SQL_BINARY, iSize, _bin, _iIndex);
+}
+
 
 
 bool DBConnection::BindParam(SQLUSMALLINT _sParamIdx, SQLUSMALLINT _sType, SQLSMALLINT _sSQLType, SQLULEN _lLen, SQLPOINTER _ptr, SQLLEN* _index)

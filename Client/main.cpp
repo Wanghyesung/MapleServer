@@ -50,7 +50,7 @@
 #include "..\IOCP_SERVER\ClientSession.h"
 #include "..\IOCP\ThreadManager.h"
 #include "..\IOCP\IOCP.h"
-
+#include "..\IOCP_SERVER\BindDB.h"
 shared_ptr<ClientSession> MakeSharedSesion()
 {
     return make_shared<ClientSession>();
@@ -99,45 +99,59 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     //내장 DB
     if (GDBConnectionPool->Connection(5, L"Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=ServerDB;Trusted_Connection=Yes;") == false)
         assert(nullptr);
-    //GDBConnectionPool->Initialize();
-   
- 
-    // Create Table
+    GDBConnectionPool->Initialize();
+
+    
+
+    DBConnection* pDB = GDBConnectionPool->Pop();
+
+    DBBind<8, 0> dbBind(*pDB, L"INSERT INTO [dbo].[Equip]([Name], [EyeID], [HairID], [HatID], [TopID], [BottomID], [ShoesID], [WeaponID])\
+     VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+    
+    int id1 = 1;
+    int id2 = 2;
+    int id3 = 3;
+    int id4 = 4;
+    int id5 = 5;
+    int id6 = 6;
+    int id7 = 7;
+    const WCHAR* name = L"TEST";
+    dbBind.BindParam(0, name);
+    dbBind.BindParam(1, id1);
+    dbBind.BindParam(2, id2);
+    dbBind.BindParam(3, id3);
+    dbBind.BindParam(4, id4);
+    dbBind.BindParam(5, id5);
+    dbBind.BindParam(6, id6);
+    dbBind.BindParam(7, id7);
+
+    if (dbBind.Execute() == false)
+        assert(nullptr);
+    GDBConnectionPool->Push(pDB);
+
+
+    pDB = GDBConnectionPool->Pop();
+
     {
-        auto query = L"									\
-			DROP TABLE IF EXISTS [dbo].[Gold];			\
-			CREATE TABLE [dbo].[Gold]					\
-			(											\
-				[id] INT NOT NULL PRIMARY KEY IDENTITY, \
-				[gold] INT NULL							\
-			);";
+        DBBind<1, 4> dbBind(*pDB, L"SELECT EyeID, HairID, HatID, TopID FROM [dbo].[Equip] WHERE Name = (?)");
 
-        DBConnection* dbConn = GDBConnectionPool->Pop();
-        dbConn->Execute(query);
-        GDBConnectionPool->Push(dbConn);
+        dbBind.BindParam(0, name);
+        int ret1 = 0;
+        int ret2 = 0;
+        int ret3 = 0;
+        int ret4 = 0;
+
+        dbBind.BindCol(0, ret1);  // EyeID
+        dbBind.BindCol(1, ret2);  // HairID
+        dbBind.BindCol(2, ret3);  // HatID
+        dbBind.BindCol(3, ret4);  // TopID
+
+        dbBind.Execute();
+
+        while(dbBind.Fetch())
+
+        int a = 10;
     }
-
-    // Add Data
-    for (int i = 0; i < 3; i++)
-    {
-        DBConnection* dbConn = GDBConnectionPool->Pop();
-        // 기존에 바인딩 된 정보 날림
-        dbConn->UnBind();
-
-        // 넘길 인자 바인딩
-        int gold = 100;
-        SQLLEN len = 0;
-
-        // 넘길 인자 바인딩
-        dbConn->BindParam(1, SQL_C_LONG, SQL_INTEGER, sizeof(gold), &gold, &len);
-
-        // SQL 실행
-        dbConn->Execute(L"INSERT INTO [dbo].[Gold]([gold]) VALUES(?)");
-
-        GDBConnectionPool->Push(dbConn);
-    }
-
-
     //SERVER
     GServerService = make_shared<ServerService>(NetAddress(L"127.0.0.1", 7777),
         make_shared<IOCP>(), MakeSharedSesion, 5);
