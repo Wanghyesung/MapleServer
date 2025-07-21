@@ -8,6 +8,7 @@
 #include "..\Engine_Source\WSceneManger.h"
 #include "..\Engine_Source\WLayer.h"
 #include "..\Engine_Source\WAnimator.h"
+
 PacketHandlerFunc GPacketHandler[UINT16_MAX] = {};
 
 //event버퍼에 넣기
@@ -37,6 +38,9 @@ bool Handle_C_EQUIP(shared_ptr<Session> _pSession, Protocol::C_EQUIP& _pkt)
 	UINT iSceneLayerPlayerIDEquipID = _pkt.scene_layer_playerid_equipid();
 	UINT iItemID = _pkt.item_id();
 	W::EventManager::ChanagePlayerEquip(iSceneLayerPlayerIDEquipID, iItemID);
+
+	//DB
+
 
 	return true;
 }

@@ -1,23 +1,28 @@
 #include "pch.h"
 #include "Room.h"
 #include "ClientSession.h"
+
 Room GRoom;
+DBConnectionPool* GDBConnectionPool = nullptr;
 
 Room::Room() :
 	m_iMaxCount(5),
 	m_iCurCount(0)
 {
 	m_vecUserID.resize(6, false);
+	GDBConnectionPool = new DBConnectionPool();
 }
 
 Room::~Room()
 {
+	if (GDBConnectionPool)
+		delete GDBConnectionPool;
 }
 
 bool Room::Check(const string& _strName)
 {
 	//읽기 전용
-	RLock ReadLock(m_lock);
+	RLock ReadLock(m_lock);	
 
 	if (m_hashPerson.find(_strName) != m_hashPerson.end())
 		return false;

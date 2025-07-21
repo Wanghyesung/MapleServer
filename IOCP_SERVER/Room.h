@@ -1,6 +1,8 @@
 #pragma once
+
 class CPerson;
 class Session;
+#include "DBConnectionPool.h"
 
 class Room
 {
@@ -42,5 +44,5 @@ private:
 
 };
 
-
+extern DBConnectionPool* GDBConnectionPool;
 extern Room GRoom;

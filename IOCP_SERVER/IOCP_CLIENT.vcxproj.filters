@@ -42,7 +42,12 @@
     <ClInclude Include="..\protoc-3.17.1-win64\bin\Item.pb.h">
       <Filter>Packet</Filter>
     </ClInclude>
-    <ClInclude Include="sqlite3.h" />
+    <ClInclude Include="DBConnectionPool.h">
+      <Filter>DB</Filter>
+    </ClInclude>
+    <ClInclude Include="DBConnection.h">
+      <Filter>DB</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -80,7 +85,12 @@
     <ClCompile Include="..\protoc-3.17.1-win64\bin\Item.pb.cc">
       <Filter>Packet</Filter>
     </ClCompile>
-    <ClCompile Include="sqlite3.c" />
+    <ClCompile Include="DBConnection.cpp">
+      <Filter>DB</Filter>
+    </ClCompile>
+    <ClCompile Include="DBConnectionPool.cpp">
+      <Filter>DB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\protoc-3.17.1-win64\bin\Enter.proto">
@@ -117,6 +127,9 @@
   <ItemGroup>
     <Filter Include="Packet">
       <UniqueIdentifier>{77c8eb4e-d5bf-47c7-a4dc-d0ed71e163da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DB">
+      <UniqueIdentifier>{d4b790c7-c0ed-4063-b30c-3f48d319fcec}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
