@@ -56,6 +56,12 @@ public:
 		m_paramFlag |= (1LL << idx);
 	}
 
+	void BindParam(int idx, const CHAR* value)
+	{
+		m_dbConnection.BindParam(idx + 1, value, &m_paramIndex[idx]);
+		m_paramFlag |= (1LL << idx);
+	}
+
 	template<typename T, int N>
 	void BindParam(int idx, T(&value)[N])
 	{

@@ -18,7 +18,7 @@ public:
 	bool Execute(const WCHAR* _strQuery);
 	bool ExecutePrepared();
 
-	bool Fetch(); //쿼리 실행
+	bool Fetch(); //바인딩 된 열에 대한 데이터 반환
 	int GetRowCount();//데이터가 몇개있는지
 	void UnBind();
 

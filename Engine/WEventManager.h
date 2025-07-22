@@ -62,7 +62,7 @@ namespace W
 		static void EraseObject(GameObject* _pObj);
 
 		static void Update_Input(UINT _iPlayerID, const vector<USHORT>& _vecInput);
-		static void CreatePlayer(UINT _ID);
+		static void CreatePlayer(UINT _ID, UINT64 _llEquip);
 		static void DeletePlayer(UINT _ID);
 
 		static void AddPlayerPool (GameObject* _pObj);

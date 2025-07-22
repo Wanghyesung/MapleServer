@@ -219,25 +219,34 @@ namespace W
 	void EventManager::create_player(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		UINT iPlayerID = (UINT)_lParm;
+		UINT64 llPlayerEquip = (UINT64)_wParm;
+
 		const UINT ValleySceneID = 4;
 		
-		Player* pPlayer = static_cast<Player*>(ObjectPoolManager::PopObject(L"Player"));// new Player();
+		Player* pPlayer = static_cast<Player*>(ObjectPoolManager::PopObject(L"Player"));
 		pPlayer->m_iPlayerID = iPlayerID;
 		pPlayer->SetObjectID(iPlayerID);
 		pPlayer->Initialize();
+
+		UCHAR cHairID = llPlayerEquip; UCHAR cEyeID = llPlayerEquip >> 8; UCHAR cHatID = llPlayerEquip >> 16;
+		UCHAR cTopID = llPlayerEquip >> 24; UCHAR cBottomID = llPlayerEquip >> 32; UCHAR cShoesID = llPlayerEquip >> 40;
+		UCHAR cWeaponID = llPlayerEquip >> 48;
+
 		
 		//DB에서 가져오기 플레이어 장비들
-		UCHAR cBottom = ItemManager::GetItemID(L"10_bottom");
-		UCHAR cTop = ItemManager::GetItemID(L"10_top");
-		UCHAR cShoes = ItemManager::GetItemID(L"10_shoes");
-		UCHAR cHat = ItemManager::GetItemID(L"10_hat");
-		UCHAR cWeapon = ItemManager::GetItemID(L"10_weapon");
+		//UCHAR cBottom = ItemManager::GetItemID(L"10_bottom");
+		//UCHAR cTop = ItemManager::GetItemID(L"10_top");
+		//UCHAR cShoes = ItemManager::GetItemID(L"10_shoes");
+		//UCHAR cHat = ItemManager::GetItemID(L"10_hat");
+		//UCHAR cWeapon = ItemManager::GetItemID(L"10_weapon");
 
-		pPlayer->SetEquip(eEquipType::Bottom, cBottom);
-		pPlayer->SetEquip(eEquipType::Top, cTop);
-		pPlayer->SetEquip(eEquipType::Shoes, cShoes);
-		pPlayer->SetEquip(eEquipType::Hat, cHat);
-		pPlayer->SetEquip(eEquipType::Weapon, cWeapon);
+		pPlayer->SetHair(cHairID);
+		pPlayer->SetEye(cEyeID);
+		pPlayer->SetEquip(eEquipType::Hat, cHatID);
+		pPlayer->SetEquip(eEquipType::Top, cTopID);
+		pPlayer->SetEquip(eEquipType::Bottom, cBottomID);
+		pPlayer->SetEquip(eEquipType::Shoes, cShoesID);
+		pPlayer->SetEquip(eEquipType::Weapon, cWeaponID);
 
 		//기존의 플레이어들 알리기
 		SceneManger::SendPlayersInfo(iPlayerID, ValleySceneID);
@@ -245,17 +254,13 @@ namespace W
 
 		Protocol::S_ENTER pkt;
 		pkt.set_player_id(iPlayerID);
-		UINT64 iEquipIDs =
-			(UINT64)0 | ((UINT64)0 << 8) | ((UINT64)cHat << 16)
-			| ((UINT64)cTop << 24) | ((UINT64)cBottom << 32) | ((UINT64)cShoes << 40)
-			| ((UINT64)cWeapon << 48);
-
-		pkt.set_player_equip_ids(iEquipIDs);
+		pkt.set_player_equip_ids(llPlayerEquip);
 		pkt.set_success(true);
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		GRoom.GetPersonByID(iPlayerID)->Send(pSendBuffer);
 
+		//다른 플레이어들에게 알리기
 		Protocol::S_PLAYER_CREATE otherPkt;
 		Protocol::PlayerInfo tInfo = {};
 		SceneManger::MakePlayerInfo(pPlayer, tInfo);
@@ -486,10 +491,11 @@ namespace W
 		AddEvent(eve);
 	}
 
-	void EventManager::CreatePlayer(UINT _ID)
+	void EventManager::CreatePlayer(UINT _ID, UINT64 _llEquip)
 	{
 		tEvent eve = {};
 		eve.lParm = (DWORD_PTR)_ID;
+		eve.wParm = (DWORD_PTR)_llEquip;
 		
 		eve.eEventType = EVENT_TYPE::CREATE_PLAYER;
 		AddEvent(eve);

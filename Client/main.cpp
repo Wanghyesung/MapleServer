@@ -96,7 +96,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
-    //내장 DB
+    //내장 SQLDB
     if (GDBConnectionPool->Connection(5, L"Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=ServerDB;Trusted_Connection=Yes;") == false)
         assert(nullptr);
     GDBConnectionPool->Initialize();
@@ -104,7 +104,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     
 
     DBConnection* pDB = GDBConnectionPool->Pop();
-
     DBBind<8, 0> dbBind(*pDB, L"INSERT INTO [dbo].[Equip]([Name], [EyeID], [HairID], [HatID], [TopID], [BottomID], [ShoesID], [WeaponID])\
      VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
     
@@ -129,9 +128,21 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         assert(nullptr);
     GDBConnectionPool->Push(pDB);
 
+    pDB = GDBConnectionPool->Pop();
+    {
+        DBBind<2, 0> pDBUpdate(*pDB, L"UPDATE [dbo].[Equip] SET [TopID] = ? WHERE [Name] = ?");
+        int id = 10;
+        pDBUpdate.BindParam(0, id);
+        pDBUpdate.BindParam(1, name);
+        
+        pDBUpdate.Execute();
+
+        GDBConnectionPool->Push(pDB);
+    }
+
+
 
     pDB = GDBConnectionPool->Pop();
-
     {
         DBBind<1, 4> dbBind(*pDB, L"SELECT EyeID, HairID, HatID, TopID FROM [dbo].[Equip] WHERE Name = (?)");
 
@@ -151,7 +162,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         while(dbBind.Fetch())
 
         int a = 10;
+
+        GDBConnectionPool->Push(pDB);
     }
+
     //SERVER
     GServerService = make_shared<ServerService>(NetAddress(L"127.0.0.1", 7777),
         make_shared<IOCP>(), MakeSharedSesion, 5);
