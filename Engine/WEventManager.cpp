@@ -346,7 +346,7 @@ namespace W
 
 	void EventManager::using_item(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
-		UINT iItemInfo = (UINT)_lParm;
+		UINT iItemInfo = (UCHAR)_lParm;
 	
 		ItemManager::ExcuteItem(iItemInfo);
 	}

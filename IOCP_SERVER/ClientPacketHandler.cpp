@@ -12,6 +12,8 @@
 #include "..\Engine\WItemManager.h"
 
 PacketHandlerFunc GPacketHandler[UINT16_MAX] = {};
+wstring GarrEquipName[(UINT)W::eEquipType::None] = { L"PandantID,", L"HatID", L"TopID", L"BottomID", L"ShoesID", L"WeaponID" };
+wstring GarrAppearanceName[(UINT)W::eAppearance::End] = {L"",L"HairID" ,L"EyeID"};
 
 //event버퍼에 넣기
 bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
@@ -47,7 +49,7 @@ bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 	else
 	{
 		DBBind<8, 0> dbInster(*pDB, L"INSERT INTO [dbo].[Equip]\
-		([Name], [EyeID], [HairID], [HatID], [TopID], [BottomID], [ShoesID], [WeaponID]) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+		([Name], [HairID], [EyeID], [HatID], [TopID], [BottomID], [ShoesID], [WeaponID]) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
 		iHairID = 0, iEyeID = 0,
 		iBottomID = W::ItemManager::GetItemID(L"10_bottom");
 		iTopID = W::ItemManager::GetItemID(L"10_top");
@@ -74,11 +76,30 @@ bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 
 bool Handle_C_EQUIP(shared_ptr<Session> _pSession, Protocol::C_EQUIP& _pkt)
 {
-	//eventManager로 보내기
-	UINT iSceneLayerPlayerIDEquipID = _pkt.scene_layer_playerid_equipid();
-	UINT iItemID = _pkt.item_id();
-	W::EventManager::ChanagePlayerEquip(iSceneLayerPlayerIDEquipID, iItemID);
+	shared_ptr<ClientSession> pSession = static_pointer_cast<ClientSession>(_pSession);
+	const wstring& strPlayerName =  StringToWString(pSession->GetName());
 
+	UINT iSceneLayerPlayerIDEquipID = _pkt.scene_layer_playerid_equipid();
+	int iItemID = _pkt.item_id();
+	
+	//DB에 넣기
+	UCHAR cEquipID = iSceneLayerPlayerIDEquipID & 0xFF;
+	if (cEquipID >= (UINT)W::eEquipType::None)
+		return false;
+
+	const wstring& strEquipName = GarrEquipName[cEquipID];
+	DBConnection* pDB = GDBConnectionPool->Pop();
+
+	wstring query = L"UPDATE [dbo].[Equip] SET [" + strEquipName + L"] = ? WHERE[Name] = ?";
+	DBBind<2, 0> pDBUpdate(*pDB, query.c_str());
+	pDBUpdate.BindParam(0, iItemID);
+	pDBUpdate.BindParam(1, strPlayerName.c_str());
+	if (pDBUpdate.Execute() == false)
+		assert(nullptr);
+
+	GDBConnectionPool->Push(pDB);
+	
+	W::EventManager::ChanagePlayerEquip(iSceneLayerPlayerIDEquipID, iItemID);
 
 	return true;
 }
@@ -149,9 +170,29 @@ bool Handle_C_SKILL(shared_ptr<Session> _pSession, Protocol::C_Skill& _pkt)
 
 bool Handle_C_ITEM(shared_ptr<Session> _pSession, Protocol::C_ITEM& _pkt)
 {	
-	UINT iScenePlayerIDItemID = _pkt.scene_playerid_itemid();
+	shared_ptr<ClientSession> pSession = static_pointer_cast<ClientSession>(_pSession);
+	const wstring& strPlayerName = StringToWString(pSession->GetName());
+
+	UINT iScenePlayerIDItemID = _pkt.scene_playerid_itemid();	
+	UINT iAppearID = (UCHAR)(iScenePlayerIDItemID >> 8);
+	int iItemID = (UCHAR)iScenePlayerIDItemID;
+	if (iAppearID == 0 || iAppearID >= (UINT)W::eAppearance::End)
+		return false;
+
+	const wstring& strAppearName = GarrAppearanceName[iAppearID];
+	DBConnection* pDB = GDBConnectionPool->Pop();
+
+	wstring query = L"UPDATE [dbo].[Equip] SET [" + strAppearName + L"] = ? WHERE[Name] = ?";
+	DBBind<2, 0> pDBUpdate(*pDB, query.c_str());
+	pDBUpdate.BindParam(0, iItemID);
+	pDBUpdate.BindParam(1, strPlayerName.c_str());
+	if (pDBUpdate.Execute() == false)
+		assert(nullptr);
+
+	GDBConnectionPool->Push(pDB);
+
 	W::EventManager::UsingItem(iScenePlayerIDItemID);
-	
+
 	return true;
 }
 

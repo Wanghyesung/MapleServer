@@ -68,7 +68,6 @@ enum PACKET_TYPE
 	S_NEW_EXIT = 1024,
 };
 
-
 template <typename T>
 shared_ptr<SendBuffer> _MakeSendBuffer(T& _pkt, UINT _ID);
 

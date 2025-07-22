@@ -24,6 +24,14 @@ namespace W
 		None,
 	};
 
+	enum class eAppearance
+	{
+		None,
+		Hair,
+		Eye,
+		End,
+	};
+
 	struct tItemInfo
 	{
 		UINT iItemID;
@@ -32,9 +40,7 @@ namespace W
 		eIconType eIconType;
 		string strItemName;
 
-		tItemInfo() :iItemID(0), iItemLevel(0), eIconType(eIconType::End), strItemName("") {}
-
-		
+		tItemInfo() :iItemID(0), iItemLevel(0), eIconType(eIconType::End), strItemName("") {}	
 	};
 
 	UINT ChangeHair(UINT _iPlayerID);
