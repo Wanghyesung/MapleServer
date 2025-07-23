@@ -41,7 +41,6 @@ namespace W
 		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::AttackObject, true);
 		CollisionManager::SetLayer(this, eLayerType::Monster, eLayerType::Player, true);
 		CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::MonsterAttack, true);
-		//CollisionManager::SetLayer(this, eLayerType::Player, eLayerType::Portal, true);
 
 	}
 	void ValleyScene::Update()

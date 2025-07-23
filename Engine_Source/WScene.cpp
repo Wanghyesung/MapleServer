@@ -4,7 +4,7 @@
 #include "..\Engine\WMonsterManager.h"
 namespace W
 {
-	UINT Scene::SCENE_ID = 0;
+	UINT Scene::SCENE_ID = 1;
 	Scene::Scene():
 		m_iSceneID(SCENE_ID++)
 	{
@@ -23,6 +23,7 @@ namespace W
 	}
 	void Scene::Initialize()
 	{
+
 	}
 	void Scene::Update()
 	{
