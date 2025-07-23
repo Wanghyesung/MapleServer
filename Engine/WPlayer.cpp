@@ -15,7 +15,7 @@
 #include "WShadow.h"
 #include "ObjectState.pb.h"
 #include "WSceneManger.h"
-
+#include "WPlayerFSM.h"
 
 namespace W
 {
@@ -84,13 +84,12 @@ namespace W
 		SetState(eState::Active);
 		GetScript<PlayerScript>()->RegisterSkill();
 
-		m_strCurStateName = L"_jump";
-
+		GetComponent<Rigidbody>()->SetGround(false);
+		GetScript<PlayerScript>()->m_pFSM->ChangeState(ePlayerState::jump);
+		
 		Vector3 vPosition = GetComponent<Transform>()->GetPosition();
 		vPosition.x = 0.f; vPosition.y = 0.f;
 		GetComponent<Transform>()->SetPosition(vPosition);
-
-		GetComponent<Rigidbody>()->SetGround(false);
 	}
 
 	void Player::Update()
@@ -170,6 +169,12 @@ namespace W
 
 	void Player::SetEquip(eEquipType _eType, UINT _iItemID)
 	{
+		if (_iItemID == 0)
+		{
+			DisableEquip(_eType);
+			return;
+		}
+
 		auto wpItem = ItemManager::GetItemInfo(_iItemID);
 		if (auto spItem = wpItem.lock())
 		{

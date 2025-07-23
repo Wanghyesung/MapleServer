@@ -164,7 +164,6 @@ namespace W
 
 	void PlayerScript::ActiveJump()
 	{
-		
 		Rigidbody* pRigidbody = m_pPlayer->GetComponent<Rigidbody>();
 		pRigidbody->SetGround(false);
 		pRigidbody->AddVelocity(Vector2(m_pPlayer->GetDir() * 3.6f, 0.1f));

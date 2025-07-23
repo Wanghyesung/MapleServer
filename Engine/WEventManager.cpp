@@ -232,14 +232,7 @@ namespace W
 		UCHAR cTopID = llPlayerEquip >> 24; UCHAR cBottomID = llPlayerEquip >> 32; UCHAR cShoesID = llPlayerEquip >> 40;
 		UCHAR cWeaponID = llPlayerEquip >> 48;
 
-		
-		//DB에서 가져오기 플레이어 장비들
-		//UCHAR cBottom = ItemManager::GetItemID(L"10_bottom");
-		//UCHAR cTop = ItemManager::GetItemID(L"10_top");
-		//UCHAR cShoes = ItemManager::GetItemID(L"10_shoes");
-		//UCHAR cHat = ItemManager::GetItemID(L"10_hat");
-		//UCHAR cWeapon = ItemManager::GetItemID(L"10_weapon");
-
+	
 		pPlayer->SetHair(cHairID);
 		pPlayer->SetEye(cEyeID);
 		pPlayer->SetEquip(eEquipType::Hat, cHatID);
@@ -346,7 +339,7 @@ namespace W
 
 	void EventManager::using_item(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
-		UINT iItemInfo = (UCHAR)_lParm;
+		UINT iItemInfo = (UINT)_lParm;
 	
 		ItemManager::ExcuteItem(iItemInfo);
 	}
@@ -374,21 +367,17 @@ namespace W
 		UCHAR cSceneID = (iPlayerInfo >> 24) & 0xFF;
 		UCHAR cLayer = (iPlayerInfo >> 16) & 0xFF;
 		UCHAR cPlayerID = (iPlayerInfo >> 8) & 0xFF;
-	
+		UCHAR cEquipID = iPlayerInfo & 0xFF;
 	
 		GameObject* pObj = SceneManger::FindPlayer(cSceneID, cPlayerID);
 		if (pObj)
 		{
 			Player* pPlayer = static_cast<Player*>(pObj);
 
-			UINT iItemID = (iPlayerItem & 0xFFFFF);	
-			UINT iPlayerPartID = (iPlayerItem >> 24) & 0xFF;
-		
-
-			if(iItemID == 0)
-				pPlayer->DisableEquip((eEquipType)iPlayerPartID);
+			if(iPlayerItem == 0)
+				pPlayer->DisableEquip((eEquipType)cEquipID);
 			else
-				pPlayer->SetEquip((eEquipType)iPlayerPartID, iItemID);
+				pPlayer->SetEquip((eEquipType)cEquipID, iPlayerItem);
 
 			Protocol::S_EQUIP pkt;
 			pkt.set_scene_layer_playerid_equipid(iPlayerInfo);

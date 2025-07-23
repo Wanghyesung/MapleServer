@@ -15,13 +15,14 @@ namespace W
 	};
 	enum class eEquipType
 	{
+		None,
 		Pandant,
 		Hat,
 		Top,
 		Bottom,
 		Shoes,
 		Weapon,
-		None,
+		End,
 	};
 
 	enum class eAppearance
@@ -57,7 +58,7 @@ namespace W
 		static weak_ptr<tItemInfo> GetItemInfo(const wstring& _strName);
 		static int GetItemID(const wstring& _strName);
 
-		static void ExcuteItem(UINT _iItemInfo);
+		static int ExcuteItem(UINT _iItemInfo);
 		static void SendResultItem(UINT _iItemInfo, UINT _iValue);
 
 	private:

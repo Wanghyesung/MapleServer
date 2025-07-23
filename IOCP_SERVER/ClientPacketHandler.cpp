@@ -12,7 +12,7 @@
 #include "..\Engine\WItemManager.h"
 
 PacketHandlerFunc GPacketHandler[UINT16_MAX] = {};
-wstring GarrEquipName[(UINT)W::eEquipType::None] = { L"PandantID,", L"HatID", L"TopID", L"BottomID", L"ShoesID", L"WeaponID" };
+wstring GarrEquipName[(UINT)W::eEquipType::End] = { L"", L"PandantID,", L"HatID", L"TopID", L"BottomID", L"ShoesID", L"WeaponID"};
 wstring GarrAppearanceName[(UINT)W::eAppearance::End] = {L"",L"HairID" ,L"EyeID"};
 
 //event버퍼에 넣기
@@ -57,8 +57,8 @@ bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 		iHatID = W::ItemManager::GetItemID(L"10_hat");
 		iWeaponID = W::ItemManager::GetItemID(L"10_weapon");
 
-		dbInster.BindParam(0, pName); dbInster.BindParam(1, iHairID); dbInster.BindParam(2, iEyeID); dbInster.BindParam(3, iBottomID);
-		dbInster.BindParam(4, iTopID); dbInster.BindParam(5, iShoesID); dbInster.BindParam(6, iHatID); dbInster.BindParam(7, iWeaponID);
+		dbInster.BindParam(0, pName); dbInster.BindParam(1, iHairID); dbInster.BindParam(2, iEyeID); dbInster.BindParam(3, iHatID);
+		dbInster.BindParam(4, iTopID); dbInster.BindParam(5, iBottomID); dbInster.BindParam(6, iShoesID); dbInster.BindParam(7, iWeaponID);
 
 		if (dbInster.Execute() == false)
 			assert(nullptr);
@@ -84,7 +84,7 @@ bool Handle_C_EQUIP(shared_ptr<Session> _pSession, Protocol::C_EQUIP& _pkt)
 	
 	//DB에 넣기
 	UCHAR cEquipID = iSceneLayerPlayerIDEquipID & 0xFF;
-	if (cEquipID >= (UINT)W::eEquipType::None)
+	if (cEquipID == 0 || cEquipID >= (UINT)W::eAppearance::End)
 		return false;
 
 	const wstring& strEquipName = GarrEquipName[cEquipID];
@@ -181,17 +181,18 @@ bool Handle_C_ITEM(shared_ptr<Session> _pSession, Protocol::C_ITEM& _pkt)
 
 	const wstring& strAppearName = GarrAppearanceName[iAppearID];
 	DBConnection* pDB = GDBConnectionPool->Pop();
-
+	int iRetValue = W::ItemManager::ExcuteItem(iScenePlayerIDItemID);
+	
 	wstring query = L"UPDATE [dbo].[Equip] SET [" + strAppearName + L"] = ? WHERE[Name] = ?";
 	DBBind<2, 0> pDBUpdate(*pDB, query.c_str());
-	pDBUpdate.BindParam(0, iItemID);
+	pDBUpdate.BindParam(0, iRetValue);
 	pDBUpdate.BindParam(1, strPlayerName.c_str());
 	if (pDBUpdate.Execute() == false)
 		assert(nullptr);
 
 	GDBConnectionPool->Push(pDB);
 
-	W::EventManager::UsingItem(iScenePlayerIDItemID);
+	//W::EventManager::UsingItem(iScenePlayerIDItemID);
 
 	return true;
 }

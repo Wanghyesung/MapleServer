@@ -85,6 +85,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     //_CrtSetBreakAlloc(41939);
     // TODO: 여기에 코드를 입력합니다.
     
+
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_CLIENT, szWindowClass, MAX_LOADSTRING);
@@ -100,71 +101,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     if (GDBConnectionPool->Connection(5, L"Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=ServerDB;Trusted_Connection=Yes;") == false)
         assert(nullptr);
     GDBConnectionPool->Initialize();
-
-    
-
-    DBConnection* pDB = GDBConnectionPool->Pop();
-    DBBind<8, 0> dbBind(*pDB, L"INSERT INTO [dbo].[Equip]([Name], [EyeID], [HairID], [HatID], [TopID], [BottomID], [ShoesID], [WeaponID])\
-     VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-    
-    int id1 = 1;
-    int id2 = 2;
-    int id3 = 3;
-    int id4 = 4;
-    int id5 = 5;
-    int id6 = 6;
-    int id7 = 7;
-    const WCHAR* name = L"TEST";
-    dbBind.BindParam(0, name);
-    dbBind.BindParam(1, id1);
-    dbBind.BindParam(2, id2);
-    dbBind.BindParam(3, id3);
-    dbBind.BindParam(4, id4);
-    dbBind.BindParam(5, id5);
-    dbBind.BindParam(6, id6);
-    dbBind.BindParam(7, id7);
-
-    if (dbBind.Execute() == false)
-        assert(nullptr);
-    GDBConnectionPool->Push(pDB);
-
-    pDB = GDBConnectionPool->Pop();
-    {
-        DBBind<2, 0> pDBUpdate(*pDB, L"UPDATE [dbo].[Equip] SET [TopID] = ? WHERE [Name] = ?");
-        int id = 10;
-        pDBUpdate.BindParam(0, id);
-        pDBUpdate.BindParam(1, name);
-        
-        pDBUpdate.Execute();
-
-        GDBConnectionPool->Push(pDB);
-    }
-
-
-
-    pDB = GDBConnectionPool->Pop();
-    {
-        DBBind<1, 4> dbBind(*pDB, L"SELECT EyeID, HairID, HatID, TopID FROM [dbo].[Equip] WHERE Name = (?)");
-
-        dbBind.BindParam(0, name);
-        int ret1 = 0;
-        int ret2 = 0;
-        int ret3 = 0;
-        int ret4 = 0;
-
-        dbBind.BindCol(0, ret1);  // EyeID
-        dbBind.BindCol(1, ret2);  // HairID
-        dbBind.BindCol(2, ret3);  // HatID
-        dbBind.BindCol(3, ret4);  // TopID
-
-        dbBind.Execute();
-
-        while(dbBind.Fetch())
-
-        int a = 10;
-
-        GDBConnectionPool->Push(pDB);
-    }
 
     //SERVER
     GServerService = make_shared<ServerService>(NetAddress(L"127.0.0.1", 7777),

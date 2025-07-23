@@ -85,13 +85,13 @@ namespace W
 		return -1;
 	}
 
-	void ItemManager::ExcuteItem(UINT _iItemInfo)
+	int ItemManager::ExcuteItem(UINT _iItemInfo)
 	{
 		UCHAR cPlayerID = (_iItemInfo >> 16) & 0xFF;
-		USHORT sItemID = _iItemInfo & 0xFFFF;
+		UCHAR cItemID = _iItemInfo & 0xFF;
 		UINT iSendValue = 0;
 		USHORT iFunctionID = 0;
-		auto wpItem = GetItemInfo(sItemID);
+		auto wpItem = GetItemInfo(cItemID);
 		if (auto shItem = wpItem.lock())
 		{
 			iFunctionID = shItem->iFunctionID;
@@ -103,6 +103,8 @@ namespace W
 		_iItemInfo |= iFunctionID;
 
 		SendResultItem(_iItemInfo, iSendValue);
+
+		return iSendValue;
 	}
 
 	void ItemManager::SendResultItem(UINT _iItemInfo, UINT _iValue)
@@ -125,8 +127,6 @@ namespace W
 		m_vecItemEvent[1] = ChangeHair;
 		m_vecItemEvent[2] = ChangeEye;
 	}
-
-
 	
 	UINT ChangeHair(UINT _iPlayerID)
 	{
@@ -151,8 +151,7 @@ namespace W
 		std::mt19937 en(rDiv());
 		std::uniform_int_distribution<UINT> disX(0, 2);
 		UINT iEyeNum = disX(en);
-		iEyeNum = 1;
-
+		
 		GameObject* pObj = SceneManger::FindPlayer(_iPlayerID);
 		if (pObj)
 		{

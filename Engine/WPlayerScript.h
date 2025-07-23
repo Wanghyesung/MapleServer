@@ -26,7 +26,7 @@ namespace W
 		virtual void OnCollisionExit(Collider2D* other)override;
 
 		void ActiveJump();
-
+	
 		bool IsAttack() { return m_bAttack; }
 		void SetAttack(bool _bActive) { m_bAttack = _bActive; }
 
@@ -103,10 +103,8 @@ namespace W
 		PlayerFSM* m_pFSM;
 		PlayerSkill* m_pSkill;
 
-		
-		//std::map <std::wstring, std::queue<PlayerAttackObject*>> m_mapAttackObjs;
 
-
+		friend class Player;
 		friend class EventManager;
 		friend class BattleManager;
 	};
