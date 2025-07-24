@@ -18,7 +18,6 @@ namespace W
 {
 	void InitializeScenes()
 	{
-		//SceneManger::CreateScene<LobyScene>(L"Loby");
 		SceneManger::CreateScene<CaveScene>(L"Cave");
 		SceneManger::CreateScene<TempleBossScene>(L"TempleBoss");
 		SceneManger::CreateScene<HelisiumBoss>(L"Helisium");

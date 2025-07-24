@@ -19,23 +19,25 @@ namespace W
 		KEY0, KEY1, KEY2, KEY3, KEY4, KEY5, KEY6, KEY7, KEY8, KEY9,
 
 		Q, W, E, R, T,
-		A, S, D, F, G,	
+		A, S, D, F, G,
 
 		Z, X, C, V, B, N, M,
+
+		Y, U, I, O, P,
+		H, J, K, L,
 
 		ENTER,
 		ALT,
 		ESC,
 		SPACE,
 
-		UP, DOWN, LEFT, RIGHT, 
+		UP, DOWN, LEFT, RIGHT,
 		LBUTTON, RBUTTON,
 
 		//SCROLL,
-
-		NONE = 46,
+		BACK_SPACE,
+		NONE
 	};
-
 	enum class eKeyState
 	{
 		Down,

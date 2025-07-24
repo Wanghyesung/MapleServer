@@ -28,11 +28,14 @@ namespace W
 		0x37,
 		0x38,
 		0x39,
-		
+
 		'Q', 'W', 'E', 'R', 'T',
 		'A', 'S', 'D', 'F', 'G',
 
 		'Z', 'X', 'C', 'V', 'B', 'N', 'M',
+
+		'Y', 'U', 'I', 'O', 'P',
+		'H', 'J', 'K', 'L',
 
 		VK_RETURN,//ENTER,
 		VK_LMENU,//ALT,
@@ -43,6 +46,7 @@ namespace W
 		VK_LBUTTON, VK_RBUTTON,
 
 		//WM_VSCROLL
+		 VK_BACK,
 	};
 
 
