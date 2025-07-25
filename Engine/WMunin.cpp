@@ -108,7 +108,26 @@ namespace W
 	
 	void Munin::UpdatePacket()
 	{
-		Monster::UpdatePacket();
+		GetComponent<Transform>()->SendTransform();
+
+		Animator* pAnimator = GetComponent<Animator>();
+
+		bool bRender = IsDead();
+
+		Protocol::S_STATE pkt;
+		UCHAR cLayer = (UCHAR)eLayerType::Monster;
+		UINT iObjectID = GetObjectID();
+		pkt.set_layer_id((cLayer << 24) | iObjectID);
+
+		Animation* pAnim = pAnimator->GetActiveAnimation();
+		UCHAR cDir = 1;
+		UCHAR cAnimIdx = pAnim->GetCurIndex();
+
+		pkt.set_state_value(!bRender << 16 | (cDir << 8) | cAnimIdx);
+		pkt.set_state(WstringToString(pAnim->GetKey()));
+
+		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
+		GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(GetSceneID()));
 	}
 
 	void Munin::setattack()
