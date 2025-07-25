@@ -27,16 +27,24 @@ namespace W
 	}
 	void Abnormal::Update()
 	{	
+		GameObject::Update();
+	}
+	void Abnormal::LateUpdate()
+	{	
 		m_fCurTime += Time::DeltaTime();
 
 		if (m_pTarget->GetState() != GameObject::Active)
+		{
 			m_pTarget = nullptr;
+			EventManager::DeleteObject(this);
+			return;
+		}
 
 		if (m_fCurTime >= m_fDeleteTime)
 		{
 			EventManager::DeleteObject(this);
 
-			if(m_pTarget)
+			if (m_pTarget)
 				Restore();
 			return;
 		}
@@ -53,10 +61,6 @@ namespace W
 			GetComponent<Transform>()->SetPosition(vTargetPos);
 		}
 
-		GameObject::Update();
-	}
-	void Abnormal::LateUpdate()
-	{	
 		GameObject::LateUpdate();
 	}
 	void Abnormal::UpdatePacket()

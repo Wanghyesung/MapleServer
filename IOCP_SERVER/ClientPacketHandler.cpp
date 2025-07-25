@@ -84,7 +84,7 @@ bool Handle_C_EQUIP(shared_ptr<Session> _pSession, Protocol::C_EQUIP& _pkt)
 	
 	//DB¿¡ ³Ö±â
 	UCHAR cEquipID = iSceneLayerPlayerIDEquipID & 0xFF;
-	if (cEquipID == 0 || cEquipID >= (UINT)W::eAppearance::End)
+	if (cEquipID == 0 || cEquipID >= (UINT)W::eEquipType::End)
 		return false;
 
 	const wstring& strEquipName = GarrEquipName[cEquipID];

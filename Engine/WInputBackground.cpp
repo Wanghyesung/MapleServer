@@ -93,6 +93,7 @@ namespace W
 
 	void InputBackground::SetTarget(Player* _pPlayer)
 	{
+		ClearExclusiveClients();
 		m_pTarget = _pPlayer;
 		AddExclusiveClient(_pPlayer->GetPlayerID());
 	}
