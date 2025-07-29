@@ -99,7 +99,7 @@ namespace W
 			m_hashGameObject.insert(std::make_pair(_pGameObj->GetObjectID(), _pGameObj));
 	}
 
-	void Layer::EraseOnVector(GameObject* _pGameObject)
+	void Layer::EraseOnHash(GameObject* _pGameObject)
 	{
 		UINT iGameObjectID = _pGameObject->GetObjectID();
 		PushObjectID(iGameObjectID);

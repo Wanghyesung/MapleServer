@@ -39,10 +39,10 @@ namespace W
 	std::map<std::wstring, BattleManager::tDamageCount> BattleManager::m_mapDamage[6] = {};
 
 	UINT BattleManager::m_iMaxDamage = 9999999;
-	bool BattleManager::m_bOnAbnormal = false;
-	bool BattleManager::m_bOnUndead = false;
+	unordered_map<UINT, bool> BattleManager::m_hashOnAbnormal = {};
+	unordered_map<UINT, bool> BattleManager::m_hashOnUndead = {};
+	unordered_map<UINT, bool> BattleManager::m_hashCurPotionTime = {};
 	float BattleManager::m_fPotionTime = 0.1f;
-	float BattleManager::m_fCurPotionTime = 0.f;
 	UINT  BattleManager::m_arrStigmaCount[6] = { 0,6,6,6,6,6 };
 
 	void BattleManager::Initialize()
@@ -160,10 +160,10 @@ namespace W
 			return;
 		}
 			
-		if (!m_bOnAbnormal)
+		UINT iPlayerID = _pPlayer->GetObjectID();
+		if (m_hashOnAbnormal[iPlayerID] == false)
 			EventManager::HitchAbnormal(_pPlayer, _eType, _fAccStat);
-
-		m_bOnAbnormal = true;
+		m_hashOnAbnormal[iPlayerID] = true;
 	}
 
 
@@ -285,7 +285,8 @@ namespace W
 		pUndead->SetTime(8.f);
 		EventManager::CreateObject(pUndead, eLayerType::Object);
 
-		m_bOnUndead = true;
+		UINT iObjectID = _pGameObject->GetObjectID();
+		m_hashOnUndead[iObjectID] = true;
 	}
 
 	void BattleManager::PushEffect(Effect* _pEffect)
@@ -325,6 +326,7 @@ namespace W
 	void BattleManager::restore(GameObject* _pTarget, eAbnormalType _eType, float _fAccValue)
 	{
 		PlayerScript* pScript = _pTarget->GetScript<PlayerScript>();
+		UINT iObjectID = _pTarget->GetObjectID();
 		switch (_eType)
 		{
 		case W::BattleManager::eAbnormalType::SealSkill:
@@ -343,7 +345,7 @@ namespace W
 			debuff_slow(_pTarget, _fAccValue);
 			break;
 		case W::BattleManager::eAbnormalType::Undead:
-			m_bOnUndead = false;
+			m_hashOnUndead[iObjectID] = true;
 			break;
 		case W::BattleManager::eAbnormalType::DemianStop:
 			pScript->m_bAbnormal = false;
@@ -352,19 +354,19 @@ namespace W
 			pScript->m_bAbnormal = false;
 			break;
 		case W::BattleManager::eAbnormalType::Stigma:
-			UINT iObjectID = _pTarget->GetObjectID();
 			m_arrStigmaCount[iObjectID] = 0;
 			break;
 		}
 
-		m_bOnAbnormal = false;
+		m_hashOnAbnormal[iObjectID] = false;
 	}
 
 	bool BattleManager::IsAblePotion()
 	{
-		if(m_fCurPotionTime>= m_fPotionTime)
-			return true;
-
+		//if(m_fCurPotionTime>= m_fPotionTime)
+		//	return true;
+		//
+		//return false;
 		return false;
 	}
 
@@ -558,11 +560,11 @@ namespace W
 	void BattleManager::buff_HP(GameObject* _pTarget, float _fAccValue)
 	{
 		tObjectInfo& tInfo = _pTarget->GetScript<PlayerScript>()->m_tObjectInfo;
-
+		UINT iObjectID = _pTarget->GetObjectID();
 		if (_fAccValue >= m_iMaxDamage)
 			_fAccValue = tInfo.fMaxHP;
 
-		if (m_bOnUndead)
+		if (m_hashOnUndead[iObjectID])
 			_fAccValue /= 2.f;
 
 		tInfo.fHP += _fAccValue;

@@ -121,11 +121,11 @@ namespace W
 		static std::map<std::wstring, tDamageCount> m_mapDamage[6];
 
 		//상태이상 
-		static bool m_bOnAbnormal;
-		static bool m_bOnUndead;
-		//체력 회복 시간
+		static unordered_map<UINT, bool> m_hashOnAbnormal;
+		static unordered_map<UINT, bool> m_hashOnUndead;
+		static unordered_map<UINT, bool> m_hashCurPotionTime;
+
 		static float m_fPotionTime;
-		static float m_fCurPotionTime;
 
 		static UINT m_arrStigmaCount[6];
 

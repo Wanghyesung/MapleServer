@@ -29,7 +29,7 @@ namespace W
 		const unordered_map<UINT, GameObject*>& GetGameObjects();
 		std::unordered_map<UINT, GameObject*> GetCopyGameObjects();
 
-		void EraseOnVector(GameObject* _pGameObject);
+		void EraseOnHash(GameObject* _pGameObject);
 
 		UINT GetCurObjectID();
 		void PushObjectID(UINT _iID);

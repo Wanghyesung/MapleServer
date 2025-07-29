@@ -59,7 +59,7 @@ namespace W
 	}
 	void Scene::EraseObject(eLayerType _eType, GameObject* _pGameObj)
 	{
-		m_vecLayer[(UINT)_eType]->EraseOnVector(_pGameObj);
+		m_vecLayer[(UINT)_eType]->EraseOnHash(_pGameObj);
 	}
 
 	void Scene::AddGameObject(eLayerType _eType, GameObject* _pGameObj)
