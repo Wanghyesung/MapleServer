@@ -20,13 +20,14 @@ namespace W
 	std::vector<tEvent> EventManager::m_vecEvent[2] = {};
 	std::vector<GameObject*> EventManager::m_vecPlayer_Pool = {};
 	std::vector<GameObject*> EventManager::m_vecMonster_Pool = {};
-	std::vector<USHORT> EventManager::m_vecInput[5][2] = {};
+	std::vector<USHORT> EventManager::m_vecInput[MAXCOUNT][2] = {};
 
 	RWLock EventManager::m_lock = {};
-	RWLock EventManager::m_inputLock = {};
+	//RWLock EventManager::m_inputLock = {};
 
 	atomic<int> EventManager::m_iActiveIdx = 1;
 	atomic<int> EventManager::m_iActiveInputIdx = 1;
+	atomic<int> EventManager::m_iPreInputIdx = 1;
 
 #define ObjectPoolPosition 2000.f
 
@@ -58,18 +59,17 @@ namespace W
 
 	void EventManager::Update()
 	{
-		pool_excute(); //오브젝트 풀
-
-		//더블버퍼링
+		pool_execute(); //오브젝트 풀
 		{
 			WLock lock_guard(m_lock);
 			m_iActiveIdx = 1 - m_iActiveIdx;
 		}
+		m_iPreInputIdx = m_iActiveInputIdx.exchange(1 - m_iActiveInputIdx);
 
 		std::vector<tEvent>& vecActiveEvent = m_vecEvent[m_iActiveIdx];
 		for (int i = 0; i < vecActiveEvent.size(); ++i)
 		{
-			excute(vecActiveEvent[i]);
+			execute(vecActiveEvent[i]);
 		}
 
 		vecActiveEvent.clear();
@@ -82,7 +82,7 @@ namespace W
 	}
 	
 
-	void EventManager::pool_excute()
+	void EventManager::pool_execute()
 	{
 		for (int i = 0; i < m_vecPlayer_Pool.size(); ++i)
 		{
@@ -108,7 +108,7 @@ namespace W
 
 
 
-	void EventManager::excute(const tEvent& _tEve)
+	void EventManager::execute(const tEvent& _tEve)
 	{
 		m_arrFunction[(UINT)_tEve.eEventType](_tEve.lParm,_tEve.wParm, _tEve.accParm, _tEve.tObjectData);
 	}
@@ -117,23 +117,21 @@ namespace W
 	{
 		GameObject* pObj = (GameObject*)_lParm;
 		eLayerType eLayer = (eLayerType)_wParm;
-
 		SceneManger::AddGameObject(pObj->GetSceneID(), eLayer, pObj);
 
-		UINT iCreateID = pObj->GetCreateID();
-		UINT iObjectID = pObj->GetObjectID();
+		UCHAR iCreateID = pObj->GetCreateID();
+		UCHAR iObjectID = pObj->GetObjectID();
 	
 		Protocol::S_CREATE pkt;
 		Protocol::ObjectInfo* tInfo = pkt.mutable_object_info();
 		
 		if (pObj->IsPoolObject())
 			tInfo->set_object_name(WstringToString(pObj->GetName()));
-	
 		tInfo->set_scene_layer_createid_id((UCHAR)pObj->GetSceneID() << 24 | (UCHAR)eLayer << 16 | iCreateID << 8 | iObjectID);
 		
 		Transform* pTr = pObj->GetComponent<Transform>();
-		const Vector3 vPosition = pTr->GetPosition();
-		const Vector3 vRotation = pTr->GetRotation();
+		const Vector3& vPosition = pTr->GetPosition();
+		const Vector3& vRotation = pTr->GetRotation();
 		Protocol::TransformInfo* tTrInfo = tInfo->mutable_transform();
 
 		tTrInfo->set_p_x(vPosition.x);	tTrInfo->set_p_y(vPosition.y);	tTrInfo->set_p_z(vPosition.z);
@@ -142,17 +140,11 @@ namespace W
 		UCHAR cDir = 1 ;
 		UCHAR cAnimIdx = 0;
 		UCHAR bRender = pObj->IsRender();
-		Animator* pAnim = pObj->GetComponent<Animator>();
-		if (pAnim)
-			cAnimIdx = 0;
-		
 		tInfo->set_state_value((bRender<<16) | (cDir << 8) | cAnimIdx);
-		
 
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
 		const vector<UINT>& vecTarget = pObj->GetExclusiveClients();
 
-		//전용으로 보낼 클라가 있다면
 		if(vecTarget.empty())
 			GRoom.Unicast(pSendBuffer, SceneManger::GetPlayerIDs(pObj->GetSceneID()));
 		else
@@ -162,11 +154,11 @@ namespace W
 	void EventManager::delete_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		GameObject* pObj = (GameObject*)_lParm;
+		UINT iObjectID = pObj->GetObjectID();
 
 		Scene* pScene = SceneManger::FindScene(pObj->GetSceneID());
 		pScene->EraseObject(pObj->GetLayerType(), pObj);
 
-		UINT iObjectID = pObj->GetObjectID();
 		Protocol::S_DELETE pkt;
 
 		pkt.set_scene_layer_deleteid((UCHAR)pObj->GetSceneID() << 24 | (UINT)pObj->GetLayerType() << 16 | iObjectID & 0xFFFF);
@@ -185,11 +177,11 @@ namespace W
 	void EventManager::erase_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData)
 	{
 		GameObject* pObj = (GameObject*)_lParm;
+		UINT iObjectID = pObj->GetObjectID();
 
 		Scene* pScene = SceneManger::FindScene(pObj->GetSceneID());
 		pScene->EraseObject(pObj->GetLayerType(), pObj);
 
-		UINT iObjectID = pObj->GetObjectID();
 		Protocol::S_DELETE pkt;
 
 		pkt.set_scene_layer_deleteid((UCHAR)pObj->GetSceneID() << 24 | (UINT)pObj->GetLayerType() << 16 | iObjectID & 0xFFFF);
@@ -208,11 +200,11 @@ namespace W
 	{
 		UINT iPlayerID = (UINT)_lParm;
 		{
-			WLock lock_guard(m_inputLock);
-			Input::Update_Key(iPlayerID, m_vecInput[iPlayerID][m_iActiveInputIdx]);
+			//WLock lock_guard(m_inputLock);
+			Input::Update_Key(iPlayerID, m_vecInput[iPlayerID][m_iPreInputIdx]);
 
-			m_vecInput[iPlayerID][m_iActiveInputIdx].clear();
-			m_iActiveInputIdx.exchange(1 - m_iActiveInputIdx);
+			m_vecInput[iPlayerID][m_iPreInputIdx].clear();
+			//m_iActiveInputIdx.exchange(1 - m_iActiveInputIdx);
 		}
 	}
 
@@ -470,7 +462,7 @@ namespace W
 		eve.lParm = (DWORD_PTR)_iPlayerID;
 		
 		{
-			WLock lock_guard(m_inputLock);
+			//WLock lock_guard(m_inputLock);
 
 			for(int i = 0; i<_vecInput.size(); ++i)
 				m_vecInput[_iPlayerID][m_iActiveInputIdx].push_back(_vecInput[i]);

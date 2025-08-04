@@ -4,6 +4,10 @@ class CPerson;
 class Session;
 #include "DBConnectionPool.h"
 
+enum eRoomCount
+{
+	MAXCOUNT = 16
+};
 class Room
 {
 public:

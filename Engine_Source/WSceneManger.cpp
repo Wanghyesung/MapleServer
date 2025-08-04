@@ -22,7 +22,7 @@ namespace W
 	void SceneManger::Initialize()
 	{
 		//최대 동접자 3/5만 미리 할당
-		for (int i = 0; i < 3; ++i)
+		for (int i = 0; i < 15; ++i)
 		{
 			Player* pPlayer = new Player();
 			pPlayer->SetName(L"Player");
@@ -81,12 +81,13 @@ namespace W
 	{
 		eLayerType eLayer = _pGameObject->GetLayerType();
 		UINT iSceneID = _pGameObject->GetSceneID();
+		
+		Protocol::S_DELETE pkt;
+		UINT iObjectID = _pGameObject->GetObjectID();
 
 		Scene* pScene = FindScene(iSceneID);
 		pScene->EraseObject(eLayer, _pGameObject);
 
-		Protocol::S_DELETE pkt;
-		UINT iObjectID = _pGameObject->GetObjectID();
 
 		pkt.set_pool_object(_pGameObject->IsPoolObject());
 		pkt.set_scene_layer_deleteid( ((UCHAR)iSceneID << 24) | (((UCHAR)eLayer) << 16) | iObjectID);
@@ -100,11 +101,11 @@ namespace W
 		eLayerType eLayer = _pGameObject->GetLayerType();
 		UINT iSceneID = _pGameObject->GetSceneID();
 
-		Scene* pScene = FindScene(iSceneID);
-		pScene->EraseObject(eLayer, _pGameObject);
-
 		Protocol::S_DELETE pkt;
 		UINT iObjectID = _pGameObject->GetObjectID();
+
+		Scene* pScene = FindScene(iSceneID);
+		pScene->EraseObject(eLayer, _pGameObject);
 
 		pkt.set_pool_object(_pGameObject->IsPoolObject());
 		pkt.set_scene_layer_deleteid(((UCHAR)iSceneID << 24) | (((UCHAR)eLayer) << 16) | iObjectID);
@@ -298,6 +299,7 @@ namespace W
 		Scene* pNextScene = FindScene(_iNextSceneID);
 		pPrevScene->EraseObject(eLayerType::Player, _pPlayer);//이거 몬스터가 플레이어 포인터 들고있을 수 있음 
 		pNextScene->AddGameObject(eLayerType::Player, _pPlayer);
+		//_pPlayer->SetSceneID(_iNextSceneID);
 
 		UINT iPlayerID = _pPlayer->GetObjectID(); //obj == playerid
 		auto& iterPrev = m_hashPlayerScene[_iPrevSceneID];

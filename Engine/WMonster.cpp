@@ -82,7 +82,9 @@ namespace W
 		Protocol::S_STATE pkt;
 		UCHAR cLayer = (UCHAR)eLayerType::Monster;
 		UINT iObjectID = GetObjectID();
-		pkt.set_layer_id((cLayer << 24) | iObjectID);
+		UINT iSceneID = GetSceneID();
+
+		pkt.set_layer_id((cLayer << 24) | (iSceneID <<16 ) | iObjectID);
 
 		Animation* pAnim = pAnimator->GetActiveAnimation();
 		UCHAR cDir = GetDir() > 0 ? 1 : 0;

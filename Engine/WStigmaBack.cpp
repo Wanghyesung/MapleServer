@@ -15,7 +15,7 @@ namespace W
 
 
 		Animator* pAnim = AddComponent<Animator>();
-		pAnim->Create(L"loop", Vector2(0.0f, 0.0f), Vector2(80.0f, 43.0f), 11, Vector2(80.f, 80.f), Vector2::Zero, 0.13f);
+		pAnim->Create(L"loop", Vector2(0.0f, 0.0f), Vector2(80.0f, 43.0f), 11, Vector2(80.f, 80.f), Vector2::Zero, 0.07f);
 
 		pAnim->Play(L"loop", true);
 	}
@@ -61,7 +61,8 @@ namespace W
 		Protocol::S_STATE pkt;
 		UCHAR cLayer = (UCHAR)GetLayerType();
 		UINT iObjectID = GetObjectID();
-		pkt.set_layer_id((cLayer << 24) | iObjectID);
+		UINT iSceneID = GetSceneID();
+		pkt.set_layer_id((cLayer << 24) | (iSceneID << 16) | iObjectID);
 
 		Animation* pAnim = pAnimator->GetActiveAnimation();
 		UCHAR cAnimIdx = pAnim->GetCurIndex();

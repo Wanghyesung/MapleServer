@@ -105,7 +105,8 @@ namespace W
 
 		UCHAR cLayer = (UCHAR)eLayerType::AttackObject;
 		UINT iObjectID = GetObjectID();
-		pkt.set_layer_id((cLayer << 24) | iObjectID);
+		UINT iSceneID = GetSceneID();
+		pkt.set_layer_id((cLayer << 24) | (iSceneID << 16) | iObjectID);
 
 		Animation* pAnim = pAnimator->GetActiveAnimation();
 		UCHAR cDir = m_iDir > 0 ? 1 : 0;
@@ -161,7 +162,9 @@ namespace W
 
 			if (pObj->GetState() != GameObject::Active)
 				continue;
-			if (!pObj->GetComponent<Collider2D>()->IsActive())
+
+			Collider2D* pCollider = pObj->GetComponent<Collider2D>();
+			if (!pCollider || !pCollider->IsActive())
 				continue;
 
 			Vector3 vTargetPos = pObj->GetComponent<Transform>()->GetPosition();
@@ -173,7 +176,7 @@ namespace W
 			if (fLen < fMaxLen)
 			{
 				fMaxLen = fLen;
-				m_pTarget = dynamic_cast<Monster*>(pObj);
+				m_pTarget = static_cast<Monster*>(pObj);
 			}
 		}
 

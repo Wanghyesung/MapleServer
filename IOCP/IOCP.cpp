@@ -26,7 +26,7 @@ void IOCP::RegisterDummyPacket()
 	PostQueuedCompletionStatus(m_IOCPHandle, 0, 0, nullptr);
 }
 
-void IOCP::Excute()
+void IOCP::Execute()
 {
 	DWORD numOfBytes = 0;
 	ULONG_PTR key = 0;

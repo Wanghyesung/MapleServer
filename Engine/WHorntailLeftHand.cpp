@@ -123,6 +123,7 @@ namespace W
 		//2
 		tMonsterAttack attack1 = {};
 		attack1.tTime.fCoolTime = 10.f;
+		attack1.tTime.fCurTime = 10.f;
 		attack1.bSkill = true;
 		attack1.vScale = Vector2::Zero;
 

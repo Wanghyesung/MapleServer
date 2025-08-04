@@ -21,6 +21,8 @@ namespace W
 
 		void Failed();
 		void Next();
+		bool IsWait() { return m_bWaitToNext; }
+
 		UINT GetCurIndex() { return m_iCurIndex; }
 		void SetTarget(Player* _pPlayer);
 
@@ -31,10 +33,12 @@ namespace W
 		//성공이나 실패시 groggy오브젝트에 time 변경
 		GameObject* m_pOwner;
 
+		bool m_bNext;
+		bool m_bWaitToNext;
+
 		Player* m_pTarget;
 		UINT m_iCurIndex;
 		std::vector<class InputObject*> m_vecInput;
-		bool m_bNext;
 		
 	};
 }

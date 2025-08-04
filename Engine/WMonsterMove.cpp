@@ -43,7 +43,7 @@ namespace W
 	void MonsterMove::Enter()
 	{
 		MonsterState* pState = GetFSM()->FindState(Monster::eMonsterState::stand);
-		m_fTargetDistance =  dynamic_cast<MonsterStand*>(pState)->GetTargetDistance();
+		m_fTargetDistance =  static_cast<MonsterStand*>(pState)->GetTargetDistance();
 		m_fTime = 1.f;
 
 		m_pTarget = SceneManger::FindPlayerRandom(GetMonster()->GetSceneID());
@@ -68,7 +68,7 @@ namespace W
 			return;
 		}
 		
-		Player* pPlayer = static_cast<Player*>(m_pTarget);
+		//Player* pPlayer = static_cast<Player*>(m_pTarget);
 		Vector3 vTargetPosition = m_pTarget->GetComponent<Collider2D>()->GetPosition();
 		Vector3 vPosition = GetMonster()->GetComponent<Collider2D>()->GetPosition();
 		vTargetPosition.z = 0.f;
@@ -80,7 +80,7 @@ namespace W
 		float iDir;
 		const tObjectInfo& tInfo = GetMonster()->GetScript<MonsterScript>()->GetObjectInfo();
 	
-		if (fLen <= 0.4f)
+		if (fLen <= 1.f)
 		{
 			EventManager::ChangeMonsterFSMState(GetFSM(), Monster::eMonsterState::stand);
 		}

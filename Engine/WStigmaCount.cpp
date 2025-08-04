@@ -55,8 +55,8 @@ namespace W
 
 		UCHAR cLayer = (UCHAR)GetLayerType();
 		UINT iObjectID = GetObjectID();
-		pkt.set_layer_id((cLayer << 24) | iObjectID);
-
+		UINT iSceneID = GetSceneID();
+		pkt.set_layer_id((cLayer << 24) | (iSceneID << 16) | iObjectID);
 		pkt.set_state_value(m_iNumber);
 	
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);
@@ -65,7 +65,7 @@ namespace W
 	
 	void StigmaCount::set_count(UINT _iCount)
 	{
-		if (_iCount>7)
+		if (_iCount>=7)
 			return;
 
 		m_iNumber = _iCount;

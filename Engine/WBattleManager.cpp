@@ -36,17 +36,19 @@ namespace W
 	FuncStatArr BattleManager::m_arrStatFunc[(UINT)eUpStatType::End];
 
 	std::map<std::wstring, std::queue<Effect*>> BattleManager::m_mapEffects = {};
-	std::map<std::wstring, BattleManager::tDamageCount> BattleManager::m_mapDamage[6] = {};
+	std::map<std::wstring, BattleManager::tDamageCount> BattleManager::m_mapDamage[MAXCOUNT] = {};
 
 	UINT BattleManager::m_iMaxDamage = 9999999;
+	vector<GameObject*> BattleManager::m_vecFonts = {};
 	unordered_map<UINT, bool> BattleManager::m_hashOnAbnormal = {};
 	unordered_map<UINT, bool> BattleManager::m_hashOnUndead = {};
 	unordered_map<UINT, bool> BattleManager::m_hashCurPotionTime = {};
 	float BattleManager::m_fPotionTime = 0.1f;
-	UINT  BattleManager::m_arrStigmaCount[6] = { 0,6,6,6,6,6 };
+	UINT  BattleManager::m_arrStigmaCount[MAXCOUNT] = { 0,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6 };
 
 	void BattleManager::Initialize()
 	{
+		m_vecFonts.reserve(300);
 		for (int i = 0; i < 300; ++i)
 		{
 			DamageFont* pDamageFont = new DamageFont();
@@ -98,7 +100,16 @@ namespace W
 
 	void BattleManager::Update()
 	{
-		for (int i = 0; i < 6; ++i)
+		//데미지 폰트 수거
+		for (int i = 0; i < m_vecFonts.size(); ++i)
+		{
+			EventManager::EraseObject(m_vecFonts[i]);
+			ObjectPoolManager::AddObjectPool(m_vecFonts[i]->GetName(), m_vecFonts[i]);
+		}
+		m_vecFonts.clear();
+
+		//데미지 나오는 순서 
+		for (int i = 0; i < MAXCOUNT; ++i)
 		{
 			for (auto iter = m_mapDamage[i].begin(); iter != m_mapDamage[i].end(); )
 			{
@@ -609,6 +620,11 @@ namespace W
 			_pTarget->GetScript<PlayerScript>()->m_tObjectInfo.fDefense / fabs(_fAccStat);
 		else
 			_pTarget->GetScript<PlayerScript>()->m_tObjectInfo.fDefense * fabs(_fAccStat);
+	}
+
+	void BattleManager::AddFontObject(DamageFont* _pFont)
+	{
+		m_vecFonts.push_back(_pFont);
 	}
 
 	void BattleManager::active_damage(std::queue<DamageFont*>& _queueFonts, UINT _iDamageCount, 

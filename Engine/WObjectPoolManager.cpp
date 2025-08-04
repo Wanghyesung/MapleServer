@@ -29,7 +29,6 @@ namespace W
 		if (iter != m_hashObjectPool.end())
 		{
 			std::vector<GameObject*>& vec = m_hashObjectPool[_strName];
-
 			if (!vec.empty())
 			{
 				GameObject* pGameObj = vec.back();

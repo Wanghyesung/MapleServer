@@ -33,11 +33,9 @@ namespace W
 
 	void InputObject::Initialize()
 	{
+		m_bPrevRender = true;
 		m_bRender = true;
-		
-		
-		ClearExclusiveClients();
-
+		m_bActive = true;
 		Animator* pAnim = GetComponent<Animator>();
 		pAnim->Play(L"clear", true);
 		pAnim->Stop(true);	
@@ -48,7 +46,7 @@ namespace W
 		if (!m_bRender)
 			return;
 
-		if (m_bActive)
+		if (m_bActive && m_pOwner->IsWait() == false)
 			check();
 
 		GameObject::Update();
@@ -74,7 +72,8 @@ namespace W
 
 		UCHAR cLayer = (UCHAR)eLayerType::Object;
 		UINT iObjectID = GetObjectID();
-		pkt.set_layer_id((cLayer << 24) | iObjectID);
+		UINT iSceneID = GetSceneID();
+		pkt.set_layer_id((cLayer << 24) | (iSceneID << 16) | iObjectID);
 
 		Animation* pAnim = pAnimator->GetActiveAnimation();
 		UCHAR cAnimIdx = pAnim->GetCurIndex();

@@ -39,7 +39,6 @@ namespace W
 		m_vecSkillTime[_iPlayerID].insert(std::make_pair(eSkill, _pSkill->GetCoolTime()));
 	}
 
-	//전부 서베에서 순차적으로 체크 클라에서 동시에 접근할 일 업음
 	void SkillManager::SetActiveSkill(UINT _iPlayerID, Player::ePlayerSkill _eSkill)
 	{
 		PlayerSkill* pPlayerSkill = FindPlayerSkill(_iPlayerID);

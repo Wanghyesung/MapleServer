@@ -24,7 +24,6 @@ namespace W
 		tTime.fCoolTime = 0.f;
 		tTime.fCurTime = 0.f;
 		SetCoolTime(tTime);
-
 		
 		
 		//m_pHitEffectAtlas = Resources::Load<Texture>(L"quadhit", L"..\\Resources\\Texture\\Player\\skill\\hit1.png");
@@ -61,7 +60,7 @@ namespace W
 		if (bComplete)
 			Exit();
 
-		if (iAnimIndex == 2 && m_iCallStack == 1)
+		if (iAnimIndex >= 2 && m_iCallStack == 1)
 		{
 			m_iCallStack = 0;
 			activeskill_quad();
@@ -117,7 +116,7 @@ namespace W
 			++m_iCreateCnt;
 
 			PlayerAttackObject* pAttackObj = GetPlayer()->GetScript<PlayerScript>()->GetPlayerSkill(L"quad");
-			Shuriken* pShuriken = dynamic_cast<Shuriken*>(pAttackObj);
+			Shuriken* pShuriken = static_cast<Shuriken*>(pAttackObj);
 			//pShuriken->GetComponent<Collider2D>()->SetActive(true);
 			pShuriken->SetDir(GetPlayer()->GetDir());
 			//추가 데미지

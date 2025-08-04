@@ -88,8 +88,8 @@ namespace W
 		static void UpStat(GameObject* _pObj, BattleManager::eUpStatType _eType, float _fAccStat);
 
 	private:
-		static void excute(const tEvent& _tEve);
-		static void pool_excute();
+		static void execute(const tEvent& _tEve);
+		static void pool_execute();
 
 		static void create_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
 		static void delete_object(DWORD_PTR _lParm, DWORD_PTR _wParm, LONG_PTR _accParm, const OBJECT_DATA& _tObjData);
@@ -128,12 +128,13 @@ namespace W
 		static std::vector<tEvent> m_vecEvent[2];
 		static std::vector<GameObject*> m_vecPlayer_Pool;
 		static std::vector<GameObject*> m_vecMonster_Pool;
-		static std::vector<USHORT> m_vecInput[5][2];
+		static std::vector<USHORT> m_vecInput[MAXCOUNT][2];
 
 		static RWLock m_lock;
 		static RWLock m_inputLock;
 
 		static atomic<int> m_iActiveInputIdx;
+		static atomic<int> m_iPreInputIdx;
 		static atomic<int> m_iActiveIdx;
 	};
 }

@@ -50,12 +50,12 @@ namespace W
 	};
 
 
-	std::vector<eKeyState> Input::m_vecKeys[6] = {};
-	std::queue<UCHAR> Input::m_queueKeys[6][(UINT)eKeyCode::NONE + 1] = {};
+	std::vector<eKeyState> Input::m_vecKeys[MAXCOUNT] = {};
+	std::queue<UCHAR> Input::m_queueKeys[MAXCOUNT][(UINT)eKeyCode::NONE + 1] = {};
 
 	void Input::Initialize()
 	{
-		for (int i = 0; i < 5; ++i)
+		for (int i = 0; i < MAXCOUNT; ++i)
 		{
 			for (UINT j = 0; j < (UINT)eKeyCode::NONE; j++)
 			{
@@ -66,7 +66,7 @@ namespace W
 
 	void Input::Update()
 	{
-		for (int i = 0; i < 5; ++i)
+		for (int i = 0; i < MAXCOUNT; ++i)
 		{
 			for (int j = 0; j <= (UINT)eKeyCode::NONE; j++)
 			{

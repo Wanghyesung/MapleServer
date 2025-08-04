@@ -110,8 +110,9 @@ namespace W
 
 	 	Animator* pAnimator = GetComponent<Animator>();
 		UCHAR cLayer = (UCHAR)eLayerType::Object;
+		UCHAR cSceneID = (UCHAR)GetSceneID();
 		UINT iObjectID = GetObjectID();
-		pkt.set_layer_id((cLayer << 24) | iObjectID);
+		pkt.set_layer_id((cLayer << 24) | (cSceneID << 16) | iObjectID);
 
 		Animation* pAnim = pAnimator->GetActiveAnimation();
 		UCHAR cLevel = m_iCurLevel;

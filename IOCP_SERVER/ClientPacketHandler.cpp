@@ -197,9 +197,3 @@ bool Handle_C_ITEM(shared_ptr<Session> _pSession, Protocol::C_ITEM& _pkt)
 	return true;
 }
 
-bool Handle_C_EXIT(shared_ptr<Session> _pSession, Protocol::C_EXIT& _pkt)
-{
-	
-	return false;
-}
-

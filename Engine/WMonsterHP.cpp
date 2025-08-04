@@ -96,8 +96,10 @@ namespace W
 		Protocol::S_STATE pkt;
 
 		UCHAR cLayer = (UCHAR)GetLayerType();
+		UCHAR cSceneID = (UCHAR)GetSceneID();
 		UINT iObjectID = GetObjectID();
-		pkt.set_layer_id((cLayer << 24) | iObjectID);
+		pkt.set_layer_id((cLayer << 24) | (cSceneID << 16) | iObjectID);
+
 
 		//이거 패킷 이름 set_int , set_string으로 변경하기
 		pkt.set_state_value(m_fHP);

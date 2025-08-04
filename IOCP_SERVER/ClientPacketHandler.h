@@ -12,8 +12,6 @@
 #include "Skill.pb.h"
 #include "Item.pb.h"
 
-using PacketHandlerFunc = std::function<bool(shared_ptr<PacketSession>&, BYTE*, INT)>;
-extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
 
 #define LOG_PACKET_SEND(name) \
     do { \
@@ -25,6 +23,9 @@ extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
     } while(0)
 
 //±âº» : ID, LAYER, SCENE
+
+using PacketHandlerFunc = std::function<bool(shared_ptr<PacketSession>&, BYTE*, INT)>;
+extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
 
 enum PACKET_TYPE
 {
@@ -63,9 +64,7 @@ enum PACKET_TYPE
 	S_SKILL = 1020,
 	C_SKILL = 1021,
 
-	S_EXIT = 1022,
-	C_EXIT = 1023,
-	S_NEW_EXIT = 1024,
+	S_NEW_EXIT = 1022,
 };
 
 template <typename T>
@@ -78,7 +77,6 @@ bool Handle_C_INPUT(shared_ptr<Session> _pSession, Protocol::C_INPUT& _pkt);
 bool Handle_C_CREATE(shared_ptr<Session> _pSession, Protocol::C_CREATE& _pkt);
 bool Handle_C_MAP(shared_ptr<Session> _pSession, Protocol::C_MAP& _pkt);
 bool Handle_C_MAP_LOADING(shared_ptr<Session> _pSession, Protocol::C_MAP_LOADING& _pkt);
-bool Handle_C_EXIT(shared_ptr<Session> _pSession, Protocol::C_EXIT& _pkt);
 bool Handle_C_START_MAP(shared_ptr<Session> _pSession, Protocol::C_START_MAP& _pkt);
 bool Handle_C_SKILL(shared_ptr<Session> _pSession, Protocol::C_Skill& _pkt);
 bool Handle_C_ITEM(shared_ptr<Session> _pSession, Protocol::C_ITEM& _pkt);
@@ -114,8 +112,6 @@ public:
 			{return  HandlePacket<Protocol::C_ITEM>(Handle_C_ITEM, _pSession, _pBuffer, _iLen); };
 		GPacketHandler[C_START_MAP] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
 			{return  HandlePacket<Protocol::C_START_MAP>(Handle_C_START_MAP, _pSession, _pBuffer, _iLen); };
-		GPacketHandler[C_EXIT] = [](shared_ptr<PacketSession>& _pSession, BYTE* _pBuffer, INT _iLen)
-			{return  HandlePacket<Protocol::C_EXIT>(Handle_C_EXIT, _pSession, _pBuffer, _iLen); };
 	}
 
 	template <typename T, typename Func>
@@ -142,11 +138,7 @@ public:
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_TRANSFORM _pkt) { return _MakeSendBuffer(_pkt, S_TRANSFORM); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_Skill _pkt) { return _MakeSendBuffer(_pkt, S_SKILL); }
 	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::C_START_MAP _pkt) { return _MakeSendBuffer(_pkt, C_START_MAP); }
-
-	static shared_ptr<SendBuffer> MakeSendBuffer(Protocol::S_EXIT _pkt) { return _MakeSendBuffer(_pkt, S_EXIT); }
-
 };
-
 
 
 template<typename T>

@@ -103,7 +103,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     GDBConnectionPool->Initialize();
 
     //SERVER
-    GServerService = make_shared<ServerService>(NetAddress(L"172.30.1.67", 7777),
+    GServerService = make_shared<ServerService>(NetAddress(L"172.30.1.65", 7777),
         make_shared<IOCP>(), MakeSharedSesion, 5);
 
     ClientPacketHandler::Initialize();
@@ -117,7 +117,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             {
                 while (bIsRunning)
                 {
-                    GServerService->GetIOCP()->Excute();
+                    GServerService->GetIOCP()->Execute();
                 }
             }
         );

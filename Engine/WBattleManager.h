@@ -6,7 +6,7 @@
 namespace W
 {
 	//SceneManager 다음 실행
-
+	class DamageFont;
 	class BattleManager
 	{
 	public:
@@ -74,8 +74,9 @@ namespace W
 
 		static void Player_DeBuff_Attack(GameObject* _pTarget, eUpStatType _eType, float _fAccStat);
 
+		static void AddFontObject(DamageFont* _pFont);
 	private:
-		static void active_damage(std::queue<class DamageFont*>& _queueFonts, UINT _iDamageCount, 
+		static void active_damage(std::queue<DamageFont*>& _queueFonts, UINT _iDamageCount, 
 			const std::wstring& _strName, UINT _iPlayerID = 0);
 		static void erase_damage(const std::wstring& _strName, UINT _iPlayerID = 0);
 		static tDamageCount& add_damage(UINT _iDamageCount, const std::wstring& _strName, UINT _iPlayerID = 0);
@@ -113,12 +114,13 @@ namespace W
 
 	private:
 		static UINT m_iMaxDamage;
+		static vector<GameObject*> m_vecFonts;
 
 		static std::function<void(GameObject* _pTarget, float _fAccValue)> m_arrAbnormalFunc[(UINT)eAbnormalType::End];
 		static std::function<void(GameObject* _pTarget, float _fAccValue)> m_arrStatFunc[(UINT)eUpStatType::End];
 
 		static std::map<std::wstring, std::queue<Effect*>> m_mapEffects;
-		static std::map<std::wstring, tDamageCount> m_mapDamage[6];
+		static std::map<std::wstring, tDamageCount> m_mapDamage[MAXCOUNT];
 
 		//상태이상 
 		static unordered_map<UINT, bool> m_hashOnAbnormal;
@@ -127,7 +129,7 @@ namespace W
 
 		static float m_fPotionTime;
 
-		static UINT m_arrStigmaCount[6];
+		static UINT m_arrStigmaCount[MAXCOUNT];
 
 		friend class EventManager;
 		friend class Abnormal;

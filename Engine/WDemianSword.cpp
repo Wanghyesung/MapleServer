@@ -203,8 +203,9 @@ namespace W
 		Protocol::S_STATE pkt;
 
 		UCHAR cLayer = (UCHAR)eLayerType::MonsterAttack;
+		UCHAR cSceneID = (UCHAR)GetSceneID();
 		UINT iObjectID = GetObjectID();
-		pkt.set_layer_id((cLayer << 24) | iObjectID);
+		pkt.set_layer_id((cLayer << 24) | (cSceneID << 16) | iObjectID);
 
 		Animator* pAnimator = GetComponent<Animator>();
 

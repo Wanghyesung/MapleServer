@@ -155,7 +155,7 @@ namespace W
 		//3
 		tMonsterAttack attack2 = {};
 		attack2.bSkill = true;
-		attack2.tTime.fCoolTime = 20.f;
+		attack2.tTime.fCoolTime = 15.f;
 
 		attack2.vScale = Vector2::Zero;
 

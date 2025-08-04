@@ -6,10 +6,10 @@ Room GRoom;
 DBConnectionPool* GDBConnectionPool = nullptr;
 
 Room::Room() :
-	m_iMaxCount(5),
+	m_iMaxCount(MAXCOUNT),
 	m_iCurCount(0)
 {
-	m_vecUserID.resize(6, false);
+	m_vecUserID.resize(MAXCOUNT, false);
 	GDBConnectionPool = new DBConnectionPool();
 }
 

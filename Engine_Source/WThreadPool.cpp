@@ -17,7 +17,6 @@ namespace W
 	{
 		for (int i = 0; i < _iThreadCount; ++i)
 		{
-			//std::thread는 복사 생성자가 delete 되어 있어서 복사 불가능
 			m_vecWorker.emplace_back([]() {
 				while (true)
 				{
@@ -45,7 +44,6 @@ namespace W
 	void ThreadPool::Shutdown()
 	{
 		m_bRunnig.store(false);
-	
 		m_CV.notify_all();
 
 		for (int i = 0; i < m_vecWorker.size(); ++i)
@@ -72,7 +70,6 @@ namespace W
 	{
 		std::unique_lock<std::mutex> lock(m_completeMutex);
 		m_completeCV.wait(lock, []() {return m_iWorkCount.load() == 0; });
-
 	}
 	
 }

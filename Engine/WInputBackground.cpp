@@ -61,8 +61,12 @@ namespace W
 	}
 	void InputBackground::Update()
 	{
-		if(m_bNext)
+		m_bWaitToNext = false;
+		if (m_bNext)
+		{
+			m_bWaitToNext = true;
 			next_button();
+		}
 	
 		GameObject::Update();
 	}
@@ -80,7 +84,7 @@ namespace W
 	void InputBackground::Failed()
 	{
 		EventManager::DeleteObject(this);
-		static_cast<Groggy*>(m_pOwner)->SetTime(12.f);
+		static_cast<Groggy*>(m_pOwner)->SetTime(10.f);
 
 		for (int i = 0; i < m_vecInput.size(); ++i)
 			EventManager::AddMonsterPool(m_vecInput[i]);

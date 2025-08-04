@@ -54,7 +54,8 @@ namespace W
 
 		UCHAR cLayer = (UCHAR)eLayerType::Object;
 		UINT iObjectID = GetObjectID();
-		pkt.set_layer_id((cLayer << 24) | iObjectID);
+		UINT iSceneID = GetSceneID();
+		pkt.set_layer_id((cLayer << 24) | (iSceneID << 16) | iObjectID);
 
 		pkt.set_state_value(m_vColor.w * 10000);
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);

@@ -86,7 +86,7 @@ namespace W
 			EventManager::ChangePlayerFSMState(GetFSM(), Player::ePlayerState::jump);
 
 			int iDir = GetPlayer()->GetDir();
-			pRigidbody->SetVelocity(Vector2(0.f, 3.5f));
+			pRigidbody->SetVelocity(Vector2(0.f, 6.f));
 			pRigidbody->SetGround(false);
 		}
 	}

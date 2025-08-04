@@ -78,8 +78,8 @@ namespace W
 		
 		//최대 5명의 플레이어 Input정보
 	private:
-		static std::queue<UCHAR> m_queueKeys[6][(UINT)eKeyCode::NONE + 1];//지금까지 들어온 키 처리
-		static std::vector<eKeyState> m_vecKeys[6];//현 체크할 키
+		static std::queue<UCHAR> m_queueKeys[MAXCOUNT][(UINT)eKeyCode::NONE + 1];//지금까지 들어온 키 처리
+		static std::vector<eKeyState> m_vecKeys[MAXCOUNT];//현 체크할 키
 	};
 
 }

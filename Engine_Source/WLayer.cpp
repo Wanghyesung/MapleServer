@@ -102,14 +102,19 @@ namespace W
 	void Layer::EraseOnHash(GameObject* _pGameObject)
 	{
 		UINT iGameObjectID = _pGameObject->GetObjectID();
-		PushObjectID(iGameObjectID);
-		//WLock lock(m_lock);
 
 		auto iter = m_hashGameObject.find(iGameObjectID);
 		GameObject* pGameObject = iter->second;
 
 		if (pGameObject != nullptr)
 			m_hashGameObject.erase(iGameObjectID);
+
+		//고정ID는 지우면 안됨
+		if (iGameObjectID < LAYER_STARAT_IDX)
+			return;
+
+		PushObjectID(iGameObjectID);
+		_pGameObject->SetObjectID(0);
 	}
 
 	UINT Layer::GetCurObjectID()

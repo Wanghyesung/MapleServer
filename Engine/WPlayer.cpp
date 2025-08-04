@@ -284,8 +284,9 @@ namespace W
 			pkt.set_state(WstringToString(m_strCurStateName));
 
 		UCHAR cLayer = (UCHAR)eLayerType::Player;
+		UCHAR cSceneID = (UCHAR)GetSceneID();
 		UINT iObjectID = GetObjectID();
-		pkt.set_layer_id((cLayer << 24) | iObjectID);
+		pkt.set_layer_id((cLayer << 24) | (cSceneID<<16) | iObjectID);
 
 		UCHAR cDir = m_iDir > 0 ? 1 : 0; 
 		UCHAR cAnimIdx = pAnim->GetActiveAnimation()->GetCurIndex();

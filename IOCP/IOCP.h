@@ -10,7 +10,7 @@ public:
 public:
 	void RegisterEvent(shared_ptr<Session> _pSession);
 	void RegisterDummyPacket();
-	void Excute();
+	void Execute();
 
 private:
 	HANDLE m_IOCPHandle;

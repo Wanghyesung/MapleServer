@@ -77,7 +77,8 @@ namespace W
 
 		UCHAR cLayer = (UCHAR)GetLayerType();
 		UINT iObjectID = GetObjectID();
-		pkt.set_layer_id((cLayer << 24) | iObjectID);
+		UCHAR cSceneID = (UCHAR)GetSceneID();
+		pkt.set_layer_id((cLayer << 24) | (cSceneID << 16) | iObjectID);
 
 		Animation* pAnim = pAnimator->GetActiveAnimation();
 		UCHAR cAnimIdx = pAnim->GetCurIndex();

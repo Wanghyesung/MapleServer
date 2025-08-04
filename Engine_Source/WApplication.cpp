@@ -36,10 +36,12 @@ namespace W
 	{
 		Input::Update();
 		SkillManager::Update();
+
 		Update();
 		LateUpdate();
 		UpdatePacket();
 
+		BattleManager::Update();
 		EventManager::Update();
 	}
 
@@ -68,7 +70,6 @@ namespace W
 		
 		CollisionManager::Update();
 		SceneManger::Update();
-		BattleManager::Update();
 		MonsterManager::Update();
 		
 	}

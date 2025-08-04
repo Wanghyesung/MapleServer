@@ -31,30 +31,9 @@ namespace W
 	{
 		SetName(L"Demian1");
 
-		//MeshRenderer* pRenderer = AddComponent<MeshRenderer>();
-		//pRenderer->SetMesh(Resources::Find<Mesh>(L"RectMesh"));
-		//
-		//
-		//std::shared_ptr<Material> pMater = std::make_shared<Material>();
-		//pMater->SetRenderinMode(eRenderingMode::Transparent);
-		//pMater->SetShader(Resources::Find<Shader>(L"MonsterShader"));
-		//Resources::Insert(L"DemianMater", pMater);
-		//
-		//pRenderer->SetMaterial(pMater);
+		
 		AddComponent<Rigidbody>();
 
-		//std::shared_ptr<Texture> pNormal = Resources::Find<Texture>(L"DemianNormal");
-		//std::shared_ptr<Texture> pDead = Resources::Find<Texture>(L"DemianDead");
-		//std::shared_ptr<Texture> pAttack0 = Resources::Find<Texture>(L"Demian_attack0");
-		//std::shared_ptr<Texture> pAttack1 = Resources::Find<Texture>(L"Demian_attack1");
-		//std::shared_ptr<Texture> pAttack2 = Resources::Find<Texture>(L"Demian_attack2");
-		//std::shared_ptr<Texture> pAttack3 = Resources::Find<Texture>(L"Demian_attack3");
-		//
-		//pAttack0->BindShaderResource(eShaderStage::PS, 12);
-		//pAttack1->BindShaderResource(eShaderStage::PS, 12);
-		//pAttack2->BindShaderResource(eShaderStage::PS, 12);
-		//pAttack3->BindShaderResource(eShaderStage::PS, 12);
-		//pDead->BindShaderResource(eShaderStage::PS, 12);
 
 		Animator* pAnim = AddComponent<Animator>();
 		pAnim->Create(L"Demian1_stand_left", Vector2(0.f, 0.f), Vector2(2000.f, 2000.f), 7, Vector2(2000.f, 2000.f), Vector2::Zero, 0.07f);

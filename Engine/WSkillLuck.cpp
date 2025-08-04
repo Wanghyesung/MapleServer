@@ -60,7 +60,7 @@ namespace W
 		if (bComplete)
 			Exit();
 
-		if (iAnimIndex == 2 && m_iCallStack == 1)
+		if (iAnimIndex >= 2 && m_iCallStack == 1)
 		{
 			m_iCallStack = 0;
 			activeskill_luck();

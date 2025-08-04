@@ -35,8 +35,7 @@ namespace W
 			m_bActive = false;
 			m_fCurTime = 0.f;
 			
-			EventManager::EraseObject(this);
-			ObjectPoolManager::AddObjectPool(GetName(), this);
+			BattleManager::AddFontObject(this);
 			return;
 		}
 
@@ -61,7 +60,8 @@ namespace W
 
 		UCHAR cLayer = (UCHAR)GetLayerType();
 		UINT iObjectID = GetObjectID();
-		pkt.set_layer_id((cLayer << 24) | iObjectID);
+		UINT iSceneID = GetSceneID();
+		pkt.set_layer_id((cLayer << 24) | (iSceneID << 16) | iObjectID);
 
 		pkt.set_state_value((m_iDamage <<16) | (UINT)(m_fAlfhaColor * 10000));
 		shared_ptr<SendBuffer> pSendBuffer = ClientPacketHandler::MakeSendBuffer(pkt);

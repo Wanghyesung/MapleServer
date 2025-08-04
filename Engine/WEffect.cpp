@@ -158,8 +158,9 @@ namespace W
 		Protocol::S_STATE pkt;
 
 		UCHAR cLayer = (UCHAR)eLayerType::Effect;
+		UCHAR cSceneID = (UCHAR)GetSceneID();
 		UINT iObjectID = GetObjectID();
-		pkt.set_layer_id((cLayer << 24) | iObjectID);
+		pkt.set_layer_id((cLayer << 24) | (cSceneID << 16) | iObjectID);
 
 		Animation* pAnim = pAnimator->GetActiveAnimation();
 		UCHAR cDir = m_iDir > 0 ? 1 : 0;

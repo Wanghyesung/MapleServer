@@ -116,8 +116,9 @@ namespace W
 
 		Protocol::S_STATE pkt;
 		UCHAR cLayer = (UCHAR)eLayerType::Monster;
+		UCHAR cSceneID = (UCHAR)GetSceneID();
 		UINT iObjectID = GetObjectID();
-		pkt.set_layer_id((cLayer << 24) | iObjectID);
+		pkt.set_layer_id((cLayer << 24) | (cSceneID << 16) | iObjectID);
 
 		Animation* pAnim = pAnimator->GetActiveAnimation();
 		UCHAR cDir = 1;
@@ -166,6 +167,7 @@ namespace W
 		tMonsterAttack skill = {};
 		skill.bSkill = true;
 		skill.tTime.fCoolTime = 18.f;
+		skill.tTime.fCurTime = 17.f;
 
 		skill.vScale = Vector2(0.f, 0.f);
 		skill.pFunction = std::bind(&Munin::attack_reflect, this);

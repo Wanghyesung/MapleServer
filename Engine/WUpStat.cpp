@@ -25,19 +25,26 @@ namespace W
 	{
 		m_fCurTime += Time::DeltaTime();
 
-		if (m_pTarget->GetState() != GameObject::Active)
-			m_pTarget = nullptr;
+		if (m_pTarget == nullptr)
+			return;
 
-		if (m_fCurTime >= m_fDeleteTime)
+		if (m_pTarget->GetState() != GameObject::Active)
+		{
+			m_pTarget = nullptr;
+			return;
+		}
+			
+
+		Collider2D* pCollider = m_pTarget->GetComponent<Collider2D>();
+
+		if (m_fCurTime >= m_fDeleteTime || pCollider->IsActive() == false)
 		{
 			EventManager::DeleteObject(this);
 			if(m_pTarget)
 				BattleManager::Buff_Stat(m_pTarget, m_eType, -m_fAccStat);
-
 			return;
 		}
-
-		else if (m_pTarget)
+		else
 		{
 			Vector3 vPosition = m_pTarget->GetComponent<Collider2D>()->GetPosition();
 			vPosition.y += 0.5f;
