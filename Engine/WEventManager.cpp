@@ -22,10 +22,8 @@ namespace W
 	std::vector<GameObject*> EventManager::m_vecMonster_Pool = {};
 	std::vector<USHORT> EventManager::m_vecInput[MAXCOUNT][2] = {};
 
-	RWLock EventManager::m_lock = {};
-	//RWLock EventManager::m_inputLock = {};
-
 	atomic<int> EventManager::m_iActiveIdx = 1;
+	atomic<int> EventManager::m_iPreIdx = 1;
 	atomic<int> EventManager::m_iActiveInputIdx = 1;
 	atomic<int> EventManager::m_iPreInputIdx = 1;
 
@@ -59,26 +57,24 @@ namespace W
 
 	void EventManager::Update()
 	{
-		pool_execute(); //오브젝트 풀
-		{
-			WLock lock_guard(m_lock);
-			m_iActiveIdx = 1 - m_iActiveIdx;
-		}
+		//다 사용한 오브젝트 회수
+		pool_execute(); 
+	
 		m_iPreInputIdx = m_iActiveInputIdx.exchange(1 - m_iActiveInputIdx);
+		m_iPreIdx = m_iActiveIdx.exchange(1 - m_iActiveIdx);
+		std::vector<tEvent>& vecActiveEvent = m_vecEvent[m_iPreIdx];
 
-		std::vector<tEvent>& vecActiveEvent = m_vecEvent[m_iActiveIdx];
 		for (int i = 0; i < vecActiveEvent.size(); ++i)
-		{
 			execute(vecActiveEvent[i]);
-		}
 
 		vecActiveEvent.clear();
 	}
 
 	void EventManager::AddEvent(const tEvent& _tEve)
 	{
-		WLock lock_guard(m_lock);
-		m_vecEvent[1 - m_iActiveIdx].emplace_back(_tEve);
+		//WLock lock_guard(m_lock);
+		int iActiveIdx = m_iActiveInputIdx.load();
+		m_vecEvent[iActiveIdx].emplace_back(_tEve);
 	}
 	
 
@@ -204,7 +200,6 @@ namespace W
 			Input::Update_Key(iPlayerID, m_vecInput[iPlayerID][m_iPreInputIdx]);
 
 			m_vecInput[iPlayerID][m_iPreInputIdx].clear();
-			//m_iActiveInputIdx.exchange(1 - m_iActiveInputIdx);
 		}
 	}
 
@@ -463,7 +458,6 @@ namespace W
 		
 		{
 			//WLock lock_guard(m_inputLock);
-
 			for(int i = 0; i<_vecInput.size(); ++i)
 				m_vecInput[_iPlayerID][m_iActiveInputIdx].push_back(_vecInput[i]);
 		}

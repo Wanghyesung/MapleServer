@@ -83,6 +83,9 @@ namespace W
 
 	void Input::Update_Key(UINT _iPlayerID, const std::vector<USHORT>& _vecKey)
 	{
+		if (_iPlayerID >= MAXCOUNT)
+			return;
+
 		for (UINT i = 0; i < _vecKey.size(); ++i)
 		{
 			USHORT sKey = _vecKey[i];

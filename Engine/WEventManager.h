@@ -130,12 +130,11 @@ namespace W
 		static std::vector<GameObject*> m_vecMonster_Pool;
 		static std::vector<USHORT> m_vecInput[MAXCOUNT][2];
 
-		static RWLock m_lock;
-		static RWLock m_inputLock;
+		static atomic<int> m_iActiveIdx;
+		static atomic<int> m_iPreIdx;
 
 		static atomic<int> m_iActiveInputIdx;
 		static atomic<int> m_iPreInputIdx;
-		static atomic<int> m_iActiveIdx;
 	};
 }
 
