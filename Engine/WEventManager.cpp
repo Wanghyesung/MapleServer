@@ -22,10 +22,10 @@ namespace W
 	std::vector<GameObject*> EventManager::m_vecMonster_Pool = {};
 	std::vector<USHORT> EventManager::m_vecInput[MAXCOUNT][2] = {};
 
+	RWLock EventManager::m_lock = {};
+	RWLock EventManager::m_inputLock = {};
 	atomic<int> EventManager::m_iActiveIdx = 1;
-	atomic<int> EventManager::m_iPreIdx = 1;
 	atomic<int> EventManager::m_iActiveInputIdx = 1;
-	atomic<int> EventManager::m_iPreInputIdx = 1;
 
 #define ObjectPoolPosition 2000.f
 
@@ -59,11 +59,14 @@ namespace W
 	{
 		//다 사용한 오브젝트 회수
 		pool_execute(); 
-	
-		m_iPreInputIdx = m_iActiveInputIdx.exchange(1 - m_iActiveInputIdx);
-		m_iPreIdx = m_iActiveIdx.exchange(1 - m_iActiveIdx);
-		std::vector<tEvent>& vecActiveEvent = m_vecEvent[m_iPreIdx];
+		{
+			WLock event_lock(m_lock);
+			WLock input_lock(m_inputLock);
 
+			m_iActiveIdx = 1 - m_iActiveIdx;
+			m_iActiveInputIdx = 1 - m_iActiveInputIdx;
+		}
+		std::vector<tEvent>& vecActiveEvent = m_vecEvent[m_iActiveIdx];
 		for (int i = 0; i < vecActiveEvent.size(); ++i)
 			execute(vecActiveEvent[i]);
 
@@ -72,9 +75,8 @@ namespace W
 
 	void EventManager::AddEvent(const tEvent& _tEve)
 	{
-		//WLock lock_guard(m_lock);
-		int iActiveIdx = m_iActiveInputIdx.load();
-		m_vecEvent[iActiveIdx].emplace_back(_tEve);
+		WLock lock_guard(m_lock);
+		m_vecEvent[1 - m_iActiveIdx].emplace_back(_tEve);
 	}
 	
 
@@ -196,10 +198,13 @@ namespace W
 	{
 		UINT iPlayerID = (UINT)_lParm;
 		{
-			//WLock lock_guard(m_inputLock);
-			Input::Update_Key(iPlayerID, m_vecInput[iPlayerID][m_iPreInputIdx]);
+			WLock lock_guard(m_inputLock);
+			int iPreIdx = 1 - m_iActiveInputIdx;
+			vector<USHORT>& vecInput = m_vecInput[iPlayerID][iPreIdx];
 
-			m_vecInput[iPlayerID][m_iPreInputIdx].clear();
+			Input::Update_Key(iPlayerID, vecInput);
+
+			vecInput.clear();
 		}
 	}
 
@@ -215,18 +220,12 @@ namespace W
 		pPlayer->SetObjectID(iPlayerID);
 		pPlayer->Initialize();
 
-		UCHAR cHairID = llPlayerEquip; UCHAR cEyeID = llPlayerEquip >> 8; UCHAR cHatID = llPlayerEquip >> 16;
-		UCHAR cTopID = llPlayerEquip >> 24; UCHAR cBottomID = llPlayerEquip >> 32; UCHAR cShoesID = llPlayerEquip >> 40;
-		UCHAR cWeaponID = llPlayerEquip >> 48;
+		UCHAR cHairID = llPlayerEquip; UCHAR cEyeID = llPlayerEquip >> 8; UCHAR cHatID = llPlayerEquip >> 16; UCHAR cTopID = llPlayerEquip >> 24;
+		UCHAR cBottomID = llPlayerEquip >> 32; UCHAR cShoesID = llPlayerEquip >> 40; UCHAR cWeaponID = llPlayerEquip >> 48;
 
 	
-		pPlayer->SetHair(cHairID);
-		pPlayer->SetEye(cEyeID);
-		pPlayer->SetEquip(eEquipType::Hat, cHatID);
-		pPlayer->SetEquip(eEquipType::Top, cTopID);
-		pPlayer->SetEquip(eEquipType::Bottom, cBottomID);
-		pPlayer->SetEquip(eEquipType::Shoes, cShoesID);
-		pPlayer->SetEquip(eEquipType::Weapon, cWeaponID);
+		pPlayer->SetHair(cHairID); pPlayer->SetEye(cEyeID); pPlayer->SetEquip(eEquipType::Hat, cHatID); pPlayer->SetEquip(eEquipType::Top, cTopID);
+		pPlayer->SetEquip(eEquipType::Bottom, cBottomID); pPlayer->SetEquip(eEquipType::Shoes, cShoesID); pPlayer->SetEquip(eEquipType::Weapon, cWeaponID);
 
 		//기존의 플레이어들 알리기
 		SceneManger::SendPlayersInfo(iPlayerID, ValleySceneID);
@@ -455,13 +454,13 @@ namespace W
 	{
 		tEvent eve = {};
 		eve.lParm = (DWORD_PTR)_iPlayerID;
-		
 		{
-			//WLock lock_guard(m_inputLock);
-			for(int i = 0; i<_vecInput.size(); ++i)
-				m_vecInput[_iPlayerID][m_iActiveInputIdx].push_back(_vecInput[i]);
-		}
+			WLock lock_guard(m_inputLock);
+			vector<USHORT>& vecTarget = m_vecInput[_iPlayerID][m_iActiveInputIdx];
 
+			vecTarget.reserve(vecTarget.size() + _vecInput.size());
+			vecTarget.insert(vecTarget.end(), _vecInput.begin(), _vecInput.end());
+		}
 		eve.eEventType = EVENT_TYPE::UPDATE_INPUT;
 		AddEvent(eve);
 	}

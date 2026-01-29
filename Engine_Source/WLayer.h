@@ -34,11 +34,11 @@ namespace W
 		UINT GetCurObjectID();
 		void PushObjectID(UINT _iID);
 	private:
-		
+	
 		unordered_map<UINT, GameObject*> m_hashGameObject;
 
 		queue<UINT> m_queueObjectID;
-		//RWLock m_lock;
+	
 
 		friend class UIManger;
 	};

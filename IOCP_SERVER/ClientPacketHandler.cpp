@@ -11,35 +11,34 @@
 #include "..\Engine_Source\WAnimator.h"
 #include "..\Engine\WItemManager.h"
 
+using namespace W;
+
 PacketHandlerFunc GPacketHandler[UINT16_MAX] = {};
 wstring GarrEquipName[(UINT)W::eEquipType::End] = { L"", L"PandantID,", L"HatID", L"TopID", L"BottomID", L"ShoesID", L"WeaponID"};
 wstring GarrAppearanceName[(UINT)W::eAppearance::End] = {L"",L"HairID" ,L"EyeID"};
 
-//event버퍼에 넣기
+
 bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 {
-	vector<UINT> vecUserID = GRoom.GetPersons();//이미 서버에 들어온 플레이어
-
 	shared_ptr<ClientSession> pSession = static_pointer_cast<ClientSession>(_pSession);
-	const string& _strPersonName = _pkt.name();
-	pSession->SetName(_strPersonName);
-	UINT iUserID = -1;
-	iUserID = GRoom.Enter(_strPersonName, pSession);
+	const string& strPersonName = _pkt.name();
+	pSession->SetName(strPersonName);
+	int iUserID = -1;
+	iUserID = GRoom.Enter(strPersonName, pSession);
 
 	if (iUserID == -1)
 		return false;
 	pSession->SetPersonID(iUserID);
 
-
 	UINT64 llEquipIDs = 0;
 	int iHairID =0, iEyeID = 0 , iHatID = 0, iTopID = 0 ,
-	iBottomID = 0, iShoesID = 0 , iWeaponID = 0;
+		iBottomID = 0, iShoesID = 0 , iWeaponID = 0;
 
 	DBConnection* pDB = GDBConnectionPool->Pop();
 	DBBind<1, 7> dbFind(*pDB, L"SELECT HairID, EyeID, HatID, TopID, BottomID, ShoesID, WeaponID\
 							    FROM [dbo].[Equip] WHERE Name = (?)");
 
-	const WCHAR* pName = StringToWString(_strPersonName).c_str();
+	const WCHAR* pName = StringToWString(strPersonName).c_str();
 	dbFind.BindParam(0, pName);
 	dbFind.BindCol(0, iHairID); dbFind.BindCol(1, iEyeID);    dbFind.BindCol(2, iHatID);
 	dbFind.BindCol(3, iTopID);  dbFind.BindCol(4, iBottomID); dbFind.BindCol(5, iShoesID); dbFind.BindCol(6, iWeaponID);
@@ -51,11 +50,8 @@ bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 		DBBind<8, 0> dbInster(*pDB, L"INSERT INTO [dbo].[Equip]\
 		([Name], [HairID], [EyeID], [HatID], [TopID], [BottomID], [ShoesID], [WeaponID]) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
 		iHairID = 0, iEyeID = 0,
-		iBottomID = W::ItemManager::GetItemID(L"10_bottom");
-		iTopID = W::ItemManager::GetItemID(L"10_top");
-		iShoesID = W::ItemManager::GetItemID(L"10_shoes");
-		iHatID = W::ItemManager::GetItemID(L"10_hat");
-		iWeaponID = W::ItemManager::GetItemID(L"10_weapon");
+		iBottomID = ItemManager::GetItemID(L"10_bottom"); iTopID = ItemManager::GetItemID(L"10_top"); iShoesID = ItemManager::GetItemID(L"10_shoes");
+		iHatID = ItemManager::GetItemID(L"10_hat"); iWeaponID = ItemManager::GetItemID(L"10_weapon");
 
 		dbInster.BindParam(0, pName); dbInster.BindParam(1, iHairID); dbInster.BindParam(2, iEyeID); dbInster.BindParam(3, iHatID);
 		dbInster.BindParam(4, iTopID); dbInster.BindParam(5, iBottomID); dbInster.BindParam(6, iShoesID); dbInster.BindParam(7, iWeaponID);
@@ -69,7 +65,7 @@ bool Handle_C_ENTER(shared_ptr<Session> _pSession, Protocol::C_ENTER& _pkt)
 		| ((UINT64)iTopID << 24) | ((UINT64)iBottomID << 32) | ((UINT64)iShoesID << 40)
 		| ((UINT64)iWeaponID << 48);
 
-	W::EventManager::CreatePlayer(iUserID, llEquipIDs);
+	EventManager::CreatePlayer(iUserID, llEquipIDs);
 
 	return true;
 }
@@ -84,7 +80,7 @@ bool Handle_C_EQUIP(shared_ptr<Session> _pSession, Protocol::C_EQUIP& _pkt)
 	
 	//DB에 넣기
 	UCHAR cEquipID = iSceneLayerPlayerIDEquipID & 0xFF;
-	if (cEquipID == 0 || cEquipID >= (UINT)W::eEquipType::End)
+	if (cEquipID == 0 || cEquipID >= (UINT)eEquipType::End)
 		return false;
 
 	const wstring& strEquipName = GarrEquipName[cEquipID];
@@ -99,7 +95,7 @@ bool Handle_C_EQUIP(shared_ptr<Session> _pSession, Protocol::C_EQUIP& _pkt)
 
 	GDBConnectionPool->Push(pDB);
 	
-	W::EventManager::ChanagePlayerEquip(iSceneLayerPlayerIDEquipID, iItemID);
+	EventManager::ChanagePlayerEquip(iSceneLayerPlayerIDEquipID, iItemID);
 
 	return true;
 }
@@ -112,7 +108,7 @@ bool Handle_C_INPUT(shared_ptr<Session> _pSession, Protocol::C_INPUT& _pkt)
 	for (int i = 0; i < _pkt.inpus_size(); ++i)
 		vecKey.push_back(_pkt.inpus(i));
 
-	W::EventManager::Update_Input(iPlayerID, vecKey);
+	EventManager::Update_Input(iPlayerID, vecKey);
 
 	return true;
 }
@@ -130,7 +126,7 @@ bool Handle_C_MAP(shared_ptr<Session> _pSession, Protocol::C_MAP& _pkt)
 	USHORT iPlayerID = iScene_playerID & 0xFFFF;
 	GRoom.UnLockSendBask(iPlayerID);
 
-	W::EventManager::ChanageScene(iPlayerID, iSceneID);
+	EventManager::ChanageScene(iPlayerID, iSceneID);
 
 	return true;
 }
@@ -149,7 +145,7 @@ bool Handle_C_START_MAP(shared_ptr<Session> _pSession, Protocol::C_START_MAP& _p
 	USHORT iSceneID = (iScene_playerID >> 16) & 0xFFFF;
 	USHORT iPlayerID = iScene_playerID & 0xFFFF;
 
-	W::EventManager::StartScene(iPlayerID, iSceneID);
+	EventManager::StartScene(iPlayerID, iSceneID);
 
 	return true;
 }
@@ -161,9 +157,9 @@ bool Handle_C_SKILL(shared_ptr<Session> _pSession, Protocol::C_Skill& _pkt)
 
 	
 	UINT iPlayerID = (iScenePlayerIDSkillID >> 8);
-	W::Player::ePlayerSkill eSkillID = (W::Player::ePlayerSkill)(iScenePlayerIDSkillID & 0xFF);
+	Player::ePlayerSkill eSkillID = (Player::ePlayerSkill)(iScenePlayerIDSkillID & 0xFF);
 	
-	W::EventManager::ChangePlayerSkillState(iPlayerID, eSkillID);
+	EventManager::ChangePlayerSkillState(iPlayerID, eSkillID);
 	
 	return true;
 }
@@ -176,12 +172,12 @@ bool Handle_C_ITEM(shared_ptr<Session> _pSession, Protocol::C_ITEM& _pkt)
 	UINT iScenePlayerIDItemID = _pkt.scene_playerid_itemid();	
 	UINT iAppearID = (UCHAR)(iScenePlayerIDItemID >> 8);
 	int iItemID = (UCHAR)iScenePlayerIDItemID;
-	if (iAppearID == 0 || iAppearID >= (UINT)W::eAppearance::End)
+	if (iAppearID == 0 || iAppearID >= (UINT)eAppearance::End)
 		return false;
 
 	const wstring& strAppearName = GarrAppearanceName[iAppearID];
 	DBConnection* pDB = GDBConnectionPool->Pop();
-	int iRetValue = W::ItemManager::ExcuteItem(iScenePlayerIDItemID);
+	int iRetValue = ItemManager::ExcuteItem(iScenePlayerIDItemID);
 	
 	wstring query = L"UPDATE [dbo].[Equip] SET [" + strAppearName + L"] = ? WHERE[Name] = ?";
 	DBBind<2, 0> pDBUpdate(*pDB, query.c_str());
@@ -191,8 +187,6 @@ bool Handle_C_ITEM(shared_ptr<Session> _pSession, Protocol::C_ITEM& _pkt)
 		assert(nullptr);
 
 	GDBConnectionPool->Push(pDB);
-
-	//W::EventManager::UsingItem(iScenePlayerIDItemID);
 
 	return true;
 }
